@@ -1,1 +1,6 @@
-# WINPRProject
+# Assigned topic: Thesis Management
+## Requirements:
+### Professors: 
+ra đề tài, yêu cầu chức năng, check tiến độ, chấm điểm, chỉnh sửa...
+### Students:
+đăng kí đề tài, cập nhật tiến độ...
