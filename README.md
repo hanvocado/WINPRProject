@@ -1,6 +1,17 @@
 # Assigned topic: Thesis Management
+
 ## Requirements:
 ### Professors: 
-ra đề tài, yêu cầu chức năng, check tiến độ, chấm điểm, chỉnh sửa...
+#### profile
+      
+#### ra đề tài
+#### yêu cầu chức năng, xem đk + duyệt/từ chối hs tham gia, check tiến độ, chấm điểm, chỉnh sửa, xuất file excel danh sách, ...
 ### Students:
-đăng kí đề tài, cập nhật tiến độ...
+profile, đk tài khoản, xem và tìm kiếm đề tài filter by major/faculty, đăng kí đề tài, U tiến độ, CRUD bài luận, upload file bài luận, xem điểm, xem feedback, tham khao luan van mau...
+### Admins:
+(Professors, Student login by gg acc) -> admins CRUD professors accs
+
+## Team:
+#### Nguyen Thi Ngoc Han 22133017 han.ntnhtc@gmail.com
+#### Nguyen Hoang 22133020
+#### Vo Van Nam 22110379
