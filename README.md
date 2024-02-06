@@ -1,4 +1,4 @@
-# Assigned topic: Thesis Management System
+# Assigned topic: Thesis Management System 
 
 ## Requirements:
 ### Professors: 
@@ -14,4 +14,4 @@ profile, đk tài khoản, xem và tìm kiếm đề tài filter by major/facult
 ## Team:
 #### Nguyen Thi Ngoc Han 22133017 han.ntnhtc@gmail.com
 #### Nguyen Hoang 22133020
-#### Vo Van Nam 22110379
+#### Vo Van Nam 22110379 email vovannam220304@gmail.com
