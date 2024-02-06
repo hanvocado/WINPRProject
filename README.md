@@ -1,4 +1,4 @@
-# Assigned topic: Thesis Management
+# Assigned topic: Thesis Management System
 
 ## Requirements:
 ### Professors: 
