@@ -16,12 +16,18 @@
     <Compile Update="Views\Professor\UserControls\TopicUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Shared\LoginView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Student\StudentMainView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Resources\Styles\ButtonStyles.xaml">
+    <Page Update="Resources\Styles\Buttons.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\Styles\Text.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Resources\Styles\UIColors.xaml">
@@ -34,6 +40,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Professor\UserControls\TopicUC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Shared\LoginView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Student\StudentMainView.xaml">

@@ -5,6 +5,10 @@
     <Color x:Key="primary">#0A426E</Color>
     <Color x:Key="secondary">#0B60B0</Color>
     
+    <!--Login View-->
+    <SolidColorBrush x:Key="primaryBrush">#0A426E</SolidColorBrush>
+    <SolidColorBrush x:Key="gray">#959BA1</SolidColorBrush>
+    
     <!--Sidebar icon color-->
     <SolidColorBrush x:Key = "color1" Color = "#4ADAEC" />
     <SolidColorBrush x:Key = "color2" Color = "#FFC047" />
@@ -14,7 +18,7 @@
     <Color x:Key="customred">#F77B6A</Color>
     <Color x:Key="customgreen">#5AB66E</Color>
     <Color x:Key="customwhite">#5AB66E</Color>
-    <Color x:Key="customgray">#959BA1</Color>
+    
 
     <SolidColorBrush x:Key = "createNomal" Color = "Green" />
     <SolidColorBrush x:Key = "createHover" Color = "lightgreen" />

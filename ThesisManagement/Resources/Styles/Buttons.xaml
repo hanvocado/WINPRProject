@@ -2,6 +2,51 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp">
 
+    <!--LoginView buttons-->
+    <Style x:Key="windowBtnStyle" TargetType="Button">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Foreground" Value="White" />
+        
+        <Setter Property="Template" >
+            <Setter.Value >
+                <ControlTemplate TargetType="Button" >
+                    <Border Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True" >
+                <Setter Property="Background" Value="#0B60B0" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="googleBtn" TargetType="Button">
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Background" Value="DarkRed" />
+        <Setter Property="Margin" Value="0 10 0 0" />
+        <Setter Property="Padding" Value="0 10 0 5" />
+
+        <Setter Property="Template" >
+            <Setter.Value >
+                <ControlTemplate TargetType="Button" >
+                    <Border Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True" >
+                <Setter Property="Background" Value="#D73D32" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <!--Sidebar button-->
     <Style x:Key = "sidebarButton" TargetType = "RadioButton" >
         <!--Normal button style-->
