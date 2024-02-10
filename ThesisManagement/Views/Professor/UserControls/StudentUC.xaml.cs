@@ -10,15 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ThesisManagement.Views.Professor
+namespace ThesisManagement.Views.Professor.UserControls
 {
-    public partial class ProfessorMainView : Window
+    /// <summary>
+    /// Interaction logic for StudentUC.xaml
+    /// </summary>
+    public partial class StudentUC : UserControl
     {
-        public ProfessorMainView()
+        public StudentUC()
         {
-            InitializeComponent();
+            //InitializeComponent();
         }
     }
 }

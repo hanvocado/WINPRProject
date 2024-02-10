@@ -3,13 +3,41 @@
 
     <!--Nav bars background and button-->
     <Color x:Key="primary">#0A426E</Color>
+    <Color x:Key="secondary">#0B60B0</Color>
+    
+    <!--Sidebar icon color-->
+    <SolidColorBrush x:Key = "color1" Color = "#4ADAEC" />
+    <SolidColorBrush x:Key = "color2" Color = "#FFC047" />
+    <SolidColorBrush x:Key = "color3" Color = "#EF6C96" />
 
+    <!--Custom button color-->
     <Color x:Key="customred">#F77B6A</Color>
     <Color x:Key="customgreen">#5AB66E</Color>
     <Color x:Key="customwhite">#5AB66E</Color>
     <Color x:Key="customgray">#959BA1</Color>
 
+    <SolidColorBrush x:Key = "createNomal" Color = "Green" />
+    <SolidColorBrush x:Key = "createHover" Color = "lightgreen" />
+    <SolidColorBrush x:Key = "updateNomal" Color = "orange" />
+    <SolidColorBrush x:Key = "updateHover" Color = "yellow" />
+    <SolidColorBrush x:Key = "deleteNomal" Color = "red" />
+    <SolidColorBrush x:Key = "deleteHover" Color = "#FF8080" />
+    <SolidColorBrush x:Key = "detailNomal" Color = "Gray" />
+    <SolidColorBrush x:Key = "detailHover" Color = "lightgray" />
+    <SolidColorBrush x:Key = "searchNomal" Color = "DeepSkyBlue" />
+    <SolidColorBrush x:Key = "searchHover" Color = "lightblue" />
+
     <!--Window border colors-->
     <Color x:Key="winBorderColor">#959BA1</Color>
+
+    <!--Colors Panel-->
+    <SolidColorBrush x:Key = "panelColor" Color = "#200F53" />
+    <SolidColorBrush x:Key = "panelOverColor" Color = "#281269" />
+    <SolidColorBrush x:Key = "panelActiveColor" Color = "#2B1372" />
+    
+    <!--Font Colors-->
+    <SolidColorBrush x:Key = "titleColor1" Color = "#E0E1F1" />  
+    <SolidColorBrush x:Key = "titleColor2" Color = "#BCBEE0" />  
+    <SolidColorBrush x:Key = "plainTextColor" Color = "#9497CD" />  
     
 </ResourceDictionary>
