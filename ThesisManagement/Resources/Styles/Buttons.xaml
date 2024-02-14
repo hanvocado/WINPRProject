@@ -2,7 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp">
 
-    <!--LoginView buttons-->
     <Style x:Key="windowBtnStyle" TargetType="Button">
         <Setter Property="FontSize" Value="14" />
         <Setter Property="Background" Value="Transparent" />
@@ -299,10 +298,10 @@
     </Style>
 
     <Style x:Key="navIcon" TargetType="fa:IconImage" >
-        <Setter Property="Foreground" Value = "{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" />
-        <Setter Property="Height" Value = "18" />
-        <Setter Property="Width" Value = "30" />
-        <Setter Property="Margin" Value = "20 0 10 0" />
+        <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" />
+        <Setter Property="Height" Value="18" />
+        <Setter Property="Width" Value="30" />
+        <Setter Property="Margin" Value="20 0 10 0" />
     </Style>
 
     <Style x:Key="navText" TargetType="TextBlock" >
@@ -310,6 +309,35 @@
         <Setter Property="FontWeight" Value="Medium" />
         <Setter Property="FontSize" Value="15" />
         <Setter Property="VerticalAlignment" Value="Center" />
-    </Style >
+    </Style>
+
+    <Style x:Key="windowControlIcon" TargetType = "fa:IconImage" >
+        <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
+        <Setter Property="Height" Value="10" />
+        <Setter Property="Width" Value="10" />
+    </Style>
+
+    <Style x:Key="windowControlBtn" TargetType="Button">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Width" Value="30" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+
+        <Setter Property="Template" >
+            <Setter.Value >
+                <ControlTemplate TargetType="Button" >
+                    <Border Background="{TemplateBinding Background}">
+                        <ContentPresenter />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True" >
+                <Setter Property="Background" Value="{StaticResource primaryBrush}" />
+                <Setter Property="Foreground" Value="White" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
 </ResourceDictionary>
