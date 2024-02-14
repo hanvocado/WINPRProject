@@ -51,30 +51,32 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                    <Border Grid.Row="0" x:Name="pnlControlContainer">
-                        <StackPanel Orientation="Horizontal"
-                                    FlowDirection="RightToLeft"
-                                    MouseEnter="pnlControlBar_MouseEnter">
-                            <Button x:Name="btnClose"
-                                    Click="btnClose_Click"
-                                    Style="{StaticResource windowControlBtn}">
-                                <fa:IconImage Icon="X" Style="{StaticResource windowControlIcon}" />
-                            </Button>
+                    <StackPanel Orientation="Horizontal"
+                                FlowDirection="RightToLeft"
+                                MouseEnter="pnlControlBar_MouseEnter">
+                        <Button x:Name="btnClose"
+                                Click="btnClose_Click"
+                                Style="{StaticResource windowControlBtn}">
+                            <fa:IconImage Icon="X" Style="{StaticResource windowControlIcon}" />
+                        </Button>
 
-                            <Button x:Name="btnMaximize"
-                                    Click="btnMaximize_Click"
-                                    Style="{StaticResource windowControlBtn}">
-                                <fa:IconImage Icon="Square" Style="{StaticResource windowControlIcon}" />
-                            </Button>
+                        <Button x:Name="btnMaximize"
+                                Click="btnMaximize_Click"
+                                Style="{StaticResource windowControlBtn}">
+                            <fa:IconImage Icon="Square" Style="{StaticResource windowControlIcon}" />
+                        </Button>
 
-                            <Button x:Name="btnMinimize"
-                                    Click="btnMinimize_Click"
-                                    Style="{StaticResource windowControlBtn}">
-                                <fa:IconImage Icon="WindowMinimize" Style="{StaticResource windowControlIcon}" />
-                            </Button>
-                        </StackPanel>
-                    </Border>
-                    
+                        <Button x:Name="btnMinimize"
+                                Click="btnMinimize_Click"
+                                Style="{StaticResource windowControlBtn}">
+                            <fa:IconImage Icon="WindowMinimize" Style="{StaticResource windowControlIcon}" />
+                        </Button>
+                    </StackPanel>
+
+                    <Grid Grid.Row="2">
+                        <ContentControl Content=""
+                                        Margin="25" />
+                    </Grid>
                 </Grid>
             </Border>
         </Grid>
