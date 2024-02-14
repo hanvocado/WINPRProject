@@ -1,24 +1,15 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!--Nav bars background and button-->
     <Color x:Key="primary">#0A426E</Color>
-    <Color x:Key="secondary">#0B60B0</Color>
-    
-    <!--Login View-->
+    <Color x:Key="secondary">#1E74B2</Color>
     <SolidColorBrush x:Key="primaryBrush">#0A426E</SolidColorBrush>
-    <SolidColorBrush x:Key="gray">#959BA1</SolidColorBrush>
+    <SolidColorBrush x:Key="secondaryBrush">#1E74B2</SolidColorBrush>
     
     <!--Sidebar icon color-->
     <SolidColorBrush x:Key = "color1" Color = "#4ADAEC" />
     <SolidColorBrush x:Key = "color2" Color = "#FFC047" />
     <SolidColorBrush x:Key = "color3" Color = "#EF6C96" />
-
-    <!--Custom button color-->
-    <Color x:Key="customred">#F77B6A</Color>
-    <Color x:Key="customgreen">#5AB66E</Color>
-    <Color x:Key="customwhite">#5AB66E</Color>
-    
 
     <SolidColorBrush x:Key = "createNomal" Color = "Green" />
     <SolidColorBrush x:Key = "createHover" Color = "lightgreen" />
@@ -31,9 +22,6 @@
     <SolidColorBrush x:Key = "searchNomal" Color = "DeepSkyBlue" />
     <SolidColorBrush x:Key = "searchHover" Color = "lightblue" />
 
-    <!--Window border colors-->
-    <Color x:Key="winBorderColor">#959BA1</Color>
-
     <!--Colors Panel-->
     <SolidColorBrush x:Key = "panelColor" Color = "#200F53" />
     <SolidColorBrush x:Key = "panelOverColor" Color = "#281269" />
@@ -41,7 +29,8 @@
     
     <!--Font Colors-->
     <SolidColorBrush x:Key = "titleColor1" Color = "#E0E1F1" />  
-    <SolidColorBrush x:Key = "titleColor2" Color = "#BCBEE0" />  
-    <SolidColorBrush x:Key = "plainTextColor" Color = "#9497CD" />  
+    <SolidColorBrush x:Key = "titleColor2" Color = "#BCBEE0" />
+    <SolidColorBrush x:Key = "titleColor" Color = "#BCBEE0" />
+    <SolidColorBrush x:Key = "plainTextColor" Color = "#F1F1F1" />  
     
 </ResourceDictionary>

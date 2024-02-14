@@ -12,12 +12,10 @@
         ResizeMode="NoResize"
         MouseDown="Window_MouseDown"
         Background="Transparent"
-        AllowsTransparency="True"
-        >
+        AllowsTransparency="True">
 
     <Border Background="{StaticResource primaryBrush}">
-        <Border CornerRadius="10"
-                 BorderBrush="{StaticResource gray}">
+        <Border BorderThickness="0">
                 <Border.Background>
                     <ImageBrush ImageSource="/Resources/Images/app-background.png"
                                 Stretch="None"/>

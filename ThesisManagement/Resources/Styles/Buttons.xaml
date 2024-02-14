@@ -57,7 +57,7 @@
         <Setter Property="Template" >
             <Setter.Value >
                 <ControlTemplate TargetType="Button" >
-                    <Border Background="{TemplateBinding Background}" Padding="7">
+                    <Border Background="{TemplateBinding Background}" Padding="6">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
                 </ControlTemplate>
@@ -265,6 +265,51 @@
         <Setter Property = "FontSize" Value = "14" />
         <Setter Property = "Margin" Value = "3" />
         <Setter Property = "VerticalAlignment" Value = "Center" />
+    </Style >
+
+    <Style x:Key="navBtn" TargetType="RadioButton">
+        <Setter Property="Height" Value="45" />
+        <Setter Property="Background" Value = "Transparent" />
+        <Setter Property="Foreground" Value = "{StaticResource titleColor}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Border x:Name="border" Height="50" BorderThickness="0" Background="Transparent">
+                        <Grid>
+                            <Border x:Name="activeSign" Height="30" Width="4" HorizontalAlignment="Left"
+                                    Background="White" Visibility="Collapsed" />
+                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        </Grid>
+                    </Border>
+                    
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Visibility" TargetName="activeSign" Value="Visible" />
+                            <Setter Property="Foreground" Value="#F1F1F1" />
+                        </Trigger>
+
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Visibility" TargetName="activeSign" Value="Visible" />
+                            <Setter Property="Foreground" Value="#F1F1F1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="navIcon" TargetType="fa:IconImage" >
+        <Setter Property="Foreground" Value = "{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" />
+        <Setter Property="Height" Value = "18" />
+        <Setter Property="Width" Value = "30" />
+        <Setter Property="Margin" Value = "20 0 10 0" />
+    </Style>
+
+    <Style x:Key="navText" TargetType="TextBlock" >
+        <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" />
+        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="VerticalAlignment" Value="Center" />
     </Style >
 
 </ResourceDictionary>

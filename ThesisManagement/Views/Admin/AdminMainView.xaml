@@ -4,28 +4,41 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ThesisManagement.Views.Admin"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         mc:Ignorable="d"
         Title="AdminMainView" Height="600" Width="1150"
         WindowStartupLocation="CenterScreen"
-        WindowStyle="None">
-    <Border CornerRadius="0">
-
+        WindowStyle="None"
+        AllowsTransparency="True">
+    <Border>
         <Grid>
 
             <Grid.ColumnDefinitions>
-                <!--Sidebar-->
                 <ColumnDefinition Width="250" />
-                <!--Content-->
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <!--SIDEBAR-->
-            <Border CornerRadius="0" Grid.Column="0">
-                <Border.Background>
-                    <SolidColorBrush Color="{StaticResource primary}" />
-                </Border.Background>
-
+            <Border Grid.Column="0" Background="{StaticResource primaryBrush}">
                 <StackPanel>
+                    <StackPanel Orientation="Horizontal" Height="35" Margin="15 25 0 40">
+                        <Image Source="/Resources/Images/logo-bright.png" Height="28" />
+                        <TextBlock Text="QUẢN LÝ LUẬN VĂN" Style="{StaticResource logo}" Margin="10 3 0 0"/>
+                    </StackPanel>
+
+                    <RadioButton Style="{StaticResource navBtn}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Seedling" Style="{StaticResource navIcon}" />
+                            <TextBlock Text="Quản trị viên" Style="{StaticResource navText}" />
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource navBtn}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="ChalkboardTeacher" Style="{StaticResource navIcon}" />
+                            <TextBlock Text="Giảng viên" Style="{StaticResource navText}" />
+                        </StackPanel>
+                    </RadioButton>
                 </StackPanel>
             </Border>
 
@@ -34,6 +47,5 @@
 
             </Border>
         </Grid>
-
     </Border>
 </Window>
