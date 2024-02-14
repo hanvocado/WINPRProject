@@ -2,7 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp">
 
-    <!--LoginView buttons-->
     <Style x:Key="windowBtnStyle" TargetType="Button">
         <Setter Property="FontSize" Value="14" />
         <Setter Property="Background" Value="Transparent" />
@@ -26,7 +25,8 @@
     </Style>
 
     <Style x:Key="googleBtn" TargetType="Button">
-        <Setter Property="Height" Value="30" />
+        <Setter Property="Height" Value="25" />
+        <Setter Property="Width" Value="110" />
         <Setter Property="Background" Value="DarkRed" />
         <Setter Property="Margin" Value="0 10 0 0" />
         <Setter Property="Padding" Value="0 10 0 5" />
@@ -43,6 +43,28 @@
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True" >
                 <Setter Property="Background" Value="#D73D32" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="primaryBtn" TargetType="Button">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Background" Value="{StaticResource primaryBrush}" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontSize" Value="13" />
+
+        <Setter Property="Template" >
+            <Setter.Value >
+                <ControlTemplate TargetType="Button" >
+                    <Border Background="{TemplateBinding Background}" Padding="6">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True" >
+                <Setter Property="Background" Value="#0B60B0" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -243,5 +265,79 @@
         <Setter Property = "Margin" Value = "3" />
         <Setter Property = "VerticalAlignment" Value = "Center" />
     </Style >
+
+    <Style x:Key="navBtn" TargetType="RadioButton">
+        <Setter Property="Height" Value="45" />
+        <Setter Property="Background" Value = "Transparent" />
+        <Setter Property="Foreground" Value = "{StaticResource titleColor}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Border x:Name="border" Height="50" BorderThickness="0" Background="Transparent">
+                        <Grid>
+                            <Border x:Name="activeSign" Height="30" Width="4" HorizontalAlignment="Left"
+                                    Background="White" Visibility="Collapsed" />
+                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        </Grid>
+                    </Border>
+                    
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Visibility" TargetName="activeSign" Value="Visible" />
+                            <Setter Property="Foreground" Value="#F1F1F1" />
+                        </Trigger>
+
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Visibility" TargetName="activeSign" Value="Visible" />
+                            <Setter Property="Foreground" Value="#F1F1F1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="navIcon" TargetType="fa:IconImage" >
+        <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" />
+        <Setter Property="Height" Value="18" />
+        <Setter Property="Width" Value="30" />
+        <Setter Property="Margin" Value="20 0 10 0" />
+    </Style>
+
+    <Style x:Key="navText" TargetType="TextBlock" >
+        <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" />
+        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="windowControlIcon" TargetType = "fa:IconImage" >
+        <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
+        <Setter Property="Height" Value="10" />
+        <Setter Property="Width" Value="10" />
+    </Style>
+
+    <Style x:Key="windowControlBtn" TargetType="Button">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Width" Value="30" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+
+        <Setter Property="Template" >
+            <Setter.Value >
+                <ControlTemplate TargetType="Button" >
+                    <Border Background="{TemplateBinding Background}">
+                        <ContentPresenter />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True" >
+                <Setter Property="Background" Value="{StaticResource primaryBrush}" />
+                <Setter Property="Foreground" Value="White" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
 </ResourceDictionary>

@@ -12,12 +12,10 @@
         ResizeMode="NoResize"
         MouseDown="Window_MouseDown"
         Background="Transparent"
-        AllowsTransparency="True"
-        >
+        AllowsTransparency="True">
 
     <Border Background="{StaticResource primaryBrush}">
-        <Border CornerRadius="10"
-                 BorderBrush="{StaticResource gray}">
+        <Border BorderThickness="0">
                 <Border.Background>
                     <ImageBrush ImageSource="/Resources/Images/app-background.png"
                                 Stretch="None"/>
@@ -34,7 +32,6 @@
                             <ColumnDefinition />
                             <ColumnDefinition Width="25" />
                             <ColumnDefinition Width="25" />
-                            <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Text="ĐĂNG NHẬP"
@@ -57,7 +54,7 @@
                                 Style="{StaticResource windowBtnStyle}"/>
                     </Grid>
 
-                <Border Grid.Row="1" Padding="20 30 20 30" Background="White" Width="300" Height="380" Opacity="0.97">
+                <Border Grid.Row="1" Padding="20" Background="White" Width="300" Height="400" Opacity="0.97">
                     <StackPanel Grid.Row="1" Orientation="Vertical">
                         <Image Source="/Resources/Images/logo.png" Height="60" />
                         <TextBlock Text="QUẢN LÝ LUẬN VĂN"
@@ -83,6 +80,7 @@
                                             AlignmentX="Left"/>
                             </PasswordBox.Background>
                         </PasswordBox>
+                        <Button Content="Đăng nhập" Width="110" Margin="0 20 0 0" Style="{StaticResource primaryBtn}" />
 
                         <TextBlock Text="Đăng nhập bắng tài khoản google" Style="{StaticResource inputLabel}" HorizontalAlignment="Center" />
                         <Button fa:FontAwesome.Icon="Brands_Google" 
