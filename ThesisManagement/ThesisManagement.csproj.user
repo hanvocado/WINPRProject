@@ -13,7 +13,16 @@
     <Compile Update="Views\Professor\ProfessorMainView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Professor\UserControls\Profile.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Professor\UserControls\StudentUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Professor\UserControls\ThesisDetailsUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Professor\UserControls\ThesisUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Professor\UserControls\TopicUC.xaml.cs">
@@ -30,6 +39,9 @@
     <Page Update="Resources\Styles\Buttons.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Resources\Styles\DataGrid.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Resources\Styles\Text.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -42,7 +54,16 @@
     <Page Update="Views\Professor\ProfessorMainView.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\Professor\UserControls\Profile.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Professor\UserControls\StudentUC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Professor\UserControls\ThesisDetailsUC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Professor\UserControls\ThesisUC.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Professor\UserControls\TopicUC.xaml">
