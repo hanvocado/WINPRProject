@@ -88,7 +88,7 @@
                        VerticalAlignment="Center"/>
 
             <TextBlock Grid.Row="1" Grid.Column="0"
-                        Text="Ad Min"
+                        Text="Nguyễn A"
                         FontSize="14"
                         VerticalAlignment="Center"/>
 
@@ -99,7 +99,7 @@
                         VerticalAlignment="Center"/>
 
             <TextBlock Grid.Row="1" Grid.Column="1"
-                        Text="admin1@hcmute.edu.vn"
+                        Text="nguyena@hcmute.edu.vn"
                         FontSize="14"
                         VerticalAlignment="Center"/>
             

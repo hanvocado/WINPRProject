@@ -2,21 +2,9 @@
 
 namespace ThesisManagement.ViewModels
 {
-    public class AdminAccountVM : ViewModelBase
+    public class AdminsVM : ViewModelBase
     {
-        private Guid _id;
         private string _email;
-        private bool _isViewVisible = true;
-
-        public Guid Id
-        {
-            get => _id;
-            set
-            {
-                _id = value;
-                OnPropertyChanged(nameof(Id));
-            }
-        }
 
         public string Email
         {
@@ -28,21 +16,11 @@ namespace ThesisManagement.ViewModels
             }
         }
 
-        public bool IsViewVisible
-        {
-            get => _isViewVisible;
-            set
-            {
-                _isViewVisible = value;
-                OnPropertyChanged(nameof(IsViewVisible));
-            }
-        }
-
         public ICommand CreateCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
 
-        public AdminAccountVM()
+        public AdminsVM()
         {
             CreateCommand = new ViewModelCommand(ExecuteCreateCommand);
             EditCommand = new ViewModelCommand(ExecuteEditCommand);

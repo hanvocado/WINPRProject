@@ -2,7 +2,7 @@
 
 namespace ThesisManagement.ViewModels
 {
-    public class AdminMainViewModel : ViewModelBase
+    public class AdminMainVM : ViewModelBase
     {
         private ViewModelBase _currentChildView;
 
@@ -18,7 +18,7 @@ namespace ThesisManagement.ViewModels
 
         public ICommand ShowAdminAccountView { get; set; }
         public ICommand ShowProfessorsView { get; set; }
-        public AdminMainViewModel()
+        public AdminMainVM()
         {
             ShowAdminAccountView = new ViewModelCommand(ExecuteShowAdminAccountView);
             ShowProfessorsView = new ViewModelCommand(ExecuteShowProfessorAccountView);
@@ -33,7 +33,7 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteShowAdminAccountView(object? obj)
         {
-            CurrentChildView = new AdminAccountVM();
+            CurrentChildView = new AdminsVM();
         }
     }
 }

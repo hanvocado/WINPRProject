@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ThesisManagement.Views.Admin"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-        xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
+        xmlns:viewModel="clr-namespace:ThesisManagement.ViewModels"
         mc:Ignorable="d"
         Title="AdminMainView" Height="600" Width="1100"
         WindowStartupLocation="CenterScreen"
@@ -14,15 +14,15 @@
         Style="{StaticResource windowStyle}">
 
     <Window.DataContext>
-        <viewModels:AdminMainViewModel />
+        <viewModel:AdminMainVM />
     </Window.DataContext>
 
     <Window.Resources>
-        <DataTemplate DataType="{x:Type viewModels:AdminAccountVM}">
-            <local:AdminAccountView />
+        <DataTemplate DataType="{x:Type viewModel:AdminsVM}">
+            <local:AdminsView />
         </DataTemplate>
         
-        <DataTemplate DataType="{x:Type viewModels:ProfessorsVM}">
+        <DataTemplate DataType="{x:Type viewModel:ProfessorsVM}">
             <local:ProfessorsView />
         </DataTemplate>
     </Window.Resources>

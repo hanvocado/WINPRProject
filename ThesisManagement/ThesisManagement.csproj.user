@@ -7,7 +7,7 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Views\Admin\AdminAccountView.xaml.cs">
+    <Compile Update="Views\Admin\AdminsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Admin\AdminMainView.xaml.cs">
@@ -57,7 +57,7 @@
     <Page Update="Resources\Styles\UIColors.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Admin\AdminAccountView.xaml">
+    <Page Update="Views\Admin\AdminsView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Admin\AdminMainView.xaml">
