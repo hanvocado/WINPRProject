@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:ThesisManagement.Views.Admin"
              xmlns:viewModel="clr-namespace:ThesisManagement.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="White">
     
     <UserControl.DataContext>
         <viewModel:AdminVM />

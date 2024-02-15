@@ -54,7 +54,7 @@
                                 Style="{StaticResource windowBtnStyle}"/>
                     </Grid>
 
-                <Border Grid.Row="1" Padding="20" Background="White" Width="300" Height="400" Opacity="0.97">
+                <Border Grid.Row="1" Padding="20" Background="White" Width="300" Height="410" Opacity="0.97">
                     <StackPanel Grid.Row="1" Orientation="Vertical">
                         <Image Source="/Resources/Images/logo.png" Height="60" />
                         <TextBlock Text="QUẢN LÝ LUẬN VĂN"
@@ -63,7 +63,8 @@
                                    FontWeight="Medium"
                                    HorizontalAlignment="Center"/>
 
-                        <TextBlock Text="Tên đăng nhập" Style="{StaticResource inputLabel}" />
+                        <TextBlock  Style="{StaticResource errorText}"/>
+                        <TextBlock Text="Tên đăng nhập" Style="{StaticResource label}" />
                         <TextBox>
                             <TextBox.Background>
                                 <ImageBrush ImageSource="/Resources/Images/user-icon.png"
@@ -72,7 +73,7 @@
                             </TextBox.Background>
                         </TextBox>
                         
-                        <TextBlock Text="Mật khẩu" Style="{StaticResource inputLabel}" />
+                        <TextBlock Text="Mật khẩu" Style="{StaticResource label}" />
                         <PasswordBox>
                             <PasswordBox.Background>
                                 <ImageBrush ImageSource="/Resources/Images/key-icon.png"
@@ -80,9 +81,10 @@
                                             AlignmentX="Left"/>
                             </PasswordBox.Background>
                         </PasswordBox>
+
                         <Button Content="Đăng nhập" Width="110" Margin="0 20 0 0" Style="{StaticResource primaryBtn}" />
 
-                        <TextBlock Text="Đăng nhập bắng tài khoản google" Style="{StaticResource inputLabel}" HorizontalAlignment="Center" />
+                        <TextBlock Text="Đăng nhập bắng tài khoản google" Style="{StaticResource label}" HorizontalAlignment="Center" Margin="0 30 0 0"/>
                         <Button fa:FontAwesome.Icon="Brands_Google" 
                                 fa:FontAwesome.PrimaryColor="White"
                                 Style="{StaticResource googleBtn}" />
