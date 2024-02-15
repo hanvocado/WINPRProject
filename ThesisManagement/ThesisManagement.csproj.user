@@ -45,6 +45,9 @@
     <Page Update="Resources\Styles\DataGrid.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Resources\Styles\Styles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Resources\Styles\Text.xaml">
       <SubType>Designer</SubType>
     </Page>

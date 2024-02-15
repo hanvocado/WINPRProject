@@ -9,7 +9,9 @@
         Title="AdminMainView" Height="600" Width="1100"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        AllowsTransparency="True">
+        AllowsTransparency="True"
+        Style="{StaticResource windowStyle}">
+
     <Border>
         <Grid>
 
