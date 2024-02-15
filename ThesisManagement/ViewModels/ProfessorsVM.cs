@@ -2,50 +2,40 @@
 
 namespace ThesisManagement.ViewModels
 {
-    public class AdminVM : ViewModelBase
+    public class ProfessorsVM : ViewModelBase
     {
-        private Guid _id;
+        private string _name;
         private string _email;
-        private bool _isViewVisible = true;
+        private string _faculty;
+        private string _phone;
+        private string _birthday;
 
-        public Guid Id 
-        { 
-            get => _id; 
+        public string Name
+        {
+            get => _name;
             set
             {
-                _id = value;
-                OnPropertyChanged(nameof(Id));
+                _name = value;
+                OnPropertyChanged(nameof(Name));
             }
         }
-        
-        public string Email 
-        { 
-            get => _email; 
+
+        public string Email
+        {
+            get => _email;
             set
             {
                 _email = value;
                 OnPropertyChanged(nameof(Email));
             }
         }
-        
-        public bool IsViewVisible 
-        { 
-            get => _isViewVisible; 
-            set
-            {
-                _isViewVisible = value;
-                OnPropertyChanged(nameof(IsViewVisible));
-            }
-        }
 
         public ICommand CreateCommand { get; set; }
-        public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
 
-        public AdminVM()
+        public ProfessorsVM()
         {
             CreateCommand = new ViewModelCommand(ExecuteCreateCommand);
-            EditCommand = new ViewModelCommand(ExecuteEditCommand);
             DeleteCommand = new ViewModelCommand(ExecuteDeleteCommand, CanExecuteDeleteCommand);
         }
 
