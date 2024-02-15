@@ -5,11 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ThesisManagement.Views.Admin"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        xmlns:viewModel="clr-namespace:ThesisManagement.ViewModels"
         mc:Ignorable="d"
         Title="AdminMainView" Height="600" Width="1100"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        AllowsTransparency="True">
+        AllowsTransparency="True"
+        Style="{StaticResource windowStyle}">
+
+    <Window.DataContext>
+        <viewModel:AdminMainVM />
+    </Window.DataContext>
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:AdminsVM}">
+            <local:AdminsView />
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type viewModel:ProfessorsVM}">
+            <local:ProfessorsView />
+        </DataTemplate>
+    </Window.Resources>
+    
     <Border>
         <Grid>
 
@@ -26,14 +43,16 @@
                         <TextBlock Text="QUẢN LÝ LUẬN VĂN" Style="{StaticResource logo}" Margin="10 3 0 0"/>
                     </StackPanel>
 
-                    <RadioButton Style="{StaticResource navBtn}" IsChecked="True">
+                    <RadioButton Style="{StaticResource navBtn}" IsChecked="True"
+                                 Command="{Binding ShowAdminAccountView}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Seedling" Style="{StaticResource navIcon}" />
                             <TextBlock Text="Quản trị viên" Style="{StaticResource navText}" />
                         </StackPanel>
                     </RadioButton>
 
-                    <RadioButton Style="{StaticResource navBtn}">
+                    <RadioButton Style="{StaticResource navBtn}"
+                                 Command="{Binding ShowProfessorsView}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="ChalkboardTeacher" Style="{StaticResource navIcon}" />
                             <TextBlock Text="Giảng viên" Style="{StaticResource navText}" />
@@ -51,30 +70,32 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                    <Border Grid.Row="0" x:Name="pnlControlContainer">
-                        <StackPanel Orientation="Horizontal"
-                                    FlowDirection="RightToLeft"
-                                    MouseEnter="pnlControlBar_MouseEnter">
-                            <Button x:Name="btnClose"
-                                    Click="btnClose_Click"
-                                    Style="{StaticResource windowControlBtn}">
-                                <fa:IconImage Icon="X" Style="{StaticResource windowControlIcon}" />
-                            </Button>
+                    <StackPanel Orientation="Horizontal"
+                                FlowDirection="RightToLeft"
+                                MouseEnter="pnlControlBar_MouseEnter">
+                        <Button x:Name="btnClose"
+                                Click="btnClose_Click"
+                                Style="{StaticResource windowControlBtn}">
+                            <fa:IconImage Icon="X" Style="{StaticResource windowControlIcon}" />
+                        </Button>
 
-                            <Button x:Name="btnMaximize"
-                                    Click="btnMaximize_Click"
-                                    Style="{StaticResource windowControlBtn}">
-                                <fa:IconImage Icon="Square" Style="{StaticResource windowControlIcon}" />
-                            </Button>
+                        <Button x:Name="btnMaximize"
+                                Click="btnMaximize_Click"
+                                Style="{StaticResource windowControlBtn}">
+                            <fa:IconImage Icon="Square" Style="{StaticResource windowControlIcon}" />
+                        </Button>
 
-                            <Button x:Name="btnMinimize"
-                                    Click="btnMinimize_Click"
-                                    Style="{StaticResource windowControlBtn}">
-                                <fa:IconImage Icon="WindowMinimize" Style="{StaticResource windowControlIcon}" />
-                            </Button>
-                        </StackPanel>
-                    </Border>
-                    
+                        <Button x:Name="btnMinimize"
+                                Click="btnMinimize_Click"
+                                Style="{StaticResource windowControlBtn}">
+                            <fa:IconImage Icon="WindowMinimize" Style="{StaticResource windowControlIcon}" />
+                        </Button>
+                    </StackPanel>
+
+                    <Grid Grid.Row="2">
+                        <ContentControl Content="{Binding CurrentChildView}"
+                                        Margin="25" />
+                    </Grid>
                 </Grid>
             </Border>
         </Grid>

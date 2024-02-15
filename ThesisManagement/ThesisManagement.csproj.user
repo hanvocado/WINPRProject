@@ -7,7 +7,13 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Views\Admin\AdminsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Admin\AdminMainView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Admin\ProfessorsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Professor\ProfessorMainView.xaml.cs">
@@ -42,13 +48,22 @@
     <Page Update="Resources\Styles\DataGrid.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Resources\Styles\Styles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Resources\Styles\Text.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Resources\Styles\UIColors.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\Admin\AdminsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Admin\AdminMainView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Admin\ProfessorsView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Professor\ProfessorMainView.xaml">
