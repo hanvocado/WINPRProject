@@ -46,10 +46,8 @@
                           Margin="5,5,0,0"> 
                 </ComboBox>
 
-                <Button Style="{StaticResource btnCruds}"
-                        Tag="{StaticResource searchHover}"
+                <Button Style="{StaticResource btnSearch}"
                         Command=""
-                        Background="{StaticResource searchNomal}"
                         Content="Tìm kiếm"
                         VerticalAlignment="Top">
                 </Button>
@@ -57,9 +55,7 @@
             </StackPanel>
 
             <Button Grid.Column="1"
-                    Style="{StaticResource btnCruds}"
-                    Tag="{StaticResource createHover}"
-                    Background="{StaticResource createNomal}"
+                    Style="{StaticResource btnCreate}"
                     Command=""                            
                     Content="Tạo mới"                            
                     VerticalAlignment="Top">
@@ -128,12 +124,10 @@
             <StackPanel Orientation="Horizontal"
                     Grid.Row="1" Grid.Column="5">
 
-                <Button Style="{StaticResource btnCruds}"
-                    Tag="{StaticResource deleteHover}"
-                    Background="{StaticResource deleteNomal}"
+                <Button Style="{StaticResource btnDelete}"
                     VerticalAlignment="Top"
                     Width="50">
-                    <fa:IconImage Icon="Trash" Style="{StaticResource iconCruds}" />
+                    <fa:IconImage Icon="Trash" Style="{StaticResource crudsButtonIcon}" />
                 </Button>
 
             </StackPanel>

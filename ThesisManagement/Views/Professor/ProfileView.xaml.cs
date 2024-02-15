@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ThesisManagement.Views.Professor.UserControls
+namespace ThesisManagement.Views.Professor
 {
     /// <summary>
-    /// Interaction logic for ThesisUC.xaml
+    /// Interaction logic for Profile.xaml
     /// </summary>
-    public partial class ThesisUC : UserControl
+    public partial class Profile : UserControl
     {
-        public ThesisUC()
+        public Profile()
         {
             InitializeComponent();
         }
