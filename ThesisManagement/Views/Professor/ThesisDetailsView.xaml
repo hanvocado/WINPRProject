@@ -5,8 +5,47 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ThesisManagement.Views.Professor"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="White">
     <Grid>
-            
+        <!--Temporary design-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Text="Chi tiết luận văn"
+                   FontSize="30"
+                   Margin="10"
+                   FontWeight="Medium"/>
+
+        <TextBlock Grid.Row="1"
+                   Text="Sinh viên thực hiện:"
+                   FontSize="18"
+                   Margin="30,0,0,0"
+                   FontWeight="Medium"/>
+
+        <TextBlock Grid.Row="2"
+                   Text="Tiến độ:"
+                   FontSize="18"
+                   Margin="30,0,0,0"
+                   FontWeight="Medium"/>
+
+        <TextBlock Grid.Row="3"
+                   Text="Điểm:"
+                   FontSize="18"
+                   Margin="30,0,0,0"
+                   FontWeight="Medium"/>
+
+        <TextBlock Grid.Row="4"
+                   Text="Nội dung luận văn:"
+                   FontSize="18"
+                   Margin="30,0,0,0"
+                   FontWeight="Medium"/>
     </Grid>
 </UserControl>
