@@ -28,29 +28,16 @@
                         Orientation="Horizontal"
                         VerticalAlignment="Top"
                         FlowDirection="LeftToRight">
-                <fa:IconImage Icon="Search" 
-                              Height="20" 
-                              Width="20" 
-              Foreground="{StaticResource plainTextColor}"/>
-                <ComboBox Text="Đề tài..."   
-                          FontSize="14"
-                          Height="24"
-                          Width="200"
-                          Background="Transparent"
-                          FontWeight="Medium"
-                          FontFamily="Montserrat"
-                          Foreground="{StaticResource plainTextColor}"
-                          BorderBrush="{StaticResource plainTextColor}"
-                          BorderThickness="0,0,0,1"
-                          VerticalContentAlignment="Center"
-                          Margin="5,5,0,0"> 
-                </ComboBox>
-
-                <Button Style="{StaticResource btnSearch}"
-                        Command=""
-                        Content="Tìm kiếm"
-                        VerticalAlignment="Top">
-                </Button>
+                <fa:IconImage Icon="Search"
+                              Margin="0 4 5 0"
+                              Height="17" 
+                              Width="20"/>
+                <TextBox Text=""   
+                         Height="24"
+                         Width="200"
+                         BorderThickness="0,0,0,2"
+                         VerticalContentAlignment="Center">
+                </TextBox>
 
             </StackPanel>
 
