@@ -20,7 +20,7 @@
     <SolidColorBrush x:Key = "detailNomal" Color = "Gray" />
     <SolidColorBrush x:Key = "detailHover" Color = "lightgray" />
     <SolidColorBrush x:Key = "searchNomal" Color = "DeepSkyBlue" />
-    <SolidColorBrush x:Key = "searchHover" Color = "lightblue" />
+    <SolidColorBrush x:Key = "searchHover" Color = "LightSkyBlue" />
 
     <!--Colors Panel-->
     <SolidColorBrush x:Key = "panelColor" Color = "#200F53" />

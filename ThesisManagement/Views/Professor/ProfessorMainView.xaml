@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ThesisManagement.Views.Professor"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-        xmlns:userControls="clr-namespace:ThesisManagement.Views.Professor.UserControls"
+        xmlns:userControls="clr-namespace:ThesisManagement.Views.Professor"
         mc:Ignorable="d"
         Title="ProfessorMainView" Height="600" Width="1150"
         WindowStartupLocation="CenterScreen"
@@ -25,47 +25,31 @@
             </Grid.ColumnDefinitions>
 
             <!--SIDEBAR-->
-            <Border CornerRadius="0" Grid.Column="0">
-
-                <Border.Background>
-                    <SolidColorBrush Color="{StaticResource primary}" />
-                </Border.Background>
-
+            <Border Grid.Column="0" Background="{StaticResource primaryBrush}">
                 <StackPanel>
-                    <!--Logo-->
-                    <StackPanel Height="80">
-                        <TextBlock Text = "Quản lý luận văn" 
-                                   Foreground = "{StaticResource titleColor2}"
-                                   FontSize = "30"
-                                   FontFamily = "Montserrat"
-                                   FontWeight = "Medium"
-                                   VerticalAlignment = "Center"
-                                   HorizontalAlignment="Center"
-                                   Margin = "5,0,0,5" />
+                    <StackPanel Orientation="Horizontal" Height="35" Margin="15 25 0 40">
+                        <Image Source="/Resources/Images/logo-bright.png" Height="28" />
+                        <TextBlock Text="QUẢN LÝ LUẬN VĂN" Style="{StaticResource logo}" Margin="10 3 0 0"/>
                     </StackPanel>
 
-                    <!--SidebarButton-->
-                    <RadioButton Style = "{StaticResource sidebarButton}" 
-                                 Tag = "{StaticResource color1}">
-                        <StackPanel Orientation = "Horizontal" >
-                            <fa:IconImage Icon = "RectangleList" Style = "{StaticResource sidebarButtonIcon}" />
-                            <TextBlock Text = "Đề tài" Style = "{StaticResource sidebarButtonText}" />
+                    <RadioButton Style="{StaticResource navBtn}" IsChecked="True">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="RectangleList" Style="{StaticResource navIcon}" />
+                            <TextBlock Text="Đề tài" Style="{StaticResource navText}" />
                         </StackPanel>
                     </RadioButton>
 
-                    <RadioButton Style = "{StaticResource sidebarButton}" 
-                                 Tag = "{StaticResource color2}">
-                        <StackPanel Orientation = "Horizontal" >
-                            <fa:IconImage Icon = "UserLarge" Style = "{StaticResource sidebarButtonIcon}" />
-                            <TextBlock Text = "Sinh viên" Style = "{StaticResource sidebarButtonText}" />
+                    <RadioButton Style="{StaticResource navBtn}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="UserLarge" Style="{StaticResource navIcon}" />
+                            <TextBlock Text="Sinh viên" Style="{StaticResource navText}" />
                         </StackPanel>
                     </RadioButton>
 
-                    <RadioButton Style = "{StaticResource sidebarButton}" 
-                                 Tag = "{StaticResource color3}">
-                        <StackPanel Orientation = "Horizontal" >
-                            <fa:IconImage Icon = "Book" Style = "{StaticResource sidebarButtonIcon}" />
-                            <TextBlock Text = "Luận văn" Style = "{StaticResource sidebarButtonText}" />
+                    <RadioButton Style="{StaticResource navBtn}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Book" Style="{StaticResource navIcon}" />
+                            <TextBlock Text="Luận văn" Style="{StaticResource navText}" />
                         </StackPanel>
                     </RadioButton>
 
@@ -160,7 +144,7 @@
                     <!--Content Section -->
                     <ContentControl Grid.Row="2"
                                     Margin="25">
-                        <userControls:TopicUC />
+                        <userControls:ProfileView/>
                     </ContentControl>
                     
                 </Grid>

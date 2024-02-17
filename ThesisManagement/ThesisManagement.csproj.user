@@ -19,19 +19,19 @@
     <Compile Update="Views\Professor\ProfessorMainView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Professor\UserControls\Profile.xaml.cs">
+    <Compile Update="Views\Professor\ProfileView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Professor\UserControls\StudentUC.xaml.cs">
+    <Compile Update="Views\Professor\StudentView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Professor\UserControls\ThesisDetailsUC.xaml.cs">
+    <Compile Update="Views\Professor\ThesisDetailsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Professor\UserControls\ThesisUC.xaml.cs">
+    <Compile Update="Views\Professor\ThesisView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Professor\UserControls\TopicUC.xaml.cs">
+    <Compile Update="Views\Professor\TopicView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Shared\LoginView.xaml.cs">
@@ -69,19 +69,19 @@
     <Page Update="Views\Professor\ProfessorMainView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Professor\UserControls\Profile.xaml">
+    <Page Update="Views\Professor\ProfileView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Professor\UserControls\StudentUC.xaml">
+    <Page Update="Views\Professor\StudentView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Professor\UserControls\ThesisDetailsUC.xaml">
+    <Page Update="Views\Professor\ThesisDetailsView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Professor\UserControls\ThesisUC.xaml">
+    <Page Update="Views\Professor\ThesisView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Professor\UserControls\TopicUC.xaml">
+    <Page Update="Views\Professor\TopicView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Shared\LoginView.xaml">
