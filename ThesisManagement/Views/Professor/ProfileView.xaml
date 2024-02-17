@@ -24,43 +24,37 @@
 
         <TextBlock Grid.Row="0"
                    Text="Hồ sơ cá nhân"
-                   FontSize="30"
+                   FontSize="25"
                    Margin="10"
                    FontWeight="Medium"/>
 
         <TextBlock Grid.Row="1"
                    Text="Mã giảng viên: "
-                   FontSize="18"
                    Margin="30,0,0,0"
                    FontWeight="Medium"/>
 
         <TextBlock Grid.Row="2"
                    Text="Họ và tên:"
-                   FontSize="18"
                    Margin="30,0,0,0"
                    FontWeight="Medium"/>
 
         <TextBlock Grid.Row="3"
                    Text="Email:"
-                   FontSize="18"
                    Margin="30,0,0,0"
                    FontWeight="Medium"/>
 
         <TextBlock Grid.Row="4"
                    Text="Số điện thoại:"
-                   FontSize="18"
                    Margin="30,0,0,0"
                    FontWeight="Medium"/>
 
         <TextBlock Grid.Row="5"
                    Text="Ngày sinh:"
-                   FontSize="18"
                    Margin="30,0,0,0"
                    FontWeight="Medium"/>
 
         <TextBlock Grid.Row="6"
                    Text="Khoa:"
-                   FontSize="18"
                    Margin="30,0,0,0"
                    FontWeight="Medium"/>
 
@@ -80,7 +74,6 @@
                                   Margin="5"
                                   />
                     <TextBlock Text="Cập nhật"
-                               FontSize="18"
                                Foreground="Black"
                                VerticalAlignment="Center"/>
                 </StackPanel>
