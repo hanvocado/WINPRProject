@@ -4,11 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ThesisManagement.Views.Student"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        xmlns:userControls="clr-namespace:ThesisManagement.Views.Professor"
+        xmlns:customControl="clr-namespace:ThesisManagement.CustomControls"
         mc:Ignorable="d"
         Title="StudentMainView" Height="600" Width="1150"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None">
-    
+
     <Border CornerRadius="0">
 
         <Grid>
@@ -21,21 +24,101 @@
             </Grid.ColumnDefinitions>
 
             <!--SIDEBAR-->
-            <Border CornerRadius="0" Grid.Column="0">
-                <Border.Background>
-                    <SolidColorBrush Color="{StaticResource primary}" />
-                </Border.Background>
-
+            <Border Grid.Column="0" Background="{StaticResource primaryBrush}">
                 <StackPanel>
+                    <StackPanel Orientation="Horizontal" Height="35" Margin="15 25 0 40">
+                        <Image Source="/Resources/Images/logo-bright.png" Height="28" />
+                        <TextBlock Text="QUẢN LÝ LUẬN VĂN" Style="{StaticResource logo}" Margin="10 3 0 0"/>
+                    </StackPanel>
+
+                    <RadioButton Style="{StaticResource navBtn}" IsChecked="True">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="RectangleList" Style="{StaticResource navIcon}" />
+                            <TextBlock Text="Đề tài" Style="{StaticResource navText}" />
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource navBtn}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="UserPlus" Style="{StaticResource navIcon}" />
+                            <TextBlock Text="Sinh viên" Style="{StaticResource navText}" />
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource navBtn}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Book" Style="{StaticResource navIcon}" />
+                            <TextBlock Text="Luận văn" Style="{StaticResource navText}" />
+                        </StackPanel>
+                    </RadioButton>
+
                 </StackPanel>
             </Border>
 
-            <!--CONTENT-->
-            <Border CornerRadius="0" Grid.Column="1">
+            <!--Main Section-->
+            <Border Grid.Column="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <!--Control Bars-->
+                        <RowDefinition Height="25"/>
+                        <!--Header / Caption-->
+                        <RowDefinition Height="45"/>
+                        <!--Content Section -->
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <customControl:WindowControlBar />
+
+                    <!--Header / Caption-->
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <!--User Options-->
+                        <StackPanel Grid.Column="0"
+                              Orientation="Horizontal"
+                              VerticalAlignment="Center">
+                            <fa:IconImage Icon="RectangleList"
+                                    Width="25"
+                                    Height="25"
+                                    Margin="35,0,10,0"/>
+                            <TextBlock Text="Đề tài"
+                                     FontSize="17"
+                                     FontFamily="Montserrat"
+                                     FontWeight="Medium"
+                                     VerticalAlignment="Center"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1"
+                              Orientation="Horizontal"
+                              FlowDirection="RightToLeft"
+                              Margin="0,0,10,0">
+                            <Button Style="{StaticResource profileBtn}"
+                              Tag="{StaticResource color1}">
+                                <fa:IconImage Icon="AngleDown" Style="{StaticResource profileBtnIcon}"/>
+                            </Button>
+
+                            <TextBlock Text="Nguyễn Thủy An" 
+                                     FontWeight="Medium"
+                                     VerticalAlignment="Center"/>
+
+                        </StackPanel>
+                    </Grid>
+
+                    <!--Content Section -->
+                    <ContentControl Grid.Row="2"
+                                  Margin="25">
+                        <userControls:ProfileView/>
+                    </ContentControl>
+
+                </Grid>
 
             </Border>
         </Grid>
 
     </Border>
-    
+
+
 </Window>
