@@ -246,7 +246,17 @@
         <Setter Property = "VerticalAlignment" Value = "Center" />
     </Style >
 
-    
+    <!--ToggleButton -->
+    <Style x:Key="toggleBtn" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Margin" Value="15"/>
+        <Setter Property="Width" Value="30"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="Transparent"/>
+    </Style>
+
     <Style x:Key="navBtn" TargetType="RadioButton">
         <Setter Property="Height" Value="45" />
         <Setter Property="Background" Value = "Transparent" />

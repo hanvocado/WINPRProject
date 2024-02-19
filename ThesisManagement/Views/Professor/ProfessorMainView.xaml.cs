@@ -18,7 +18,7 @@ namespace ThesisManagement.Views.Professor
     {
         public ProfessorMainView()
         {
-            InitializeComponent();
+           InitializeComponent();
         }
     }
 }
