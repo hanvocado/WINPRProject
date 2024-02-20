@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ThesisManagement.Views.Student"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-        xmlns:userControls="clr-namespace:ThesisManagement.Views.Professor"
+        xmlns:userControls="clr-namespace:ThesisManagement.Views.Student"
         xmlns:customControl="clr-namespace:ThesisManagement.CustomControls"
         mc:Ignorable="d"
         Title="StudentMainView" Height="600" Width="1150"
@@ -40,15 +40,22 @@
 
                     <RadioButton Style="{StaticResource navBtn}">
                         <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="UserPlus" Style="{StaticResource navIcon}" />
-                            <TextBlock Text="Sinh viên" Style="{StaticResource navText}" />
+                            <fa:IconImage Icon="BookOpenReader" Style="{StaticResource navIcon}" />
+                            <TextBlock Text="Luận văn" Style="{StaticResource navText}" />
+                        </StackPanel>
+                    </RadioButton>
+                    
+                    <RadioButton Style="{StaticResource navBtn}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="UserTie" Style="{StaticResource navIcon}" />
+                            <TextBlock Text="Hồ sơ" Style="{StaticResource navText}" />
                         </StackPanel>
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource navBtn}">
                         <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="Book" Style="{StaticResource navIcon}" />
-                            <TextBlock Text="Luận văn" Style="{StaticResource navText}" />
+                            <fa:IconImage Icon="RightFromBracket" Style="{StaticResource navIcon}" />
+                            <TextBlock Text="Đăng xuất" Style="{StaticResource navText}" />
                         </StackPanel>
                     </RadioButton>
 
@@ -110,7 +117,7 @@
                     <!--Content Section -->
                     <ContentControl Grid.Row="2"
                                   Margin="25">
-                        <userControls:ProfileView/>
+                        <userControls:TopicListView/>
                     </ContentControl>
 
                 </Grid>

@@ -62,9 +62,9 @@
                         <!--Control Bars-->
                         <RowDefinition Height="25"/>
                         <!--Header / Caption-->
-                        <RowDefinition Height="45"/>
+                        <RowDefinition Height="Auto"/>
                         <!--Content Section -->
-                        <RowDefinition Height="*"/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
 
                     <customControl:WindowControlBar />
@@ -112,7 +112,7 @@
                                     Margin="25">
                         <userControls:ProfileView/>
                     </ContentControl>
-                    
+
                 </Grid>
 
             </Border>
