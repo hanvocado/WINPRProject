@@ -56,91 +56,65 @@
             Background="#0A426E"
             Padding="10">
 
-            <!--main code-->
-            <!--<DataGrid ColumnWidth="*"
-                  Background="#0A426E"
-                  BorderThickness="0">
-
-            <DataGrid.ColumnHeaderStyle>
-                <Style TargetType="DataGridColumnHeader">
-                    <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="Foreground" Value="#BCBEE0"/>
-                    <Setter Property="Padding" Value="10,0,0,10"/>
-                    <Setter Property="FontFamily" Value="Montserrat"/>
-                    <Setter Property="FontSize" Value="15"/>
-                </Style>
-            </DataGrid.ColumnHeaderStyle>
-
-            <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Đề tài" Width="5*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <TextBlock Text="{Binding YourTitleProperty}" />
-                            </Grid>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Sửa"/>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Xóa"/>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Chi tiết"/>
-            </DataGrid.Columns>
-        
-
-        </DataGrid>-->
-
-            <!--design code-->
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="60"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Text="Danh sách đề tài" HorizontalAlignment="Center"
-                       Foreground="LightGray"
-                       FontSize="17"
-                       FontWeight="Medium"
-                       VerticalAlignment="Center"/>
                 
-                <TextBlock Grid.Row="0" Grid.Column="1"
-                       Text="Hoạt động"
-                       Foreground="LightGray"
-                       FontSize="17"
-                       FontWeight="Medium"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"/>
+                <Grid Grid.Row="0">
+                    <TextBlock Text="Danh sách đề tài"
+                    FontSize="18"
+                    FontWeight="Medium"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Foreground="White"/>
+                </Grid>
 
-                <StackPanel Orientation="Horizontal"
-                        FlowDirection="LeftToRight"
-                        Grid.Row="1" Grid.Column="1">
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-                    <Button Style="{StaticResource btnDetail}"
-                        VerticalAlignment="Top"
-                        Width="50">
-                        <fa:IconImage Icon="CircleInfo" Style="{StaticResource crudsButtonIcon}" />
-                    </Button>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="25*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0"
+                        Text="Tên đề tài"
+                        FontSize="18"
+                        FontWeight="Medium"
+                        Foreground="White"
+                        VerticalAlignment="Center" Grid.ColumnSpan="3"/>
 
-                    <Button Style="{StaticResource btnUpdate}"
-                        VerticalAlignment="Top"
-                        Width="50">
-                        <fa:IconImage Icon="Pen" Style="{StaticResource crudsButtonIcon}" />
-                    </Button>
+                    <TextBlock Grid.Row="0" Grid.Column="1"
+                        Text="Giảng viên"
+                        FontSize="18"
+                        FontWeight="Medium"
+                        Foreground="White"
+                        VerticalAlignment="Center" Grid.ColumnSpan="3"/>
 
-                    <Button Style="{StaticResource btnDelete}"
-                        VerticalAlignment="Top"
-                        Width="50">
-                        <fa:IconImage Icon="Trash" Style="{StaticResource crudsButtonIcon}" />
-                    </Button>
+                    <TextBlock Grid.Row="0" Grid.Column="2"
+                        Text="Thời gian"
+                        FontSize="18"
+                        FontWeight="Medium"
+                        Foreground="White"
+                        VerticalAlignment="Center" Grid.ColumnSpan="3"/>
 
-                </StackPanel>
+                    <TextBlock Grid.Row="0" Grid.Column="4"
+                    Text="Trạng thái"
+                    FontSize="18"
+                    FontWeight="Medium"
+                    Foreground="White"
+                    VerticalAlignment="Center" Grid.ColumnSpan="3"/>        
+                </Grid>
             </Grid>
-
+            
         </Border>
 
     </Grid>

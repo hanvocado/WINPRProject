@@ -117,7 +117,7 @@
                     <!--Content Section -->
                     <ContentControl Grid.Row="2"
                                   Margin="25">
-                        <userControls:TopicListView/>
+                        <userControls:SearchThesis/>
                     </ContentControl>
 
                 </Grid>

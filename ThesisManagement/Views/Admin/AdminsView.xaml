@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
-    
+
     <UserControl.DataContext>
         <viewModel:AdminsVM />
     </UserControl.DataContext>
@@ -59,33 +59,35 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="21*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="11*"/>
+                <ColumnDefinition Width="33*"/>
                 <ColumnDefinition Width="140"/>
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Tên"
                FontSize="14"
                FontWeight="Medium"
-               VerticalAlignment="Center"/>
+               VerticalAlignment="Center" Grid.ColumnSpan="3"/>
 
             <TextBlock Grid.Row="1" Grid.Column="0"
                 Text="Ad Min"
-                VerticalAlignment="Center"/>
+                VerticalAlignment="Center" Grid.ColumnSpan="3"/>
 
-            <TextBlock Grid.Row="0" Grid.Column="1"
+            <TextBlock Grid.Column="3"
                        Text="Email"
                        FontSize="14"
                        FontWeight="Medium"
                        VerticalAlignment="Center"/>
 
-            <TextBlock Grid.Row="1" Grid.Column="1"
+            <TextBlock Grid.Row="1" Grid.Column="3"
                 Text="admin1@hcmute.edu.vn"
                 FontSize="14"
                 VerticalAlignment="Center"/>
-            
+
             <StackPanel Orientation="Horizontal"
-                        Grid.Row="1" Grid.Column="2">
+                        Grid.Row="1" Grid.Column="4">
 
                 <Button Style="{StaticResource btnUpdate}"
                         VerticalAlignment="Top"

@@ -27,19 +27,12 @@
                       Height="20" 
                       Width="20" 
                       Foreground="{StaticResource plainTextColor}"/>
-                <ComboBox Text="Đề tài..."   
-                  FontSize="13"
-                  Height="24"
-                  Width="200"
-                  Background="Transparent"
-                  FontWeight="Medium"
-                  FontFamily="Montserrat"
-                  Foreground="{StaticResource plainTextColor}"
-                  BorderBrush="{StaticResource plainTextColor}"
-                  BorderThickness="0,0,0,1"
-                  VerticalContentAlignment="Center"
-                  Margin="5,5,0,0">
-                </ComboBox>
+                <TextBox Text=""   
+                     Height="24"
+                     Width="200"
+                     BorderThickness="0,0,0,2"
+                     VerticalContentAlignment="Center">
+                </TextBox>
 
                 <Button Style="{StaticResource btnSearch}"
                 Command=""
@@ -55,87 +48,77 @@
         Background="#0A426E"
         Padding="10">
 
-            <!--main code-->
-            <!--<DataGrid ColumnWidth="*"
-              Background="#0A426E"
-              BorderThickness="0">
-
-        <DataGrid.ColumnHeaderStyle>
-            <Style TargetType="DataGridColumnHeader">
-                <Setter Property="Background" Value="Transparent"/>
-                <Setter Property="Foreground" Value="#BCBEE0"/>
-                <Setter Property="Padding" Value="10,0,0,10"/>
-                <Setter Property="FontFamily" Value="Montserrat"/>
-                <Setter Property="FontSize" Value="15"/>
-            </Style>
-        </DataGrid.ColumnHeaderStyle>
-
-        <DataGrid.Columns>
-            <DataGridTemplateColumn Header="Đề tài" Width="5*">
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <TextBlock Text="{Binding YourTitleProperty}" />
-                        </Grid>
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Sửa"/>
-            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Xóa"/>
-            <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Chi tiết"/>
-        </DataGrid.Columns>
-    
-
-    </DataGrid>-->
-
-            <!--design code-->
+            
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="45"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="45"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
+                
 
-                <TextBlock Text="Danh sách luận văn" HorizontalAlignment="Center"
+                <TextBlock Grid.Row="0"   
+                   Text=" đề tài 1" HorizontalAlignment="Center"
                    Foreground="LightGray"
-                   FontSize="17"
+                   FontSize="20"
                    FontWeight="Medium"
                    VerticalAlignment="Center"/>
 
-                <TextBlock Grid.Row="0" Grid.Column="1"
-                   Text="Hoạt động"
+                <TextBlock Grid.Row="1"   
+                   Text="-Luận văn: Nghiên cứu quá trình ứng dụng công nghệ thông tin..." 
                    Foreground="LightGray"
-                   FontSize="17"
+                   FontSize="20"
                    FontWeight="Medium"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"/>
+                   VerticalAlignment="Center"/>
 
+                <TextBlock Grid.Row="2"   
+                   Text="-Giảng viên hướng dẫn: Nguyễn Thủy An" 
+                   Foreground="LightGray"
+                   FontSize="20"
+                   FontWeight="Medium"
+                   VerticalAlignment="Center"/>
+                
+                <TextBlock Grid.Row="3"   
+                   Text="-Nhóm thực hiện : UITE" 
+                   Foreground="LightGray"
+                   FontSize="20"
+                   FontWeight="Medium"
+                   VerticalAlignment="Center"/>
+
+                <TextBlock Grid.Row="4"   
+                   Text="-Thời gian : 20/02/2024" 
+                   Foreground="LightGray"
+                   FontSize="20"
+                   FontWeight="Medium"
+                   VerticalAlignment="Center"/> 
                 <StackPanel Orientation="Horizontal"
-                    FlowDirection="LeftToRight"
-                    Grid.Row="1" Grid.Column="1">
+                    FlowDirection="RightToLeft"
+                    VerticalAlignment="Bottom"
+                    Grid.Row="5" Grid.Column="0">
 
+                    <Button Style="{StaticResource btnDelete}"
+                        VerticalAlignment="Top"
+                        Width="50">
+                        <fa:IconImage Icon="Trash" Style="{StaticResource crudsButtonIcon}" />
+                    </Button>
+                    
                     <Button Style="{StaticResource btnDetail}"
-                    VerticalAlignment="Top"
-                    Width="50">
-                        <fa:IconImage Icon="CircleInfo" Style="{StaticResource crudsButtonIcon}" />
+                        VerticalAlignment="Top"
+                        Width="50">
+                        <fa:IconImage Icon="PenToSquare" Style="{StaticResource crudsButtonIcon}" />
                     </Button>
 
                     <Button Style="{StaticResource btnUpdate}"
-                    VerticalAlignment="Top"
-                    Width="50">
+                        VerticalAlignment="Top"
+                        Width="50">
                         <fa:IconImage Icon="Pen" Style="{StaticResource crudsButtonIcon}" />
                     </Button>
 
-                    <Button Style="{StaticResource btnDelete}"
-                    VerticalAlignment="Top"
-                    Width="50">
-                        <fa:IconImage Icon="Trash" Style="{StaticResource crudsButtonIcon}" />
-                    </Button>
+                    
 
                 </StackPanel>
             </Grid>
