@@ -1,0 +1,129 @@
+﻿<UserControl x:Class="ThesisManagement.Views.Student.ThesisViewStudent"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ThesisManagement.Views.Student"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="120"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0"
+                Orientation="Horizontal"
+                VerticalAlignment="Top"
+                FlowDirection="LeftToRight">
+                <fa:IconImage Icon="Search" 
+                      Height="20" 
+                      Width="20" 
+                      Foreground="{StaticResource plainTextColor}"/>
+                <TextBox Text=""   
+                     Height="24"
+                     Width="200"
+                     BorderThickness="0,0,0,2"
+                     VerticalContentAlignment="Center">
+                </TextBox>
+
+                <Button Style="{StaticResource btnSearch}"
+                Command=""
+                Content="Tìm kiếm"
+                VerticalAlignment="Top">
+                </Button>
+
+            </StackPanel>
+
+        </Grid>
+
+        <Border Grid.Row="1"
+        Background="#0A426E"
+        Padding="10">
+
+            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                
+
+                <TextBlock Grid.Row="0"   
+                   Text=" đề tài 1" HorizontalAlignment="Center"
+                   Foreground="LightGray"
+                   FontSize="20"
+                   FontWeight="Medium"
+                   VerticalAlignment="Center"/>
+
+                <TextBlock Grid.Row="1"   
+                   Text="-Luận văn: Nghiên cứu quá trình ứng dụng công nghệ thông tin..." 
+                   Foreground="LightGray"
+                   FontSize="20"
+                   FontWeight="Medium"
+                   VerticalAlignment="Center"/>
+
+                <TextBlock Grid.Row="2"   
+                   Text="-Giảng viên hướng dẫn: Nguyễn Thủy An" 
+                   Foreground="LightGray"
+                   FontSize="20"
+                   FontWeight="Medium"
+                   VerticalAlignment="Center"/>
+                
+                <TextBlock Grid.Row="3"   
+                   Text="-Nhóm thực hiện : UITE" 
+                   Foreground="LightGray"
+                   FontSize="20"
+                   FontWeight="Medium"
+                   VerticalAlignment="Center"/>
+
+                <TextBlock Grid.Row="4"   
+                   Text="-Thời gian : 20/02/2024" 
+                   Foreground="LightGray"
+                   FontSize="20"
+                   FontWeight="Medium"
+                   VerticalAlignment="Center"/> 
+                <StackPanel Orientation="Horizontal"
+                    FlowDirection="RightToLeft"
+                    VerticalAlignment="Bottom"
+                    Grid.Row="5" Grid.Column="0">
+
+                    <Button Style="{StaticResource btnDelete}"
+                        VerticalAlignment="Top"
+                        Width="50">
+                        <fa:IconImage Icon="Trash" Style="{StaticResource crudsButtonIcon}" />
+                    </Button>
+                    
+                    <Button Style="{StaticResource btnDetail}"
+                        VerticalAlignment="Top"
+                        Width="50">
+                        <fa:IconImage Icon="PenToSquare" Style="{StaticResource crudsButtonIcon}" />
+                    </Button>
+
+                    <Button Style="{StaticResource btnUpdate}"
+                        VerticalAlignment="Top"
+                        Width="50">
+                        <fa:IconImage Icon="Pen" Style="{StaticResource crudsButtonIcon}" />
+                    </Button>
+
+                    
+
+                </StackPanel>
+            </Grid>
+
+        </Border>
+
+    </Grid>
+</UserControl>

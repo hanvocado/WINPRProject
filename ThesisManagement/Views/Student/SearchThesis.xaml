@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="ThesisManagement.Views.Professor.ThesisView"
+﻿<UserControl x:Class="ThesisManagement.Views.Student.SearchThesis"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ThesisManagement.Views.Professor"
+             xmlns:local="clr-namespace:ThesisManagement.Views.Student"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -19,39 +19,38 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0"
-                        Orientation="Horizontal"
-                        VerticalAlignment="Top"
-                        FlowDirection="LeftToRight">
+                    Orientation="Horizontal"
+                    VerticalAlignment="Top"
+                    FlowDirection="LeftToRight">
                 <TextBlock Text="Đề tài"
-                           FontSize="16"
-                           FontWeight="Medium"
-                           VerticalAlignment="Center"
-                           Foreground="LightGray"/>
+                       FontSize="16"
+                       FontWeight="Medium"
+                       VerticalAlignment="Center"
+                       />
                 <ComboBox Height="24"
-                          Width="150"
-                          BorderThickness="0,0,0,1"
-                          VerticalContentAlignment="Center"
-                          Margin="5,5,0,0">
+                      Width="150"
+                      BorderThickness="0,0,0,1"
+                      VerticalContentAlignment="Center"
+                      Margin="5,5,0,0">
                 </ComboBox>
 
-                <TextBlock Text="trạng thái"
-                           FontSize="16"
-                           FontWeight="Medium"
-                           VerticalAlignment="Center"
-                           Foreground="LightGray"
-                           Margin="10,0,0,0"/>
+                <TextBlock Text="Trạng Thái"
+                       FontSize="16"
+                       FontWeight="Medium"
+                       VerticalAlignment="Center"
+                       Margin="10,0,0,0"/>
 
                 <ComboBox Height="24"
-                          Width="150"
-                          BorderThickness="0,0,0,1"
-                          VerticalContentAlignment="Center"
-                          Margin="5,5,0,0">
+                      Width="150"
+                      BorderThickness="0,0,0,1"
+                      VerticalContentAlignment="Center"
+                      Margin="5,5,0,0">
                 </ComboBox>
 
                 <Button Style="{StaticResource btnSearch}"
-                        Command=""
-                        Content="Tìm kiếm"
-                        VerticalAlignment="Top">
+                    Command=""
+                    Content="Tìm kiếm"
+                    VerticalAlignment="Top">
                 </Button>
 
             </StackPanel>
@@ -60,13 +59,13 @@
         </Grid>
 
         <Border Grid.Row="1"
-                Background="#0A426E"
-                Padding="10">
+            Background="#0A426E"
+            Padding="10">
 
             <DataGrid ColumnWidth="*"
-                      Background="#0A426E"
-                      BorderThickness="0"
-                      ColumnHeaderStyle="{StaticResource columnHeader}">
+                  Background="#0A426E"
+                  BorderThickness="0"
+                  ColumnHeaderStyle="{StaticResource columnHeader}">
 
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Luận văn"/>
