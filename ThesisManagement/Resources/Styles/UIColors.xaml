@@ -5,14 +5,10 @@
     <Color x:Key="secondary">#1E74B2</Color>
     <SolidColorBrush x:Key="primaryBrush">#0A426E</SolidColorBrush>
     <SolidColorBrush x:Key="secondaryBrush">#1E74B2</SolidColorBrush>
-    
-    <!--Sidebar icon color-->
-    <SolidColorBrush x:Key = "color1" Color = "#4ADAEC" />
-    <SolidColorBrush x:Key = "color2" Color = "#FFC047" />
-    <SolidColorBrush x:Key = "color3" Color = "#EF6C96" />
 
-    <SolidColorBrush x:Key = "createNomal" Color = "Green" />
-    <SolidColorBrush x:Key = "createHover" Color = "lightgreen" />
+    <!--Button Color-->
+    <SolidColorBrush x:Key = "createNomal" Color = "#0A426E" />
+    <SolidColorBrush x:Key = "createHover" Color = "#1E74B2" />
     <SolidColorBrush x:Key = "updateNomal" Color = "orange" />
     <SolidColorBrush x:Key = "updateHover" Color = "yellow" />
     <SolidColorBrush x:Key = "deleteNomal" Color = "red" />
@@ -22,14 +18,7 @@
     <SolidColorBrush x:Key = "searchNomal" Color = "DeepSkyBlue" />
     <SolidColorBrush x:Key = "searchHover" Color = "LightSkyBlue" />
 
-    <!--Colors Panel-->
-    <SolidColorBrush x:Key = "panelColor" Color = "#200F53" />
-    <SolidColorBrush x:Key = "panelOverColor" Color = "#281269" />
-    <SolidColorBrush x:Key = "panelActiveColor" Color = "#2B1372" />
-    
     <!--Font Colors-->
-    <SolidColorBrush x:Key = "titleColor1" Color = "#E0E1F1" />  
-    <SolidColorBrush x:Key = "titleColor2" Color = "#BCBEE0" />
     <SolidColorBrush x:Key = "titleColor" Color = "#BCBEE0" />
     <SolidColorBrush x:Key = "plainTextColor" Color = "#F1F1F1" />  
     

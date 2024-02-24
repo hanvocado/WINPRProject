@@ -38,7 +38,7 @@
                             <DataTemplate>
                                 <CheckBox IsChecked="{Binding IsCompleted}" />
                             </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn.CellTemplate> 
                     </DataGridTemplateColumn>
 
                 </DataGrid.Columns>

@@ -2,8 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style x:Key="columnHeader" TargetType="DataGridColumnHeader">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="#BCBEE0"/>
+        <Setter Property="Background" Value="white"/>
         <Setter Property="Padding" Value="10,0,0,10"/>
         <Setter Property="FontFamily" Value="Montserrat"/>
         <Setter Property="FontSize" Value="15"/>

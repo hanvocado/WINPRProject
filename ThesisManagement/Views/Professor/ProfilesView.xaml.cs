@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace ThesisManagement.Views.Professor
 {
     /// <summary>
-    /// Interaction logic for TopicView.xaml
+    /// Interaction logic for Profile.xaml
     /// </summary>
-    public partial class TopicView : Window
+    public partial class ProfilesView : UserControl
     {
-        public TopicView()
+        public ProfilesView()
         {
             InitializeComponent();
         }

@@ -85,6 +85,7 @@
                         <Button Content="Đăng nhập" Width="110" Margin="0 20 0 0" Style="{StaticResource primaryBtn}" />
 
                         <TextBlock Text="Đăng nhập bắng tài khoản google" Style="{StaticResource label}" HorizontalAlignment="Center" Margin="0 30 0 0"/>
+                        <TextBlock Text="Đăng nhập bắng tài khoản google" Style="{StaticResource label}" HorizontalAlignment="Center" Margin="0 30 0 0"/>
                         <Button fa:FontAwesome.Icon="Brands_Google" 
                                 fa:FontAwesome.PrimaryColor="White"
                                 Style="{StaticResource googleBtn}" />
