@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:ThesisManagement.Views.Admin"
              xmlns:viewModel="clr-namespace:ThesisManagement.ViewModels"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             xmlns:customControl="clr-namespace:ThesisManagement.CustomControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
@@ -42,12 +43,13 @@
 
             </StackPanel>
 
-            <Button Grid.Column="1"
-                Style="{StaticResource btnCreate}"
-                Command=""                            
-                Content="Tạo mới"                            
-                VerticalAlignment="Top">
-            </Button>
+            <customControl:TemplateButton Grid.Column="1" 
+                          DefaultColor="{StaticResource createNomal}"
+                          HoverColor="{StaticResource createHover}">
+                <customControl:TemplateButton.Title>
+                    <TextBlock Text="Tạo mới" Style="{StaticResource crudsButtonText}"/>
+                </customControl:TemplateButton.Title>
+            </customControl:TemplateButton>
         </Grid>
 
         <!--Temporary for design-->
@@ -89,17 +91,23 @@
             <StackPanel Orientation="Horizontal"
                         Grid.Row="1" Grid.Column="4">
 
-                <Button Style="{StaticResource btnUpdate}"
-                        VerticalAlignment="Top"
-                        Width="50">
-                    <fa:IconImage Icon="Pen" Style="{StaticResource crudsButtonIcon}" />
-                </Button>
+                <customControl:TemplateButton Grid.Column="1"
+                          DefaultColor="{StaticResource updateNomal}"
+                          HoverColor="{StaticResource updateHover}"
+                          ButtonWidth="60">
+                    <customControl:TemplateButton.Title>
+                        <fa:IconImage Icon="Pen" Style="{StaticResource crudsButtonIcon}" />
+                    </customControl:TemplateButton.Title>
+                </customControl:TemplateButton>
 
-                <Button Style="{StaticResource btnDelete}"
-                        VerticalAlignment="Top"
-                        Width="50">
-                    <fa:IconImage Icon="Trash" Style="{StaticResource crudsButtonIcon}" />
-                </Button>
+                <customControl:TemplateButton Grid.Column="1"
+                          DefaultColor="{StaticResource deleteNomal}"
+                          HoverColor="{StaticResource deleteHover}"
+                          ButtonWidth="60">
+                    <customControl:TemplateButton.Title>
+                        <fa:IconImage Icon="Trash" Style="{StaticResource crudsButtonIcon}" />
+                    </customControl:TemplateButton.Title>
+                </customControl:TemplateButton>
 
             </StackPanel>
         </Grid>

@@ -1,10 +1,11 @@
-﻿<UserControl x:Class="ThesisManagement.Views.Professor.ProfileView"
+﻿<UserControl x:Class="ThesisManagement.Views.Professor.ProfilesView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ThesisManagement.Views.Professor"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             xmlns:customControl="clr-namespace:ThesisManagement.CustomControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="white">
@@ -64,20 +65,21 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Style="{StaticResource btnUpdate}"
-                    VerticalAlignment="Top"
-                    Width="120"
-                    Grid.Column="1">
-                <StackPanel Orientation="Horizontal"
+            <customControl:TemplateButton Grid.Column="1"
+                          DefaultColor="{StaticResource updateNomal}"
+                          HoverColor="{StaticResource updateHover}">
+                <customControl:TemplateButton.Title>
+                    <StackPanel Orientation="Horizontal"
                             VerticalAlignment="Center">
-                    <fa:IconImage Icon="Pen" Style="{StaticResource crudsButtonIcon}" 
+                        <fa:IconImage Icon="Pen" Style="{StaticResource crudsButtonIcon}" 
                                   Margin="5"
                                   />
-                    <TextBlock Text="Cập nhật"
+                        <TextBlock Text="Cập nhật"
                                Foreground="Black"
                                VerticalAlignment="Center"/>
-                </StackPanel>
-            </Button>
+                    </StackPanel>
+                </customControl:TemplateButton.Title>
+            </customControl:TemplateButton>
         </Grid>
     </Grid>
 </UserControl>

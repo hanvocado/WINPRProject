@@ -18,15 +18,15 @@
 
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModel:TopicsVM}">
-            <local:TopicView />
+            <local:TopicsView />
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type viewModel:StudentsVM}">
-            <local:StudentView />
+            <local:StudentsView />
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type viewModel:ThesesVM}">
-            <local:ThesisView />
+            <local:ThesesView />
         </DataTemplate>
     </Window.Resources>
 
@@ -138,8 +138,7 @@
                                 Orientation="Horizontal"
                                 FlowDirection="RightToLeft"
                                 Margin="0,0,10,0">
-                            <Button Style="{StaticResource profileBtn}"
-                                Tag="{StaticResource color1}">
+                            <Button Style="{StaticResource profileBtn}">
                                 <fa:IconImage Icon="AngleDown" Style="{StaticResource profileBtnIcon}"/>
                             </Button>
 
