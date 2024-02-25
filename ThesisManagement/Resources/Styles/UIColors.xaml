@@ -2,24 +2,16 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Color x:Key="primary">#0A426E</Color>
-    <Color x:Key="secondary">#1E74B2</Color>
+    <Color x:Key="secondary">#0B60B0</Color>
+    
     <SolidColorBrush x:Key="primaryBrush">#0A426E</SolidColorBrush>
-    <SolidColorBrush x:Key="secondaryBrush">#1E74B2</SolidColorBrush>
+    <SolidColorBrush x:Key="secondaryBrush">#0B60B0</SolidColorBrush>
 
-    <!--Button Color-->
-    <SolidColorBrush x:Key = "createNomal" Color = "#0A426E" />
-    <SolidColorBrush x:Key = "createHover" Color = "#1E74B2" />
-    <SolidColorBrush x:Key = "updateNomal" Color = "orange" />
-    <SolidColorBrush x:Key = "updateHover" Color = "yellow" />
-    <SolidColorBrush x:Key = "deleteNomal" Color = "red" />
-    <SolidColorBrush x:Key = "deleteHover" Color = "#FF8080" />
-    <SolidColorBrush x:Key = "detailNomal" Color = "Gray" />
-    <SolidColorBrush x:Key = "detailHover" Color = "lightgray" />
-    <SolidColorBrush x:Key = "searchNomal" Color = "DeepSkyBlue" />
-    <SolidColorBrush x:Key = "searchHover" Color = "LightSkyBlue" />
+    <SolidColorBrush x:Key="danger" Color="#b10000" />
+    <SolidColorBrush x:Key="dangerHover" Color="#d70000" />
 
     <!--Font Colors-->
-    <SolidColorBrush x:Key = "titleColor" Color = "#BCBEE0" />
-    <SolidColorBrush x:Key = "plainTextColor" Color = "#F1F1F1" />  
+    <SolidColorBrush x:Key="titleColor" Color = "#BCBEE0" />
+    <SolidColorBrush x:Key="plainTextColor" Color = "#F1F1F1" />  
     
 </ResourceDictionary>

@@ -8,6 +8,14 @@
         <Setter Property="Margin" Value="0 10 0 5" />
     </Style>
     
+    <Style x:Key="btnContent" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource plainTextColor}" />
+        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Margin" Value="3" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    
     <Style x:Key="errorText" TargetType="TextBlock">
         <Setter Property="Foreground" Value="#d75960" />
         <Setter Property="FontSize" Value="12" />

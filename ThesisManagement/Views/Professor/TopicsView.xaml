@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ThesisManagement.Views.Professor"
-             xmlns:customControl="clr-namespace:ThesisManagement.CustomControls"
+             xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
@@ -38,13 +38,13 @@
 
             </StackPanel>
 
-            <customControl:TemplateButton Grid.Column="1" 
-                          DefaultColor="{StaticResource createNomal}"
-                          HoverColor="{StaticResource createHover}">
-                <customControl:TemplateButton.Title>
+            <customControls:TemplateButton Grid.Column="1" 
+                          DefaultColor="{StaticResource primaryBrush}"
+                          HoverColor="{StaticResource secondaryBrush}">
+                <customControls:TemplateButton.Title>
                     <TextBlock Text="Tạo mới" Style="{StaticResource crudsButtonText}"/>
-                </customControl:TemplateButton.Title>
-            </customControl:TemplateButton>
+                </customControls:TemplateButton.Title>
+            </customControls:TemplateButton>
 
         </Grid>
 
@@ -118,14 +118,14 @@
                            FontSize="15"
                            VerticalAlignment="Center" />
 
-                <customControl:TemplateButton Grid.Column="2" Grid.Row="1" 
-                          DefaultColor="{StaticResource deleteNomal}"
-                          HoverColor="{StaticResource deleteHover}"
+                <customControls:TemplateButton Grid.Column="2" Grid.Row="1" 
+                          DefaultColor="{StaticResource danger}"
+                          HoverColor="{StaticResource dangerHover}"
                           ButtonWidth="60">
-                    <customControl:TemplateButton.Title>
+                    <customControls:TemplateButton.Title>
                         <fa:IconImage Icon="Trash" Style="{StaticResource crudsButtonIcon}" />
-                    </customControl:TemplateButton.Title>
-                </customControl:TemplateButton>
+                    </customControls:TemplateButton.Title>
+                </customControls:TemplateButton>
             </Grid>
 
         </Border>

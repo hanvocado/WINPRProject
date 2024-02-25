@@ -39,8 +39,8 @@
             </StackPanel>
 
             <customControl:TemplateButton Grid.Column="1"
-                          DefaultColor="{StaticResource createNomal}"
-                          HoverColor="{StaticResource createHover}"
+                          DefaultColor="{StaticResource primaryBrush}"
+                          HoverColor="{StaticResource secondaryBrush}"
                           ButtonWidth="100">
                 <customControl:TemplateButton.Title>
                     <StackPanel Orientation="Horizontal"
