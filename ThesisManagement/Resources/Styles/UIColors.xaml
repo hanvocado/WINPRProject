@@ -9,6 +9,10 @@
 
     <SolidColorBrush x:Key="danger" Color="#b10000" />
     <SolidColorBrush x:Key="dangerHover" Color="#d70000" />
+    <SolidColorBrush x:Key="warning" Color="#ffc107" />
+    <SolidColorBrush x:Key="warningHover" Color="#ffca2c" />
+    <SolidColorBrush x:Key="success" Color="#157347" />
+    <SolidColorBrush x:Key="successHover" Color="#198754" />
 
     <!--Font Colors-->
     <SolidColorBrush x:Key="titleColor" Color = "#BCBEE0" />

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ThesisManagement.Views.Professor"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-             xmlns:customControl="clr-namespace:ThesisManagement.CustomControls"
+             xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="white">
@@ -127,44 +127,32 @@
                              HorizontalContentAlignment="Left"/>
                 </StackPanel>
 
-                <customControl:TemplateButton Grid.Row="1" Grid.Column="2"
-                          DefaultColor="{StaticResource searchNomal}"
-                          HoverColor="{StaticResource searchHover}"
-                          ButtonWidth="100">
-                    <customControl:TemplateButton.Title>
-                        <StackPanel Orientation="Horizontal"
-                                    VerticalAlignment="Center">
-                            <fa:IconImage Icon="Spinner" Style="{StaticResource crudsButtonIcon}" />
-                            <TextBlock Text="Đang chờ" Style="{StaticResource crudsButtonText}"/>
-                        </StackPanel>
-                    </customControl:TemplateButton.Title>
-                </customControl:TemplateButton>
+                <customControls:ControlButton Grid.Row="1"  Grid.Column="2"
+                                              DefaultColor="{StaticResource primaryBrush}"
+                                              HoverColor="{StaticResource secondaryBrush}"
+                                              Width="100">
+                    <customControls:ControlButton.Content>
+                        <TextBlock Text="Đang chờ" Style="{StaticResource btnContent}"/>
+                    </customControls:ControlButton.Content>
+                </customControls:ControlButton>
 
-                <customControl:TemplateButton Grid.Row="2" Grid.Column="2"
-                          DefaultColor="{StaticResource createNomal}"
-                          HoverColor="{StaticResource createHover}"
-                          ButtonWidth="100">
-                    <customControl:TemplateButton.Title>
-                        <StackPanel Orientation="Horizontal"
-                                    VerticalAlignment="Center">
-                            <fa:IconImage Icon="Check" Style="{StaticResource crudsButtonIcon}" />
-                            <TextBlock Text="Chấp nhận" Style="{StaticResource crudsButtonText}"/>
-                        </StackPanel>
-                    </customControl:TemplateButton.Title>
-                </customControl:TemplateButton>
+                <customControls:ControlButton Grid.Row="2"  Grid.Column="2"
+                                              DefaultColor="{StaticResource success}"
+                                              HoverColor="{StaticResource successHover}"
+                                              Width="100">
+                    <customControls:ControlButton.Content>
+                        <TextBlock Text="Chấp nhận" Style="{StaticResource btnContent}"/>
+                    </customControls:ControlButton.Content>
+                </customControls:ControlButton>
 
-                <customControl:TemplateButton Grid.Row="3" Grid.Column="2"
-                          DefaultColor="{StaticResource deleteNomal}"
-                          HoverColor="{StaticResource deleteHover}"
-                          ButtonWidth="100">
-                    <customControl:TemplateButton.Title>
-                        <StackPanel Orientation="Horizontal"
-                                    VerticalAlignment="Center">
-                            <fa:IconImage Icon="Xmark" Style="{StaticResource crudsButtonIcon}" />
-                            <TextBlock Text="Từ chối" Style="{StaticResource crudsButtonText}"/>
-                        </StackPanel>
-                    </customControl:TemplateButton.Title>
-                </customControl:TemplateButton>
+                <customControls:ControlButton Grid.Row="3"  Grid.Column="2"
+                                              DefaultColor="{StaticResource danger}"
+                                              HoverColor="{StaticResource dangerHover}"
+                                              Width="100">
+                    <customControls:ControlButton.Content>
+                        <TextBlock Text="Từ chối" Style="{StaticResource btnContent}"/>
+                    </customControls:ControlButton.Content>
+                </customControls:ControlButton>
 
             </Grid>
 

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:ThesisManagement.Views.Admin"
              xmlns:viewModel="clr-namespace:ThesisManagement.ViewModels"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-             xmlns:customControl="clr-namespace:ThesisManagement.CustomControls"
+             xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
@@ -43,13 +43,14 @@
 
             </StackPanel>
 
-            <customControl:TemplateButton Grid.Column="1" 
-                          DefaultColor="{StaticResource createNomal}"
-                          HoverColor="{StaticResource createHover}">
-                <customControl:TemplateButton.Title>
-                    <TextBlock Text="Tạo mới" Style="{StaticResource crudsButtonText}"/>
-                </customControl:TemplateButton.Title>
-            </customControl:TemplateButton>
+            <customControls:ControlButton Grid.Column="1"
+                                          DefaultColor="{StaticResource primaryBrush}"
+                                          HoverColor="{StaticResource secondaryBrush}"
+                                          Width="80">
+                <customControls:ControlButton.Content>
+                    <TextBlock Text="Tạo mới" Style="{StaticResource btnContent}"/>
+                </customControls:ControlButton.Content>
+            </customControls:ControlButton>
         </Grid>
 
         <!--Temporary for design-->
@@ -91,24 +92,24 @@
             <StackPanel Orientation="Horizontal"
                         Grid.Row="1" Grid.Column="4">
 
-                <customControl:TemplateButton Grid.Column="1"
-                          DefaultColor="{StaticResource updateNomal}"
-                          HoverColor="{StaticResource updateHover}"
-                          ButtonWidth="60">
-                    <customControl:TemplateButton.Title>
-                        <fa:IconImage Icon="Pen" Style="{StaticResource crudsButtonIcon}" />
-                    </customControl:TemplateButton.Title>
-                </customControl:TemplateButton>
+                <customControls:ControlButton Grid.Column="1"
+                                              DefaultColor="{StaticResource warning}"
+                                              HoverColor="{StaticResource warningHover}"
+                                              Width="60"
+                                              Margin="5">
+                    <customControls:ControlButton.Content>
+                        <fa:IconImage Icon="Pen" Style="{StaticResource btnIcon}" />
+                    </customControls:ControlButton.Content>
+                </customControls:ControlButton>
 
-                <customControl:TemplateButton Grid.Column="1"
-                          DefaultColor="{StaticResource deleteNomal}"
-                          HoverColor="{StaticResource deleteHover}"
-                          ButtonWidth="60">
-                    <customControl:TemplateButton.Title>
-                        <fa:IconImage Icon="Trash" Style="{StaticResource crudsButtonIcon}" />
-                    </customControl:TemplateButton.Title>
-                </customControl:TemplateButton>
-
+                <customControls:ControlButton Grid.Column="1"
+                                              DefaultColor="{StaticResource danger}"
+                                              HoverColor="{StaticResource dangerHover}"
+                                              Width="60">
+                    <customControls:ControlButton.Content>
+                        <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}"/>
+                    </customControls:ControlButton.Content>
+                </customControls:ControlButton>
             </StackPanel>
         </Grid>
     </Grid>
