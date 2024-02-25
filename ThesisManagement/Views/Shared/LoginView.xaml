@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ThesisManagement.Views.Shared"
-        xmlns:fa="http://schemas.fontawesome.com/icons/svg/properties"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
         mc:Ignorable="d"
         Title="LoginView" Height="550" Width="800"
         WindowStartupLocation="CenterScreen"
@@ -54,7 +55,7 @@
                                 Style="{StaticResource windowBtnStyle}"/>
                     </Grid>
 
-                <Border Grid.Row="1" Padding="20" Background="White" Width="300" Height="410" Opacity="0.97">
+                <Border Grid.Row="1" Padding="20" Background="White" Width="300" Height="415" Opacity="0.97">
                     <StackPanel Grid.Row="1" Orientation="Vertical">
                         <Image Source="/Resources/Images/logo.png" Height="60" />
                         <TextBlock Text="QUẢN LÝ LUẬN VĂN"
@@ -82,12 +83,22 @@
                             </PasswordBox.Background>
                         </PasswordBox>
 
-                        <Button Content="Đăng nhập" Width="110" Margin="0 20 0 0" Style="{StaticResource primaryBtn}" />
+                        <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
+                                                      HoverColor="{StaticResource secondaryBrush}"
+                                                      Width="110" Margin="0 20 0 0">
+                            <customControls:ControlButton.Content>
+                                <TextBlock Text="Đăng nhập" Style="{StaticResource btnContent}"/>
+                            </customControls:ControlButton.Content>
+                        </customControls:ControlButton>
 
-                        <TextBlock Text="Đăng nhập bắng tài khoản google" Style="{StaticResource label}" HorizontalAlignment="Center" Margin="0 30 0 0"/>
-                        <Button fa:FontAwesome.Icon="Brands_Google" 
-                                fa:FontAwesome.PrimaryColor="White"
-                                Style="{StaticResource googleBtn}" />
+                        <TextBlock Text="Đăng nhập bắng tài khoản google" Style="{StaticResource label}" HorizontalAlignment="Center" Margin="0 30 0 10"/>
+                        <customControls:ControlButton DefaultColor="{StaticResource danger}"
+                                                      HoverColor="{StaticResource dangerHover}"
+                                                      Width="110">
+                            <customControls:ControlButton.Content>
+                                <fa:IconImage Icon="Google" Foreground="White" />
+                            </customControls:ControlButton.Content>
+                        </customControls:ControlButton>
                     </StackPanel>
                 </Border>
                     

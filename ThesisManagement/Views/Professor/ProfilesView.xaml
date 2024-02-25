@@ -66,17 +66,15 @@
             </Grid.ColumnDefinitions>
 
             <customControl:TemplateButton Grid.Column="1"
-                          DefaultColor="{StaticResource updateNomal}"
-                          HoverColor="{StaticResource updateHover}">
+                          DefaultColor="{StaticResource primaryBrush}"
+                          HoverColor="{StaticResource primaryBrush}">
                 <customControl:TemplateButton.Title>
                     <StackPanel Orientation="Horizontal"
                             VerticalAlignment="Center">
                         <fa:IconImage Icon="Pen" Style="{StaticResource crudsButtonIcon}" 
                                   Margin="5"
                                   />
-                        <TextBlock Text="Cập nhật"
-                               Foreground="Black"
-                               VerticalAlignment="Center"/>
+                        <TextBlock Text="Cập nhật" Style="{StaticResource btnContent}">
                     </StackPanel>
                 </customControl:TemplateButton.Title>
             </customControl:TemplateButton>
