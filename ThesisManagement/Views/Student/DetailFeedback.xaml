@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ThesisManagement.Views.Student"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
@@ -50,16 +51,15 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="120"/>
             </Grid.ColumnDefinitions>
-            <StackPanel 
-                Grid.Column="1"
-                Orientation="Horizontal"
-                FlowDirection="RightToLeft">
-                <Button Style="{StaticResource btnUpdate}"
-                        VerticalAlignment="Top"
-                        Width="80" >
-                        <fa:IconImage Icon="Upload" Style="{StaticResource crudsButtonIcon}" />
-                </Button>
-            </StackPanel >
+            
+            <customControls:ControlButton Grid.Column="1"
+                                              DefaultColor="{StaticResource warning}"
+                                              HoverColor="{StaticResource warningHover}"
+                                              Width="60">
+                <customControls:ControlButton.Content>
+                    <fa:IconImage Icon="Upload" Style="{StaticResource btnIcon}"/>
+                </customControls:ControlButton.Content>
+            </customControls:ControlButton>
 
             <StackPanel 
                 Grid.Column="0"

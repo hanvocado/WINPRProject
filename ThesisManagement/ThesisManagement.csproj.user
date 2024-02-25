@@ -7,9 +7,6 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="CustomControls\TemplateButton.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="CustomControls\WindowControlBar.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -75,9 +72,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="CustomControls\TemplateButton.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="CustomControls\WindowControlBar.xaml">
       <SubType>Designer</SubType>
     </Page>

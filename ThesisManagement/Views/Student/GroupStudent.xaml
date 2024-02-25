@@ -36,13 +36,8 @@
                     VerticalContentAlignment="Center">
                 </TextBox>
 
-                <Button Style="{StaticResource btnSearch}"
-                Command=""
-                Content="Tìm kiếm"
-                VerticalAlignment="Top">
-                </Button>
-
             </StackPanel>
+            
             <StackPanel Grid.Column="1"
                 Orientation="Horizontal"
                 VerticalAlignment="Top"

@@ -38,13 +38,14 @@
 
             </StackPanel>
 
-            <customControls:TemplateButton Grid.Column="1" 
-                          DefaultColor="{StaticResource primaryBrush}"
-                          HoverColor="{StaticResource secondaryBrush}">
-                <customControls:TemplateButton.Title>
-                    <TextBlock Text="Tạo mới" Style="{StaticResource crudsButtonText}"/>
-                </customControls:TemplateButton.Title>
-            </customControls:TemplateButton>
+            <customControls:ControlButton Grid.Column="1"
+                                          DefaultColor="{StaticResource primaryBrush}"
+                                          HoverColor="{StaticResource secondaryBrush}"
+                                          Width="80">
+                <customControls:ControlButton.Content>
+                    <TextBlock Text="Tạo mới" Style="{StaticResource btnContent}"/>
+                </customControls:ControlButton.Content>
+            </customControls:ControlButton>
 
         </Grid>
 
@@ -118,14 +119,14 @@
                            FontSize="15"
                            VerticalAlignment="Center" />
 
-                <customControls:TemplateButton Grid.Column="2" Grid.Row="1" 
-                          DefaultColor="{StaticResource danger}"
-                          HoverColor="{StaticResource dangerHover}"
-                          ButtonWidth="60">
-                    <customControls:TemplateButton.Title>
-                        <fa:IconImage Icon="Trash" Style="{StaticResource crudsButtonIcon}" />
-                    </customControls:TemplateButton.Title>
-                </customControls:TemplateButton>
+                <customControls:ControlButton Grid.Row="1" Grid.Column="2"
+                                              DefaultColor="{StaticResource danger}"
+                                              HoverColor="{StaticResource dangerHover}"
+                                              Width="60">
+                    <customControls:ControlButton.Content>
+                        <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}"/>
+                    </customControls:ControlButton.Content>
+                </customControls:ControlButton>
             </Grid>
 
         </Border>

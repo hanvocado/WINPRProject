@@ -147,6 +147,7 @@
                                        VerticalAlignment="Center"/>
 
                         </StackPanel>
+                        
                     </Grid>
 
                     <!--Content Section -->
