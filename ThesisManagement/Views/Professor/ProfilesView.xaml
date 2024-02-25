@@ -66,8 +66,8 @@
             </Grid.ColumnDefinitions>
 
             <customControls:ControlButton Grid.Column="1"
-                                              DefaultColor="{StaticResource warning}"
-                                              HoverColor="{StaticResource warningHover}"
+                                              DefaultColor="{StaticResource primaryBrush}"
+                                              HoverColor="{StaticResource secondaryBrush}"
                                               Width="80">
                 <customControls:ControlButton.Content>
                     <TextBlock Text="Cập nhật" Style="{StaticResource btnContent}"/>
