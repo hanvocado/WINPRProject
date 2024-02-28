@@ -27,14 +27,13 @@
                 VerticalAlignment="Top"
                 FlowDirection="LeftToRight">
                 <fa:IconImage Icon="Search" 
-                      Height="20" 
-                      Width="20" 
-                      Foreground="{StaticResource plainTextColor}"/>
+                              Height="20" 
+                              Width="20"/>
                 <TextBox Text=""   
-                    Height="24"
-                    Width="200"
-                    BorderThickness="0,0,0,2"
-                    VerticalContentAlignment="Center">
+                        Height="24"
+                        Width="200"
+                        BorderThickness="0,0,0,2"
+                        VerticalContentAlignment="Center">
                 </TextBox>
 
             </StackPanel>
