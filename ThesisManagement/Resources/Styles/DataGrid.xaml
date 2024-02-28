@@ -7,6 +7,11 @@
         <Setter Property="FontFamily" Value="Montserrat"/>
         <Setter Property="FontSize" Value="15"/>
     </Style>
+
+    <Style TargetType="ListView">
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="BorderBrush" Value="#cdcdcd" />
+    </Style>
     
 </ResourceDictionary>
     

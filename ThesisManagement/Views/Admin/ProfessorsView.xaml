@@ -52,78 +52,21 @@
             </customControls:ControlButton>
         </Grid>
 
-        <!--Temporary for design-->
-        <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="45"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+        <ListView Grid.Row="1" ItemsSource="{Binding Professors}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Tên" Width="200"
+                                    DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="Email" Width="150"
+                                    DisplayMemberBinding="{Binding Email}" />
+                    <GridViewColumn Header="Khoa" Width="200"
+                                    DisplayMemberBinding="{Binding Faculty}" />
+                    <GridViewColumn Header="Số điện thoại" Width="150"
+                                    DisplayMemberBinding="{Binding Phone}" />
+                    <GridViewColumn Width="100" />
+                </GridView>
+            </ListView.View>
+        </ListView>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="90"/>
-            </Grid.ColumnDefinitions>
-
-            <TextBlock Text="Tên"
-                       FontSize="14"
-                       FontWeight="Medium"
-                       VerticalAlignment="Center"/>
-
-            <TextBlock Grid.Row="1" Grid.Column="0"
-                        Text="Nguyễn A"
-                        FontSize="14"
-                        VerticalAlignment="Center"/>
-
-            <TextBlock Grid.Row="0" Grid.Column="1"
-                        Text="Email"
-                        FontSize="14"
-                        FontWeight="Medium"
-                        VerticalAlignment="Center"/>
-
-            <TextBlock Grid.Row="1" Grid.Column="1"
-                        Text="nguyena@hcmute.edu.vn"
-                        FontSize="14"
-                        VerticalAlignment="Center"/>
-            
-            <TextBlock Grid.Row="0" Grid.Column="2"
-                        Text="Khoa"
-                        FontSize="14"
-                        FontWeight="Medium"
-                        VerticalAlignment="Center"/>
-
-            <TextBlock Grid.Row="1" Grid.Column="2"
-                        Text="Công nghệ thông tin "
-                        FontSize="14"
-                        VerticalAlignment="Center"/>
-            
-            <TextBlock Grid.Row="0" Grid.Column="3"
-                        Text="Số điện thoại"
-                        FontSize="14"
-                        FontWeight="Medium"
-                        VerticalAlignment="Center"/>
-
-            <TextBlock Grid.Row="1" Grid.Column="3"
-                        Text="123456789"
-                        FontSize="14"
-                        VerticalAlignment="Center"/>
-
-            <StackPanel Orientation="Horizontal"
-                    Grid.Row="1" Grid.Column="5">
-
-                <customControls:ControlButton Grid.Column="1"
-                                              DefaultColor="{StaticResource danger}"
-                                              HoverColor="{StaticResource dangerHover}"
-                                              Width="60">
-                    <customControls:ControlButton.Content>
-                        <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}"/>
-                    </customControls:ControlButton.Content>
-                </customControls:ControlButton>
-
-            </StackPanel>
-        </Grid>
     </Grid>
 </UserControl>
