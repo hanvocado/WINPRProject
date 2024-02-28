@@ -28,7 +28,7 @@
             <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding YourTaskList}">
                 <DataGrid.Columns>
                     <!-- Cột "Time" -->
-                    <DataGridTextColumn Header="Time" Binding="{Binding Time}" Width="*"/>
+                    <DataGridTextColumn Header="Thời gian" Binding="{Binding Time}" Width="*"/>
 
                     <!-- Cột "Công Việc" -->
                     <DataGridTextColumn Header="Công Việc" Binding="{Binding Job}" Width="*" />

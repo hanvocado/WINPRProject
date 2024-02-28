@@ -1,20 +1,12 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
+using ThesisManagement.Models;
 
 namespace ThesisManagement.ViewModels
 {
     public class AdminsVM : ViewModelBase
     {
-        private string _email;
-
-        public string Email
-        {
-            get => _email;
-            set
-            {
-                _email = value;
-                OnPropertyChanged(nameof(Email));
-            }
-        }
+        public ObservableCollection<Admin> Admins { get; set; }
 
         public ICommand CreateCommand { get; set; }
         public ICommand EditCommand { get; set; }
