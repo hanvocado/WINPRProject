@@ -12,6 +12,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
@@ -40,43 +41,12 @@
 
         </Grid>
 
-        <Border Grid.Row="1">
 
-            <!--main code-->
-            <!--<DataGrid ColumnWidth="*"
-                      Background="#0A426E"
-                      BorderThickness="0">
 
-                <DataGrid.ColumnHeaderStyle>
-                    <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="#BCBEE0"/>
-                        <Setter Property="Padding" Value="10,0,0,10"/>
-                        <Setter Property="FontFamily" Value="Montserrat"/>
-                        <Setter Property="FontSize" Value="15"/>
-                    </Style>
-                </DataGrid.ColumnHeaderStyle>
-
-                <DataGrid.Columns>
-                    <DataGridTemplateColumn Header="Đề tài" Width="5*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <TextBlock Text="{Binding YourTitleProperty}" />
-                                </Grid>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Sửa"/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Xóa"/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Chi tiết"/>
-                </DataGrid.Columns>
-            
-
-            </DataGrid>-->
+         
 
             <!--design code-->
-            <Grid>
+            <!--<Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="80"/>
@@ -154,9 +124,57 @@
                     </customControls:ControlButton.Content>
                 </customControls:ControlButton>
 
-            </Grid>
+            </Grid>-->
 
-        </Border>
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    FlowDirection="LeftToRight">
+            <customControls:ControlButton Grid.Row="1"  Grid.Column="2"
+                                          DefaultColor="{StaticResource primaryBrush}"
+                                          HoverColor="{StaticResource secondaryBrush}"
+                                          Width="100"
+                                          Margin="5,0,0,0">
+                <customControls:ControlButton.Content>
+                    <TextBlock Text="Đang chờ" Style="{StaticResource btnContent}"/>
+                </customControls:ControlButton.Content>
+            </customControls:ControlButton>
+
+            <customControls:ControlButton Grid.Row="2"  Grid.Column="2"
+                                          DefaultColor="{StaticResource success}"
+                                          HoverColor="{StaticResource successHover}"
+                                          Width="100"
+                                          Margin="5,0,0,0">
+                <customControls:ControlButton.Content>
+                    <TextBlock Text="Chấp nhận" Style="{StaticResource btnContent}"/>
+                </customControls:ControlButton.Content>
+            </customControls:ControlButton>
+
+            <customControls:ControlButton Grid.Row="3"  Grid.Column="2"
+                                          DefaultColor="{StaticResource danger}"
+                                          HoverColor="{StaticResource dangerHover}"
+                                          Width="100"
+                                          Margin="5,0,0,0">
+                <customControls:ControlButton.Content>
+                    <TextBlock Text="Từ chối" Style="{StaticResource btnContent}"/>
+                </customControls:ControlButton.Content>
+            </customControls:ControlButton>
+        </StackPanel>
+
+            <ListView Grid.Row="2"
+                  Name="AdminsListView"
+                  ItemsSource="{Binding Admins}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Luận văn" Width="500"
+                                    DisplayMemberBinding="{Binding Topic}" />
+                        <GridViewColumn Header="Sinh viên" Width="300"
+                                    DisplayMemberBinding="{Binding Description}" />
+                        <GridViewColumn Width="100" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+
 
     </Grid>
 </UserControl>

@@ -3,10 +3,95 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
         xmlns:local="clr-namespace:ThesisManagement.Views.Professor"
         mc:Ignorable="d"
-        Title="TopicView" Height="450" Width="800">
+        Title="TitleView" Height="300" Width="600"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource windowStyle}">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="1" Grid.Column="0"
+                   Text="Tên"
+                   VerticalAlignment="Center"
+                   FontSize="20"
+                   Margin="20,0,0,0"/>
+
+        <TextBox  Height="24"
+                  Width="350"
+                  BorderThickness="0,0,0,2"
+                  VerticalContentAlignment="Center"
+                  HorizontalAlignment="Left"
+                  Margin="5,0,0,0"
+                  Grid.Row="1" Grid.Column="1">
+        </TextBox>
+
+        <TextBlock Grid.Row="2" Grid.Column="0"
+                   Text="Yêu cầu"
+                   VerticalAlignment="Center"
+                   FontSize="20"
+                   Margin="20,0,0,0"/>
+
+        <TextBox  Height="24"
+                  Width="350"
+                  BorderThickness="0,0,0,2"
+                  VerticalContentAlignment="Center"
+                  HorizontalAlignment="Left"
+                  Margin="5,0,0,0"
+                  Grid.Row="2" Grid.Column="1">
+        </TextBox>
+
+        <TextBlock Grid.Row="3" Grid.Column="0"
+                   Text="Ngày tạo"
+                   VerticalAlignment="Center"
+                   FontSize="20"
+                   Margin="20,0,0,0"/>
+
+        <TextBox  Height="24"
+                  Width="350"
+                  BorderThickness="0,0,0,2"
+                  VerticalContentAlignment="Center"
+                  HorizontalAlignment="Left"
+                  Margin="5,0,0,0"
+                  Grid.Row="3" Grid.Column="1">
+        </TextBox>
+
+        <TextBlock Grid.Row="4" Grid.Column="0"
+                   Text="Ngày hết hạn"
+                   VerticalAlignment="Center"
+                   FontSize="20"
+                   Margin="20,0,0,0"/>
+
+        <TextBox  Height="24"
+                  Width="350"
+                  BorderThickness="0,0,0,2"
+                  VerticalContentAlignment="Center"
+                  HorizontalAlignment="Left"
+                  Margin="5,0,0,0"
+                  Grid.Row="4" Grid.Column="1">
+        </TextBox>
+
+        <customControls:ControlButton Grid.Column="1"
+                                          DefaultColor="{StaticResource primaryBrush}"
+                                          HoverColor="{StaticResource secondaryBrush}"
+                                          Width="80">
+            <customControls:ControlButton.Content>
+                <TextBlock Text="Tạo mới" Style="{StaticResource btnContent}"/>
+            </customControls:ControlButton.Content>
+        </customControls:ControlButton>
+
     </Grid>
 </Window>

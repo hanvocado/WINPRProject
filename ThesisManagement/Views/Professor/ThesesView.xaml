@@ -65,7 +65,7 @@
 
             </DataGrid>-->
 
-            <Grid>
+            <!--<Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="80"/>
@@ -116,7 +116,22 @@
                              HorizontalContentAlignment="Left"/>
                 </StackPanel>
 
-            </Grid>
+            </Grid>-->
+
+            <ListView Grid.Row="1"
+                  Name="AdminsListView"
+                  ItemsSource="{Binding Admins}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Luận văn" Width="300"
+                                    DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn Header="Sinh viên" Width="300"
+                                    DisplayMemberBinding="{Binding Email}" />
+                        <GridViewColumn Header="Điểm số" Width="200"
+                                    DisplayMemberBinding="{Binding Email}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
 
         </Border>
 

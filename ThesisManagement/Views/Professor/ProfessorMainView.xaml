@@ -103,6 +103,20 @@
                                 <TextBlock Text="Luận văn" Style="{StaticResource navText}" />
                             </StackPanel>
                         </RadioButton>
+
+                        <RadioButton Style="{StaticResource navBtn}">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="UserTie" Style="{StaticResource navIcon}" />
+                                <TextBlock Text="Hồ sơ" Style="{StaticResource navText}" />
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton Style="{StaticResource navBtn}">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="RightFromBracket" Style="{StaticResource navIcon}" />
+                                <TextBlock Text="Đăng xuất" Style="{StaticResource navText}" />
+                            </StackPanel>
+                        </RadioButton>
                     </StackPanel>
 
                 </Grid>
@@ -132,21 +146,6 @@
                         <!--Toggle Button -->
                         
                         
-                        <!--User Options-->
-
-                        <StackPanel Grid.Column="1"
-                                Orientation="Horizontal"
-                                FlowDirection="RightToLeft"
-                                Margin="0,0,10,0">
-                            <Button Style="{StaticResource profileBtn}">
-                                <fa:IconImage Icon="AngleDown" Style="{StaticResource profileBtnIcon}"/>
-                            </Button>
-
-                            <TextBlock Text="Nguyễn Thủy An" 
-                                       FontWeight="Medium"
-                                       VerticalAlignment="Center"/>
-
-                        </StackPanel>
                         
                     </Grid>
 
