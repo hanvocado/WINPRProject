@@ -7,7 +7,7 @@
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
         mc:Ignorable="d"
-        Title="LoginView" Height="550" Width="800"
+        Title="LoginView" Height="550" Width="500"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize"
@@ -15,7 +15,7 @@
         Background="Transparent"
         AllowsTransparency="True">
 
-    <Border Background="{StaticResource primaryBrush}">
+    <Border Background="#202a6a">
         <Border BorderThickness="0">
                 <Border.Background>
                     <ImageBrush ImageSource="/Resources/Images/app-background.png"
@@ -55,7 +55,7 @@
                                 Style="{StaticResource windowBtnStyle}"/>
                     </Grid>
 
-                <Border Grid.Row="1" Padding="20" Background="White" Width="300" Height="415" Opacity="0.97">
+                <Border Grid.Row="1" Padding="20" Background="White" Width="300" Height="415" Opacity="0.98">
                     <StackPanel Grid.Row="1" Orientation="Vertical">
                         <Image Source="/Resources/Images/logo.png" Height="60" />
                         <TextBlock Text="QUẢN LÝ LUẬN VĂN"

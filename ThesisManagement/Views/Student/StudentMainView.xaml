@@ -68,56 +68,16 @@
                     <Grid.RowDefinitions>
                         <!--Control Bars-->
                         <RowDefinition Height="25"/>
-                        <!--Header / Caption-->
-                        <RowDefinition Height="45"/>
                         <!--Content Section -->
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
                     <customControl:WindowControlBar />
 
-                    <!--Header / Caption-->
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-
-                        <!--User Options-->
-                        <StackPanel Grid.Column="0"
-                              Orientation="Horizontal"
-                              VerticalAlignment="Center">
-                            <fa:IconImage Icon="RectangleList"
-                                    Width="25"
-                                    Height="25"
-                                    Margin="35,0,10,0"/>
-                            <TextBlock Text="Đề tài"
-                                     FontSize="17"
-                                     FontFamily="Montserrat"
-                                     FontWeight="Medium"
-                                     VerticalAlignment="Center"/>
-                        </StackPanel>
-
-                        <StackPanel Grid.Column="1"
-                              Orientation="Horizontal"
-                              FlowDirection="RightToLeft"
-                              Margin="0,0,10,0">
-                            <Button Style="{StaticResource profileBtn}"
-                              Tag="{StaticResource color1}">
-                                <fa:IconImage Icon="AngleDown" Style="{StaticResource profileBtnIcon}"/>
-                            </Button>
-
-                            <TextBlock Text="Nguyễn Thủy An" 
-                                     FontWeight="Medium"
-                                     VerticalAlignment="Center"/>
-
-                        </StackPanel>
-                    </Grid>
-
                     <!--Content Section -->
-                    <ContentControl Grid.Row="2"
+                    <ContentControl Grid.Row="1"
                                   Margin="25">
-                        <userControls:SearchThesis/>
+                        <userControls:TopicListView/>
                     </ContentControl>
 
                 </Grid>

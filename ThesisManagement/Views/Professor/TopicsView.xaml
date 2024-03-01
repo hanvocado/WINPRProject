@@ -23,7 +23,7 @@
 
             <StackPanel Grid.Column="0"
                         Orientation="Horizontal"
-                        VerticalAlignment="Top"
+                        VerticalAlignment="Center"
                         FlowDirection="LeftToRight">
                 <fa:IconImage Icon="Search"
                               Margin="0 4 5 0"
@@ -41,7 +41,6 @@
             <customControls:ControlButton Grid.Column="1"
                                           DefaultColor="{StaticResource primaryBrush}"
                                           HoverColor="{StaticResource secondaryBrush}"
-                                          Margin="0 0 0 22"
                                           Width="80">
                 <customControls:ControlButton.Content>
                     <TextBlock Text="Tạo mới" Style="{StaticResource btnContent}"/>

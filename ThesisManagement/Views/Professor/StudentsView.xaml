@@ -6,13 +6,13 @@
              xmlns:local="clr-namespace:ThesisManagement.Views.Professor"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="white">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="40"/>
             <RowDefinition />
         </Grid.RowDefinitions>
 
@@ -41,31 +41,20 @@
 
         </Grid>
 
-        <Border Grid.Row="1" Padding="10 0">
-            <StackPanel Orientation="Horizontal">
-                <RadioButton Style="{StaticResource tabBtn}" IsChecked="True"
-                     Command="{Binding ShowWaitingStudentsView}">
-                    <TextBlock Text="Đang chờ" Style="{StaticResource tabText}" />
-                </RadioButton>
-
-                <RadioButton Style="{StaticResource tabBtn}"
-                     Command="{Binding ShowProfessorsView}">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Đã duyệt" Style="{StaticResource tabText}" />
-                    </StackPanel>
-                </RadioButton>
+        <TabControl Grid.Row="1"
+                    HorizontalContentAlignment="Left"
+                    Style="{StaticResource MaterialDesignUniformTabControl}">
+            <TabItem Header="Đang chờ">
+                <local:WaitingStudents />
+            </TabItem>
+            
+            <TabItem Header="Đã duyệt">
                 
-                <RadioButton Style="{StaticResource tabBtn}"
-                     Command="{Binding ShowProfessorsView}">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Đã từ chối" Style="{StaticResource tabText}" />
-                    </StackPanel>
-                </RadioButton>
-            </StackPanel>
-        </Border>
-
-        <Border Grid.Row="2" Padding="0 10 0 0">
-            <local:WaitingStudents />
-        </Border>      
+            </TabItem>
+            
+            <TabItem Header="Đã từ chối">
+                
+            </TabItem>
+        </TabControl>
     </Grid>
 </UserControl>
