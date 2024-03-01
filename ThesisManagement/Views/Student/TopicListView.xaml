@@ -42,11 +42,11 @@
                       Margin="5,5,0,0">
                 </ComboBox>
 
-                <Button Style="{StaticResource btnSearch}"
+                <!--<Button Style="{StaticResource btnSearch}"
                     Command=""
                     Content="Tìm kiếm"
                     VerticalAlignment="Top">
-                </Button>
+                </Button>-->
 
             </StackPanel>
 

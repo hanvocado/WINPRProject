@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ThesisManagement.Views.Student"
+             xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -34,11 +35,7 @@
                      VerticalContentAlignment="Center">
                 </TextBox>
 
-                <Button Style="{StaticResource btnSearch}"
-                Command=""
-                Content="Tìm kiếm"
-                VerticalAlignment="Top">
-                </Button>
+                
 
             </StackPanel>
 
@@ -100,25 +97,33 @@
                     VerticalAlignment="Bottom"
                     Grid.Row="5" Grid.Column="0">
 
-                    <Button Style="{StaticResource btnDelete}"
+                    <!--<Button Style="{StaticResource b}"
                         VerticalAlignment="Top"
                         Width="50">
                         <fa:IconImage Icon="Trash" Style="{StaticResource crudsButtonIcon}" />
-                    </Button>
+                    </Button>-->
                     
-                    <Button Style="{StaticResource btnDetail}"
+                    <!--<Button Style="{StaticResource profileBtn}"
                         VerticalAlignment="Top"
                         Width="50">
-                        <fa:IconImage Icon="PenToSquare" Style="{StaticResource crudsButtonIcon}" />
-                    </Button>
+                        <fa:IconImage Icon="PenToSquare" Style="{StaticResource }" />
+                    </Button>-->
 
-                    <Button Style="{StaticResource btnUpdate}"
+                    <!--<Button Style="{StaticResource btnUpdate}"
                         VerticalAlignment="Top"
                         Width="50">
                         <fa:IconImage Icon="Pen" Style="{StaticResource crudsButtonIcon}" />
-                    </Button>
+                    </Button>-->
+                    <customControls:ControlButton Grid.Column="5"
+              DefaultColor="{StaticResource primaryBrush}"
+              HoverColor="{StaticResource secondaryBrush}"
+              Width="80">
+                        <customControls:ControlButton.Content>
+                            <TextBlock Text="Xuất excel" Style="{StaticResource btnContent}"/>
+                        </customControls:ControlButton.Content>
+                    </customControls:ControlButton>
 
-                    
+
 
                 </StackPanel>
             </Grid>
