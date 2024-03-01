@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="ThesisManagement.Views.Professor.WaitingStudents"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ThesisManagement.Views.Professor"
+             xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <ListView Grid.Row="2">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Luận văn" Width="350"
+                            DisplayMemberBinding="{Binding Topic}" />
+                    <GridViewColumn Header="Sinh viên" Width="300"
+                            DisplayMemberBinding="{Binding Description}" />
+                    <GridViewColumn Width="150" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Left">
+                                    <customControls:ControlButton Content="Duyệt"
+                                                          DefaultColor="{StaticResource primaryBrush}" />
+                                    <customControls:ControlButton Content="Từ chối"
+                                                          DefaultColor="{StaticResource danger}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</UserControl>

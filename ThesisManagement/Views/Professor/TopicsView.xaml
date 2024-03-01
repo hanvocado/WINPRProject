@@ -41,6 +41,7 @@
             <customControls:ControlButton Grid.Column="1"
                                           DefaultColor="{StaticResource primaryBrush}"
                                           HoverColor="{StaticResource secondaryBrush}"
+                                          Margin="0 0 0 22"
                                           Width="80">
                 <customControls:ControlButton.Content>
                     <TextBlock Text="Tạo mới" Style="{StaticResource btnContent}"/>
@@ -50,84 +51,6 @@
         </Grid>
 
         <Border Grid.Row="1">
-
-            <!--main code-->
-            <!--<DataGrid ColumnWidth="*"
-                      Background="#0A426E"
-                      BorderThickness="0">
-
-                <DataGrid.ColumnHeaderStyle>
-                    <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="#BCBEE0"/>
-                        <Setter Property="Padding" Value="10,0,0,10"/>
-                        <Setter Property="FontFamily" Value="Montserrat"/>
-                        <Setter Property="FontSize" Value="15"/>
-                    </Style>
-                </DataGrid.ColumnHeaderStyle>
-
-                <DataGrid.Columns>
-                    <DataGridTemplateColumn Header="Đề tài" Width="5*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <TextBlock Text="{Binding YourTitleProperty}" />
-                                </Grid>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Sửa"/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Xóa"/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Chi tiết"/>
-                </DataGrid.Columns>
-            
-
-            </DataGrid>-->
-
-            <!--design code-->
-            <!--<Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="45"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="2*" />
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Text="Đề tài"
-                           FontSize="17"
-                           FontWeight="Medium"
-                           VerticalAlignment="Center"/>
-
-                <TextBlock Grid.Row="0" Grid.Column="1"
-                           Text="Yêu cầu"
-                           FontSize="17"
-                           FontWeight="Medium"
-                           VerticalAlignment="Center"/>
-
-                <TextBlock Grid.Row="1" Grid.Column="0"
-                            Text="Xây dựng ứng dụng quản lý "
-                            FontSize="15"
-                            VerticalAlignment="Center"/>
-
-                <TextBlock Grid.Row="1" Grid.Column="1"
-                           Text="Có các chức năng cơ bản: tìm kiếm, ..."
-                           FontSize="15"
-                           VerticalAlignment="Center" />
-
-                <customControls:ControlButton Grid.Row="1" Grid.Column="2"
-                                              DefaultColor="{StaticResource danger}"
-                                              HoverColor="{StaticResource dangerHover}"
-                                              Width="60">
-                    <customControls:ControlButton.Content>
-                        <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}"/>
-                    </customControls:ControlButton.Content>
-                </customControls:ControlButton>
-            </Grid>-->
 
             <ListView Grid.Row="1"
                   Name="AdminsListView"
