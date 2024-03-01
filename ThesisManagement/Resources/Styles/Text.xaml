@@ -8,6 +8,15 @@
         <Setter Property="Margin" Value="0 10 0 5" />
     </Style>
     
+    <Style TargetType="Label">
+        <Setter Property="Foreground" Value="#353E4E" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="Margin" Value="0 10 0 5" />
+        <Setter Property="Padding" Value="0 3 0 0" />
+    </Style>
+    
     <Style x:Key="btnContent" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{StaticResource plainTextColor}" />
         <Setter Property="FontWeight" Value="Medium" />
@@ -25,14 +34,14 @@
     </Style>
 
     <Style TargetType="TextBox">
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontSize" Value="14" />
         <Setter Property="Height" Value="28" />
         <Setter Property="FontWeight" Value="Medium" />
         <Setter Property="Foreground" Value="Black" />
         <Setter Property="BorderBrush" Value="DarkGray" />
         <Setter Property="BorderThickness" Value="0 0 0 2" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Padding" Value="20 5 5 5" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+        <Setter Property="Padding" Value="20 5 5 2" />
         <Setter Property="Margin" Value="0 0 0 5" />
     </Style>
 
