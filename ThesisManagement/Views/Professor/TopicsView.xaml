@@ -85,7 +85,7 @@
             </DataGrid>-->
 
             <!--design code-->
-            <Grid>
+            <!--<Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="45"/>
@@ -127,7 +127,21 @@
                         <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}"/>
                     </customControls:ControlButton.Content>
                 </customControls:ControlButton>
-            </Grid>
+            </Grid>-->
+
+            <ListView Grid.Row="1"
+                  Name="AdminsListView"
+                  ItemsSource="{Binding Admins}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Đề tài" Width="300"
+                                    DisplayMemberBinding="{Binding Topic}" />
+                        <GridViewColumn Header="Yêu cầu" Width="300"
+                                    DisplayMemberBinding="{Binding Description}" />
+                        <GridViewColumn Width="100" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
 
         </Border>
 
