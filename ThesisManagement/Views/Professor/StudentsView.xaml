@@ -13,7 +13,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
-            <RowDefinition/>
+            <RowDefinition />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
@@ -41,140 +41,31 @@
 
         </Grid>
 
+        <Border Grid.Row="1" Padding="10 0">
+            <StackPanel Orientation="Horizontal">
+                <RadioButton Style="{StaticResource tabBtn}" IsChecked="True"
+                     Command="{Binding ShowWaitingStudentsView}">
+                    <TextBlock Text="Đang chờ" Style="{StaticResource tabText}" />
+                </RadioButton>
 
+                <RadioButton Style="{StaticResource tabBtn}"
+                     Command="{Binding ShowProfessorsView}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Đã duyệt" Style="{StaticResource tabText}" />
+                    </StackPanel>
+                </RadioButton>
+                
+                <RadioButton Style="{StaticResource tabBtn}"
+                     Command="{Binding ShowProfessorsView}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Đã từ chối" Style="{StaticResource tabText}" />
+                    </StackPanel>
+                </RadioButton>
+            </StackPanel>
+        </Border>
 
-         
-
-            <!--design code-->
-            <!--<Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="80"/>
-                    <RowDefinition Height="45"/>
-                    <RowDefinition Height="45"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Text="Luận văn"
-                           FontSize="17"
-                           FontWeight="Medium"
-                           VerticalAlignment="Center"/>
-                <TextBlock Text="Sinh viên"
-                           FontSize="17"
-                           FontWeight="Medium"
-                           VerticalAlignment="Center"
-                           Grid.Row="0" Grid.Column="1"
-                           Margin="20,0,0,0"/>
-
-                <TextBlock Grid.Row="0" Grid.Column="2"
-                           Text="Trạng thái"
-                           FontSize="17"
-                           FontWeight="Medium"
-                           VerticalAlignment="Center"
-                           HorizontalAlignment="Center"/>
-
-                <TextBlock Grid.Row="1" Grid.Column="0"
-                            Text="Ứng dụng quản lý luận văn "
-                            FontSize="15"
-                            VerticalAlignment="Center"/>
-
-                <StackPanel Grid.Row="1" Grid.Column="1">
-                    <TextBox TextWrapping="Wrap" 
-                             AcceptsReturn="True"
-                             BorderThickness="0"
-                             Text="Nguyễn Thị Ngọc Hân 
-                                     Võ Văn Nam 
-                                     Nguyễn Hoàng"
-                             FontSize="15"
-                             Height="80"
-                             VerticalAlignment="Top"
-                             HorizontalContentAlignment="Left"/>
-                </StackPanel>
-
-                <customControls:ControlButton Grid.Row="1"  Grid.Column="2"
-                                              DefaultColor="{StaticResource primaryBrush}"
-                                              HoverColor="{StaticResource secondaryBrush}"
-                                              Width="100">
-                    <customControls:ControlButton.Content>
-                        <TextBlock Text="Đang chờ" Style="{StaticResource btnContent}"/>
-                    </customControls:ControlButton.Content>
-                </customControls:ControlButton>
-
-                <customControls:ControlButton Grid.Row="2"  Grid.Column="2"
-                                              DefaultColor="{StaticResource success}"
-                                              HoverColor="{StaticResource successHover}"
-                                              Width="100">
-                    <customControls:ControlButton.Content>
-                        <TextBlock Text="Chấp nhận" Style="{StaticResource btnContent}"/>
-                    </customControls:ControlButton.Content>
-                </customControls:ControlButton>
-
-                <customControls:ControlButton Grid.Row="3"  Grid.Column="2"
-                                              DefaultColor="{StaticResource danger}"
-                                              HoverColor="{StaticResource dangerHover}"
-                                              Width="100">
-                    <customControls:ControlButton.Content>
-                        <TextBlock Text="Từ chối" Style="{StaticResource btnContent}"/>
-                    </customControls:ControlButton.Content>
-                </customControls:ControlButton>
-
-            </Grid>-->
-
-        <StackPanel Grid.Row="1"
-                    Orientation="Horizontal"
-                    FlowDirection="LeftToRight">
-            <customControls:ControlButton Grid.Row="1"  Grid.Column="2"
-                                          DefaultColor="{StaticResource primaryBrush}"
-                                          HoverColor="{StaticResource secondaryBrush}"
-                                          Width="100"
-                                          Margin="5,0,0,0">
-                <customControls:ControlButton.Content>
-                    <TextBlock Text="Đang chờ" Style="{StaticResource btnContent}"/>
-                </customControls:ControlButton.Content>
-            </customControls:ControlButton>
-
-            <customControls:ControlButton Grid.Row="2"  Grid.Column="2"
-                                          DefaultColor="{StaticResource success}"
-                                          HoverColor="{StaticResource successHover}"
-                                          Width="100"
-                                          Margin="5,0,0,0">
-                <customControls:ControlButton.Content>
-                    <TextBlock Text="Chấp nhận" Style="{StaticResource btnContent}"/>
-                </customControls:ControlButton.Content>
-            </customControls:ControlButton>
-
-            <customControls:ControlButton Grid.Row="3"  Grid.Column="2"
-                                          DefaultColor="{StaticResource danger}"
-                                          HoverColor="{StaticResource dangerHover}"
-                                          Width="100"
-                                          Margin="5,0,0,0">
-                <customControls:ControlButton.Content>
-                    <TextBlock Text="Từ chối" Style="{StaticResource btnContent}"/>
-                </customControls:ControlButton.Content>
-            </customControls:ControlButton>
-        </StackPanel>
-
-            <ListView Grid.Row="2"
-                  Name="AdminsListView"
-                  ItemsSource="{Binding Admins}">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Luận văn" Width="500"
-                                    DisplayMemberBinding="{Binding Topic}" />
-                        <GridViewColumn Header="Sinh viên" Width="300"
-                                    DisplayMemberBinding="{Binding Description}" />
-                        <GridViewColumn Width="100" />
-                    </GridView>
-                </ListView.View>
-            </ListView>
-
-
-
+        <Border Grid.Row="2" Padding="0 10 0 0">
+            <local:WaitingStudents />
+        </Border>      
     </Grid>
 </UserControl>
