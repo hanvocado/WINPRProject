@@ -16,6 +16,9 @@
     <Compile Update="Views\Admin\AdminMainView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Admin\AdminView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Admin\ProfessorsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -41,6 +44,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Professor\TopicView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Professor\WaitingStudents.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Shared\LoginView.xaml.cs">
@@ -99,6 +105,9 @@
     <Page Update="Views\Admin\AdminMainView.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\Admin\AdminView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Admin\ProfessorsView.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -124,6 +133,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Professor\TopicView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Professor\WaitingStudents.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Shared\LoginView.xaml">

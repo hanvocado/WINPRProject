@@ -3,10 +3,58 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
         xmlns:local="clr-namespace:ThesisManagement.Views.Professor"
         mc:Ignorable="d"
-        Title="TopicView" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="TopicView" Height="240" Width="450"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource formStyle}">
+
+    <Border Padding="0 0 0 15" Height="240">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <customControls:WindowControlBar />
+
+            <Border Grid.Row="1" Padding="10 10 15 10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="300"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="Tên" Grid.Row="0" Grid.Column="0" />
+                    <TextBox Grid.Row="0" Grid.Column="1" 
+                             TextWrapping="Wrap"
+                             AcceptsReturn="True"
+                             VerticalScrollBarVisibility="Auto" />
+
+                    <Label Content="Yêu cầu" Grid.Row="1" Grid.Column="0" />
+                    <TextBox Grid.Row="1" Grid.Column="1" />
+
+                    <Label Content="Ngày hết hạn" Grid.Row="3" Grid.Column="0" />
+                    <TextBox Grid.Row="3" Grid.Column="1" />
+
+                </Grid>
+            </Border>
+
+            <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
+                                          HoverColor="{StaticResource secondaryBrush}"
+                                          Content="Lưu"
+                                          Width="100"
+                                          Grid.Row="3"/>
+        </Grid>
+    </Border>
+    
 </Window>
