@@ -101,10 +101,10 @@
                           Orientation="Horizontal"
                           FlowDirection="RightToLeft"
                           Margin="0,0,10,0">
-                            <Button Style="{StaticResource profileBtn}"
+                            <!--<Button Style="{StaticResource profileBtn}"
                           Tag="{StaticResource color1}">
                                 <fa:IconImage Icon="AngleDown" Style="{StaticResource profileBtnIcon}"/>
-                            </Button>
+                            </Button>-->
 
                             <TextBlock Text="Nguyễn Thủy An" 
                                  FontWeight="Medium"

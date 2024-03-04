@@ -5,10 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ThesisManagement.Views.Student"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-             xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
-             Background="White">
+             d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -26,22 +24,36 @@
                     Orientation="Horizontal"
                     VerticalAlignment="Top"
                     FlowDirection="LeftToRight">
-                <fa:IconImage Icon="Search"
-                              Margin="0 4 5 0"
-                              Height="17" 
-                              Width="20"/>
-                <TextBox Text=""   
-                         Height="24"
-                         Width="200"
-                         BorderThickness="0,0,0,2"
-                         VerticalContentAlignment="Center">
-                </TextBox>
+                <fa:IconImage Icon="Search" 
+                          Height="20" 
+                          Width="20" 
+                          Foreground="{StaticResource plainTextColor}"/>
+                <ComboBox Text="Đề tài..."   
+                      FontSize="13"
+                      Height="24"
+                      Width="200"
+                      Background="Transparent"
+                      FontWeight="Medium"
+                      FontFamily="Montserrat"
+                      Foreground="{StaticResource plainTextColor}"
+                      BorderBrush="{StaticResource plainTextColor}"
+                      BorderThickness="0,0,0,1"
+                      VerticalContentAlignment="Center"
+                      Margin="5,5,0,0">
+                </ComboBox>
+
+                <!--<Button Style="{StaticResource btnSearch}"
+                    Command=""
+                    Content="Tìm kiếm"
+                    VerticalAlignment="Top">
+                </Button>-->
 
             </StackPanel>
 
         </Grid>
 
         <Border Grid.Row="1"
+            Background="#0A426E"
             Padding="10">
 
             <Grid>
@@ -55,24 +67,52 @@
                     FontSize="18"
                     FontWeight="Medium"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center"/>
+                    VerticalAlignment="Center"
+                    Foreground="White"/>
                 </Grid>
 
-                <Border Grid.Row="1">
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-                    <ListView Grid.Row="1">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Đề tài" Width="300"
-                                                DisplayMemberBinding="{Binding Topic}" />
-                                <GridViewColumn Header="Yêu cầu" Width="350"
-                                                DisplayMemberBinding="{Binding Description}" />
-                                <GridViewColumn />
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="25*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0"
+                        Text="Tên đề tài"
+                        FontSize="18"
+                        FontWeight="Medium"
+                        Foreground="White"
+                        VerticalAlignment="Center" Grid.ColumnSpan="3"/>
 
-                </Border>
+                    <TextBlock Grid.Row="0" Grid.Column="1"
+                        Text="Giảng viên"
+                        FontSize="18"
+                        FontWeight="Medium"
+                        Foreground="White"
+                        VerticalAlignment="Center" Grid.ColumnSpan="3"/>
+
+                    <TextBlock Grid.Row="0" Grid.Column="2"
+                        Text="Thời gian"
+                        FontSize="18"
+                        FontWeight="Medium"
+                        Foreground="White"
+                        VerticalAlignment="Center" Grid.ColumnSpan="3"/>
+
+                    <TextBlock Grid.Row="0" Grid.Column="4"
+                    Text="Trạng thái"
+                    FontSize="18"
+                    FontWeight="Medium"
+                    Foreground="White"
+                    VerticalAlignment="Center" Grid.ColumnSpan="3"/>        
+                </Grid>
             </Grid>
             
         </Border>

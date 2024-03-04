@@ -30,7 +30,7 @@
                FontWeight="Medium"/>
 
         <TextBlock Grid.Row="1"
-               Text="Mã giảng viên: "
+               Text="Mã Sinh Viên: "
                Margin="30,0,0,0"
                FontWeight="Medium"/>
 
