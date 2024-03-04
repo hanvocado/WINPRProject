@@ -22,9 +22,7 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0"
-                        Orientation="Horizontal"
-                        VerticalAlignment="Center"
-                        FlowDirection="LeftToRight">
+                        Orientation="Horizontal">
                 <fa:IconImage Icon="Search"
                               Margin="0 4 5 0"
                               Height="17" 

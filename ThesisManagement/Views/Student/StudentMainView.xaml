@@ -68,29 +68,16 @@
                     <Grid.RowDefinitions>
                         <!--Control Bars-->
                         <RowDefinition Height="25"/>
-                        <!--Header / Caption-->
-                        <RowDefinition Height="45"/>
                         <!--Content Section -->
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
                     <customControl:WindowControlBar />
 
-                    <!--Header / Caption-->
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-
-                        <!--User Options-->
-                        
-                    </Grid>
-
                     <!--Content Section -->
-                    <ContentControl Grid.Row="2"
+                    <ContentControl Grid.Row="1"
                                   Margin="25">
-                        <userControls:MenuThesisDetail/>
+                        <userControls:TopicsView/>
                     </ContentControl>
 
                 </Grid>

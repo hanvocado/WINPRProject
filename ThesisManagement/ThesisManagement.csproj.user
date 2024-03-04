@@ -76,7 +76,7 @@
     <Compile Update="Views\Student\ThesisViewStudent.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Student\TopicListView.xaml.cs">
+    <Compile Update="Views\Student\TopicsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -165,7 +165,7 @@
     <Page Update="Views\Student\ThesisViewStudent.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Student\TopicListView.xaml">
+    <Page Update="Views\Student\TopicsView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
