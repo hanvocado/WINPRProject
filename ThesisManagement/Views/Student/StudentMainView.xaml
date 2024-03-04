@@ -77,7 +77,7 @@
                     <!--Content Section -->
                     <ContentControl Grid.Row="1"
                                   Margin="25">
-                        <userControls:TopicListView/>
+                        <userControls:TopicsView/>
                     </ContentControl>
 
                 </Grid>

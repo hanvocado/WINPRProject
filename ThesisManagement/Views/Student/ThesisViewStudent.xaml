@@ -119,8 +119,6 @@
                         <fa:IconImage Icon="Pen" Style="{StaticResource crudsButtonIcon}" />
                     </Button>
 
-                    
-
                 </StackPanel>
             </Grid>
 
