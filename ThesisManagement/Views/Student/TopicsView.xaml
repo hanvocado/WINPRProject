@@ -4,9 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ThesisManagement.Views.Student"
+             xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
+             xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="White">
+
+    <UserControl.DataContext>
+        <viewModels:TopicsVM />
+    </UserControl.DataContext>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -21,100 +29,74 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0"
-                    Orientation="Horizontal"
-                    VerticalAlignment="Top"
-                    FlowDirection="LeftToRight">
-                <fa:IconImage Icon="Search" 
-                          Height="20" 
-                          Width="20" 
-                          Foreground="{StaticResource plainTextColor}"/>
-                <ComboBox Text="Đề tài..."   
-                      FontSize="13"
-                      Height="24"
-                      Width="200"
-                      Background="Transparent"
-                      FontWeight="Medium"
-                      FontFamily="Montserrat"
-                      Foreground="{StaticResource plainTextColor}"
-                      BorderBrush="{StaticResource plainTextColor}"
-                      BorderThickness="0,0,0,1"
-                      VerticalContentAlignment="Center"
-                      Margin="5,5,0,0">
+                    Orientation="Horizontal">
+                <fa:IconImage Icon="Search"
+                          Margin="0 4 5 0"
+                          Height="17" 
+                          Width="20"/>
+                <ComboBox
+                                ItemsSource="{Binding Topics}"
+                                SelectedValue=""
+                                Margin="10 10"
+                                IsEditable="True"
+                                IsTextSearchEnabled="True"
+                                TextSearch.TextPath="Category"
+                                md:HintAssist.Hint="Thể loại"
+                                md:TextFieldAssist.HasClearButton="True"
+                                Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Category}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
-
-                <!--<Button Style="{StaticResource btnSearch}"
-                    Command=""
-                    Content="Tìm kiếm"
-                    VerticalAlignment="Top">
-                </Button>-->
+                
 
             </StackPanel>
 
+            <customControls:ControlButton Grid.Column="1"
+                                      DefaultColor="{StaticResource primaryBrush}"
+                                      HoverColor="{StaticResource secondaryBrush}"
+                                      Width="80">
+                <customControls:ControlButton.Content>
+                    <TextBlock Text="Tạo mới" Style="{StaticResource btnContent}"/>
+                </customControls:ControlButton.Content>
+            </customControls:ControlButton>
+
         </Grid>
 
-        <Border Grid.Row="1"
-            Background="#0A426E"
-            Padding="10">
+        <Border Grid.Row="1">
 
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                
-                <Grid Grid.Row="0">
-                    <TextBlock Text="Danh sách đề tài"
-                    FontSize="18"
-                    FontWeight="Medium"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Foreground="White"/>
-                </Grid>
+            <ListView Grid.Row="1"
+              Name="AdminsListView"
+              ItemsSource="{Binding Topics}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Đề tài" Width="300" HeaderContainerStyle="{StaticResource header}"
+                                    DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn Header="Thể loại" Width="200" HeaderContainerStyle="{StaticResource header}"
+                                    DisplayMemberBinding="{Binding Category}" />
+                        <GridViewColumn Header="Công nghệ" Width="200" HeaderContainerStyle="{StaticResource header}"
+                                    DisplayMemberBinding="{Binding Technology}" />
+                        <GridViewColumn Header="Giảng viên" Width="200" HeaderContainerStyle="{StaticResource header}"
+                                    DisplayMemberBinding="{Binding ProfessorId}" />
+                        <GridViewColumn Width="80" HeaderContainerStyle="{StaticResource header}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <customControls:ControlButton DefaultColor="{StaticResource danger}"
+                                                              HoverColor="{StaticResource dangerHover}"
+                                                              Width="30">
+                                        <customControls:ControlButton.Content>
+                                            <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
+                                        </customControls:ControlButton.Content>
+                                    </customControls:ControlButton>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
 
-                <Grid Grid.Row="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="25*"/>
-                        <ColumnDefinition Width="25*"/>
-                        <ColumnDefinition Width="25*"/>
-                        <ColumnDefinition Width="25*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0" Grid.Column="0"
-                        Text="Tên đề tài"
-                        FontSize="18"
-                        FontWeight="Medium"
-                        Foreground="White"
-                        VerticalAlignment="Center" Grid.ColumnSpan="3"/>
-
-                    <TextBlock Grid.Row="0" Grid.Column="1"
-                        Text="Giảng viên"
-                        FontSize="18"
-                        FontWeight="Medium"
-                        Foreground="White"
-                        VerticalAlignment="Center" Grid.ColumnSpan="3"/>
-
-                    <TextBlock Grid.Row="0" Grid.Column="2"
-                        Text="Thời gian"
-                        FontSize="18"
-                        FontWeight="Medium"
-                        Foreground="White"
-                        VerticalAlignment="Center" Grid.ColumnSpan="3"/>
-
-                    <TextBlock Grid.Row="0" Grid.Column="4"
-                    Text="Trạng thái"
-                    FontSize="18"
-                    FontWeight="Medium"
-                    Foreground="White"
-                    VerticalAlignment="Center" Grid.ColumnSpan="3"/>        
-                </Grid>
-            </Grid>
-            
         </Border>
 
     </Grid>
