@@ -67,4 +67,10 @@
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="Padding" Value="18 10" />
     </Style>
+
+    <Style x:Key="tooltip" TargetType="ToolTip">
+        <Setter Property="Margin" Value="50 -50 -50 50" />
+        <Setter Property="Background" Value="LightGray" />
+        <Setter Property="Foreground" Value="{StaticResource primaryBrush}" />
+    </Style>
 </ResourceDictionary>
