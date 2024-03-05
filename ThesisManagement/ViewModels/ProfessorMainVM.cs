@@ -16,17 +16,17 @@ namespace ThesisManagement.ViewModels
             }
         }
 
-        public ICommand ShowTopicView { get; set; }
+        public ICommand ShowTopicsView { get; set; }
         public ICommand ShowStudentView { get; set; }
         public ICommand ShowThesisView { get; set; }
 
         public ProfessorMainVM()
         {
-            ShowTopicView = new ViewModelCommand(ExecuteShowTopicView);
+            ShowTopicsView = new ViewModelCommand(ExecuteShowTopicsView);
             ShowStudentView = new ViewModelCommand(ExecuteShowStudentView);
             ShowThesisView = new ViewModelCommand(ExecuteShowThesisView);
 
-            ExecuteShowTopicView(null);
+            ExecuteShowTopicsView(null);
         }
 
         private void ExecuteShowThesisView(object? obj)
@@ -39,7 +39,7 @@ namespace ThesisManagement.ViewModels
             CurrentChildView = new StudentsVM();
         }
 
-        private void ExecuteShowTopicView(object? obj)
+        private void ExecuteShowTopicsView(object? obj)
         {
             CurrentChildView = new TopicsVM();
         }
