@@ -56,6 +56,7 @@
         <Border Grid.Row="1">
 
             <ListView Grid.Row="1"
+                      MouseLeftButtonUp="ListViewItem_Click"
                   Name="AdminsListView"
                   ItemsSource="{Binding Topics}">
                 <ListView.View>
