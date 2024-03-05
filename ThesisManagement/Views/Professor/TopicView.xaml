@@ -3,58 +3,80 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
+        xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
         xmlns:local="clr-namespace:ThesisManagement.Views.Professor"
         mc:Ignorable="d"
-        Title="TopicView" Height="240" Width="450"
-        WindowStartupLocation="CenterScreen"
+        Title="TopicView" Height="450" Width="400"
         Style="{StaticResource formStyle}">
 
-    <Border Padding="0 0 0 15" Height="240">
+    <Window.DataContext>
+        <viewModels:TopicVM />
+    </Window.DataContext>
+    
+    <Border>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="25" />
+                <RowDefinition />
+                <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
 
             <customControls:WindowControlBar />
 
-            <Border Grid.Row="1" Padding="10 10 15 10">
+            <Border Grid.Row="1" Padding="30 20 30 0">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition Height="120"/>
                     </Grid.RowDefinitions>
 
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="300"/>
-                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Row="0"
+                             VerticalAlignment="Top"
+                            md:HintAssist.Hint="Tên đề tài"
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}" />
 
-                    <Label Content="Tên" Grid.Row="0" Grid.Column="0" />
-                    <TextBox Grid.Row="0" Grid.Column="1" 
-                             TextWrapping="Wrap"
-                             AcceptsReturn="True"
-                             VerticalScrollBarVisibility="Auto" />
+                    <ComboBox Grid.Row="1"
+                              VerticalAlignment="Top"
+                            ItemsSource="{Binding Categories}"
+                            SelectedValue="{Binding Category}"
+                            md:HintAssist.Hint="Thể loại"
+                            md:TextFieldAssist.HasClearButton="True"
+                            Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                    </ComboBox>
+                    
+                    <ComboBox Grid.Row="2"
+                              VerticalAlignment="Top"
+                              md:HintAssist.Hint="Công nghệ"
+                              ItemsSource="{Binding Technologies}"
+                              SelectedValue="{Binding Technology}"
+                              Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                    </ComboBox>
 
-                    <Label Content="Yêu cầu" Grid.Row="1" Grid.Column="0" />
-                    <TextBox Grid.Row="1" Grid.Column="1" />
-
-                    <Label Content="Ngày hết hạn" Grid.Row="3" Grid.Column="0" />
-                    <TextBox Grid.Row="3" Grid.Column="1" />
-
+                    <TextBox Grid.Row="3"
+                             VerticalAlignment="Top"
+                            Height="100"
+                            Text="" 
+                            md:HintAssist.Hint="Mô tả"
+                            AcceptsReturn="True"
+                            IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                            TextWrapping="Wrap"
+                            VerticalScrollBarVisibility="Auto" />
                 </Grid>
             </Border>
 
             <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
                                           HoverColor="{StaticResource secondaryBrush}"
                                           Content="Lưu"
+                                          Margin="0 -10 0 20"
                                           Width="100"
+                                          Height="50"
+                                          FontSize="14"
                                           Grid.Row="3"/>
         </Grid>
     </Border>
-    
 </Window>

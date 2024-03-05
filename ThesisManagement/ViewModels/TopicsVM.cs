@@ -1,6 +1,8 @@
-﻿using System.Windows.Input;
+﻿using System.Windows;
+using System.Windows.Input;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
+using ThesisManagement.Views.Professor;
 
 namespace ThesisManagement.ViewModels
 {
@@ -30,9 +32,12 @@ namespace ThesisManagement.ViewModels
             throw new NotImplementedException();
         }
 
-        private void ExecuteCreateCommand(object obj)
+        private void ExecuteCreateCommand(object sender)
         {
-            throw new NotImplementedException();
+            TopicView topicView = new TopicView();
+            topicView.Owner = Application.Current.MainWindow;
+            topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            topicView.Show();
         }
     }
 }
