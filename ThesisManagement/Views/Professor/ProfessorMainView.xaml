@@ -31,7 +31,6 @@
     </Window.Resources>
 
     <Border CornerRadius="0">
-
         <Grid>
 
             <Grid.ColumnDefinitions>
@@ -46,12 +45,7 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <Border Margin="0 22 0 0">
-                        <StackPanel Orientation="Horizontal" Height="35" Margin="3 25 0 40" Grid.Row="0">
-                            <Image Source="/Resources/Images/logo-bright.png" Height="28" />
-                            <TextBlock Text="QUẢN LÝ LUẬN VĂN" Style="{StaticResource logo}" Margin="10 3 0 0"/>
-                        </StackPanel>
-                    </Border>
+                    <Image Source="/Resources/Images/logo-bright.png" Height="28" Margin="0 22 0 0" />
                     
                     <StackPanel Grid.Row="1">
                         <RadioButton Style="{StaticResource navBtn}" IsChecked="True"
@@ -59,10 +53,7 @@
                             <RadioButton.ToolTip>
                                 <ToolTip Content="Đề tài" Style="{StaticResource navToolTip}" />
                             </RadioButton.ToolTip>
-                            <StackPanel Orientation="Horizontal">
-                                <fa:IconImage Icon="RectangleList" Style="{StaticResource navIcon}" />
-                                <TextBlock Text="Đề tài" Style="{StaticResource navText}" />
-                            </StackPanel>
+                            <fa:IconImage Icon="RectangleList" Style="{StaticResource navIcon}" />
                         </RadioButton>
 
                         <RadioButton Style="{StaticResource navBtn}"
@@ -70,10 +61,7 @@
                             <RadioButton.ToolTip>
                                 <ToolTip Content="Sinh viên" Style="{StaticResource navToolTip}" />
                             </RadioButton.ToolTip>
-                            <StackPanel Orientation="Horizontal">
-                                <fa:IconImage Icon="UserLarge" Style="{StaticResource navIcon}" />
-                                <TextBlock Text="Sinh viên" Style="{StaticResource navText}" />
-                            </StackPanel>
+                            <fa:IconImage Icon="UserLarge" Style="{StaticResource navIcon}" />
                         </RadioButton>
 
                         <RadioButton Style="{StaticResource navBtn}" 
@@ -81,33 +69,23 @@
                             <RadioButton.ToolTip>
                                 <ToolTip Content="Luận văn" Style="{StaticResource navToolTip}" />
                             </RadioButton.ToolTip>
-                            <StackPanel Orientation="Horizontal">
-                                <fa:IconImage Icon="Book" Style="{StaticResource navIcon}" />
-                                <TextBlock Text="Luận văn" Style="{StaticResource navText}" />
-                            </StackPanel>
+                            <fa:IconImage Icon="Book" Style="{StaticResource navIcon}" />
                         </RadioButton>
 
                         <RadioButton Style="{StaticResource navBtn}">
                             <RadioButton.ToolTip>
                                 <ToolTip Content="Đề tài" Style="{StaticResource navToolTip}" />
                             </RadioButton.ToolTip>
-                            <StackPanel Orientation="Horizontal">
-                                <fa:IconImage Icon="UserTie" Style="{StaticResource navIcon}" />
-                                <TextBlock Text="Tôi" Style="{StaticResource navText}" />
-                            </StackPanel>
+                            <fa:IconImage Icon="UserTie" Style="{StaticResource navIcon}" />
                         </RadioButton>
 
                         <RadioButton Style="{StaticResource navBtn}">
                             <RadioButton.ToolTip>
                                 <ToolTip Content="Đăng xuất" Style="{StaticResource navToolTip}" />
                             </RadioButton.ToolTip>
-                            <StackPanel Orientation="Horizontal">
-                                <fa:IconImage Icon="RightFromBracket" Style="{StaticResource navIcon}" />
-                                <TextBlock Text="Đăng xuất" Style="{StaticResource navText}" />
-                            </StackPanel>
+                            <fa:IconImage Icon="RightFromBracket" Style="{StaticResource navIcon}" />
                         </RadioButton>
                     </StackPanel>
-
                 </Grid>
             </Border>
 
@@ -126,10 +104,8 @@
                     </ContentControl>
 
                 </Grid>
-
             </Border>
         </Grid>
-
     </Border>
 
 </Window>
