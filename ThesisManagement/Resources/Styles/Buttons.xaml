@@ -80,8 +80,8 @@
 
     <Style x:Key = "btnIcon" TargetType = "fa:IconImage" >
         <Setter Property = "Foreground" Value = "{StaticResource plainTextColor}" />
-        <Setter Property = "Width" Value = "15" />
-        <Setter Property = "Height" Value = "15" />
+        <Setter Property = "Width" Value = "12" />
+        <Setter Property = "Height" Value = "12" />
     </Style>
 
     <!--ToggleButton -->
