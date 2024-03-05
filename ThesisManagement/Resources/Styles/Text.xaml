@@ -68,9 +68,14 @@
         <Setter Property="Padding" Value="15 10" />
     </Style>
 
-    <Style x:Key="tooltip" TargetType="ToolTip">
-        <Setter Property="Margin" Value="50 -50 -50 50" />
-        <Setter Property="Background" Value="LightGray" />
-        <Setter Property="Foreground" Value="{StaticResource primaryBrush}" />
+    <Style x:Key="navToolTip" TargetType="ToolTip">
+        <Setter Property="Placement" Value="Right" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="15 6" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="HorizontalOffset" Value="-2" />
+        <Setter Property="VerticalOffset" Value="10" />
+        <Setter Property="Background" Value="{StaticResource primaryBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource plainTextColor}" />
     </Style>
 </ResourceDictionary>
