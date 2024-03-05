@@ -34,7 +34,6 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <!--SIDEBAR-->
             <Border Grid.Column="0" Background="{StaticResource primaryBrush}">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Height="35" Margin="15 25 0 40">
@@ -60,7 +59,6 @@
                 </StackPanel>
             </Border>
 
-            <!--CONTENT-->
             <Border Grid.Column="1">
                 <Grid>
                     <Grid.RowDefinitions>

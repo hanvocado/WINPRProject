@@ -24,31 +24,6 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="profileBtn" TargetType="Button" >
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="Width" Value="25" />
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Template" >
-            <Setter.Value >
-                <ControlTemplate TargetType="Button" >
-                    <Border Background="{TemplateBinding Background}">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True" >
-                <Setter Property="Foreground" Value="{Binding Path=Tag, RelativeSource={RelativeSource Self}}" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
-    <Style x:Key="profileBtnIcon" TargetType="fa:IconImage" >
-        <Setter Property="Width" Value="10" />
-        <Setter Property="Height" Value="10" />
-    </Style>
-
     <Style TargetType="{x:Type customControls:ControlButton}">
         <Setter Property="Background" Value="{Binding DefaultColor, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="FontSize" Value="12"/>
@@ -84,7 +59,6 @@
         <Setter Property = "Height" Value = "12" />
     </Style>
 
-    <!--ToggleButton -->
     <Style x:Key="toggleBtn" TargetType="{x:Type ToggleButton}">
         <Setter Property="Margin" Value="15"/>
         <Setter Property="Width" Value="30"/>
@@ -109,7 +83,7 @@
                             <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" />
                         </Grid>
                     </Border>
-                    
+
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Visibility" TargetName="activeSign" Value="Visible" />
@@ -119,37 +93,6 @@
                         <Trigger Property="IsChecked" Value="True">
                             <Setter Property="Visibility" TargetName="activeSign" Value="Visible" />
                             <Setter Property="Foreground" Value="#F1F1F1" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    
-    <Style x:Key="tabBtn" TargetType="RadioButton">
-        <Setter Property="Height" Value="40" />
-        <Setter Property="Width" Value="120" />
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="RadioButton">
-                    <Border x:Name="border" Height="40" BorderThickness="0" Background="Transparent">
-                        <Grid>
-                            <Border x:Name="activeSign" Height="4" Width="80" VerticalAlignment="Bottom"
-                                    Background="{StaticResource primaryBrush}" Visibility="Collapsed" />
-                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" />
-                        </Grid>
-                    </Border>
-                    
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Visibility" TargetName="activeSign" Value="Visible" />
-                            <Setter Property="Foreground" Value="{StaticResource primaryBrush}" />
-                        </Trigger>
-
-                        <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="Visibility" TargetName="activeSign" Value="Visible" />
-                            <Setter Property="Foreground" Value="{StaticResource primaryBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -161,7 +104,7 @@
         <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" />
         <Setter Property="Height" Value="18" />
         <Setter Property="Width" Value="30" />
-        <Setter Property="Margin" Value="20 0 10 0" />
+        <Setter Property="Margin" Value="18 0 0 0" />
     </Style>
 
     <Style x:Key="navText" TargetType="TextBlock" >

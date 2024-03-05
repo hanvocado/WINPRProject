@@ -8,7 +8,7 @@
         xmlns:viewModel="clr-namespace:ThesisManagement.ViewModels"
         xmlns:customControl="clr-namespace:ThesisManagement.CustomControls"
         mc:Ignorable="d"
-        Title="ProfessorMainView" Height="500" Width="880"
+        Title="ProfessorMainView" Height="500" Width="900"
         WindowStartupLocation="CenterScreen"
         Style="{StaticResource windowStyle}">
 
@@ -31,98 +31,64 @@
     </Window.Resources>
 
     <Border CornerRadius="0">
-
         <Grid>
 
             <Grid.ColumnDefinitions>
-                <!--Sidebar-->
-                <ColumnDefinition Width="Auto" />
-                <!--Content-->
+                <ColumnDefinition Width="65" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <!--SIDEBAR-->
             <Border Grid.Column="0" Background="{StaticResource primaryBrush}">
-                <Grid x:Name="gridSidebar" Width="60">
+                <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="60"/>
-                        <RowDefinition Height="100"/>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="120"/>
+                        <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <ToggleButton Grid.Row="0" Style="{StaticResource toggleBtn}">
-                        <fa:IconImage Icon="Bars" Foreground="White" Height="18" Width="30" />
-
-                        <ToggleButton.Triggers>
-                            <EventTrigger RoutedEvent="ToggleButton.Unchecked">
-                                <BeginStoryboard>
-                                    <Storyboard x:Name="HideStackPanel">
-                                        <DoubleAnimation Storyboard.TargetName="gridSidebar" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="250" To="60" Duration="0:0:0.5">
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                            <EventTrigger RoutedEvent="ToggleButton.Checked">
-                                <BeginStoryboard>
-                                    <Storyboard x:Name="ShowStackPanel">
-                                        <DoubleAnimation Storyboard.TargetName="gridSidebar" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="60" To="250" Duration="0:0:0.5">
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                        </ToggleButton.Triggers>
-                        
-                    </ToggleButton>
-
-                    <StackPanel Orientation="Horizontal" Height="35" Margin="5 25 0 40" Grid.Row="1">
-                        <Image Source="/Resources/Images/logo-bright.png" Height="28" />
-                        <TextBlock Text="QUẢN LÝ LUẬN VĂN" Style="{StaticResource logo}" Margin="10 3 0 0"/>
-                    </StackPanel>
+                    <Image Source="/Resources/Images/logo-bright.png" Height="28" Margin="0 22 0 0" />
                     
-                    <StackPanel Grid.Row="2">
+                    <StackPanel Grid.Row="1">
                         <RadioButton Style="{StaticResource navBtn}" IsChecked="True"
-                                 Command="{Binding ShowTopicView}">
-                            <StackPanel Orientation="Horizontal">
-                                <fa:IconImage Icon="RectangleList" Style="{StaticResource navIcon}" />
-                                <TextBlock Text="Đề tài" Style="{StaticResource navText}" />
-                            </StackPanel>
+                                     Command="{Binding ShowTopicsView}">
+                            <RadioButton.ToolTip>
+                                <ToolTip Content="Đề tài" Style="{StaticResource navToolTip}" />
+                            </RadioButton.ToolTip>
+                            <fa:IconImage Icon="RectangleList" Style="{StaticResource navIcon}" />
                         </RadioButton>
 
                         <RadioButton Style="{StaticResource navBtn}"
-                                 Command="{Binding ShowStudentView}">
-                            <StackPanel Orientation="Horizontal">
-                                <fa:IconImage Icon="UserLarge" Style="{StaticResource navIcon}" />
-                                <TextBlock Text="Sinh viên" Style="{StaticResource navText}" />
-                            </StackPanel>
+                                     Command="{Binding ShowStudentView}">
+                            <RadioButton.ToolTip>
+                                <ToolTip Content="Sinh viên" Style="{StaticResource navToolTip}" />
+                            </RadioButton.ToolTip>
+                            <fa:IconImage Icon="UserLarge" Style="{StaticResource navIcon}" />
                         </RadioButton>
 
-                        <RadioButton Style="{StaticResource navBtn}"
-                                 Command="{Binding ShowThesisView}">
-                            <StackPanel Orientation="Horizontal">
-                                <fa:IconImage Icon="Book" Style="{StaticResource navIcon}" />
-                                <TextBlock Text="Luận văn" Style="{StaticResource navText}" />
-                            </StackPanel>
-                        </RadioButton>
-
-                        <RadioButton Style="{StaticResource navBtn}">
-                            <StackPanel Orientation="Horizontal">
-                                <fa:IconImage Icon="UserTie" Style="{StaticResource navIcon}" />
-                                <TextBlock Text="Hồ sơ" Style="{StaticResource navText}" />
-                            </StackPanel>
+                        <RadioButton Style="{StaticResource navBtn}" 
+                                     Command="{Binding ShowThesisView}">
+                            <RadioButton.ToolTip>
+                                <ToolTip Content="Luận văn" Style="{StaticResource navToolTip}" />
+                            </RadioButton.ToolTip>
+                            <fa:IconImage Icon="Book" Style="{StaticResource navIcon}" />
                         </RadioButton>
 
                         <RadioButton Style="{StaticResource navBtn}">
-                            <StackPanel Orientation="Horizontal">
-                                <fa:IconImage Icon="RightFromBracket" Style="{StaticResource navIcon}" />
-                                <TextBlock Text="Đăng xuất" Style="{StaticResource navText}" />
-                            </StackPanel>
+                            <RadioButton.ToolTip>
+                                <ToolTip Content="Đề tài" Style="{StaticResource navToolTip}" />
+                            </RadioButton.ToolTip>
+                            <fa:IconImage Icon="UserTie" Style="{StaticResource navIcon}" />
+                        </RadioButton>
+
+                        <RadioButton Style="{StaticResource navBtn}">
+                            <RadioButton.ToolTip>
+                                <ToolTip Content="Đăng xuất" Style="{StaticResource navToolTip}" />
+                            </RadioButton.ToolTip>
+                            <fa:IconImage Icon="RightFromBracket" Style="{StaticResource navIcon}" />
                         </RadioButton>
                     </StackPanel>
-
                 </Grid>
             </Border>
 
-            <!--Main Section-->
             <Border Grid.Column="1">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -133,15 +99,13 @@
                     <customControl:WindowControlBar />
 
                     <ContentControl Grid.Row="1"
-                                    Margin="25"
+                                    Margin="20 5 0 0"
                                     Content="{Binding CurrentChildView}">
                     </ContentControl>
 
                 </Grid>
-
             </Border>
         </Grid>
-
     </Border>
 
 </Window>
