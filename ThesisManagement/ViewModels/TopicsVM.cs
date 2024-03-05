@@ -1,40 +1,21 @@
 ﻿using System.Windows.Input;
+using ThesisManagement.Models;
+using ThesisManagement.Repositories;
 
 namespace ThesisManagement.ViewModels
 {
     public class TopicsVM : ViewModelBase
     {
-        private string _name;
-        private string _description;
-        private DateTime _createAt;
-        private DateTime _expiredAt;
-        private bool _status;
-
-        public string Name
-        {
-            get => _name;
-            set
-            {
-                _name = value;
-                OnPropertyChanged(nameof(Name));
-            }
-        }
-
-        public string Description
-        {
-            get => _description;
-            set
-            {
-                _description = value;
-                OnPropertyChanged(nameof(Description));
-            }
-        }
+        private readonly ITopicRepository _topicRepo;
+        public IEnumerable<Topic> Topics { get; set; }
 
         public ICommand CreateCommand { get; set; }
         public ICommand EditCommand { get; set; }
 
         public TopicsVM()
         {
+            _topicRepo = new TopicRepository();
+            Topics = _topicRepo.GetAll();
             CreateCommand = new ViewModelCommand(ExecuteCreateCommand);
             EditCommand = new ViewModelCommand(ExecuteEditCommand, CanExecuteEditCommand);
         }
