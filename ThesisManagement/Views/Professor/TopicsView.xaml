@@ -44,6 +44,7 @@
             <customControls:ControlButton Grid.Column="1"
                                           DefaultColor="{StaticResource primaryBrush}"
                                           HoverColor="{StaticResource secondaryBrush}"
+                                          Command="{Binding CreateCommand}"
                                           Width="80">
                 <customControls:ControlButton.Content>
                     <TextBlock Text="Tạo mới" Style="{StaticResource btnContent}"/>
