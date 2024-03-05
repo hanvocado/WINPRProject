@@ -34,7 +34,7 @@
                           Margin="0 4 5 0"
                           Height="17" 
                           Width="20"/>
-                <ComboBox
+                <ComboBox Grid.Row="1" Grid.Column="1"
                                 ItemsSource="{Binding Topics}"
                                 SelectedValue=""
                                 Margin="10 10"
@@ -50,7 +50,8 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                
+
+
 
             </StackPanel>
 

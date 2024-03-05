@@ -7,6 +7,7 @@
         xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         mc:Ignorable="d"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="TopicView" Height="500" Width="700"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
@@ -41,7 +42,23 @@
 
 
             </StackPanel>
-            
+            <ComboBox Grid.Row="1" Grid.Column="1"
+                ItemsSource="{Binding Topics}"
+                SelectedValue=""
+                Margin="10 10"
+                IsEditable="True"
+                IsTextSearchEnabled="True"
+                TextSearch.TextPath="Category"
+                md:HintAssist.Hint="Thể loại"
+                md:TextFieldAssist.HasClearButton="True"
+                Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Category}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
             <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
                               HoverColor="{StaticResource secondaryBrush}"
                               Content="Lưu"
