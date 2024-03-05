@@ -36,7 +36,7 @@
 
             <Grid.ColumnDefinitions>
                 <!--Sidebar-->
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="65" />
                 <!--Content-->
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
@@ -74,7 +74,7 @@
                         
                     </ToggleButton>
 
-                    <StackPanel Orientation="Horizontal" Height="35" Margin="5 25 0 40" Grid.Row="1">
+                    <StackPanel Orientation="Horizontal" Height="35" Margin="3 25 0 40" Grid.Row="1">
                         <Image Source="/Resources/Images/logo-bright.png" Height="28" />
                         <TextBlock Text="QUẢN LÝ LUẬN VĂN" Style="{StaticResource logo}" Margin="10 3 0 0"/>
                     </StackPanel>
@@ -138,7 +138,7 @@
                     <customControl:WindowControlBar />
 
                     <ContentControl Grid.Row="1"
-                                    Margin="25"
+                                    Margin="20 5 0 0"
                                     Content="{Binding CurrentChildView}">
                     </ContentControl>
 
