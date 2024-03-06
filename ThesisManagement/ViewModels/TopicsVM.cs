@@ -2,41 +2,65 @@
 using System.Windows.Input;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
+using ThesisManagement.Views.Professor;
 
 namespace ThesisManagement.ViewModels
 {
     public class TopicsVM : ViewModelBase
     {
         private readonly ITopicRepository _topicRepo;
+        private Topic Topic = new Topic();
         public IEnumerable<Topic> Topics { get; set; }
-
         public ICommand CreateCommand { get; set; }
+<<<<<<< HEAD
         public ICommand EditCommand { get; set; }
         public TopicVM SelectedTopic { get; set; }
         public ICommand YourButtonCommand { get; set; }
+=======
+        public ICommand UpdateCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
+
+>>>>>>> main
         public TopicsVM()
         {
             YourButtonCommand = new ViewModelCommand(ExecuteYourButtonCommand);
             SelectedTopic = new TopicVM();
             _topicRepo = new TopicRepository();
-            Topics = _topicRepo.GetAll();
             CreateCommand = new ViewModelCommand(ExecuteCreateCommand);
-            EditCommand = new ViewModelCommand(ExecuteEditCommand, CanExecuteEditCommand);
+            UpdateCommand = new ViewModelCommand(ExecuteUpdateCommand, CanExecuteUpdateCommand);
+            DeleteCommand = new ViewModelCommand(ExecuteDeleteCommand, CanExecuteDeleteCommand);
+            Topics = _topicRepo.GetAll();
         }
 
-        private bool CanExecuteEditCommand(object obj)
+        private void ExecuteDeleteCommand(object sender)
         {
-            throw new NotImplementedException();
+            _topicRepo.Delete(Topic.Id);
         }
 
-        private void ExecuteEditCommand(object obj)
+        private bool CanExecuteDeleteCommand(object sender)
         {
-            throw new NotImplementedException();
+            return true;
+        }
+
+<<<<<<< HEAD
+        private void ExecuteCreateCommand(object sender)
+        {
+            Views.Professor.TopicView topicView = new Views.Professor.TopicView();
+=======
+        private void ExecuteUpdateCommand(object sender)
+        {
+            TopicView topicView = new TopicView();
+        }
+
+        private bool CanExecuteUpdateCommand(object sender)
+        {
+            return true;
         }
 
         private void ExecuteCreateCommand(object sender)
         {
-            Views.Professor.TopicView topicView = new Views.Professor.TopicView();
+            TopicView topicView = new TopicView();
+>>>>>>> main
             topicView.Owner = Application.Current.MainWindow;
             topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             topicView.Show();

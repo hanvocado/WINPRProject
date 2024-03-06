@@ -7,6 +7,7 @@
              xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
              xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
@@ -32,12 +33,15 @@
                               Margin="0 4 5 0"
                               Height="17" 
                               Width="20"/>
-                <TextBox Text=""   
-                         Height="24"
-                         Width="200"
-                         BorderThickness="0,0,0,2"
-                         VerticalContentAlignment="Center">
-                </TextBox>
+                <ComboBox VerticalAlignment="Center"
+                          Padding="10"
+                          Width="200"
+                          ItemsSource="{Binding }"
+                          SelectedValue=""
+                          md:HintAssist.Hint="Tìm kiếm"
+                          md:TextFieldAssist.HasClearButton="True"
+                          Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                </ComboBox>
 
             </StackPanel>
 
@@ -56,22 +60,36 @@
         <Border Grid.Row="1">
 
             <ListView Grid.Row="1"
+                      MouseLeftButtonUp="ListViewItem_Click"
                   Name="AdminsListView"
                   ItemsSource="{Binding Topics}">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Đề tài" Width="340" HeaderContainerStyle="{StaticResource header}"
-                                        DisplayMemberBinding="{Binding Name}" />
-                        <GridViewColumn Header="Thể loại" Width="200" HeaderContainerStyle="{StaticResource header}"
-                                        DisplayMemberBinding="{Binding Category}" />
-                        <GridViewColumn Header="Công nghệ" Width="200" HeaderContainerStyle="{StaticResource header}"
-                                        DisplayMemberBinding="{Binding Name}" />
-                        <GridViewColumn Width="60" HeaderContainerStyle="{StaticResource header}">
-                            <GridViewColumn.CellTemplate>
+                        <GridViewColumn Width="340"
+                                        DisplayMemberBinding="{Binding Name}" >
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Đề tài" />
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="180"
+                                        DisplayMemberBinding="{Binding Category}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Thể loại" />
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="200"
+                                        DisplayMemberBinding="{Binding Name}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Công nghệ" />
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                            <GridViewColumn Width="60">
+                                <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <customControls:ControlButton DefaultColor="{StaticResource danger}"
                                                                   HoverColor="{StaticResource dangerHover}"
-                                                                  Width="30">
+                                                                  Width="30"
+                                                                  Command="{Binding DeleteCommand}">
                                         <customControls:ControlButton.Content>
                                             <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
                                         </customControls:ControlButton.Content>
