@@ -2,7 +2,6 @@
 using System.Windows.Input;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
-using ThesisManagement.Views.Professor;
 
 namespace ThesisManagement.ViewModels
 {
@@ -37,18 +36,17 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteCreateCommand(object sender)
         {
-            TopicView topicView = new TopicView();
+            Views.Professor.TopicView topicView = new Views.Professor.TopicView();
             topicView.Owner = Application.Current.MainWindow;
             topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             topicView.Show();
         }
         private void ExecuteYourButtonCommand(object parameter)
         {
-            TopicView topicView = new TopicView();
+            Views.Student.TopicView topicView = new Views.Student.TopicView();
             topicView.Owner = Application.Current.MainWindow;
             topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             topicView.Show();
-            
         }
 
     }

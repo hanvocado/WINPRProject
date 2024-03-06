@@ -125,6 +125,7 @@ namespace ThesisManagement.Repositories
                 Technology = reader["Technology"]?.ToString() ?? null
             };
         }
+
         private void ShowErrorMessage(string message)
         {
             MessageBox.Show(message);

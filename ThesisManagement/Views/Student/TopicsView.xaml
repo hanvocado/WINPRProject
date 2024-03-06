@@ -79,8 +79,7 @@
                                       Width="80"
                                       Command="{Binding YourButtonCommand}">
                 <customControls:ControlButton.Content>
-                    <TextBlock Text="Đề xuất" Style="{StaticResource btnContent}"/>
-                    
+                    <TextBlock Text="+ Đề xuất" Style="{StaticResource btnContent}"/>                    
                 </customControls:ControlButton.Content>
             </customControls:ControlButton>
 
