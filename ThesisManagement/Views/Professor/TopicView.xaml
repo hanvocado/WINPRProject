@@ -23,7 +23,7 @@
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
 
-            <customControls:WindowControlBar />
+            <customControls:PopupControlBar />
 
             <Border Grid.Row="1" Padding="30 20 30 0">
                 <Grid>
@@ -35,6 +35,7 @@
                     </Grid.RowDefinitions>
 
                     <TextBox Grid.Row="0"
+                             Text="{Binding Name}"
                              VerticalAlignment="Top"
                             md:HintAssist.Hint="Tên đề tài"
                             Style="{StaticResource MaterialDesignOutlinedTextBox}" />
@@ -58,8 +59,8 @@
 
                     <TextBox Grid.Row="3"
                              VerticalAlignment="Top"
+                             Text="{Binding Description}"
                             Height="100"
-                            Text="" 
                             md:HintAssist.Hint="Mô tả"
                             AcceptsReturn="True"
                             IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
