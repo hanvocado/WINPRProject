@@ -19,14 +19,21 @@ namespace ThesisManagement.ViewModels
         public ICommand ShowTopicsView { get; set; }
         public ICommand ShowStudentView { get; set; }
         public ICommand ShowThesisView { get; set; }
+        public ICommand ShowProfessorProfileView { get; set; }
 
         public ProfessorMainVM()
         {
             ShowTopicsView = new ViewModelCommand(ExecuteShowTopicsView);
             ShowStudentView = new ViewModelCommand(ExecuteShowStudentView);
             ShowThesisView = new ViewModelCommand(ExecuteShowThesisView);
+            ShowProfessorProfileView = new ViewModelCommand(ExcututeShowProfessorProfileView);
 
             ExecuteShowTopicsView(null);
+        }
+
+        private void ExcututeShowProfessorProfileView(object obj)
+        {
+            CurrentChildView = new ProfessorProfileVM();
         }
 
         private void ExecuteShowThesisView(object? obj)

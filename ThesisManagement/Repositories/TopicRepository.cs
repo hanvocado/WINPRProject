@@ -8,7 +8,7 @@ namespace ThesisManagement.Repositories
     public interface ITopicRepository
     {
         void Add(Topic topic);
-        void Update(int id);
+        void Update(Topic topic);
         void Delete(int id);
         Topic? Get(int id);
         IEnumerable<Topic> GetAll();
@@ -40,9 +40,52 @@ namespace ThesisManagement.Repositories
             }
         }
 
+        public void Update(Topic topic)
+        {
+            using (SqlConnection conn = GetConnection())
+            {
+                try
+                {
+                    conn.Open();
+                    string query = Query.Topic.Update(topic);
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ShowErrorMessage(ex.Message);
+                    return;
+                }
+
+                ShowSuccessMessage(Message.Success);
+            }
+        }
+
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = GetConnection())
+            {
+                try
+                {
+                    conn.Open();
+                    string query = Query.Topic.Delete(id);
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ShowErrorMessage(ex.Message);
+                    return;
+                }
+
+                ShowSuccessMessage(Message.Success);
+            }
         }
 
         public Topic? Get(int id)
@@ -107,10 +150,6 @@ namespace ThesisManagement.Repositories
             }
         }
 
-        public void Update(int id)
-        {
-            throw new NotImplementedException();
-        }
 
         private Topic RetrieveTopic(SqlDataReader reader)
         {
