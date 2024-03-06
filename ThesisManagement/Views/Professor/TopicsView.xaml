@@ -61,13 +61,25 @@
                   ItemsSource="{Binding Topics}">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Đề tài" Width="340" HeaderContainerStyle="{StaticResource header}"
-                                        DisplayMemberBinding="{Binding Name}" />
-                        <GridViewColumn Header="Thể loại" Width="200" HeaderContainerStyle="{StaticResource header}"
-                                        DisplayMemberBinding="{Binding Category}" />
-                        <GridViewColumn Header="Công nghệ" Width="200" HeaderContainerStyle="{StaticResource header}"
-                                        DisplayMemberBinding="{Binding Name}" />
-                        <GridViewColumn Width="60" HeaderContainerStyle="{StaticResource header}">
+                        <GridViewColumn Width="340"
+                                        DisplayMemberBinding="{Binding Name}" >
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Đề tài" />
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="180"
+                                        DisplayMemberBinding="{Binding Category}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Thể loại" />
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="200"
+                                        DisplayMemberBinding="{Binding Name}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Công nghệ" />
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="60">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <customControls:ControlButton DefaultColor="{StaticResource danger}"
