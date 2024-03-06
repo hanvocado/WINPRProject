@@ -15,6 +15,21 @@
     <SolidColorBrush x:Key="successHover" Color="#198754" />
 
     <SolidColorBrush x:Key="titleColor" Color = "#BCBEE0" />
-    <SolidColorBrush x:Key="plainTextColor" Color = "#F1F1F1" />  
+    <SolidColorBrush x:Key="plainTextColor" Color = "#F1F1F1" />
+
+
+    <LinearGradientBrush x:Key="cs_Backgroud" StartPoint="0,0" EndPoint="0,5">
+        <GradientStop Color="White" Offset="0.0"/>
+        <GradientStop Color="#283593" Offset="0.5"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="cs_PopupBackgroud" StartPoint="0,0" EndPoint="0,5">
+        <GradientStop Color="#FF2F84AC " Offset="0.0"/>
+        <GradientStop Color="#FF97D5F2" Offset="0.5"/>
+    </LinearGradientBrush>
+
+    <SolidColorBrush x:Key="cs_BackgroudLayer" Color="#283593" Opacity="0.2"/>
+
+    <SolidColorBrush x:Key="cs_BorderBrushLayer" Color="#283593"/>
     
 </ResourceDictionary>

@@ -12,11 +12,19 @@ namespace ThesisManagement.ViewModels
         private Topic Topic = new Topic();
         public IEnumerable<Topic> Topics { get; set; }
         public ICommand CreateCommand { get; set; }
+<<<<<<< HEAD
+        public ICommand EditCommand { get; set; }
+        public TopicVM SelectedTopic { get; set; }
+        public ICommand YourButtonCommand { get; set; }
+=======
         public ICommand UpdateCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
 
+>>>>>>> main
         public TopicsVM()
         {
+            YourButtonCommand = new ViewModelCommand(ExecuteYourButtonCommand);
+            SelectedTopic = new TopicVM();
             _topicRepo = new TopicRepository();
             CreateCommand = new ViewModelCommand(ExecuteCreateCommand);
             UpdateCommand = new ViewModelCommand(ExecuteUpdateCommand, CanExecuteUpdateCommand);
@@ -34,6 +42,11 @@ namespace ThesisManagement.ViewModels
             return true;
         }
 
+<<<<<<< HEAD
+        private void ExecuteCreateCommand(object sender)
+        {
+            Views.Professor.TopicView topicView = new Views.Professor.TopicView();
+=======
         private void ExecuteUpdateCommand(object sender)
         {
             TopicView topicView = new TopicView();
@@ -47,9 +60,18 @@ namespace ThesisManagement.ViewModels
         private void ExecuteCreateCommand(object sender)
         {
             TopicView topicView = new TopicView();
+>>>>>>> main
             topicView.Owner = Application.Current.MainWindow;
             topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             topicView.Show();
         }
+        private void ExecuteYourButtonCommand(object parameter)
+        {
+            Views.Student.TopicView topicView = new Views.Student.TopicView();
+            topicView.Owner = Application.Current.MainWindow;
+            topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            topicView.Show();
+        }
+
     }
 }
