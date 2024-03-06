@@ -7,72 +7,120 @@
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
              Background="white">
     <Grid>
         <!--Temporary design-->
         <Grid.RowDefinitions>
-            <RowDefinition Height="80"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition/>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0"
-                   Text="Hồ sơ cá nhân"
-                   FontSize="25"
-                   Margin="10"
-                   FontWeight="Medium"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Row="1"
                    Text="Mã giảng viên: "
-                   Margin="30,0,0,0"
+                   Margin="10"
                    FontWeight="Medium"/>
+
+        <TextBox Grid.Row="1" Grid.Column="1"
+                 Margin="5"
+                 VerticalAlignment="Top"
+                 Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+                 Text=""
+                 Width="300"
+                 HorizontalAlignment="Left"/>
 
         <TextBlock Grid.Row="2"
                    Text="Họ và tên:"
-                   Margin="30,0,0,0"
+                   Margin="10"
                    FontWeight="Medium"/>
+
+        <TextBox Grid.Row="2" Grid.Column="1"
+                 Margin="5"
+                 VerticalAlignment="Top"
+                 Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+                 Text=""
+                 Width="300"
+                 HorizontalAlignment="Left"/>      
 
         <TextBlock Grid.Row="3"
                    Text="Email:"
-                   Margin="30,0,0,0"
+                   Margin="10"
                    FontWeight="Medium"/>
+
+        <TextBox Grid.Row="3" Grid.Column="1"
+                 Margin="5"
+                 VerticalAlignment="Top"
+                 Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+                 Text=""
+                 Width="300"
+                 HorizontalAlignment="Left"/>  
 
         <TextBlock Grid.Row="4"
                    Text="Số điện thoại:"
-                   Margin="30,0,0,0"
+                   Margin="10"
                    FontWeight="Medium"/>
+
+        <TextBox Grid.Row="4" Grid.Column="1"
+                 Margin="5"
+                 VerticalAlignment="Top"
+                 Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+                 Text=""
+                 Width="300"
+                 HorizontalAlignment="Left"/>
 
         <TextBlock Grid.Row="5"
                    Text="Ngày sinh:"
-                   Margin="30,0,0,0"
+                   Margin="10"
                    FontWeight="Medium"/>
+
+        <TextBox Grid.Row="5" Grid.Column="1"
+                 Margin="5"
+                 VerticalAlignment="Top"
+                 Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+                 Text=""
+                 Width="300"
+                 HorizontalAlignment="Left"/>  
 
         <TextBlock Grid.Row="6"
                    Text="Khoa:"
-                   Margin="30,0,0,0"
+                   Margin="10"
                    FontWeight="Medium"/>
 
-        <Grid Grid.Row="7">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+        <TextBox Grid.Row="6" Grid.Column="1"
+                 Margin="5"
+                 VerticalAlignment="Top"
+                 Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+                 Text=""
+                 Width="300"
+                 HorizontalAlignment="Left"/>
 
-            <customControls:ControlButton Grid.Column="1"
-                                              DefaultColor="{StaticResource primaryBrush}"
-                                              HoverColor="{StaticResource secondaryBrush}"
-                                              Width="80">
+
+        <StackPanel Grid.Row="7" Grid.Column="1"
+                    Width="300"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left">
+            <customControls:ControlButton Grid.Row="7" Grid.Column="1"
+                              DefaultColor="{StaticResource primaryBrush}"
+                              HoverColor="{StaticResource secondaryBrush}"
+                              Width="80"
+                              Margin="10"
+                              HorizontalAlignment="Right">
                 <customControls:ControlButton.Content>
                     <TextBlock Text="Cập nhật" Style="{StaticResource btnContent}"/>
                 </customControls:ControlButton.Content>
             </customControls:ControlButton>
-        </Grid>
+        </StackPanel>
+
     </Grid>
+
 </UserControl>

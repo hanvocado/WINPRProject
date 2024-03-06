@@ -30,12 +30,15 @@
                               Margin="0 4 5 0"
                               Height="17" 
                               Width="20"/>
-                <TextBox Text=""   
-                         Height="24"
-                         Width="200"
-                         BorderThickness="0,0,0,2"
-                         VerticalContentAlignment="Center">
-                </TextBox>
+                <ComboBox VerticalAlignment="Center"
+                          Padding="10"
+                          Width="200"
+                          ItemsSource="{Binding }"
+                          SelectedValue=""
+                          md:HintAssist.Hint="Tìm kiếm"
+                          md:TextFieldAssist.HasClearButton="True"
+                          Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                </ComboBox>
 
             </StackPanel>
 

@@ -28,6 +28,10 @@
         <DataTemplate DataType="{x:Type viewModel:ThesesVM}">
             <local:ThesesView />
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:ProfessorProfileVM}">
+            <local:ProfilesView />
+        </DataTemplate>
     </Window.Resources>
 
     <Border CornerRadius="0">
@@ -72,7 +76,8 @@
                             <fa:IconImage Icon="Book" Style="{StaticResource navIcon}" />
                         </RadioButton>
 
-                        <RadioButton Style="{StaticResource navBtn}">
+                        <RadioButton Style="{StaticResource navBtn}"
+                                     Command="{Binding ShowProfessorProfileView}">
                             <RadioButton.ToolTip>
                                 <ToolTip Content="Đề tài" Style="{StaticResource navToolTip}" />
                             </RadioButton.ToolTip>
