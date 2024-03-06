@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="CustomControls\PopupControlBar.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="CustomControls\WindowControlBar.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -81,6 +84,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="CustomControls\PopupControlBar.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="CustomControls\WindowControlBar.xaml">
       <SubType>Designer</SubType>
     </Page>

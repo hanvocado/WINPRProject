@@ -23,7 +23,7 @@
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
 
-            <customControls:WindowControlBar />
+            <customControls:PopupControlBar />
 
             <Border Grid.Row="1" Padding="30 20 30 0">
                 <Grid>
