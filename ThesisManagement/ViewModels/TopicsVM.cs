@@ -1,6 +1,8 @@
-﻿using System.Windows.Input;
+﻿using System.Windows;
+using System.Windows.Input;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
+using ThesisManagement.Views.Professor;
 
 namespace ThesisManagement.ViewModels
 {
@@ -11,9 +13,12 @@ namespace ThesisManagement.ViewModels
 
         public ICommand CreateCommand { get; set; }
         public ICommand EditCommand { get; set; }
-
+        public TopicVM SelectedTopic { get; set; }
+        public ICommand YourButtonCommand { get; set; }
         public TopicsVM()
         {
+            YourButtonCommand = new ViewModelCommand(ExecuteYourButtonCommand);
+            SelectedTopic = new TopicVM();
             _topicRepo = new TopicRepository();
             Topics = _topicRepo.GetAll();
             CreateCommand = new ViewModelCommand(ExecuteCreateCommand);
@@ -30,9 +35,21 @@ namespace ThesisManagement.ViewModels
             throw new NotImplementedException();
         }
 
-        private void ExecuteCreateCommand(object obj)
+        private void ExecuteCreateCommand(object sender)
         {
-            throw new NotImplementedException();
+            TopicView topicView = new TopicView();
+            topicView.Owner = Application.Current.MainWindow;
+            topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            topicView.Show();
         }
+        private void ExecuteYourButtonCommand(object parameter)
+        {
+            TopicView topicView = new TopicView();
+            topicView.Owner = Application.Current.MainWindow;
+            topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            topicView.Show();
+            
+        }
+
     }
 }

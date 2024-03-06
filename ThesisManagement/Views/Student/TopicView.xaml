@@ -7,12 +7,16 @@
         xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         mc:Ignorable="d"
+        xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="TopicView" Height="500" Width="700"
+        Title="TopicView" Height="450" Width="800"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent">
+    <Window.DataContext>
+        <viewModels:TopicVM />
+    </Window.DataContext>
     <Grid>
 
         <Border Background="White"
@@ -21,51 +25,110 @@
                 BorderBrush="{StaticResource cs_BorderBrushLayer}"
             />
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="30"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right"
                         Grid.Column="2">
-                <!--<Button x:Name="btnClose"
-                        Click="btnClose_Click"
-                        Style="{StaticResource windowControlBtn}">
-                        <fa:IconImage Icon="X" Style="{StaticResource windowControlIcon}" />
-                </Button>-->
-
-
+                
             </StackPanel>
-            <ComboBox Grid.Row="1" Grid.Column="1"
-                ItemsSource="{Binding Topics}"
-                SelectedValue=""
-                Margin="10 10"
-                IsEditable="True"
-                IsTextSearchEnabled="True"
-                TextSearch.TextPath="Category"
-                md:HintAssist.Hint="Thể loại"
-                md:TextFieldAssist.HasClearButton="True"
-                Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Category}" />
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
+            <customControls:WindowControlBar />
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="1" Padding="30 20 30 0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <!--<RowDefinition Height="120"/>-->
+                        </Grid.RowDefinitions>
 
+                        <TextBox Grid.Row="0"
+                                 VerticalAlignment="Top"
+                                 md:HintAssist.Hint="Tên đề tài"
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                        <ComboBox Grid.Row="1"
+                                  VerticalAlignment="Top"
+                                  ItemsSource="{Binding Categories}"
+                                  SelectedValue="{Binding Category}"
+                                  md:HintAssist.Hint="Thể loại"
+                                  md:TextFieldAssist.HasClearButton="True"
+                                  Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                        </ComboBox>
+
+                        <ComboBox Grid.Row="2"
+                                  VerticalAlignment="Top"
+                                  md:HintAssist.Hint="Công nghệ"
+                                  md:TextFieldAssist.HasClearButton="True"
+                                  ItemsSource="{Binding Technologies}"
+                                  SelectedValue="{Binding Technology}"
+                                  Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                        </ComboBox>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Column="0" Padding="30 20 30 0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            
+                        </Grid.RowDefinitions>
+
+                        <TextBox Grid.Row="0"
+                                 VerticalAlignment="Top"
+                                 md:HintAssist.Hint="MSSV"
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                        <ComboBox Grid.Row="1"
+                                  VerticalAlignment="Top"
+                                  ItemsSource="{Binding Category}"
+                                  SelectedValue="{Binding Category}"
+                                  md:HintAssist.Hint="Tên"
+                                  md:TextFieldAssist.HasClearButton="True"
+                                  Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                        </ComboBox>
+
+                        <ComboBox Grid.Row="2"
+                                  VerticalAlignment="Top"
+                                  md:HintAssist.Hint="Giáo viên đề nghị"
+                                  md:TextFieldAssist.HasClearButton="True"
+                                  ItemsSource="{Binding Technologies}"
+                                  SelectedValue="{Binding Technology}"
+                                  Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                        </ComboBox>
+                    </Grid>
+                </Border>
+            </Grid>
+            <TextBox Grid.Row="2"
+                     
+                     VerticalAlignment="Top"
+                     Height="80"
+                     Text="" 
+                     md:HintAssist.Hint="Mô tả"
+                     AcceptsReturn="True"
+                     IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                     TextWrapping="Wrap"
+                     VerticalScrollBarVisibility="Auto"
+                     Margin="50, 5, 50, 5"/>
             <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
                               HoverColor="{StaticResource secondaryBrush}"
-                              Content="Lưu"
+                              Content="Gửi"
+                              Margin="0 -10 0 20"
                               Width="100"
-                              Grid.Row="1"
-                              VerticalAlignment="Bottom"/>
-            
+                              Height="50"
+                              FontSize="14"
+                              Grid.Row="3"/>
         </Grid>
     </Grid>
 </Window>
