@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
@@ -10,8 +9,7 @@ namespace ThesisManagement.ViewModels
     public class TopicsVM : ViewModelBase
     {
         private readonly ITopicRepository _topicRepo;
-        private TopicVM _topicVM;
-        private Topic _topic = new Topic();
+        private Topic Topic = new Topic();
         public IEnumerable<Topic> Topics { get; set; }
         public ICommand CreateCommand { get; set; }
         public ICommand UpdateCommand { get; set; }
@@ -26,15 +24,9 @@ namespace ThesisManagement.ViewModels
             Topics = _topicRepo.GetAll();
         }
 
-        public TopicsVM(TopicVM topicVM)
-        {
-            _topicVM = topicVM;
-            _topic = _topicVM.selectedTopic();
-        }
-
         private void ExecuteDeleteCommand(object sender)
         {
-            _topicRepo.Delete(_topic.Id);
+            _topicRepo.Delete(Topic.Id);
         }
 
         private bool CanExecuteDeleteCommand(object sender)
@@ -44,8 +36,7 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteUpdateCommand(object sender)
         {
-             TopicView topicView = new TopicView();
-            _topicRepo.Update(_topic);
+            TopicView topicView = new TopicView();
         }
 
         private bool CanExecuteUpdateCommand(object sender)
@@ -59,7 +50,6 @@ namespace ThesisManagement.ViewModels
             topicView.Owner = Application.Current.MainWindow;
             topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             topicView.Show();
-            _topicRepo.Add(_topic);
         }
     }
 }
