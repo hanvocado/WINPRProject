@@ -1,67 +1,69 @@
+using System.Windows.Input;
 using ThesisManagement.Models;
+using ThesisManagement.Repositories;
 
 namespace ThesisManagement.ViewModels
 {
     public class TopicVM : ViewModelBase
     {
-        public string? name;
-        public string? category;
-        public string? technology;
-        public string? description;
+        public string Name { get; set; }
+        public string? Category { get; set; }
+        public string? Technology { get; set; }
+        public string Description { get; set; }
 
-        public string? Name
+        private readonly ITopicRepository _topicRepo;
+        public ICommand CreateCommand { get; set; }
+        public ICommand SaveCommand { get; set; }
+        public TopicsVM topicsVM;
+
+
+        public IEnumerable<string> Categories { get; set; } = new List<string>() { "Computer Science", "Web Development", "Data Science", "Other" };
+        public IEnumerable<string> Technologies { get; set; } = new List<string>() { "JavaScript", "Wpf", ".NET", "Java", "Python", "SQL", "ASP.NET Core", "Other" };
+
+        public Topic selectedTopic;
+        public Topic SelectedTopic
         {
-            get => name;
+            get
+            {
+                return selectedTopic;
+            }
             set
             {
-                name = value;
-                OnPropertyChanged(nameof(Name));
+                selectedTopic = value;
+                OnPropertyChanged(nameof(SelectedTopic));
             }
         }
-
-        public string? Category
+        public TopicVM()
         {
-            get => category;
-            set
-            {
-                category = value;
-                OnPropertyChanged(nameof(Category));
-            }
+            topicsVM = new TopicsVM();
+            selectedTopic = new Topic();
+            _topicRepo = new TopicRepository();
+            CreateCommand = new ViewModelCommand(ExecuteCreateCommand);
+            SaveCommand = new ViewModelCommand(ExecuteSaveCommand, CanExecuteSaveCommand);
         }
 
-        public string? Technology
+        private void ExecuteSaveCommand(object obj)
         {
-            get => technology;
-            set
-            {
-                technology = value;
-                OnPropertyChanged(nameof(Technology));
-            }
+            topicsVM.Topics = _topicRepo.GetAll();
         }
 
-        public string? Description
+        private bool CanExecuteSaveCommand(object obj)
         {
-            get => description;
-            set
-            {
-                description = value;
-                OnPropertyChanged(nameof(Description));
-            }
+            return true;
         }
-        public IEnumerable<string> Categories { get; set; } = new List<string>() { "Education", "Health", "Business", "Other" };
-        public IEnumerable<string> Technologies { get; set; } = new List<string>() { "JavaScript", "Wpf", ".NET", "Java", "Python", "Other" };
 
-        public Topic selectedTopic()
+        private void ExecuteCreateCommand(object obj)
         {
-            return new Topic
+            Topic newTopic = new Topic
             {
-                ProfessorId = "Prof000",
-                StudentId = "Stud000",
-                Name = this.Name,
-                Category = this.Category,
-                Technology = this.Technology,
-                Description = this.Description
+                Name = selectedTopic.Name,
+                Category = selectedTopic.Category,
+                Technology = selectedTopic.Technology,
+                Description = selectedTopic.Description
             };
+
+            _topicRepo.Add(newTopic);
         }
+
     }
 }

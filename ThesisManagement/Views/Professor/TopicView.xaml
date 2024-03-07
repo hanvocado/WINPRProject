@@ -11,13 +11,12 @@
         Title="TopicView" Height="450" Width="400"
         Style="{StaticResource formStyle}">
 
-    <Window.Resources>
-        <viewModels:TopicVM x:Key="TopicVM" />
-        <viewModels:TopicsVM x:Key="TopicsVM" />
-    </Window.Resources>
+    <Window.DataContext>
+        <viewModels:TopicVM />
+    </Window.DataContext>
 
     <Border>
-        <Grid DataContext="{StaticResource TopicVM}">
+        <Grid >
             <Grid.RowDefinitions>
                 <RowDefinition Height="25" />
                 <RowDefinition />
@@ -36,7 +35,7 @@
                     </Grid.RowDefinitions>
 
                     <TextBox Grid.Row="0"
-                             Text="{Binding Name}"
+                             Text="{Binding SelectedTopic.Name, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                              VerticalAlignment="Top"
                              md:HintAssist.Hint="Tên đề tài"
                              Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
@@ -44,7 +43,7 @@
                     <ComboBox Grid.Row="1"
                               VerticalAlignment="Top"
                             ItemsSource="{Binding Categories}"
-                            SelectedValue="{Binding Category}"
+                            SelectedValue="{Binding SelectedTopic.Category, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                             md:HintAssist.Hint="Thể loại"
                             md:TextFieldAssist.HasClearButton="True"
                             Style="{StaticResource MaterialDesignOutlinedComboBox}">
@@ -54,13 +53,13 @@
                               VerticalAlignment="Top"
                               md:HintAssist.Hint="Công nghệ"
                               ItemsSource="{Binding Technologies}"
-                              SelectedValue="{Binding Technology}"
+                              SelectedValue="{Binding SelectedTopic.Technology,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               Style="{StaticResource MaterialDesignOutlinedComboBox}">
                     </ComboBox>
 
                     <TextBox Grid.Row="3"
                              VerticalAlignment="Top"
-                             Text="{Binding Description}"
+                             Text="{Binding SelectedTopic.Description,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              Height="100"
                              md:HintAssist.Hint="Mô tả"
                              AcceptsReturn="True"
@@ -70,7 +69,7 @@
                 </Grid>
             </Border>
 
-            <Grid Grid.Row="2" DataContext="{StaticResource TopicsVM}">
+            <Grid Grid.Row="2" >
                 <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
                               HoverColor="{StaticResource secondaryBrush}"
                               Content="Lưu"
