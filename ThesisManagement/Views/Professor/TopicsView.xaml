@@ -11,10 +11,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
+
     <UserControl.DataContext>
         <viewModels:TopicsVM />
     </UserControl.DataContext>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -78,7 +79,7 @@
                             </GridViewColumn.Header>
                         </GridViewColumn>
                         <GridViewColumn Width="200"
-                                        DisplayMemberBinding="{Binding Name}">
+                                        DisplayMemberBinding="{Binding Technology}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Công nghệ" />
                             </GridViewColumn.Header>

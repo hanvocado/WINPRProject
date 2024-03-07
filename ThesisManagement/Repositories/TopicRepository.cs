@@ -1,7 +1,8 @@
-﻿using System.Data.SqlClient;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Windows;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
+using ThesisManagement.Repositories.EF;
 
 namespace ThesisManagement.Repositories
 {
@@ -14,155 +15,43 @@ namespace ThesisManagement.Repositories
         IEnumerable<Topic> GetAll();
     }
 
-    public class TopicRepository : DbRepository, ITopicRepository
+    public class TopicRepository : ITopicRepository
     {
+        private AppDbContext _context;
+        private Topic? topic;
+        public TopicRepository()
+        {
+            _context = DataProvider.Instance.Context;
+        }
         public void Add(Topic topic)
         {
-            using (SqlConnection conn = GetConnection())
-            {
-                try
-                {
-                    conn.Open();
-                    string query = Query.Topic.Insert(topic);
-
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    ShowErrorMessage(ex.Message);
-                    return;
-                }
-
-                ShowSuccessMessage(Message.Success);
-            }
+            _context.Add(topic);
+            DbSave();
         }
 
         public void Update(Topic topic)
         {
-            using (SqlConnection conn = GetConnection())
-            {
-                try
-                {
-                    conn.Open();
-                    string query = Query.Topic.Update(topic);
 
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    ShowErrorMessage(ex.Message);
-                    return;
-                }
-
-                ShowSuccessMessage(Message.Success);
-            }
         }
 
         public void Delete(int id)
         {
-            using (SqlConnection conn = GetConnection())
-            {
-                try
-                {
-                    conn.Open();
-                    string query = Query.Topic.Delete(id);
-
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    ShowErrorMessage(ex.Message);
-                    return;
-                }
-
-                ShowSuccessMessage(Message.Success);
-            }
+            topic = _context.Topics.FirstOrDefault(t => t.Id == id);
+            if (topic == null) return;
+            _context.Remove(topic);
+            DbSave();
         }
 
         public Topic? Get(int id)
         {
-            Topic? topic = null;
-            using (SqlConnection conn = GetConnection())
-            {
-                try
-                {
-                    conn.Open();
-                    string query = Query.Topic.Select(id);
-
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        using (SqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-                                topic = RetrieveTopic(reader);
-                            }
-                        }
-                    }
-                }
-                catch (Exception e)
-                {
-                    ShowErrorMessage(e.Message);
-                }
-            }
+            topic = _context.Topics.Include(topic => topic.Professor).FirstOrDefault(topic => topic.Id == id);
             return topic;
         }
 
         public IEnumerable<Topic> GetAll()
         {
-            List<Topic> topics = new();
-
-            using (SqlConnection conn = GetConnection())
-            {
-                try
-                {
-                    conn.Open();
-                    string query = Query.Topic.Select();
-
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        using (SqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            Topic topic = new();
-                            while (reader.Read())
-                            {
-                                topic = RetrieveTopic(reader);
-                                topics.Add(topic);
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    ShowErrorMessage(ex.Message);
-                }
-
-                return topics;
-            }
-        }
-
-
-        private Topic RetrieveTopic(SqlDataReader reader)
-        {
-            return new Topic
-            {
-                Id = Convert.ToInt32(reader["Id"]),
-                ProfessorId = "",
-                StudentId = reader["StudentId"]?.ToString() ?? null,
-                Name = reader["Name"]?.ToString()!,
-                Description = reader["Description"]?.ToString()!,
-                Category = reader["Category"]?.ToString() ?? null,
-                Technology = reader["Technology"]?.ToString() ?? null
-            };
+            var topics = _context.Topics.Include(t => t.Professor).AsNoTracking().ToList();
+            return topics;
         }
 
         private void ShowErrorMessage(string message)
@@ -173,6 +62,19 @@ namespace ThesisManagement.Repositories
         private void ShowSuccessMessage(string message)
         {
             MessageBox.Show(message);
+        }
+
+        private void DbSave()
+        {
+            try
+            {
+                _context.SaveChanges();
+                ShowSuccessMessage(Message.Success);
+            }
+            catch (DbUpdateException e)
+            {
+                ShowErrorMessage(e.Message);
+            }
         }
     }
 }
