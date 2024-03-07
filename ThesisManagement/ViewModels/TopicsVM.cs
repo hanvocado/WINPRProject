@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
@@ -11,23 +12,21 @@ namespace ThesisManagement.ViewModels
         private readonly ITopicRepository _topicRepo;
 
         private Topic Topic = new Topic();
+        private ObservableCollection<Topic> topics { get; set; }
 
-        public IEnumerable<Topic> topics;
-        public IEnumerable<Topic> Topics
+        public ObservableCollection<Topic> Topics
         {
             get
             {
-                return topics;
+                return _topicRepo.GetAll();
             }
             set
             {
-                if (topics != value)
-                {
-                    topics = value;
-                    OnPropertyChanged(nameof(Topics));
-                }
+                topics = value;
+                OnPropertyChanged(nameof(Topics));
             }
         }
+
         public ICommand CreateCommand { get; set; }
         public ICommand YourButtonCommand { get; set; }
         public ICommand UpdateCommand { get; set; }
@@ -55,7 +54,6 @@ namespace ThesisManagement.ViewModels
             CreateCommand = new ViewModelCommand(ExecuteCreateCommand);
             UpdateCommand = new ViewModelCommand(ExecuteUpdateCommand, CanExecuteUpdateCommand);
             DeleteCommand = new ViewModelCommand(ExecuteDeleteCommand, CanExecuteDeleteCommand);
-            Topics = _topicRepo.GetAll();
         }
 
         private void ExecuteDeleteCommand(object sender)
@@ -86,7 +84,7 @@ namespace ThesisManagement.ViewModels
             Topics = _topicRepo.GetAll();
 
         }
-        
+
         private void ExecuteYourButtonCommand(object parameter)
         {
             Views.Student.TopicView topicView = new Views.Student.TopicView();

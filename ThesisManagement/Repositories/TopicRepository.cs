@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.ObjectModel;
 using System.Windows;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
@@ -12,7 +13,7 @@ namespace ThesisManagement.Repositories
         void Update(Topic topic);
         void Delete(int id);
         Topic? Get(int id);
-        IEnumerable<Topic> GetAll();
+        ObservableCollection<Topic> GetAll();
     }
 
     public class TopicRepository : ITopicRepository
@@ -48,10 +49,10 @@ namespace ThesisManagement.Repositories
             return topic;
         }
 
-        public IEnumerable<Topic> GetAll()
+        public ObservableCollection<Topic> GetAll()
         {
             var topics = _context.Topics.Include(t => t.Professor).AsNoTracking().ToList();
-            return topics;
+            return new ObservableCollection<Topic>(topics);
         }
 
         private void ShowErrorMessage(string message)
