@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ThesisManagement.Views.Student
 {
     /// <summary>
-    /// Interaction logic for TopicsView.xaml
+    /// Interaction logic for MyTopics.xaml
     /// </summary>
-    public partial class TopicsView : UserControl
+    public partial class MyTopics : UserControl
     {
-        public TopicsView()
+        public MyTopics()
         {
             InitializeComponent();
         }
