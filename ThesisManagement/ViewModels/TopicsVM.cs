@@ -39,6 +39,7 @@ namespace ThesisManagement.ViewModels
             CreateCommand = new ViewModelCommand(ExecuteCreateCommand);
             UpdateCommand = new ViewModelCommand(ExecuteUpdateCommand, CanExecuteUpdateCommand);
             DeleteCommand = new ViewModelCommand(ExecuteDeleteCommand, CanExecuteDeleteCommand);
+            Topics = _topicRepo.GetAll();
         }
 
         private void ExecuteDeleteCommand(object sender)
