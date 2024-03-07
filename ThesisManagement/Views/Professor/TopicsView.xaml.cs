@@ -43,5 +43,16 @@ namespace ThesisManagement.Views.Professor
                 topicView.Show();
             }
         }
+
+        private void FilterTexbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TopicListView.Items.Filter = FilterMethod;
+        }
+
+        private bool FilterMethod(object obj)
+        {
+            var topic = (Topic)obj;
+            return topic.Name.Contains(FilterTexbox.Text, StringComparison.OrdinalIgnoreCase);
+        }
     }
 }

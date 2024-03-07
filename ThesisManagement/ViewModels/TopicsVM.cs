@@ -12,22 +12,22 @@ namespace ThesisManagement.ViewModels
 
         private Topic Topic = new Topic();
 
-        public IEnumerable<Topic> topics;
-        public IEnumerable<Topic> Topics
-        {
-            get
-            {
-                return topics;
-            }
-            set
-            {
-                if (topics != value)
-                {
-                    topics = value;
-                    OnPropertyChanged(nameof(Topics));
-                }
-            }
-        }
+        //public IEnumerable<Topic> topics;
+        //public IEnumerable<Topic> Topics
+        //{
+        //    get
+        //    {
+        //        return topics;
+        //    }
+        //    set
+        //    {
+        //        if (topics != value)
+        //        {
+        //            topics = value;
+        //            OnPropertyChanged(nameof(Topics));
+        //        }
+        //    }
+        //}
         public ICommand CreateCommand { get; set; }
         public ICommand YourButtonCommand { get; set; }
         public ICommand UpdateCommand { get; set; }
@@ -55,7 +55,7 @@ namespace ThesisManagement.ViewModels
             CreateCommand = new ViewModelCommand(ExecuteCreateCommand);
             UpdateCommand = new ViewModelCommand(ExecuteUpdateCommand, CanExecuteUpdateCommand);
             DeleteCommand = new ViewModelCommand(ExecuteDeleteCommand, CanExecuteDeleteCommand);
-            Topics = _topicRepo.GetAll();
+            //Topics = _topicRepo.GetAll();
         }
 
         private void ExecuteDeleteCommand(object sender)
@@ -83,7 +83,7 @@ namespace ThesisManagement.ViewModels
             topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             topicView.Show();
 
-            Topics = _topicRepo.GetAll();
+            //Topics = _topicRepo.GetAll();
 
         }
         
