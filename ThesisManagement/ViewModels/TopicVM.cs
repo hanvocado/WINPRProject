@@ -14,6 +14,7 @@ namespace ThesisManagement.ViewModels
 
         private readonly ITopicRepository _topicRepo;
         public ICommand CreateCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
         public ICommand SaveCommand { get; set; }
         public TopicsVM topicsVM;
 
@@ -34,18 +35,33 @@ namespace ThesisManagement.ViewModels
                 OnPropertyChanged(nameof(SelectedTopic));
             }
         }
+
         public TopicVM()
         {
             topicsVM = new TopicsVM();
             selectedTopic = new Topic();
             _topicRepo = new TopicRepository();
             CreateCommand = new ViewModelCommand(ExecuteCreateCommand);
+            DeleteCommand = new ViewModelCommand(ExecuteDeletCommand, CanExecuteDeletCommand);
             SaveCommand = new ViewModelCommand(ExecuteSaveCommand, CanExecuteSaveCommand);
+        }
+
+        private bool CanExecuteDeletCommand(object obj)
+        {
+            return true;
+        }
+
+        private void ExecuteDeletCommand(object parameter)
+        {
+            if (parameter is Topic selectedItem)
+            {
+                _topicRepo.Delete(selectedItem.Id);
+            }
         }
 
         private void ExecuteSaveCommand(object obj)
         {
-            topicsVM.Topics = _topicRepo.GetAll();
+            //topicsVM.Topics = _topicRepo.GetAll();
         }
 
         private bool CanExecuteSaveCommand(object obj)

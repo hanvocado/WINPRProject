@@ -83,9 +83,9 @@
 
             <ListView Grid.Row="1"
                       MouseLeftButtonUp="ListViewItem_Click"
-                      Name="AdminsListView"
+                      Name="TopicListView"
                       ItemsSource="{Binding Topics}"
-                      SelectedItem="{Binding SelectedItem}">
+                      SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Width="340"
@@ -112,8 +112,9 @@
                                     <customControls:ControlButton DefaultColor="{StaticResource danger}"
                                                                   HoverColor="{StaticResource dangerHover}"
                                                                   Width="30"
-                                                                  DataContext="{StaticResource TopicsVM}"
-                                                                  Command="{Binding DeleteCommand}">
+                                                                  DataContext="{StaticResource TopicVM}"
+                                                                  Command="{Binding DeleteCommand}"
+                                                                  CommandParameter="{Binding SelectedItem, ElementName=TopicListView}">
                                         <customControls:ControlButton.Content>
                                             <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
                                         </customControls:ControlButton.Content>
