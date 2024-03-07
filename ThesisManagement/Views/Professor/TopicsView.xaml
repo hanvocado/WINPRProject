@@ -35,6 +35,8 @@
                               Height="17" 
                               Width="20"/>
                 <TextBox Grid.Row="0"
+                         Name="FilterTexbox"
+                         TextChanged="FilterTexbox_TextChanged"
                          Text="{Binding Name}"
                          Width="200"
                          Padding="10"
@@ -82,13 +84,13 @@
 
         </Grid>
 
-        <Border Grid.Row="1" DataContext="{StaticResource TopicsVM}">
+        <Border Grid.Row="1" DataContext="{StaticResource TopicVM}">
 
             <ListView Grid.Row="1"
                       MouseLeftButtonUp="ListViewItem_Click"
-                      Name="AdminsListView"
-                      ItemsSource="{Binding Topics}"
-                      SelectedItem="{Binding SelectedItem}">
+                      Name="TopicListView"
+                      ItemsSource="{Binding FilteredTopics}"
+                      SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Width="340"
@@ -115,8 +117,9 @@
                                     <customControls:ControlButton DefaultColor="{StaticResource danger}"
                                                                   HoverColor="{StaticResource dangerHover}"
                                                                   Width="30"
-                                                                  DataContext="{StaticResource TopicsVM}"
-                                                                  Command="{Binding DeleteCommand}">
+                                                                  DataContext="{StaticResource TopicVM}"
+                                                                  Command="{Binding DeleteCommand}"
+                                                                  CommandParameter="{Binding SelectedItem, ElementName=TopicListView}">
                                         <customControls:ControlButton.Content>
                                             <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
                                         </customControls:ControlButton.Content>

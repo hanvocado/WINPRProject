@@ -13,6 +13,8 @@ namespace ThesisManagement.Repositories
         void Delete(int id);
         Topic? Get(int id);
         IEnumerable<Topic> GetAll();
+        public IEnumerable<Topic> GetFilteredTopics(string name, string category, string technology);
+
     }
 
     public class TopicRepository : ITopicRepository
@@ -47,6 +49,26 @@ namespace ThesisManagement.Repositories
             topic = _context.Topics.Include(topic => topic.Professor).FirstOrDefault(topic => topic.Id == id);
             return topic;
         }
+
+        public IEnumerable<Topic> GetFilteredTopics(string name, string category, string technology)
+        {
+            IEnumerable<Topic> filteredTopicList = _context.Topics;
+
+            if (name != null)
+            {
+                filteredTopicList = filteredTopicList.Where(topic => topic.Name.IndexOf(name, StringComparison.OrdinalIgnoreCase) != -1);
+            }
+            if (category != null)
+            {
+                filteredTopicList = filteredTopicList.Where(topic => topic.Category == category);
+            }
+            if (technology != null)
+            {
+                filteredTopicList = filteredTopicList.Where(topic => topic.Technology == technology);
+            }
+            return filteredTopicList.ToList();
+        }
+
 
         public IEnumerable<Topic> GetAll()
         {
