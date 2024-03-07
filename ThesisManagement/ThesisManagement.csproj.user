@@ -61,7 +61,10 @@
     <Compile Update="Views\Student\GroupStudent.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Student\MenuThesisDetail.xaml.cs">
+    <Compile Update="Views\Student\MyTopics.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Student\ProfessorsTopics.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Student\ProfileStudentView.xaml.cs">
@@ -156,7 +159,10 @@
     <Page Update="Views\Student\GroupStudent.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Student\MenuThesisDetail.xaml">
+    <Page Update="Views\Student\MyTopics.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Student\ProfessorsTopics.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Student\ProfileStudentView.xaml">

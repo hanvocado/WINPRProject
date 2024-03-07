@@ -109,7 +109,7 @@
                     Width="300"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left">
-            <customControls:ControlButton Grid.Row="7" Grid.Column="1"
+            <!--<customControls:ControlButton Grid.Row="7" Grid.Column="1"
                               DefaultColor="{StaticResource primaryBrush}"
                               HoverColor="{StaticResource secondaryBrush}"
                               Width="80"
@@ -118,9 +118,8 @@
                 <customControls:ControlButton.Content>
                     <TextBlock Text="Cập nhật" Style="{StaticResource btnContent}"/>
                 </customControls:ControlButton.Content>
-            </customControls:ControlButton>
+            </customControls:ControlButton>-->
         </StackPanel>
-
     </Grid>
 
 </UserControl>

@@ -12,7 +12,7 @@
         WindowStartupLocation="CenterScreen"
         Style="{StaticResource windowStyle}">
 
-    <Window.DataContext>
+    <!--<Window.DataContext>
         <viewModel:AdminMainVM />
     </Window.DataContext>
 
@@ -24,7 +24,7 @@
         <DataTemplate DataType="{x:Type viewModel:ProfessorsVM}">
             <local:ProfessorsView />
         </DataTemplate>
-    </Window.Resources>
+    </Window.Resources>-->
     
     <Border>
         <Grid>
@@ -66,7 +66,7 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                    <customControl:WindowControlBar Grid.Row="0" />
+                    <!--<customControl:WindowControlBar Grid.Row="0" />-->
 
                     <Grid Grid.Row="1">
                         <ContentControl Content="{Binding CurrentChildView}"

@@ -42,14 +42,14 @@
 
             </StackPanel>
 
-            <customControls:ControlButton Grid.Column="1"
+            <!--<customControls:ControlButton Grid.Column="1"
                           DefaultColor="{StaticResource primaryBrush}"
                           HoverColor="{StaticResource secondaryBrush}"
                           Width="80">
                 <customControls:ControlButton.Content>
                     <TextBlock Text="Xuất excel" Style="{StaticResource btnContent}"/>
                 </customControls:ControlButton.Content>
-            </customControls:ControlButton>
+            </customControls:ControlButton>-->
 
         </Grid>
 
