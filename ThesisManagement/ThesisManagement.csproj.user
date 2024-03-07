@@ -183,5 +183,8 @@
     <Page Update="Views\Student\TopicsView.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\Student\TopicView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 </Project>

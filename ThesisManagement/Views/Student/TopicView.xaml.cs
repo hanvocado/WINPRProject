@@ -21,7 +21,7 @@ namespace ThesisManagement.Views.Student
     {
         public TopicView()
         {
-            //InitializeComponent();
+            InitializeComponent();
         }
     }
 }
