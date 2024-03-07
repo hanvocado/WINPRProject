@@ -7,7 +7,7 @@ namespace ThesisManagement.Repositories.EF
     {
         public AppDbContext CreateDbContext(string[] args)
         {
-            const string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ThesisManagement;Integrated Security=True";
+            string connectionString = Properties.Settings.Default.ConnectionString;
             var optionBuilder = new DbContextOptionsBuilder<AppDbContext>();
             optionBuilder.UseSqlServer(connectionString);
 

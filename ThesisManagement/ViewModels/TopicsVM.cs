@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
+using ThesisManagement.Repositories.EF;
 using ThesisManagement.Views.Professor;
 
 namespace ThesisManagement.ViewModels
@@ -9,6 +10,7 @@ namespace ThesisManagement.ViewModels
     public class TopicsVM : ViewModelBase
     {
         private readonly ITopicRepository _topicRepo;
+
         private Topic Topic = new Topic();
         public IEnumerable<Topic> Topics { get; set; }
         public ICommand CreateCommand { get; set; }
@@ -18,11 +20,11 @@ namespace ThesisManagement.ViewModels
         public ICommand UpdateCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
 
-        public TopicsVM()
+        public TopicsVM(AppDbContext context)
         {
             YourButtonCommand = new ViewModelCommand(ExecuteYourButtonCommand);
             SelectedTopic = new TopicVM();
-            _topicRepo = new TopicRepository();
+            _topicRepo = new TopicRepository(context);
             CreateCommand = new ViewModelCommand(ExecuteCreateCommand);
             UpdateCommand = new ViewModelCommand(ExecuteUpdateCommand, CanExecuteUpdateCommand);
             DeleteCommand = new ViewModelCommand(ExecuteDeleteCommand, CanExecuteDeleteCommand);

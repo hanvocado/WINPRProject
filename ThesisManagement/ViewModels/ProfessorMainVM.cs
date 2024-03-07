@@ -1,10 +1,12 @@
 ﻿using System.Windows.Input;
+using ThesisManagement.Repositories.EF;
 
 namespace ThesisManagement.ViewModels
 {
     public class ProfessorMainVM : ViewModelBase
     {
         private ViewModelBase _currentChildView;
+        private AppDbContext _context;
 
         public ViewModelBase CurrentChildView
         {
@@ -21,8 +23,9 @@ namespace ThesisManagement.ViewModels
         public ICommand ShowThesisView { get; set; }
         public ICommand ShowProfessorProfileView { get; set; }
 
-        public ProfessorMainVM()
+        public ProfessorMainVM(AppDbContext context)
         {
+            _context = context;
             ShowTopicsView = new ViewModelCommand(ExecuteShowTopicsView);
             ShowStudentView = new ViewModelCommand(ExecuteShowStudentView);
             ShowThesisView = new ViewModelCommand(ExecuteShowThesisView);
@@ -48,7 +51,7 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteShowTopicsView(object? obj)
         {
-            CurrentChildView = new TopicsVM();
+            CurrentChildView = new TopicsVM(_context);
         }
     }
 }

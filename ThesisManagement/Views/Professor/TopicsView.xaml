@@ -11,10 +11,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
-    <UserControl.DataContext>
-        <viewModels:TopicsVM />
-    </UserControl.DataContext>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
