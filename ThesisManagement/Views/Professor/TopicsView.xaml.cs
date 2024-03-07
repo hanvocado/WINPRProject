@@ -43,10 +43,5 @@ namespace ThesisManagement.Views.Professor
                 topicView.Show();
             }
         }
-
-        private void ShowMessage(string message)
-        {
-            MessageBox.Show(message);
-        }
     }
 }

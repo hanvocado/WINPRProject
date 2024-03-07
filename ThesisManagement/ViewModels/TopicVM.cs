@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
@@ -19,8 +18,8 @@ namespace ThesisManagement.ViewModels
         public TopicsVM topicsVM;
 
 
-        public IEnumerable<string> Categories { get; set; } = new List<string>() { "Education", "Health", "Business", "Other" };
-        public IEnumerable<string> Technologies { get; set; } = new List<string>() { "JavaScript", "Wpf", ".NET", "Java", "Python", "Other" };
+        public IEnumerable<string> Categories { get; set; } = new List<string>() { "Computer Science", "Web Development", "Data Science", "Other" };
+        public IEnumerable<string> Technologies { get; set; } = new List<string>() { "JavaScript", "Wpf", ".NET", "Java", "Python", "SQL", "ASP.NET Core", "Other" };
 
         public Topic selectedTopic;
         public Topic SelectedTopic
