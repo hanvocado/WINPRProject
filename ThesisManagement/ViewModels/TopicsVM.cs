@@ -14,8 +14,8 @@ namespace ThesisManagement.ViewModels
         private Topic Topic = new Topic();
         private ObservableCollection<Topic> topics { get; set; }
 
-        //public IEnumerable<Topic> topics;
-        //public IEnumerable<Topic> Topics
+        //public ObservableCollection<Topic> topics;
+        //public ObservableCollection<Topic> Topics
         //{
         //    get
         //    {

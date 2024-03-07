@@ -13,7 +13,7 @@ namespace ThesisManagement.Repositories
         void Update(Topic topic);
         void Delete(int id);
         Topic? Get(int id);
-        IEnumerable<Topic> GetAll();
+        ObservableCollection<Topic> GetAll();
         public IEnumerable<Topic> GetFilteredTopics(string name, string category, string technology);
 
     }
