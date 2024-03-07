@@ -19,9 +19,9 @@ namespace ThesisManagement.Repositories
     {
         private AppDbContext _context;
         private Topic? topic;
-        public TopicRepository(AppDbContext context)
+        public TopicRepository()
         {
-            _context = context;
+            _context = DataProvider.Instance.Context;
         }
         public void Add(Topic topic)
         {
@@ -50,7 +50,7 @@ namespace ThesisManagement.Repositories
 
         public IEnumerable<Topic> GetAll()
         {
-            var topics = _context.Topics.Include(t => t.Professor).AsNoTracking();
+            var topics = _context.Topics.Include(t => t.Professor).AsNoTracking().ToList();
             return topics;
         }
 

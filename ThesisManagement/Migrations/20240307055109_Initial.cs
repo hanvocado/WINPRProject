@@ -48,6 +48,31 @@ namespace ThesisManagement.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.InsertData(
+                table: "Professors",
+                columns: new[] { "Id", "Birthday", "Email", "Name", "Password", "Phone" },
+                values: new object[] { "P1", new DateTime(1980, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "john@example.com", "John Doe", "hashed_password", "123-456-7890" });
+
+            migrationBuilder.InsertData(
+                table: "Professors",
+                columns: new[] { "Id", "Birthday", "Email", "Name", "Password", "Phone" },
+                values: new object[] { "P2", new DateTime(1975, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "jane@example.com", "Jane Smith", "hashed_password2", "987-654-3210" });
+
+            migrationBuilder.InsertData(
+                table: "Topics",
+                columns: new[] { "Id", "Category", "Description", "Name", "ProfessorId", "StudentId", "Technology" },
+                values: new object[] { 1, "Computer Science", "Introductory course on database design", "Database Design", "P1", null, "SQL" });
+
+            migrationBuilder.InsertData(
+                table: "Topics",
+                columns: new[] { "Id", "Category", "Description", "Name", "ProfessorId", "StudentId", "Technology" },
+                values: new object[] { 2, "Web Development", "Building dynamic websites using ASP.NET Core", "Web Development", "P1", null, "ASP.NET Core" });
+
+            migrationBuilder.InsertData(
+                table: "Topics",
+                columns: new[] { "Id", "Category", "Description", "Name", "ProfessorId", "StudentId", "Technology" },
+                values: new object[] { 3, "Data Science", "Exploring algorithms for predictive modeling", "Machine Learning", "P2", null, "Python" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Professors_Email",
                 table: "Professors",

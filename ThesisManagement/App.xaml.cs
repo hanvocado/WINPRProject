@@ -1,8 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using System.Windows;
-using ThesisManagement.Repositories.EF;
-using ThesisManagement.ViewModels;
+﻿using System.Windows;
 using ThesisManagement.Views.Professor;
 
 namespace ThesisManagement
@@ -15,18 +11,13 @@ namespace ThesisManagement
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            var services = new ServiceCollection();
-            services.AddDbContext<AppDbContext>
-                (options => options.UseSqlServer("Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = ThesisManagement; Integrated Security = True"));
 
-            var serviceProvider = services.BuildServiceProvider();
+            ShowProfessorWindow();
+        }
 
+        private void ShowProfessorWindow()
+        {
             ProfessorMainView professorMainView = new ProfessorMainView();
-            professorMainView.DataContext = serviceProvider.GetRequiredService<ProfessorMainVM>();
-
-            var topicsView = new TopicsView();
-            topicsView.DataContext = serviceProvider.GetRequiredService<TopicsVM>();
-
             professorMainView.Show();
         }
     }

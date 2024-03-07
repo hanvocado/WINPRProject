@@ -25,8 +25,7 @@ namespace ThesisManagement.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\\\MSSQLLocalDB;Initial Catalog=ThesisManagement;Integrated S" +
-            "ecurity=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Server=(localdb)\\MSSQLLocalDB;Database=ThesisManagement;Integrated Security=True")]
         public string ConnectionString {
             get {
                 return ((string)(this["ConnectionString"]));

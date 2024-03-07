@@ -54,6 +54,26 @@ namespace ThesisManagement.Migrations
                         .IsUnique();
 
                     b.ToTable("Professors");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "P1",
+                            Birthday = new DateTime(1980, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "john@example.com",
+                            Name = "John Doe",
+                            Password = "hashed_password",
+                            Phone = "123-456-7890"
+                        },
+                        new
+                        {
+                            Id = "P2",
+                            Birthday = new DateTime(1975, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "jane@example.com",
+                            Name = "Jane Smith",
+                            Password = "hashed_password2",
+                            Phone = "987-654-3210"
+                        });
                 });
 
             modelBuilder.Entity("ThesisManagement.Models.Topic", b =>
@@ -92,6 +112,35 @@ namespace ThesisManagement.Migrations
                     b.HasIndex("ProfessorId");
 
                     b.ToTable("Topics");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Category = "Computer Science",
+                            Description = "Introductory course on database design",
+                            Name = "Database Design",
+                            ProfessorId = "P1",
+                            Technology = "SQL"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Category = "Web Development",
+                            Description = "Building dynamic websites using ASP.NET Core",
+                            Name = "Web Development",
+                            ProfessorId = "P1",
+                            Technology = "ASP.NET Core"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Category = "Data Science",
+                            Description = "Exploring algorithms for predictive modeling",
+                            Name = "Machine Learning",
+                            ProfessorId = "P2",
+                            Technology = "Python"
+                        });
                 });
 
             modelBuilder.Entity("ThesisManagement.Models.Topic", b =>

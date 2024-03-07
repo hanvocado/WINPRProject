@@ -1,8 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using ThesisManagement.Models;
-using ThesisManagement.Repositories.EF;
 using ThesisManagement.ViewModels;
 
 namespace ThesisManagement.Views.Professor
@@ -12,10 +10,8 @@ namespace ThesisManagement.Views.Professor
     /// </summary>
     public partial class TopicsView : UserControl
     {
-        private readonly AppDbContext _context;
         public TopicsView()
         {
-            _context = 
             InitializeComponent();
         }
 
