@@ -11,13 +11,12 @@
         Title="TopicView" Height="450" Width="400"
         Style="{StaticResource formStyle}">
 
-    <Window.Resources>
-        <viewModels:TopicVM x:Key="TopicVM" />
-        <viewModels:TopicsVM x:Key="TopicsVM" />
-    </Window.Resources>
+    <Window.DataContext>
+        <viewModels:TopicVM />
+    </Window.DataContext>
 
     <Border>
-        <Grid DataContext="{StaticResource TopicVM}">
+        <Grid >
             <Grid.RowDefinitions>
                 <RowDefinition Height="25" />
                 <RowDefinition />

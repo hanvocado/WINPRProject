@@ -104,7 +104,7 @@
                             </GridViewColumn.Header>
                         </GridViewColumn>
                         <GridViewColumn Width="200"
-                                        DisplayMemberBinding="{Binding Name}">
+                                        DisplayMemberBinding="{Binding Technology, Mode=TwoWay}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Công nghệ" />
                             </GridViewColumn.Header>
