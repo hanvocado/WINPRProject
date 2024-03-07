@@ -12,7 +12,7 @@
         Style="{StaticResource formStyle}">
 
     <Window.DataContext>
-        <viewModels:TopicVM />
+        <viewModels:TopicsViewModel />
     </Window.DataContext>
 
     <Border>
