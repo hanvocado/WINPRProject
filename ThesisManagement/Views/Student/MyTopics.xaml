@@ -11,9 +11,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
-    <UserControl.DataContext>
-        <viewModels:TopicsVM />
-    </UserControl.DataContext>
+    <UserControl.Resources>
+        <viewModels:TopicsVM x:Key="TopicsVM" />
+        <viewModels:TopicVM x:Key="TopicVM"/>
+    </UserControl.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -28,6 +29,7 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0"
+                DataContext="{StaticResource TopicVM}"
                 Orientation="Horizontal">
                 <fa:IconImage Icon="Search"
                       Margin="0 4 5 0"
@@ -114,24 +116,23 @@
                             </GridViewColumn.Header>
                         </GridViewColumn>
                         <GridViewColumn Width="60">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <customControls:ControlButton DefaultColor="{StaticResource danger}"
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <customControls:ControlButton DefaultColor="{StaticResource danger}"
                                                           HoverColor="{StaticResource dangerHover}"
                                                           Width="30"
                                                           Command="{Binding DeleteCommand}">
-                                    <customControls:ControlButton.Content>
-                                        <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
-                                    </customControls:ControlButton.Content>
-                                </customControls:ControlButton>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                                        <customControls:ControlButton.Content>
+                                            <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
+                                        </customControls:ControlButton.Content>
+                                    </customControls:ControlButton>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
 
         </Border>
-
     </Grid>
 </UserControl>

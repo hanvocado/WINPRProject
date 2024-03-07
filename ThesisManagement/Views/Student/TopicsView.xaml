@@ -21,7 +21,8 @@
             </TabItem>
 
             <TabItem Header="ProfessorsTopic">
-                <local:ProfessorsTopics/>
+                
+                <userControls:ProfessorsTopics/>
             </TabItem>
 
             <TabItem Header="Đã từ chối">
