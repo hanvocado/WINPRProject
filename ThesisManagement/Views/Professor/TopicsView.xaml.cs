@@ -35,18 +35,12 @@ namespace ThesisManagement.Views.Professor
                         Description = topic.Description
                     }
                 };
-                //ShowMessage($"{topicVM.SelectedTopic.Name}, {topicVM.SelectedTopic.Category},{topicVM.SelectedTopic.Technology},{topicVM.SelectedTopic.Description}");
 
                 topicView.DataContext = topicVM;
                 topicView.Owner = Application.Current.MainWindow;
                 topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 topicView.Show();
             }
-        }
-
-        private void ShowMessage(string message)
-        {
-            MessageBox.Show(message);
         }
     }
 }
