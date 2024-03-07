@@ -8,83 +8,83 @@
         xmlns:userControls="clr-namespace:ThesisManagement.Views.Student"
         xmlns:customControl="clr-namespace:ThesisManagement.CustomControls"
         mc:Ignorable="d"
-        Title="StudentMainView" Height="600" Width="1150"
+        Title="StudentMainView" Height="500" Width="900"
         WindowStartupLocation="CenterScreen"
-        WindowStyle="None">
+        Style="{StaticResource windowStyle}">
 
     <Border CornerRadius="0">
-
         <Grid>
 
             <Grid.ColumnDefinitions>
-                <!--Sidebar-->
-                <ColumnDefinition Width="250" />
-                <!--Content-->
+                <ColumnDefinition Width="65" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <!--SIDEBAR-->
             <Border Grid.Column="0" Background="{StaticResource primaryBrush}">
-                <StackPanel>
-                    <StackPanel Orientation="Horizontal" Height="35" Margin="15 25 0 40">
-                        <Image Source="/Resources/Images/logo-bright.png" Height="28" />
-                        <TextBlock Text="QUẢN LÝ LUẬN VĂN" Style="{StaticResource logo}" Margin="10 3 0 0"/>
-                    </StackPanel>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="120"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
 
-                    <RadioButton Style="{StaticResource navBtn}" IsChecked="True">
-                        <StackPanel Orientation="Horizontal">
+                    <Image Source="/Resources/Images/logo-bright.png" Height="28" Margin="0 22 0 0" />
+
+                    <StackPanel Grid.Row="1">
+                        <RadioButton Style="{StaticResource navBtn}" IsChecked="True"
+                                 Command="{Binding ShowTopicsView}">
+                            <RadioButton.ToolTip>
+                                <ToolTip Content="Đề tài" Style="{StaticResource navToolTip}" />
+                            </RadioButton.ToolTip>
                             <fa:IconImage Icon="RectangleList" Style="{StaticResource navIcon}" />
-                            <TextBlock Text="Đề tài" Style="{StaticResource navText}" />
-                        </StackPanel>
-                    </RadioButton>
+                        </RadioButton>
 
-                    <RadioButton Style="{StaticResource navBtn}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="BookOpenReader" Style="{StaticResource navIcon}" />
-                            <TextBlock Text="Luận văn" Style="{StaticResource navText}" />
-                        </StackPanel>
-                    </RadioButton>
-                    
-                    <RadioButton Style="{StaticResource navBtn}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="UserTie" Style="{StaticResource navIcon}" />
-                            <TextBlock Text="Hồ sơ" Style="{StaticResource navText}" />
-                        </StackPanel>
-                    </RadioButton>
+                        <RadioButton Style="{StaticResource navBtn}"
+                                 Command="{Binding ShowStudentView}">
+                            <RadioButton.ToolTip>
+                                <ToolTip Content="Luận văn" Style="{StaticResource navToolTip}" />
+                            </RadioButton.ToolTip>
+                            <fa:IconImage Icon="UserLarge" Style="{StaticResource navIcon}" />
+                        </RadioButton>
 
-                    <RadioButton Style="{StaticResource navBtn}">
-                        <StackPanel Orientation="Horizontal">
+                        <RadioButton Style="{StaticResource navBtn}" 
+                                 Command="{Binding ShowThesisView}">
+                            <RadioButton.ToolTip>
+                                <ToolTip Content="Hồ sơ" Style="{StaticResource navToolTip}" />
+                            </RadioButton.ToolTip>
+                            <fa:IconImage Icon="Book" Style="{StaticResource navIcon}" />
+                        </RadioButton>
+                        
+                        <RadioButton Style="{StaticResource navBtn}">
+                            <RadioButton.ToolTip>
+                                <ToolTip Content="Đăng xuất" Style="{StaticResource navToolTip}" />
+                            </RadioButton.ToolTip>
                             <fa:IconImage Icon="RightFromBracket" Style="{StaticResource navIcon}" />
-                            <TextBlock Text="Đăng xuất" Style="{StaticResource navText}" />
-                        </StackPanel>
-                    </RadioButton>
-
-                </StackPanel>
+                        </RadioButton>
+                    </StackPanel>
+                </Grid>
             </Border>
 
-            <!--Main Section-->
             <Border Grid.Column="1">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <!--Control Bars-->
                         <RowDefinition Height="25"/>
-                        <!--Content Section -->
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
                     <customControl:WindowControlBar />
 
-                    <!--Content Section -->
+                    <!--<ContentControl Grid.Row="1"
+                                Margin="20 5 0 0"
+                                Content="{Binding CurrentChildView}">
+                    </ContentControl>-->
                     <ContentControl Grid.Row="1"
-                                  Margin="25">
+                                  Margin="20 5 0 0">
                         <userControls:TopicsView/>
                     </ContentControl>
-
+                    
                 </Grid>
-
             </Border>
         </Grid>
-
     </Border>
 
 

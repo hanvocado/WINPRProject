@@ -82,6 +82,9 @@
     <Compile Update="Views\Student\TopicsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Student\TopicView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="CustomControls\PopupControlBar.xaml">
@@ -172,6 +175,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Student\TopicsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Student\TopicView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

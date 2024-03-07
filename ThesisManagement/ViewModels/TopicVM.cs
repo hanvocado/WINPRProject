@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
 using ThesisManagement.Models;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace ThesisManagement.ViewModels
 {
