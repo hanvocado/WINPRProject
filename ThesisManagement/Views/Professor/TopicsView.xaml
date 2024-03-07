@@ -11,9 +11,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
-    <UserControl.DataContext>
-        <viewModels:TopicsVM />
-    </UserControl.DataContext>
+    <UserControl.Resources>
+        <viewModels:TopicsVM x:Key="TopicsVM"/>
+        <viewModels:TopicVM x:Key="TopicVM"/>
+    </UserControl.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -21,7 +22,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" DataContext="{StaticResource TopicVM}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="120"/>
@@ -40,12 +41,12 @@
                           VerticalAlignment="Center"
                           md:HintAssist.Hint="Tên đề tài..."
                           Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
-                
+
                 <ComboBox VerticalAlignment="Center"
                           Padding="10"
                           Width="200"
-                          ItemsSource="{Binding }"
-                          SelectedValue=""
+                          ItemsSource="{Binding Categories}"
+                          SelectedValue="{Binding Category}"
                           md:HintAssist.Hint="Thể loại..."
                           md:TextFieldAssist.HasClearButton="True"
                           Style="{StaticResource MaterialDesignOutlinedComboBox}">
@@ -54,49 +55,53 @@
                 <ComboBox VerticalAlignment="Center"
                           Padding="10"
                           Width="200"
-                          ItemsSource="{Binding }"
-                          SelectedValue=""
-                          md:HintAssist.Hint="Công nghệ"
+                          ItemsSource="{Binding Technologies}"
+                          SelectedValue="{Binding Technology}"
+                          md:HintAssist.Hint="Công nghệ..."
                           md:TextFieldAssist.HasClearButton="True"
                           Style="{StaticResource MaterialDesignOutlinedComboBox}">
                 </ComboBox>
 
             </StackPanel>
 
-            <customControls:ControlButton Grid.Column="1"
-                                          DefaultColor="{StaticResource primaryBrush}"
-                                          HoverColor="{StaticResource secondaryBrush}"
-                                          Command="{Binding CreateCommand}"
-                                          Width="80">
-                <customControls:ControlButton.Content>
-                    <TextBlock Text="Tạo mới" Style="{StaticResource btnContent}"/>
-                </customControls:ControlButton.Content>
-            </customControls:ControlButton>
+            <StackPanel DataContext="{StaticResource TopicsVM}"
+                        Grid.Row="0" Grid.Column="1"
+                        VerticalAlignment="Center">
+                <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
+                                               HoverColor="{StaticResource secondaryBrush}"
+                                               Command="{Binding CreateCommand}"
+                                               Width="80">
+                    <customControls:ControlButton.Content>
+                        <TextBlock Text="Tạo mới" Style="{StaticResource btnContent}"/>
+                    </customControls:ControlButton.Content>
+                </customControls:ControlButton>
+            </StackPanel>
 
         </Grid>
 
-        <Border Grid.Row="1">
+        <Border Grid.Row="1" DataContext="{StaticResource TopicsVM}">
 
             <ListView Grid.Row="1"
                       MouseLeftButtonUp="ListViewItem_Click"
-                  Name="AdminsListView"
-                  ItemsSource="{Binding Topics}">
+                      Name="AdminsListView"
+                      ItemsSource="{Binding Topics}"
+                      SelectedItem="{Binding SelectedItem}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Width="340"
-                                        DisplayMemberBinding="{Binding Name}" >
+                                        DisplayMemberBinding="{Binding Name, Mode=TwoWay}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Đề tài" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
                         <GridViewColumn Width="180"
-                                        DisplayMemberBinding="{Binding Category}">
+                                        DisplayMemberBinding="{Binding Category, Mode=TwoWay}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Thể loại" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
                         <GridViewColumn Width="200"
-                                        DisplayMemberBinding="{Binding Name}">
+                                        DisplayMemberBinding="{Binding Technology, Mode=TwoWay}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Công nghệ" />
                             </GridViewColumn.Header>
@@ -107,6 +112,7 @@
                                     <customControls:ControlButton DefaultColor="{StaticResource danger}"
                                                                   HoverColor="{StaticResource dangerHover}"
                                                                   Width="30"
+                                                                  DataContext="{StaticResource TopicsVM}"
                                                                   Command="{Binding DeleteCommand}">
                                         <customControls:ControlButton.Content>
                                             <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />

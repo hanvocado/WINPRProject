@@ -76,6 +76,7 @@ namespace ThesisManagement.Repositories
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.ExecuteNonQuery();
+                        ShowSuccessMessage($"Xóa {id} thành công");
                     }
                 }
                 catch (Exception ex)

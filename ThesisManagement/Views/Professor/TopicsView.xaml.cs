@@ -19,21 +19,34 @@ namespace ThesisManagement.Views.Professor
         {
             var listView = sender as ListView;
             var selectedItem = listView?.SelectedItem;
+
             if (selectedItem != null)
             {
                 Topic topic = selectedItem as Topic;
-                TopicView topicView = new();
-                topicView.DataContext = new TopicVM
+                TopicView topicView = new TopicView();
+
+                TopicVM topicVM = new TopicVM
                 {
-                    Name = topic.Name,
-                    Category = topic.Category,
-                    Technology = topic.Technology,
-                    Description = topic.Description
+                    SelectedTopic = new Topic
+                    {
+                        Name = topic.Name,
+                        Category = topic.Category,
+                        Technology = topic.Technology,
+                        Description = topic.Description
+                    }
                 };
+                ShowMessage($"{topicVM.SelectedTopic.Name}, {topicVM.SelectedTopic.Category},{topicVM.SelectedTopic.Technology},{topicVM.SelectedTopic.Description}");
+
+                topicView.DataContext = topicVM;
                 topicView.Owner = Application.Current.MainWindow;
                 topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 topicView.Show();
             }
+        }
+
+        private void ShowMessage(string message)
+        {
+            MessageBox.Show(message);
         }
     }
 }

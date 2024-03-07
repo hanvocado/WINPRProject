@@ -9,19 +9,30 @@ namespace ThesisManagement.ViewModels
     public class TopicsVM : ViewModelBase
     {
         private readonly ITopicRepository _topicRepo;
-        private Topic Topic = new Topic();
         public IEnumerable<Topic> Topics { get; set; }
         public ICommand CreateCommand { get; set; }
-        public TopicVM SelectedTopic { get; set; }
         public ICommand YourButtonCommand { get; set; }
-
         public ICommand UpdateCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
 
+        public Topic selectedTopic;
+        public Topic SelectedTopic
+        {
+            get
+            {
+                return selectedTopic;
+            }
+            set
+            {
+                selectedTopic = value;
+                OnPropertyChanged(nameof(SelectedTopic));
+            }
+        }
+
         public TopicsVM()
         {
+            selectedTopic = new Topic();
             YourButtonCommand = new ViewModelCommand(ExecuteYourButtonCommand);
-            SelectedTopic = new TopicVM();
             _topicRepo = new TopicRepository();
             CreateCommand = new ViewModelCommand(ExecuteCreateCommand);
             UpdateCommand = new ViewModelCommand(ExecuteUpdateCommand, CanExecuteUpdateCommand);
@@ -31,7 +42,7 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteDeleteCommand(object sender)
         {
-            _topicRepo.Delete(Topic.Id);
+            _topicRepo.Delete(selectedTopic.Id);
         }
 
         private bool CanExecuteDeleteCommand(object sender)
@@ -41,7 +52,6 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteUpdateCommand(object sender)
         {
-            TopicView topicView = new TopicView();
         }
 
         private bool CanExecuteUpdateCommand(object sender)
