@@ -91,14 +91,14 @@
                         </GridViewColumn>
 
                         <GridViewColumn Width="200"
-                                DisplayMemberBinding="{Binding Name}">
+                                DisplayMemberBinding="{Binding Technology}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Công nghệ" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
 
                         <GridViewColumn Width="150"
-                                DisplayMemberBinding="{Binding Name}">
+                                DisplayMemberBinding="{Binding Professor.Name}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Giảng viên" />
                             </GridViewColumn.Header>

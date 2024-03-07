@@ -22,7 +22,7 @@
             </TabItem>
 
             <TabItem Header="Giảng viên">
-                <!--<userControls:ProfessorsTopics/>-->
+                <userControls:ProfessorsTopics/>
             </TabItem>
             
             <TabItem Header="Đã đăng kí">

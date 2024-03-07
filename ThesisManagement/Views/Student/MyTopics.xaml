@@ -11,10 +11,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
-    <!--<UserControl.Resources>
-        --><!--<viewModels:TopicsVM x:Key="TopicsVM" />--><!--
+    <UserControl.Resources>
+        <viewModels:TopicsVM x:Key="TopicsVM" />
         <viewModels:TopicVM x:Key="TopicVM"/>
-    </UserControl.Resources>-->
+    </UserControl.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -86,6 +86,7 @@
             <ListView Grid.Row="1"
               MouseLeftButtonUp="ListViewItem_Click"
               Name="AdminsListView"
+              DataContext="{StaticResource TopicsVM}"
               ItemsSource="{Binding Topics}">
                 <ListView.View>
                     <GridView>
