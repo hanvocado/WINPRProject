@@ -14,7 +14,7 @@
     <UserControl.DataContext>
         <viewModels:TopicsVM />
     </UserControl.DataContext>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -33,12 +33,30 @@
                               Margin="0 4 5 0"
                               Height="17" 
                               Width="20"/>
+                <TextBox Grid.Row="0"
+                          Text="{Binding Name}"
+                          Width="200"
+                          Padding="10"
+                          VerticalAlignment="Center"
+                          md:HintAssist.Hint="Tên đề tài..."
+                          Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                
                 <ComboBox VerticalAlignment="Center"
                           Padding="10"
                           Width="200"
                           ItemsSource="{Binding }"
                           SelectedValue=""
-                          md:HintAssist.Hint="Tìm kiếm"
+                          md:HintAssist.Hint="Thể loại..."
+                          md:TextFieldAssist.HasClearButton="True"
+                          Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                </ComboBox>
+
+                <ComboBox VerticalAlignment="Center"
+                          Padding="10"
+                          Width="200"
+                          ItemsSource="{Binding }"
+                          SelectedValue=""
+                          md:HintAssist.Hint="Công nghệ"
                           md:TextFieldAssist.HasClearButton="True"
                           Style="{StaticResource MaterialDesignOutlinedComboBox}">
                 </ComboBox>
@@ -83,8 +101,8 @@
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Công nghệ" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
-                            <GridViewColumn Width="60">
-                                <GridViewColumn.CellTemplate>
+                        <GridViewColumn Width="60">
+                            <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <customControls:ControlButton DefaultColor="{StaticResource danger}"
                                                                   HoverColor="{StaticResource dangerHover}"
