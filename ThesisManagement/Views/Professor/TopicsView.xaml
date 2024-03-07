@@ -35,6 +35,8 @@
                               Height="17" 
                               Width="20"/>
                 <TextBox Grid.Row="0"
+                         Name="FilterTexbox"
+                         TextChanged="FilterTexbox_TextChanged"
                          Text="{Binding Name}"
                          Width="200"
                          Padding="10"
@@ -82,12 +84,12 @@
 
         </Grid>
 
-        <Border Grid.Row="1" DataContext="{StaticResource TopicsVM}">
+        <Border Grid.Row="1" DataContext="{StaticResource TopicVM}">
 
             <ListView Grid.Row="1"
                       MouseLeftButtonUp="ListViewItem_Click"
                       Name="TopicListView"
-                      ItemsSource="{Binding Topics}"
+                      ItemsSource="{Binding FilteredTopics}"
                       SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ListView.View>
                     <GridView>
