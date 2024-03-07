@@ -17,7 +17,7 @@
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
 
-            <customControls:WindowControlBar />
+            <!--<customControls:WindowControlBar />-->
 
             <Border Grid.Row="1" Padding="10 10 15 10">
                 <Grid>
@@ -56,11 +56,11 @@
                 </Grid>
             </Border>
 
-            <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
+            <!--<customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
                                           HoverColor="{StaticResource secondaryBrush}"
                                           Content="Lưu"
                                           Width="100"
-                                          Grid.Row="3"/>
+                                          Grid.Row="3"/>-->
         </Grid>
     </Border>
 </Window>

@@ -70,7 +70,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <customControl:WindowControlBar />
+                    <!--<customControl:WindowControlBar />-->
 
                     <!--<ContentControl Grid.Row="1"
                                 Margin="20 5 0 0"

@@ -11,10 +11,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
-    <UserControl.Resources>
-        <viewModels:TopicsVM x:Key="TopicsVM" />
+    <!--<UserControl.Resources>
+        --><!--<viewModels:TopicsVM x:Key="TopicsVM" />--><!--
         <viewModels:TopicVM x:Key="TopicVM"/>
-    </UserControl.Resources>
+    </UserControl.Resources>-->
 
     <Grid>
         <Grid.RowDefinitions>
@@ -29,7 +29,7 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0"
-                DataContext="{StaticResource TopicVM}"
+                
                 Orientation="Horizontal">
                 <fa:IconImage Icon="Search"
                       Margin="0 4 5 0"
@@ -39,8 +39,8 @@
                   Padding="10"
                   Margin="0,0,20,0"
                   Width="200"
-                  ItemsSource="{Binding }"
-                  SelectedValue=""
+                  ItemsSource="{Binding Category}"
+                  SelectedValue="{Binding Categories}"
                   md:HintAssist.Hint="Thể loại"
                   md:TextFieldAssist.HasClearButton="True"
                   Style="{StaticResource MaterialDesignOutlinedComboBox}">
@@ -69,7 +69,7 @@
                 
 
             </StackPanel>
-            <customControls:ControlButton Grid.Column="1"
+            <!--<customControls:ControlButton Grid.Column="1"
                               DefaultColor="{StaticResource primaryBrush}"
                               HoverColor="{StaticResource secondaryBrush}"
                               Command="{Binding CreateCommand}"
@@ -77,7 +77,7 @@
                 <customControls:ControlButton.Content>
                     <TextBlock Text="+Đề xuất" Style="{StaticResource btnContent}"/>
                 </customControls:ControlButton.Content>
-            </customControls:ControlButton>
+            </customControls:ControlButton>-->
 
         </Grid>
 
@@ -118,14 +118,14 @@
                         <GridViewColumn Width="60">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <customControls:ControlButton DefaultColor="{StaticResource danger}"
+                                    <!--<customControls:ControlButton DefaultColor="{StaticResource danger}"
                                                           HoverColor="{StaticResource dangerHover}"
                                                           Width="30"
                                                           Command="{Binding DeleteCommand}">
                                         <customControls:ControlButton.Content>
                                             <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
                                         </customControls:ControlButton.Content>
-                                    </customControls:ControlButton>
+                                    </customControls:ControlButton>-->
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

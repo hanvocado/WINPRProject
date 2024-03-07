@@ -12,7 +12,7 @@
         WindowStartupLocation="CenterScreen"
         Style="{StaticResource windowStyle}">
 
-    <Window.DataContext>
+    <!--<Window.DataContext>
         <viewModel:ProfessorMainVM />
     </Window.DataContext>
 
@@ -32,7 +32,7 @@
         <DataTemplate DataType="{x:Type viewModel:ProfessorProfileVM}">
             <local:ProfilesView />
         </DataTemplate>
-    </Window.Resources>
+    </Window.Resources>-->
 
     <Border CornerRadius="0">
         <Grid>
@@ -101,7 +101,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <customControl:WindowControlBar />
+                    <!--<customControl:WindowControlBar />-->
 
                     <ContentControl Grid.Row="1"
                                     Margin="20 5 20 0"

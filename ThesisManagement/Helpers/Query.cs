@@ -16,7 +16,7 @@
 
             public static string Delete(int id)
             {
-                return $"DELETE FROM Topic WHERE Id= {id}";
+                return $"DELETE FROM Topic WHERE Id= '{id}'";
             }
 
             public static string Select(int id)
