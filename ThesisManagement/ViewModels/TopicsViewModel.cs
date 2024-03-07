@@ -96,13 +96,14 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteProfessorCreateCommand(object sender)
         {
+            var vm = new TopicsViewModel();
             ProfessorTopicsView topicsView = sender as ProfessorTopicsView;
-            ProfessorTopicView topicView = new();
             if (topicsView != null)
             {
-                topicsView.DataContext = this;
+                topicsView.DataContext = vm;
             }
-            topicView.DataContext = this;
+            ProfessorTopicView topicView = new();
+            topicView.DataContext = vm;
             topicView.Owner = Application.Current.MainWindow;
             topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             topicView.Show();
@@ -110,6 +111,7 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteCreateCommand(object obj)
         {
+            ProfessorTopicView topicView = obj as ProfessorTopicView;
             Topic newTopic = new Topic
             {
                 Name = selectedTopic.Name,
@@ -119,6 +121,15 @@ namespace ThesisManagement.ViewModels
             };
 
             _topicRepo.Add(newTopic);
+
+            if (topicView != null)
+            {
+                topicView.Close();
+            }
+
+            var mainWindow = Application.Current.MainWindow;
+            mainWindow.Focus();
+
             Topics = _topicRepo.GetAll();
         }
 
