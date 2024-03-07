@@ -91,15 +91,15 @@
               ItemsSource="{Binding Topics}">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Đề tài" Width="200" HeaderContainerStyle="{StaticResource header}"
+                        <GridViewColumn Header="Đề tài" Width="200"
                                     DisplayMemberBinding="{Binding Name}" />
-                        <GridViewColumn Header="Thể loại" Width="200" HeaderContainerStyle="{StaticResource header}"
+                        <GridViewColumn Header="Thể loại" Width="200"
                                     DisplayMemberBinding="{Binding Category}" />
-                        <GridViewColumn Header="Công nghệ" Width="200" HeaderContainerStyle="{StaticResource header}"
+                        <GridViewColumn Header="Công nghệ" Width="200"
                                     DisplayMemberBinding="{Binding Technology}" />
-                        <GridViewColumn Header="Giảng viên" Width="150" HeaderContainerStyle="{StaticResource header}"
+                        <GridViewColumn Header="Giảng viên" Width="150"
                                     DisplayMemberBinding="{Binding ProfessorId}" />
-                        <GridViewColumn Width="50" HeaderContainerStyle="{StaticResource header}">
+                        <GridViewColumn Width="50">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <customControls:ControlButton DefaultColor="{StaticResource danger}"

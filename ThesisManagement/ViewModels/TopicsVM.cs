@@ -9,6 +9,8 @@ namespace ThesisManagement.ViewModels
     public class TopicsVM : ViewModelBase
     {
         private readonly ITopicRepository _topicRepo;
+
+        private Topic Topic = new Topic();
         public IEnumerable<Topic> Topics { get; set; }
         public ICommand CreateCommand { get; set; }
         public ICommand YourButtonCommand { get; set; }
