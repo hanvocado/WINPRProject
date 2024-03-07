@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
+using ProfessorTopicsView = ThesisManagement.Views.Professor.TopicsView;
 using ProfessorTopicView = ThesisManagement.Views.Professor.TopicView;
 
 namespace ThesisManagement.ViewModels
@@ -95,7 +96,13 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteProfessorCreateCommand(object sender)
         {
+            ProfessorTopicsView topicsView = sender as ProfessorTopicsView;
             ProfessorTopicView topicView = new();
+            if (topicsView != null)
+            {
+                topicsView.DataContext = this;
+            }
+            topicView.DataContext = this;
             topicView.Owner = Application.Current.MainWindow;
             topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             topicView.Show();
