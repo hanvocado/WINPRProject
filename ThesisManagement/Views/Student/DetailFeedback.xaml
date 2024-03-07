@@ -52,14 +52,14 @@
                 <ColumnDefinition Width="120"/>
             </Grid.ColumnDefinitions>
             
-            <customControls:ControlButton Grid.Column="1"
+            <!--<customControls:ControlButton Grid.Column="1"
                                               DefaultColor="{StaticResource primaryBrush}"
                                               HoverColor="{StaticResource secondaryBrush}"
                                               Width="60">
                 <customControls:ControlButton.Content>
                     <fa:IconImage Icon="Upload" Style="{StaticResource btnIcon}"/>
                 </customControls:ControlButton.Content>
-            </customControls:ControlButton>
+            </customControls:ControlButton>-->
 
             <StackPanel 
                 Grid.Column="0"

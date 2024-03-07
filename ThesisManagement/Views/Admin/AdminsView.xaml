@@ -11,9 +11,9 @@
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
 
-    <UserControl.DataContext>
+    <!--<UserControl.DataContext>
         <viewModel:AdminsVM />
-    </UserControl.DataContext>
+    </UserControl.DataContext>-->
     
     <Grid>
         <Grid.RowDefinitions>
@@ -44,14 +44,14 @@
 
             </StackPanel>
 
-            <customControls:ControlButton Grid.Column="1"
+            <!--<customControls:ControlButton Grid.Column="1"
                                           DefaultColor="{StaticResource primaryBrush}"
                                           HoverColor="{StaticResource secondaryBrush}"
                                           Width="80">
                 <customControls:ControlButton.Content>
                     <TextBlock Text="Tạo mới" Style="{StaticResource btnContent}"/>
                 </customControls:ControlButton.Content>
-            </customControls:ControlButton>
+            </customControls:ControlButton>-->
         </Grid>
 
         <ListView Grid.Row="1"
