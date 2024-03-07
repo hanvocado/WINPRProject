@@ -9,6 +9,7 @@
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
+             x:Name="topicsUC"
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
     <UserControl.DataContext>
@@ -73,6 +74,7 @@
                 <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
                                                HoverColor="{StaticResource secondaryBrush}"
                                                Command="{Binding ProfessorCreateTopic}"
+                                              CommandParameter="{Binding ElementName=topicsUC}"
                                                Width="80">
                     <customControls:ControlButton.Content>
                         <TextBlock Text="Tạo mới" Style="{StaticResource btnContent}"/>

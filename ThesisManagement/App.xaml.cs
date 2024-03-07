@@ -13,13 +13,13 @@ namespace ThesisManagement
         {
             base.OnStartup(e);
 
-            ShowStudentWindow();
+            ShowProfessorWindow();
 
         }
 
         private void ShowProfessorWindow()
         {
-            ProfessorMainView professorMainView = new ProfessorMainView();
+            ProfessorMainView professorMainView = new();
             professorMainView.Show();
         }
 
