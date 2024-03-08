@@ -14,7 +14,6 @@
              Background="White">
                 
     <UserControl.Resources>
-        <viewModels:TopicsVM x:Key="TopicsVM" />
         <Style x:Key="A" TargetType="TextBlock">
             <Setter Property="Background" Value="#81d4fa"/>
         </Style>
@@ -24,7 +23,6 @@
         <Style x:Key="C" TargetType="TextBlock">
             <Setter Property="Background" Value="Red" />
         </Style>
-        <viewModels:TopicsVM x:Key="TopicVM"/>
     </UserControl.Resources>
     
     <Grid>
@@ -40,9 +38,7 @@
                 <TextBlock Text="Chờ duyệt" Style="{StaticResource A}" MinHeight="40" Width="700"/>
             </Expander.Header>
             <ListView Grid.Row="1"
-                      MouseLeftButtonUp="ListViewItem_Click"
                       Name="AdminsListView"
-                      DataContext="{StaticResource TopicsVM}"
                       ItemsSource="{Binding Topics}">
                 <ListView.View>
                     <GridView>
@@ -95,9 +91,6 @@
                 <TextBlock Text="Đã chấp nhận" Style="{StaticResource B}" MinHeight="40" Width="700"/>
             </Expander.Header>
             <ListView Grid.Row="1"
-              MouseLeftButtonUp="ListViewItem_Click"
-              Name=""
-              DataContext="{StaticResource TopicsVM}"
               ItemsSource="{Binding Topics}">
                 <ListView.View>
                     <GridView>
@@ -115,14 +108,14 @@
                         </GridViewColumn>
 
                         <GridViewColumn Width="180"
-                    DisplayMemberBinding="{Binding Name}">
+                    DisplayMemberBinding="{Binding Technology}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Công nghệ" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
 
                         <GridViewColumn Width="180"
-                    DisplayMemberBinding="{Binding Name}">
+                    DisplayMemberBinding="{Binding Professor.Name}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Giảng viên" />
                             </GridViewColumn.Header>
@@ -150,9 +143,8 @@
                 <TextBlock Text="Đã từ chối" Style="{StaticResource C}" MinHeight="40" Width="700"/>
             </Expander.Header>
             <ListView Grid.Row="1"
-              MouseLeftButtonUp="ListViewItem_Click"
+              
               Name="A"
-              DataContext="{StaticResource TopicsVM}"
               ItemsSource="{Binding Topics}">
                 <ListView.View>
                     <GridView>
