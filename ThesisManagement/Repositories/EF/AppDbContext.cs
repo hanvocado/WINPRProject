@@ -116,18 +116,18 @@ namespace ThesisManagement.Repositories.EF
                 {
                     StudentId = "S1",
                     TopicId = 1,
-                    Status = "Approveled"
+                    Status = "Approved"
                 },
                 new StudentTopic
                 {
-                    StudentId = "S2",
+                    StudentId = "S1",
                     TopicId = 2,
                     Status = "Rejected"
                 },
                 new StudentTopic
                 {
                     StudentId = "S1",
-                    TopicId = 2,
+                    TopicId = 3,
                     Status = "Waiting"
                 }
             );

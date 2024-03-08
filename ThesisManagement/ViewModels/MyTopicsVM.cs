@@ -1,17 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ThesisManagement.Models;
+﻿using ThesisManagement.Models;
+using ThesisManagement.Repositories;
 
 namespace ThesisManagement.ViewModels
 {
-    internal class MyTopicsVM
+    public class MyTopicsVM
     {
-        public IEnumerable<Topic> waitingTopics;
-        public IEnumerable<Topic> approveledTopics;
-        public IEnumerable<Topic> rejectedTopics;
+        private readonly IStudentTopicRepository _repo;
+        public IEnumerable<StudentTopic> WaitingTopics;
+        public IEnumerable<StudentTopic> ApprovedTopics;
+        public IEnumerable<StudentTopic> RejectedTopics;
 
+        public MyTopicsVM()
+        {
+            _repo = new StudentTopicRepository();
+            WaitingTopics = _repo.Get("S1", "Waiting");
+            ApprovedTopics = _repo.Get("S1", "Approved");
+            RejectedTopics = _repo.Get("S1", "Rejected");
+        }
     }
 }
