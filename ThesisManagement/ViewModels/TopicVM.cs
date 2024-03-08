@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Reflection.Metadata;
 using System.Windows.Forms;
 using System.Windows.Input;
 using ThesisManagement.Models;
@@ -88,21 +89,27 @@ namespace ThesisManagement.ViewModels
             _topicRepo = new TopicRepository();
             FilteredTopics = _topicRepo.GetAll();
             CreateCommand = new ViewModelCommand(ExecuteCreateCommand);
-            DeleteCommand = new ViewModelCommand(ExecuteDeletCommand, CanExecuteDeletCommand);
+            DeleteCommand = new ViewModelCommand(ExecuteDeleteCommand, CanExecuteDeleteCommand);
             SaveCommand = new ViewModelCommand(ExecuteSaveCommand, CanExecuteSaveCommand);
         }
 
-        private bool CanExecuteDeletCommand(object obj)
+        private bool CanExecuteDeleteCommand(object obj)
         {
             return true;
         }
 
-        private void ExecuteDeletCommand(object parameter)
+        private void ExecuteDeleteCommand(object parameter)
         {
-            if (parameter is Topic selectedItem)
+            Topic topic = new Topic
             {
-                _topicRepo.Delete(selectedItem.Id);
-            }
+                Id = selectedTopic.Id,
+                Name = selectedTopic.Name,
+                Category = selectedTopic.Category,
+                Technology = selectedTopic.Technology,
+                Description = selectedTopic.Description
+            };
+            //MessageBox.Show($"{topic.Id},{topic.Name}, {topic.Category}, {topic.Technology}, {topic.Description}");
+            _topicRepo.Delete(topic.Id);
         }
 
         private void ExecuteSaveCommand(object obj)
@@ -128,19 +135,11 @@ namespace ThesisManagement.ViewModels
             _topicRepo.Add(newTopic);
         }
 
-
         private void FilterData()
         {
             var filteredData = _topicRepo.GetFilteredTopics(Name, Category, Technology);
             FilteredTopics = new ObservableCollection<Topic>(filteredData);
         }
-
-        private void ShowMessage(string message)
-        {
-            MessageBox.Show(message);
-        }
-
-
 
     }
 }
