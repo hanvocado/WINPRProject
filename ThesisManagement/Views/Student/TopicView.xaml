@@ -72,7 +72,7 @@
 
                         </Grid.RowDefinitions>
 
-                        <ComboBox Grid.Row="0"
+                        <ComboBox Grid.Row="2"
                                   VerticalAlignment="Top"
                                   ItemsSource="{Binding Category}"
                                   SelectedValue="{Binding Category}"
@@ -81,7 +81,7 @@
                                   Style="{StaticResource MaterialDesignOutlinedComboBox}">
                         </ComboBox>
 
-                        <ComboBox Grid.Row="2"
+                        <ComboBox Grid.Row="0"
                                   VerticalAlignment="Top"
                                   md:HintAssist.Hint="Giảng viên"
                                   md:TextFieldAssist.HasClearButton="True"
@@ -103,7 +103,7 @@
                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
                      TextWrapping="Wrap"
                      VerticalScrollBarVisibility="Auto"
-                     Margin="50, 5, 50, 5"/>
+                     Margin="30, 5, 30, 5"/>
             <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
                               HoverColor="{StaticResource secondaryBrush}"
                               Content="Gửi"
