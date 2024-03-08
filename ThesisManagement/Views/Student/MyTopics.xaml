@@ -7,13 +7,15 @@
              xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
              xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             xmlns:userControls="clr-namespace:ThesisManagement.Views.Student"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
     <UserControl.Resources>
         <viewModels:TopicsVM x:Key="TopicsVM" />
-        <viewModels:TopicVM x:Key="TopicVM"/>
+        <!--<viewModels:TopicVM x:Key="TopicVM"/>-->
     </UserControl.Resources>
 
     <Grid>
@@ -82,58 +84,7 @@
         </Grid>
 
         <Border Grid.Row="1">
-
-            <ListView Grid.Row="1"
-              MouseLeftButtonUp="ListViewItem_Click"
-              Name="AdminsListView"
-              DataContext="{StaticResource TopicsVM}"
-              ItemsSource="{Binding Topics}">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Width="200"
-                                DisplayMemberBinding="{Binding Name}" >
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Đề tài" />
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
-                        <GridViewColumn Width="180"
-                                DisplayMemberBinding="{Binding Category}">
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Thể loại" />
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
-
-                        <GridViewColumn Width="180"
-                            DisplayMemberBinding="{Binding Name}">
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Công nghệ" />
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
-
-                        <GridViewColumn Width="180"
-                            DisplayMemberBinding="{Binding Name}">
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Giảng viên" />
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
-                        <GridViewColumn Width="60">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <!--<customControls:ControlButton DefaultColor="{StaticResource danger}"
-                                                          HoverColor="{StaticResource dangerHover}"
-                                                          Width="30"
-                                                          Command="{Binding DeleteCommand}">
-                                        <customControls:ControlButton.Content>
-                                            <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
-                                        </customControls:ControlButton.Content>
-                                    </customControls:ControlButton>-->
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-
+            <local:Pending/>
         </Border>
     </Grid>
 </UserControl>
