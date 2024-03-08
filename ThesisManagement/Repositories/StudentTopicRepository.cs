@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.ObjectModel;
+using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories.EF;
 
@@ -10,9 +10,10 @@ namespace ThesisManagement.Repositories
         void Add(StudentTopic topic);
         void Update(StudentTopic topic);
         void Delete(int id);
-        ObservableCollection<StudentTopic> GetAll();
-        ObservableCollection<StudentTopic> Get(string studentId);
-        public IEnumerable<StudentTopic> Get(string studentId, string status);
+        IEnumerable<StudentTopic> GetAll();
+        IEnumerable<StudentTopic> Get(string studentId, string status);
+
+        bool CanRegisterTopic(string studentId);
 
     }
     public class StudentTopicRepository : IStudentTopicRepository
@@ -24,31 +25,34 @@ namespace ThesisManagement.Repositories
             _context = DataProvider.Instance.Context;
         }
 
+        public bool CanRegisterTopic(string studentId)
+        {
+            int waiting = _context.StudentTopics.Where(st => st.StudentId == studentId && st.Status == Variable.StudentTopic.Waiting).Count();
+            if (waiting >= 1)
+                return false;
+            return true;
+        }
+
         public void Add(StudentTopic topic)
         {
             throw new NotImplementedException();
         }
+
 
         public void Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public ObservableCollection<StudentTopic> Get(string studentId)
-        {
-            var list = _context.StudentTopics.Include(st => st.Student).Include(st => st.Topic).Where(st => st.StudentId == studentId).ToList();
-            return new ObservableCollection<StudentTopic>(list);
-        }
-
         public IEnumerable<StudentTopic> Get(string studentId, string status)
         {
-            var list = _context.StudentTopics.Include(st => st.Student).Include(st => st.Topic).
-                                    ThenInclude(t => t.Professor)
-                                    .Where(st => st.StudentId == studentId && st.Status == status).ToList();
-            return new ObservableCollection<StudentTopic>(list);
+            var list = _context.StudentTopics.Include(st => st.Student).Include(st => st.Topic)
+                                    .ThenInclude(t => t.Professor)
+                                    .Where(st => st.StudentId == studentId && st.Status == status).AsNoTracking().ToList();
+            return list;
         }
 
-        public ObservableCollection<StudentTopic> GetAll()
+        public IEnumerable<StudentTopic> GetAll()
         {
             throw new NotImplementedException();
         }

@@ -64,7 +64,7 @@
                             </GridViewColumn.Header>
                         </GridViewColumn>
                         <GridViewColumn Width="180"
-                            DisplayMemberBinding="{Binding Topic.Category}">
+                            DisplayMemberBinding="{Binding StudentId}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Thể loại" />
                             </GridViewColumn.Header>
@@ -82,20 +82,6 @@
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Giảng viên" />
                             </GridViewColumn.Header>
-                        </GridViewColumn>
-                        <GridViewColumn Width="60">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <customControls:ControlButton DefaultColor="{StaticResource danger}"
-                                              HoverColor="{StaticResource dangerHover}"
-                                              Width="30"
-                                              Command="{Binding DeleteCommand}">
-                                        <customControls:ControlButton.Content>
-                                            <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
-                                        </customControls:ControlButton.Content>
-                                    </customControls:ControlButton>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                     </GridView>
                 </ListView.View>
@@ -134,20 +120,6 @@
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Giảng viên" />
                             </GridViewColumn.Header>
-                        </GridViewColumn>
-                        <GridViewColumn Width="60">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <customControls:ControlButton DefaultColor="{StaticResource danger}"
-                                  HoverColor="{StaticResource dangerHover}"
-                                  Width="30"
-                                  Command="{Binding DeleteCommand}">
-                                        <customControls:ControlButton.Content>
-                                            <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
-                                        </customControls:ControlButton.Content>
-                                    </customControls:ControlButton>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                     </GridView>
                 </ListView.View>
@@ -188,20 +160,6 @@
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Giảng viên" />
                             </GridViewColumn.Header>
-                        </GridViewColumn>
-                        <GridViewColumn Width="60">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <customControls:ControlButton DefaultColor="{StaticResource danger}"
-                                  HoverColor="{StaticResource dangerHover}"
-                                  Width="30"
-                                  Command="{Binding DeleteCommand}">
-                                        <customControls:ControlButton.Content>
-                                            <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
-                                        </customControls:ControlButton.Content>
-                                    </customControls:ControlButton>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                     </GridView>
                 </ListView.View>
