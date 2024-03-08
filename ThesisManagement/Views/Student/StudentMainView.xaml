@@ -5,13 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ThesisManagement.Views.Student"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-        xmlns:userControls="clr-namespace:ThesisManagement.Views.Student"
+        xmlns:viewModel="clr-namespace:ThesisManagement.ViewModels"
         xmlns:customControl="clr-namespace:ThesisManagement.CustomControls"
         mc:Ignorable="d"
-        Title="StudentMainView" Height="500" Width="900"
+        Title="StudentMainView" Height="550" Width="900"
         WindowStartupLocation="CenterScreen"
         Style="{StaticResource windowStyle}">
-
     <Border CornerRadius="0">
         <Grid>
 
@@ -73,13 +72,13 @@
 
                     <customControl:WindowControlBar />
 
-                    <!--<ContentControl Grid.Row="1"
+                    <ContentControl Grid.Row="1"
                                 Margin="20 5 0 0"
                                 Content="{Binding CurrentChildView}">
-                    </ContentControl>-->
+                    </ContentControl>
                     <ContentControl Grid.Row="1"
-                                  Margin="20 5 0 0">
-                        <userControls:TopicsView/>
+                                    Margin="20 5 0 0">
+                        
                     </ContentControl>
                     
                 </Grid>

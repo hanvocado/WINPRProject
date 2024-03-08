@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using ThesisManagement.Views.Professor;
+using ThesisManagement.Views.Student;
 
 namespace ThesisManagement
 {
@@ -13,12 +14,19 @@ namespace ThesisManagement
             base.OnStartup(e);
 
             ShowProfessorWindow();
+
         }
 
         private void ShowProfessorWindow()
         {
-            ProfessorMainView professorMainView = new ProfessorMainView();
+            ProfessorMainView professorMainView = new();
             professorMainView.Show();
+        }
+
+        private void ShowStudentWindow()
+        {
+            StudentMainView wd = new();
+            wd.Show();
         }
     }
 

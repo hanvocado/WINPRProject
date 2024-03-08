@@ -19,10 +19,10 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Left">
-                                    <customControls:ControlButton Content="Duyệt"
+                                    <!--<customControls:ControlButton Content="Duyệt"
                                                           DefaultColor="{StaticResource primaryBrush}" />
                                     <customControls:ControlButton Content="Từ chối"
-                                                          DefaultColor="{StaticResource danger}" />
+                                                          DefaultColor="{StaticResource danger}" />-->
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>

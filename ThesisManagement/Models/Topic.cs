@@ -25,5 +25,7 @@ namespace ThesisManagement.Models
         public string? Technology { get; set; }
 
         public Professor? Professor { get; set; }
+        public ICollection<StudentTopic>? StudentTopics { get; set; }
+
     }
 }

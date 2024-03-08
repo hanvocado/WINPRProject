@@ -104,8 +104,8 @@
                     <customControl:WindowControlBar />
 
                     <ContentControl Grid.Row="1"
-                                    Margin="20 5 20 0"
-                                    Content="{Binding CurrentChildView}">
+                                    Margin="20 5 20 0">
+                        <local:TopicsView />
                     </ContentControl>
 
                 </Grid>

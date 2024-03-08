@@ -115,14 +115,14 @@
                         Width="50">
                         <fa:IconImage Icon="Pen" Style="{StaticResource crudsButtonIcon}" />
                     </Button>-->
-                    <customControls:ControlButton Grid.Column="5"
+                    <!--<customControls:ControlButton Grid.Column="5"
               DefaultColor="{StaticResource primaryBrush}"
               HoverColor="{StaticResource secondaryBrush}"
               Width="80">
                         <customControls:ControlButton.Content>
                             <TextBlock Text="Xuất excel" Style="{StaticResource btnContent}"/>
                         </customControls:ControlButton.Content>
-                    </customControls:ControlButton>
+                    </customControls:ControlButton>-->
 
 
 

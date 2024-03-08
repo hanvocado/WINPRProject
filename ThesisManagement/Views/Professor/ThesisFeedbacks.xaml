@@ -34,13 +34,13 @@
                    Margin="10"
                    FontWeight="Medium"/>
 
-        <customControls:ControlButton Grid.Row="4" Grid.Column="2"
+        <!--<customControls:ControlButton Grid.Row="4" Grid.Column="2"
                           DefaultColor="{StaticResource primaryBrush}"
                           HoverColor="{StaticResource secondaryBrush}"
                           Width="80">
             <customControls:ControlButton.Content>
                 <TextBlock Text="Cập nhật" Style="{StaticResource btnContent}" />
             </customControls:ControlButton.Content>
-        </customControls:ControlButton>
+        </customControls:ControlButton>-->
     </Grid>
 </Window>

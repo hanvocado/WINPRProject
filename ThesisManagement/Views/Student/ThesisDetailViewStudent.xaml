@@ -73,7 +73,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <customControl:WindowControlBar />
+                    <!--<customControl:WindowControlBar />-->
 
                     <!--Header / Caption-->
                     <Grid Grid.Row="1">
@@ -116,7 +116,7 @@
                     <!--Content Section -->
                     <ContentControl Grid.Row="2"
                          Margin="25">
-                        <userControls:GroupStudent/>
+                        <!--<userControls:GroupStudent/>-->
                     </ContentControl>
 
                 </Grid>

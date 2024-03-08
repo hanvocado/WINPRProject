@@ -9,12 +9,12 @@
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
+             x:Name="topicsUC"
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
-    <UserControl.Resources>
-        <viewModels:TopicsVM x:Key="TopicsVM"/>
-        <viewModels:TopicVM x:Key="TopicVM"/>
-    </UserControl.Resources>
+    <UserControl.DataContext>
+        <viewModels:TopicsViewModel/>
+    </UserControl.DataContext>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -22,7 +22,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" DataContext="{StaticResource TopicVM}">
+        <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="120"/>
@@ -69,12 +69,12 @@
 
             </StackPanel>
 
-            <StackPanel DataContext="{StaticResource TopicsVM}"
-                        Grid.Row="0" Grid.Column="1"
+            <StackPanel Grid.Row="0" Grid.Column="1"
                         VerticalAlignment="Center">
                 <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
                                                HoverColor="{StaticResource secondaryBrush}"
-                                               Command="{Binding CreateCommand}"
+                                               Command="{Binding ProfessorCreateTopic}"
+                                              CommandParameter="{Binding ElementName=topicsUC}"
                                                Width="80">
                     <customControls:ControlButton.Content>
                         <TextBlock Text="Tạo mới" Style="{StaticResource btnContent}"/>
@@ -84,15 +84,18 @@
 
         </Grid>
 
-        <Border Grid.Row="1" DataContext="{StaticResource TopicVM}">
+        <Border Grid.Row="1">
 
             <ListView Grid.Row="1"
                       MouseLeftButtonUp="ListViewItem_Click"
                       Name="TopicListView"
-                      ItemsSource="{Binding FilteredTopics}"
-                      SelectedItem="{Binding SelectedTopic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                      ItemsSource="{Binding Topics}"
+                      SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ListView.View>
                     <GridView>
+                        <GridViewColumn Width="0" x:Name="id"
+                                        DisplayMemberBinding="{Binding Id, Mode=TwoWay}">
+                        </GridViewColumn>
                         <GridViewColumn Width="340"
                                         DisplayMemberBinding="{Binding Name, Mode=TwoWay}">
                             <GridViewColumn.Header>
@@ -117,8 +120,8 @@
                                     <customControls:ControlButton DefaultColor="{StaticResource danger}"
                                                                   HoverColor="{StaticResource dangerHover}"
                                                                   Width="30"
-                                                                  DataContext="{StaticResource TopicVM}"
-                                                                  Command="{Binding DeleteCommand}">
+                                                                  Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
+                                                                  CommandParameter="{Binding SelectedItem.Id, ElementName=TopicListView}">
                                         <customControls:ControlButton.Content>
                                             <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
                                         </customControls:ControlButton.Content>

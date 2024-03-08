@@ -9,11 +9,12 @@
         mc:Ignorable="d"
         xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="TopicView" Height="450" Width="800"
+        Title="TopicView" Height="350" Width="600"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="True"
-        Background="Transparent">
+        Background="Transparent"
+        Style="{StaticResource formStyle}">
     <Window.DataContext>
         <viewModels:TopicVM />
     </Window.DataContext>
@@ -22,33 +23,28 @@
         <Border Background="White"
                 CornerRadius="20"
                 BorderThickness="3"
-                BorderBrush="{StaticResource cs_BorderBrushLayer}"
-            />
+                BorderBrush="{StaticResource cs_BorderBrushLayer}" />
         <Grid>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="30"/>
+                <RowDefinition Height="25"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Right"
-                        Grid.Column="2">
-                
-            </StackPanel>
-            <customControls:WindowControlBar />
+            
+            <customControls:PopupControlBar />
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Border Grid.Column="1" Padding="30 20 30 0">
+                <Border Grid.Column="0" Padding="30 20 30 0">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition />
-                            <RowDefinition />
+
                             <!--<RowDefinition Height="120"/>-->
                         </Grid.RowDefinitions>
 
@@ -65,42 +61,29 @@
                                   Style="{StaticResource MaterialDesignOutlinedComboBox}">
                         </ComboBox>
 
-                        <ComboBox Grid.Row="2"
-                                  VerticalAlignment="Top"
-                                  md:HintAssist.Hint="Công nghệ"
-                                  md:TextFieldAssist.HasClearButton="True"
-                                  ItemsSource="{Binding Technologies}"
-                                  SelectedValue="{Binding Technology}"
-                                  Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                        </ComboBox>
                     </Grid>
                 </Border>
 
-                <Border Grid.Column="0" Padding="30 20 30 0">
+                <Border Grid.Column="1" Padding="30 20 30 0">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition />
-                            <RowDefinition />
-                            
+
                         </Grid.RowDefinitions>
 
-                        <TextBox Grid.Row="0"
-                                 VerticalAlignment="Top"
-                                 md:HintAssist.Hint="MSSV"
-                                 Style="{StaticResource MaterialDesignOutlinedTextBox}" />
-                        <ComboBox Grid.Row="1"
+                        <ComboBox Grid.Row="0"
                                   VerticalAlignment="Top"
                                   ItemsSource="{Binding Category}"
                                   SelectedValue="{Binding Category}"
-                                  md:HintAssist.Hint="Tên"
+                                  md:HintAssist.Hint="Công nghệ"
                                   md:TextFieldAssist.HasClearButton="True"
                                   Style="{StaticResource MaterialDesignOutlinedComboBox}">
                         </ComboBox>
 
                         <ComboBox Grid.Row="2"
                                   VerticalAlignment="Top"
-                                  md:HintAssist.Hint="Giáo viên đề nghị"
+                                  md:HintAssist.Hint="Giảng viên"
                                   md:TextFieldAssist.HasClearButton="True"
                                   ItemsSource="{Binding Technologies}"
                                   SelectedValue="{Binding Technology}"
@@ -110,11 +93,11 @@
                 </Border>
             </Grid>
             <TextBox Grid.Row="2"
-                     
+
                      VerticalAlignment="Top"
                      Height="80"
                      Text="" 
-                     md:HintAssist.Hint="Mô tả"
+                     md:HintAssist.Hint="Chú thích"
                      AcceptsReturn="True"
                      IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
