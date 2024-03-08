@@ -15,31 +15,29 @@
                 
     <UserControl.Resources>
         <viewModels:TopicsVM x:Key="TopicsVM" />
-        <Style x:Key="ExpanderHeaderStyle" TargetType="TextBlock">
-            <Setter Property="Background" Value="LightBlue" />
+        <Style x:Key="A" TargetType="TextBlock">
+            <Setter Property="Background" Value="#81d4fa"/>
         </Style>
-        <viewModels:TopicVM x:Key="TopicVM"/>
+        <Style x:Key="B" TargetType="TextBlock">
+            <Setter Property="Background" Value="#81C784" />
+        </Style>
+        <Style x:Key="C" TargetType="TextBlock">
+            <Setter Property="Background" Value="Red" />
+        </Style>
+        <viewModels:TopicsVM x:Key="TopicVM"/>
     </UserControl.Resources>
     
     <Grid>
         
-        <!--<Expander materialDesign:ExpanderAssist.VerticalHeaderPadding="0,0,0,5" ExpandDirection="Down">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Expander  IsExpanded="False" Grid.Row="0">
             <Expander.Header>
-                <TextBlock RenderTransformOrigin=".5,.5" Text="Đang chờ duyệt">
-                    <TextBlock.LayoutTransform>
-                        <RotateTransform Angle="0" />
-                    </TextBlock.LayoutTransform>
-                </TextBlock>
-            </Expander.Header>
-            <StackPanel Orientation="Horizontal" Margin="10">
-               
-                <TextBlock Text="Sample content inside the Expander" />
-                
-            </StackPanel>-->
-        <!--</Expander>-->
-        <Expander  IsExpanded="False">
-            <Expander.Header>
-                <TextBlock Text="Chờ duyệt" Style="{StaticResource ExpanderHeaderStyle}" MinHeight="40" Width="700"/>
+                <TextBlock Text="Chờ duyệt" Style="{StaticResource A}" MinHeight="40" Width="700"/>
             </Expander.Header>
             <ListView Grid.Row="1"
                       MouseLeftButtonUp="ListViewItem_Click"
@@ -92,6 +90,115 @@
                 </ListView.View>
             </ListView>
         </Expander>
-        
+        <Expander  IsExpanded="False" Grid.Row="1">
+            <Expander.Header>
+                <TextBlock Text="Đã chấp nhận" Style="{StaticResource B}" MinHeight="40" Width="700"/>
+            </Expander.Header>
+            <ListView Grid.Row="1"
+              MouseLeftButtonUp="ListViewItem_Click"
+              Name=""
+              DataContext="{StaticResource TopicsVM}"
+              ItemsSource="{Binding Topics}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="200"
+                     DisplayMemberBinding="{Binding Name}" >
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Đề tài" />
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="180"
+                    DisplayMemberBinding="{Binding Category}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Thể loại" />
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+
+                        <GridViewColumn Width="180"
+                    DisplayMemberBinding="{Binding Name}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Công nghệ" />
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+
+                        <GridViewColumn Width="180"
+                    DisplayMemberBinding="{Binding Name}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Giảng viên" />
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="60">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <customControls:ControlButton DefaultColor="{StaticResource danger}"
+                                      HoverColor="{StaticResource dangerHover}"
+                                      Width="30"
+                                      Command="{Binding DeleteCommand}">
+                                        <customControls:ControlButton.Content>
+                                            <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
+                                        </customControls:ControlButton.Content>
+                                    </customControls:ControlButton>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Expander>
+        <Expander  IsExpanded="False" Grid.Row="2">
+            <Expander.Header>
+                <TextBlock Text="Đã từ chối" Style="{StaticResource C}" MinHeight="40" Width="700"/>
+            </Expander.Header>
+            <ListView Grid.Row="1"
+              MouseLeftButtonUp="ListViewItem_Click"
+              Name="A"
+              DataContext="{StaticResource TopicsVM}"
+              ItemsSource="{Binding Topics}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="200"
+                     DisplayMemberBinding="{Binding Name}" >
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Đề tài" />
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="180"
+                    DisplayMemberBinding="{Binding Category}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Thể loại" />
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+
+                        <GridViewColumn Width="180"
+                    DisplayMemberBinding="{Binding Name}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Công nghệ" />
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+
+                        <GridViewColumn Width="180"
+                    DisplayMemberBinding="{Binding Name}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Giảng viên" />
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="60">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <customControls:ControlButton DefaultColor="{StaticResource danger}"
+                                      HoverColor="{StaticResource dangerHover}"
+                                      Width="30"
+                                      Command="{Binding DeleteCommand}">
+                                        <customControls:ControlButton.Content>
+                                            <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
+                                        </customControls:ControlButton.Content>
+                                    </customControls:ControlButton>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Expander>
     </Grid>
 </UserControl>

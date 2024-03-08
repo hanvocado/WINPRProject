@@ -17,7 +17,7 @@
             HorizontalContentAlignment="Left"
             Style="{StaticResource MaterialDesignUniformTabControl}">
             <TabItem Header="Tôi">
-                <userControls:MyTopics/>                
+                <userControls:Pending/>                
             </TabItem>
 
             <TabItem Header="Giảng viên">
