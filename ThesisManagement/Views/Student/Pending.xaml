@@ -47,7 +47,7 @@
         </Grid.RowDefinitions>
         <Expander  IsExpanded="False" Grid.Row="0" HorizontalAlignment="Stretch" Background="Transparent">
             <Expander.Header>
-                <TextBlock Text="Chờ duyệt" Style="{StaticResource A}" MinHeight="40" Margin="-23,10,-63,0"/>
+                <TextBlock Text="Chờ duyệt" Style="{StaticResource A}" MinHeight="40" Margin="-23,0,-63,0"/>
             </Expander.Header>
             <ListView Grid.Row="1"
                       Name="AdminsListView"
