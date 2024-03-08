@@ -135,7 +135,6 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteDeleteCommand(object parameter)
         {
-            MessageBox.Show("Hi");
             Topic topic = new Topic
             {
                 Id = selectedTopic.Id,
@@ -144,8 +143,9 @@ namespace ThesisManagement.ViewModels
                 Technology = selectedTopic.Technology,
                 Description = selectedTopic.Description
             };
-            MessageBox.Show($"{topic.Id},{topic.Name}, {topic.Category}, {topic.Technology}, {topic.Description}");
+            //MessageBox.Show($"{topic.Id},{topic.Name}, {topic.Category}, {topic.Technology}, {topic.Description}");
             _topicRepo.Delete(topic.Id);
+            Topics = _topicRepo.GetAll();
         }
 
         private void FilterData()
