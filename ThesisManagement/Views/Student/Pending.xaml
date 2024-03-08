@@ -13,6 +13,10 @@
              mc:Ignorable="d"
              Background="White">
 
+    <UserControl.DataContext>
+        <viewModels:MyTopicsVM />
+    </UserControl.DataContext>
+
     <UserControl.Resources>
         <Style x:Key="A" TargetType="TextBlock">
             <Setter Property="Background" Value="#5aedff"/>
@@ -47,52 +51,37 @@
         </Grid.RowDefinitions>
         <Expander  IsExpanded="False" Grid.Row="0" HorizontalAlignment="Stretch" Background="Transparent">
             <Expander.Header>
-                <TextBlock Text="Chờ duyệt" Style="{StaticResource A}" MinHeight="40" Margin="-23,10,-63,0"/>
+                <TextBlock Text="Chờ duyệt" Style="{StaticResource A}" MinHeight="40" Margin="-23,0,-63,0"/>
             </Expander.Header>
             <ListView Grid.Row="1"
-                      Name="AdminsListView"
-                      ItemsSource="{Binding Topics}">
+                      ItemsSource="{Binding WaitingTopics}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Width="200"
-                             DisplayMemberBinding="{Binding Name}" >
+                             DisplayMemberBinding="{Binding Topic.Name}" >
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Đề tài" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
                         <GridViewColumn Width="180"
-                            DisplayMemberBinding="{Binding Category}">
+                            DisplayMemberBinding="{Binding StudentId}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Thể loại" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
 
                         <GridViewColumn Width="180"
-                            DisplayMemberBinding="{Binding Name}">
+                            DisplayMemberBinding="{Binding Topic.Technology}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Công nghệ" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
 
                         <GridViewColumn Width="180"
-                            DisplayMemberBinding="{Binding Name}">
+                            DisplayMemberBinding="{Binding Topic.Professor.Name}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Giảng viên" />
                             </GridViewColumn.Header>
-                        </GridViewColumn>
-                        <GridViewColumn Width="60">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <customControls:ControlButton DefaultColor="{StaticResource danger}"
-                                              HoverColor="{StaticResource dangerHover}"
-                                              Width="30"
-                                              Command="{Binding DeleteCommand}">
-                                        <customControls:ControlButton.Content>
-                                            <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
-                                        </customControls:ControlButton.Content>
-                                    </customControls:ControlButton>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                     </GridView>
                 </ListView.View>
@@ -103,48 +92,34 @@
                 <TextBlock Text="Đã chấp nhận" Style="{StaticResource B}" MinHeight="40" Margin="-23,0,-63,0"  />
             </Expander.Header>
             <ListView Grid.Row="1"
-              ItemsSource="{Binding Topics}">
+              ItemsSource="{Binding ApprovedTopics}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Width="200"
-                     DisplayMemberBinding="{Binding Name}" >
+                 DisplayMemberBinding="{Binding Topic.Name}" >
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Đề tài" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
                         <GridViewColumn Width="180"
-                    DisplayMemberBinding="{Binding Category}">
+                DisplayMemberBinding="{Binding Topic.Category}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Thể loại" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
 
                         <GridViewColumn Width="180"
-                    DisplayMemberBinding="{Binding Technology}">
+                DisplayMemberBinding="{Binding Topic.Technology}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Công nghệ" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
 
                         <GridViewColumn Width="180"
-                    DisplayMemberBinding="{Binding Professor.Name}">
+                DisplayMemberBinding="{Binding Topic.Professor.Name}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Giảng viên" />
                             </GridViewColumn.Header>
-                        </GridViewColumn>
-                        <GridViewColumn Width="60">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <customControls:ControlButton DefaultColor="{StaticResource danger}"
-                                      HoverColor="{StaticResource dangerHover}"
-                                      Width="30"
-                                      Command="{Binding DeleteCommand}">
-                                        <customControls:ControlButton.Content>
-                                            <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
-                                        </customControls:ControlButton.Content>
-                                    </customControls:ControlButton>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                     </GridView>
                 </ListView.View>
@@ -157,48 +132,34 @@
             <ListView Grid.Row="1"
               
               Name="A"
-              ItemsSource="{Binding Topics}">
+              ItemsSource="{Binding RejectedTopics}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Width="200"
-                     DisplayMemberBinding="{Binding Name}" >
+                 DisplayMemberBinding="{Binding Topic.Name}" >
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Đề tài" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
                         <GridViewColumn Width="180"
-                    DisplayMemberBinding="{Binding Category}">
+                DisplayMemberBinding="{Binding Topic.Category}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Thể loại" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
 
                         <GridViewColumn Width="180"
-                    DisplayMemberBinding="{Binding Name}">
+                DisplayMemberBinding="{Binding Topic.Technology}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Công nghệ" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
 
                         <GridViewColumn Width="180"
-                    DisplayMemberBinding="{Binding Name}">
+                DisplayMemberBinding="{Binding Topic.Professor.Name}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Giảng viên" />
                             </GridViewColumn.Header>
-                        </GridViewColumn>
-                        <GridViewColumn Width="60">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <customControls:ControlButton DefaultColor="{StaticResource danger}"
-                                      HoverColor="{StaticResource dangerHover}"
-                                      Width="30"
-                                      Command="{Binding DeleteCommand}">
-                                        <customControls:ControlButton.Content>
-                                            <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
-                                        </customControls:ControlButton.Content>
-                                    </customControls:ControlButton>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                     </GridView>
                 </ListView.View>

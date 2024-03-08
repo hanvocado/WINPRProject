@@ -12,7 +12,7 @@
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
     <UserControl.DataContext>
-        <viewModels:TopicsVM/>
+        <viewModels:TopicsViewModel/>
     </UserControl.DataContext>
 
     <Grid>
@@ -37,8 +37,8 @@
                       Padding="10"
                       Margin="0,0,20,0"
                       Width="200"
-                      ItemsSource="{Binding }"
-                      SelectedValue=""
+                      ItemsSource="{Binding Categories}"
+                      SelectedValue="{Binding Category}"
                       md:HintAssist.Hint="Thể loại"
                       md:TextFieldAssist.HasClearButton="True"
                       Style="{StaticResource MaterialDesignOutlinedComboBox}">
@@ -48,8 +48,8 @@
                           Padding="10"
                           Margin="0,0,20,0"
                           Width="200"
-                          ItemsSource="{Binding }"
-                          SelectedValue=""
+                          ItemsSource="{Binding Technologies}"
+                          SelectedValue="{Binding Technology}"
                           md:HintAssist.Hint="Công nghệ"
                           md:TextFieldAssist.HasClearButton="True"
                           Style="{StaticResource MaterialDesignOutlinedComboBox}">
@@ -58,9 +58,9 @@
                 <ComboBox VerticalAlignment="Center"
                           Padding="10"
                           Width="200"
-                          ItemsSource="{Binding }"
-                          SelectedValue=""
-                          md:HintAssist.Hint="Giáo viên"
+                          ItemsSource="{Binding Professors}"
+                          SelectedValue="{Binding Professor}"
+                          md:HintAssist.Hint="Giảng viên"
                           md:TextFieldAssist.HasClearButton="True"
                           Style="{StaticResource MaterialDesignOutlinedComboBox}">
                 </ComboBox>
@@ -70,7 +70,7 @@
             <customControls:ControlButton Grid.Column="1"
                                           DefaultColor="{StaticResource primaryBrush}"
                                           HoverColor="{StaticResource secondaryBrush}"
-                                          Command="{Binding CreateCommand}"
+                                          Command="{Binding StudentCreateTopic}"
                                           Width="80">
                 <customControls:ControlButton.Content>
                     <TextBlock Text="+ Đề xuất" Style="{StaticResource btnContent}"/>
@@ -79,7 +79,7 @@
 
         </Grid>
 
-        <Border Grid.Row="1">
+        <Border Grid.Row="1" >
 
             <ListView Grid.Row="1"
               Name="AdminsListView"

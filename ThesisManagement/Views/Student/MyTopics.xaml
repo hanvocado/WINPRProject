@@ -13,10 +13,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
-    <UserControl.Resources>
-        <viewModels:TopicsVM x:Key="TopicsVM" />
-        <!--<viewModels:TopicVM x:Key="TopicVM"/>-->
-    </UserControl.Resources>
+    <UserControl.DataContext>
+        <viewModels:MyTopicsVM />
+    </UserControl.DataContext>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -41,8 +40,7 @@
                   Padding="10"
                   Margin="0,0,20,0"
                   Width="200"
-                  ItemsSource="{Binding Category}"
-                  SelectedValue="{Binding Categories}"
+                  ItemsSource="{Binding Categories}"
                   md:HintAssist.Hint="Thể loại"
                   md:TextFieldAssist.HasClearButton="True"
                   Style="{StaticResource MaterialDesignOutlinedComboBox}">

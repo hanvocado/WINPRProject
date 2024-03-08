@@ -12,7 +12,7 @@ using ThesisManagement.Repositories.EF;
 namespace ThesisManagement.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240307055109_Initial")]
+    [Migration("20240308040305_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -78,6 +78,101 @@ namespace ThesisManagement.Migrations
                         });
                 });
 
+            modelBuilder.Entity("ThesisManagement.Models.Student", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("Birthday")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasMaxLength(12)
+                        .HasColumnType("nvarchar(12)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.ToTable("Students");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "S1",
+                            Birthday = new DateTime(2000, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "scott@example.com",
+                            Name = "Boe Scott",
+                            Password = "hashed_password3",
+                            Phone = "123-456-7890"
+                        },
+                        new
+                        {
+                            Id = "S2",
+                            Birthday = new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "smith@example.com",
+                            Name = "Arian Smith",
+                            Password = "hashed_password4",
+                            Phone = "987-654-3210"
+                        });
+                });
+
+            modelBuilder.Entity("ThesisManagement.Models.StudentTopic", b =>
+                {
+                    b.Property<string>("StudentId")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("TopicId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("StudentId", "TopicId");
+
+                    b.HasIndex("TopicId");
+
+                    b.ToTable("StudentTopics");
+
+                    b.HasData(
+                        new
+                        {
+                            StudentId = "S1",
+                            TopicId = 1,
+                            Status = "Approved"
+                        },
+                        new
+                        {
+                            StudentId = "S1",
+                            TopicId = 2,
+                            Status = "Rejected"
+                        },
+                        new
+                        {
+                            StudentId = "S1",
+                            TopicId = 3,
+                            Status = "Waiting"
+                        });
+                });
+
             modelBuilder.Entity("ThesisManagement.Models.Topic", b =>
                 {
                     b.Property<int>("Id")
@@ -103,7 +198,7 @@ namespace ThesisManagement.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("StudentId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Technology")
                         .HasMaxLength(100)
@@ -112,6 +207,8 @@ namespace ThesisManagement.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ProfessorId");
+
+                    b.HasIndex("StudentId");
 
                     b.ToTable("Topics");
 
@@ -145,11 +242,34 @@ namespace ThesisManagement.Migrations
                         });
                 });
 
+            modelBuilder.Entity("ThesisManagement.Models.StudentTopic", b =>
+                {
+                    b.HasOne("ThesisManagement.Models.Student", "Student")
+                        .WithMany("StudentTopics")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ThesisManagement.Models.Topic", "Topic")
+                        .WithMany("StudentTopics")
+                        .HasForeignKey("TopicId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Student");
+
+                    b.Navigation("Topic");
+                });
+
             modelBuilder.Entity("ThesisManagement.Models.Topic", b =>
                 {
                     b.HasOne("ThesisManagement.Models.Professor", "Professor")
                         .WithMany("Topics")
                         .HasForeignKey("ProfessorId");
+
+                    b.HasOne("ThesisManagement.Models.Student", null)
+                        .WithMany("Topics")
+                        .HasForeignKey("StudentId");
 
                     b.Navigation("Professor");
                 });
@@ -157,6 +277,18 @@ namespace ThesisManagement.Migrations
             modelBuilder.Entity("ThesisManagement.Models.Professor", b =>
                 {
                     b.Navigation("Topics");
+                });
+
+            modelBuilder.Entity("ThesisManagement.Models.Student", b =>
+                {
+                    b.Navigation("StudentTopics");
+
+                    b.Navigation("Topics");
+                });
+
+            modelBuilder.Entity("ThesisManagement.Models.Topic", b =>
+                {
+                    b.Navigation("StudentTopics");
                 });
 #pragma warning restore 612, 618
         }
