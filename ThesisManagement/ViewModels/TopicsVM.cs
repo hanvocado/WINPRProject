@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
@@ -11,9 +12,10 @@ namespace ThesisManagement.ViewModels
         private readonly ITopicRepository _topicRepo;
 
         private Topic Topic = new Topic();
+        private ObservableCollection<Topic> topics { get; set; }
 
-        //public IEnumerable<Topic> topics;
-        //public IEnumerable<Topic> Topics
+        //public ObservableCollection<Topic> topics;
+        //public ObservableCollection<Topic> Topics
         //{
         //    get
         //    {
@@ -86,7 +88,7 @@ namespace ThesisManagement.ViewModels
             //Topics = _topicRepo.GetAll();
 
         }
-        
+
         private void ExecuteYourButtonCommand(object parameter)
         {
             Views.Student.TopicView topicView = new Views.Student.TopicView();
