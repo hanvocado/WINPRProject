@@ -12,6 +12,9 @@ namespace ThesisManagement.Repositories
         void Delete(int id);
         IEnumerable<StudentTopic> GetAll();
         IEnumerable<StudentTopic> Get(string studentId, string status);
+        IEnumerable<Student> GetMembers(int topicId);
+
+        void AddMembers(int topicId, IEnumerable<Student> members);
 
         bool CanRegisterTopic(string studentId);
 
@@ -58,6 +61,21 @@ namespace ThesisManagement.Repositories
         }
 
         public void Update(StudentTopic topic)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddMembers(int topicId, IEnumerable<Student> members)
+        {
+            var studentTopics = new List<StudentTopic>();
+            foreach (Student member in members)
+            {
+                studentTopics.Add(new StudentTopic() { StudentId = member.Id, TopicId = topicId, Status = Variable.StudentTopic.Waiting });
+            }
+            _context.StudentTopics.AddRange(studentTopics);
+        }
+
+        public IEnumerable<Student> GetMembers(int topicId)
         {
             throw new NotImplementedException();
         }
