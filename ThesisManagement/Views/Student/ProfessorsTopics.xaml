@@ -67,12 +67,21 @@
 
             </StackPanel>
 
+            <customControls:ControlButton Grid.Column="1"
+                                          DefaultColor="{StaticResource primaryBrush}"
+                                          HoverColor="{StaticResource secondaryBrush}"
+                                          Command="{Binding CreateCommand}"
+                                          Width="80">
+                <customControls:ControlButton.Content>
+                    <TextBlock Text="+ Đề xuất" Style="{StaticResource btnContent}"/>
+                </customControls:ControlButton.Content>
+            </customControls:ControlButton>
+
         </Grid>
 
         <Border Grid.Row="1">
 
             <ListView Grid.Row="1"
-              MouseLeftButtonUp="ListViewItem_Click"
               Name="AdminsListView"
               ItemsSource="{Binding Topics}">
                 <ListView.View>

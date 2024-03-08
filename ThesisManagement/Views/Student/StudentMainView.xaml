@@ -73,12 +73,8 @@
                     <customControl:WindowControlBar />
 
                     <ContentControl Grid.Row="1"
-                                Margin="20 5 0 0">
+                                    Margin="20 5 20 0">
                         <local:TopicsView />
-                    </ContentControl>
-                    <ContentControl Grid.Row="1"
-                                    Margin="20 5 0 0">
-                        
                     </ContentControl>
                     
                 </Grid>
