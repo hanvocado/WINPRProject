@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:ThesisManagement.Views.Shared"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
+        xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
         mc:Ignorable="d"
         Title="LoginView" Height="550" Width="500"
         WindowStartupLocation="CenterScreen"
@@ -14,7 +15,9 @@
         MouseDown="Window_MouseDown"
         Background="Transparent"
         AllowsTransparency="True">
-
+    <Window.Resources>
+        <!--<viewModels:LoginVM x:Key="LoginVM"/>-->
+    </Window.Resources>
     <Border Background="#202a6a">
         <Border BorderThickness="0">
                 <Border.Background>
