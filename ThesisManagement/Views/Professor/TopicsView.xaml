@@ -90,7 +90,7 @@
                       MouseLeftButtonUp="ListViewItem_Click"
                       Name="TopicListView"
                       ItemsSource="{Binding Topics}"
-                      SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                      SelectedItem="{Binding SelectedTopic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Width="0" x:Name="id"
@@ -120,8 +120,7 @@
                                     <customControls:ControlButton DefaultColor="{StaticResource danger}"
                                                                   HoverColor="{StaticResource dangerHover}"
                                                                   Width="30"
-                                                                  Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
-                                                                  CommandParameter="{Binding SelectedItem.Id, ElementName=TopicListView}">
+                                                                  Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
                                         <customControls:ControlButton.Content>
                                             <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
                                         </customControls:ControlButton.Content>
@@ -131,6 +130,11 @@
                         </GridViewColumn>
                     </GridView>
                 </ListView.View>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <EventSetter Event="MouseEnter" Handler="ListViewItem_MouseEnter" />
+                    </Style>
+                </ListView.ItemContainerStyle>
             </ListView>
 
         </Border>

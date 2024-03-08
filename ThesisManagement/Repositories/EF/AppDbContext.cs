@@ -8,6 +8,9 @@ namespace ThesisManagement.Repositories.EF
         public AppDbContext(DbContextOptions<AppDbContext> opts) : base(opts) { }
         public DbSet<Topic> Topics { get; set; }
         public DbSet<Professor> Professors { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<StudentTopic> StudentTopics { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,6 +34,27 @@ namespace ThesisManagement.Repositories.EF
                     Password = "hashed_password2",
                     Phone = "987-654-3210",
                     Birthday = new DateTime(1975, 5, 15)
+                }
+            );
+
+            modelBuilder.Entity<Student>().HasData(
+                new Student
+                {
+                    Id = "S1",
+                    Name = "Boe Scott",
+                    Email = "scott@example.com",
+                    Password = "hashed_password3",
+                    Phone = "123-456-7890",
+                    Birthday = new DateTime(2000, 1, 3)
+                },
+                new Student
+                {
+                    Id = "S2",
+                    Name = "Arian Smith",
+                    Email = "smith@example.com",
+                    Password = "hashed_password4",
+                    Phone = "987-654-3210",
+                    Birthday = new DateTime(2001, 5, 22)
                 }
             );
 
@@ -67,6 +91,44 @@ namespace ThesisManagement.Repositories.EF
                     Description = "Exploring algorithms for predictive modeling",
                     Category = "Data Science",
                     Technology = "Python"
+                }
+            );
+
+            modelBuilder.Entity<StudentTopic>(entity =>
+            {
+                entity.HasKey(studenttopic => new
+                {
+                    studenttopic.StudentId,
+                    studenttopic.TopicId,
+                });
+                entity.HasOne(st => st.Student)
+                .WithMany(student => student.StudentTopics)
+                .HasForeignKey(student => student.StudentId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(tp => tp.Topic)
+                                .WithMany(topic => topic.StudentTopics)
+                                .HasForeignKey(student => student.TopicId)
+                                .OnDelete(DeleteBehavior.Restrict);
+            });
+            modelBuilder.Entity<StudentTopic>().HasData(
+                new StudentTopic
+                {
+                    StudentId = "S1",
+                    TopicId = 1,
+                    Status = "Approveled"
+                },
+                new StudentTopic
+                {
+                    StudentId = "S2",
+                    TopicId = 2,
+                    Status = "Rejected"
+                },
+                new StudentTopic
+                {
+                    StudentId = "S1",
+                    TopicId = 2,
+                    Status = "Waiting"
                 }
             );
         }

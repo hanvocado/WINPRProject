@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using ThesisManagement.Models;
 using ThesisManagement.ViewModels;
 
@@ -53,6 +54,25 @@ namespace ThesisManagement.Views.Professor
         {
             var topic = (Topic)obj;
             return topic.Name.Contains(FilterTexbox.Text, StringComparison.OrdinalIgnoreCase);
+        }
+
+        private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)
+        {
+            var listViewItem = sender as ListViewItem;
+            var topic = listViewItem?.DataContext as Topic;
+            TopicsViewModel dataContext = this.DataContext as TopicsViewModel ?? new TopicsViewModel();
+            if (topic != null)
+            {
+                dataContext.SelectedTopic = new Topic
+                {
+                    Id = topic.Id,
+                    Name = topic.Name,
+                    Category = topic.Category,
+                    Technology = topic.Technology,
+                    Description = topic.Description
+                };
+                //MessageBox.Show($"{topicVM.SelectedTopic.Id},{topicVM.SelectedTopic.Name} ,  {topicVM.SelectedTopic.Category} ,  {topicVM.SelectedTopic.Technology} ,  {topicVM.SelectedTopic.Description}");
+            }
         }
     }
 }

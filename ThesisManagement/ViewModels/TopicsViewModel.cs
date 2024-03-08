@@ -135,10 +135,16 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteDeleteCommand(object parameter)
         {
-            if (parameter is int selectedId)
+            Topic topic = new Topic
             {
-                _topicRepo.Delete(selectedId);
-            }
+                Id = selectedTopic.Id,
+                Name = selectedTopic.Name,
+                Category = selectedTopic.Category,
+                Technology = selectedTopic.Technology,
+                Description = selectedTopic.Description
+            };
+            //MessageBox.Show($"{topic.Id},{topic.Name}, {topic.Category}, {topic.Technology}, {topic.Description}");
+            _topicRepo.Delete(topic.Id);
             Topics = _topicRepo.GetAll();
         }
 

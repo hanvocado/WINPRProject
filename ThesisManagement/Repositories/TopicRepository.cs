@@ -34,7 +34,8 @@ namespace ThesisManagement.Repositories
 
         public void Update(Topic topic)
         {
-
+            _context.Update(topic);
+            DbSave();
         }
 
         public void Delete(int id)
