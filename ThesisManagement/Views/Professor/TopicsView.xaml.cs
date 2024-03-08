@@ -60,20 +60,18 @@ namespace ThesisManagement.Views.Professor
         {
             var listViewItem = sender as ListViewItem;
             var topic = listViewItem?.DataContext as Topic;
+            TopicsViewModel dataContext = this.DataContext as TopicsViewModel ?? new TopicsViewModel();
             if (topic != null)
             {
-                TopicVM topicVM = new TopicVM
+                dataContext.SelectedTopic = new Topic
                 {
-                    SelectedTopic = new Topic
-                    {
-                        Id = topic.Id,
-                        Name = topic.Name,
-                        Category = topic.Category,
-                        Technology = topic.Technology,
-                        Description = topic.Description
-                    }
+                    Id = topic.Id,
+                    Name = topic.Name,
+                    Category = topic.Category,
+                    Technology = topic.Technology,
+                    Description = topic.Description
                 };
-               //MessageBox.Show($"{topicVM.SelectedTopic.Id},{topicVM.SelectedTopic.Name} ,  {topicVM.SelectedTopic.Category} ,  {topicVM.SelectedTopic.Technology} ,  {topicVM.SelectedTopic.Description}");
+                //MessageBox.Show($"{topicVM.SelectedTopic.Id},{topicVM.SelectedTopic.Name} ,  {topicVM.SelectedTopic.Category} ,  {topicVM.SelectedTopic.Technology} ,  {topicVM.SelectedTopic.Description}");
             }
         }
     }
