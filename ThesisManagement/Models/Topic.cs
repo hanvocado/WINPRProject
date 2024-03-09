@@ -8,7 +8,8 @@ namespace ThesisManagement.Models
         public int Id { get; set; }
 
         [StringLength(20)]
-        public string? ProfessorId { get; set; }
+        [Required]
+        public string ProfessorId { get; set; }
 
         public string? StudentId { get; set; }
 
@@ -24,7 +25,7 @@ namespace ThesisManagement.Models
         [StringLength(100)]
         public string? Technology { get; set; }
 
-        public Professor? Professor { get; set; }
+        public Professor Professor { get; set; }
         public ICollection<StudentTopic>? StudentTopics { get; set; }
 
     }

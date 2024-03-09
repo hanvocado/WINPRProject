@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+
+    <Style x:Key="CustomExpanderStyle" TargetType="{x:Type Expander}">
+        <Setter Property="Background" Value="#FF2196F3"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="BorderBrush" Value="#FF2196F3"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <!-- ... other style setters ... -->
+
+        <!--<Setter Property="Template">
+            <Setter.Value>
+                  
+            </Setter.Value>
+        </Setter>-->
+    </Style>
+
+</ResourceDictionary>

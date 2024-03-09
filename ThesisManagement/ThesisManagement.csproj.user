@@ -67,6 +67,9 @@
     <Compile Update="Views\Student\MyTopics.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Student\Pending.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Student\ProfessorsTopics.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -106,6 +109,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Resources\Styles\DataGrid.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\Styles\ExpenderStyle.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Resources\Styles\Styles.xaml">
@@ -166,6 +172,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Student\MyTopics.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Student\Pending.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Student\ProfessorsTopics.xaml">

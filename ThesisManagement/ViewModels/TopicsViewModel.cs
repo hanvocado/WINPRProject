@@ -5,6 +5,8 @@ using ThesisManagement.Models;
 using ThesisManagement.Repositories;
 using ProfessorTopicsView = ThesisManagement.Views.Professor.TopicsView;
 using ProfessorTopicView = ThesisManagement.Views.Professor.TopicView;
+using StudentTopicsView = ThesisManagement.Views.Student.TopicsView;
+using StudentTopicView = ThesisManagement.Views.Student.TopicView;
 
 namespace ThesisManagement.ViewModels
 {
@@ -24,6 +26,7 @@ namespace ThesisManagement.ViewModels
         public IEnumerable<string> Technologies { get; set; } = new List<string>() { "JavaScript", "Wpf", ".NET", "Java", "Python", "SQL", "ASP.NET Core", "Other" };
 
         public ICommand ProfessorCreateTopic { get; set; }
+        public ICommand StudentCreateTopic { get; set; }
         public ICommand CreateCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand SaveCommand { get; set; }
@@ -90,6 +93,7 @@ namespace ThesisManagement.ViewModels
             _topicRepo = new TopicRepository();
             Topics = _topicRepo.GetAll();
             ProfessorCreateTopic = new ViewModelCommand(ExecuteProfessorCreateCommand);
+            StudentCreateTopic = new ViewModelCommand(ExecuteStudentCreateCommand);
             CreateCommand = new ViewModelCommand(ExecuteCreateCommand);
             DeleteCommand = new ViewModelCommand(ExecuteDeleteCommand);
         }
@@ -103,6 +107,21 @@ namespace ThesisManagement.ViewModels
                 topicsView.DataContext = vm;
             }
             ProfessorTopicView topicView = new();
+            topicView.DataContext = vm;
+            topicView.Owner = Application.Current.MainWindow;
+            topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            topicView.Show();
+        }
+
+        private void ExecuteStudentCreateCommand(object sender)
+        {
+            var vm = new TopicsViewModel();
+            StudentTopicsView topicsView = sender as StudentTopicsView;
+            if (topicsView != null)
+            {
+                topicsView.DataContext = vm;
+            }
+            StudentTopicView topicView = new();
             topicView.DataContext = vm;
             topicView.Owner = Application.Current.MainWindow;
             topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -144,7 +163,6 @@ namespace ThesisManagement.ViewModels
                 Technology = selectedTopic.Technology,
                 Description = selectedTopic.Description
             };
-            //MessageBox.Show($"{topic.Id},{topic.Name}, {topic.Category}, {topic.Technology}, {topic.Description}");
             _topicRepo.Delete(topic.Id);
         }
 
