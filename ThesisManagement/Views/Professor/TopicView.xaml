@@ -8,6 +8,7 @@
         xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
         xmlns:local="clr-namespace:ThesisManagement.Views.Professor"
         mc:Ignorable="d"
+        x:Name="topicUC"
         Title="TopicView" Height="450" Width="400"
         Style="{StaticResource formStyle}">
 
@@ -78,6 +79,7 @@
                               Height="50"
                               FontSize="14"
                               Command="{Binding CreateCommand}"
+                              CommandParameter="{Binding ElementName=topicUC}"
                               Grid.Row="3"/>
             </Grid>
             

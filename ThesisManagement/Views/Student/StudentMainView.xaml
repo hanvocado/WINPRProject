@@ -16,7 +16,7 @@
     </Window.DataContext>
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModel:TopicsVM}">
-            <local:TopicsView />
+            <local:DetailFeedback />
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type viewModel:StudentsVM}">
@@ -95,7 +95,7 @@
                                     Content="{Binding CurrentChildView}">
                                     
                     </ContentControl>
-                    
+                                    
                 </Grid>
             </Border>
         </Grid>

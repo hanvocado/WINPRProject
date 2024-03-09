@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace ThesisManagement.ViewModels
 {
-    public class StudentMainVM:ViewModelBase
+    public class StudentMainVM : ViewModelBase
     {
         private ViewModelBase _currentChildView;
 

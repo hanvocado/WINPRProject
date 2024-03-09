@@ -9,14 +9,12 @@
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:userControls="clr-namespace:ThesisManagement.Views.Student"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
-             
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
-    <UserControl.Resources>
-        <viewModels:TopicsVM x:Key="TopicsVM" />
-        <!--<viewModels:TopicVM x:Key="TopicVM"/>-->
-    </UserControl.Resources>
+    <!--<UserControl.DataContext>
+        <viewModels:MyTopicsVM/>
+    </UserControl.DataContext>-->
 
     <Grid>
         <Grid.RowDefinitions>
@@ -41,8 +39,7 @@
                   Padding="10"
                   Margin="0,0,20,0"
                   Width="200"
-                  ItemsSource="{Binding Category}"
-                  SelectedValue="{Binding Categories}"
+                  ItemsSource="{Binding Categories}"
                   md:HintAssist.Hint="Thể loại"
                   md:TextFieldAssist.HasClearButton="True"
                   Style="{StaticResource MaterialDesignOutlinedComboBox}">
@@ -68,23 +65,14 @@
                       md:TextFieldAssist.HasClearButton="True"
                       Style="{StaticResource MaterialDesignOutlinedComboBox}">
                 </ComboBox>
-                
+
 
             </StackPanel>
-            <customControls:ControlButton Grid.Column="1"
-                              DefaultColor="{StaticResource primaryBrush}"
-                              HoverColor="{StaticResource secondaryBrush}"
-                              Command="{Binding CreateCommand}"
-                              Width="80">
-                <customControls:ControlButton.Content>
-                    <TextBlock Text="+Đề xuất" Style="{StaticResource btnContent}"/>
-                </customControls:ControlButton.Content>
-            </customControls:ControlButton>
 
         </Grid>
 
         <Border Grid.Row="1">
-            <local:Pending/>
+           
         </Border>
     </Grid>
 </UserControl>

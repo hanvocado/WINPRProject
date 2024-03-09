@@ -19,8 +19,8 @@ namespace ThesisManagement
 
         private void ShowProfessorWindow()
         {
-            ProfessorMainView professorMainView = new ProfessorMainView();
-            professorMainView.Show();
+            StudentMainView StudentMainView = new();
+                StudentMainView.Show();
         }
 
         private void ShowStudentWindow()
