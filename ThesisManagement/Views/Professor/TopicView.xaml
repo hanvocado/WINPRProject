@@ -78,7 +78,7 @@
                               Width="100"
                               Height="50"
                               FontSize="14"
-                              Command="{Binding CreateCommand}"
+                              Command="{Binding CreateOrUpdateCommand}"
                               CommandParameter="{Binding ElementName=topicUC}"
                               Grid.Row="3"/>
             </Grid>
