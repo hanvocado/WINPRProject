@@ -11,6 +11,23 @@
         Title="StudentMainView" Height="550" Width="900"
         WindowStartupLocation="CenterScreen"
         Style="{StaticResource windowStyle}">
+    <Window.DataContext>
+        <viewModel:StudentMainVM/>
+    </Window.DataContext>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:TopicsVM}">
+            <local:TopicsView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:StudentsVM}">
+            <local:DetailFeedback />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:ThesesVM}">
+            <local:SearchThesis />
+        </DataTemplate>
+
+    </Window.Resources>
     <Border CornerRadius="0">
         <Grid>
 
@@ -38,7 +55,7 @@
                         </RadioButton>
 
                         <RadioButton Style="{StaticResource navBtn}"
-                                 Command="{Binding ShowStudentView}">
+                                     Command="{Binding ShowThesisView}">
                             <RadioButton.ToolTip>
                                 <ToolTip Content="Luận văn" Style="{StaticResource navToolTip}" />
                             </RadioButton.ToolTip>
@@ -46,13 +63,13 @@
                         </RadioButton>
 
                         <RadioButton Style="{StaticResource navBtn}" 
-                                 Command="{Binding ShowThesisView}">
+                                 Command="{Binding ShowStudentProfileView}">
                             <RadioButton.ToolTip>
                                 <ToolTip Content="Hồ sơ" Style="{StaticResource navToolTip}" />
                             </RadioButton.ToolTip>
                             <fa:IconImage Icon="Book" Style="{StaticResource navIcon}" />
                         </RadioButton>
-                        
+
                         <RadioButton Style="{StaticResource navBtn}">
                             <RadioButton.ToolTip>
                                 <ToolTip Content="Đăng xuất" Style="{StaticResource navToolTip}" />
@@ -72,13 +89,11 @@
 
                     <customControl:WindowControlBar />
 
+                    
                     <ContentControl Grid.Row="1"
-                                Margin="20 5 0 0">
-                        <local:TopicsView />
-                    </ContentControl>
-                    <ContentControl Grid.Row="1"
-                                    Margin="20 5 0 0">
-                        
+                                    Margin="20 5 0 0"
+                                    Content="{Binding CurrentChildView}">
+                                    
                     </ContentControl>
                     
                 </Grid>

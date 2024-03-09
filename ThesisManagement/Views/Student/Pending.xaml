@@ -40,14 +40,15 @@
     <Grid>
         
         <Grid.RowDefinitions>
+            <RowDefinition Height="0"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Expander  IsExpanded="False" Grid.Row="0" HorizontalAlignment="Stretch" Background="Transparent">
+        <Expander  IsExpanded="False" Grid.Row="1" HorizontalAlignment="Stretch" Background="Transparent">
             <Expander.Header>
-                <TextBlock Text="Chờ duyệt" Style="{StaticResource A}" MinHeight="40" Margin="-23,10,-61,0"/>
+                <TextBlock Text="Chờ duyệt" Style="{StaticResource A}" MinHeight="40"  Margin="-23,0,-61,0"/>
             </Expander.Header>
             <ListView Grid.Row="1"
                       Name="AdminsListView"
@@ -98,7 +99,7 @@
                 </ListView.View>
             </ListView>
         </Expander>
-        <Expander  IsExpanded="False" Grid.Row="1" HorizontalAlignment="Stretch" Background="Transparent">
+        <Expander  IsExpanded="False" Grid.Row="2" HorizontalAlignment="Stretch" Background="Transparent">
             <Expander.Header>
                 <TextBlock Text="Đã chấp nhận" Style="{StaticResource B}" MinHeight="40" Margin="-23,0,-63,0"  />
             </Expander.Header>
@@ -150,9 +151,9 @@
                 </ListView.View>
             </ListView>
         </Expander>
-        <Expander  IsExpanded="False" Grid.Row="2" HorizontalAlignment="Stretch" Background="Transparent">
+        <Expander  IsExpanded="False" Grid.Row="3" HorizontalAlignment="Stretch" Background="Transparent">
             <Expander.Header>
-                <TextBlock Text="Đã từ chối" Style="{StaticResource C}" MinHeight="40" Margin="-24,0,-63,0"/>
+                <TextBlock Text="Đã từ chối" Style="{StaticResource C}" MinHeight="40" Margin="-23,0,-63,0"/>
             </Expander.Header>
             <ListView Grid.Row="1"
               

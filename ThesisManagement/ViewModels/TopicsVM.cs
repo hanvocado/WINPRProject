@@ -11,7 +11,7 @@ namespace ThesisManagement.ViewModels
     {
         private readonly ITopicRepository _topicRepo;
 
-        private Topic Topic = new Topic();
+        //private Topic Topic = new Topic();
         private ObservableCollection<Topic> topics { get; set; }
 
         //public ObservableCollection<Topic> topics;

@@ -15,9 +15,9 @@
         AllowsTransparency="True"
         Background="Transparent"
         Style="{StaticResource formStyle}">
-    <Window.DataContext>
-        <viewModels:TopicVM />
-    </Window.DataContext>
+    <!--<Window.DataContext>
+        
+    </Window.DataContext>-->
     <Grid>
 
         <Border Background="White"
@@ -72,21 +72,22 @@
 
                         </Grid.RowDefinitions>
 
-                        <ComboBox Grid.Row="0"
-                                  VerticalAlignment="Top"
-                                  ItemsSource="{Binding Category}"
-                                  SelectedValue="{Binding Category}"
-                                  md:HintAssist.Hint="Công nghệ"
-                                  md:TextFieldAssist.HasClearButton="True"
-                                  Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                        </ComboBox>
+                        
 
-                        <ComboBox Grid.Row="2"
+                        <ComboBox Grid.Row="0"
                                   VerticalAlignment="Top"
                                   md:HintAssist.Hint="Giảng viên"
                                   md:TextFieldAssist.HasClearButton="True"
                                   ItemsSource="{Binding Technologies}"
                                   SelectedValue="{Binding Technology}"
+                                  Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                        </ComboBox>
+                        <ComboBox Grid.Row="2"
+                                  VerticalAlignment="Top"
+                                  ItemsSource="{Binding Category}"
+                                  SelectedValue="{Binding Category}"
+                                  md:HintAssist.Hint="Công nghệ"
+                                  md:TextFieldAssist.HasClearButton="True"
                                   Style="{StaticResource MaterialDesignOutlinedComboBox}">
                         </ComboBox>
                     </Grid>
@@ -103,7 +104,7 @@
                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
                      TextWrapping="Wrap"
                      VerticalScrollBarVisibility="Auto"
-                     Margin="50, 5, 50, 5"/>
+                     Margin="30, 5, 30, 5"/>
             <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
                               HoverColor="{StaticResource secondaryBrush}"
                               Content="Gửi"
