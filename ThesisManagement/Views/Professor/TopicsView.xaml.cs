@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using ThesisManagement.Models;
 using ThesisManagement.ViewModels;
@@ -12,9 +13,11 @@ namespace ThesisManagement.Views.Professor
     public partial class TopicsView : UserControl
     {
         private TopicView currentTopicView;
+        public static bool IsTopicViewOpen { get; set; } = false;
         public TopicsView()
         {
             InitializeComponent();
+            TopicListView.ItemContainerGenerator.StatusChanged += OnListViewItemStatusChanged;
         }
 
         private void ListViewItem_Click(object sender, RoutedEventArgs e)
@@ -69,6 +72,9 @@ namespace ThesisManagement.Views.Professor
 
         private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)
         {
+            if (!Window.GetWindow(this).IsActive)
+                return;
+
             var listViewItem = sender as ListViewItem;
             var topic = listViewItem?.DataContext as Topic;
             TopicsViewModel dataContext = this.DataContext as TopicsViewModel ?? new TopicsViewModel();
@@ -85,6 +91,18 @@ namespace ThesisManagement.Views.Professor
                     Description = topic.Description
                 };
                 //MessageBox.Show($"{dataContext.SelectedTopic.Id},{dataContext.SelectedTopic.Name} ,  {dataContext.SelectedTopic.Category} ,  {dataContext.SelectedTopic.Technology} ,  {dataContext.SelectedTopic.Description}");
+            }
+        }
+
+        private void OnListViewItemStatusChanged(object sender, EventArgs e)
+        {
+            if (TopicListView.ItemContainerGenerator.Status == GeneratorStatus.ContainersGenerated)
+            {
+                foreach (var item in TopicListView.Items)
+                {
+                    ListViewItem listViewItem = (ListViewItem)TopicListView.ItemContainerGenerator.ContainerFromItem(item);
+                    listViewItem.MouseEnter += ListViewItem_MouseEnter;
+                }
             }
         }
     }

@@ -129,11 +129,6 @@
                         </GridViewColumn>
                     </GridView>
                 </ListView.View>
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <EventSetter Event="MouseEnter" Handler="ListViewItem_MouseEnter" />
-                    </Style>
-                </ListView.ItemContainerStyle>
             </ListView>
 
         </Border>
