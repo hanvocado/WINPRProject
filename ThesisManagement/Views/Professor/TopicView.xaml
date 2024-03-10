@@ -67,10 +67,13 @@
                              Style="{StaticResource MaterialDesignOutlinedTextBox}"
                              TextWrapping="Wrap"
                              VerticalScrollBarVisibility="Auto" />
+
                 </Grid>
             </Border>
 
             <Grid Grid.Row="2" >
+                <TextBox Text="{Binding SelectedTopic.Id}" Visibility="Hidden" />
+                <TextBox Text="{Binding SelectedTopic.ProfessorId}" Visibility="Hidden" />
                 <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
                               HoverColor="{StaticResource secondaryBrush}"
                               Content="Lưu"
