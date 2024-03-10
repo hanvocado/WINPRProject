@@ -43,5 +43,6 @@ namespace ThesisManagement.Views.Student
             //    topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             //    topicView.Show();
         }
+
     }
 }

@@ -64,7 +64,7 @@
                             </GridViewColumn.Header>
                         </GridViewColumn>
                         <GridViewColumn Width="180"
-                            DisplayMemberBinding="{Binding StudentId}">
+                            DisplayMemberBinding="{Binding Topic.Category}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Thể loại" />
                             </GridViewColumn.Header>
