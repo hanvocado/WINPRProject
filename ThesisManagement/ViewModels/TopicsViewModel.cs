@@ -3,9 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
-using ProfessorTopicsView = ThesisManagement.Views.Professor.TopicsView;
 using ProfessorTopicView = ThesisManagement.Views.Professor.TopicView;
-using StudentTopicsView = ThesisManagement.Views.Student.TopicsView;
 using StudentTopicView = ThesisManagement.Views.Student.TopicView;
 
 namespace ThesisManagement.ViewModels
@@ -13,23 +11,35 @@ namespace ThesisManagement.ViewModels
     public class TopicsViewModel : ViewModelBase
     {
         private readonly ITopicRepository _topicRepo;
+        private readonly IProfessorRepository _professorRepo;
+
+        private readonly string currentUserId;
 
         private ObservableCollection<Topic> topics;
 
+        private ObservableCollection<Professor> professors;
+
         private Topic selectedTopic;
 
-        public string name;
-        public string? category;
-        public string? technology;
-        public string description;
+        private string name;
+        private string? category;
+        private string? technology;
+        private string description;
+        private string professorName;
+
         public IEnumerable<string> Categories { get; set; } = new List<string>() { "Computer Science", "Web Development", "Data Science", "Other" };
         public IEnumerable<string> Technologies { get; set; } = new List<string>() { "JavaScript", "Wpf", ".NET", "Java", "Python", "SQL", "ASP.NET Core", "Other" };
-
+        public ObservableCollection<string> ProfessorNames { get; set; }
         public ICommand ProfessorCreateTopic { get; set; }
         public ICommand StudentCreateTopic { get; set; }
-        public ICommand CreateCommand { get; set; }
+        public ICommand CreateOrUpdateCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand SaveCommand { get; set; }
+
+        public string CurrentUserId
+        {
+            get { return currentUserId; }
+        }
 
         public Topic SelectedTopic
         {
@@ -87,27 +97,46 @@ namespace ThesisManagement.ViewModels
             }
         }
 
+        public ObservableCollection<Professor> Professors
+        {
+            get { return professors; }
+            set
+            {
+                professors = value;
+                OnPropertyChanged(nameof(Professors));
+            }
+        }
+
+        public string ProfessorName
+        {
+            get { return professorName; }
+            set
+            {
+                professorName = value;
+                OnPropertyChanged(nameof(ProfessorName));
+                FilterData();
+            }
+        }
+
         public TopicsViewModel()
         {
+            currentUserId = SessionInfo.UserId;
             selectedTopic = new Topic();
             _topicRepo = new TopicRepository();
+            _professorRepo = new ProfessorRepository();
             Topics = _topicRepo.GetAll();
+            ProfessorNames = _professorRepo.GetProfessorNames();
             ProfessorCreateTopic = new ViewModelCommand(ExecuteProfessorCreateCommand);
             StudentCreateTopic = new ViewModelCommand(ExecuteStudentCreateCommand);
-            CreateCommand = new ViewModelCommand(ExecuteCreateCommand);
+            CreateOrUpdateCommand = new ViewModelCommand(ExecuteCreateOrUpdateCommand);
             DeleteCommand = new ViewModelCommand(ExecuteDeleteCommand);
         }
 
         private void ExecuteProfessorCreateCommand(object sender)
         {
-            var vm = new TopicsViewModel();
-            ProfessorTopicsView topicsView = sender as ProfessorTopicsView;
-            if (topicsView != null)
-            {
-                topicsView.DataContext = vm;
-            }
+            this.SelectedTopic = new Topic();
             ProfessorTopicView topicView = new();
-            topicView.DataContext = vm;
+            topicView.DataContext = this;
             topicView.Owner = Application.Current.MainWindow;
             topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             topicView.Show();
@@ -115,31 +144,26 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteStudentCreateCommand(object sender)
         {
-            var vm = new TopicsViewModel();
-            StudentTopicsView topicsView = sender as StudentTopicsView;
-            if (topicsView != null)
-            {
-                topicsView.DataContext = vm;
-            }
+            this.SelectedTopic = new Topic();
             StudentTopicView topicView = new();
-            topicView.DataContext = vm;
+            topicView.DataContext = this;
             topicView.Owner = Application.Current.MainWindow;
             topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             topicView.Show();
         }
 
-        private void ExecuteCreateCommand(object obj)
+        private void ExecuteCreateOrUpdateCommand(object obj)
         {
             ProfessorTopicView topicView = obj as ProfessorTopicView;
-            Topic newTopic = new Topic
+            selectedTopic.ProfessorId = selectedTopic.ProfessorId ?? currentUserId;
+            if (selectedTopic.Id <= 0)
             {
-                Name = selectedTopic.Name,
-                Category = selectedTopic.Category,
-                Technology = selectedTopic.Technology,
-                Description = selectedTopic.Description
-            };
-
-            _topicRepo.Add(newTopic);
+                _topicRepo.Add(selectedTopic);
+            }
+            else
+            {
+                _topicRepo.Update(selectedTopic);
+            }
 
             if (topicView != null)
             {
@@ -149,26 +173,18 @@ namespace ThesisManagement.ViewModels
             var mainWindow = Application.Current.MainWindow;
             mainWindow.Focus();
 
-            Topics = _topicRepo.GetAll();
+            this.Topics = _topicRepo.GetAll();
         }
 
         private void ExecuteDeleteCommand(object parameter)
         {
-            Topic topic = new Topic
-            {
-                Id = selectedTopic.Id,
-                Name = selectedTopic.Name,
-                Category = selectedTopic.Category,
-                Technology = selectedTopic.Technology,
-                Description = selectedTopic.Description
-            };
-            _topicRepo.Delete(topic.Id);
+            _topicRepo.Delete(selectedTopic.Id);
             Topics = _topicRepo.GetAll();
         }
 
         private void FilterData()
         {
-            var filteredData = _topicRepo.GetFilteredTopics(Name, Category, Technology);
+            var filteredData = _professorRepo.GetFilteredTopics(Category, Technology, ProfessorName);
             Topics = new ObservableCollection<Topic>(filteredData);
         }
     }

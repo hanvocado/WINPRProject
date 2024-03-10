@@ -11,6 +11,7 @@ namespace ThesisManagement.Views.Professor
     /// </summary>
     public partial class TopicsView : UserControl
     {
+        private TopicView currentTopicView;
         public TopicsView()
         {
             InitializeComponent();
@@ -26,22 +27,32 @@ namespace ThesisManagement.Views.Professor
                 Topic topic = selectedItem as Topic;
                 TopicView topicView = new TopicView();
 
-                TopicVM topicVM = new TopicVM
+                if (currentTopicView != null && currentTopicView.IsVisible)
+                {
+                    currentTopicView.Close();
+                }
+
+                TopicsViewModel topicVM = new TopicsViewModel
                 {
                     SelectedTopic = new Topic
                     {
+                        Id = topic.Id,
+                        ProfessorId = topic.ProfessorId,
+                        StudentId = topic.StudentId,
                         Name = topic.Name,
                         Category = topic.Category,
                         Technology = topic.Technology,
                         Description = topic.Description
                     }
                 };
-               // ShowMessage($"{topicVM.SelectedTopic.Name}, {topicVM.SelectedTopic.Category},{topicVM.SelectedTopic.Technology},{topicVM.SelectedTopic.Description}");
+                //MessageBox.Show($"{topicVM.SelectedTopic.Id}, {topicVM.SelectedTopic.Name}, {topicVM.SelectedTopic.Category},{topicVM.SelectedTopic.Technology},{topicVM.SelectedTopic.Description}");
 
                 topicView.DataContext = topicVM;
                 topicView.Owner = Application.Current.MainWindow;
                 topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 topicView.Show();
+
+                currentTopicView = topicView;
             }
         }
 
@@ -66,12 +77,14 @@ namespace ThesisManagement.Views.Professor
                 dataContext.SelectedTopic = new Topic
                 {
                     Id = topic.Id,
+                    ProfessorId = topic.ProfessorId,
+                    StudentId = topic.StudentId,
                     Name = topic.Name,
                     Category = topic.Category,
                     Technology = topic.Technology,
                     Description = topic.Description
                 };
-                //MessageBox.Show($"{topicVM.SelectedTopic.Id},{topicVM.SelectedTopic.Name} ,  {topicVM.SelectedTopic.Category} ,  {topicVM.SelectedTopic.Technology} ,  {topicVM.SelectedTopic.Description}");
+                //MessageBox.Show($"{dataContext.SelectedTopic.Id},{dataContext.SelectedTopic.Name} ,  {dataContext.SelectedTopic.Category} ,  {dataContext.SelectedTopic.Technology} ,  {dataContext.SelectedTopic.Description}");
             }
         }
     }
