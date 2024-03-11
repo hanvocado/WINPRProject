@@ -165,6 +165,7 @@ namespace ThesisManagement.ViewModels
                 _topicRepo.Update(selectedTopic);
             }
 
+            Topics = _topicRepo.GetAll();
             if (topicView != null)
             {
                 topicView.Close();
@@ -173,7 +174,6 @@ namespace ThesisManagement.ViewModels
             var mainWindow = Application.Current.MainWindow;
             mainWindow.Focus();
 
-            this.Topics = _topicRepo.GetAll();
         }
 
         private void ExecuteDeleteCommand(object parameter)

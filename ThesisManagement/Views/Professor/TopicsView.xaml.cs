@@ -35,22 +35,13 @@ namespace ThesisManagement.Views.Professor
                     currentTopicView.Close();
                 }
 
-                TopicsViewModel topicVM = new TopicsViewModel
+                this.DataContext = new TopicsViewModel
                 {
-                    SelectedTopic = new Topic
-                    {
-                        Id = topic.Id,
-                        ProfessorId = topic.ProfessorId,
-                        StudentId = topic.StudentId,
-                        Name = topic.Name,
-                        Category = topic.Category,
-                        Technology = topic.Technology,
-                        Description = topic.Description
-                    }
+                    SelectedTopic = topic
                 };
                 //MessageBox.Show($"{topicVM.SelectedTopic.Id}, {topicVM.SelectedTopic.Name}, {topicVM.SelectedTopic.Category},{topicVM.SelectedTopic.Technology},{topicVM.SelectedTopic.Description}");
 
-                topicView.DataContext = topicVM;
+                topicView.DataContext = this.DataContext;
                 topicView.Owner = Application.Current.MainWindow;
                 topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 topicView.Show();

@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
-using System.Data.Common;
 using System.Diagnostics;
-using System.Linq.Expressions;
 using System.Windows;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
@@ -51,8 +49,7 @@ namespace ThesisManagement.Repositories
         }
         public void Update(Topic topic)
         {
-
-            //MessageBox.Show($"Đây là topic update được chọn {topic.Id}, {topic.Name}, {topic.Technology}");
+            _context.ChangeTracker.Clear();
             _context.Update(topic);
             DbSave();
         }
