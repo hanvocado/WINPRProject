@@ -5,27 +5,72 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ThesisManagement.CustomControls"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              Background="White"
-             d:DesignHeight="25" d:DesignWidth="800">
-    <StackPanel Orientation="Horizontal"
-                FlowDirection="RightToLeft">
-        <Button x:Name="btnClose"
-                Click="btnClose_Click"
-                Style="{StaticResource windowControlBtn}">
-             <fa:IconImage Icon="X" Style="{StaticResource windowControlIcon}" />
-        </Button>
+             d:DesignHeight="50" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="title" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#303f9d" />
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Padding" Value="0 0 0 0"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="120"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions >
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal"
+                        FlowDirection="RightToLeft"
+                        Grid.Row="0">
+                <Button x:Name="btnClose"
+                        Click="btnClose_Click"
+                        Style="{StaticResource windowControlBtn}">
+                    <fa:IconImage Icon="X" Style="{StaticResource windowControlIcon}" />
+                </Button>
 
-        <Button x:Name="btnMaximize"
-                Click="btnMaximize_Click"
-                Style="{StaticResource windowControlBtn}">
-            <fa:IconImage Icon="Square" Style="{StaticResource windowControlIcon}" />
-        </Button>
+                <Button x:Name="btnMaximize"
+                        Click="btnMaximize_Click"
+                        Style="{StaticResource windowControlBtn}">
+                    <fa:IconImage Icon="Square" Style="{StaticResource windowControlIcon}" />
+                </Button>
 
-        <Button x:Name="btnMinimize"
-                Click="btnMinimize_Click"
-                Style="{StaticResource windowControlBtn}">
-            <fa:IconImage Icon="WindowMinimize" Style="{StaticResource windowControlIcon}" />
-        </Button>
-    </StackPanel>
+                <Button x:Name="btnMinimize"
+                        Click="btnMinimize_Click"
+                        Style="{StaticResource windowControlBtn}">
+                    <fa:IconImage Icon="WindowMinimize" Style="{StaticResource windowControlIcon}" />
+                </Button>
+            </StackPanel>
+            <Button x:Name="btnNotyfy" Grid.Row="1" HorizontalAlignment="Right" Style="{StaticResource windowControlBtn}">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="60">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <fa:IconImage Icon="bell"/>
+            </Button>
+        </Grid>
+        <Grid Grid.Row="0">
+            <StackPanel
+                Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <TextBlock 
+                    Text="Ứng dụng bản đồ số xây dựng website tìm kiếm và cho thuê bất động sản khu vực Hà Nội " Style="{StaticResource title}" />
+            </StackPanel>
+        </Grid>
+        
+        
+
+    </Grid>
+    
 </UserControl>

@@ -25,6 +25,9 @@
     <Compile Update="Views\Admin\ProfessorsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Professor\NewTasks.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Professor\ProfessorMainView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -32,6 +35,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Professor\StudentsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Professor\Tasks.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Professor\ThesisDetailsView.xaml.cs">
@@ -91,6 +97,9 @@
     <Compile Update="Views\Student\TopicView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Student\RegisterTopicView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="CustomControls\PopupControlBar.xaml">
@@ -129,6 +138,9 @@
     <Page Update="Views\Admin\ProfessorsView.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\Professor\NewTasks.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Professor\ProfessorMainView.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -136,6 +148,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Professor\StudentsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Professor\Tasks.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Professor\ThesisDetailsView.xaml">
@@ -193,6 +208,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Student\TopicView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Student\RegisterTopicView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
