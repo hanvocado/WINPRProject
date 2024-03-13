@@ -37,12 +37,14 @@
     <Grid>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Expander  IsExpanded="False" Grid.Row="0" HorizontalAlignment="Stretch" Background="Transparent">
+        <Expander  IsExpanded="False" Grid.Row="1" HorizontalAlignment="Stretch" Background="Transparent">
             <Expander.Header>
                 <TextBlock Text="Đang thực hiện" Style="{StaticResource A}" MinHeight="40" Margin="-23,0,-63,0"/>
             </Expander.Header>
@@ -103,15 +105,29 @@
                 </ListView.View>
             </ListView>
         </Expander>
-        <Expander  IsExpanded="False" Grid.Row="1" HorizontalAlignment="Stretch" Background="Transparent">
+        <Expander  IsExpanded="False" Grid.Row="2" HorizontalAlignment="Stretch" Background="Transparent">
             <Expander.Header>
                 <TextBlock Text="Đã hoàn thành" Style="{StaticResource B}" MinHeight="40" Margin="-23,0,-63,0"  />
             </Expander.Header>
         </Expander>
-        <Expander  IsExpanded="False" Grid.Row="2" HorizontalAlignment="Stretch" Background="Transparent">
+        <Expander  IsExpanded="False" Grid.Row="3" HorizontalAlignment="Stretch" Background="Transparent">
             <Expander.Header>
                 <TextBlock Text="Đã Quá hạn" Style="{StaticResource C}" MinHeight="40" Margin="-23,0,-63,0"/>
             </Expander.Header>
         </Expander>
+        <Grid Grid.Row="0">
+            <Button Width="950" Height="30" Margin="10 10 10 10">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="#9ae2ca"
+                        CornerRadius="20">
+                            <!-- Điều chỉnh bán kính để bo tròn góc -->
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <TextBlock Text="+ new task" Style="{StaticResource B}" HorizontalAlignment="Center"  VerticalAlignment="Center" FontSize="15" RenderTransformOrigin="0.514,0.256" Height="46"/>
+            </Button>
+        </Grid>
     </Grid>
 </UserControl>

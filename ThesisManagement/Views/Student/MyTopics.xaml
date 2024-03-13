@@ -9,80 +9,142 @@
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:userControls="clr-namespace:ThesisManagement.Views.Student"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
-             
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="550" d:DesignWidth="1000"
              Background="White">
-    <UserControl.DataContext>
-        <viewModels:MyTopicsVM />
-    </UserControl.DataContext>
+    <UserControl.Resources>
+        <Style x:Key="Button1Style" TargetType="Button">
+            <Setter Property="Background" Value="Green"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Green" BorderThickness="1" CornerRadius="8">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="Foreground" Value="Green"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
 
+
+        <Style x:Key="Button2Style" TargetType="Button">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="Green"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Green" BorderThickness="1" CornerRadius="8">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Green"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
+            
         </Grid.RowDefinitions>
-
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-
-            <StackPanel Grid.Column="0"
-                
-                Orientation="Horizontal">
-                <fa:IconImage Icon="Search"
-                      Margin="0 4 5 0"
-                      Height="17" 
-                      Width="20"/>
-                <ComboBox VerticalAlignment="Center"
-                  Padding="10"
-                  Margin="0,0,20,0"
-                  Width="200"
-                  ItemsSource="{Binding Categories}"
-                  md:HintAssist.Hint="Thể loại"
-                  md:TextFieldAssist.HasClearButton="True"
-                  Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                </ComboBox>
-
-                <ComboBox VerticalAlignment="Center"
-                      Padding="10"
-                      Margin="0,0,20,0"
-                      Width="200"
-                      ItemsSource="{Binding }"
-                      SelectedValue=""
-                      md:HintAssist.Hint="Công nghệ"
-                      md:TextFieldAssist.HasClearButton="True"
-                      Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                </ComboBox>
-
-                <ComboBox VerticalAlignment="Center"
-                      Padding="10"
-                      Width="200"
-                      ItemsSource="{Binding }"
-                      SelectedValue=""
-                      md:HintAssist.Hint="Giáo viên"
-                      md:TextFieldAssist.HasClearButton="True"
-                      Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                </ComboBox>
-                
-
-            </StackPanel>
-            <!--<customControls:ControlButton Grid.Column="1"
-                              DefaultColor="{StaticResource primaryBrush}"
-                              HoverColor="{StaticResource secondaryBrush}"
-                              Command="{Binding CreateCommand}"
-                              Width="80">
-                <customControls:ControlButton.Content>
-                    <TextBlock Text="+Đề xuất" Style="{StaticResource btnContent}"/>
-                </customControls:ControlButton.Content>
-            </customControls:ControlButton>-->
-
+            <Grid Grid.Column="0">
+                <Image Source="/Resources/Images/UTE.jpg" Width="149" Margin="0,0,0,0">
+                    <Image.Effect>
+                        <DropShadowEffect ShadowDepth="5" BlurRadius="10" Direction="270"/>
+                    </Image.Effect>
+                </Image>
+            </Grid>
+            <Grid Grid.Column="1">
+                <TextBlock 
+                    Text="Đề tài : Ứng dụng bản đồ số xây dựng website tìm kiếm và cho thuê bất động sản khu vực Hà Nội " 
+                    Style="{StaticResource title}" 
+                    FontSize="20"
+                    TextWrapping="Wrap"
+                    Padding="10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"/>
+            </Grid>
         </Grid>
+        
+        <Grid Grid.Row="1">
+            <TabControl 
+                    HorizontalContentAlignment="Left"
+                    Style="{StaticResource MaterialDesignUniformTabControl}">
+                <TabItem Header="Mô tả">
+                    
+                </TabItem>
 
-        <Border Grid.Row="1">
-            <local:Pending/>
-        </Border>
+                <TabItem Header="Nhiệm vụ">
+                    <ListView Grid.Row="1"
+                            Name="AdminsListView"
+                            ItemsSource="{Binding Topics}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="160"
+                                        DisplayMemberBinding="{Binding }" >
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Tiêu đề" />
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn Width="160"
+                                        DisplayMemberBinding="{Binding Category}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Người được giao" />
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+
+                                <GridViewColumn Width="160"
+                                        DisplayMemberBinding="{Binding Technology}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Tiến độ" />
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+
+                                <GridViewColumn Width="140"
+                                        DisplayMemberBinding="{Binding Professor.Name}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Ngày bắt đầu" />
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+
+                                <GridViewColumn Width="160"
+                                        DisplayMemberBinding="{Binding Professor.Name}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Ngày kết thúc" />
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+
+                                <GridViewColumn Width="140"
+                                        DisplayMemberBinding="{Binding }">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Trạng thái" />
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </TabItem>
+
+            </TabControl>
+        </Grid>
     </Grid>
 </UserControl>

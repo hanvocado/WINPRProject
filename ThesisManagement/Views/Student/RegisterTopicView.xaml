@@ -7,7 +7,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="1000"
+             d:DesignHeight="600" d:DesignWidth="1000"
              Background="White">
     <UserControl.Resources>
         <Style x:Key="Button1Style" TargetType="Button">
@@ -54,7 +54,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="3*"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
@@ -63,7 +63,7 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
-                <Image Source="/Resources/Images/UTE.jpg" Width="149" Margin="0,0,0,0">
+                <Image Source="/Resources/Images/UTE.jpg" Width="140" Margin="0,0,0,0">
                     <Image.Effect>
                         <DropShadowEffect ShadowDepth="5" BlurRadius="10" Direction="270"/>
                     </Image.Effect>
@@ -74,7 +74,7 @@
                         Text="Đề tài : Ứng dụng bản đồ số xây dựng website tìm kiếm và cho thuê bất động sản khu vực Hà Nội " 
                         Style="{StaticResource title}"
                         TextWrapping="Wrap"
-                        Padding="20"
+                        Padding="10"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"/>
             </Grid>

@@ -59,18 +59,6 @@
                 <fa:IconImage Icon="bell"/>
             </Button>
         </Grid>
-        <Grid Grid.Row="0">
-            <StackPanel
-                Orientation="Horizontal"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center">
-                <TextBlock 
-                    Text="Ứng dụng bản đồ số xây dựng website tìm kiếm và cho thuê bất động sản khu vực Hà Nội " Style="{StaticResource title}" />
-            </StackPanel>
-        </Grid>
-        
-        
-
     </Grid>
     
 </UserControl>

@@ -9,7 +9,7 @@
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="450"
-             d:DesignWidth="800"
+             d:DesignWidth="1000"
              mc:Ignorable="d"
              Background="White">
 
@@ -18,26 +18,12 @@
     </UserControl.DataContext>
 
     <UserControl.Resources>
-        <Style x:Key="A" TargetType="TextBlock">
-            <Setter Property="Background" Value="#5aedff"/>
-            <Setter Property="Foreground" Value="#303f9d"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="FontSize" Value="13"/>
-            <Setter Property="Padding" Value="20 12 0 0"/>
-        </Style>
         <Style x:Key="B" TargetType="TextBlock">
-            <Setter Property="Background" Value="#9ae2ca" />
+            <!--<Setter Property="Background" Value="#9ae2ca" />-->
             <Setter Property="Foreground" Value="#436358" />
             <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="FontSize" Value="13"/>
-            <Setter Property="Padding" Value="20 12 0 0"/>
-        </Style>
-        <Style x:Key="C" TargetType="TextBlock">
-            <Setter Property="Background" Value="#fee9ee" />
-            <Setter Property="Foreground" Value="#8f535f" />
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="FontSize" Value="13"/>
-            <Setter Property="Padding" Value="20 12 0 0"/>
+            <Setter Property="FontSize" Value="25"/>
+            <!--<Setter Property="Padding" Value="20 12 0 0"/>-->
         </Style>
     </UserControl.Resources>
 
@@ -47,123 +33,22 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Expander  IsExpanded="False" Grid.Row="0" HorizontalAlignment="Stretch" Background="Transparent">
-            <Expander.Header>
-                <TextBlock Text="Chờ duyệt" Style="{StaticResource A}" MinHeight="40" Margin="-23,0,-63,0"/>
-            </Expander.Header>
-            <ListView Grid.Row="1"
-                      ItemsSource="{Binding WaitingTopics}">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Width="200"
-                             DisplayMemberBinding="{Binding Topic.Name}" >
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Đề tài" />
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
-                        <GridViewColumn Width="180"
-                            DisplayMemberBinding="{Binding StudentId}">
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Thể loại" />
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
-
-                        <GridViewColumn Width="180"
-                            DisplayMemberBinding="{Binding Topic.Technology}">
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Công nghệ" />
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
-
-                        <GridViewColumn Width="180"
-                            DisplayMemberBinding="{Binding Topic.Professor.Name}">
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Giảng viên" />
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </Expander>
-        <Expander  IsExpanded="False" Grid.Row="1" HorizontalAlignment="Stretch" Background="Transparent">
-            <Expander.Header>
-                <TextBlock Text="Đã chấp nhận" Style="{StaticResource B}" MinHeight="40" Margin="-23,0,-63,0"  />
-            </Expander.Header>
-            <ListView Grid.Row="1"
-              ItemsSource="{Binding ApprovedTopics}">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Width="200"
-                 DisplayMemberBinding="{Binding Topic.Name}" >
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Đề tài" />
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
-                        <GridViewColumn Width="180"
-                DisplayMemberBinding="{Binding Topic.Category}">
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Thể loại" />
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
-
-                        <GridViewColumn Width="180"
-                DisplayMemberBinding="{Binding Topic.Technology}">
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Công nghệ" />
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
-
-                        <GridViewColumn Width="180"
-                DisplayMemberBinding="{Binding Topic.Professor.Name}">
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Giảng viên" />
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </Expander>
-        <Expander  IsExpanded="False" Grid.Row="2" HorizontalAlignment="Stretch" Background="Transparent">
-            <Expander.Header>
-                <TextBlock Text="Đã từ chối" Style="{StaticResource C}" MinHeight="40" Margin="-23,0,-63,0"/>
-            </Expander.Header>
-            <ListView Grid.Row="1"
-              
-              Name="A"
-              ItemsSource="{Binding RejectedTopics}">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Width="200"
-                 DisplayMemberBinding="{Binding Topic.Name}" >
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Đề tài" />
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
-                        <GridViewColumn Width="180"
-                DisplayMemberBinding="{Binding Topic.Category}">
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Thể loại" />
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
-
-                        <GridViewColumn Width="180"
-                DisplayMemberBinding="{Binding Topic.Technology}">
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Công nghệ" />
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
-
-                        <GridViewColumn Width="180"
-                DisplayMemberBinding="{Binding Topic.Professor.Name}">
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Giảng viên" />
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </Expander>
+        <Grid Grid.Row="3">
+            <Button Width="950" Height="30" Margin="0">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="#9ae2ca"
+                                CornerRadius="20">
+                            <!-- Điều chỉnh bán kính để bo tròn góc -->
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <TextBlock Text="wesite bán hàng " Style="{StaticResource B}" />
+            </Button>
+        </Grid>
     </Grid>
 </UserControl>

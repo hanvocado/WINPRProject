@@ -126,23 +126,7 @@
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Trạng thái" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
-                        <GridViewColumn Width="140">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <customControls:ControlButton DefaultColor="{StaticResource danger}"
-                                                    HoverColor="{StaticResource dangerHover}"
-                                                    Width="30"
-                                                    Margin="5 0 0 0"
-                                                    Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
-                                            <customControls:ControlButton.Content>
-                                                <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
-                                            </customControls:ControlButton.Content>
-                                        </customControls:ControlButton>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
+                        
                     </GridView>
                 </ListView.View>
             </ListView>

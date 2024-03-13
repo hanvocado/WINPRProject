@@ -11,6 +11,25 @@
         Title="StudentMainView" Height="550" Width="1100"
         WindowStartupLocation="CenterScreen"
         Style="{StaticResource windowStyle}">
+    <Window.DataContext>
+        <viewModel:StudentMainVM/>
+    </Window.DataContext>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:TopicsVM}">
+            <local:TopicsView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:StudentsVM}">
+            <local:DetailFeedback />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:ThesesVM}">
+            <local:MyTopics />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:ProfessorProfileVM}">
+            <local:ProfileStudent />
+        </DataTemplate>
+    </Window.Resources>
     <Border CornerRadius="0">
         <Grid>
 
@@ -38,7 +57,7 @@
                         </RadioButton>
 
                         <RadioButton Style="{StaticResource navBtn}"
-                                 Command="{Binding ShowStudentView}">
+                                 Command="{Binding ShowStudentProfileView}">
                             <RadioButton.ToolTip>
                                 <ToolTip Content="Luận văn" Style="{StaticResource navToolTip}" />
                             </RadioButton.ToolTip>
@@ -73,11 +92,11 @@
                     <customControl:WindowControlBar/>
 
                     <ContentControl Grid.Row="1"
-                                    Margin="20 5 20 0">
-                        <local:TopicsView />
+                        Margin="20 5 20 0"
+                        Content="{Binding CurrentChildView}">
                     </ContentControl>
-                    
-                    
+
+
                 </Grid>
             </Border>
         </Grid>
