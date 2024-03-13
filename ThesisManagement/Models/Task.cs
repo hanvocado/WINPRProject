@@ -9,7 +9,7 @@ namespace ThesisManagement.Models
         public int Id { get; set; }
 
         [Required]
-        public int ThesisId { get; set; }
+        public int TopicId { get; set; }
 
         public string Text { get; set; }
 
@@ -17,7 +17,7 @@ namespace ThesisManagement.Models
 
         public bool Status { get; set; }
 
-        [ForeignKey(nameof(ThesisId))]
-        public Thesis Thesis { get; set; }
+        [ForeignKey(nameof(TopicId))]
+        public Topic Topic { get; set; }
     }
 }

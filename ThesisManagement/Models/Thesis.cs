@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using ThesisManagement.Helpers;
 
 namespace ThesisManagement.Models
 {
@@ -8,7 +9,8 @@ namespace ThesisManagement.Models
         [Key]
         public int Id { get; set; }
 
-        public int? TopicId { get; set; }
+        [Required]
+        public int TopicId { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -21,10 +23,36 @@ namespace ThesisManagement.Models
         [ForeignKey(nameof(TopicId))]
         public Topic Topic { get; set; }
 
-        public Task? Task { get; set; }
-
         public ICollection<Feedback>? Feedbacks { get; set; }
-        
+
         public ICollection<Student>? Students { get; set; }
+
+        [NotMapped]
+        public string StatusColor
+        {
+            get
+            {
+                if (TopicStatus == Variable.StatusTopic.Waiting)
+                    return "Yellow";
+                else if (TopicStatus == Variable.StatusTopic.Approved)
+                    return "Green";
+                else
+                    return "Red";
+            }
+        }
+
+        [NotMapped]
+        public string StatusHoverColor
+        {
+            get
+            {
+                if (TopicStatus == Variable.StatusTopic.Waiting)
+                    return "Yellow";
+                else if (TopicStatus == Variable.StatusTopic.Approved)
+                    return "Green";
+                else
+                    return "Red";
+            }
+        }
     }
 }
