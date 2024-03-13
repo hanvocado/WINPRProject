@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ThesisManagement.Models;
+using Task = ThesisManagement.Models.Task;
 
 namespace ThesisManagement.Repositories.EF
 {
@@ -9,8 +10,9 @@ namespace ThesisManagement.Repositories.EF
         public DbSet<Topic> Topics { get; set; }
         public DbSet<Professor> Professors { get; set; }
         public DbSet<Student> Students { get; set; }
-        public DbSet<StudentTopic> StudentTopics { get; set; }
-
+        public DbSet<Thesis> Theses { get; set; }
+        public DbSet<Task> Tasks { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -72,7 +74,9 @@ namespace ThesisManagement.Repositories.EF
                     Name = "Database Design",
                     Description = "Introductory course on database design",
                     Category = "Computer Science",
-                    Technology = "SQL"
+                    Technology = "SQL",
+                    Requirement = "",
+                    StudentQuantity = 5
                 },
                 new Topic
                 {
@@ -81,7 +85,9 @@ namespace ThesisManagement.Repositories.EF
                     Name = "Web Development",
                     Description = "Building dynamic websites using ASP.NET Core",
                     Category = "Web Development",
-                    Technology = "ASP.NET Core"
+                    Technology = "ASP.NET Core",
+                    Requirement = "",
+                    StudentQuantity = 3
                 },
                 new Topic
                 {
@@ -90,47 +96,57 @@ namespace ThesisManagement.Repositories.EF
                     Name = "Machine Learning",
                     Description = "Exploring algorithms for predictive modeling",
                     Category = "Data Science",
-                    Technology = "Python"
+                    Technology = "Python",
+                    Requirement = "",
+                    StudentQuantity = 5
                 }
             );
 
-            modelBuilder.Entity<StudentTopic>(entity =>
+            modelBuilder.Entity<Thesis>(entity =>
             {
-                entity.HasKey(studenttopic => new
-                {
-                    studenttopic.StudentId,
-                    studenttopic.TopicId,
-                });
-                entity.HasOne(st => st.Student)
-                .WithMany(student => student.StudentTopics)
-                .HasForeignKey(student => student.StudentId)
-                .OnDelete(DeleteBehavior.Restrict);
-
                 entity.HasOne(tp => tp.Topic)
-                                .WithMany(topic => topic.StudentTopics)
-                                .HasForeignKey(student => student.TopicId)
-                                .OnDelete(DeleteBehavior.Restrict);
+                        .WithMany(th => th.Theses)
+                        .HasForeignKey(th => th.TopicId);
+
+                entity.HasOne(th => th.Task)
+                      .WithOne(t => t.Thesis)
+                      .HasForeignKey<Task>(t => t.ThesisId);
+
             });
-            modelBuilder.Entity<StudentTopic>().HasData(
-                new StudentTopic
+            modelBuilder.Entity<Thesis>().HasData(
+                new Thesis
                 {
-                    StudentId = "S1",
-                    TopicId = 1,
-                    Status = "Approved"
-                },
-                new StudentTopic
-                {
-                    StudentId = "S1",
+                    Id = 1,
                     TopicId = 2,
-                    Status = "Rejected"
+                    TopicStatus = "Approved",
+                    File = null,
+                    Score = 8
                 },
-                new StudentTopic
-                {
-                    StudentId = "S1",
-                    TopicId = 3,
-                    Status = "Waiting"
+                  new Thesis
+                  {
+                      Id = 2,
+                      TopicId = 1,
+                      TopicStatus = "Waiting",
+                      File = null,
+                      Score = 9
+                },
+                    new Thesis
+                    {
+                        Id = 3,
+                        TopicId = 3,
+                        TopicStatus = "Rejected",
+                        File = null,
+                        Score = 10
                 }
             );
+
+            modelBuilder.Entity<Feedback>(entity =>
+            {
+                entity.HasOne(th => th.Thesis)
+                      .WithMany(fb => fb.Feedbacks)
+                      .HasForeignKey(fb => fb.ThesisId);
+            });
+
         }
     }
 }

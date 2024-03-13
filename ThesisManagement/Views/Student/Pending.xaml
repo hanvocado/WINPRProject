@@ -13,9 +13,9 @@
              mc:Ignorable="d"
              Background="White">
 
-    <UserControl.DataContext>
+    <!-- <UserControl.DataContext>
         <viewModels:MyTopicsVM />
-    </UserControl.DataContext>
+    </UserControl.DataContext> -->
 
     <UserControl.Resources>
         <Style x:Key="A" TargetType="TextBlock">
