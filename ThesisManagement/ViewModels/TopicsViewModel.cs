@@ -4,6 +4,7 @@ using System.Windows.Input;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
 using ProfessorTopicView = ThesisManagement.Views.Professor.TopicView;
+//using StudentTopicsView = ThesisManagement.Views.Student.TopicsView;
 using StudentTopicView = ThesisManagement.Views.Student.TopicView;
 
 namespace ThesisManagement.ViewModels

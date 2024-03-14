@@ -8,7 +8,7 @@
              xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="450" d:DesignWidth="1000"
              Background="white">
     <Grid>
         <Grid.RowDefinitions>
@@ -52,7 +52,46 @@
             </TabItem>
 
             <TabItem Header="Đã duyệt">
+                <ListView Grid.Row="1"
+                        Name="AdminsListView"
+                        ItemsSource="{Binding Topics}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Width="300"
+                                    DisplayMemberBinding="{Binding Topic}" >
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Đề tài" />
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
 
+                            <GridViewColumn Width="300"
+                                        DisplayMemberBinding="{Binding Students}">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Sinh viên" />
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn Width="140">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <customControls:ControlButton DefaultColor="#4fc3f7"
+                                                                        HoverColor="#0093C4"
+                                                                        Width="30"
+                                                                        Margin="5 0 0 0"
+                                                                        Click="Button_click">
+                                                <customControls:ControlButton.Content>
+                                                    <fa:IconImage Icon="Pen" Style="{StaticResource btnIcon}" />
+                                                </customControls:ControlButton.Content>
+                                            </customControls:ControlButton>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </TabItem>
         </TabControl>
     </Grid>
