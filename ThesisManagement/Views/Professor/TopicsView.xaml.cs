@@ -39,7 +39,6 @@ namespace ThesisManagement.Views.Professor
                 {
                     SelectedTopic = topic
                 };
-                //MessageBox.Show($"{topicVM.SelectedTopic.Id}, {topicVM.SelectedTopic.Name}, {topicVM.SelectedTopic.Category},{topicVM.SelectedTopic.Technology},{topicVM.SelectedTopic.Description}");
 
                 topicView.DataContext = this.DataContext;
                 topicView.Owner = Application.Current.MainWindow;
@@ -81,7 +80,6 @@ namespace ThesisManagement.Views.Professor
                     Technology = topic.Technology,
                     Description = topic.Description
                 };
-                //MessageBox.Show($"{dataContext.SelectedTopic.Id},{dataContext.SelectedTopic.Name} ,  {dataContext.SelectedTopic.Category} ,  {dataContext.SelectedTopic.Technology} ,  {dataContext.SelectedTopic.Description}");
             }
         }
 
