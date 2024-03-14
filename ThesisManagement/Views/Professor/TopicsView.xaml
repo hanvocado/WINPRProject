@@ -45,28 +45,6 @@
                          md:HintAssist.Hint="Tên đề tài..."
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
 
-                <ComboBox VerticalAlignment="Center"
-                          Padding="10"
-                          Margin="5"
-                          Width="200"
-                          ItemsSource="{Binding Categories}"
-                          SelectedValue="{Binding Category}"
-                          md:HintAssist.Hint="Thể loại..."
-                          md:TextFieldAssist.HasClearButton="True"
-                          Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                </ComboBox>
-
-                <ComboBox VerticalAlignment="Center"
-                          Padding="10"
-                          Margin="5"
-                          Width="200"
-                          ItemsSource="{Binding Technologies}"
-                          SelectedValue="{Binding Technology}"
-                          md:HintAssist.Hint="Công nghệ..."
-                          md:TextFieldAssist.HasClearButton="True"
-                          Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                </ComboBox>
-
             </StackPanel>
 
             <StackPanel Grid.Row="0" Grid.Column="1"
