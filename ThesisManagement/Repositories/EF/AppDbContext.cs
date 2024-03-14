@@ -98,6 +98,7 @@ namespace ThesisManagement.Repositories.EF
                         .WithMany(p => p.Topics)
                         .HasForeignKey(t => t.ProfessorId);
             });
+
             modelBuilder.Entity<Topic>().HasData(
                 new Topic
                 {
@@ -140,8 +141,8 @@ namespace ThesisManagement.Repositories.EF
                         .WithMany(th => th.Theses)
                         .HasForeignKey(th => th.TopicId);
 
-
             });
+
             modelBuilder.Entity<Thesis>().HasData(
                 new Thesis
                 {
@@ -194,8 +195,8 @@ namespace ThesisManagement.Repositories.EF
 
             modelBuilder.Entity<Feedback>(entity =>
             {
-                entity.HasOne(th => th.Thesis)
-                      .WithMany(fb => fb.Feedbacks)
+                entity.HasOne(fb => fb.Thesis)
+                      .WithMany(ts => ts.Feedbacks)
                       .HasForeignKey(fb => fb.ThesisId);
             });
 

@@ -12,12 +12,14 @@ namespace ThesisManagement.ViewModels
     {
         private readonly ITopicRepository _topicRepo;
         private readonly IProfessorRepository _professorRepo;
+        private readonly IStudentRepository _studentRepo;
 
         private readonly string currentUserId;
 
         private ObservableCollection<Topic> topics;
 
         private ObservableCollection<Professor> professors;
+        private ObservableCollection<Student> students;
 
         private Topic selectedTopic;
 
@@ -26,6 +28,7 @@ namespace ThesisManagement.ViewModels
         private string? technology;
         private string description;
         private string professorName;
+        private string studentFilter;
 
         public IEnumerable<string> Categories { get; set; } = new List<string>() { "Computer Science", "Web Development", "Data Science", "Other" };
         public IEnumerable<string> Technologies { get; set; } = new List<string>() { "JavaScript", "Wpf", ".NET", "Java", "Python", "SQL", "ASP.NET Core", "Other" };
@@ -107,6 +110,16 @@ namespace ThesisManagement.ViewModels
             }
         }
 
+        public ObservableCollection<Student> Students
+        {
+            get { return students; }
+            set
+            {
+                students = value;
+                OnPropertyChanged(nameof(Students));
+            }
+        }
+
         public string ProfessorName
         {
             get { return professorName; }
@@ -118,14 +131,28 @@ namespace ThesisManagement.ViewModels
             }
         }
 
+        public string StudentFilter
+        {
+            get { return studentFilter; }
+            set
+            {
+                studentFilter = value;
+                OnPropertyChanged(nameof(StudentFilter));
+                FilterStudent();
+            }
+        }
+
         public TopicsViewModel()
         {
             currentUserId = SessionInfo.UserId;
             selectedTopic = new Topic();
+            studentFilter = "";
             _topicRepo = new TopicRepository();
             _professorRepo = new ProfessorRepository();
+            _studentRepo = new StudentRepository();
             Topics = _topicRepo.GetAll();
             ProfessorNames = _professorRepo.GetProfessorNames();
+            Students = _studentRepo.GetAll();
             ProfessorCreateTopic = new ViewModelCommand(ExecuteProfessorCreateCommand);
             StudentCreateTopic = new ViewModelCommand(ExecuteStudentCreateCommand);
             CreateOrUpdateCommand = new ViewModelCommand(ExecuteCreateOrUpdateCommand);
@@ -186,6 +213,12 @@ namespace ThesisManagement.ViewModels
         {
             var filteredData = _professorRepo.GetFilteredTopics(Category, Technology, ProfessorName);
             Topics = new ObservableCollection<Topic>(filteredData);
+        }
+
+        private void FilterStudent()
+        {
+            Students = _studentRepo.Get(studentFilter);
+            MessageBox.Show(Students.ToList().Count.ToString());
         }
     }
 }
