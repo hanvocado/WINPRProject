@@ -55,13 +55,11 @@
 
                     <DatePicker 
                           md:HintAssist.FloatingOffset="0,-23"
-                          md:HintAssist.HelperText="mm/dd/yyyy "
                           md:HintAssist.Hint="Ngày bắt đầu"
                           Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="0,0,0,0" FontSize="14" Grid.Row="1" VerticalAlignment="Top"/>
 
                     <DatePicker 
                           md:HintAssist.FloatingOffset="0,-23"
-                          md:HintAssist.HelperText="mm/dd/yyyy "
                           md:HintAssist.Hint="Ngày bắt đầu"
                           Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="0,0,0,0" FontSize="14" Grid.Row="2" VerticalAlignment="Top"/>
 

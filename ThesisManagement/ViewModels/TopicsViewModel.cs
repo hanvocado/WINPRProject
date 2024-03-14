@@ -5,7 +5,7 @@ using ThesisManagement.Models;
 using ThesisManagement.Repositories;
 using ProfessorTopicsView = ThesisManagement.Views.Professor.TopicsView;
 using ProfessorTopicView = ThesisManagement.Views.Professor.TopicView;
-using StudentTopicsView = ThesisManagement.Views.Student.TopicsView;
+//using StudentTopicsView = ThesisManagement.Views.Student.TopicsView;
 using StudentTopicView = ThesisManagement.Views.Student.TopicView;
 
 namespace ThesisManagement.ViewModels
@@ -93,7 +93,7 @@ namespace ThesisManagement.ViewModels
             _topicRepo = new TopicRepository();
             Topics = _topicRepo.GetAll();
             ProfessorCreateTopic = new ViewModelCommand(ExecuteProfessorCreateCommand);
-            StudentCreateTopic = new ViewModelCommand(ExecuteStudentCreateCommand);
+            //StudentCreateTopic = new ViewModelCommand(ExecuteStudentCreateCommand);
             CreateCommand = new ViewModelCommand(ExecuteCreateCommand);
             DeleteCommand = new ViewModelCommand(ExecuteDeleteCommand);
         }
@@ -113,20 +113,20 @@ namespace ThesisManagement.ViewModels
             topicView.Show();
         }
 
-        private void ExecuteStudentCreateCommand(object sender)
-        {
-            var vm = new TopicsViewModel();
-            StudentTopicsView topicsView = sender as StudentTopicsView;
-            if (topicsView != null)
-            {
-                topicsView.DataContext = vm;
-            }
-            StudentTopicView topicView = new();
-            topicView.DataContext = vm;
-            topicView.Owner = Application.Current.MainWindow;
-            topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            topicView.Show();
-        }
+        //private void ExecuteStudentCreateCommand(object sender)
+        //{
+        //    var vm = new TopicsViewModel();
+        //    StudentTopicsView topicsView = sender as StudentTopicsView;
+        //    if (topicsView != null)
+        //    {
+        //        topicsView.DataContext = vm;
+        //    }
+        //    StudentTopicView topicView = new();
+        //    topicView.DataContext = vm;
+        //    topicView.Owner = Application.Current.MainWindow;
+        //    topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+        //    topicView.Show();
+        //}
 
         private void ExecuteCreateCommand(object obj)
         {
