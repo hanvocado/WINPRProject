@@ -35,8 +35,8 @@
                               Height="17" 
                               Width="20"/>
                 <TextBox Grid.Row="0"
-                         Name="FilterTexbox"
-                         TextChanged="FilterTexbox_TextChanged"
+                         Name="FilterTextbox"
+                         TextChanged="FilterTextbox_TextChanged"
                          Text="{Binding Name}"
                          Width="200"
                          Padding="10"
