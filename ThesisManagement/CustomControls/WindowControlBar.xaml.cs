@@ -35,12 +35,10 @@ namespace ThesisManagement.CustomControls
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            //Application.Current.Shutdown();
             Window window = Window.GetWindow((DependencyObject)sender);
 
             if (window != null)
             {
-                // Đóng cửa sổ
                 window.Close();
             }
 

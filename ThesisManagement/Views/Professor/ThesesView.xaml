@@ -42,85 +42,11 @@
 
             </StackPanel>
 
-            <!--<customControls:ControlButton Grid.Column="1"
-                          DefaultColor="{StaticResource primaryBrush}"
-                          HoverColor="{StaticResource secondaryBrush}"
-                          Width="80">
-                <customControls:ControlButton.Content>
-                    <TextBlock Text="Xuất excel" Style="{StaticResource btnContent}"/>
-                </customControls:ControlButton.Content>
-            </customControls:ControlButton>-->
-
         </Grid>
 
         <Border Grid.Row="1">
 
-            <!--<DataGrid ColumnWidth="*"
-                      BorderThickness="0"
-                      Background="white"
-                      ColumnHeaderStyle="{StaticResource columnHeader}">
-
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Luận văn"/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Trạng thái"/>
-                    <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Điểm số"/>
-                </DataGrid.Columns>
-
-
-            </DataGrid>-->
-
-            <!--<Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="80"/>
-                    <RowDefinition Height="45"/>
-                    <RowDefinition Height="45"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Text="Luận văn"
-                           FontSize="17"
-                           FontWeight="Medium"
-                           VerticalAlignment="Center"/>
-                <TextBlock Text="Sinh viên"
-                           FontSize="17"
-                           FontWeight="Medium"
-                           VerticalAlignment="Center"
-                           Grid.Row="0" Grid.Column="1"
-                           Margin="20,0,0,0"/>
-
-                <TextBlock Grid.Row="0" Grid.Column="2"
-                           Text="Điểm số"
-                           FontSize="17"
-                           FontWeight="Medium"
-                           VerticalAlignment="Center"
-                           HorizontalAlignment="Center"/>
-
-                <TextBlock Grid.Row="1" Grid.Column="0"
-                            Text="Ứng dụng quản lý luận văn"
-                            FontSize="15"
-                            VerticalAlignment="Center"/>
-
-                <StackPanel Grid.Row="1" Grid.Column="1">
-                    <TextBox TextWrapping="Wrap" 
-                             AcceptsReturn="True"
-                             BorderThickness="0"
-                             Text="Nguyễn Thị Ngọc Hân               
-                                   Võ Văn Nam                 
-                                   Nguyễn Hoàng"
-                             FontSize="15"
-                             Height="80"
-                             VerticalAlignment="Top"
-                             HorizontalContentAlignment="Left"/>
-                </StackPanel>
-
-            </Grid>-->
+           
 
             <ListView Grid.Row="1"
                   Name="AdminsListView"

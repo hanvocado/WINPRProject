@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ThesisManagement.Views.Student
+namespace ThesisManagement.Views.Professor
 {
     /// <summary>
-    /// Interaction logic for Pending.xaml
+    /// Interaction logic for NewTasks.xaml
     /// </summary>
-    public partial class Pending : UserControl
+    public partial class Task : Window
     {
-        public Pending()
+        public Task()
         {
             InitializeComponent();
         }
