@@ -9,14 +9,6 @@
              mc:Ignorable="d" 
              Background="White"
              d:DesignHeight="25" d:DesignWidth="1000">
-    <UserControl.Resources>
-        <Style x:Key="title" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="#303f9d" />
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="Padding" Value="0 0 0 0"/>
-        </Style>
-    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -25,7 +17,6 @@
         <Grid Grid.Column="1">
             <Grid.RowDefinitions >
                 <RowDefinition Height="25"/>
-               
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal"
                         FlowDirection="RightToLeft"
@@ -50,5 +41,5 @@
             </StackPanel>
         </Grid>
     </Grid>
-    
+
 </UserControl>
