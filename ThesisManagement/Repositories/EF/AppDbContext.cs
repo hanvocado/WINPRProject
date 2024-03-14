@@ -66,6 +66,7 @@ namespace ThesisManagement.Repositories.EF
                         .WithMany(p => p.Topics)
                         .HasForeignKey(t => t.ProfessorId);
             });
+
             modelBuilder.Entity<Topic>().HasData(
                 new Topic
                 {
@@ -108,11 +109,8 @@ namespace ThesisManagement.Repositories.EF
                         .WithMany(th => th.Theses)
                         .HasForeignKey(th => th.TopicId);
 
-                entity.HasOne(th => th.Task)
-                      .WithOne(t => t.Thesis)
-                      .HasForeignKey<Task>(t => t.ThesisId);
-
             });
+
             modelBuilder.Entity<Thesis>().HasData(
                 new Thesis
                 {
@@ -129,7 +127,7 @@ namespace ThesisManagement.Repositories.EF
                       TopicStatus = "Waiting",
                       File = null,
                       Score = 9
-                },
+                  },
                     new Thesis
                     {
                         Id = 3,
@@ -137,13 +135,13 @@ namespace ThesisManagement.Repositories.EF
                         TopicStatus = "Rejected",
                         File = null,
                         Score = 10
-                }
+                    }
             );
 
             modelBuilder.Entity<Feedback>(entity =>
             {
-                entity.HasOne(th => th.Thesis)
-                      .WithMany(fb => fb.Feedbacks)
+                entity.HasOne(fb => fb.Thesis)
+                      .WithMany(ts => ts.Feedbacks)
                       .HasForeignKey(fb => fb.ThesisId);
             });
 

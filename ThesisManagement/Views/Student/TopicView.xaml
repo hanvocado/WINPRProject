@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ThesisManagement.Views.Student"
         xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
-        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        xmlns:sf="http://schemas.syncfusion.com/wpf"
         mc:Ignorable="d"
         xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="TopicView" Height="350" Width="600"
+        Title="TopicView" Height="400" Width="600"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="True"
@@ -23,7 +23,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="100"/>
+                <RowDefinition Height="180"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
             
@@ -86,18 +86,36 @@
                     </Grid>
                 </Border>
             </Grid>
-            <TextBox Grid.Row="2"
 
-                     VerticalAlignment="Top"
-                     Height="80"
-                     Text="" 
-                     md:HintAssist.Hint="Chú thích"
-                     AcceptsReturn="True"
-                     IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
-                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                     TextWrapping="Wrap"
-                     VerticalScrollBarVisibility="Auto"
-                     Margin="30, 5, 30, 5"/>
+            <StackPanel Grid.Row="2">
+
+                <sf:ComboBoxAdv Height="50" Margin="30, 0, 30, 5"
+                                ItemsSource="{Binding Students}"
+                                AllowMultiSelect="True">
+                    <sf:ComboBoxAdv.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Name}" />
+                                <TextBlock Text=" - " />
+                                <TextBlock Text="{Binding Id}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </sf:ComboBoxAdv.ItemTemplate>
+                </sf:ComboBoxAdv>
+                
+                <TextBox Grid.Row="2"
+                         VerticalAlignment="Top"
+                         Height="80"
+                         Text="" 
+                         md:HintAssist.Hint="Chú thích"
+                         AcceptsReturn="True"
+                         IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         TextWrapping="Wrap"
+                         VerticalScrollBarVisibility="Auto"
+                         Margin="30, 5, 30, 5"/>
+
+            </StackPanel>
             <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
                               HoverColor="{StaticResource secondaryBrush}"
                               Content="Gửi"

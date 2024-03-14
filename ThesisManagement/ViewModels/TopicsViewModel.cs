@@ -12,12 +12,14 @@ namespace ThesisManagement.ViewModels
     {
         private readonly ITopicRepository _topicRepo;
         private readonly IProfessorRepository _professorRepo;
+        private readonly IStudentRepository _studentRepo;
 
         private readonly string currentUserId;
 
         private ObservableCollection<Topic> topics;
 
         private ObservableCollection<Professor> professors;
+        private ObservableCollection<Student> students;
 
         private Topic selectedTopic;
 
@@ -107,6 +109,16 @@ namespace ThesisManagement.ViewModels
             }
         }
 
+        public ObservableCollection<Student> Students
+        {
+            get { return students; }
+            set
+            {
+                students = value;
+                OnPropertyChanged(nameof(Students));
+            }
+        }
+
         public string ProfessorName
         {
             get { return professorName; }
@@ -124,8 +136,10 @@ namespace ThesisManagement.ViewModels
             selectedTopic = new Topic();
             _topicRepo = new TopicRepository();
             _professorRepo = new ProfessorRepository();
+            _studentRepo = new StudentRepository();
             Topics = _topicRepo.GetAll();
             ProfessorNames = _professorRepo.GetProfessorNames();
+            Students = _studentRepo.GetAll();
             ProfessorCreateTopic = new ViewModelCommand(ExecuteProfessorCreateCommand);
             StudentCreateTopic = new ViewModelCommand(ExecuteStudentCreateCommand);
             CreateOrUpdateCommand = new ViewModelCommand(ExecuteCreateOrUpdateCommand);

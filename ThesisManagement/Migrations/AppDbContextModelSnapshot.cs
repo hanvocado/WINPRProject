@@ -175,13 +175,12 @@ namespace ThesisManagement.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ThesisId")
+                    b.Property<int>("TopicId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ThesisId")
-                        .IsUnique();
+                    b.HasIndex("TopicId");
 
                     b.ToTable("Tasks");
                 });
@@ -200,8 +199,7 @@ namespace ThesisManagement.Migrations
                     b.Property<float?>("Score")
                         .HasColumnType("real");
 
-                    b.Property<int?>("TopicId")
-                        .IsRequired()
+                    b.Property<int>("TopicId")
                         .HasColumnType("int");
 
                     b.Property<string>("TopicStatus")
@@ -342,13 +340,13 @@ namespace ThesisManagement.Migrations
 
             modelBuilder.Entity("ThesisManagement.Models.Task", b =>
                 {
-                    b.HasOne("ThesisManagement.Models.Thesis", "Thesis")
-                        .WithOne("Task")
-                        .HasForeignKey("ThesisManagement.Models.Task", "ThesisId")
+                    b.HasOne("ThesisManagement.Models.Topic", "Topic")
+                        .WithMany()
+                        .HasForeignKey("TopicId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Thesis");
+                    b.Navigation("Topic");
                 });
 
             modelBuilder.Entity("ThesisManagement.Models.Thesis", b =>
@@ -383,8 +381,6 @@ namespace ThesisManagement.Migrations
                     b.Navigation("Feedbacks");
 
                     b.Navigation("Students");
-
-                    b.Navigation("Task");
                 });
 
             modelBuilder.Entity("ThesisManagement.Models.Topic", b =>
