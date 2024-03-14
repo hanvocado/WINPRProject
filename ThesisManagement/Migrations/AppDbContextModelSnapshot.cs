@@ -263,7 +263,6 @@ namespace ThesisManagement.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Requirement")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StudentId")
@@ -291,7 +290,7 @@ namespace ThesisManagement.Migrations
                             Name = "Database Design",
                             ProfessorId = "P1",
                             Requirement = "",
-                            StudentQuantity = 5,
+                            StudentQuantity = 2,
                             Technology = "SQL"
                         },
                         new
@@ -313,8 +312,30 @@ namespace ThesisManagement.Migrations
                             Name = "Machine Learning",
                             ProfessorId = "P2",
                             Requirement = "",
-                            StudentQuantity = 5,
+                            StudentQuantity = 3,
                             Technology = "Python"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Category = "Data Science",
+                            Description = "Description xyz",
+                            Name = "Topic abc",
+                            ProfessorId = "P2",
+                            Requirement = "Requirement something here",
+                            StudentQuantity = 2,
+                            Technology = "Python"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Category = "Other",
+                            Description = "Description xyz",
+                            Name = "Topic opq",
+                            ProfessorId = "P2",
+                            Requirement = "Requirement something here",
+                            StudentQuantity = 2,
+                            Technology = "Other"
                         });
                 });
 

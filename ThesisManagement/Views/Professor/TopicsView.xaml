@@ -85,23 +85,35 @@
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Thể loại" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
-                        <GridViewColumn Width="200"
+                        <GridViewColumn Width="170"
                                         DisplayMemberBinding="{Binding Technology, Mode=TwoWay}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Công nghệ" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
-                        <GridViewColumn Width="60">
+                        <GridViewColumn Width="100">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <customControls:ControlButton DefaultColor="{StaticResource danger}"
-                                                                  HoverColor="{StaticResource dangerHover}"
-                                                                  Width="30"
-                                                                  Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
-                                        <customControls:ControlButton.Content>
-                                            <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
-                                        </customControls:ControlButton.Content>
-                                    </customControls:ControlButton>
+                                    <StackPanel Orientation="Horizontal">
+                                        <customControls:ControlButton DefaultColor="{StaticResource danger}"
+                                                                      HoverColor="{StaticResource dangerHover}"
+                                                                      Width="30"
+                                                                      Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
+                                            <customControls:ControlButton.Content>
+                                                <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
+                                            </customControls:ControlButton.Content>
+                                        </customControls:ControlButton>
+                                        <customControls:ControlButton DefaultColor="{Binding PenColor}"
+                                                                      Margin="10 0 0 0"
+                                                                      IsEnabled="{Binding PenEnable}"
+                                                                      HoverColor="{Binding PenColor}"
+                                                                      Width="30"
+                                                                      Command="{Binding DataContext.ViewTopicRegister, RelativeSource={RelativeSource AncestorType=ListView}}">
+                                            <customControls:ControlButton.Content>
+                                                <fa:IconImage Icon="Pen" Style="{StaticResource btnIcon}" />
+                                            </customControls:ControlButton.Content>
+                                        </customControls:ControlButton>
+                                    </StackPanel>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
