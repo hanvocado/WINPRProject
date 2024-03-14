@@ -22,6 +22,28 @@ namespace ThesisManagement.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("ThesisManagement.Models.Feedback", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ThesisId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ThesisId");
+
+                    b.ToTable("Feedbacks");
+                });
+
             modelBuilder.Entity("ThesisManagement.Models.Professor", b =>
                 {
                     b.Property<string>("Id")
@@ -102,10 +124,15 @@ namespace ThesisManagement.Migrations
                         .HasMaxLength(12)
                         .HasColumnType("nvarchar(12)");
 
+                    b.Property<int?>("ThesisId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Email")
                         .IsUnique();
+
+                    b.HasIndex("ThesisId");
 
                     b.ToTable("Students");
 
@@ -130,44 +157,83 @@ namespace ThesisManagement.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ThesisManagement.Models.StudentTopic", b =>
+            modelBuilder.Entity("ThesisManagement.Models.Task", b =>
                 {
-                    b.Property<string>("StudentId")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("DeadLine")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TopicId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Status")
+                    b.HasKey("Id");
+
+                    b.HasIndex("TopicId");
+
+                    b.ToTable("Tasks");
+                });
+
+            modelBuilder.Entity("ThesisManagement.Models.Thesis", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<byte[]>("File")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<float?>("Score")
+                        .HasColumnType("real");
+
+                    b.Property<int>("TopicId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TopicStatus")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("StudentId", "TopicId");
+                    b.HasKey("Id");
 
                     b.HasIndex("TopicId");
 
-                    b.ToTable("StudentTopics");
+                    b.ToTable("Theses");
 
                     b.HasData(
                         new
                         {
-                            StudentId = "S1",
-                            TopicId = 1,
-                            Status = "Approved"
-                        },
-                        new
-                        {
-                            StudentId = "S1",
+                            Id = 1,
+                            Score = 8f,
                             TopicId = 2,
-                            Status = "Rejected"
+                            TopicStatus = "Approved"
                         },
                         new
                         {
-                            StudentId = "S1",
+                            Id = 2,
+                            Score = 9f,
+                            TopicId = 1,
+                            TopicStatus = "Waiting"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Score = 10f,
                             TopicId = 3,
-                            Status = "Waiting"
+                            TopicStatus = "Rejected"
                         });
                 });
 
@@ -192,11 +258,19 @@ namespace ThesisManagement.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProfessorId")
+                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
+                    b.Property<string>("Requirement")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("StudentId")
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StudentQuantity")
+                        .HasColumnType("int");
 
                     b.Property<string>("Technology")
                         .HasMaxLength(100)
@@ -205,8 +279,6 @@ namespace ThesisManagement.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ProfessorId");
-
-                    b.HasIndex("StudentId");
 
                     b.ToTable("Topics");
 
@@ -218,6 +290,8 @@ namespace ThesisManagement.Migrations
                             Description = "Introductory course on database design",
                             Name = "Database Design",
                             ProfessorId = "P1",
+                            Requirement = "",
+                            StudentQuantity = 5,
                             Technology = "SQL"
                         },
                         new
@@ -227,6 +301,8 @@ namespace ThesisManagement.Migrations
                             Description = "Building dynamic websites using ASP.NET Core",
                             Name = "Web Development",
                             ProfessorId = "P1",
+                            Requirement = "",
+                            StudentQuantity = 3,
                             Technology = "ASP.NET Core"
                         },
                         new
@@ -236,25 +312,50 @@ namespace ThesisManagement.Migrations
                             Description = "Exploring algorithms for predictive modeling",
                             Name = "Machine Learning",
                             ProfessorId = "P2",
+                            Requirement = "",
+                            StudentQuantity = 5,
                             Technology = "Python"
                         });
                 });
 
-            modelBuilder.Entity("ThesisManagement.Models.StudentTopic", b =>
+            modelBuilder.Entity("ThesisManagement.Models.Feedback", b =>
                 {
-                    b.HasOne("ThesisManagement.Models.Student", "Student")
-                        .WithMany("StudentTopics")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                    b.HasOne("ThesisManagement.Models.Thesis", "Thesis")
+                        .WithMany("Feedbacks")
+                        .HasForeignKey("ThesisId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Thesis");
+                });
+
+            modelBuilder.Entity("ThesisManagement.Models.Student", b =>
+                {
+                    b.HasOne("ThesisManagement.Models.Thesis", "Thesis")
+                        .WithMany("Students")
+                        .HasForeignKey("ThesisId");
+
+                    b.Navigation("Thesis");
+                });
+
+            modelBuilder.Entity("ThesisManagement.Models.Task", b =>
+                {
                     b.HasOne("ThesisManagement.Models.Topic", "Topic")
-                        .WithMany("StudentTopics")
+                        .WithMany()
                         .HasForeignKey("TopicId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Student");
+                    b.Navigation("Topic");
+                });
+
+            modelBuilder.Entity("ThesisManagement.Models.Thesis", b =>
+                {
+                    b.HasOne("ThesisManagement.Models.Topic", "Topic")
+                        .WithMany("Theses")
+                        .HasForeignKey("TopicId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Topic");
                 });
@@ -263,11 +364,9 @@ namespace ThesisManagement.Migrations
                 {
                     b.HasOne("ThesisManagement.Models.Professor", "Professor")
                         .WithMany("Topics")
-                        .HasForeignKey("ProfessorId");
-
-                    b.HasOne("ThesisManagement.Models.Student", null)
-                        .WithMany("Topics")
-                        .HasForeignKey("StudentId");
+                        .HasForeignKey("ProfessorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Professor");
                 });
@@ -277,16 +376,16 @@ namespace ThesisManagement.Migrations
                     b.Navigation("Topics");
                 });
 
-            modelBuilder.Entity("ThesisManagement.Models.Student", b =>
+            modelBuilder.Entity("ThesisManagement.Models.Thesis", b =>
                 {
-                    b.Navigation("StudentTopics");
+                    b.Navigation("Feedbacks");
 
-                    b.Navigation("Topics");
+                    b.Navigation("Students");
                 });
 
             modelBuilder.Entity("ThesisManagement.Models.Topic", b =>
                 {
-                    b.Navigation("StudentTopics");
+                    b.Navigation("Theses");
                 });
 #pragma warning restore 612, 618
         }

@@ -46,12 +46,16 @@
         <Border Grid.Row="1" >
 
             <ListView Grid.Row="1"
-      Name="AdminsListView"
-      ItemsSource="{Binding Topics}">
+                      MouseLeftButtonUp="ListViewItem_Click"
+                      Name="TopicListView"
+                      ItemsSource="{Binding Topics, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding SelectedTopic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Width="160"
-                            DisplayMemberBinding="{Binding Name}" >
+                        <GridViewColumn Width="0" x:Name="id"
+                                        DisplayMemberBinding="{Binding Id, Mode=TwoWay}" />
+                        <GridViewColumn Width="340"
+                                        DisplayMemberBinding="{Binding Name, Mode=TwoWay}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Đề tài" />
                             </GridViewColumn.Header>

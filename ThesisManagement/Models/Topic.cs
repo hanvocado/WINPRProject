@@ -22,11 +22,16 @@ namespace ThesisManagement.Models
         [StringLength(100)]
         public string Category { get; set; }
 
+        [Required]
+        public string Requirement { get; set; }
+
+        public int StudentQuantity { get; set; }
+
         [StringLength(100)]
         public string? Technology { get; set; }
 
         public Professor Professor { get; set; }
-        public ICollection<StudentTopic>? StudentTopics { get; set; }
+        public ICollection<Thesis>? Theses { get; set; }
 
     }
 }

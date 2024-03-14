@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
@@ -32,17 +33,24 @@ namespace ThesisManagement.Repositories
             DbSave();
         }
 
-        public void Update(Topic topic)
-        {
-            _context.Update(topic);
-            DbSave();
-        }
-
         public void Delete(int id)
         {
-            topic = _context.Topics.FirstOrDefault(t => t.Id == id);
-            if (topic == null) return;
-            _context.Remove(topic);
+            try
+            {
+                topic = _context.Topics.FirstOrDefault(t => t.Id == id);
+                if (topic == null) return;
+                _context.Remove(topic);
+                _context.SaveChanges();
+            }
+            catch
+            {
+                ShowErrorMessage(Message.DeleteFailed);
+            }
+        }
+        public void Update(Topic topic)
+        {
+            _context.ChangeTracker.Clear();
+            _context.Update(topic);
             DbSave();
         }
 
@@ -98,6 +106,7 @@ namespace ThesisManagement.Repositories
             catch (DbUpdateException e)
             {
                 ShowErrorMessage(e.Message);
+                Trace.WriteLine(e);
             }
         }
     }
