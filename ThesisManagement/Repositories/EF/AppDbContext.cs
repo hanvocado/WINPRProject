@@ -77,7 +77,7 @@ namespace ThesisManagement.Repositories.EF
                     Category = "Computer Science",
                     Technology = "SQL",
                     Requirement = "",
-                    StudentQuantity = 5
+                    StudentQuantity = 2
                 },
                 new Topic
                 {
@@ -99,7 +99,29 @@ namespace ThesisManagement.Repositories.EF
                     Category = "Data Science",
                     Technology = "Python",
                     Requirement = "",
-                    StudentQuantity = 5
+                    StudentQuantity = 3
+                },
+                new Topic
+                {
+                    Id = 4,
+                    ProfessorId = "P2",
+                    Name = "Topic abc",
+                    Description = "Description xyz",
+                    Category = "Data Science",
+                    Technology = "Python",
+                    Requirement = "Requirement something here",
+                    StudentQuantity = 2
+                },
+                new Topic
+                {
+                    Id = 5,
+                    ProfessorId = "P2",
+                    Name = "Topic opq",
+                    Description = "Description xyz",
+                    Category = "Other",
+                    Technology = "Other",
+                    Requirement = "Requirement something here",
+                    StudentQuantity = 2
                 }
             );
 

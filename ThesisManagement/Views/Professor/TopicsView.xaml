@@ -10,7 +10,7 @@
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              x:Name="topicsUC"
-             d:DesignHeight="450" d:DesignWidth="1000"
+             d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
     <UserControl.DataContext>
         <viewModels:TopicsViewModel/>
@@ -27,6 +27,25 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="120"/>
             </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0"
+                        Orientation="Horizontal">
+                <fa:IconImage Icon="Search"
+                              Margin="0 5"
+                              Height="17" 
+                              Width="20"/>
+                <TextBox Grid.Row="0"
+                         Name="FilterTexbox"
+                         TextChanged="FilterTexbox_TextChanged"
+                         Text="{Binding Name}"
+                         Width="200"
+                         Padding="10"
+                         Margin="5"
+                         VerticalAlignment="Center"
+                         md:HintAssist.Hint="Tên đề tài..."
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+
+            </StackPanel>
 
             <StackPanel Grid.Row="0" Grid.Column="1"
                         VerticalAlignment="Center">
@@ -66,45 +85,32 @@
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Thể loại" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
-
-                        <GridViewColumn Width="160"
-                        DisplayMemberBinding="{Binding Technology}">
+                        <GridViewColumn Width="170"
+                                        DisplayMemberBinding="{Binding Technology, Mode=TwoWay}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Công nghệ" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
-
-                        <GridViewColumn Width="140"
-                        DisplayMemberBinding="{Binding Professor.Name}">
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Giảng viên" />
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
-
-                        <GridViewColumn Width="160"
-                        DisplayMemberBinding="{Binding Professor.Name}">
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Số lượng thành viên" />
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
-
-                        <GridViewColumn Width="140"
-                        DisplayMemberBinding="{Binding }">
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Trạng thái" />
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
-                        <GridViewColumn Width="140">
+                        <GridViewColumn Width="100">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <customControls:ControlButton DefaultColor="{StaticResource danger}"
-                                            HoverColor="{StaticResource dangerHover}"
-                                            Width="30"
-                                            Margin="5 0 0 0"
-                                            Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
+                                                                      HoverColor="{StaticResource dangerHover}"
+                                                                      Width="30"
+                                                                      Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
                                             <customControls:ControlButton.Content>
                                                 <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
+                                            </customControls:ControlButton.Content>
+                                        </customControls:ControlButton>
+                                        <customControls:ControlButton DefaultColor="{Binding PenColor}"
+                                                                      Margin="10 0 0 0"
+                                                                      IsEnabled="{Binding PenEnable}"
+                                                                      HoverColor="{Binding PenColor}"
+                                                                      Width="30"
+                                                                      Command="{Binding DataContext.ViewTopicRegister, RelativeSource={RelativeSource AncestorType=ListView}}">
+                                            <customControls:ControlButton.Content>
+                                                <fa:IconImage Icon="Pen" Style="{StaticResource btnIcon}" />
                                             </customControls:ControlButton.Content>
                                         </customControls:ControlButton>
                                     </StackPanel>

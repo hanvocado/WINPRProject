@@ -82,7 +82,9 @@ namespace ThesisManagement.Repositories
 
         public ObservableCollection<Topic> GetAll()
         {
-            var topics = _context.Topics.Include(t => t.Professor).AsNoTracking().ToList();
+            var topics = _context.Topics.Include(t => t.Professor)
+                                        .Include(t => t.Theses)
+                                        .AsNoTracking().ToList();
             return new ObservableCollection<Topic>(topics);
         }
 

@@ -9,7 +9,7 @@
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="1000"
+             d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
     <UserControl.DataContext>
         <viewModels:TopicsViewModel/>
@@ -86,7 +86,7 @@
               ItemsSource="{Binding Topics}">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Width="160"
+                        <GridViewColumn Width="250"
                                     DisplayMemberBinding="{Binding Name}" >
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Đề tài" />
@@ -113,20 +113,6 @@
                             </GridViewColumn.Header>
                         </GridViewColumn>
 
-                        <GridViewColumn Width="160"
-                                DisplayMemberBinding="{Binding Professor.Name}">
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Số lượng thành viên" />
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
-
-                        <GridViewColumn Width="140"
-                                DisplayMemberBinding="{Binding }">
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Trạng thái" />
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
-                        
                     </GridView>
                 </ListView.View>
             </ListView>

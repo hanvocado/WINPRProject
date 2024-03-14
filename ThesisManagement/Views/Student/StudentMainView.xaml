@@ -8,7 +8,7 @@
         xmlns:viewModel="clr-namespace:ThesisManagement.ViewModels"
         xmlns:customControl="clr-namespace:ThesisManagement.CustomControls"
         mc:Ignorable="d"
-        Title="StudentMainView" Height="550" Width="1100"
+        Title="StudentMainView" Height="550" Width="900"
         WindowStartupLocation="CenterScreen"
         Style="{StaticResource windowStyle}">
     <Window.DataContext>

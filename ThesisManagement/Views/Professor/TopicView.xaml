@@ -60,14 +60,14 @@
                               Style="{StaticResource MaterialDesignOutlinedComboBox}">
                     </ComboBox>
                     <TextBox Grid.Row="3"
-                             Text="{Binding SelectedTopic.Name, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                             Text="{Binding SelectedTopic.StudentQuantity, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                              VerticalAlignment="Top"
-                             md:HintAssist.Hint="Số lượng thành viên"
+                             md:HintAssist.Hint="Số lượng thành viên tối đa"
                              Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
 
                     <TextBox Grid.Row="4"
                              VerticalAlignment="Top"
-                             Text="{Binding SelectedTopic.Description,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             Text="{Binding SelectedTopic.Requirement,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              Height="70"
                              md:HintAssist.Hint="Yêu cầu"
                              AcceptsReturn="True"
