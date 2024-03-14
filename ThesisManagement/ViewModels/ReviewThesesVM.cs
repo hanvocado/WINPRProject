@@ -1,6 +1,9 @@
 ﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
+using System.Xml.Linq;
+using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
 using Task = System.Threading.Tasks.Task;
@@ -10,15 +13,19 @@ namespace ThesisManagement.ViewModels
     public class ReviewThesesVM : ViewModelBase
     {
         private readonly IThesisRepository _thesisRepo;
-        private Topic selectedThesis;
+        private IEnumerable<Thesis> theses;
+        private Thesis selectedThesis;
+
+        public Thesis SelectedThesis { get => selectedThesis; set { selectedThesis = value; OnPropertyChanged(nameof(SelectedThesis)); } }
+        public IEnumerable<Thesis> Theses { get => theses; set { theses = value; OnPropertyChanged(nameof(Theses)); } }
+
         private Visibility visibleRestoreButton = Visibility.Hidden;
         public Visibility VisibleRestoreButton { get => visibleRestoreButton; set { visibleRestoreButton = value; OnPropertyChanged(); } }
         private int timer = 0;
         public int Timer { get => timer; set { timer = value; OnPropertyChanged(); LoadMessageRemain(); } }
         public string messageTimeRemain = "";
         public string MessageTimeRemain { get => messageTimeRemain; set { messageTimeRemain = value; OnPropertyChanged(); } }
-        public Topic SelectedThesis { get => selectedThesis; set { selectedThesis = value; OnPropertyChanged(nameof(SelectedThesis)); }  }
-  
+
         public ICommand ApproveCommand { get; set; }
         public ICommand RejectCommand { get; set; }
         public ICommand UndoCommand { get; set; }
@@ -26,6 +33,8 @@ namespace ThesisManagement.ViewModels
         public ReviewThesesVM()
         {
             _thesisRepo = new ThesisRepository();
+            selectedThesis = new Thesis();
+            Theses = _thesisRepo.Get(Variable.StatusTopic.Waiting);
             ApproveCommand = new ViewModelCommand(ExecuteApproveCommand);
             RejectCommand = new ViewModelCommand(ExecuteRejectCommand);
             UndoCommand = new ViewModelCommand(ExecuteUndoCommand);
@@ -33,18 +42,20 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteApproveCommand(object obj)
         {
-            bool canRegister = _thesisRepo.CanRegisterTopic(SelectedThesis.Id);
+            bool canRegister = _thesisRepo.CanRegisterTopic(selectedThesis.Id);
             if (canRegister)
             {
-                //Chỗ này t định lấy danh sách sinh viên đăng kí rồi gán ThesisId của mỗi Student = Id của thesis đang đăng kí
-                //Nhưng mà chưa biết lấy từ đâu của UI ;vv
-            }    
-                
+                selectedThesis.TopicStatus = Variable.StatusTopic.Approved;
+                _thesisRepo.Update(selectedThesis);
+                Theses = _thesisRepo.Get(Variable.StatusTopic.Waiting);
+            }
         }
 
         private void ExecuteRejectCommand(object obj)
         {
-            throw new NotImplementedException();
+            selectedThesis.TopicStatus = Variable.StatusTopic.Rejected;
+            _thesisRepo.Update(selectedThesis);
+            Theses = _thesisRepo.Get(Variable.StatusTopic.Waiting);
         }
 
         private void ExecuteUndoCommand(object obj)

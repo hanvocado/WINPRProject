@@ -48,9 +48,9 @@
                     HorizontalContentAlignment="Left"
                     Style="{StaticResource MaterialDesignUniformTabControl}">
             <TabItem Header="Đang chờ">
-                <!--<local:WaitingStudents />-->
+                <local:WaitingStudents />
             </TabItem>
-            
+
             <TabItem Header="Đã duyệt">
                 <ListView Grid.Row="1"
                         Name="AdminsListView"
@@ -92,10 +92,6 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-            </TabItem>
-            
-            <TabItem Header="Đã từ chối">
-                
             </TabItem>
         </TabControl>
     </Grid>

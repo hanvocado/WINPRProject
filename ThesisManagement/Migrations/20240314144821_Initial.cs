@@ -140,20 +140,12 @@ namespace ThesisManagement.Migrations
             migrationBuilder.InsertData(
                 table: "Professors",
                 columns: new[] { "Id", "Birthday", "Email", "Name", "Password", "Phone" },
-                values: new object[,]
-                {
-                    { "P1", new DateTime(1980, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "john@example.com", "John Doe", "hashed_password", "123-456-7890" },
-                    { "P2", new DateTime(1975, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "jane@example.com", "Jane Smith", "hashed_password2", "987-654-3210" }
-                });
+                values: new object[] { "P1", new DateTime(1980, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "john@example.com", "John Doe", "hashed_password", "123-456-7890" });
 
             migrationBuilder.InsertData(
-                table: "Students",
-                columns: new[] { "Id", "Birthday", "Email", "Name", "Password", "Phone", "ThesisId" },
-                values: new object[,]
-                {
-                    { "S1", new DateTime(2000, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "scott@example.com", "Boe Scott", "hashed_password3", "123-456-7890", null },
-                    { "S2", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "smith@example.com", "Arian Smith", "hashed_password4", "987-654-3210", null }
-                });
+                table: "Professors",
+                columns: new[] { "Id", "Birthday", "Email", "Name", "Password", "Phone" },
+                values: new object[] { "P2", new DateTime(1975, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "jane@example.com", "Jane Smith", "hashed_password2", "987-654-3210" });
 
             migrationBuilder.InsertData(
                 table: "Topics",
@@ -170,17 +162,26 @@ namespace ThesisManagement.Migrations
             migrationBuilder.InsertData(
                 table: "Theses",
                 columns: new[] { "Id", "File", "Score", "TopicId", "TopicStatus" },
-                values: new object[] { 1, null, 8f, 2, "Approved" });
+                values: new object[,]
+                {
+                    { 1, null, 8f, 2, "Approved" },
+                    { 2, null, 9f, 1, "Waiting" },
+                    { 3, null, 10f, 3, "Rejected" },
+                    { 4, null, 10f, 2, "Waiting" },
+                    { 5, null, 10f, 2, "Waiting" }
+                });
 
             migrationBuilder.InsertData(
-                table: "Theses",
-                columns: new[] { "Id", "File", "Score", "TopicId", "TopicStatus" },
-                values: new object[] { 2, null, 9f, 1, "Waiting" });
-
-            migrationBuilder.InsertData(
-                table: "Theses",
-                columns: new[] { "Id", "File", "Score", "TopicId", "TopicStatus" },
-                values: new object[] { 3, null, 10f, 3, "Rejected" });
+                table: "Students",
+                columns: new[] { "Id", "Birthday", "Email", "Name", "Password", "Phone", "ThesisId" },
+                values: new object[,]
+                {
+                    { "S1", new DateTime(2000, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "scott@example.com", "Boe Scott", "hashed_password3", "123-456-7890", 2 },
+                    { "S2", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "smith@example.com", "Arian Smith", "hashed_password4", "987-654-3210", 4 },
+                    { "S3", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "charles@example.com", "Vincent Charles", "hashed_password4", "987-654-3210", 4 },
+                    { "S4", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "joyce@example.com", "Nora Joyce", "hashed_password4", "987-654-3210", 4 },
+                    { "S5", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "drake@example.com", "Noah Drake", "hashed_password4", "987-654-3210", 5 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Feedbacks_ThesisId",

@@ -49,7 +49,7 @@ namespace ThesisManagement.Views.Professor
             }
         }
 
-        private void FilterTexbox_TextChanged(object sender, TextChangedEventArgs e)
+        private void FilterTextbox_TextChanged(object sender, TextChangedEventArgs e)
         {
             TopicListView.Items.Filter = FilterMethod;
         }
@@ -57,7 +57,7 @@ namespace ThesisManagement.Views.Professor
         private bool FilterMethod(object obj)
         {
             var topic = (Topic)obj;
-            return topic.Name.Contains(FilterTexbox.Text, StringComparison.OrdinalIgnoreCase);
+            return topic.Name.Contains(FilterTextbox.Text, StringComparison.OrdinalIgnoreCase);
         }
 
         private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)
