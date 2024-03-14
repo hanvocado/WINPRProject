@@ -28,6 +28,7 @@ namespace ThesisManagement.ViewModels
         private string? technology;
         private string description;
         private string professorName;
+        private string studentFilter;
 
         public IEnumerable<string> Categories { get; set; } = new List<string>() { "Computer Science", "Web Development", "Data Science", "Other" };
         public IEnumerable<string> Technologies { get; set; } = new List<string>() { "JavaScript", "Wpf", ".NET", "Java", "Python", "SQL", "ASP.NET Core", "Other" };
@@ -130,10 +131,22 @@ namespace ThesisManagement.ViewModels
             }
         }
 
+        public string StudentFilter
+        {
+            get { return studentFilter; }
+            set
+            {
+                studentFilter = value;
+                OnPropertyChanged(nameof(StudentFilter));
+                FilterStudent();
+            }
+        }
+
         public TopicsViewModel()
         {
             currentUserId = SessionInfo.UserId;
             selectedTopic = new Topic();
+            studentFilter = "";
             _topicRepo = new TopicRepository();
             _professorRepo = new ProfessorRepository();
             _studentRepo = new StudentRepository();
@@ -200,6 +213,12 @@ namespace ThesisManagement.ViewModels
         {
             var filteredData = _professorRepo.GetFilteredTopics(Category, Technology, ProfessorName);
             Topics = new ObservableCollection<Topic>(filteredData);
+        }
+
+        private void FilterStudent()
+        {
+            Students = _studentRepo.Get(studentFilter);
+            MessageBox.Show(Students.ToList().Count.ToString());
         }
     }
 }

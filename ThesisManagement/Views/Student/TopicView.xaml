@@ -91,11 +91,13 @@
             <StackPanel Grid.Row="2">
 
                 <sf:ComboBoxAdv Height="50" Margin="30, 0, 30, 5"
+                                Padding="17 0"
                                 ItemsSource="{Binding Students}"
-                                IsEditable="True"
                                 AllowMultiSelect="True"
-                                EnableToken="True"
                                 DefaultText="Thành viên">
+                                <!--IsEditable="True"
+                                Text="{Binding StudentFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                EnableToken="True"-->
                     <sf:ComboBoxAdv.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -105,11 +107,6 @@
                             </StackPanel>
                         </DataTemplate>
                     </sf:ComboBoxAdv.ItemTemplate>
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="KeyUp">
-                            <customControls:FilterComboBoxAdv />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
                 </sf:ComboBoxAdv>
                 
                 <TextBox Grid.Row="2"
