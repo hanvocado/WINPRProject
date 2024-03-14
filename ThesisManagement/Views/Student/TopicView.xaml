@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:ThesisManagement.Views.Student"
         xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
         xmlns:sf="http://schemas.syncfusion.com/wpf"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -91,16 +92,24 @@
 
                 <sf:ComboBoxAdv Height="50" Margin="30, 0, 30, 5"
                                 ItemsSource="{Binding Students}"
-                                AllowMultiSelect="True">
+                                IsEditable="True"
+                                AllowMultiSelect="True"
+                                EnableToken="True"
+                                DefaultText="Thành viên">
                     <sf:ComboBoxAdv.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Name}" />
-                                <TextBlock Text=" - " />
                                 <TextBlock Text="{Binding Id}" />
+                                <TextBlock Text="_" />
+                                <TextBlock Text="{Binding Name}" />
                             </StackPanel>
                         </DataTemplate>
                     </sf:ComboBoxAdv.ItemTemplate>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="KeyUp">
+                            <customControls:FilterComboBoxAdv />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </sf:ComboBoxAdv>
                 
                 <TextBox Grid.Row="2"
