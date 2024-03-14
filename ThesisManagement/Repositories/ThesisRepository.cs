@@ -3,12 +3,19 @@ using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories.EF;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.ObjectModel;
+using static ThesisManagement.Helpers.Query;
+using System.Diagnostics;
+using System.Windows;
+using System.Linq.Expressions;
 
 namespace ThesisManagement.Repositories
 {
     public interface IThesisRepository
     {
+        void Update(Thesis thesis);
         IEnumerable<Thesis> GetAll();
+        IEnumerable<Thesis> Get(string topicStatus);
         IEnumerable<Thesis> Get(int topicId, string topicStatus);
         IEnumerable<Student> GetMembers(int thesisId);
         bool CanRegisterTopic(int thesisId);
@@ -24,9 +31,26 @@ namespace ThesisManagement.Repositories
             _context = DataProvider.Instance.Context;
         }
 
+        public void Update(Thesis thesis)
+        {
+            _context.ChangeTracker.Clear();
+            _context.Update(thesis);
+            DbSave();
+        }
+
+
         public IEnumerable<Thesis> GetAll()
         {
-            throw new NotImplementedException();
+            var theses = _context.Theses.Include(tp => tp.Topic).AsNoTracking().ToList();
+            return new ObservableCollection<Thesis>(theses);
+        }
+
+        public IEnumerable<Thesis> Get(string topicStatus)
+        {
+            var list = _context.Theses.Include(st => st.Students).Include(tp => tp.Topic)
+                                                .ThenInclude(pr => pr.Professor)
+                                                .Where(th => th.TopicStatus == topicStatus).AsNoTracking().ToList();
+            return list;
         }
 
         public IEnumerable<Thesis> Get(int topicId, string topicStatus)
@@ -51,6 +75,30 @@ namespace ThesisManagement.Repositories
         {
             var students = _context.Theses.Include(st => st.Students).Where(th => th.Id == thesisId).SelectMany(th => th.Students).ToList();
             return students;
+        }
+
+        private void DbSave()
+        {
+            try
+            {
+                _context.SaveChanges();
+                ShowSuccessMessage(Message.Success);
+            }
+            catch (DbUpdateException e)
+            {
+                ShowErrorMessage(e.Message);
+                Trace.WriteLine(e);
+            }
+        }
+
+        private void ShowErrorMessage(string message)
+        {
+            MessageBox.Show(message);
+        }
+
+        private void ShowSuccessMessage(string message)
+        {
+            MessageBox.Show(message);
         }
 
         //public void AddMembers(int topicId, IEnumerable<Student> members)

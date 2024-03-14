@@ -32,6 +32,8 @@ namespace ThesisManagement.Models
 
         public Professor Professor { get; set; }
         public ICollection<Thesis>? Theses { get; set; }
+        public ICollection<Task>? Tasks { get; set; }
+
 
     }
 }

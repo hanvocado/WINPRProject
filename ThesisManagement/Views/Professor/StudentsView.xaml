@@ -48,15 +48,11 @@
                     HorizontalContentAlignment="Left"
                     Style="{StaticResource MaterialDesignUniformTabControl}">
             <TabItem Header="Đang chờ">
-                <!--<local:WaitingStudents />-->
+                <local:WaitingStudents />
             </TabItem>
-            
+
             <TabItem Header="Đã duyệt">
-                
-            </TabItem>
-            
-            <TabItem Header="Đã từ chối">
-                
+
             </TabItem>
         </TabControl>
     </Grid>

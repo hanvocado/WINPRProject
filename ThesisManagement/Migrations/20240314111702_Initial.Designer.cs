@@ -12,7 +12,7 @@ using ThesisManagement.Repositories.EF;
 namespace ThesisManagement.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240313100456_Initial")]
+    [Migration("20240314111702_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -146,7 +146,8 @@ namespace ThesisManagement.Migrations
                             Email = "scott@example.com",
                             Name = "Boe Scott",
                             Password = "hashed_password3",
-                            Phone = "123-456-7890"
+                            Phone = "123-456-7890",
+                            ThesisId = 2
                         },
                         new
                         {
@@ -155,7 +156,38 @@ namespace ThesisManagement.Migrations
                             Email = "smith@example.com",
                             Name = "Arian Smith",
                             Password = "hashed_password4",
-                            Phone = "987-654-3210"
+                            Phone = "987-654-3210",
+                            ThesisId = 4
+                        },
+                        new
+                        {
+                            Id = "S3",
+                            Birthday = new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "charles@example.com",
+                            Name = "Vincent Charles",
+                            Password = "hashed_password4",
+                            Phone = "987-654-3210",
+                            ThesisId = 4
+                        },
+                        new
+                        {
+                            Id = "S4",
+                            Birthday = new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "joyce@example.com",
+                            Name = "Nora Joyce",
+                            Password = "hashed_password4",
+                            Phone = "987-654-3210",
+                            ThesisId = 4
+                        },
+                        new
+                        {
+                            Id = "S5",
+                            Birthday = new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "drake@example.com",
+                            Name = "Noah Drake",
+                            Password = "hashed_password4",
+                            Phone = "987-654-3210",
+                            ThesisId = 5
                         });
                 });
 
@@ -177,13 +209,12 @@ namespace ThesisManagement.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ThesisId")
+                    b.Property<int>("TopicId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ThesisId")
-                        .IsUnique();
+                    b.HasIndex("TopicId");
 
                     b.ToTable("Tasks");
                 });
@@ -202,8 +233,7 @@ namespace ThesisManagement.Migrations
                     b.Property<float?>("Score")
                         .HasColumnType("real");
 
-                    b.Property<int?>("TopicId")
-                        .IsRequired()
+                    b.Property<int>("TopicId")
                         .HasColumnType("int");
 
                     b.Property<string>("TopicStatus")
@@ -238,6 +268,20 @@ namespace ThesisManagement.Migrations
                             Score = 10f,
                             TopicId = 3,
                             TopicStatus = "Rejected"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Score = 10f,
+                            TopicId = 2,
+                            TopicStatus = "Waiting"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Score = 10f,
+                            TopicId = 2,
+                            TopicStatus = "Waiting"
                         });
                 });
 
@@ -344,13 +388,13 @@ namespace ThesisManagement.Migrations
 
             modelBuilder.Entity("ThesisManagement.Models.Task", b =>
                 {
-                    b.HasOne("ThesisManagement.Models.Thesis", "Thesis")
-                        .WithOne("Task")
-                        .HasForeignKey("ThesisManagement.Models.Task", "ThesisId")
+                    b.HasOne("ThesisManagement.Models.Topic", "Topic")
+                        .WithMany("Tasks")
+                        .HasForeignKey("TopicId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Thesis");
+                    b.Navigation("Topic");
                 });
 
             modelBuilder.Entity("ThesisManagement.Models.Thesis", b =>
@@ -385,12 +429,12 @@ namespace ThesisManagement.Migrations
                     b.Navigation("Feedbacks");
 
                     b.Navigation("Students");
-
-                    b.Navigation("Task");
                 });
 
             modelBuilder.Entity("ThesisManagement.Models.Topic", b =>
                 {
+                    b.Navigation("Tasks");
+
                     b.Navigation("Theses");
                 });
 #pragma warning restore 612, 618

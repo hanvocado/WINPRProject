@@ -43,6 +43,7 @@ namespace ThesisManagement.Repositories.EF
                 new Student
                 {
                     Id = "S1",
+                    ThesisId = 2,
                     Name = "Boe Scott",
                     Email = "scott@example.com",
                     Password = "hashed_password3",
@@ -52,8 +53,39 @@ namespace ThesisManagement.Repositories.EF
                 new Student
                 {
                     Id = "S2",
+                    ThesisId = 4,
                     Name = "Arian Smith",
                     Email = "smith@example.com",
+                    Password = "hashed_password4",
+                    Phone = "987-654-3210",
+                    Birthday = new DateTime(2001, 5, 22)
+                },
+                new Student
+                {
+                    Id = "S3",
+                    ThesisId = 4,
+                    Name = "Vincent Charles",
+                    Email = "charles@example.com",
+                    Password = "hashed_password4",
+                    Phone = "987-654-3210",
+                    Birthday = new DateTime(2001, 5, 22)
+                },
+                new Student
+                {
+                    Id = "S4",
+                    ThesisId = 4,
+                    Name = "Nora Joyce",
+                    Email = "joyce@example.com",
+                    Password = "hashed_password4",
+                    Phone = "987-654-3210",
+                    Birthday = new DateTime(2001, 5, 22)
+                },
+                new Student
+                {
+                    Id = "S5",
+                    ThesisId = 5,
+                    Name = "Noah Drake",
+                    Email = "drake@example.com",
                     Password = "hashed_password4",
                     Phone = "987-654-3210",
                     Birthday = new DateTime(2001, 5, 22)
@@ -108,9 +140,6 @@ namespace ThesisManagement.Repositories.EF
                         .WithMany(th => th.Theses)
                         .HasForeignKey(th => th.TopicId);
 
-                entity.HasOne(th => th.Task)
-                      .WithOne(t => t.Thesis)
-                      .HasForeignKey<Task>(t => t.ThesisId);
 
             });
             modelBuilder.Entity<Thesis>().HasData(
@@ -122,23 +151,46 @@ namespace ThesisManagement.Repositories.EF
                     File = null,
                     Score = 8
                 },
-                  new Thesis
-                  {
-                      Id = 2,
-                      TopicId = 1,
-                      TopicStatus = "Waiting",
-                      File = null,
-                      Score = 9
+                new Thesis
+                {
+                    Id = 2,
+                    TopicId = 1,
+                    TopicStatus = "Waiting",
+                    File = null,
+                    Score = 9
                 },
-                    new Thesis
-                    {
-                        Id = 3,
-                        TopicId = 3,
-                        TopicStatus = "Rejected",
-                        File = null,
-                        Score = 10
+                new Thesis
+                {
+                    Id = 3,
+                    TopicId = 3,
+                    TopicStatus = "Rejected",
+                    File = null,
+                    Score = 10
+                },
+                new Thesis
+                {
+                    Id = 4,
+                    TopicId = 2,
+                    TopicStatus = "Waiting",
+                    File = null,
+                    Score = 10
+                },
+                new Thesis
+                {
+                    Id = 5,
+                    TopicId = 2,
+                    TopicStatus = "Waiting",
+                    File = null,
+                    Score = 10
                 }
             );
+
+            modelBuilder.Entity<Task>(entity =>
+            {
+                entity.HasOne(tp => tp.Topic)
+                      .WithMany(t => t.Tasks)
+                      .HasForeignKey(t => t.TopicId);
+            });
 
             modelBuilder.Entity<Feedback>(entity =>
             {
