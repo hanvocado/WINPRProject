@@ -17,9 +17,9 @@ namespace ThesisManagement.Views.Professor
     /// <summary>
     /// Interaction logic for NewTasks.xaml
     /// </summary>
-    public partial class NewTasks : Window
+    public partial class Task : Window
     {
-        public NewTasks()
+        public Task()
         {
             InitializeComponent();
         }

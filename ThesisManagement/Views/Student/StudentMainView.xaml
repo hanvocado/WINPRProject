@@ -16,15 +16,15 @@
     </Window.DataContext>
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModel:TopicsVM}">
-            <local:TopicsView />
+            <local:ProfessorsTopics/>
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type viewModel:StudentsVM}">
-            <local:DetailFeedback />
+            <local:MyThesis/>
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type viewModel:ThesesVM}">
-            <local:MyTopics />
+            <local:MyThesis/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:ProfessorProfileVM}">
             <local:ProfileStudent />
@@ -59,7 +59,7 @@
                         <RadioButton Style="{StaticResource navBtn}"
                                  Command="{Binding ShowStudentProfileView}">
                             <RadioButton.ToolTip>
-                                <ToolTip Content="Luận văn" Style="{StaticResource navToolTip}" />
+                                <ToolTip Content="Hồ sơ" Style="{StaticResource navToolTip}" />
                             </RadioButton.ToolTip>
                             <fa:IconImage Icon="UserLarge" Style="{StaticResource navIcon}" />
                         </RadioButton>
@@ -67,7 +67,7 @@
                         <RadioButton Style="{StaticResource navBtn}" 
                                  Command="{Binding ShowThesisView}">
                             <RadioButton.ToolTip>
-                                <ToolTip Content="Hồ sơ" Style="{StaticResource navToolTip}" />
+                                <ToolTip Content="Luận văn" Style="{StaticResource navToolTip}" />
                             </RadioButton.ToolTip>
                             <fa:IconImage Icon="Book" Style="{StaticResource navIcon}" />
                         </RadioButton>
@@ -85,7 +85,7 @@
             <Border Grid.Column="1">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="25"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 

@@ -19,9 +19,9 @@ namespace ThesisManagement.Views.Student
     /// <summary>
     /// Interaction logic for MyTopics.xaml
     /// </summary>
-    public partial class MyTopics : UserControl
+    public partial class MyThesis : UserControl
     {
-        public MyTopics()
+        public MyThesis()
         {
             InitializeComponent();
         }

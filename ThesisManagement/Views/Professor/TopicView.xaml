@@ -9,7 +9,7 @@
         xmlns:local="clr-namespace:ThesisManagement.Views.Professor"
         mc:Ignorable="d"
         x:Name="topicUC"
-        Title="TopicView" Height="450" Width="400"
+        Title="TopicView" Height="650" Width="500"
         Style="{StaticResource formStyle}">
 
     <Window.DataContext>
@@ -26,13 +26,15 @@
 
             <customControls:PopupControlBar />
 
-            <Border Grid.Row="1" Padding="30 20 30 0">
+            <Border Grid.Row="1" Padding="30 20 30 5">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition />
                         <RowDefinition />
                         <RowDefinition />
-                        <RowDefinition Height="120"/>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition Height="70"/>
                     </Grid.RowDefinitions>
 
                     <TextBox Grid.Row="0"
@@ -57,11 +59,26 @@
                               SelectedValue="{Binding SelectedTopic.Technology,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               Style="{StaticResource MaterialDesignOutlinedComboBox}">
                     </ComboBox>
-
                     <TextBox Grid.Row="3"
+                             Text="{Binding SelectedTopic.Name, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                             VerticalAlignment="Top"
+                             md:HintAssist.Hint="Số lượng thành viên"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+
+                    <TextBox Grid.Row="4"
                              VerticalAlignment="Top"
                              Text="{Binding SelectedTopic.Description,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             Height="100"
+                             Height="70"
+                             md:HintAssist.Hint="Yêu cầu"
+                             AcceptsReturn="True"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto" />
+                    
+                    <TextBox Grid.Row="5"
+                             VerticalAlignment="Top"
+                             Text="{Binding SelectedTopic.Description,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             Height="65"
                              md:HintAssist.Hint="Mô tả"
                              AcceptsReturn="True"
                              Style="{StaticResource MaterialDesignOutlinedTextBox}"
