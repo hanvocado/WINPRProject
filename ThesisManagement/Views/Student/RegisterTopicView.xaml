@@ -53,31 +53,27 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="2*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
-                <Image Source="/Resources/Images/UTE.jpg" Width="140" Margin="0,0,0,0">
-                    <Image.Effect>
-                        <DropShadowEffect ShadowDepth="5" BlurRadius="10" Direction="270"/>
-                    </Image.Effect>
+                <Image Source="/Resources/Images/UTE.png" Height="70" Width="70" Margin="10 0 0 0">
                 </Image>
             </Grid>
-            <Grid Grid.Column="1">
+            <Border Grid.Column="1">
                 <TextBlock 
                         Text="Đề tài : Ứng dụng bản đồ số xây dựng website tìm kiếm và cho thuê bất động sản khu vực Hà Nội " 
                         Style="{StaticResource title}"
                         TextWrapping="Wrap"
-                        Padding="10"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"/>
-            </Grid>
+            </Border>
         </Grid>
         <Grid Grid.Row="1">
             <ScrollViewer Grid.Row="2" Grid.ColumnSpan="2"  Background="White">
@@ -133,8 +129,8 @@
         </Grid>
         <Grid Grid.Row="2">
             <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
-                  HoverColor="{StaticResource secondaryBrush}"
-                  Width="110" Margin="0 0 0 0">
+                                          HoverColor="{StaticResource secondaryBrush}"
+                                          Width="110" Margin="0 0 0 0">
                     <customControls:ControlButton.Content>
                         <TextBlock Text="Đăng Kí" Style="{StaticResource btnContent}"/>
                     </customControls:ControlButton.Content>
