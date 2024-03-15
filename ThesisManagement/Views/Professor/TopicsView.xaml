@@ -108,7 +108,7 @@
                                                                       IsEnabled="{Binding PenEnable}"
                                                                       HoverColor="{Binding PenColor}"
                                                                       Width="30"
-                                                                      Command="{Binding DataContext.ViewTopicRegister, RelativeSource={RelativeSource AncestorType=ListView}}">
+                                                                      Command="{Binding DataContext.ViewTopicRegisters, RelativeSource={RelativeSource AncestorType=ListView}}">
                                             <customControls:ControlButton.Content>
                                                 <fa:IconImage Icon="Pen" Style="{StaticResource btnIcon}" />
                                             </customControls:ControlButton.Content>

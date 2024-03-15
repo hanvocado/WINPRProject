@@ -8,7 +8,7 @@
              xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="450" d:DesignWidth="700"
              Background="white">
     <UserControl.DataContext>
         <viewModels:ReviewThesesVM/>
@@ -22,10 +22,10 @@
           SelectedItem="{Binding SelectedThesis, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Width="200"
-                                    DisplayMemberBinding="{Binding Id, Mode=TwoWay}">
+                    <GridViewColumn Width="280"
+                                    DisplayMemberBinding="{Binding Topic.Name, Mode=TwoWay}">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Luận văn" />
+                            <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Đề tài" />
                         </GridViewColumn.Header>
                     </GridViewColumn>
                     <GridViewColumn Width="300">
@@ -44,7 +44,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Width="300">
+                    <GridViewColumn Width="100">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel VerticalAlignment="Center"
