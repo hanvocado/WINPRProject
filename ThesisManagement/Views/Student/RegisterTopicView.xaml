@@ -63,8 +63,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
-                <Image Source="/Resources/Images/UTE.png" Height="70" Width="70" Margin="10 0 0 0">
-                </Image>
+                <Image Source="/Resources/Images/UTE.png" Height="70" Width="70" Margin="10 0 0 0" />
             </Grid>
             <Border Grid.Column="1">
                 <TextBlock 

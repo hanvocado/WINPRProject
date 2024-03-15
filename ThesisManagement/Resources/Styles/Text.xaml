@@ -10,7 +10,10 @@
     <Style x:Key="title" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{StaticResource primaryBrush}" />
         <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="FontSize" Value="25"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
     </Style>
     <Style TargetType="Label">
         <Setter Property="Foreground" Value="#353E4E" />
