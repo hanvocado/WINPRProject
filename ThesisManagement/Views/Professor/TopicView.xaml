@@ -9,7 +9,7 @@
         xmlns:local="clr-namespace:ThesisManagement.Views.Professor"
         mc:Ignorable="d"
         x:Name="topicUC"
-        Title="TopicView" Height="650" Width="500"
+        Title="TopicView" Height="700" Width="500"
         Style="{StaticResource formStyle}">
 
     <Window.DataContext>
@@ -20,13 +20,23 @@
         <Grid >
             <Grid.RowDefinitions>
                 <RowDefinition Height="25" />
+                <RowDefinition Height="50" />
                 <RowDefinition />
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
 
             <customControls:PopupControlBar />
-
-            <Border Grid.Row="1" Padding="30 20 30 5">
+            <Grid Grid.Row="1">
+                <TextBlock 
+                Text="Đề xuất" 
+                Style="{StaticResource title}" 
+                FontSize="20"
+                TextWrapping="Wrap"
+                Padding="20"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"/>
+            </Grid>
+            <Border Grid.Row="2" Padding="30 20 30 5">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition />
@@ -88,12 +98,12 @@
                 </Grid>
             </Border>
 
-            <Grid Grid.Row="2" >
+            <Grid Grid.Row="3" >
                 <TextBox Text="{Binding SelectedTopic.Id}" Visibility="Hidden" />
                 <TextBox Text="{Binding SelectedTopic.ProfessorId}" Visibility="Hidden" />
                 <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
                               HoverColor="{StaticResource secondaryBrush}"
-                              Content="Lưu"
+                              Content="Gửi"
                               Margin="0 -10 0 20"
                               Width="100"
                               Height="50"
