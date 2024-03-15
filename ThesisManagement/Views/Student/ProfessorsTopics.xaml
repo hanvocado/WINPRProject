@@ -82,8 +82,10 @@
         <Border Grid.Row="1" >
 
             <ListView Grid.Row="1"
-              Name="AdminsListView"
-              ItemsSource="{Binding Topics}">
+            Name="TopicsListView"
+            ItemsSource="{Binding Topics}"
+            MouseLeftButtonUp="ListViewItem_Click"
+            SelectedItem="{Binding SelectedTopic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Width="250"
