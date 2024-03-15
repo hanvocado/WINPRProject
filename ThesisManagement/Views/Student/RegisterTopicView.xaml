@@ -134,6 +134,7 @@
                 <sf:ComboBoxAdv Margin="22 0"
                                   Height="60"
                                   VerticalAlignment="Top"
+                                AllowMultiSelect="True"
                                   ItemsSource="{Binding Students}"
                                   md:TextFieldAssist.HasClearButton="True">
                     <sf:ComboBoxAdv.ItemTemplate>

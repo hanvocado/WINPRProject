@@ -7,7 +7,7 @@
         xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="ProfessorMainView" Height="550" Width="1100"
+        Title="ProfessorMainView" Height="550" Width="900"
         WindowStartupLocation="CenterScreen"
         Style="{StaticResource windowStyle}">
     <Window.Resources>
@@ -40,9 +40,20 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="50" />
         </Grid.RowDefinitions>
+        
         <customControls:PopupControlBar />
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Image Source="/Resources/Images/UTE.png" Height="50" Width="50" Margin="20 0 20 0" />
+            <TextBlock Style="{StaticResource title}" >
+                <Run Text="Đề tài: "/>
+                <Run Text="{Binding SelectedTopic.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </TextBlock>
+        </StackPanel>
+
         <Expander  IsExpanded="False" Grid.Row="2" HorizontalAlignment="Stretch" Background="Transparent">
             <Expander.Header>
                 <TextBlock Text="Đang thực hiện" Style="{StaticResource A}" MinHeight="40" Margin="-23,0,-63,0"/>
@@ -69,38 +80,38 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Width="150"
+                        <GridViewColumn Width="220"
                     DisplayMemberBinding="{Binding tieude}" >
                             <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Chủ đề" />
+                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Nhiệm vụ" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
 
                         <GridViewColumn Width="200"
                     DisplayMemberBinding="{Binding tiendo}">
                             <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Tiến độ" />
+                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Sinh viên" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
 
-                        <GridViewColumn Width="200"
+                        <GridViewColumn Width="150"
                     DisplayMemberBinding="{Binding start}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Ngày bắt đầu" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
 
-                        <GridViewColumn Width="200"
+                        <GridViewColumn Width="150"
                     DisplayMemberBinding="{Binding end}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Ngày kết thúc" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
 
-                        <GridViewColumn Width="200"
+                        <GridViewColumn Width="150"
                     DisplayMemberBinding="{Binding trangthai}">
                             <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Trạng thái" />
+                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Tiến độ" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
 
@@ -118,13 +129,12 @@
                 <TextBlock Text="Đã Quá hạn" Style="{StaticResource C}" MinHeight="40" Margin="-23,0,-63,0"/>
             </Expander.Header>
         </Expander>
-        <Grid Grid.Row="4">
+        <Grid Grid.Row="5">
             <Button Width="750" Height="30" Margin="10 10 10 10" Click="Button_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Border Background="#9ae2ca"
                                 CornerRadius="20">
-                            <!-- Điều chỉnh bán kính để bo tròn góc -->
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
