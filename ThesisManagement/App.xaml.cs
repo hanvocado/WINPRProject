@@ -14,7 +14,6 @@ namespace ThesisManagement
         {
             SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NAaF1cXmhKYVF2WmFZfVpgfV9FYlZSQGY/P1ZhSXxXdkZiWn1fc3ZWQmBeWUE=");
         }
-
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
