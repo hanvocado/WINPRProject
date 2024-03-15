@@ -12,8 +12,6 @@
          xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
          Title="TopicView" Height="450" Width="600"
          WindowStartupLocation="CenterScreen"
-         WindowStyle="None"
-         AllowsTransparency="True"
          Style="{StaticResource formStyle}">
     <Window.DataContext>
         <viewModels:TopicsViewModel />
@@ -38,13 +36,12 @@
                 Style="{StaticResource title}" 
                 FontSize="20"
                 TextWrapping="Wrap"
-                Padding="20"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"/>
             </Grid>
 
             <TextBox Grid.Row="2"
-                     Width="500"
+                     Width="490"
                      Margin="50,20,50,20"
                      Text="{Binding SelectedTopic.Name, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                      VerticalAlignment="Top"
@@ -60,18 +57,18 @@
                 <DatePicker 
                       md:HintAssist.FloatingOffset="0,-23"
                       md:HintAssist.Hint="Ngày bắt đầu"
-                      Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="50,20,30,20" FontSize="14" Grid.Column="0" VerticalAlignment="Top"/>
+                      Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="55,20,30,20" FontSize="14" Grid.Column="0" VerticalAlignment="Top"/>
 
                 <DatePicker 
                       md:HintAssist.FloatingOffset="0,-23"
                       md:HintAssist.Hint="Ngày kết thúc"
-                      Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="30,20,50,20" FontSize="14" Grid.Column="1" VerticalAlignment="Top"/>
+                      Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="30,20,55,20" FontSize="14" Grid.Column="1" VerticalAlignment="Top"/>
 
             </Grid>
 
             <Grid Grid.Row="4">
                 <TextBox Grid.Row="2"
-                 Width="500"
+                 Width="490"
                  Height="70"
                  Margin="50,20,50,20"
                  Text="{Binding SelectedTopic.Name, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
@@ -85,17 +82,18 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBlock 
                                Text="Tiến độ: "
-                               Margin="50 20 20 20"
+                               Margin="55 20 20 20"
                                FontWeight="Normal"
                                FontSize="15"/>
                     <Slider
-                              Maximum="{Binding DiscreteHorizontal.Maximum}"
+                              Maximum="100"
                               Minimum="0"
                               Style="{StaticResource MaterialDesignDiscreteSlider}"
-                              Foreground="#81d4fa"
-                              TickFrequency="{Binding DiscreteHorizontal.TickFrequency}"
+                              TickFrequency="10"
                               TickPlacement="Both"
-                              Value="60" Width="424" Height="34"/>
+                              Foreground="#81d4fa"
+                              Value="60" Width="412" Height="34"/>
+
                 </StackPanel>
             </Grid>
 

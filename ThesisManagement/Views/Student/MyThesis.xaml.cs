@@ -25,14 +25,14 @@ namespace ThesisManagement.Views.Student
         public MyThesis()
         {
             InitializeComponent();
-            YourTaskList = new ObservableCollection<Task>
+            YourTaskList = new ObservableCollection<_Task>
             {
-                new Task { tieude = "Thiết kế giao diện", tiendo = "80%", start = "12/03/2024",end="12/04/2024" ,trangthai="Đã hoàn thành"},
-                new Task { tieude = "Thiết kế button", tiendo = "80%", start = "12/03/2024",end="12/04/2024" ,trangthai="Đang hoàn thành"},
-                new Task { tieude = "Chạy thử", tiendo = "80%", start = "12/03/2024",end="12/04/2024" ,trangthai="Đang thực hiện"},
-                new Task { tieude = "khắc phục lỗi", tiendo = "80%", start = "12/03/2024",end="12/04/2024" ,trangthai="Đang thực hiện"},
-                new Task { tieude = "Làm báo cáo", tiendo = "80%", start = "12/03/2024",end="12/04/2024" ,trangthai="Đang thực hiện"},
-                new Task { tieude = "Bảo vệ luận án", tiendo = "80%", start = "12/03/2024",end="12/04/2024" ,trangthai="Đang thực hiện"},
+                new _Task { tieude = "Thiết kế giao diện", tiendo = "80%", start = "12/03/2024",end="12/04/2024" ,trangthai="Đã hoàn thành"},
+                new _Task { tieude = "Thiết kế button", tiendo = "80%", start = "12/03/2024",end="12/04/2024" ,trangthai="Đang hoàn thành"},
+                new _Task { tieude = "Chạy thử", tiendo = "80%", start = "12/03/2024",end="12/04/2024" ,trangthai="Đang thực hiện"},
+                new _Task { tieude = "khắc phục lỗi", tiendo = "80%", start = "12/03/2024",end="12/04/2024" ,trangthai="Đang thực hiện"},
+                new _Task { tieude = "Làm báo cáo", tiendo = "80%", start = "12/03/2024",end="12/04/2024" ,trangthai="Đang thực hiện"},
+                new _Task { tieude = "Bảo vệ luận án", tiendo = "80%", start = "12/03/2024",end="12/04/2024" ,trangthai="Đang thực hiện"},
                 
                 // Thêm các công việc khác vào đây
             };
@@ -42,7 +42,7 @@ namespace ThesisManagement.Views.Student
         {
 
         }
-        public class Task
+        public class _Task
         {
             public string tieude { get; set; }
             public string tiendo { get; set; }
@@ -53,10 +53,11 @@ namespace ThesisManagement.Views.Student
             
 
         }
-        public ObservableCollection<Task> YourTaskList { get; set; }
+        public ObservableCollection<_Task> YourTaskList { get; set; }
         private void button_click(object sender, RoutedEventArgs e)
         {
-            
+            Task task = new Task();
+            task.ShowDialog();
             
         }
     }
