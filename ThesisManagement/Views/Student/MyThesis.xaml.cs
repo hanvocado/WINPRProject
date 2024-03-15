@@ -56,8 +56,7 @@ namespace ThesisManagement.Views.Student
         public ObservableCollection<Task> YourTaskList { get; set; }
         private void button_click(object sender, RoutedEventArgs e)
         {
-            TopicView topicView = new TopicView();
-            topicView.ShowDialog();
+            
             
         }
     }
