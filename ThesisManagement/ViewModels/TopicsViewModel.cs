@@ -154,6 +154,7 @@ namespace ThesisManagement.ViewModels
             Topics = _topicRepo.GetAll();
             ProfessorNames = _professorRepo.GetProfessorNames();
             Students = _studentRepo.GetAll();
+            Professors = _professorRepo.GetAll();
             ProfessorCreateTopic = new ViewModelCommand(ExecuteProfessorCreateCommand);
             StudentCreateTopic = new ViewModelCommand(ExecuteStudentCreateCommand);
             CreateOrUpdateCommand = new ViewModelCommand(ExecuteCreateOrUpdateCommand);

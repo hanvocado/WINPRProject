@@ -78,16 +78,12 @@
                 <ComboBox Grid.Row="1"
                             VerticalAlignment="Top"
                             Height="60"
-                            ItemsSource="{Binding Professors, XPath=Name}"
-                            SelectedValue="{Binding SelectedTopic.Professor}"
+                          DisplayMemberPath="Name"
+                          SelectedValuePath="Id"
+                            ItemsSource="{Binding Professors}"
+                            SelectedValue="{Binding SelectedTopic.ProfessorId}"
                             hc:InfoElement.Title="Giảng viên"
-                            Style="{StaticResource ComboBoxExtend}">
-                    <!--<ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}" />
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>-->
-                </ComboBox>
+                            Style="{StaticResource ComboBoxExtend}" />
             </Border>
 
             <Border Grid.Row="5" Padding="30 0">
