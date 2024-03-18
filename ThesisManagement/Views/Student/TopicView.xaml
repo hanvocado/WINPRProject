@@ -5,16 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ThesisManagement.Views.Student"
         xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
-        xmlns:sf="http://schemas.syncfusion.com/wpf"
-        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
         mc:Ignorable="d"
         xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
-        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="TopicView" Height="400" Width="600"
-        WindowStartupLocation="CenterScreen"
+        Title="TopicView" Height="540" Width="600"
         WindowStyle="None"
-        AllowsTransparency="True"
-        Style="{StaticResource formStyle}">
+        Style="{StaticResource formStyle}"
+        WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <viewModels:TopicsViewModel />
     </Window.DataContext>
@@ -23,82 +20,83 @@
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="180"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="120"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
             
-            <customControls:PopupControlBar />
+            <customControls:PopupControlBar Grid.Row="0" />
             <Grid Grid.Row="1">
+                <TextBlock  Text="Đăng Ký Đề Tài" 
+                            Style="{StaticResource title}" 
+                            FontSize="20"
+                            TextWrapping="Wrap"
+                            Padding="0 0 0 10"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+            </Grid>
+
+            <Border Grid.Row="2" Padding="30 0">
+                <TextBox Grid.Row="0"
+                        Height="60"
+                        VerticalAlignment="Top"
+                        Style="{StaticResource TextBoxExtend}"
+                        hc:InfoElement.Title="Tên đề tài" />
+            </Border>
+            
+            <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Border Grid.Column="0" Padding="30 20 30 0">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-
-                            <!--<RowDefinition Height="120"/>-->
-                        </Grid.RowDefinitions>
-
-                        <TextBox Grid.Row="0"
-                                 VerticalAlignment="Top"
-                                 md:HintAssist.Hint="Tên đề tài"
-                                 Style="{StaticResource MaterialDesignOutlinedTextBox}" />
-                        <ComboBox Grid.Row="1"
-                                  VerticalAlignment="Top"
-                                  ItemsSource="{Binding Categories}"
-                                  SelectedValue="{Binding Category}"
-                                  md:HintAssist.Hint="Thể loại"
-                                  md:TextFieldAssist.HasClearButton="True"
-                                  Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                        </ComboBox>
-
-                    </Grid>
+                <Border Grid.Column="0" Padding="30 0">
+                    <ComboBox Grid.Row="1"
+                              VerticalAlignment="Top"
+                              Height="60"
+                              ItemsSource="{Binding Categories}"
+                              SelectedValue="{Binding SelectedTopic.Category}"
+                              hc:InfoElement.Title="Thể loại"
+                              Style="{StaticResource ComboBoxExtend}"/>
                 </Border>
 
-                <Border Grid.Column="1" Padding="30 20 30 0">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-
-                        </Grid.RowDefinitions>
-
-                        <ComboBox Grid.Row="2"
-                                  VerticalAlignment="Top"
-                                  ItemsSource="{Binding Technologies}"
-                                  SelectedValue="{Binding Technology}"
-                                  md:HintAssist.Hint="Công nghệ"
-                                  md:TextFieldAssist.HasClearButton="True"
-                                  Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                        </ComboBox>
-
-                        <ComboBox Grid.Row="0"
-                                  VerticalAlignment="Top"
-                                  md:HintAssist.Hint="Giảng viên"
-                                  md:TextFieldAssist.HasClearButton="True"
-                                  ItemsSource="{Binding Professors}"
-                                  SelectedValue="{Binding Professor}"
-                                  Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                        </ComboBox>
-                    </Grid>
+                <Border Grid.Column="1" Padding="30 0">
+                    <ComboBox Grid.Row="1"
+                              VerticalAlignment="Top"
+                              Height="60"
+                              ItemsSource="{Binding Technologies}"
+                              SelectedValue="{Binding SelectedTopic.Technology}"
+                              hc:InfoElement.Title="Công nghệ"
+                              Style="{StaticResource ComboBoxExtend}" />
                 </Border>
             </Grid>
 
-            <StackPanel Grid.Row="2">
+            <Border Grid.Row="4" Padding="30 0">
+                <ComboBox Grid.Row="1"
+                            VerticalAlignment="Top"
+                            Height="60"
+                            ItemsSource="{Binding Professors, XPath=Name}"
+                            SelectedValue="{Binding SelectedTopic.Professor}"
+                            hc:InfoElement.Title="Giảng viên"
+                            Style="{StaticResource ComboBoxExtend}">
+                    <!--<ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>-->
+                </ComboBox>
+            </Border>
 
-                <sf:ComboBoxAdv Height="50" Margin="30, 0, 30, 5"
-                                Padding="17 0"
-                                ItemsSource="{Binding Students}"
-                                AllowMultiSelect="True"
-                                DefaultText="Thành viên">
-                                <!--IsEditable="True"
-                                Text="{Binding StudentFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                EnableToken="True"-->
-                    <sf:ComboBoxAdv.ItemTemplate>
+            <Border Grid.Row="5" Padding="30 0">
+                <hc:CheckComboBox Height="60"
+                                  VerticalAlignment="Top"
+                                  hc:InfoElement.Title="Thành viên"
+                                  Style="{StaticResource CheckComboBoxExtend}"
+                                    ItemsSource="{Binding Students}" >
+                    <hc:CheckComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding Id}" />
@@ -106,22 +104,22 @@
                                 <TextBlock Text="{Binding Name}" />
                             </StackPanel>
                         </DataTemplate>
-                    </sf:ComboBoxAdv.ItemTemplate>
-                </sf:ComboBoxAdv>
-                
+                    </hc:CheckComboBox.ItemTemplate>
+                </hc:CheckComboBox>
+            </Border>
+
+            <Border Grid.Row="6" Padding="30 0">
                 <TextBox Grid.Row="2"
                          VerticalAlignment="Top"
-                         Height="80"
+                         Height="100"
                          Text="" 
-                         md:HintAssist.Hint="Chú thích"
+                         hc:InfoElement.Title="Chú thích"
+                         Style="{StaticResource TextBoxExtend}"
                          AcceptsReturn="True"
-                         IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
-                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
                          TextWrapping="Wrap"
-                         VerticalScrollBarVisibility="Auto"
-                         Margin="30, 5, 30, 5"/>
-
-            </StackPanel>
+                         VerticalScrollBarVisibility="Auto"/>
+            </Border>
+            
             <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
                               HoverColor="{StaticResource secondaryBrush}"
                               Content="Gửi"
@@ -129,7 +127,7 @@
                               Width="100"
                               Height="50"
                               FontSize="14"
-                              Grid.Row="3"/>
+                              Grid.Row="7"/>
         </Grid>
     </Border>
 </Window>

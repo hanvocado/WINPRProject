@@ -8,6 +8,7 @@
              xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:sf="http://schemas.syncfusion.com/wpf"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
              mc:Ignorable="d" 
              Height="600" Width="600"
@@ -53,21 +54,21 @@
 
                         <TextBox Grid.Row="0"
                               Text="{Binding SelectedTopic.StudentQuantity, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                              VerticalAlignment="Top"
+                              Height="50"
+                                 VerticalAlignment="Top"
                               IsReadOnly="True"
-                              md:HintAssist.Hint="Số lượng thành viên tối đa"
-                              Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                              md:HintAssist.Hint="Số lượng thành viên tối đa"/>
 
-                        <ComboBox Grid.Row="1"
+                        <hc:ComboBox Grid.Row="1"
                                   IsHitTestVisible="False"
                                     IsEditable="True"
                                     IsReadOnly="True"
+                                     Height="50"
                                   VerticalAlignment="Top"
                                   md:HintAssist.Hint="Công nghệ"
                                   ItemsSource="{Binding Technologies}"
-                                  SelectedValue="{Binding SelectedTopic.Technology,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                  Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                        </ComboBox>
+                                  SelectedValue="{Binding SelectedTopic.Technology,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        </hc:ComboBox>
                     </Grid>
 
 
@@ -84,14 +85,14 @@
 
                         <ComboBox Grid.Row="1"
                                   VerticalAlignment="Top"
+                                  Height="50"
                                   ItemsSource="{Binding Categories}"
                                   SelectedValue="{Binding SelectedTopic.Category, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                   IsHitTestVisible="False"
                                   IsEditable="True"
                                   IsReadOnly="True"
                                   md:HintAssist.Hint="Thể loại"
-                                  md:TextFieldAssist.HasClearButton="True"
-                                  Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                                  md:TextFieldAssist.HasClearButton="True">
                         </ComboBox>
 
 
@@ -99,8 +100,8 @@
                              Text="{Binding SelectedTopic.Professor.Name, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                              IsReadOnly="True"
                              VerticalAlignment="Top"
-                             md:HintAssist.Hint="Giảng viên"
-                             Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                                 Height="50"
+                             md:HintAssist.Hint="Giảng viên"/>
 
                     </Grid>
 
@@ -114,7 +115,6 @@
                       Height="60"
                       md:HintAssist.Hint="Mô tả"
                       AcceptsReturn="True"
-                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
                       TextWrapping="Wrap"
                       VerticalScrollBarVisibility="Auto" Margin="22,0,22,0" />
             
@@ -125,19 +125,17 @@
                       Height="60"
                       md:HintAssist.Hint="Yêu cầu"
                       AcceptsReturn="True"
-                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
                       TextWrapping="Wrap"
                       VerticalScrollBarVisibility="Auto" Margin="22,0,22,0" />
 
             <StackPanel Grid.Row="5">
-                <Label Content="Thành viên" Margin="22 0 0 2"/>
-                <sf:ComboBoxAdv Margin="22 0"
+                <hc:CheckComboBox Margin="22 0"
                                   Height="60"
                                   VerticalAlignment="Top"
-                                AllowMultiSelect="True"
                                   ItemsSource="{Binding Students}"
+                                  md:HintAssist.Hint="Thành viên"
                                   md:TextFieldAssist.HasClearButton="True">
-                    <sf:ComboBoxAdv.ItemTemplate>
+                    <hc:CheckComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding Id}" />
@@ -145,8 +143,8 @@
                                 <TextBlock Text="{Binding Name}" />
                             </StackPanel>
                         </DataTemplate>
-                    </sf:ComboBoxAdv.ItemTemplate>
-                </sf:ComboBoxAdv>
+                    </hc:CheckComboBox.ItemTemplate>
+                </hc:CheckComboBox>
             </StackPanel>
 
             <Grid Grid.Row="6" >
