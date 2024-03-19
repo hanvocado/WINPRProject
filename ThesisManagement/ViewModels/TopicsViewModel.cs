@@ -24,14 +24,16 @@ namespace ThesisManagement.ViewModels
 
         private Topic selectedTopic;
 
-        private string name;
-        private string? category;
-        private string? technology;
-        private string description;
-        private string professorName;
+        private string? filterName;
+        private string? filterCategory;
+        private string? filterTechnology;
+        private string? filterProfessorName;
         private string studentFilter;
 
-        public IEnumerable<string> Categories { get; set; } = new List<string>() { "Computer Science", "Web Development", "Data Science", "Other" };
+        private
+
+        public IEnumerable<string> Categories
+        { get; set; } = new List<string>() { "Computer Science", "Web Development", "Data Science", "Other" };
         public IEnumerable<string> Technologies { get; set; } = new List<string>() { "JavaScript", "Wpf", ".NET", "Java", "Python", "SQL", "ASP.NET Core", "Other" };
         public ICommand ProfessorCreateTopic { get; set; }
         public ICommand StudentCreateTopic { get; set; }
@@ -57,35 +59,35 @@ namespace ThesisManagement.ViewModels
             }
         }
 
-        public string Name
+        public string FilterName
         {
-            get { return name; }
+            get { return filterName; }
             set
             {
-                name = value;
-                OnPropertyChanged(nameof(Name));
+                filterName = value;
+                OnPropertyChanged(nameof(FilterName));
                 FilterData();
             }
         }
 
-        public string Category
+        public string FilterCategory
         {
-            get { return category; }
+            get { return filterCategory; }
             set
             {
-                category = value;
-                OnPropertyChanged(nameof(Category));
+                filterCategory = value;
+                OnPropertyChanged(nameof(FilterCategory));
                 FilterData();
             }
         }
 
-        public string Technology
+        public string FilterTechnology
         {
-            get { return technology; }
+            get { return filterTechnology; }
             set
             {
-                technology = value;
-                OnPropertyChanged(nameof(Technology));
+                filterTechnology = value;
+                OnPropertyChanged(nameof(FilterTechnology));
                 FilterData();
             }
         }
@@ -120,13 +122,13 @@ namespace ThesisManagement.ViewModels
             }
         }
 
-        public string ProfessorName
+        public string FilterProfessorName
         {
-            get { return professorName; }
+            get { return filterProfessorName; }
             set
             {
-                professorName = value;
-                OnPropertyChanged(nameof(ProfessorName));
+                filterProfessorName = value;
+                OnPropertyChanged(nameof(FilterProfessorName));
                 FilterData();
             }
         }
