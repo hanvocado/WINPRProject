@@ -15,7 +15,7 @@ namespace ThesisManagement.Repositories
         void Delete(int id);
         Topic? Get(int id);
         ObservableCollection<Topic> GetAll();
-        public IEnumerable<Topic> GetFilteredTopics(string name, string category, string technology);
+        public ObservableCollection<Topic> GetFilteredTopics(string name, string category, string technology);
 
     }
 
@@ -60,7 +60,7 @@ namespace ThesisManagement.Repositories
             return topic;
         }
 
-        public IEnumerable<Topic> GetFilteredTopics(string name, string category, string technology)
+        public ObservableCollection<Topic> GetFilteredTopics(string name, string category, string technology)
         {
             IEnumerable<Topic> filteredTopicList = _context.Topics;
 
@@ -76,7 +76,7 @@ namespace ThesisManagement.Repositories
             {
                 filteredTopicList = filteredTopicList.Where(topic => topic.Technology == technology);
             }
-            return filteredTopicList.ToList();
+            return new ObservableCollection<Topic>(filteredTopicList);
         }
 
 

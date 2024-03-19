@@ -33,7 +33,6 @@ namespace ThesisManagement.ViewModels
 
         public IEnumerable<string> Categories { get; set; } = new List<string>() { "Computer Science", "Web Development", "Data Science", "Other" };
         public IEnumerable<string> Technologies { get; set; } = new List<string>() { "JavaScript", "Wpf", ".NET", "Java", "Python", "SQL", "ASP.NET Core", "Other" };
-        public ObservableCollection<string> ProfessorNames { get; set; }
         public ICommand ProfessorCreateTopic { get; set; }
         public ICommand StudentCreateTopic { get; set; }
         public ICommand CreateOrUpdateCommand { get; set; }
@@ -152,7 +151,6 @@ namespace ThesisManagement.ViewModels
             _professorRepo = new ProfessorRepository();
             _studentRepo = new StudentRepository();
             Topics = _topicRepo.GetAll();
-            ProfessorNames = _professorRepo.GetProfessorNames();
             Students = _studentRepo.GetAll();
             Professors = _professorRepo.GetAll();
             ProfessorCreateTopic = new ViewModelCommand(ExecuteProfessorCreateCommand);
@@ -213,8 +211,7 @@ namespace ThesisManagement.ViewModels
 
         private void FilterData()
         {
-            var filteredData = _professorRepo.GetFilteredTopics(Category, Technology, ProfessorName);
-            Topics = new ObservableCollection<Topic>(filteredData);
+            Topics = _topicRepo.GetFilteredTopics(Category, Technology, ProfessorName);
         }
 
         private void FilterStudent()
