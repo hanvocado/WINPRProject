@@ -8,7 +8,7 @@
         xmlns:hc="https://handyorg.github.io/handycontrol"
         mc:Ignorable="d"
         xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
-        Title="TopicView" Height="540" Width="600"
+        Title="TopicView" Height="570" Width="600"
         WindowStyle="None"
         Style="{StaticResource formStyle}"
         WindowStartupLocation="CenterScreen">
@@ -21,11 +21,11 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/>
                 <RowDefinition Height="50"/>
-                <RowDefinition Height="70"/>
-                <RowDefinition Height="70"/>
-                <RowDefinition Height="70"/>
-                <RowDefinition Height="70"/>
-                <RowDefinition Height="120"/>
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="140"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
             
@@ -107,7 +107,7 @@
             <Border Grid.Row="6" Padding="30 0">
                 <TextBox Grid.Row="2"
                          VerticalAlignment="Top"
-                         Height="100"
+                         Height="120"
                          Text="" 
                          hc:InfoElement.Title="Chú thích"
                          Style="{StaticResource TextBoxExtend}"
