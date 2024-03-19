@@ -53,7 +53,7 @@
                         </Grid.RowDefinitions>
 
                         <TextBox Grid.Row="0"
-                                  Text="{Binding SelectedTopic.StudentQuantity, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                  Text="{Binding StudentQuantity, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                   VerticalAlignment="Top"
                                   md:HintAssist.Hint="Số lượng thành viên tối đa"
                                   Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
@@ -62,7 +62,7 @@
                                   VerticalAlignment="Top"
                                   md:HintAssist.Hint="Công nghệ"
                                   ItemsSource="{Binding Technologies}"
-                                  SelectedValue="{Binding SelectedTopic.Technology,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  SelectedValue="{Binding Technology,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                   Style="{StaticResource MaterialDesignOutlinedComboBox}">
                         </ComboBox>
                     </Grid>
@@ -79,7 +79,7 @@
                         <ComboBox Grid.Row="1"
                                   VerticalAlignment="Top"
                                   ItemsSource="{Binding Categories}"
-                                  SelectedValue="{Binding SelectedTopic.Category, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                  SelectedValue="{Binding Category, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                   md:HintAssist.Hint="Thể loại"
                                   md:TextFieldAssist.HasClearButton="True"
                                   Style="{StaticResource MaterialDesignOutlinedComboBox}">
@@ -87,7 +87,7 @@
                         
 
                         <TextBox Grid.Row="0"
-                                 Text="{Binding SelectedTopic.Name, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                 Text="{Binding Name, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                  VerticalAlignment="Top"
                                  md:HintAssist.Hint="Tên đề tài"
                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
@@ -99,7 +99,7 @@
 
             <TextBox Grid.Row="4"
                       VerticalAlignment="Top"
-                      Text="{Binding SelectedTopic.Description,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      Text="{Binding Description,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       Height="60"
                       md:HintAssist.Hint="Mô tả"
                       AcceptsReturn="True"
@@ -109,7 +109,7 @@
 
             <TextBox Grid.Row="3"
                       VerticalAlignment="Top"
-                      Text="{Binding SelectedTopic.Description,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      Text="{Binding Requirement,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       Height="60"
                       md:HintAssist.Hint="Yêu cầu"
                       AcceptsReturn="True"

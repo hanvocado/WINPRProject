@@ -37,7 +37,7 @@
                 <TextBox Grid.Row="0"
                          Name="FilterTextbox"
                          TextChanged="FilterTextbox_TextChanged"
-                         Text="{Binding Name}"
+                         Text="{Binding FilterName}"
                          Width="200"
                          Padding="10"
                          Margin="5"

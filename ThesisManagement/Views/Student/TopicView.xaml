@@ -44,6 +44,7 @@
                 <TextBox Grid.Row="0"
                         Height="60"
                         VerticalAlignment="Top"
+                         ToolTip="{Binding ElementName=Nametextbox,Path=(Validation.Errors)[0].ErrorContent}"
                         Style="{StaticResource TextBoxExtend}"
                         hc:InfoElement.Title="Tên đề tài" />
             </Border>
@@ -58,7 +59,7 @@
                               VerticalAlignment="Top"
                               Height="60"
                               ItemsSource="{Binding Categories}"
-                              SelectedValue="{Binding SelectedTopic.Category}"
+                              SelectedValue="{Binding Category}"
                               hc:InfoElement.Title="Thể loại"
                               Style="{StaticResource ComboBoxExtend}"/>
                 </Border>
@@ -68,7 +69,7 @@
                               VerticalAlignment="Top"
                               Height="60"
                               ItemsSource="{Binding Technologies}"
-                              SelectedValue="{Binding SelectedTopic.Technology}"
+                              SelectedValue="{Binding Technology}"
                               hc:InfoElement.Title="Công nghệ"
                               Style="{StaticResource ComboBoxExtend}" />
                 </Border>
@@ -81,7 +82,7 @@
                           DisplayMemberPath="Name"
                           SelectedValuePath="Id"
                             ItemsSource="{Binding Professors}"
-                            SelectedValue="{Binding SelectedTopic.ProfessorId}"
+                            SelectedValue="{Binding ProfessorId}"
                             hc:InfoElement.Title="Giảng viên"
                             Style="{StaticResource ComboBoxExtend}" />
             </Border>
@@ -91,7 +92,7 @@
                                   VerticalAlignment="Top"
                                   hc:InfoElement.Title="Thành viên"
                                   Style="{StaticResource CheckComboBoxExtend}"
-                                    ItemsSource="{Binding Students}" >
+                                  ItemsSource="{Binding Students}" >
                     <hc:CheckComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -108,7 +109,7 @@
                 <TextBox Grid.Row="2"
                          VerticalAlignment="Top"
                          Height="120"
-                         Text="" 
+                         Text="{Binding Description}" 
                          hc:InfoElement.Title="Chú thích"
                          Style="{StaticResource TextBoxExtend}"
                          AcceptsReturn="True"

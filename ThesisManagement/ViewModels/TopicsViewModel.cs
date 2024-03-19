@@ -17,6 +17,15 @@ namespace ThesisManagement.ViewModels
 
         private readonly string currentUserId;
 
+        private Topic? selectedTopic;
+
+        public Topic? SelectedTopic
+        {
+            get { return selectedTopic; }
+            set { selectedTopic = value; OnPropertyChanged(nameof(SelectedTopic)); }
+        }
+
+
         private ObservableCollection<Topic> topics;
 
         private ObservableCollection<Professor> professors;
@@ -43,14 +52,22 @@ namespace ThesisManagement.ViewModels
         public string ProfessorId
         {
             get { return professorId; }
-            set { professorId = value; Validate(nameof(ProfessorId), value, CreateOrUpdateCommand); }
+            set
+            {
+                professorId = value;
+                OnPropertyChanged(nameof(ProfessorId));
+            }
         }
 
         private string? studentId;
         public string? StudentId
         {
             get { return studentId; }
-            set { studentId = value; Validate(nameof(StudentId), value, CreateOrUpdateCommand); }
+            set
+            {
+                studentId = value;
+                OnPropertyChanged(nameof(StudentId));
+            }
         }
 
         private string? name;
@@ -59,7 +76,11 @@ namespace ThesisManagement.ViewModels
         public string Name
         {
             get { return name; }
-            set { name = value; Validate(nameof(Name), value, CreateOrUpdateCommand); }
+            set
+            {
+                name = value;
+                OnPropertyChanged(nameof(Name));
+            }
         }
 
         private string? category;
@@ -69,7 +90,11 @@ namespace ThesisManagement.ViewModels
         public string Category
         {
             get { return category; }
-            set { category = value; Validate(nameof(Category), value, CreateOrUpdateCommand); }
+            set
+            {
+                category = value;
+                OnPropertyChanged(nameof(Category));
+            }
         }
 
         private string? technology;
@@ -79,21 +104,25 @@ namespace ThesisManagement.ViewModels
         public string Technology
         {
             get { return technology; }
-            set { technology = value; Validate(nameof(Technology), value, CreateOrUpdateCommand); }
+            set
+            {
+                technology = value;
+                OnPropertyChanged(nameof(Technology));
+            }
         }
 
         private string? description;
         public string? Description
         {
             get { return description; }
-            set { description = value; }
+            set { description = value; OnPropertyChanged(nameof(Description)); }
         }
 
         private string? requirement;
         public string? Requirement
         {
             get { return requirement; }
-            set { requirement = value; }
+            set { requirement = value; OnPropertyChanged(nameof(Requirement)); }
         }
 
         private int studentQuantity;
@@ -102,8 +131,12 @@ namespace ThesisManagement.ViewModels
         public int StudentQuantity
         {
             get { return studentQuantity; }
-            set { studentQuantity = value; Validate(nameof(StudentQuantity), value, CreateOrUpdateCommand); }
-        };
+            set
+            {
+                studentQuantity = value;
+                OnPropertyChanged(nameof(StudentQuantity));
+            }
+        }
 
 
         public IEnumerable<string> Categories
@@ -217,13 +250,19 @@ namespace ThesisManagement.ViewModels
             Professors = _professorRepo.GetAll();
             ProfessorCreateTopic = new ViewModelCommand(ExecuteProfessorCreateCommand);
             StudentCreateTopic = new ViewModelCommand(ExecuteStudentCreateCommand);
-            CreateOrUpdateCommand = new ViewModelCommand(ExecuteCreateOrUpdateCommand);
+            CreateOrUpdateCommand = new ViewModelCommand(ExecuteCreateOrUpdateCommand, CanCreateOrUpdateTopic);
             DeleteCommand = new ViewModelCommand(ExecuteDeleteCommand);
+        }
+
+        private bool CanCreateOrUpdateTopic(object obj)
+        {
+            return true;
         }
 
         private void ExecuteProfessorCreateCommand(object sender)
         {
             ProfessorTopicView topicView = new();
+            ResetTopicProperties();
             this.ProfessorId = currentUserId;
             topicView.DataContext = this;
             topicView.Owner = Application.Current.MainWindow;
@@ -243,6 +282,9 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteCreateOrUpdateCommand(object obj)
         {
+            if (IsTopicNotValid())
+                return;
+
             ProfessorTopicView topicView = obj as ProfessorTopicView;
             Topic topic = new Topic
             {
@@ -286,6 +328,27 @@ namespace ThesisManagement.ViewModels
         {
             Students = _studentRepo.Get(studentFilter);
             MessageBox.Show(Students.ToList().Count.ToString());
+        }
+
+        private void ResetTopicProperties()
+        {
+            Id = 0;
+            Name = "";
+            Description = "";
+            Requirement = "";
+            Category = "";
+            Technology = "";
+            studentQuantity = 1;
+        }
+
+        private bool IsTopicNotValid()
+        {
+            bool isProfessorValid = Validate(nameof(ProfessorId), professorId, CreateOrUpdateCommand);
+            bool isNameValid = Validate(nameof(Name), name, CreateOrUpdateCommand);
+            bool isCategoryValid = Validate(nameof(Category), category, CreateOrUpdateCommand);
+            bool isTechnologyValid = Validate(nameof(Technology), technology, CreateOrUpdateCommand);
+            bool isStudentQuantityValid = Validate(nameof(StudentQuantity), studentQuantity, CreateOrUpdateCommand);
+            return !isProfessorValid || !isNameValid || !isCategoryValid || !isTechnologyValid || !isStudentQuantityValid;
         }
     }
 }
