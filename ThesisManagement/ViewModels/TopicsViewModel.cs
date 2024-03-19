@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Windows;
 using System.Windows.Input;
 using ThesisManagement.Models;
@@ -22,15 +23,90 @@ namespace ThesisManagement.ViewModels
         private ObservableCollection<Professor> professors;
         private ObservableCollection<Student> students;
 
-        private Topic selectedTopic;
-
         private string? filterName;
         private string? filterCategory;
         private string? filterTechnology;
         private string? filterProfessorName;
         private string studentFilter;
 
-        private
+        private int id;
+
+        [Required]
+        public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
+        private string? professorId;
+
+        [StringLength(20)]
+        [Required(ErrorMessage = "Giảng viên không thể để trống")]
+        public string ProfessorId
+        {
+            get { return professorId; }
+            set { professorId = value; }
+        }
+
+        private string? studentId;
+        public string? StudentId
+        {
+            get { return studentId; }
+            set { studentId = value; }
+        }
+
+        private string? name;
+
+        [Required(ErrorMessage = "Tên đề tài không thể để trống")]
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
+        private string? category;
+
+        [Required(ErrorMessage = "Thể loại không thể để trống")]
+        [StringLength(100)]
+        public string Category
+        {
+            get { return category; }
+            set { category = value; }
+        }
+
+        private string? technology;
+
+        [StringLength(100)]
+        [Required(ErrorMessage = "Thể loại không thể để trống")]
+        public string Technology
+        {
+            get { return technology; }
+            set { technology = value; }
+        }
+
+        private string? description;
+        public string? Description
+        {
+            get { return description}
+            set { description = value; }
+        }
+
+        private string? requirement;
+        public string? Requirement
+        {
+            get { return requirement; }
+            set { requirement = value; }
+        }
+
+        private int studentQuantity;
+
+        [Range(1, 5)]
+        public int StudentQuantity
+        {
+            get { return studentQuantity; }
+            set { studentQuantity = value; }
+        };
+
 
         public IEnumerable<string> Categories
         { get; set; } = new List<string>() { "Computer Science", "Web Development", "Data Science", "Other" };
@@ -44,19 +120,6 @@ namespace ThesisManagement.ViewModels
         public string CurrentUserId
         {
             get { return currentUserId; }
-        }
-
-        public Topic SelectedTopic
-        {
-            get
-            {
-                return selectedTopic;
-            }
-            set
-            {
-                selectedTopic = value;
-                OnPropertyChanged(nameof(SelectedTopic));
-            }
         }
 
         public string FilterName
@@ -147,7 +210,6 @@ namespace ThesisManagement.ViewModels
         public TopicsViewModel()
         {
             currentUserId = SessionInfo.UserId;
-            selectedTopic = new Topic();
             studentFilter = "";
             _topicRepo = new TopicRepository();
             _professorRepo = new ProfessorRepository();
@@ -163,8 +225,8 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteProfessorCreateCommand(object sender)
         {
-            this.SelectedTopic = new Topic();
             ProfessorTopicView topicView = new();
+            this.ProfessorId = currentUserId;
             topicView.DataContext = this;
             topicView.Owner = Application.Current.MainWindow;
             topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -173,8 +235,8 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteStudentCreateCommand(object sender)
         {
-            this.SelectedTopic = new Topic();
             StudentTopicView topicView = new();
+            //this.StudentId = currentUserId;
             topicView.DataContext = this;
             topicView.Owner = Application.Current.MainWindow;
             topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -184,36 +246,42 @@ namespace ThesisManagement.ViewModels
         private void ExecuteCreateOrUpdateCommand(object obj)
         {
             ProfessorTopicView topicView = obj as ProfessorTopicView;
-            selectedTopic.ProfessorId = selectedTopic.ProfessorId ?? currentUserId;
-            if (selectedTopic.Id <= 0)
+            Topic topic = new Topic
             {
-                _topicRepo.Add(selectedTopic);
-            }
+                Id = id,
+                Name = name,
+                ProfessorId = professorId,
+                StudentId = studentId,
+                Category = category,
+                Technology = technology,
+                Description = description,
+                Requirement = requirement,
+                StudentQuantity = studentQuantity
+            };
+
+            if (id <= 0)
+                _topicRepo.Add(topic);
             else
-            {
-                _topicRepo.Update(selectedTopic);
-            }
+                _topicRepo.Update(topic);
 
             Topics = _topicRepo.GetAll();
+
             if (topicView != null)
-            {
                 topicView.Close();
-            }
 
             var mainWindow = Application.Current.MainWindow;
             mainWindow.Focus();
-
         }
 
         private void ExecuteDeleteCommand(object parameter)
         {
-            _topicRepo.Delete(selectedTopic.Id);
+            _topicRepo.Delete(id);
             Topics = _topicRepo.GetAll();
         }
 
         private void FilterData()
         {
-            Topics = _topicRepo.GetFilteredTopics(Category, Technology, ProfessorName);
+            Topics = _topicRepo.GetFilteredTopics(FilterCategory, FilterTechnology, FilterProfessorName);
         }
 
         private void FilterStudent()

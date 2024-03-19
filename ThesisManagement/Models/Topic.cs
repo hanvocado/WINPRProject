@@ -64,6 +64,5 @@ namespace ThesisManagement.Models
                 return PenColor != "LightGray";
             }
         }
-
     }
 }
