@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Windows;
-using System.Windows.Input;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
 using ProfessorTopicView = ThesisManagement.Views.Professor.TopicView;
@@ -31,7 +30,6 @@ namespace ThesisManagement.ViewModels
 
         private int id;
 
-        [Required]
         public int Id
         {
             get { return id; }
@@ -45,14 +43,14 @@ namespace ThesisManagement.ViewModels
         public string ProfessorId
         {
             get { return professorId; }
-            set { professorId = value; }
+            set { professorId = value; Validate(nameof(ProfessorId), value, CreateOrUpdateCommand); }
         }
 
         private string? studentId;
         public string? StudentId
         {
             get { return studentId; }
-            set { studentId = value; }
+            set { studentId = value; Validate(nameof(StudentId), value, CreateOrUpdateCommand); }
         }
 
         private string? name;
@@ -61,7 +59,7 @@ namespace ThesisManagement.ViewModels
         public string Name
         {
             get { return name; }
-            set { name = value; }
+            set { name = value; Validate(nameof(Name), value, CreateOrUpdateCommand); }
         }
 
         private string? category;
@@ -71,7 +69,7 @@ namespace ThesisManagement.ViewModels
         public string Category
         {
             get { return category; }
-            set { category = value; }
+            set { category = value; Validate(nameof(Category), value, CreateOrUpdateCommand); }
         }
 
         private string? technology;
@@ -81,13 +79,13 @@ namespace ThesisManagement.ViewModels
         public string Technology
         {
             get { return technology; }
-            set { technology = value; }
+            set { technology = value; Validate(nameof(Technology), value, CreateOrUpdateCommand); }
         }
 
         private string? description;
         public string? Description
         {
-            get { return description}
+            get { return description; }
             set { description = value; }
         }
 
@@ -104,18 +102,18 @@ namespace ThesisManagement.ViewModels
         public int StudentQuantity
         {
             get { return studentQuantity; }
-            set { studentQuantity = value; }
+            set { studentQuantity = value; Validate(nameof(StudentQuantity), value, CreateOrUpdateCommand); }
         };
 
 
         public IEnumerable<string> Categories
         { get; set; } = new List<string>() { "Computer Science", "Web Development", "Data Science", "Other" };
         public IEnumerable<string> Technologies { get; set; } = new List<string>() { "JavaScript", "Wpf", ".NET", "Java", "Python", "SQL", "ASP.NET Core", "Other" };
-        public ICommand ProfessorCreateTopic { get; set; }
-        public ICommand StudentCreateTopic { get; set; }
-        public ICommand CreateOrUpdateCommand { get; set; }
-        public ICommand DeleteCommand { get; set; }
-        public ICommand SaveCommand { get; set; }
+        public ViewModelCommand ProfessorCreateTopic { get; set; }
+        public ViewModelCommand StudentCreateTopic { get; set; }
+        public ViewModelCommand CreateOrUpdateCommand { get; set; }
+        public ViewModelCommand DeleteCommand { get; set; }
+        public ViewModelCommand SaveCommand { get; set; }
 
         public string CurrentUserId
         {
