@@ -26,5 +26,11 @@ namespace ThesisManagement.Models
         public string? Phone { get; set; }
 
         public DateTime? Birthday { get; set; }
+
+        [NotMapped]
+        public string DisplayName
+        {
+            get { return $"{Id} - {Name}"; }
+        }
     }
 }

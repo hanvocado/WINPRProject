@@ -91,17 +91,9 @@
                 <hc:CheckComboBox Height="60"
                                   VerticalAlignment="Top"
                                   hc:InfoElement.Title="Thành viên"
+                                  DisplayMemberPath="DisplayName"
                                   Style="{StaticResource CheckComboBoxExtend}"
                                   ItemsSource="{Binding Students}" >
-                    <hc:CheckComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Id}" />
-                                <TextBlock Text="_" />
-                                <TextBlock Text="{Binding Name}" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </hc:CheckComboBox.ItemTemplate>
                 </hc:CheckComboBox>
             </Border>
 

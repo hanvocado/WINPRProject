@@ -53,7 +53,7 @@
                                                HoverColor="{StaticResource secondaryBrush}"
                                                Command="{Binding ProfessorCreateTopic}"
                                               CommandParameter="{Binding ElementName=topicsUC}"
-                                               Width="80">
+                                               Width="90">
                     <customControls:ControlButton.Content>
                         <TextBlock Text="+ Tạo mới" Style="{StaticResource btnContent}"/>
                     </customControls:ControlButton.Content>
