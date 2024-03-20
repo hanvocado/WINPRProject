@@ -91,9 +91,9 @@
                         </Grid.RowDefinitions>
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="300"/>
+                            <ColumnDefinition Width="100"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
@@ -102,31 +102,64 @@
                                    Text="Giảng viên "
                                    Margin="10"
                                    FontWeight="Medium"/>
-                        
+
+                        <TextBlock Grid.Row="0"
+                                   Grid.Column="1"
+                                   Text="Võ Văn Ngân"
+                                   Margin="10"
+                                   FontWeight="Normal"/>
+
+
                         <TextBlock Grid.Row="1"
                                     Text="Thể loại"
                                     Margin="10"
                                     FontWeight="Medium"/>
-                        
+
+                        <TextBlock Grid.Row="1"
+                                   Grid.Column="1"
+                                   Text="Giáo dục"
+                                   Margin="10"
+                                   FontWeight="Normal"/>
+
                         <TextBlock Grid.Row="2"
                                     Text="Công nghệ"
                                     Margin="10"
                                     FontWeight="Medium"/>
-                        
+
+                        <TextBlock Grid.Row="2"
+                                   Grid.Column="1"
+                                   Text="Python"
+                                   Margin="10"
+                                   FontWeight="Normal"/>
+
                         <TextBlock Grid.Row="3"
-                                    Text="Số lượng thành viên "
+                                    Text="Thành viên "
                                     Margin="10"
                                     FontWeight="Medium"/>
 
-                        
+                        <TextBlock Grid.Row="3"
+                                   Grid.Column="1"
+                                   Text="Võ Văn Nam,Nguyễn Thanh Tùng"
+                                   Margin="10"
+                                   FontWeight="Normal"/>
+
+
                         <TextBlock Grid.Row="0"
-                                       Grid.Column="3"
+                                       Grid.Column="2"
                                        Text="Mô tả"
                                        Margin="10"
                                        FontWeight="Medium"/>
 
-                         <TextBlock Grid.Row="1"
-                                       Grid.Column="3"
+                        <TextBlock Grid.Row="0"
+                                   Grid.Column="3"
+                                   Text="TravelExplore là một nền tảng trực tuyến cung cấp thông tin và dịch vụ về du lịch và khám phá du lịch trên khắp thế giới. Trang web cung cấp cho người dùng một loạt các tài nguyên hữu ích để lên kế hoạch cho chuyến đi của họ, từ việc tìm kiếm địa điểm đến đặt phòng khách sạn và đặt vé máy bay."
+                                   Margin="10"
+                                   FontWeight="Normal"
+                                   TextWrapping="Wrap"/>
+                        
+                        
+                        <TextBlock Grid.Row="1"
+                                       Grid.Column="2"
                                        Text="Yêu cầu"
                                        Margin="10"
                                        FontWeight="Medium"/>
