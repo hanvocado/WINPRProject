@@ -1,6 +1,6 @@
 ﻿namespace ThesisManagement.Models
 {
-    public class Admin
+    public class Admin : User
     {
     }
 }

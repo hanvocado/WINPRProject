@@ -9,6 +9,9 @@ namespace ThesisManagement
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+        }
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
@@ -19,8 +22,13 @@ namespace ThesisManagement
 
         private void ShowProfessorWindow()
         {
+<<<<<<< HEAD
             StudentMainView StudentMainView = new();
                 StudentMainView.Show();
+=======
+            ProfessorMainView professorMainView = new();
+            professorMainView.Show();
+>>>>>>> main
         }
 
         private void ShowStudentWindow()

@@ -16,6 +16,7 @@
     </Window.DataContext>
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModel:TopicsVM}">
+<<<<<<< HEAD
             <local:DetailFeedback />
         </DataTemplate>
 
@@ -27,6 +28,21 @@
             <local:SearchThesis />
         </DataTemplate>
 
+=======
+            <local:ProfessorsTopics/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:StudentsVM}">
+            <local:MyThesis/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:ThesesVM}">
+            <local:MyThesis/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:ProfessorProfileVM}">
+            <local:ProfileStudent />
+        </DataTemplate>
+>>>>>>> main
     </Window.Resources>
     <Border CornerRadius="0">
         <Grid>
@@ -55,9 +71,13 @@
                         </RadioButton>
 
                         <RadioButton Style="{StaticResource navBtn}"
+<<<<<<< HEAD
                                      Command="{Binding ShowThesisView}">
+=======
+                                 Command="{Binding ShowStudentProfileView}">
+>>>>>>> main
                             <RadioButton.ToolTip>
-                                <ToolTip Content="Luận văn" Style="{StaticResource navToolTip}" />
+                                <ToolTip Content="Hồ sơ" Style="{StaticResource navToolTip}" />
                             </RadioButton.ToolTip>
                             <fa:IconImage Icon="UserLarge" Style="{StaticResource navIcon}" />
                         </RadioButton>
@@ -65,7 +85,7 @@
                         <RadioButton Style="{StaticResource navBtn}" 
                                  Command="{Binding ShowStudentProfileView}">
                             <RadioButton.ToolTip>
-                                <ToolTip Content="Hồ sơ" Style="{StaticResource navToolTip}" />
+                                <ToolTip Content="Luận văn" Style="{StaticResource navToolTip}" />
                             </RadioButton.ToolTip>
                             <fa:IconImage Icon="Book" Style="{StaticResource navIcon}" />
                         </RadioButton>
@@ -87,8 +107,9 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <customControl:WindowControlBar />
+                    <customControl:WindowControlBar/>
 
+<<<<<<< HEAD
                     
                     <ContentControl Grid.Row="1"
                                     Margin="20 5 0 0"
@@ -96,6 +117,14 @@
                                     
                     </ContentControl>
                                     
+=======
+                    <ContentControl Grid.Row="1"
+                        Margin="20 5 20 0"
+                        Content="{Binding CurrentChildView}">
+                    </ContentControl>
+
+
+>>>>>>> main
                 </Grid>
             </Border>
         </Grid>

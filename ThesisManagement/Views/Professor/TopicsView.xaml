@@ -35,37 +35,15 @@
                               Height="17" 
                               Width="20"/>
                 <TextBox Grid.Row="0"
-                         Name="FilterTexbox"
-                         TextChanged="FilterTexbox_TextChanged"
-                         Text="{Binding Name}"
+                         Name="FilterTextbox"
+                         TextChanged="FilterTextbox_TextChanged"
+                         Text="{Binding FilterName}"
                          Width="200"
                          Padding="10"
                          Margin="5"
                          VerticalAlignment="Center"
                          md:HintAssist.Hint="Tên đề tài..."
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
-
-                <ComboBox VerticalAlignment="Center"
-                          Padding="10"
-                          Margin="5"
-                          Width="200"
-                          ItemsSource="{Binding Categories}"
-                          SelectedValue="{Binding Category}"
-                          md:HintAssist.Hint="Thể loại..."
-                          md:TextFieldAssist.HasClearButton="True"
-                          Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                </ComboBox>
-
-                <ComboBox VerticalAlignment="Center"
-                          Padding="10"
-                          Margin="5"
-                          Width="200"
-                          ItemsSource="{Binding Technologies}"
-                          SelectedValue="{Binding Technology}"
-                          md:HintAssist.Hint="Công nghệ..."
-                          md:TextFieldAssist.HasClearButton="True"
-                          Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                </ComboBox>
 
             </StackPanel>
 
@@ -75,56 +53,57 @@
                                                HoverColor="{StaticResource secondaryBrush}"
                                                Command="{Binding ProfessorCreateTopic}"
                                               CommandParameter="{Binding ElementName=topicsUC}"
-                                               Width="80">
+                                               Width="90">
                     <customControls:ControlButton.Content>
-                        <TextBlock Text="Tạo mới" Style="{StaticResource btnContent}"/>
+                        <TextBlock Text="+ Tạo mới" Style="{StaticResource btnContent}"/>
                     </customControls:ControlButton.Content>
                 </customControls:ControlButton>
             </StackPanel>-->
 
         </Grid>
 
-        <Border Grid.Row="1">
+        <Border Grid.Row="1" >
 
             <ListView Grid.Row="1"
                       MouseLeftButtonUp="ListViewItem_Click"
                       Name="TopicListView"
-                      ItemsSource="{Binding Topics}"
+                      ItemsSource="{Binding Topics, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding SelectedTopic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Width="0" x:Name="id"
-                                        DisplayMemberBinding="{Binding Id, Mode=TwoWay}">
-                        </GridViewColumn>
-                        <GridViewColumn Width="340"
+                                        DisplayMemberBinding="{Binding Id, Mode=TwoWay}" />
+                        <GridViewColumn Width="390"
                                         DisplayMemberBinding="{Binding Name, Mode=TwoWay}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Đề tài" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
-                        <GridViewColumn Width="180"
-                                        DisplayMemberBinding="{Binding Category, Mode=TwoWay}">
+                        <GridViewColumn Width="160"
+                            DisplayMemberBinding="{Binding Category}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Thể loại" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
-                        <GridViewColumn Width="200"
+                        <GridViewColumn Width="170"
                                         DisplayMemberBinding="{Binding Technology, Mode=TwoWay}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Công nghệ" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
-                        <!--<GridViewColumn Width="60">
+                        <GridViewColumn Width="70">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <customControls:ControlButton DefaultColor="{StaticResource danger}"
-                                                                  HoverColor="{StaticResource dangerHover}"
-                                                                  Width="30"
-                                                                  Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
-                                        <customControls:ControlButton.Content>
-                                            <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
-                                        </customControls:ControlButton.Content>
-                                    </customControls:ControlButton>
+                                    <StackPanel Orientation="Horizontal">
+                                        <customControls:ControlButton DefaultColor="{StaticResource danger}"
+                                                                      HoverColor="{StaticResource dangerHover}"
+                                                                      Width="30"
+                                                                      Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
+                                            <customControls:ControlButton.Content>
+                                                <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
+                                            </customControls:ControlButton.Content>
+                                        </customControls:ControlButton>
+                                    </StackPanel>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>-->

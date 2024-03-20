@@ -4,25 +4,69 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ThesisManagement.Views.Professor"
+             xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
              xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="700"
+             Background="white">
+    <UserControl.DataContext>
+        <viewModels:ReviewThesesVM/>
+    </UserControl.DataContext>
+
     <Grid>
-        <ListView Grid.Row="2">
+        <ListView Grid.Row="1"
+          Name="ThesisListView"
+          MouseLeftButtonUp="ListViewItem_MouseEnter"
+          ItemsSource="{Binding Theses, UpdateSourceTrigger=PropertyChanged}"
+          SelectedItem="{Binding SelectedThesis, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Luận văn" Width="350"
-                            DisplayMemberBinding="{Binding Topic}" />
-                    <GridViewColumn Header="Sinh viên" Width="300"
-                            DisplayMemberBinding="{Binding Description}" />
-                    <GridViewColumn Width="150" >
+                    <GridViewColumn Width="280"
+                                    DisplayMemberBinding="{Binding Topic.Name, Mode=TwoWay}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Đề tài" />
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn Width="300">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Danh sách sinh viên" />
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel HorizontalAlignment="Left">
-                                    <!--<customControls:ControlButton Content="Duyệt"
-                                                          DefaultColor="{StaticResource primaryBrush}" />
-                                    <customControls:ControlButton Content="Từ chối"
-                                                          DefaultColor="{StaticResource danger}" />-->
+                                <ItemsControl ItemsSource="{Binding Students}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Name}" Margin="2"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel VerticalAlignment="Center"
+                                            Orientation="Horizontal">
+                                    <customControls:ControlButton DefaultColor="{StaticResource success}"
+                                                           HoverColor="{StaticResource successHover}"
+                                                           Width="30"
+                                                           Margin="5"
+                                                           Command="{Binding DataContext.ApproveCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
+                                        <customControls:ControlButton.Content>
+                                            <fa:IconImage Icon="Check" Style="{StaticResource btnIcon}" />
+                                        </customControls:ControlButton.Content>
+                                    </customControls:ControlButton>
+
+                                    <customControls:ControlButton DefaultColor="{StaticResource danger}"
+                                                           HoverColor="{StaticResource dangerHover}"
+                                                           Width="30"
+                                                           Command="{Binding DataContext.RejectCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
+                                        <customControls:ControlButton.Content>
+                                            <fa:IconImage Icon="X" Style="{StaticResource btnIcon}" />
+                                        </customControls:ControlButton.Content>
+                                    </customControls:ControlButton>
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>

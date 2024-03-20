@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="CustomControls\Dialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="CustomControls\PopupControlBar.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -25,13 +28,22 @@
     <Compile Update="Views\Admin\ProfessorsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Professor\Task.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Professor\ProfessorMainView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Professor\ProfilesView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Professor\ReviewTheses.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Professor\StudentsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Professor\Tasks.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Professor\ThesisDetailsView.xaml.cs">
@@ -61,10 +73,7 @@
     <Compile Update="Views\Student\GroupStudent.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Student\MyTopics.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\Student\Pending.xaml.cs">
+    <Compile Update="Views\Student\MyThesis.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Student\ProfessorsTopics.xaml.cs">
@@ -79,20 +88,26 @@
     <Compile Update="Views\Student\StudentMainView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Student\Task.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Student\ThesisDetailViewStudent.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Student\ThesisViewStudent.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Student\TopicsView.xaml.cs">
+    <Compile Update="Views\Student\TopicView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Student\TopicView.xaml.cs">
+    <Compile Update="Views\Student\RegisterTopicView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="CustomControls\Dialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="CustomControls\PopupControlBar.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -129,13 +144,22 @@
     <Page Update="Views\Admin\ProfessorsView.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\Professor\Task.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Professor\ProfessorMainView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Professor\ProfilesView.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\Professor\ReviewTheses.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Professor\StudentsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Professor\Tasks.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Professor\ThesisDetailsView.xaml">
@@ -165,10 +189,7 @@
     <Page Update="Views\Student\GroupStudent.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Student\MyTopics.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\Student\Pending.xaml">
+    <Page Update="Views\Student\MyThesis.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Student\ProfessorsTopics.xaml">
@@ -183,16 +204,19 @@
     <Page Update="Views\Student\StudentMainView.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\Student\Task.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Student\ThesisDetailViewStudent.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Student\ThesisViewStudent.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Student\TopicsView.xaml">
+    <Page Update="Views\Student\TopicView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Student\TopicView.xaml">
+    <Page Update="Views\Student\RegisterTopicView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

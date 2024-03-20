@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="ThesisManagement.CustomControls.Dialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ThesisManagement.CustomControls"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d">
+ 
+    <Grid>
+        <md:DialogHost x:Name="RootDialog"
+                                   HorizontalAlignment="Stretch"
+                                   VerticalAlignment="Stretch"
+                                   CloseOnClickAway="True">
+            <md:DialogHost.DialogContent>
+                <TextBlock Text="{Binding message}" />
+            </md:DialogHost.DialogContent>
+        </md:DialogHost>
+    </Grid>
+</UserControl>

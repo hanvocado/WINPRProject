@@ -9,7 +9,11 @@
         xmlns:local="clr-namespace:ThesisManagement.Views.Professor"
         mc:Ignorable="d"
         x:Name="topicUC"
+<<<<<<< HEAD
         Title="TopicView" Height="450" Width="400"
+=======
+        Title="TopicView" Height="500" Width="600"
+>>>>>>> main
         Style="{StaticResource formStyle}">
 
     <Window.DataContext>
@@ -17,68 +21,119 @@
     </Window.DataContext>
 
     <Border>
-        <Grid >
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="25" />
+                <RowDefinition Height="50" />
                 <RowDefinition />
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="100"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
 
             <customControls:PopupControlBar />
+            <Grid Grid.Row="1">
+                <TextBlock 
+                Text="Đề tài" 
+                Style="{StaticResource title}" 
+                FontSize="20"
+                TextWrapping="Wrap"
+                Padding="20"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <Border Grid.Row="1" Padding="30 20 30 0">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition Height="120"/>
-                    </Grid.RowDefinitions>
+                <Border Grid.Column="1" Padding="30 20 20 0">
 
-                    <TextBox Grid.Row="0"
-                             Text="{Binding SelectedTopic.Name, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                             VerticalAlignment="Top"
-                             md:HintAssist.Hint="Tên đề tài"
-                             Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
 
-                    <ComboBox Grid.Row="1"
-                              VerticalAlignment="Top"
-                            ItemsSource="{Binding Categories}"
-                            SelectedValue="{Binding SelectedTopic.Category, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                            md:HintAssist.Hint="Thể loại"
-                            md:TextFieldAssist.HasClearButton="True"
-                            Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                    </ComboBox>
-                    
-                    <ComboBox Grid.Row="2"
-                              VerticalAlignment="Top"
-                              md:HintAssist.Hint="Công nghệ"
-                              ItemsSource="{Binding Technologies}"
-                              SelectedValue="{Binding SelectedTopic.Technology,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                    </ComboBox>
+                        <TextBox Grid.Row="0"
+                                  Text="{Binding StudentQuantity, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                  VerticalAlignment="Top"
+                                  md:HintAssist.Hint="Số lượng thành viên tối đa"
+                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
 
-                    <TextBox Grid.Row="3"
-                             VerticalAlignment="Top"
-                             Text="{Binding SelectedTopic.Description,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             Height="100"
-                             md:HintAssist.Hint="Mô tả"
-                             AcceptsReturn="True"
-                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                             TextWrapping="Wrap"
-                             VerticalScrollBarVisibility="Auto" />
-                </Grid>
-            </Border>
+                        <ComboBox Grid.Row="1"
+                                  VerticalAlignment="Top"
+                                  md:HintAssist.Hint="Công nghệ"
+                                  ItemsSource="{Binding Technologies}"
+                                  SelectedValue="{Binding Technology,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                        </ComboBox>
+                    </Grid>
+                </Border>
 
-            <Grid Grid.Row="2" >
+                <Border Grid.Column="0" Padding="20 20 30 0">
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <ComboBox Grid.Row="1"
+                                  VerticalAlignment="Top"
+                                  ItemsSource="{Binding Categories}"
+                                  SelectedValue="{Binding Category, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                  md:HintAssist.Hint="Thể loại"
+                                  md:TextFieldAssist.HasClearButton="True"
+                                  Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                        </ComboBox>
+                        
+
+                        <TextBox Grid.Row="0"
+                                 Text="{Binding Name, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                 VerticalAlignment="Top"
+                                 md:HintAssist.Hint="Tên đề tài"
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+
+                    </Grid>
+
+                </Border>
+            </Grid>
+
+            <TextBox Grid.Row="4"
+                      VerticalAlignment="Top"
+                      Text="{Binding Description,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      Height="60"
+                      md:HintAssist.Hint="Mô tả"
+                      AcceptsReturn="True"
+                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                      TextWrapping="Wrap"
+                      VerticalScrollBarVisibility="Auto" Margin="22,10,22,0" />
+
+            <TextBox Grid.Row="3"
+                      VerticalAlignment="Top"
+                      Text="{Binding Requirement,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      Height="60"
+                      md:HintAssist.Hint="Yêu cầu"
+                      AcceptsReturn="True"
+                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                      TextWrapping="Wrap"
+                      VerticalScrollBarVisibility="Auto" Margin="22,0,22,0" />
+
+            <Grid Grid.Row="5" >
                 <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
                               HoverColor="{StaticResource secondaryBrush}"
                               Content="Lưu"
-                              Margin="0 -10 0 20"
+                              Margin="0 0 0 20"
                               Width="100"
                               Height="50"
                               FontSize="14"
+<<<<<<< HEAD
                               Command="{Binding CreateCommand}"
+=======
+                              Command="{Binding CreateOrUpdateCommand}"
+>>>>>>> main
                               CommandParameter="{Binding ElementName=topicUC}"
                               Grid.Row="3"/>
             </Grid>

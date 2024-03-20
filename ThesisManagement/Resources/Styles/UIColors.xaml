@@ -1,11 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Color x:Key="primary">#283593</Color>
-    <Color x:Key="secondary">#3949ab</Color>
-    
-    <SolidColorBrush x:Key="primaryBrush">#283593</SolidColorBrush>
-    <SolidColorBrush x:Key="secondaryBrush">#3949ab</SolidColorBrush>
+    <Color x:Key="primary">#326cf3</Color>
+    <Color x:Key="secondary">#2755c0</Color>
+
+    <SolidColorBrush x:Key="primaryBrush">#326cf3</SolidColorBrush>
+    <SolidColorBrush x:Key="secondaryBrush">#2755c0</SolidColorBrush>
 
     <SolidColorBrush x:Key="danger" Color="#b10000" />
     <SolidColorBrush x:Key="dangerHover" Color="#d70000" />

@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ThesisManagement.Views.Student
+namespace ThesisManagement.CustomControls
 {
     /// <summary>
-    /// Interaction logic for Pending.xaml
+    /// Interaction logic for Dialog.xaml
     /// </summary>
-    public partial class Pending : UserControl
+    public partial class Dialog : UserControl
     {
-        public Pending()
+        public Dialog()
         {
             InitializeComponent();
         }

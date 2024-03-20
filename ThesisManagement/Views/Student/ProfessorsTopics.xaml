@@ -58,8 +58,8 @@
                 <ComboBox VerticalAlignment="Center"
                           Padding="10"
                           Width="200"
-                          ItemsSource="{Binding Professors}"
-                          SelectedValue="{Binding Professor}"
+                          ItemsSource="{Binding ProfessorNames}"
+                          SelectedValue="{Binding ProfessorName}"
                           md:HintAssist.Hint="Giảng viên"
                           md:TextFieldAssist.HasClearButton="True"
                           Style="{StaticResource MaterialDesignOutlinedComboBox}">
@@ -82,36 +82,39 @@
         <Border Grid.Row="1" >
 
             <ListView Grid.Row="1"
-              Name="AdminsListView"
-              ItemsSource="{Binding Topics}">
+            Name="TopicsListView"
+            ItemsSource="{Binding Topics}"
+            MouseLeftButtonUp="ListViewItem_Click"
+            SelectedItem="{Binding SelectedTopic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Width="200"
+                        <GridViewColumn Width="250"
                                     DisplayMemberBinding="{Binding Name}" >
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Đề tài" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
-                        <GridViewColumn Width="200"
+                        <GridViewColumn Width="160"
                                     DisplayMemberBinding="{Binding Category}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Thể loại" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
 
-                        <GridViewColumn Width="200"
+                        <GridViewColumn Width="160"
                                 DisplayMemberBinding="{Binding Technology}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Công nghệ" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
 
-                        <GridViewColumn Width="150"
+                        <GridViewColumn Width="140"
                                 DisplayMemberBinding="{Binding Professor.Name}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Giảng viên" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
+
                     </GridView>
                 </ListView.View>
             </ListView>
