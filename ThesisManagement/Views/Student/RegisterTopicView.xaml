@@ -59,7 +59,7 @@
                               IsReadOnly="True"
                               md:HintAssist.Hint="Số lượng thành viên tối đa"/>
 
-                        <hc:ComboBox Grid.Row="1"
+                        <!--<hc:ComboBox Grid.Row="1"
                                   IsHitTestVisible="False"
                                     IsEditable="True"
                                     IsReadOnly="True"
@@ -68,7 +68,7 @@
                                   md:HintAssist.Hint="Công nghệ"
                                   ItemsSource="{Binding Technologies}"
                                   SelectedValue="{Binding SelectedTopic.Technology,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                        </hc:ComboBox>
+                        </hc:ComboBox>-->
                     </Grid>
 
 
@@ -129,7 +129,7 @@
                       VerticalScrollBarVisibility="Auto" Margin="22,0,22,0" />
 
             <StackPanel Grid.Row="5">
-                <hc:CheckComboBox Margin="22 0"
+                <!--<hc:CheckComboBox Margin="22 0"
                                   Height="60"
                                   VerticalAlignment="Top"
                                   ItemsSource="{Binding Students}"
@@ -144,7 +144,7 @@
                             </StackPanel>
                         </DataTemplate>
                     </hc:CheckComboBox.ItemTemplate>
-                </hc:CheckComboBox>
+                </hc:CheckComboBox>-->
             </StackPanel>
 
             <Grid Grid.Row="6" >
