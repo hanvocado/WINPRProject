@@ -27,7 +27,7 @@
                 <RowDefinition Height="180"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            
+
             <customControls:PopupControlBar />
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -95,7 +95,7 @@
                                 ItemsSource="{Binding Students}"
                                 AllowMultiSelect="True"
                                 DefaultText="Thành viên">
-                                <!--IsEditable="True"
+                    <!--IsEditable="True"
                                 Text="{Binding StudentFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 EnableToken="True"-->
                     <sf:ComboBoxAdv.ItemTemplate>
@@ -108,7 +108,6 @@
                         </DataTemplate>
                     </sf:ComboBoxAdv.ItemTemplate>
                 </sf:ComboBoxAdv>
-                
                 <TextBox Grid.Row="2"
                          VerticalAlignment="Top"
                          Height="80"

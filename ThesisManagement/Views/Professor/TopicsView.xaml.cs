@@ -37,7 +37,15 @@ namespace ThesisManagement.Views.Professor
 
                 this.DataContext = new TopicsViewModel
                 {
-                    SelectedTopic = topic
+                    Id = topic.Id,
+                    Name = topic.Name,
+                    ProfessorId = topic.ProfessorId,
+                    StudentId = topic.StudentId,
+                    Category = topic.Category,
+                    Technology = topic.Technology,
+                    Description = topic.Description,
+                    Requirement = topic.Requirement,
+                    StudentQuantity = topic.StudentQuantity
                 };
 
                 topicView.DataContext = this.DataContext;
@@ -70,16 +78,13 @@ namespace ThesisManagement.Views.Professor
             TopicsViewModel dataContext = this.DataContext as TopicsViewModel ?? new TopicsViewModel();
             if (topic != null)
             {
-                dataContext.SelectedTopic = new Topic
-                {
-                    Id = topic.Id,
-                    ProfessorId = topic.ProfessorId,
-                    StudentId = topic.StudentId,
-                    Name = topic.Name,
-                    Category = topic.Category,
-                    Technology = topic.Technology,
-                    Description = topic.Description
-                };
+                dataContext.Id = topic.Id;
+                dataContext.ProfessorId = topic.ProfessorId;
+                dataContext.StudentId = topic.StudentId;
+                dataContext.Name = topic.Name;
+                dataContext.Category = topic.Category;
+                dataContext.Technology = topic.Technology;
+                dataContext.Description = topic.Description;
             }
         }
 

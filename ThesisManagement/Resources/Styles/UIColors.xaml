@@ -3,7 +3,7 @@
 
     <Color x:Key="primary">#283593</Color>
     <Color x:Key="secondary">#3949ab</Color>
-    
+
     <SolidColorBrush x:Key="primaryBrush">#283593</SolidColorBrush>
     <SolidColorBrush x:Key="secondaryBrush">#3949ab</SolidColorBrush>
 
@@ -31,5 +31,5 @@
     <SolidColorBrush x:Key="cs_BackgroudLayer" Color="#283593" Opacity="0.2"/>
 
     <SolidColorBrush x:Key="cs_BorderBrushLayer" Color="#283593"/>
-    
+
 </ResourceDictionary>

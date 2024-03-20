@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using ThesisManagement.Models;
 using ThesisManagement.ViewModels;
 
@@ -45,7 +33,15 @@ namespace ThesisManagement.Views.Student
 
                 this.DataContext = new TopicsViewModel
                 {
-                    SelectedTopic = topic
+                    Id = topic.Id,
+                    Name = topic.Name,
+                    ProfessorId = topic.ProfessorId,
+                    StudentId = topic.StudentId,
+                    Category = topic.Category,
+                    Technology = topic.Technology,
+                    Description = topic.Description,
+                    Requirement = topic.Requirement,
+                    StudentQuantity = topic.StudentQuantity
                 };
 
                 registerTopic.DataContext = this.DataContext;
