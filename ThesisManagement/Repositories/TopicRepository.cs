@@ -15,7 +15,7 @@ namespace ThesisManagement.Repositories
         void Delete(int id);
         Topic? Get(int id);
         ObservableCollection<Topic> GetAll();
-        public ObservableCollection<Topic> GetFilteredTopics(string name, string category, string technology);
+        public ObservableCollection<Topic> GetFilteredTopics(string category, string technology, string professor);
 
     }
 
@@ -60,13 +60,13 @@ namespace ThesisManagement.Repositories
             return topic;
         }
 
-        public ObservableCollection<Topic> GetFilteredTopics(string name, string category, string technology)
+        public ObservableCollection<Topic> GetFilteredTopics(string category, string technology, string professor)
         {
-            IEnumerable<Topic> filteredTopicList = _context.Topics;
+            IEnumerable<Topic> filteredTopicList = _context.Topics.Include(t => t.Professor).AsNoTracking();
 
-            if (name != null)
+            if (professor != null)
             {
-                filteredTopicList = filteredTopicList.Where(topic => topic.Name.IndexOf(name, StringComparison.OrdinalIgnoreCase) != -1);
+                filteredTopicList = filteredTopicList.Where(topic => topic.Professor.Name == professor);
             }
             if (category != null)
             {

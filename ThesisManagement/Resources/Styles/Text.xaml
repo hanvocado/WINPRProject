@@ -2,10 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <Style x:Key="label" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="#353E4E" />
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Foreground" Value="#173373" />
+        <Setter Property="FontSize" Value="13" />
         <Setter Property="FontWeight" Value="Medium" />
-        <Setter Property="Margin" Value="0 10 0 5" />
+        <Setter Property="Margin" Value="5 0 0 3" />
     </Style>
     <Style x:Key="title" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{StaticResource primaryBrush}" />
@@ -20,8 +20,7 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="FontWeight" Value="Medium" />
-        <Setter Property="Margin" Value="0 10 0 5" />
-        <Setter Property="Padding" Value="0 3 0 0" />
+        <Setter Property="Margin" Value="5 0 0 0" />
     </Style>
     
     <Style x:Key="btnContent" TargetType="TextBlock">
@@ -31,25 +30,13 @@
         <Setter Property="Margin" Value="3" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
-    
+
     <Style x:Key="errorText" TargetType="TextBlock">
         <Setter Property="Foreground" Value="#d75960" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="FontWeight" Value="Medium" />
         <Setter Property="Margin" Value="0 15 0 0" />
         <Setter Property="TextWrapping" Value="Wrap" />
-    </Style>
-
-    <Style TargetType="TextBox">
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="Height" Value="28" />
-        <Setter Property="FontWeight" Value="Medium" />
-        <Setter Property="Foreground" Value="Black" />
-        <Setter Property="BorderBrush" Value="DarkGray" />
-        <Setter Property="BorderThickness" Value="0 0 0 2" />
-        <Setter Property="VerticalAlignment" Value="Bottom" />
-        <Setter Property="Padding" Value="20 5 5 2" />
-        <Setter Property="Margin" Value="0 0 0 5" />
     </Style>
 
     <Style TargetType="PasswordBox">
