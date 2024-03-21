@@ -26,7 +26,7 @@ namespace ThesisManagement.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
 
-        protected bool Validate(string propertyName, object propertyValue, ViewModelCommand cmd)
+        protected bool Validate(string propertyName, object propertyValue, ViewModelCommand? cmd)
         {
             var results = new List<ValidationResult>();
 
@@ -44,7 +44,9 @@ namespace ThesisManagement.ViewModels
                 ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
             }
 
-            cmd.RaiseCanExecuteChanged();
+            if (cmd != null)
+                cmd.RaiseCanExecuteChanged();
+
             return !results.Any();
         }
     }

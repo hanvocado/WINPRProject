@@ -10,7 +10,7 @@ namespace ThesisManagement.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Professors",
+                name: "Admin",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
@@ -22,7 +22,23 @@ namespace ThesisManagement.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Professors", x => x.Id);
+                    table.PrimaryKey("PK_Admin", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Professor",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: true),
+                    Birthday = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Professor", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -37,6 +53,7 @@ namespace ThesisManagement.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Category = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Requirement = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Functions = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StudentQuantity = table.Column<int>(type: "int", nullable: false),
                     Technology = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
                 },
@@ -44,9 +61,9 @@ namespace ThesisManagement.Migrations
                 {
                     table.PrimaryKey("PK_Topics", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Topics_Professors_ProfessorId",
+                        name: "FK_Topics_Professor_ProfessorId",
                         column: x => x.ProfessorId,
-                        principalTable: "Professors",
+                        principalTable: "Professor",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -138,25 +155,30 @@ namespace ThesisManagement.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Professors",
+                table: "Admin",
+                columns: new[] { "Id", "Birthday", "Email", "Name", "Password", "Phone" },
+                values: new object[] { "A1", null, "ad1@gmail.com", "Nguyen A", "12345", null });
+
+            migrationBuilder.InsertData(
+                table: "Professor",
                 columns: new[] { "Id", "Birthday", "Email", "Name", "Password", "Phone" },
                 values: new object[] { "P1", new DateTime(1980, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "john@example.com", "John Doe", "hashed_password", "123-456-7890" });
 
             migrationBuilder.InsertData(
-                table: "Professors",
+                table: "Professor",
                 columns: new[] { "Id", "Birthday", "Email", "Name", "Password", "Phone" },
                 values: new object[] { "P2", new DateTime(1975, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "jane@example.com", "Jane Smith", "hashed_password2", "987-654-3210" });
 
             migrationBuilder.InsertData(
                 table: "Topics",
-                columns: new[] { "Id", "Category", "Description", "Name", "ProfessorId", "Requirement", "StudentId", "StudentQuantity", "Technology" },
+                columns: new[] { "Id", "Category", "Description", "Functions", "Name", "ProfessorId", "Requirement", "StudentId", "StudentQuantity", "Technology" },
                 values: new object[,]
                 {
-                    { 1, "Computer Science", "Introductory course on database design", "Database Design", "P1", "", null, 2, "SQL" },
-                    { 2, "Web Development", "Building dynamic websites using ASP.NET Core", "Web Development", "P1", "", null, 3, "ASP.NET Core" },
-                    { 3, "Data Science", "Exploring algorithms for predictive modeling", "Machine Learning", "P2", "", null, 3, "Python" },
-                    { 4, "Data Science", "Description xyz", "Topic abc", "P2", "Requirement something here", null, 2, "Python" },
-                    { 5, "Other", "Description xyz", "Topic opq", "P2", "Requirement something here", null, 2, "Other" }
+                    { 1, "Computer Science", "Introductory course on database design", null, "Database Design", "P1", "", null, 2, "SQL" },
+                    { 2, "Web Development", "Building dynamic websites using ASP.NET Core", null, "Web Development", "P1", "", null, 3, "ASP.NET Core" },
+                    { 3, "Data Science", "Exploring algorithms for predictive modeling", null, "Machine Learning", "P2", "", null, 3, "Python" },
+                    { 4, "Data Science", "Description xyz", null, "Topic abc", "P2", "Requirement something here", null, 2, "Python" },
+                    { 5, "Other", "Description xyz", null, "Topic opq", "P2", "Requirement something here", null, 2, "Other" }
                 });
 
             migrationBuilder.InsertData(
@@ -184,13 +206,19 @@ namespace ThesisManagement.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Admin_Email",
+                table: "Admin",
+                column: "Email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Feedbacks_ThesisId",
                 table: "Feedbacks",
                 column: "ThesisId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Professors_Email",
-                table: "Professors",
+                name: "IX_Professor_Email",
+                table: "Professor",
                 column: "Email",
                 unique: true);
 
@@ -224,6 +252,9 @@ namespace ThesisManagement.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Admin");
+
+            migrationBuilder.DropTable(
                 name: "Feedbacks");
 
             migrationBuilder.DropTable(
@@ -239,7 +270,7 @@ namespace ThesisManagement.Migrations
                 name: "Topics");
 
             migrationBuilder.DropTable(
-                name: "Professors");
+                name: "Professor");
         }
     }
 }
