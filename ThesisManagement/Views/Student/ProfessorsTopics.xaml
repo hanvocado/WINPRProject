@@ -82,6 +82,7 @@
         <Border Grid.Row="1" >
 
             <ListView Grid.Row="1"
+            Background="White"
             Name="TopicsListView"
             ItemsSource="{Binding Topics}"
             MouseLeftButtonUp="ListViewItem_Click"
@@ -93,22 +94,28 @@
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Đề tài" />
                             </GridViewColumn.Header>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <!-- Định nghĩa giao diện cho nội dung hiển thị của cột -->
+                                    <TextBlock Text="{Binding Name}" Margin="5" Foreground="Blue" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Width="160"
+                        <GridViewColumn Width="190"
                                     DisplayMemberBinding="{Binding Category}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Thể loại" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
 
-                        <GridViewColumn Width="160"
+                        <GridViewColumn Width="170"
                                 DisplayMemberBinding="{Binding Technology}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Công nghệ" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
 
-                        <GridViewColumn Width="140"
+                        <GridViewColumn Width="180"
                                 DisplayMemberBinding="{Binding Professor.Name}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Giảng viên" />
