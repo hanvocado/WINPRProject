@@ -1,15 +1,14 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Windows;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
-using ThesisManagement.Helpers;
+using ThesisManagement.Views.Student;
 using ProfessorTopicView = ThesisManagement.Views.Professor.TopicView;
 //using StudentTopicsView = ThesisManagement.Views.Student.TopicsView;
 using StudentTopicView = ThesisManagement.Views.Student.TopicView;
-using System.Diagnostics;
-using ThesisManagement.Views.Student;
 
 namespace ThesisManagement.ViewModels
 {
@@ -38,6 +37,7 @@ namespace ThesisManagement.ViewModels
         private ObservableCollection<Professor> professors;
         private ObservableCollection<Student> students;
 
+        private string? filterTopicName;
         private string? filterProfessorName;
         private string? filterCategory;
         private string? filterTechnology;
@@ -152,6 +152,17 @@ namespace ThesisManagement.ViewModels
             }
         }
 
+        public string FilterTopicName
+        {
+            get { return filterTopicName; }
+            set
+            {
+                filterTopicName = value;
+                OnPropertyChanged(nameof(FilterTopicName));
+                Topics = _topicRepo.GetByTopicName(value);
+            }
+        }
+
         public string FilterProfessorName
         {
             get { return filterProfessorName; }
@@ -188,7 +199,7 @@ namespace ThesisManagement.ViewModels
         public IEnumerable<string> Categories
         { get; set; } = new List<string>() { "Computer Science", "Web Development", "Data Science", "Other" };
         public IEnumerable<string> Technologies { get; set; } = new List<string>() { "JavaScript", "Wpf", ".NET", "Java", "Python", "SQL", "ASP.NET Core", "Other" };
-        public IEnumerable<string> ProfessorNames { get; set; } 
+        public IEnumerable<string> ProfessorNames { get; set; }
         public ViewModelCommand ProfessorCreateTopic { get; set; }
         public ViewModelCommand StudentCreateTopic { get; set; }
         public ViewModelCommand CreateOrUpdateCommand { get; set; }
@@ -262,7 +273,7 @@ namespace ThesisManagement.ViewModels
             _professorRepo = new ProfessorRepository();
             _studentRepo = new StudentRepository();
             _thesisRepo = new ThesisRepository();
-            SelectedStudents = new ();
+            SelectedStudents = new();
 
             if (currentUserRole == Role.Professor)
             {
@@ -272,7 +283,6 @@ namespace ThesisManagement.ViewModels
                 Topics = _topicRepo.GetAll();
             Students = _studentRepo.GetAll();
             Professors = _professorRepo.GetAll();
-            ProfessorNames = _professorRepo.GetNames();
             ProfessorCreateTopic = new ViewModelCommand(ExecuteProfessorCreateCommand);
             StudentCreateTopic = new ViewModelCommand(ExecuteStudentCreateCommand);
             CreateOrUpdateCommand = new ViewModelCommand(ExecuteCreateOrUpdateCommand, CanCreateOrUpdateTopic);
@@ -325,7 +335,8 @@ namespace ThesisManagement.ViewModels
         private void ExecuteStudentCreateCommand(object sender)
         {
             StudentTopicView topicView = new();
-            //this.StudentId = currentUserId;
+            ResetTopicProperties();
+            this.StudentId = currentUserId;
             topicView.DataContext = this;
             topicView.Owner = Application.Current.MainWindow;
             topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -348,6 +359,7 @@ namespace ThesisManagement.ViewModels
                 Technology = technology,
                 Description = description,
                 Requirement = requirement,
+                Function = function,
                 StudentQuantity = studentQuantity
             };
 
@@ -361,7 +373,7 @@ namespace ThesisManagement.ViewModels
                 var success = _topicRepo.Update(topic);
                 ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
             }
-           
+
             Topics = _topicRepo.GetAll(currentUserId);
 
             if (topicView != null)

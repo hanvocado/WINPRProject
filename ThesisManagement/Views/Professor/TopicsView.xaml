@@ -8,6 +8,7 @@
              xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
              mc:Ignorable="d" 
              x:Name="topicsUC"
              d:DesignHeight="450" d:DesignWidth="800"
@@ -35,15 +36,13 @@
                               Height="17" 
                               Width="20"/>
                 <TextBox Grid.Row="0"
-                         Name="FilterTextbox"
-                         TextChanged="FilterTextbox_TextChanged"
-                         Text="{Binding FilterName}"
+                         Text="{Binding FilterTopicName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          Width="200"
                          Padding="10"
                          Margin="5"
                          VerticalAlignment="Center"
-                         md:HintAssist.Hint="Tên đề tài..."
-                         Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                         hc:InfoElement.Placeholder="Tên đề tài..."
+                         Style="{StaticResource TextBoxExtend}"/>
 
             </StackPanel>
 

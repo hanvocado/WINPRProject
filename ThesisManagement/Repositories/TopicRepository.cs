@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Windows;
-using System.Xml.Linq;
-using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories.EF;
 
@@ -17,6 +14,7 @@ namespace ThesisManagement.Repositories
         Topic? Get(int id);
         ObservableCollection<Topic> GetAll();
         ObservableCollection<Topic> GetAll(string professorId);
+        ObservableCollection<Topic> GetByTopicName(string name);
         public ObservableCollection<Topic> GetFilteredTopics(string category, string technology, string professorname);
 
     }
@@ -94,6 +92,14 @@ namespace ThesisManagement.Repositories
             var topics = _context.Topics.Include(t => t.Professor)
                                         .Include(t => t.Theses)
                                         .Where(t => t.ProfessorId == professorId)
+                                        .AsNoTracking().ToList();
+            return new ObservableCollection<Topic>(topics);
+        }
+
+        public ObservableCollection<Topic> GetByTopicName(string name)
+        {
+            var topics = _context.Topics.Include(t => t.Professor)
+                                        .Where(t => t.Name.ToLower().Contains(name.ToLower()))
                                         .AsNoTracking().ToList();
             return new ObservableCollection<Topic>(topics);
         }

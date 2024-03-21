@@ -9,7 +9,7 @@
         xmlns:local="clr-namespace:ThesisManagement.Views.Professor"
         mc:Ignorable="d"
         x:Name="topicUC"
-        Title="TopicView" Height="680" Width="650"
+        Title="TopicView" Height="660" Width="650"
         Style="{StaticResource formStyle}">
 
     <Window.DataContext>
@@ -24,9 +24,9 @@
                     <RowDefinition Height="50" />
                     <RowDefinition Height="75" />
                     <RowDefinition Height="75"/>
-                    <RowDefinition Height="130"/>
-                    <RowDefinition Height="130"/>
-                    <RowDefinition Height="130"/>
+                    <RowDefinition Height="125"/>
+                    <RowDefinition Height="125"/>
+                    <RowDefinition Height="125"/>
                     <RowDefinition Height="50" />
                 </Grid.RowDefinitions>
 
@@ -128,7 +128,7 @@
                         <TextBlock Text="Chức năng" Style="{StaticResource label}" />
                         <TextBox
                                   VerticalAlignment="Top"
-                                  Text="{Binding Functions,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  Text="{Binding Function,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                   Height="90"
                                   AcceptsReturn="True"
                                   TextWrapping="Wrap"

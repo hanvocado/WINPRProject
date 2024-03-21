@@ -12,7 +12,7 @@ using ThesisManagement.Repositories.EF;
 namespace ThesisManagement.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240321040938_Initial")]
+    [Migration("20240321144945_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -127,18 +127,18 @@ namespace ThesisManagement.Migrations
                         {
                             Id = "P1",
                             Birthday = new DateTime(1980, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "john@example.com",
-                            Name = "John Doe",
-                            Password = "hashed_password",
+                            Email = "anh@hcmute.vn.edu",
+                            Name = "Trần Văn Anh",
+                            Password = "12345",
                             Phone = "123-456-7890"
                         },
                         new
                         {
                             Id = "P2",
                             Birthday = new DateTime(1975, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "jane@example.com",
-                            Name = "Jane Smith",
-                            Password = "hashed_password2",
+                            Email = "lenguyen@gmail.com",
+                            Name = "Lê Nguyên",
+                            Password = "54321",
                             Phone = "987-654-3210"
                         });
                 });
@@ -184,50 +184,50 @@ namespace ThesisManagement.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "S1",
+                            Id = "22133010",
                             Birthday = new DateTime(2000, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "scott@example.com",
-                            Name = "Boe Scott",
+                            Email = "a@student.com",
+                            Name = "Nguyễn A",
                             Password = "hashed_password3",
                             Phone = "123-456-7890",
                             ThesisId = 2
                         },
                         new
                         {
-                            Id = "S2",
+                            Id = "22133011",
                             Birthday = new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "smith@example.com",
-                            Name = "Arian Smith",
+                            Email = "b@student.com",
+                            Name = "Lâm B",
                             Password = "hashed_password4",
                             Phone = "987-654-3210",
                             ThesisId = 4
                         },
                         new
                         {
-                            Id = "S3",
+                            Id = "22110001",
                             Birthday = new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "charles@example.com",
-                            Name = "Vincent Charles",
+                            Email = "c@student.com",
+                            Name = "Võ C",
                             Password = "hashed_password4",
                             Phone = "987-654-3210",
                             ThesisId = 4
                         },
                         new
                         {
-                            Id = "S4",
+                            Id = "22110010",
                             Birthday = new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "joyce@example.com",
-                            Name = "Nora Joyce",
+                            Name = "Nguyễn D",
                             Password = "hashed_password4",
                             Phone = "987-654-3210",
                             ThesisId = 4
                         },
                         new
                         {
-                            Id = "S5",
+                            Id = "22133015",
                             Birthday = new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "drake@example.com",
-                            Name = "Noah Drake",
+                            Name = "Trần E",
                             Password = "hashed_password4",
                             Phone = "987-654-3210",
                             ThesisId = 5

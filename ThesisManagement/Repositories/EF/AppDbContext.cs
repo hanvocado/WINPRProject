@@ -33,18 +33,18 @@ namespace ThesisManagement.Repositories.EF
                 new Professor
                 {
                     Id = "P1",
-                    Name = "John Doe",
-                    Email = "john@example.com",
-                    Password = "hashed_password",
+                    Name = "Trần Văn Anh",
+                    Email = "anh@hcmute.vn.edu",
+                    Password = "12345",
                     Phone = "123-456-7890",
                     Birthday = new DateTime(1980, 1, 1)
                 },
                 new Professor
                 {
                     Id = "P2",
-                    Name = "Jane Smith",
-                    Email = "jane@example.com",
-                    Password = "hashed_password2",
+                    Name = "Lê Nguyên",
+                    Email = "lenguyen@gmail.com",
+                    Password = "54321",
                     Phone = "987-654-3210",
                     Birthday = new DateTime(1975, 5, 15)
                 }
@@ -53,51 +53,51 @@ namespace ThesisManagement.Repositories.EF
             modelBuilder.Entity<Student>().HasData(
                 new Student
                 {
-                    Id = "S1",
+                    Id = "22133010",
                     ThesisId = 2,
-                    Name = "Boe Scott",
-                    Email = "scott@example.com",
-                    Password = "hashed_password3",
+                    Name = "Nguyễn A",
+                    Email = "a@student.com",
+                    Password = "a12345",
                     Phone = "123-456-7890",
                     Birthday = new DateTime(2000, 1, 3)
                 },
                 new Student
                 {
-                    Id = "S2",
+                    Id = "22133011",
                     ThesisId = 4,
-                    Name = "Arian Smith",
-                    Email = "smith@example.com",
-                    Password = "hashed_password4",
+                    Name = "Lâm B",
+                    Email = "b@student.com",
+                    Password = "b12345",
                     Phone = "987-654-3210",
                     Birthday = new DateTime(2001, 5, 22)
                 },
                 new Student
                 {
-                    Id = "S3",
+                    Id = "22110001",
                     ThesisId = 4,
-                    Name = "Vincent Charles",
-                    Email = "charles@example.com",
-                    Password = "hashed_password4",
+                    Name = "Võ C",
+                    Email = "c@student.com",
+                    Password = "c12345",
                     Phone = "987-654-3210",
                     Birthday = new DateTime(2001, 5, 22)
                 },
                 new Student
                 {
-                    Id = "S4",
+                    Id = "22110010",
                     ThesisId = 4,
-                    Name = "Nora Joyce",
-                    Email = "joyce@example.com",
-                    Password = "hashed_password4",
+                    Name = "Nguyễn D",
+                    Email = "d@student.com",
+                    Password = "d12345",
                     Phone = "987-654-3210",
                     Birthday = new DateTime(2001, 5, 22)
                 },
                 new Student
                 {
-                    Id = "S5",
+                    Id = "22133015",
                     ThesisId = 5,
-                    Name = "Noah Drake",
-                    Email = "drake@example.com",
-                    Password = "hashed_password4",
+                    Name = "Trần E",
+                    Email = "e@student.com",
+                    Password = "e12346",
                     Phone = "987-654-3210",
                     Birthday = new DateTime(2001, 5, 22)
                 }

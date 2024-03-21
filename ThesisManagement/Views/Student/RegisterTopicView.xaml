@@ -26,9 +26,9 @@
                     <RowDefinition Height="70" />
                     <RowDefinition Height="75" />
                     <RowDefinition Height="75"/>
-                    <RowDefinition Height="140"/>
-                    <RowDefinition Height="140"/>
-                    <RowDefinition Height="140"/>
+                    <RowDefinition Height="125"/>
+                    <RowDefinition Height="125"/>
+                    <RowDefinition Height="125"/>
                     <RowDefinition Height="75"/>
                     <RowDefinition Height="50" />
                     <RowDefinition />
@@ -111,7 +111,7 @@
                         <TextBox  VerticalAlignment="Top"
                                   IsReadOnly="True"
                                   Text="{Binding SelectedTopic.Description,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                  Height="100"
+                                  Height="90"
                                   AcceptsReturn="True"
                                   TextWrapping="Wrap"
                                   VerticalScrollBarVisibility="Auto" />
@@ -124,7 +124,7 @@
                         <TextBox  IsReadOnly="True"
                                   VerticalAlignment="Top"
                                   Text="{Binding SelectedTopic.Requirement,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                  Height="100"
+                                  Height="90"
                                   AcceptsReturn="True"
                                   TextWrapping="Wrap"
                                   VerticalScrollBarVisibility="Auto" />
@@ -136,8 +136,8 @@
                         <TextBlock Text="Chức năng" Style="{StaticResource label}" />
                         <TextBox  IsReadOnly="True"
                                   VerticalAlignment="Top"
-                                  Text="{Binding SelectedTopic.Functions,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                  Height="100"
+                                  Text="{Binding SelectedTopic.Function,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  Height="90"
                                   AcceptsReturn="True"
                                   TextWrapping="Wrap"
                                   VerticalScrollBarVisibility="Auto" />

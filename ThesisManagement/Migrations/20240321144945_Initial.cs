@@ -162,12 +162,12 @@ namespace ThesisManagement.Migrations
             migrationBuilder.InsertData(
                 table: "Professor",
                 columns: new[] { "Id", "Birthday", "Email", "Name", "Password", "Phone" },
-                values: new object[] { "P1", new DateTime(1980, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "john@example.com", "John Doe", "hashed_password", "123-456-7890" });
+                values: new object[] { "P1", new DateTime(1980, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "anh@hcmute.vn.edu", "Trần Văn Anh", "12345", "123-456-7890" });
 
             migrationBuilder.InsertData(
                 table: "Professor",
                 columns: new[] { "Id", "Birthday", "Email", "Name", "Password", "Phone" },
-                values: new object[] { "P2", new DateTime(1975, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "jane@example.com", "Jane Smith", "hashed_password2", "987-654-3210" });
+                values: new object[] { "P2", new DateTime(1975, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "lenguyen@gmail.com", "Lê Nguyên", "54321", "987-654-3210" });
 
             migrationBuilder.InsertData(
                 table: "Topics",
@@ -198,11 +198,11 @@ namespace ThesisManagement.Migrations
                 columns: new[] { "Id", "Birthday", "Email", "Name", "Password", "Phone", "ThesisId" },
                 values: new object[,]
                 {
-                    { "S1", new DateTime(2000, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "scott@example.com", "Boe Scott", "hashed_password3", "123-456-7890", 2 },
-                    { "S2", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "smith@example.com", "Arian Smith", "hashed_password4", "987-654-3210", 4 },
-                    { "S3", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "charles@example.com", "Vincent Charles", "hashed_password4", "987-654-3210", 4 },
-                    { "S4", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "joyce@example.com", "Nora Joyce", "hashed_password4", "987-654-3210", 4 },
-                    { "S5", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "drake@example.com", "Noah Drake", "hashed_password4", "987-654-3210", 5 }
+                    { "22110001", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "c@student.com", "Võ C", "hashed_password4", "987-654-3210", 4 },
+                    { "22110010", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "joyce@example.com", "Nguyễn D", "hashed_password4", "987-654-3210", 4 },
+                    { "22133010", new DateTime(2000, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "a@student.com", "Nguyễn A", "hashed_password3", "123-456-7890", 2 },
+                    { "22133011", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "b@student.com", "Lâm B", "hashed_password4", "987-654-3210", 4 },
+                    { "22133015", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "drake@example.com", "Trần E", "hashed_password4", "987-654-3210", 5 }
                 });
 
             migrationBuilder.CreateIndex(

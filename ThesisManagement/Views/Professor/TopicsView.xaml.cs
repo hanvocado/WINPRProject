@@ -58,17 +58,6 @@ namespace ThesisManagement.Views.Professor
             }
         }
 
-        private void FilterTextbox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            TopicListView.Items.Filter = FilterMethod;
-        }
-
-        private bool FilterMethod(object obj)
-        {
-            var topic = (Topic)obj;
-            return topic.Name.Contains(FilterTextbox.Text, StringComparison.OrdinalIgnoreCase);
-        }
-
         private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)
         {
             if (!Window.GetWindow(this).IsActive)

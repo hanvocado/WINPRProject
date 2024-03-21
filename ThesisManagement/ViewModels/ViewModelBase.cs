@@ -1,8 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Collections;
+﻿using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows;
 
@@ -54,11 +52,11 @@ namespace ThesisManagement.ViewModels
         }
 
         public void ShowMessage(bool success, string successMessage, string failedMessage)
-            {
-                if (success)
-                    MessageBox.Show(successMessage);
-                else
-                    MessageBox.Show(failedMessage);
-            }
+        {
+            if (success)
+                MessageBox.Show(successMessage);
+            else
+                MessageBox.Show(failedMessage);
         }
+    }
 }
