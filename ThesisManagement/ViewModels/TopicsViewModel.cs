@@ -206,6 +206,7 @@ namespace ThesisManagement.ViewModels
         public ViewModelCommand DeleteCommand { get; set; }
         public ViewModelCommand SaveCommand { get; set; }
         public ViewModelCommand RegisterThesisCommand { get; set; }
+        public ViewModelCommand RegisterNewTopicCommand { get; set; }
 
         public string CurrentUserId
         {
@@ -288,6 +289,48 @@ namespace ThesisManagement.ViewModels
             CreateOrUpdateCommand = new ViewModelCommand(ExecuteCreateOrUpdateCommand, CanCreateOrUpdateTopic);
             DeleteCommand = new ViewModelCommand(ExecuteDeleteCommand);
             RegisterThesisCommand = new ViewModelCommand(ExecuteRegisterThesisCommand);
+            RegisterNewTopicCommand = new ViewModelCommand(ExecuteRegisterNewTopicCommand);
+        }
+
+        private void ExecuteRegisterNewTopicCommand(object obj)
+        {
+            if (IsTopicNotValid())
+                return;
+
+            StudentTopicView topicView = obj as StudentTopicView;
+            Topic topic = new Topic
+            {
+                Id = id,
+                Name = name,
+                ProfessorId = professorId,
+                StudentId = currentUserId,
+                Category = category,
+                Technology = technology,
+                Description = description
+            };
+
+            var success = _topicRepo.Add(topic);
+            ShowMessage(success, Message.RegisterSuccess, Message.RegisterFailed);
+
+            Thesis thesis = new Thesis
+            {
+                TopicId = topic.Id,
+                TopicStatus = Variable.StatusTopic.Waiting,
+                File = null,
+                Score = 0
+            };
+            _thesisRepo.Add(thesis);
+            foreach (var student in SelectedStudents)
+            {
+                student.ThesisId = thesis.Id;
+                _studentRepo.Update(student);
+            }
+
+            if (topicView != null)
+                topicView.Close();
+
+            var mainWindow = Application.Current.MainWindow;
+            mainWindow.Focus();
         }
 
         private void ExecuteRegisterThesisCommand(object obj)
