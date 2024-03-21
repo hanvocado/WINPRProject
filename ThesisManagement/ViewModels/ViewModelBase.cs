@@ -1,7 +1,10 @@
-﻿using System.Collections;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Windows;
 
 namespace ThesisManagement.ViewModels
 {
@@ -47,5 +50,16 @@ namespace ThesisManagement.ViewModels
             cmd.RaiseCanExecuteChanged();
             return !results.Any();
         }
+
+        public void ShowErrorMessage(string message)
+        {
+            MessageBox.Show(message);
+        }
+
+        public void ShowSuccessMessage(string message)
+        {
+            MessageBox.Show(message);
+        }
+
     }
 }

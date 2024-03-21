@@ -109,6 +109,7 @@ namespace ThesisManagement.Repositories.EF
                     Category = "Computer Science",
                     Technology = "SQL",
                     Requirement = "",
+                    Function = "Access and query data",
                     StudentQuantity = 2
                 },
                 new Topic
@@ -120,6 +121,7 @@ namespace ThesisManagement.Repositories.EF
                     Category = "Web Development",
                     Technology = "ASP.NET Core",
                     Requirement = "",
+                    Function = "Add product to cart, pay order invoice",
                     StudentQuantity = 3
                 },
                 new Topic
@@ -131,6 +133,7 @@ namespace ThesisManagement.Repositories.EF
                     Category = "Data Science",
                     Technology = "Python",
                     Requirement = "",
+                    Function = "Train model for project",
                     StudentQuantity = 3
                 },
                 new Topic
@@ -142,6 +145,7 @@ namespace ThesisManagement.Repositories.EF
                     Category = "Data Science",
                     Technology = "Python",
                     Requirement = "Requirement something here",
+                    Function = "",
                     StudentQuantity = 2
                 },
                 new Topic
@@ -153,6 +157,7 @@ namespace ThesisManagement.Repositories.EF
                     Category = "Other",
                     Technology = "Other",
                     Requirement = "Requirement something here",
+                    Function = "",
                     StudentQuantity = 2
                 }
             );

@@ -13,7 +13,7 @@ namespace ThesisManagement.Repositories
 {
     public interface IThesisRepository
     {
-        void Update(Thesis thesis);
+        bool Update(Thesis thesis);
         IEnumerable<Thesis> GetAll();
         IEnumerable<Thesis> Get(string topicStatus);
         IEnumerable<Thesis> Get(int topicId, string topicStatus);
@@ -31,11 +31,11 @@ namespace ThesisManagement.Repositories
             _context = DataProvider.Instance.Context;
         }
 
-        public void Update(Thesis thesis)
+        public bool Update(Thesis thesis)
         {
             _context.ChangeTracker.Clear();
             _context.Update(thesis);
-            DbSave();
+            return DbSave();
         }
 
 
@@ -77,17 +77,17 @@ namespace ThesisManagement.Repositories
             return students;
         }
 
-        private void DbSave()
+        public bool DbSave()
         {
             try
             {
                 _context.SaveChanges();
-                ShowSuccessMessage(Message.Success);
+                return true;
             }
-            catch (DbUpdateException e)
+            catch (DbUpdateException ex)
             {
-                ShowErrorMessage(e.Message);
-                Trace.WriteLine(e);
+                Trace.WriteLine(ex);
+                return false;
             }
         }
 

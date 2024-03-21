@@ -10,9 +10,9 @@ namespace ThesisManagement.Repositories
 {
     public interface ITopicRepository
     {
-        void Add(Topic topic);
-        void Update(Topic topic);
-        void Delete(int id);
+        bool Add(Topic topic);
+        bool Update(Topic topic);
+        bool Delete(int id);
         Topic? Get(int id);
         ObservableCollection<Topic> GetAll();
         public ObservableCollection<Topic> GetFilteredTopics(string name, string category, string technology);
@@ -27,31 +27,38 @@ namespace ThesisManagement.Repositories
         {
             _context = DataProvider.Instance.Context;
         }
-        public void Add(Topic topic)
+        public bool Add(Topic topic)
         {
             _context.Add(topic);
-            DbSave();
+            return DbSave();
         }
 
-        public void Delete(int id)
+        public bool Delete(int id)
         {
-            try
-            {
-                topic = _context.Topics.FirstOrDefault(t => t.Id == id);
-                if (topic == null) return;
-                _context.Remove(topic);
-                _context.SaveChanges();
-            }
-            catch
-            {
-                ShowErrorMessage(Message.DeleteFailed);
-            }
+            topic = _context.Topics.FirstOrDefault(t => t.Id == id);
+            if (topic == null) return false;
+            _context.Remove(topic);
+            return DbSave();
         }
-        public void Update(Topic topic)
+        public bool Update(Topic topic)
         {
             _context.ChangeTracker.Clear();
             _context.Update(topic);
-            DbSave();
+            return DbSave();
+        }
+
+        public bool DbSave()
+        {
+            try
+            {
+                _context.SaveChanges();
+                return true;
+            }
+            catch (DbUpdateException ex)
+            {
+                Trace.WriteLine(ex);
+                return false;
+            }
         }
 
         public Topic? Get(int id)
@@ -88,28 +95,5 @@ namespace ThesisManagement.Repositories
             return new ObservableCollection<Topic>(topics);
         }
 
-        private void ShowErrorMessage(string message)
-        {
-            MessageBox.Show(message);
-        }
-
-        private void ShowSuccessMessage(string message)
-        {
-            MessageBox.Show(message);
-        }
-
-        private void DbSave()
-        {
-            try
-            {
-                _context.SaveChanges();
-                ShowSuccessMessage(Message.Success);
-            }
-            catch (DbUpdateException e)
-            {
-                ShowErrorMessage(e.Message);
-                Trace.WriteLine(e);
-            }
-        }
     }
 }

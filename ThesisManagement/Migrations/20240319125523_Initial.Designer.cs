@@ -12,7 +12,7 @@ using ThesisManagement.Repositories.EF;
 namespace ThesisManagement.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240314144821_Initial")]
+    [Migration("20240319125523_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -301,6 +301,10 @@ namespace ThesisManagement.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Function")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -335,6 +339,7 @@ namespace ThesisManagement.Migrations
                             Id = 1,
                             Category = "Computer Science",
                             Description = "Introductory course on database design",
+                            Function = "Access and query data",
                             Name = "Database Design",
                             ProfessorId = "P1",
                             Requirement = "",
@@ -346,6 +351,7 @@ namespace ThesisManagement.Migrations
                             Id = 2,
                             Category = "Web Development",
                             Description = "Building dynamic websites using ASP.NET Core",
+                            Function = "Add product to cart, pay order invoice",
                             Name = "Web Development",
                             ProfessorId = "P1",
                             Requirement = "",
@@ -357,6 +363,7 @@ namespace ThesisManagement.Migrations
                             Id = 3,
                             Category = "Data Science",
                             Description = "Exploring algorithms for predictive modeling",
+                            Function = "Train model for project",
                             Name = "Machine Learning",
                             ProfessorId = "P2",
                             Requirement = "",
@@ -368,6 +375,7 @@ namespace ThesisManagement.Migrations
                             Id = 4,
                             Category = "Data Science",
                             Description = "Description xyz",
+                            Function = "",
                             Name = "Topic abc",
                             ProfessorId = "P2",
                             Requirement = "Requirement something here",
@@ -379,6 +387,7 @@ namespace ThesisManagement.Migrations
                             Id = 5,
                             Category = "Other",
                             Description = "Description xyz",
+                            Function = "",
                             Name = "Topic opq",
                             ProfessorId = "P2",
                             Requirement = "Requirement something here",

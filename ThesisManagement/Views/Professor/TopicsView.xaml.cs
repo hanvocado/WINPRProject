@@ -45,7 +45,8 @@ namespace ThesisManagement.Views.Professor
                     Technology = topic.Technology,
                     Description = topic.Description,
                     Requirement = topic.Requirement,
-                    StudentQuantity = topic.StudentQuantity
+                    StudentQuantity = topic.StudentQuantity,
+                    Function = topic.Function
                 };
 
                 topicView.DataContext = this.DataContext;
@@ -85,6 +86,7 @@ namespace ThesisManagement.Views.Professor
                 dataContext.Category = topic.Category;
                 dataContext.Technology = topic.Technology;
                 dataContext.Description = topic.Description;
+                dataContext.Function = topic.Function;
             }
         }
 

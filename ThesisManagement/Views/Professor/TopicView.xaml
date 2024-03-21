@@ -9,7 +9,7 @@
         xmlns:local="clr-namespace:ThesisManagement.Views.Professor"
         mc:Ignorable="d"
         x:Name="topicUC"
-        Title="TopicView" Height="500" Width="600"
+        Title="TopicView" Height="600" Width="600"
         Style="{StaticResource formStyle}">
 
     <Window.DataContext>
@@ -22,7 +22,8 @@
                 <RowDefinition Height="25" />
                 <RowDefinition Height="50" />
                 <RowDefinition />
-                <RowDefinition Height="80"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
@@ -44,7 +45,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Border Grid.Column="1" Padding="30 20 20 0">
+                <Border Grid.Column="1" Padding="10 10 20 0">
 
                     <Grid>
                         <Grid.RowDefinitions>
@@ -56,7 +57,8 @@
                                   Text="{Binding StudentQuantity, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                   VerticalAlignment="Top"
                                   md:HintAssist.Hint="Số lượng thành viên tối đa"
-                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                 Margin="0,0,0,5"/>
 
                         <ComboBox Grid.Row="1"
                                   VerticalAlignment="Top"
@@ -68,9 +70,9 @@
                     </Grid>
                 </Border>
 
-                <Border Grid.Column="0" Padding="20 20 30 0">
+                <Border Grid.Column="0" Padding="20 10 20 0">
 
-                    <Grid>
+                    <Grid >
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
@@ -90,34 +92,43 @@
                                  Text="{Binding Name, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                  VerticalAlignment="Top"
                                  md:HintAssist.Hint="Tên đề tài"
-                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                 Margin="0,0,0,5"/>
 
                     </Grid>
 
                 </Border>
             </Grid>
 
-            <TextBox Grid.Row="4"
+            <TextBox Grid.Row="3"
+                        VerticalAlignment="Top"
+                       Text="{Binding Function,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                       md:HintAssist.Hint="Chức năng"
+                       AcceptsReturn="True"
+                       Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                       TextWrapping="Wrap"
+                       VerticalScrollBarVisibility="Auto" Margin="22,5,22,0" />
+
+
+            <TextBox Grid.Row="5"
                       VerticalAlignment="Top"
                       Text="{Binding Description,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                      Height="60"
                       md:HintAssist.Hint="Mô tả"
                       AcceptsReturn="True"
                       Style="{StaticResource MaterialDesignOutlinedTextBox}"
                       TextWrapping="Wrap"
-                      VerticalScrollBarVisibility="Auto" Margin="22,10,22,0" />
+                      VerticalScrollBarVisibility="Auto" Margin="22,0,22,0" />
 
-            <TextBox Grid.Row="3"
+            <TextBox Grid.Row="4"
                       VerticalAlignment="Top"
                       Text="{Binding Requirement,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                      Height="60"
                       md:HintAssist.Hint="Yêu cầu"
                       AcceptsReturn="True"
                       Style="{StaticResource MaterialDesignOutlinedTextBox}"
                       TextWrapping="Wrap"
                       VerticalScrollBarVisibility="Auto" Margin="22,0,22,0" />
 
-            <Grid Grid.Row="5" >
+            <Grid Grid.Row="6" >
                 <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
                               HoverColor="{StaticResource secondaryBrush}"
                               Content="Lưu"

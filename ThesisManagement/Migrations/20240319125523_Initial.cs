@@ -36,6 +36,7 @@ namespace ThesisManagement.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Category = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Function = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Requirement = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StudentQuantity = table.Column<int>(type: "int", nullable: false),
                     Technology = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
@@ -149,14 +150,14 @@ namespace ThesisManagement.Migrations
 
             migrationBuilder.InsertData(
                 table: "Topics",
-                columns: new[] { "Id", "Category", "Description", "Name", "ProfessorId", "Requirement", "StudentId", "StudentQuantity", "Technology" },
+                columns: new[] { "Id", "Category", "Description", "Function", "Name", "ProfessorId", "Requirement", "StudentId", "StudentQuantity", "Technology" },
                 values: new object[,]
                 {
-                    { 1, "Computer Science", "Introductory course on database design", "Database Design", "P1", "", null, 2, "SQL" },
-                    { 2, "Web Development", "Building dynamic websites using ASP.NET Core", "Web Development", "P1", "", null, 3, "ASP.NET Core" },
-                    { 3, "Data Science", "Exploring algorithms for predictive modeling", "Machine Learning", "P2", "", null, 3, "Python" },
-                    { 4, "Data Science", "Description xyz", "Topic abc", "P2", "Requirement something here", null, 2, "Python" },
-                    { 5, "Other", "Description xyz", "Topic opq", "P2", "Requirement something here", null, 2, "Other" }
+                    { 1, "Computer Science", "Introductory course on database design", "Access and query data", "Database Design", "P1", "", null, 2, "SQL" },
+                    { 2, "Web Development", "Building dynamic websites using ASP.NET Core", "Add product to cart, pay order invoice", "Web Development", "P1", "", null, 3, "ASP.NET Core" },
+                    { 3, "Data Science", "Exploring algorithms for predictive modeling", "Train model for project", "Machine Learning", "P2", "", null, 3, "Python" },
+                    { 4, "Data Science", "Description xyz", "", "Topic abc", "P2", "Requirement something here", null, 2, "Python" },
+                    { 5, "Other", "Description xyz", "", "Topic opq", "P2", "Requirement something here", null, 2, "Other" }
                 });
 
             migrationBuilder.InsertData(

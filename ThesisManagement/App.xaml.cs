@@ -16,7 +16,7 @@ namespace ThesisManagement
         {
             base.OnStartup(e);
 
-            ShowStudentWindow();
+            ShowProfessorWindow();
 
         }
 
