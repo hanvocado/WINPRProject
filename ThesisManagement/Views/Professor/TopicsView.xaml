@@ -92,6 +92,9 @@
                             </GridViewColumn.Header>
                         </GridViewColumn>
                         <GridViewColumn Width="70">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Template="{StaticResource lvHeader}" />
+                            </GridViewColumn.Header>
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
