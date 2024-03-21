@@ -206,6 +206,7 @@ namespace ThesisManagement.ViewModels
         public ViewModelCommand DeleteCommand { get; set; }
         public ViewModelCommand SaveCommand { get; set; }
         public ViewModelCommand RegisterThesisCommand { get; set; }
+        public ViewModelCommand RegisterNewTopic { get; set; }
 
         public string CurrentUserId
         {
@@ -288,6 +289,35 @@ namespace ThesisManagement.ViewModels
             CreateOrUpdateCommand = new ViewModelCommand(ExecuteCreateOrUpdateCommand, CanCreateOrUpdateTopic);
             DeleteCommand = new ViewModelCommand(ExecuteDeleteCommand);
             RegisterThesisCommand = new ViewModelCommand(ExecuteRegisterThesisCommand);
+            RegisterNewTopic = new ViewModelCommand(ExecuteRegisterNewTopic);
+        }
+
+        private void ExecuteRegisterNewTopic(object obj)
+        {
+            if (IsTopicNotValid())
+                return;
+
+            StudentTopicView topicView = obj as StudentTopicView;
+            Topic topic = new Topic
+            {
+                Id = id,
+                Name = name,
+                ProfessorId = professorId,
+                StudentId = studentId,
+                Category = category,
+                Technology = technology,
+                Description = description,
+            };
+
+            var success = _topicRepo.Add(topic);
+
+            //Xử lý tiếp tương tự ExcuteRegisterThesisCommand
+
+            if (topicView != null)
+                topicView.Close();
+
+            var mainWindow = Application.Current.MainWindow;
+            mainWindow.Focus();
         }
 
         private void ExecuteRegisterThesisCommand(object obj)

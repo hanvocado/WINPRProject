@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories.EF;
 
@@ -115,7 +116,11 @@ namespace ThesisManagement.Repositories
 
         public bool CanRegisterTopic(string studentId)
         {
-            throw new NotImplementedException();
+            var student = _context.Students.Include(s => s.Thesis).FirstOrDefault(s => s.Id == studentId);
+            if (student == null || student.ThesisId <= 0 || student.Thesis?.TopicStatus == Variable.StatusTopic.Waiting) 
+                return false;
+
+            return true;
         }
     }
 }
