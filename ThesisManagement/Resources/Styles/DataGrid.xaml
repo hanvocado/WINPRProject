@@ -18,8 +18,9 @@
     </Style>
 
     <ControlTemplate x:Key="lvHeader" TargetType="GridViewColumnHeader">
-        <Grid Background="{TemplateBinding Background}" Height="40">
-            <TextBlock Background="{TemplateBinding Background}" Foreground="{TemplateBinding Foreground}" Padding="14 0"
+        <Grid Background="#6ccb5f" Height="40">
+            <TextBlock Background="#6ccb5f" Foreground="White" Padding="10 0"
+                       Style="{StaticResource label}"
                        Text="{TemplateBinding Tag}" VerticalAlignment="Center" />
             <Thumb x:Name="PART_HeaderGripper" HorizontalAlignment="Right" Margin="0" Width="1"/>
         </Grid>

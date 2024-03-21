@@ -16,6 +16,39 @@ namespace ThesisManagement.ViewModels
 
         private string email;
 
+        private bool isLoading = false;
+        private string loadingVisibility = "Hidden";
+
+        public bool IsLoading
+        {
+            get
+            {
+                return isLoading;
+            }
+            set
+            {
+                isLoading = value;
+                if (value)
+                    LoadingVisibility = "Visible";
+                else
+                    LoadingVisibility = "Hidden";
+                OnPropertyChanged(nameof(IsLoading));
+            }
+        }
+
+        public string LoadingVisibility
+        {
+            get
+            {
+                return loadingVisibility;
+            }
+            set
+            {
+                loadingVisibility = value;
+                OnPropertyChanged(nameof(LoadingVisibility));
+            }
+        }
+
         [EmailAddress(ErrorMessage = "Bạn cần nhập email hợp lệ")]
         public string Email
         {
@@ -69,11 +102,17 @@ namespace ThesisManagement.ViewModels
         public LoginVM()
         {
             _userRepo = new UserRepository();
-            LoginCommand = new ViewModelCommand(ExecuteLoginCommand);
+            LoginCommand = new ViewModelCommand(ExecuteLoginCommand, CanExecuteLogin);
+        }
+
+        private bool CanExecuteLogin(object obj)
+        {
+            return !isLoading;
         }
 
         private void ExecuteLoginCommand(object obj)
         {
+            IsLoading = true;
             if (ValidInfo())
             {
                 var isUserValid = _userRepo.Authenticate(new NetworkCredential(email, password));
@@ -81,7 +120,6 @@ namespace ThesisManagement.ViewModels
                 {
                     var logicView = Application.Current.MainWindow as LoginView;
                     logicView.Hide();
-                    MessageBox.Show(SessionInfo.UserId, SessionInfo.Role.ToString());
 
                     if (SessionInfo.Role == Role.Student)
                     {
@@ -101,6 +139,7 @@ namespace ThesisManagement.ViewModels
                 }
             }
             ErrorMessage = "Thông tin đăng nhập không chính xác!";
+            IsLoading = false;
         }
 
         private bool ValidInfo()

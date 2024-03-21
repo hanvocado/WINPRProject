@@ -54,11 +54,11 @@ namespace ThesisManagement.ViewModels
         }
 
         public void ShowMessage(bool success, string successMessage, string failedMessage)
-        {
-            if (success)
-                MessageBox.Show(successMessage);
-            else
-                MessageBox.Show(failedMessage);
+            {
+                if (success)
+                    MessageBox.Show(successMessage);
+                else
+                    MessageBox.Show(failedMessage);
+            }
         }
-    }
 }
