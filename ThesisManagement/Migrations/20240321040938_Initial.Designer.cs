@@ -12,7 +12,7 @@ using ThesisManagement.Repositories.EF;
 namespace ThesisManagement.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240319125523_Initial")]
+    [Migration("20240321040938_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,49 @@ namespace ThesisManagement.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("ThesisManagement.Models.Admin", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("Birthday")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasMaxLength(12)
+                        .HasColumnType("nvarchar(12)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.ToTable("Admin");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "A1",
+                            Email = "ad1@gmail.com",
+                            Name = "Nguyen A",
+                            Password = "12345"
+                        });
+                });
 
             modelBuilder.Entity("ThesisManagement.Models.Feedback", b =>
                 {
@@ -77,7 +120,7 @@ namespace ThesisManagement.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Professors");
+                    b.ToTable("Professor");
 
                     b.HasData(
                         new
@@ -302,7 +345,6 @@ namespace ThesisManagement.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Function")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")

@@ -8,5 +8,19 @@
             get { return userId; }
             set { userId = value; }
         }
+
+        private static Role role;
+        public static Role Role
+        {
+            get { return role; }
+            set { role = value; }
+        }
+    }
+
+    public enum Role
+    {
+        Professor,
+        Student,
+        Admin
     }
 }

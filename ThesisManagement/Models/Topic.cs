@@ -23,10 +23,8 @@ namespace ThesisManagement.Models
         [Required]
         [StringLength(100)]
         public string Category { get; set; }
-        public string Function {  get; set; }
-
-        //[Required]
         public string? Requirement { get; set; }
+        public string? Function { get; set; }
 
         public int StudentQuantity { get; set; } = 1;
 

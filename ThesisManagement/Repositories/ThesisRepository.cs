@@ -91,16 +91,6 @@ namespace ThesisManagement.Repositories
             }
         }
 
-        private void ShowErrorMessage(string message)
-        {
-            MessageBox.Show(message);
-        }
-
-        private void ShowSuccessMessage(string message)
-        {
-            MessageBox.Show(message);
-        }
-
         //public void AddMembers(int topicId, IEnumerable<Student> members)
         //{
         //    var studentTopics = new List<StudentTopic>();

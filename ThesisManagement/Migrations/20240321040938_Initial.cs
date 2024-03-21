@@ -10,7 +10,7 @@ namespace ThesisManagement.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Professors",
+                name: "Admin",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
@@ -22,7 +22,23 @@ namespace ThesisManagement.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Professors", x => x.Id);
+                    table.PrimaryKey("PK_Admin", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Professor",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: true),
+                    Birthday = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Professor", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -36,8 +52,8 @@ namespace ThesisManagement.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Category = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Function = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Requirement = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Function = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StudentQuantity = table.Column<int>(type: "int", nullable: false),
                     Technology = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
                 },
@@ -45,9 +61,9 @@ namespace ThesisManagement.Migrations
                 {
                     table.PrimaryKey("PK_Topics", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Topics_Professors_ProfessorId",
+                        name: "FK_Topics_Professor_ProfessorId",
                         column: x => x.ProfessorId,
-                        principalTable: "Professors",
+                        principalTable: "Professor",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -139,12 +155,17 @@ namespace ThesisManagement.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Professors",
+                table: "Admin",
+                columns: new[] { "Id", "Birthday", "Email", "Name", "Password", "Phone" },
+                values: new object[] { "A1", null, "ad1@gmail.com", "Nguyen A", "12345", null });
+
+            migrationBuilder.InsertData(
+                table: "Professor",
                 columns: new[] { "Id", "Birthday", "Email", "Name", "Password", "Phone" },
                 values: new object[] { "P1", new DateTime(1980, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "john@example.com", "John Doe", "hashed_password", "123-456-7890" });
 
             migrationBuilder.InsertData(
-                table: "Professors",
+                table: "Professor",
                 columns: new[] { "Id", "Birthday", "Email", "Name", "Password", "Phone" },
                 values: new object[] { "P2", new DateTime(1975, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "jane@example.com", "Jane Smith", "hashed_password2", "987-654-3210" });
 
@@ -185,13 +206,19 @@ namespace ThesisManagement.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Admin_Email",
+                table: "Admin",
+                column: "Email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Feedbacks_ThesisId",
                 table: "Feedbacks",
                 column: "ThesisId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Professors_Email",
-                table: "Professors",
+                name: "IX_Professor_Email",
+                table: "Professor",
                 column: "Email",
                 unique: true);
 
@@ -225,6 +252,9 @@ namespace ThesisManagement.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Admin");
+
+            migrationBuilder.DropTable(
                 name: "Feedbacks");
 
             migrationBuilder.DropTable(
@@ -240,7 +270,7 @@ namespace ThesisManagement.Migrations
                 name: "Topics");
 
             migrationBuilder.DropTable(
-                name: "Professors");
+                name: "Professor");
         }
     }
 }

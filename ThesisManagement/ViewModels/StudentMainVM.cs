@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace ThesisManagement.ViewModels
 {
-    public class StudentMainVM:ViewModelBase
+    public class StudentMainVM : ViewModelBase
     {
         private ViewModelBase _currentChildView;
 
@@ -45,7 +40,7 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteShowTopicsView(object? obj)
         {
-            CurrentChildView = new TopicsVM();
+            CurrentChildView = new TopicsViewModel();
         }
     }
 }

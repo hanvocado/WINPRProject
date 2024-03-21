@@ -29,7 +29,7 @@ namespace ThesisManagement.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
 
-        protected bool Validate(string propertyName, object propertyValue, ViewModelCommand cmd)
+        protected bool Validate(string propertyName, object propertyValue, ViewModelCommand? cmd)
         {
             var results = new List<ValidationResult>();
 
@@ -47,19 +47,18 @@ namespace ThesisManagement.ViewModels
                 ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
             }
 
-            cmd.RaiseCanExecuteChanged();
+            if (cmd != null)
+                cmd.RaiseCanExecuteChanged();
+
             return !results.Any();
         }
 
-        public void ShowErrorMessage(string message)
+        public void ShowMessage(bool success, string successMessage, string failedMessage)
         {
-            MessageBox.Show(message);
+            if (success)
+                MessageBox.Show(successMessage);
+            else
+                MessageBox.Show(failedMessage);
         }
-
-        public void ShowSuccessMessage(string message)
-        {
-            MessageBox.Show(message);
-        }
-
     }
 }
