@@ -150,8 +150,10 @@
                         <hc:CheckComboBox Height="40"
                                           VerticalAlignment="Top"
                                           DisplayMemberPath="DisplayName"
+                                          SelectionChanged="CheckComboBox_SelectionChanged"
                                           Style="{StaticResource CheckComboBoxExtend}"
-                                          ItemsSource="{Binding Students}" >
+                                          ItemsSource="{Binding Students}" 
+                                          SelectedItem="{Binding SelectedStudents}">
                         </hc:CheckComboBox>
                     </StackPanel>
                 </Border>

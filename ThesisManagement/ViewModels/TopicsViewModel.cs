@@ -302,9 +302,9 @@ namespace ThesisManagement.ViewModels
             };
             var success = _thesisRepo.Add(thesis);
             ShowMessage(success, Message.RegisterSuccess, Message.RegisterFailed);
+            
             foreach (var student in SelectedStudents)
             {
-                Trace.WriteLine($"{student.Id}, {student.ThesisId}");
                 student.ThesisId = thesis.Id;
                 _studentRepo.Update(student);
             }

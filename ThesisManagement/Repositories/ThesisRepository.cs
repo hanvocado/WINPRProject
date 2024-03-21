@@ -16,7 +16,7 @@ namespace ThesisManagement.Repositories
         bool Add(Thesis thesis);
         bool Update(Thesis thesis);
         IEnumerable<Thesis> GetAll();
-        IEnumerable<Thesis> Get(string topicStatus);
+        IEnumerable<Thesis> Get(string userId,string topicStatus);
         IEnumerable<Thesis> Get(int topicId, string topicStatus);
         IEnumerable<Student> GetMembers(int thesisId);
         bool CanRegisterTopic(int thesisId);
@@ -52,11 +52,11 @@ namespace ThesisManagement.Repositories
             return new ObservableCollection<Thesis>(theses);
         }
 
-        public IEnumerable<Thesis> Get(string topicStatus)
+        public IEnumerable<Thesis> Get(string userId, string topicStatus)
         {
             var list = _context.Theses.Include(st => st.Students).Include(tp => tp.Topic)
                                                 .ThenInclude(pr => pr.Professor)
-                                                .Where(th => th.TopicStatus == topicStatus).AsNoTracking().ToList();
+                                                .Where(th => th.Topic.ProfessorId == userId && th.TopicStatus == topicStatus).AsNoTracking().ToList();
             return list;
         }
 

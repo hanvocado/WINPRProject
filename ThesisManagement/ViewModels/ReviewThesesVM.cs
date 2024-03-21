@@ -12,6 +12,7 @@ namespace ThesisManagement.ViewModels
 {
     public class ReviewThesesVM : ViewModelBase
     {
+        private readonly string currentUserId;
         private readonly IThesisRepository _thesisRepo;
         private IEnumerable<Thesis> theses;
         private Thesis selectedThesis;
@@ -33,8 +34,9 @@ namespace ThesisManagement.ViewModels
         public ReviewThesesVM()
         {
             _thesisRepo = new ThesisRepository();
+            currentUserId = SessionInfo.UserId;
             selectedThesis = new Thesis();
-            Theses = _thesisRepo.Get(Variable.StatusTopic.Waiting);
+            Theses = _thesisRepo.Get(currentUserId, Variable.StatusTopic.Waiting);
             ApproveCommand = new ViewModelCommand(ExecuteApproveCommand);
             RejectCommand = new ViewModelCommand(ExecuteRejectCommand);
             UndoCommand = new ViewModelCommand(ExecuteUndoCommand);
@@ -47,7 +49,7 @@ namespace ThesisManagement.ViewModels
             {
                 selectedThesis.TopicStatus = Variable.StatusTopic.Approved;
                 _thesisRepo.Update(selectedThesis);
-                Theses = _thesisRepo.Get(Variable.StatusTopic.Waiting);
+                Theses = _thesisRepo.Get(currentUserId, Variable.StatusTopic.Waiting);
             }
         }
 
@@ -55,7 +57,7 @@ namespace ThesisManagement.ViewModels
         {
             selectedThesis.TopicStatus = Variable.StatusTopic.Rejected;
             _thesisRepo.Update(selectedThesis);
-            Theses = _thesisRepo.Get(Variable.StatusTopic.Waiting);
+            Theses = _thesisRepo.Get(currentUserId, Variable.StatusTopic.Waiting);
         }
 
         private void ExecuteUndoCommand(object obj)
