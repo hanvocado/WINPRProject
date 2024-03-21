@@ -13,6 +13,7 @@ namespace ThesisManagement.Repositories
 {
     public interface IThesisRepository
     {
+        bool Add(Thesis thesis);
         bool Update(Thesis thesis);
         IEnumerable<Thesis> GetAll();
         IEnumerable<Thesis> Get(string topicStatus);
@@ -29,6 +30,12 @@ namespace ThesisManagement.Repositories
         public ThesisRepository()
         {
             _context = DataProvider.Instance.Context;
+        }
+
+        public bool Add(Thesis thesis)
+        {
+            _context.Add(thesis);
+            return DbSave();
         }
 
         public bool Update(Thesis thesis)

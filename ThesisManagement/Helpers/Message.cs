@@ -6,8 +6,11 @@
         public static string AddFailed = "Thêm thất bại";
         public static string UpdateSuccess = "Cập nhật thành công";
         public static string UpdateFailed = "Cập nhật thất bại";
-        public static string DeleteSuccess = "Xóa thành công thành công";
+        public static string DeleteSuccess = "Xóa thành công";
         public static string DeleteFailed = "Không thể xóa. Đề tài hiện đang có sinh viên đăng kí!";
+
+        public static string RegisterSuccess = "Đăng kí thành công";
+        public static string RegisterFailed = "Đăng kí thất bại";
 
         public static string Approve = "Đã duyệt luận văn";
         public static string Reject = "Đã từ chối luận văn";

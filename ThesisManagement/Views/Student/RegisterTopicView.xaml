@@ -38,6 +38,7 @@
                     <Run Text="{Binding SelectedTopic.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>    
                 </TextBlock>
             </StackPanel>
+            
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -130,11 +131,12 @@
 
             <StackPanel Grid.Row="5">
                 <hc:CheckComboBox Margin="22 0"
-                                  Height="60"
-                                  VerticalAlignment="Top"
-                                  ItemsSource="{Binding Students}"
-                                  md:HintAssist.Hint="Thành viên"
-                                  md:TextFieldAssist.HasClearButton="True">
+                      Height="60"
+                      VerticalAlignment="Top"
+                      ItemsSource="{Binding Students}"
+                      SelectedItem="{Binding SelectedStudents}"
+                      md:HintAssist.Hint="Thành viên"
+                      md:TextFieldAssist.HasClearButton="True">
                     <hc:CheckComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -156,7 +158,7 @@
                           Width="100"
                           Height="50"
                           FontSize="14"
-                          Command="{Binding }"
+                          Command="{Binding RegisterThesisCommand}"
                           Grid.Row="3"/>
             </Grid>
 

@@ -4,22 +4,28 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ThesisManagement.Views.Shared"
+        xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
         mc:Ignorable="d"
-        Title="LoginView" Height="550" Width="500"
+        Title="LoginView" Height="340" Width="300"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize"
         MouseDown="Window_MouseDown"
-        Background="Transparent"
-        AllowsTransparency="True">
+        Style="{StaticResource formStyle}">
 
-    <Border Background="#202a6a">
+    <Window.DataContext>
+        <viewModels:LoginVM />
+    </Window.DataContext>
+
+    <!--<Border Background="White">
         <Border BorderThickness="0">
                 <Border.Background>
                     <ImageBrush ImageSource="/Resources/Images/app-background.png"
-                                Stretch="None"/>
+                                Stretch="None"
+                                AlignmentX="Left"/>
                 </Border.Background>
                 
                 <Grid>
@@ -31,8 +37,7 @@
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
-                            <ColumnDefinition Width="25" />
-                            <ColumnDefinition Width="25" />
+                            <ColumnDefinition Width="400" />
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Text="ĐĂNG NHẬP"
@@ -42,31 +47,22 @@
                             VerticalAlignment="Center"
                             Margin="10 0 0 0" />
 
-                        <Button x:Name="btnMinimize"
-                            Content="-"
-                            Grid.Column="1"
-                            Click="btnMinimize_Click"
-                            Style="{StaticResource windowBtnStyle}"/>
+                        <customControls:PopupControlBar Grid.Column="1" />
+                </Grid>
 
-                        <Button x:Name="btnClose"
-                                Content="x"
-                                Grid.Column="2"
-                                Click="btnClose_Click"
-                                Style="{StaticResource windowBtnStyle}"/>
-                    </Grid>
-
-                <Border Grid.Row="1" Padding="20" Background="White" Width="300" Height="415" Opacity="0.98">
+                <Border Grid.Row="1" Margin="0 0 30 0" Padding="20" Background="White" Width="300" Height="415" HorizontalAlignment="Right">
                     <StackPanel Grid.Row="1" Orientation="Vertical">
-                        <Image Source="/Resources/Images/logo.png" Height="60" />
+                        --><!--<Image Source="/Resources/Images/logo.png" Height="60" />--><!--
                         <TextBlock Text="QUẢN LÝ LUẬN VĂN"
                                    Foreground="{StaticResource primaryBrush}"
                                    FontSize="12"
                                    FontWeight="Medium"
                                    HorizontalAlignment="Center"/>
 
-                        <TextBlock  Style="{StaticResource errorText}"/>
-                        <TextBlock Text="Tên đăng nhập" Style="{StaticResource label}" />
-                        <TextBox>
+                        <TextBlock Style="{StaticResource errorText}"
+                                   Text="{Binding ErrorMessage}" />
+                        <TextBlock Text="Email" Style="{StaticResource label}" />
+                        <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}">
                             <TextBox.Background>
                                 <ImageBrush ImageSource="/Resources/Images/user-icon.png"
                                         Stretch="None"
@@ -75,35 +71,87 @@
                         </TextBox>
                         
                         <TextBlock Text="Mật khẩu" Style="{StaticResource label}" />
-                        <PasswordBox>
-                            <PasswordBox.Background>
+                        <customControls:BindablePasswordBox Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <customControls:BindablePasswordBox.Background>
                                 <ImageBrush ImageSource="/Resources/Images/key-icon.png"
                                             Stretch="None"
                                             AlignmentX="Left"/>
-                            </PasswordBox.Background>
-                        </PasswordBox>
+                            </customControls:BindablePasswordBox.Background>
+                        </customControls:BindablePasswordBox>
 
                         <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
                                                       HoverColor="{StaticResource secondaryBrush}"
+                                                      Command="{Binding LoginCommand}"
                                                       Width="110" Margin="0 20 0 0">
                             <customControls:ControlButton.Content>
                                 <TextBlock Text="Đăng nhập" Style="{StaticResource btnContent}"/>
                             </customControls:ControlButton.Content>
                         </customControls:ControlButton>
 
-                        <TextBlock Text="Đăng nhập bắng tài khoản google" Style="{StaticResource label}" HorizontalAlignment="Center" Margin="0 30 0 10"/>
+                        --><!--<TextBlock Text="Đăng nhập bắng tài khoản google" Style="{StaticResource label}" HorizontalAlignment="Center" Margin="0 30 0 10"/>
                         <customControls:ControlButton DefaultColor="{StaticResource danger}"
                                                       HoverColor="{StaticResource dangerHover}"
                                                       Width="110">
                             <customControls:ControlButton.Content>
                                 <fa:IconImage Icon="Google" Foreground="White" />
                             </customControls:ControlButton.Content>
-                        </customControls:ControlButton>
+                        </customControls:ControlButton>--><!--
                     </StackPanel>
                 </Border>
                     
                 </Grid>
 
         </Border>
+    </Border>-->
+
+    <Border>
+        <StackPanel>
+            <customControls:PopupControlBar Height="25" />
+            <Border Padding="20">
+
+                <StackPanel Grid.Row="1" Orientation="Vertical">
+                    <!--<Image Source="/Resources/Images/logo.png" Height="60" />-->
+                    <TextBlock Text="QUẢN LÝ LUẬN VĂN"
+                           Foreground="{StaticResource primaryBrush}"
+                           FontSize="12"
+                           FontWeight="Medium"
+                           HorizontalAlignment="Center"/>
+
+                    <TextBlock Style="{StaticResource errorText}"
+                           Text="{Binding ErrorMessage}" />
+                    <TextBlock Text="Email" Style="{StaticResource label}" />
+                    <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
+                             Padding="10 5 5 5"
+                             Height="40"
+                             Margin="0 0 0 10">
+
+                    </TextBox>
+
+                    <TextBlock Text="Mật khẩu" Style="{StaticResource label}" />
+                    <customControls:BindablePasswordBox Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                        Height="40">
+
+                    </customControls:BindablePasswordBox>
+
+                    <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
+                                              HoverColor="{StaticResource secondaryBrush}"
+                                              Command="{Binding LoginCommand}"
+                                              Width="110" Margin="0 30 0 0">
+                        <customControls:ControlButton.Content>
+                            <TextBlock Text="Đăng nhập" Style="{StaticResource btnContent}"/>
+                        </customControls:ControlButton.Content>
+                    </customControls:ControlButton>
+
+                    <!--<TextBlock Text="Đăng nhập bắng tài khoản google" Style="{StaticResource label}" HorizontalAlignment="Center" Margin="0 30 0 10"/>
+                <customControls:ControlButton DefaultColor="{StaticResource danger}"
+                                              HoverColor="{StaticResource dangerHover}"
+                                              Width="110">
+                    <customControls:ControlButton.Content>
+                        <fa:IconImage Icon="Google" Foreground="White" />
+                    </customControls:ControlButton.Content>
+                </customControls:ControlButton>-->
+                </StackPanel>
+            </Border>
+        </StackPanel>
     </Border>
 </Window>

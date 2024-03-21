@@ -8,6 +8,7 @@ namespace ThesisManagement.Repositories
     public interface IProfessorRepository
     {
         ObservableCollection<Professor> GetAll();
+        IEnumerable<string> GetNames();
     }
 
     public class ProfessorRepository : IProfessorRepository
@@ -24,5 +25,10 @@ namespace ThesisManagement.Repositories
             return new ObservableCollection<Professor>(professors);
         }
 
+        public IEnumerable<string> GetNames()
+        {
+            var names = _context.Professors.Select(prof => prof.Name).ToList();
+            return names;
+        }
     }
 }

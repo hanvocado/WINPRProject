@@ -33,15 +33,23 @@ namespace ThesisManagement.Views.Student
 
                 this.DataContext = new TopicsViewModel
                 {
-                    Id = topic.Id,
-                    Name = topic.Name,
-                    ProfessorId = topic.ProfessorId,
-                    StudentId = topic.StudentId,
-                    Category = topic.Category,
-                    Technology = topic.Technology,
-                    Description = topic.Description,
-                    Requirement = topic.Requirement,
-                    StudentQuantity = topic.StudentQuantity
+                    SelectedTopic = new Topic
+                    {
+                        Professor = new Models.Professor
+                        {
+                            Name = topic.Professor.Name
+                        },
+                        Id = topic.Id,
+                        Name = topic.Name,
+                        ProfessorId = topic.ProfessorId,
+                        StudentId = topic.StudentId,
+                        Category = topic.Category,
+                        Technology = topic.Technology,
+                        Description = topic.Description,
+                        Requirement = topic.Requirement,
+                        StudentQuantity = topic.StudentQuantity,
+                        Function = topic.Function
+                    }
                 };
 
                 registerTopic.DataContext = this.DataContext;
@@ -52,6 +60,7 @@ namespace ThesisManagement.Views.Student
                 currenTopicView = registerTopic;
             }
         }
+
 
     }
 }

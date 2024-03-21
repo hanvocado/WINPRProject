@@ -83,7 +83,7 @@
 
             <ListView Grid.Row="1"
             Name="TopicsListView"
-            ItemsSource="{Binding Topics}"
+            ItemsSource="{Binding Topics,  UpdateSourceTrigger=PropertyChanged}"
             MouseLeftButtonUp="ListViewItem_Click"
             SelectedItem="{Binding SelectedTopic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ListView.View>
@@ -108,7 +108,7 @@
                             </GridViewColumn.Header>
                         </GridViewColumn>
 
-                        <GridViewColumn Width="140"
+                        <GridViewColumn Width="220"
                                 DisplayMemberBinding="{Binding Professor.Name}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Giảng viên" />
