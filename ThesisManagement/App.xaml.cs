@@ -1,6 +1,5 @@
 ﻿using System.Windows;
-using ThesisManagement.Views.Professor;
-using ThesisManagement.Views.Student;
+using ThesisManagement.Views.Shared;
 
 namespace ThesisManagement
 {
@@ -9,27 +8,16 @@ namespace ThesisManagement
     /// </summary>
     public partial class App : Application
     {
-        public App()
-        {
-        }
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-
-            ShowStudentWindow();
-
+            ApplicationStart();
         }
 
-        private void ShowProfessorWindow()
+        private void ApplicationStart()
         {
-            ProfessorMainView professorMainView = new();
-            professorMainView.Show();
-        }
-
-        private void ShowStudentWindow()
-        {
-            StudentMainView wd = new();
-            wd.Show();
+            var loginView = new LoginView();
+            loginView.Show();
         }
     }
 

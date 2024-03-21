@@ -1,11 +1,12 @@
-﻿using ThesisManagement.Models;
+﻿using System.Net;
+using ThesisManagement.Models;
 using ThesisManagement.Repositories.EF;
 
 namespace ThesisManagement.Repositories
 {
     public interface IUserRepository
     {
-        bool Authenticate(string username, string password);
+        bool Authenticate(NetworkCredential credential);
     }
 
     public class UserRepository : IUserRepository
@@ -16,10 +17,11 @@ namespace ThesisManagement.Repositories
         {
             _context = DataProvider.Instance.Context;
         }
-        public bool Authenticate(string email, string password)
+        public bool Authenticate(NetworkCredential credential)
         {
-            email = email.ToLower();
-            user = _context.Students.FirstOrDefault(p => p.Email.ToLower() == email && p.Password == password);
+            var email = credential.UserName.ToLower();
+            var pw = credential.Password;
+            user = _context.Students.FirstOrDefault(p => p.Email.ToLower() == email && p.Password == pw);
             if (user != null)
             {
                 SessionInfo.UserId = user.Id;
@@ -27,7 +29,7 @@ namespace ThesisManagement.Repositories
                 return true;
             }
 
-            user = _context.Professors.FirstOrDefault(p => p.Email.ToLower() == email && p.Password == password);
+            user = _context.Professors.FirstOrDefault(p => p.Email.ToLower() == email && p.Password == pw);
             if (user != null)
             {
                 SessionInfo.UserId = user.Id;
@@ -35,7 +37,7 @@ namespace ThesisManagement.Repositories
                 return true;
             }
 
-            user = _context.Admins.FirstOrDefault(p => p.Email.ToLower() == email && p.Password == password);
+            user = _context.Admins.FirstOrDefault(p => p.Email.ToLower() == email && p.Password == pw);
             if (user != null)
             {
                 SessionInfo.UserId = user.Id;
