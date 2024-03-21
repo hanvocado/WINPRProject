@@ -15,8 +15,9 @@ namespace ThesisManagement.Repositories
         ObservableCollection<Topic> GetAll();
         ObservableCollection<Topic> GetAll(string professorId);
         ObservableCollection<Topic> GetByTopicName(string name);
-        public ObservableCollection<Topic> GetFilteredTopics(string category, string technology, string professorname);
+        ObservableCollection<Topic> GetFilteredTopics(string category, string technology, string professorname);
 
+        bool CanRegisterTopic(string studentId);
     }
 
     public class TopicRepository : ITopicRepository
@@ -110,6 +111,11 @@ namespace ThesisManagement.Repositories
                                        .Include(t => t.Theses)
                                        .AsNoTracking().ToList();
             return new ObservableCollection<Topic>(topics);
+        }
+
+        public bool CanRegisterTopic(string studentId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

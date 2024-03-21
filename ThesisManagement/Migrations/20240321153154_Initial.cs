@@ -198,11 +198,11 @@ namespace ThesisManagement.Migrations
                 columns: new[] { "Id", "Birthday", "Email", "Name", "Password", "Phone", "ThesisId" },
                 values: new object[,]
                 {
-                    { "22110001", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "c@student.com", "Võ C", "hashed_password4", "987-654-3210", 4 },
-                    { "22110010", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "joyce@example.com", "Nguyễn D", "hashed_password4", "987-654-3210", 4 },
-                    { "22133010", new DateTime(2000, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "a@student.com", "Nguyễn A", "hashed_password3", "123-456-7890", 2 },
-                    { "22133011", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "b@student.com", "Lâm B", "hashed_password4", "987-654-3210", 4 },
-                    { "22133015", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "drake@example.com", "Trần E", "hashed_password4", "987-654-3210", 5 }
+                    { "22110001", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "c@student.com", "Võ C", "c12345", "987-654-3210", 4 },
+                    { "22110010", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "d@student.com", "Nguyễn D", "d12345", "987-654-3210", 4 },
+                    { "22133010", new DateTime(2000, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "a@student.com", "Nguyễn A", "a12345", "123-456-7890", 2 },
+                    { "22133011", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "b@student.com", "Lâm B", "b12345", "987-654-3210", 4 },
+                    { "22133015", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "e@student.com", "Trần E", "e12346", "987-654-3210", 5 }
                 });
 
             migrationBuilder.CreateIndex(

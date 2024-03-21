@@ -186,7 +186,7 @@ namespace ThesisManagement.Migrations
                             Birthday = new DateTime(2000, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "a@student.com",
                             Name = "Nguyễn A",
-                            Password = "hashed_password3",
+                            Password = "a12345",
                             Phone = "123-456-7890",
                             ThesisId = 2
                         },
@@ -196,7 +196,7 @@ namespace ThesisManagement.Migrations
                             Birthday = new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "b@student.com",
                             Name = "Lâm B",
-                            Password = "hashed_password4",
+                            Password = "b12345",
                             Phone = "987-654-3210",
                             ThesisId = 4
                         },
@@ -206,7 +206,7 @@ namespace ThesisManagement.Migrations
                             Birthday = new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "c@student.com",
                             Name = "Võ C",
-                            Password = "hashed_password4",
+                            Password = "c12345",
                             Phone = "987-654-3210",
                             ThesisId = 4
                         },
@@ -214,9 +214,9 @@ namespace ThesisManagement.Migrations
                         {
                             Id = "22110010",
                             Birthday = new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "joyce@example.com",
+                            Email = "d@student.com",
                             Name = "Nguyễn D",
-                            Password = "hashed_password4",
+                            Password = "d12345",
                             Phone = "987-654-3210",
                             ThesisId = 4
                         },
@@ -224,9 +224,9 @@ namespace ThesisManagement.Migrations
                         {
                             Id = "22133015",
                             Birthday = new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "drake@example.com",
+                            Email = "e@student.com",
                             Name = "Trần E",
-                            Password = "hashed_password4",
+                            Password = "e12346",
                             Phone = "987-654-3210",
                             ThesisId = 5
                         });

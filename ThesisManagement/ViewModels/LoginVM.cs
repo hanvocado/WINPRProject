@@ -107,7 +107,7 @@ namespace ThesisManagement.ViewModels
 
         private bool CanExecuteLogin(object obj)
         {
-            return !isLoading;
+            return true;
         }
 
         private void ExecuteLoginCommand(object obj)
@@ -144,7 +144,8 @@ namespace ThesisManagement.ViewModels
 
         private bool ValidInfo()
         {
-            return Password != null && Password.Length > 0 && ValidEmail(email);
+            var isValid = Password != null && Password.Length > 0 && ValidEmail(email);
+            return isValid;
         }
 
         private bool ValidEmail(string email)

@@ -292,13 +292,12 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteRegisterThesisCommand(object obj)
         {
-            RegisterTopicView registerView = new RegisterTopicView();
+            RegisterTopicView registerView = obj as RegisterTopicView;
             Thesis thesis = new Thesis
             {
                 TopicId = SelectedTopic.Id,
                 TopicStatus = Variable.StatusTopic.Waiting,
                 File = null,
-                Score = 0
             };
             var success = _thesisRepo.Add(thesis);
             ShowMessage(success, Message.RegisterSuccess, Message.RegisterFailed);
