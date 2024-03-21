@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ThesisManagement.Views.Student"
         xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
-        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:sf="http://schemas.syncfusion.com/wpf"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
         Title="TopicView" Height="670" Width="600"
         WindowStyle="None"
-        Style="{StaticResource formStyle}"
-        WindowStartupLocation="CenterScreen">
+        AllowsTransparency="True"
+        Style="{StaticResource formStyle}">
     <Window.DataContext>
         <viewModels:TopicsViewModel />
     </Window.DataContext>
@@ -20,6 +21,8 @@
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="180"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="100"/>
@@ -28,8 +31,8 @@
                 <RowDefinition Height="140"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            
-            <customControls:PopupControlBar Grid.Row="0" />
+
+            <customControls:PopupControlBar />
             <Grid Grid.Row="1">
                 <TextBlock  Text="Đăng Ký Đề Tài" 
                             Style="{StaticResource title}" 
@@ -131,7 +134,7 @@
                               Width="100"
                               Height="50"
                               FontSize="14"
-                              Grid.Row="7"/>
+                              Grid.Row="3"/>
         </Grid>
     </Border>
     

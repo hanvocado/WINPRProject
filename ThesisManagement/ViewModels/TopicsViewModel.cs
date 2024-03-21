@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
 using System.Windows;
+using System.Windows.Input;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
 using ProfessorTopicView = ThesisManagement.Views.Professor.TopicView;
@@ -17,62 +17,47 @@ namespace ThesisManagement.ViewModels
 
         private readonly string currentUserId;
 
-        private Topic? selectedTopic;
-
-        public Topic? SelectedTopic
-        {
-            get { return selectedTopic; }
-            set { selectedTopic = value; OnPropertyChanged(nameof(SelectedTopic)); }
-        }
-
-
         private ObservableCollection<Topic> topics;
 
         private ObservableCollection<Professor> professors;
         private ObservableCollection<Student> students;
 
-        private string? filterName;
-        private string? filterCategory;
-        private string? filterTechnology;
-        private string? filterProfessorName;
+        private Topic selectedTopic;
+
+        private string name;
+        private string? category;
+        private string? technology;
+        private string description;
+        private string professorName;
         private string studentFilter;
 
-        private int id;
+        public IEnumerable<string> Categories { get; set; } = new List<string>() { "Computer Science", "Web Development", "Data Science", "Other" };
+        public IEnumerable<string> Technologies { get; set; } = new List<string>() { "JavaScript", "Wpf", ".NET", "Java", "Python", "SQL", "ASP.NET Core", "Other" };
+        public ObservableCollection<string> ProfessorNames { get; set; }
+        public ICommand ProfessorCreateTopic { get; set; }
+        public ICommand StudentCreateTopic { get; set; }
+        public ICommand CreateOrUpdateCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
+        public ICommand SaveCommand { get; set; }
 
-        public int Id
+        public string CurrentUserId
         {
-            get { return id; }
-            set { id = value; }
+            get { return currentUserId; }
         }
 
-        private string? professorId;
-
-        [StringLength(20)]
-        [Required(ErrorMessage = "Giảng viên không thể để trống")]
-        public string ProfessorId
+        public Topic SelectedTopic
         {
-            get { return professorId; }
+            get
+            {
+                return selectedTopic;
+            }
             set
             {
-                professorId = value;
-                OnPropertyChanged(nameof(ProfessorId));
+                selectedTopic = value;
+                OnPropertyChanged(nameof(SelectedTopic));
             }
         }
 
-        private string? studentId;
-        public string? StudentId
-        {
-            get { return studentId; }
-            set
-            {
-                studentId = value;
-                OnPropertyChanged(nameof(StudentId));
-            }
-        }
-
-        private string? name;
-
-        [Required(ErrorMessage = "Tên đề tài không thể để trống")]
         public string Name
         {
             get { return name; }
@@ -80,13 +65,10 @@ namespace ThesisManagement.ViewModels
             {
                 name = value;
                 OnPropertyChanged(nameof(Name));
+                FilterData();
             }
         }
 
-        private string? category;
-
-        [Required(ErrorMessage = "Thể loại không thể để trống")]
-        [StringLength(100)]
         public string Category
         {
             get { return category; }
@@ -94,13 +76,10 @@ namespace ThesisManagement.ViewModels
             {
                 category = value;
                 OnPropertyChanged(nameof(Category));
+                FilterData();
             }
         }
 
-        private string? technology;
-
-        [StringLength(100)]
-        [Required(ErrorMessage = "Thể loại không thể để trống")]
         public string Technology
         {
             get { return technology; }
@@ -108,80 +87,6 @@ namespace ThesisManagement.ViewModels
             {
                 technology = value;
                 OnPropertyChanged(nameof(Technology));
-            }
-        }
-
-        private string? description;
-        public string? Description
-        {
-            get { return description; }
-            set { description = value; OnPropertyChanged(nameof(Description)); }
-        }
-
-        private string? requirement;
-        public string? Requirement
-        {
-            get { return requirement; }
-            set { requirement = value; OnPropertyChanged(nameof(Requirement)); }
-        }
-
-        private int studentQuantity;
-
-        [Range(1, 5)]
-        public int StudentQuantity
-        {
-            get { return studentQuantity; }
-            set
-            {
-                studentQuantity = value;
-                OnPropertyChanged(nameof(StudentQuantity));
-            }
-        }
-
-
-        public IEnumerable<string> Categories
-        { get; set; } = new List<string>() { "Computer Science", "Web Development", "Data Science", "Other" };
-        public IEnumerable<string> Technologies { get; set; } = new List<string>() { "JavaScript", "Wpf", ".NET", "Java", "Python", "SQL", "ASP.NET Core", "Other" };
-        public ViewModelCommand ProfessorCreateTopic { get; set; }
-        public ViewModelCommand StudentCreateTopic { get; set; }
-        public ViewModelCommand CreateOrUpdateCommand { get; set; }
-        public ViewModelCommand DeleteCommand { get; set; }
-        public ViewModelCommand SaveCommand { get; set; }
-
-        public string CurrentUserId
-        {
-            get { return currentUserId; }
-        }
-
-        public string FilterName
-        {
-            get { return filterName; }
-            set
-            {
-                filterName = value;
-                OnPropertyChanged(nameof(FilterName));
-                FilterData();
-            }
-        }
-
-        public string FilterCategory
-        {
-            get { return filterCategory; }
-            set
-            {
-                filterCategory = value;
-                OnPropertyChanged(nameof(FilterCategory));
-                FilterData();
-            }
-        }
-
-        public string FilterTechnology
-        {
-            get { return filterTechnology; }
-            set
-            {
-                filterTechnology = value;
-                OnPropertyChanged(nameof(FilterTechnology));
                 FilterData();
             }
         }
@@ -216,13 +121,13 @@ namespace ThesisManagement.ViewModels
             }
         }
 
-        public string FilterProfessorName
+        public string ProfessorName
         {
-            get { return filterProfessorName; }
+            get { return professorName; }
             set
             {
-                filterProfessorName = value;
-                OnPropertyChanged(nameof(FilterProfessorName));
+                professorName = value;
+                OnPropertyChanged(nameof(ProfessorName));
                 FilterData();
             }
         }
@@ -241,29 +146,24 @@ namespace ThesisManagement.ViewModels
         public TopicsViewModel()
         {
             currentUserId = SessionInfo.UserId;
+            selectedTopic = new Topic();
             studentFilter = "";
             _topicRepo = new TopicRepository();
             _professorRepo = new ProfessorRepository();
             _studentRepo = new StudentRepository();
             Topics = _topicRepo.GetAll();
+            ProfessorNames = _professorRepo.GetProfessorNames();
             Students = _studentRepo.GetAll();
-            Professors = _professorRepo.GetAll();
             ProfessorCreateTopic = new ViewModelCommand(ExecuteProfessorCreateCommand);
             StudentCreateTopic = new ViewModelCommand(ExecuteStudentCreateCommand);
-            CreateOrUpdateCommand = new ViewModelCommand(ExecuteCreateOrUpdateCommand, CanCreateOrUpdateTopic);
+            CreateOrUpdateCommand = new ViewModelCommand(ExecuteCreateOrUpdateCommand);
             DeleteCommand = new ViewModelCommand(ExecuteDeleteCommand);
-        }
-
-        private bool CanCreateOrUpdateTopic(object obj)
-        {
-            return true;
         }
 
         private void ExecuteProfessorCreateCommand(object sender)
         {
+            this.SelectedTopic = new Topic();
             ProfessorTopicView topicView = new();
-            ResetTopicProperties();
-            this.ProfessorId = currentUserId;
             topicView.DataContext = this;
             topicView.Owner = Application.Current.MainWindow;
             topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -272,8 +172,8 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteStudentCreateCommand(object sender)
         {
+            this.SelectedTopic = new Topic();
             StudentTopicView topicView = new();
-            //this.StudentId = currentUserId;
             topicView.DataContext = this;
             topicView.Owner = Application.Current.MainWindow;
             topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -282,73 +182,44 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteCreateOrUpdateCommand(object obj)
         {
-            if (IsTopicNotValid())
-                return;
-
             ProfessorTopicView topicView = obj as ProfessorTopicView;
-            Topic topic = new Topic
+            selectedTopic.ProfessorId = selectedTopic.ProfessorId ?? currentUserId;
+            if (selectedTopic.Id <= 0)
             {
-                Id = id,
-                Name = name,
-                ProfessorId = professorId,
-                StudentId = studentId,
-                Category = category,
-                Technology = technology,
-                Description = description,
-                Requirement = requirement,
-                StudentQuantity = studentQuantity
-            };
-
-            if (id <= 0)
-                _topicRepo.Add(topic);
+                _topicRepo.Add(selectedTopic);
+            }
             else
-                _topicRepo.Update(topic);
+            {
+                _topicRepo.Update(selectedTopic);
+            }
 
             Topics = _topicRepo.GetAll();
-
             if (topicView != null)
+            {
                 topicView.Close();
+            }
 
             var mainWindow = Application.Current.MainWindow;
             mainWindow.Focus();
+
         }
 
         private void ExecuteDeleteCommand(object parameter)
         {
-            _topicRepo.Delete(id);
+            _topicRepo.Delete(selectedTopic.Id);
             Topics = _topicRepo.GetAll();
         }
 
         private void FilterData()
         {
-            Topics = _topicRepo.GetFilteredTopics(FilterCategory, FilterTechnology, FilterProfessorName);
+            var filteredData = _professorRepo.GetFilteredTopics(Category, Technology, ProfessorName);
+            Topics = new ObservableCollection<Topic>(filteredData);
         }
 
         private void FilterStudent()
         {
             Students = _studentRepo.Get(studentFilter);
             MessageBox.Show(Students.ToList().Count.ToString());
-        }
-
-        private void ResetTopicProperties()
-        {
-            Id = 0;
-            Name = "";
-            Description = "";
-            Requirement = "";
-            Category = "";
-            Technology = "";
-            studentQuantity = 1;
-        }
-
-        private bool IsTopicNotValid()
-        {
-            bool isProfessorValid = Validate(nameof(ProfessorId), professorId, CreateOrUpdateCommand);
-            bool isNameValid = Validate(nameof(Name), name, CreateOrUpdateCommand);
-            bool isCategoryValid = Validate(nameof(Category), category, CreateOrUpdateCommand);
-            bool isTechnologyValid = Validate(nameof(Technology), technology, CreateOrUpdateCommand);
-            bool isStudentQuantityValid = Validate(nameof(StudentQuantity), studentQuantity, CreateOrUpdateCommand);
-            return !isProfessorValid || !isNameValid || !isCategoryValid || !isTechnologyValid || !isStudentQuantityValid;
         }
     }
 }

@@ -7,8 +7,6 @@ namespace ThesisManagement.ViewModels
         private readonly Action<object> _executeAction;
         private readonly Predicate<object> _canExecuteAction;
 
-        public event EventHandler? CanExecuteChanged;
-
         public ViewModelCommand(Action<object> executeAction)
         {
             _executeAction = executeAction;
@@ -21,6 +19,12 @@ namespace ThesisManagement.ViewModels
             _canExecuteAction = canExecuteAction;
         }
 
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
+
         public bool CanExecute(object? parameter)
         {
             return _canExecuteAction == null ? true : _canExecuteAction(parameter);
@@ -29,11 +33,6 @@ namespace ThesisManagement.ViewModels
         public void Execute(object? parameter)
         {
             _executeAction(parameter);
-        }
-
-        public void RaiseCanExecuteChanged()
-        {
-            CanExecuteChanged?.Invoke(this, new EventArgs());
         }
     }
 }

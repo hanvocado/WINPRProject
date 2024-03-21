@@ -37,7 +37,7 @@
                 <TextBox Grid.Row="0"
                          Name="FilterTextbox"
                          TextChanged="FilterTextbox_TextChanged"
-                         Text="{Binding FilterName}"
+                         Text="{Binding Name}"
                          Width="200"
                          Padding="10"
                          Margin="5"
@@ -53,7 +53,7 @@
                                                HoverColor="{StaticResource secondaryBrush}"
                                                Command="{Binding ProfessorCreateTopic}"
                                               CommandParameter="{Binding ElementName=topicsUC}"
-                                               Width="90">
+                                               Width="80">
                     <customControls:ControlButton.Content>
                         <TextBlock Text="+ Tạo mới" Style="{StaticResource btnContent}"/>
                     </customControls:ControlButton.Content>
@@ -73,7 +73,7 @@
                     <GridView>
                         <GridViewColumn Width="0" x:Name="id"
                                         DisplayMemberBinding="{Binding Id, Mode=TwoWay}" />
-                        <GridViewColumn Width="390"
+                        <GridViewColumn Width="340"
                                         DisplayMemberBinding="{Binding Name, Mode=TwoWay}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Đề tài" />
@@ -91,7 +91,7 @@
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Công nghệ" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
-                        <GridViewColumn Width="70">
+                        <GridViewColumn Width="100">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
@@ -101,6 +101,16 @@
                                                                       Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
                                             <customControls:ControlButton.Content>
                                                 <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
+                                            </customControls:ControlButton.Content>
+                                        </customControls:ControlButton>
+                                        <customControls:ControlButton DefaultColor="{Binding PenColor}"
+                                                                      Margin="10 0 0 0"
+                                                                      IsEnabled="{Binding PenEnable}"
+                                                                      HoverColor="{Binding PenColor}"
+                                                                      Width="30"
+                                                                      Command="{Binding DataContext.ViewTopicRegisters, RelativeSource={RelativeSource AncestorType=ListView}}">
+                                            <customControls:ControlButton.Content>
+                                                <fa:IconImage Icon="Pen" Style="{StaticResource btnIcon}" />
                                             </customControls:ControlButton.Content>
                                         </customControls:ControlButton>
                                     </StackPanel>
