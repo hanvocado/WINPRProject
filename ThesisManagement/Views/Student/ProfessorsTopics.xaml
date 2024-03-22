@@ -83,7 +83,7 @@
 
         <Border Grid.Row="1" >
 
-                      <!-- ItemContainerStyle="{StaticResource itemContainer}" -->
+                       <!--ItemContainerStyle="{StaticResource itemContainer}"--> 
             <ListView Grid.Row="1"
             Name="TopicsListView"
             ItemsSource="{Binding Topics,  UpdateSourceTrigger=PropertyChanged}"

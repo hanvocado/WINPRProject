@@ -38,11 +38,7 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="itemContainer" TargetType="{x:Type ListViewItem}">
-        <Style.BasedOn>
-            <StaticResource ResourceKey="{x:Type ListViewItem}" />
-        </Style.BasedOn>
-        
+    <Style x:Key="itemContainer" TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource {x:Type ListViewItem}}">
         <Style.Resources>
             <customControls:StringNullOrEmptyConverter x:Key="StringNullOrEmptyConverter"/>
         </Style.Resources>

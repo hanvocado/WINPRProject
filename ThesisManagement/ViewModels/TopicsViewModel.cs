@@ -6,7 +6,6 @@ using ThesisManagement.Models;
 using ThesisManagement.Repositories;
 using ThesisManagement.Views.Student;
 using ProfessorTopicView = ThesisManagement.Views.Professor.TopicView;
-//using StudentTopicsView = ThesisManagement.Views.Student.TopicsView;
 using StudentTopicView = ThesisManagement.Views.Student.TopicView;
 
 namespace ThesisManagement.ViewModels
@@ -22,7 +21,7 @@ namespace ThesisManagement.ViewModels
         private readonly Role currentUserRole;
 
         private Topic? selectedTopic;
-        private ObservableCollection<Student> selectedStudents;
+        private List<Student> selectedStudents;
 
         public Topic? SelectedTopic
         {
@@ -34,7 +33,7 @@ namespace ThesisManagement.ViewModels
         private ObservableCollection<Topic> topics;
 
         private ObservableCollection<Professor> professors;
-        private ObservableCollection<Student> students;
+        private List<Student> students;
 
         private string? filterTopicName;
         private string? filterProfessorName;
@@ -195,6 +194,15 @@ namespace ThesisManagement.ViewModels
             }
         }
 
+        private string selectedStudentNames;
+
+        public string SelectedStudentNames
+        {
+            get { return selectedStudentNames; }
+            set { selectedStudentNames = value; OnPropertyChanged(nameof(SelectedStudentNames)); }
+        }
+
+
         public IEnumerable<string> Categories
         { get; set; } = new List<string>() { "Computer Science", "Web Development", "Data Science", "Other" };
         public IEnumerable<string> Technologies { get; set; } = new List<string>() { "JavaScript", "Wpf", ".NET", "Java", "Python", "SQL", "ASP.NET Core", "Other" };
@@ -206,6 +214,8 @@ namespace ThesisManagement.ViewModels
         public ViewModelCommand SaveCommand { get; set; }
         public ViewModelCommand RegisterThesisCommand { get; set; }
         public ViewModelCommand RegisterNewTopicCommand { get; set; }
+        public ViewModelCommand ChooseMembersCommand { get; set; }
+        public ViewModelCommand AddMembersCommand { get; set; }
 
         public string CurrentUserId
         {
@@ -232,7 +242,7 @@ namespace ThesisManagement.ViewModels
             }
         }
 
-        public ObservableCollection<Student> SelectedStudents
+        public List<Student> SelectedStudents
         {
             get { return selectedStudents; }
             set
@@ -242,7 +252,7 @@ namespace ThesisManagement.ViewModels
             }
         }
 
-        public ObservableCollection<Student> Students
+        public List<Student> Students
         {
             get { return students; }
             set
@@ -251,7 +261,6 @@ namespace ThesisManagement.ViewModels
                 OnPropertyChanged(nameof(Students));
             }
         }
-
 
         public string StudentFilter
         {
@@ -273,7 +282,7 @@ namespace ThesisManagement.ViewModels
             _professorRepo = new ProfessorRepository();
             _studentRepo = new StudentRepository();
             _thesisRepo = new ThesisRepository();
-            SelectedStudents = new();
+            SelectedStudents = new List<Student>();
 
             if (currentUserRole == Role.Professor)
             {
@@ -289,6 +298,27 @@ namespace ThesisManagement.ViewModels
             DeleteCommand = new ViewModelCommand(ExecuteDeleteCommand);
             RegisterThesisCommand = new ViewModelCommand(ExecuteRegisterThesisCommand);
             RegisterNewTopicCommand = new ViewModelCommand(ExecuteRegisterNewTopicCommand);
+            ChooseMembersCommand = new ViewModelCommand(ExecuteChooseMembers);
+            AddMembersCommand = new ViewModelCommand(ExecuteAddMembers);
+        }
+
+        private void ExecuteAddMembers(object obj)
+        {
+            var members = Students.Where(s => s.IsSelected).ToList();
+            foreach (var st in members)
+            {
+                SelectedStudentNames += $"   {st.DisplayName}";
+                SelectedStudents.Add(st);
+            }
+            var chooseMembersView = obj as ChooseMembersView;
+            chooseMembersView?.Close();
+        }
+
+        private void ExecuteChooseMembers(object obj)
+        {
+            var popup = new ChooseMembersView();
+            popup.DataContext = this;
+            popup.Show();
         }
 
         private void ExecuteRegisterNewTopicCommand(object obj)
@@ -308,26 +338,28 @@ namespace ThesisManagement.ViewModels
                 Description = description
             };
 
-            var success = _topicRepo.Add(topic);
-            ShowMessage(success, Message.RegisterSuccess, Message.RegisterFailed);
-
-            Thesis thesis = new Thesis
+            var isSuccess = _topicRepo.Add(topic);
+            if (isSuccess)
             {
-                TopicId = topic.Id,
-                TopicStatus = Variable.StatusTopic.Waiting,
-                File = null,
-                Score = 0
-            };
-            _thesisRepo.Add(thesis);
-            foreach (var student in SelectedStudents)
-            {
-                student.ThesisId = thesis.Id;
-                _studentRepo.Update(student);
+                Thesis thesis = new Thesis
+                {
+                    TopicId = topic.Id,
+                    TopicStatus = Variable.StatusTopic.Waiting,
+                    File = null,
+                    Score = 0
+                };
+                isSuccess = _thesisRepo.Add(thesis);
+                foreach (var student in SelectedStudents)
+                {
+                    student.ThesisId = thesis.Id;
+                    _studentRepo.Update(student);
+                }
             }
+            ShowMessage(isSuccess, Message.RegisterSuccess, Message.RegisterFailed);
 
-            if (topicView != null)
-                topicView.Close();
+            topicView?.Close();
 
+            Topics = _topicRepo.GetMyTopicsAndProfessorTopics(SessionInfo.UserId);
             var mainWindow = Application.Current.MainWindow;
             mainWindow.Focus();
         }
@@ -350,8 +382,7 @@ namespace ThesisManagement.ViewModels
                 _studentRepo.Update(student);
             }
 
-            if (registerView != null)
-                registerView.Close();
+            registerView?.Close();
 
             var mainWindow = Application.Current.MainWindow;
             mainWindow.Focus();
@@ -379,6 +410,11 @@ namespace ThesisManagement.ViewModels
             ResetTopicProperties();
             this.StudentId = currentUserId;
             topicView.DataContext = this;
+
+            var currentStudent = _studentRepo.GetStudent(SessionInfo.UserId);
+            SelectedStudents.Add(currentStudent);
+            SelectedStudentNames = currentStudent.DisplayName;
+
             topicView.Owner = Application.Current.MainWindow;
             topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             topicView.Show();
@@ -417,8 +453,7 @@ namespace ThesisManagement.ViewModels
 
             Topics = _topicRepo.GetAll(currentUserId);
 
-            if (topicView != null)
-                topicView.Close();
+            topicView?.Close();
 
             var mainWindow = Application.Current.MainWindow;
             mainWindow.Focus();
@@ -438,8 +473,7 @@ namespace ThesisManagement.ViewModels
 
         private void FilterStudent()
         {
-            Students = _studentRepo.Get(studentFilter);
-            MessageBox.Show(Students.ToList().Count.ToString());
+            Students = Students.OrderByDescending(s => s.Name.ToLower().Contains(studentFilter) || s.Id.Contains(studentFilter)).ToList();
         }
 
         private void ResetTopicProperties()
@@ -451,6 +485,7 @@ namespace ThesisManagement.ViewModels
             Category = "";
             Technology = "";
             Function = "";
+            ProfessorId = "";
             studentQuantity = 1;
         }
 

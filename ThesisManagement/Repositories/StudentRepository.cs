@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories.EF;
@@ -9,8 +8,8 @@ namespace ThesisManagement.Repositories
     public interface IStudentRepository
     {
         bool Update(Student student);
-        ObservableCollection<Student> GetAll();
-        ObservableCollection<Student> Get(string filter);
+        List<Student> GetAll();
+        List<Student> Get(string? filter);
         Student GetStudent(string id);
         Thesis? GetThesis(string studentId);
     }
@@ -43,16 +42,19 @@ namespace ThesisManagement.Repositories
             }
         }
 
-        public ObservableCollection<Student> GetAll()
+        public List<Student> GetAll()
         {
             var students = _context.Students.AsNoTracking().ToList();
-            return new ObservableCollection<Student>(students);
+            return students;
         }
 
-        public ObservableCollection<Student> Get(string filter)
+        public List<Student> Get(string? filter)
         {
-            var students = _context.Students.Where(s => s.Name.Contains(filter, StringComparison.OrdinalIgnoreCase) || s.Id.Contains(filter, StringComparison.OrdinalIgnoreCase)).AsNoTracking().ToList();
-            return new ObservableCollection<Student>(students);
+            if (String.IsNullOrEmpty(filter))
+                return GetAll();
+
+            var students = _context.Students.Where(s => s.Name.ToLower().Contains(filter.ToLower()) || s.Id.ToLower().Contains(filter.ToLower())).AsNoTracking().ToList();
+            return students;
         }
 
         public Student GetStudent(string id)
