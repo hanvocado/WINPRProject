@@ -92,7 +92,7 @@
             <Border Grid.Row="4" Padding="30 0">
                 <StackPanel>
                     <TextBlock Text="Giảng viên" Style="{StaticResource label}" />
-                    <ComboBox Grid.Row="1"
+                    <!--<ComboBox Grid.Row="1"
                               IsEditable="True"
                               IsTextSearchEnabled="True"
                               IsTextSearchCaseSensitive="False"
@@ -102,7 +102,21 @@
                               SelectedValuePath="Id"
                                 ItemsSource="{Binding Professors}"
                                 SelectedValue="{Binding ProfessorId}"
-                                Style="{StaticResource ComboBoxExtend}" />
+                                Style="{StaticResource ComboBoxExtend}" />-->
+                    <customControls:FilterComboBox  Height="40"
+                                                    ItemsSource="{Binding Professors}"
+                                                    SelectedValue="{Binding ProfessorId}"
+                                                    Style="{StaticResource ComboBoxExtend}"
+                                                    DisplayMemberPath="Name"
+                                                    IsEditable="True" 
+                                                    IsTextSearchEnabled="False" 
+                                                    StaysOpenOnEdit="True">
+                        <customControls:FilterComboBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel VirtualizationMode="Recycling" />
+                            </ItemsPanelTemplate>
+                        </customControls:FilterComboBox.ItemsPanel>
+                    </customControls:FilterComboBox>
                 </StackPanel>
             </Border>
 
@@ -112,8 +126,6 @@
                     <hc:CheckComboBox Height="40"
                                       VerticalAlignment="Top"
                                       DisplayMemberPath="DisplayName"
-                                      IsTextSearchEnabled="True"
-                                      IsTextSearchCaseSensitive="False"
                                       Style="{StaticResource CheckComboBoxExtend}"
                                       ItemsSource="{Binding Students}" 
                                       SelectionChanged="CheckComboBox_SelectionChanged">

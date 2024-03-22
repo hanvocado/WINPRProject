@@ -114,6 +114,4 @@ namespace ThesisManagement.CustomControls
             return value.ToString().ToLower().Contains(Text.ToLower());
         }
     }
-
-
 }

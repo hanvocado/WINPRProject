@@ -63,5 +63,10 @@ namespace ThesisManagement.Models
                 return PenColor != "LightGray";
             }
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
