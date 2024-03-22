@@ -119,23 +119,20 @@ namespace ThesisManagement.ViewModels
                 if (isUserValid)
                 {
                     var logicView = Application.Current.MainWindow as LoginView;
-                    logicView.Hide();
 
                     if (SessionInfo.Role == Role.Student)
                     {
                         ShowStudentWindow();
-                        return;
                     }
-                    if (SessionInfo.Role == Role.Professor)
+                    else if (SessionInfo.Role == Role.Professor)
                     {
                         ShowProfessorWindow();
-                        return;
                     }
-                    if (SessionInfo.Role == Role.Admin)
+                    else if (SessionInfo.Role == Role.Admin)
                     {
                         Console.WriteLine();
-                        return;
                     }
+                    logicView.Close();
                 }
             }
             ErrorMessage = "Thông tin đăng nhập không chính xác!";
@@ -194,12 +191,14 @@ namespace ThesisManagement.ViewModels
         private void ShowProfessorWindow()
         {
             ProfessorMainView professorMainView = new();
+            Application.Current.MainWindow = professorMainView;
             professorMainView.Show();
         }
 
         private void ShowStudentWindow()
         {
             StudentMainView wd = new();
+            Application.Current.MainWindow = wd;
             wd.Show();
         }
     }

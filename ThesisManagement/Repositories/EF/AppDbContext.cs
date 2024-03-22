@@ -63,7 +63,6 @@ namespace ThesisManagement.Repositories.EF
                 new Student
                 {
                     Id = "22133010",
-                    ThesisId = 2,
                     Name = "Nguyễn A",
                     Email = "a@student.com",
                     Password = "a12345",
@@ -73,7 +72,6 @@ namespace ThesisManagement.Repositories.EF
                 new Student
                 {
                     Id = "22133011",
-                    ThesisId = 4,
                     Name = "Lâm B",
                     Email = "b@student.com",
                     Password = "b12345",
@@ -83,7 +81,6 @@ namespace ThesisManagement.Repositories.EF
                 new Student
                 {
                     Id = "22110001",
-                    ThesisId = 4,
                     Name = "Võ C",
                     Email = "c@student.com",
                     Password = "c12345",
@@ -93,7 +90,6 @@ namespace ThesisManagement.Repositories.EF
                 new Student
                 {
                     Id = "22110010",
-                    ThesisId = 4,
                     Name = "Nguyễn D",
                     Email = "d@student.com",
                     Password = "d12345",
@@ -103,7 +99,6 @@ namespace ThesisManagement.Repositories.EF
                 new Student
                 {
                     Id = "22133015",
-                    ThesisId = 5,
                     Name = "Trần E",
                     Email = "e@student.com",
                     Password = "e12346",

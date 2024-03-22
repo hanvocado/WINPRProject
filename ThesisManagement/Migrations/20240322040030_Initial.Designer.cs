@@ -12,7 +12,7 @@ using ThesisManagement.Repositories.EF;
 namespace ThesisManagement.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240321153154_Initial")]
+    [Migration("20240322040030_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -127,9 +127,9 @@ namespace ThesisManagement.Migrations
                         {
                             Id = "P1",
                             Birthday = new DateTime(1980, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "anh@hcmute.vn.edu",
+                            Email = "anh@hcmute.edu.vn",
                             Name = "Trần Văn Anh",
-                            Password = "12345",
+                            Password = "anh12345",
                             Phone = "123-456-7890"
                         },
                         new
@@ -138,7 +138,16 @@ namespace ThesisManagement.Migrations
                             Birthday = new DateTime(1975, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "lenguyen@gmail.com",
                             Name = "Lê Nguyên",
-                            Password = "54321",
+                            Password = "nguyen12345",
+                            Phone = "987-654-3210"
+                        },
+                        new
+                        {
+                            Id = "P3",
+                            Birthday = new DateTime(1975, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "lam@hcmute.edu.vn",
+                            Name = "Đặng Lâm",
+                            Password = "lam12345",
                             Phone = "987-654-3210"
                         });
                 });
@@ -189,8 +198,7 @@ namespace ThesisManagement.Migrations
                             Email = "a@student.com",
                             Name = "Nguyễn A",
                             Password = "a12345",
-                            Phone = "123-456-7890",
-                            ThesisId = 2
+                            Phone = "123-456-7890"
                         },
                         new
                         {
@@ -199,8 +207,7 @@ namespace ThesisManagement.Migrations
                             Email = "b@student.com",
                             Name = "Lâm B",
                             Password = "b12345",
-                            Phone = "987-654-3210",
-                            ThesisId = 4
+                            Phone = "987-654-3210"
                         },
                         new
                         {
@@ -209,8 +216,7 @@ namespace ThesisManagement.Migrations
                             Email = "c@student.com",
                             Name = "Võ C",
                             Password = "c12345",
-                            Phone = "987-654-3210",
-                            ThesisId = 4
+                            Phone = "987-654-3210"
                         },
                         new
                         {
@@ -219,8 +225,7 @@ namespace ThesisManagement.Migrations
                             Email = "d@student.com",
                             Name = "Nguyễn D",
                             Password = "d12345",
-                            Phone = "987-654-3210",
-                            ThesisId = 4
+                            Phone = "987-654-3210"
                         },
                         new
                         {
@@ -229,8 +234,7 @@ namespace ThesisManagement.Migrations
                             Email = "e@student.com",
                             Name = "Trần E",
                             Password = "e12346",
-                            Phone = "987-654-3210",
-                            ThesisId = 5
+                            Phone = "987-654-3210"
                         });
                 });
 
@@ -289,43 +293,6 @@ namespace ThesisManagement.Migrations
                     b.HasIndex("TopicId");
 
                     b.ToTable("Theses");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Score = 8f,
-                            TopicId = 2,
-                            TopicStatus = "Approved"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Score = 9f,
-                            TopicId = 1,
-                            TopicStatus = "Waiting"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Score = 10f,
-                            TopicId = 3,
-                            TopicStatus = "Rejected"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Score = 10f,
-                            TopicId = 2,
-                            TopicStatus = "Waiting"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Score = 10f,
-                            TopicId = 2,
-                            TopicStatus = "Waiting"
-                        });
                 });
 
             modelBuilder.Entity("ThesisManagement.Models.Topic", b =>
@@ -382,7 +349,7 @@ namespace ThesisManagement.Migrations
                             Category = "Computer Science",
                             Description = "Introductory course on database design",
                             Function = "Access and query data",
-                            Name = "Database Design",
+                            Name = "Quản lý ngân ",
                             ProfessorId = "P1",
                             Requirement = "",
                             StudentQuantity = 2,
@@ -392,11 +359,11 @@ namespace ThesisManagement.Migrations
                         {
                             Id = 2,
                             Category = "Web Development",
-                            Description = "Building dynamic websites using ASP.NET Core",
-                            Function = "Add product to cart, pay order invoice",
-                            Name = "Web Development",
+                            Description = "Xây dựng website Quản lý công ty quy mô vừa và nhỏ",
+                            Function = "Trả lương nhân viên. Giao Tasks theo các cấp.",
+                            Name = "Quản lý công ty",
                             ProfessorId = "P1",
-                            Requirement = "",
+                            Requirement = "Đúng deadline, teamwork",
                             StudentQuantity = 3,
                             Technology = "ASP.NET Core"
                         },
@@ -423,18 +390,6 @@ namespace ThesisManagement.Migrations
                             Requirement = "Requirement something here",
                             StudentQuantity = 2,
                             Technology = "Python"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Category = "Other",
-                            Description = "Description xyz",
-                            Function = "",
-                            Name = "Topic opq",
-                            ProfessorId = "P2",
-                            Requirement = "Requirement something here",
-                            StudentQuantity = 2,
-                            Technology = "Other"
                         });
                 });
 

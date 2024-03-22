@@ -162,35 +162,11 @@ namespace ThesisManagement.Migrations
             migrationBuilder.InsertData(
                 table: "Professor",
                 columns: new[] { "Id", "Birthday", "Email", "Name", "Password", "Phone" },
-                values: new object[] { "P1", new DateTime(1980, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "anh@hcmute.vn.edu", "Trần Văn Anh", "12345", "123-456-7890" });
-
-            migrationBuilder.InsertData(
-                table: "Professor",
-                columns: new[] { "Id", "Birthday", "Email", "Name", "Password", "Phone" },
-                values: new object[] { "P2", new DateTime(1975, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "lenguyen@gmail.com", "Lê Nguyên", "54321", "987-654-3210" });
-
-            migrationBuilder.InsertData(
-                table: "Topics",
-                columns: new[] { "Id", "Category", "Description", "Function", "Name", "ProfessorId", "Requirement", "StudentId", "StudentQuantity", "Technology" },
                 values: new object[,]
                 {
-                    { 1, "Computer Science", "Introductory course on database design", "Access and query data", "Database Design", "P1", "", null, 2, "SQL" },
-                    { 2, "Web Development", "Building dynamic websites using ASP.NET Core", "Add product to cart, pay order invoice", "Web Development", "P1", "", null, 3, "ASP.NET Core" },
-                    { 3, "Data Science", "Exploring algorithms for predictive modeling", "Train model for project", "Machine Learning", "P2", "", null, 3, "Python" },
-                    { 4, "Data Science", "Description xyz", "", "Topic abc", "P2", "Requirement something here", null, 2, "Python" },
-                    { 5, "Other", "Description xyz", "", "Topic opq", "P2", "Requirement something here", null, 2, "Other" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Theses",
-                columns: new[] { "Id", "File", "Score", "TopicId", "TopicStatus" },
-                values: new object[,]
-                {
-                    { 1, null, 8f, 2, "Approved" },
-                    { 2, null, 9f, 1, "Waiting" },
-                    { 3, null, 10f, 3, "Rejected" },
-                    { 4, null, 10f, 2, "Waiting" },
-                    { 5, null, 10f, 2, "Waiting" }
+                    { "P1", new DateTime(1980, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "anh@hcmute.edu.vn", "Trần Văn Anh", "anh12345", "123-456-7890" },
+                    { "P2", new DateTime(1975, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "lenguyen@gmail.com", "Lê Nguyên", "nguyen12345", "987-654-3210" },
+                    { "P3", new DateTime(1975, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "lam@hcmute.edu.vn", "Đặng Lâm", "lam12345", "987-654-3210" }
                 });
 
             migrationBuilder.InsertData(
@@ -198,11 +174,22 @@ namespace ThesisManagement.Migrations
                 columns: new[] { "Id", "Birthday", "Email", "Name", "Password", "Phone", "ThesisId" },
                 values: new object[,]
                 {
-                    { "22110001", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "c@student.com", "Võ C", "c12345", "987-654-3210", 4 },
-                    { "22110010", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "d@student.com", "Nguyễn D", "d12345", "987-654-3210", 4 },
-                    { "22133010", new DateTime(2000, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "a@student.com", "Nguyễn A", "a12345", "123-456-7890", 2 },
-                    { "22133011", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "b@student.com", "Lâm B", "b12345", "987-654-3210", 4 },
-                    { "22133015", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "e@student.com", "Trần E", "e12346", "987-654-3210", 5 }
+                    { "22110001", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "c@student.com", "Võ C", "c12345", "987-654-3210", null },
+                    { "22110010", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "d@student.com", "Nguyễn D", "d12345", "987-654-3210", null },
+                    { "22133010", new DateTime(2000, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "a@student.com", "Nguyễn A", "a12345", "123-456-7890", null },
+                    { "22133011", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "b@student.com", "Lâm B", "b12345", "987-654-3210", null },
+                    { "22133015", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "e@student.com", "Trần E", "e12346", "987-654-3210", null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Topics",
+                columns: new[] { "Id", "Category", "Description", "Function", "Name", "ProfessorId", "Requirement", "StudentId", "StudentQuantity", "Technology" },
+                values: new object[,]
+                {
+                    { 1, "Computer Science", "Introductory course on database design", "Access and query data", "Quản lý ngân ", "P1", "", null, 2, "SQL" },
+                    { 2, "Web Development", "Xây dựng website Quản lý công ty quy mô vừa và nhỏ", "Trả lương nhân viên. Giao Tasks theo các cấp.", "Quản lý công ty", "P1", "Đúng deadline, teamwork", null, 3, "ASP.NET Core" },
+                    { 3, "Data Science", "Exploring algorithms for predictive modeling", "Train model for project", "Machine Learning", "P2", "", null, 3, "Python" },
+                    { 4, "Data Science", "Description xyz", "", "Topic abc", "P2", "Requirement something here", null, 2, "Python" }
                 });
 
             migrationBuilder.CreateIndex(

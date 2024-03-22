@@ -21,6 +21,7 @@ namespace ThesisManagement.Views.Student
         {
             var comboBox = sender as HandyControl.Controls.CheckComboBox;
             var currentStudent = _studentRepo.GetStudent(SessionInfo.UserId);
+            var currStudentQuantity = 1;
             if (comboBox != null)
             {
                 var topicsViewModel = comboBox.DataContext as TopicsViewModel;
@@ -31,10 +32,12 @@ namespace ThesisManagement.Views.Student
                     foreach (var item in comboBox.SelectedItems)
                     {
                         topicsViewModel.SelectedStudents.Add(item as Models.Student);
+                        currStudentQuantity++;
                     }
-
                 }
             }
+            //if (currStudentQuantity > )
+            //    MessageBox.Show("Số lượng thành viên đăng kí vượt quá giới hạn cho phép");
         }
     }
 }

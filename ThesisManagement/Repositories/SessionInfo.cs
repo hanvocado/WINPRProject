@@ -15,10 +15,17 @@
             get { return role; }
             set { role = value; }
         }
+
+        public static void Clear()
+        {
+            UserId = "";
+            Role = Role.None;
+        }
     }
 
     public enum Role
     {
+        None,
         Professor,
         Student,
         Admin
