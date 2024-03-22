@@ -3,12 +3,11 @@
 namespace ThesisManagement.Views.Student
 {
     /// <summary>
-    /// Interaction logic for TopicView.xaml
+    /// Interaction logic for ChooseMembers.xaml
     /// </summary>
-
-    public partial class TopicView : Window
+    public partial class ChooseMembersView : Window
     {
-        public TopicView()
+        public ChooseMembersView()
         {
             InitializeComponent();
         }
