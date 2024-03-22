@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
 using System.Windows;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
@@ -292,7 +291,7 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteRegisterThesisCommand(object obj)
         {
-            RegisterTopicView registerView = new RegisterTopicView();
+            RegisterTopicView registerView = obj as RegisterTopicView;
             Thesis thesis = new Thesis
             {
                 TopicId = SelectedTopic.Id,
@@ -302,7 +301,7 @@ namespace ThesisManagement.ViewModels
             };
             var success = _thesisRepo.Add(thesis);
             ShowMessage(success, Message.RegisterSuccess, Message.RegisterFailed);
-            
+
             foreach (var student in SelectedStudents)
             {
                 student.ThesisId = thesis.Id;
