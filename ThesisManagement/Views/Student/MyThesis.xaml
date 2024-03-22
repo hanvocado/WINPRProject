@@ -19,10 +19,9 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
-            
             <RowDefinition Height="*"/>
-            
         </Grid.RowDefinitions>
+        
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"/>
@@ -46,61 +45,93 @@
                     Style="{StaticResource MaterialDesignUniformTabControl}">
                 <TabItem Header="Tổng quan">
                     <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
 
-                        <TextBlock Grid.Row="0"
-                                   Text="Giảng viên: "
-                                   Style="{StaticResource label}"
-                                   Margin="10"
-                                   FontWeight="Medium"/>
-                        
-                        <TextBlock Grid.Row="1"
-                                    Text="Thể loại: "
-                                    Style="{StaticResource label}"
-                                    Margin="10"
-                                    FontWeight="Medium"/>
-                        
-                        <TextBlock Grid.Row="2"
-                                    Text="Công nghệ"
-                                   Style="{StaticResource label}"
-                                    Margin="10"
-                                    FontWeight="Medium"/>
-                        
-                        <TextBlock Grid.Row="3"
-                                    Text="Thành viên "
-                                   Style="{StaticResource label}"
-                                    Margin="10"
-                                    FontWeight="Medium"/>
+                            <StackPanel Orientation="Vertical"
+                                        Grid.Row="0">
+                                <TextBlock Text="Giảng viên: "
+                                           Style="{StaticResource label}"
+                                           Margin="10"
+                                           FontWeight="Medium"/>
+                                <TextBlock Text="{Binding Thesis.Topic.Name}"
+                                           Height="40"
+                                           Margin="30,0,0,0"/>
+                            </StackPanel>
 
-                        
-                        <TextBlock Grid.Row="0"
-                                       Grid.Column="3"
-                                   Style="{StaticResource label}"
-                                       Text="Mô tả"
+                            <StackPanel Orientation="Vertical"
+                                        Grid.Row="1">
+                                <TextBlock Text="Thể loại: "
+                                            Style="{StaticResource label}"
+                                            Margin="10"
+                                            FontWeight="Medium"/>
+                                <TextBlock Text=""
+                                            Height="40"
+                                           Margin="30,0,0,0"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical"
+                                        Grid.Row="2">
+                                <TextBlock Text="Công nghệ: "
+                                       Style="{StaticResource label}"
+                                        Margin="10"
+                                        FontWeight="Medium"/>
+                                <TextBlock Text=""
+                                            Height="40"
+                                           Margin="30,0,0,0"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical"
+                                        Grid.Row="3">
+                                <TextBlock Text="Thành viên: "
+                                            Style="{StaticResource label}"
+                                            Margin="10"
+                                            FontWeight="Medium"/>
+                                <TextBlock Text=""
+                                            Height="40"
+                                           Margin="30,0,0,0"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Orientation="Vertical"
+                                        Grid.Row="0">
+                                <TextBlock Style="{StaticResource label}"
+                                       Text="Mô tả: "
                                        Margin="10"
                                        FontWeight="Medium"/>
+                                <TextBlock Text=""
+                                           Height="100"
+                                           Margin="10,0,0,0"/>
+                            </StackPanel>
 
-                         <TextBlock Grid.Row="1"
-                                    Style="{StaticResource label}"
-                                       Grid.Column="3"
-                                       Text="Yêu cầu"
-                                       Margin="10"
-                                       FontWeight="Medium"/>
-                        
-
+                            <StackPanel Orientation="Vertical"
+                                        Grid.Row="1">
+                                <TextBlock Style="{StaticResource label}"
+                                           Grid.Column="3"
+                                           Text="Yêu cầu: "
+                                           Margin="10"
+                                           FontWeight="Medium"/>
+                                <TextBlock Text=""
+                                           Height="110"
+                                           Margin="10,0,0,0"/>
+                            </StackPanel>
+                        </Grid>
                     </Grid>
                 </TabItem>
 

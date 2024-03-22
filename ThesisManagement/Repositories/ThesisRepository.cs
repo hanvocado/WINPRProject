@@ -74,7 +74,7 @@ namespace ThesisManagement.Repositories
             int currentQuantity = currentStudents.Count();
             bool waiting = _context.Theses.Include(tp => tp.Topic)
                                           .Where(th => th.Id == thesisId && th.TopicStatus == Variable.StatusTopic.Waiting)
-                                          .Any(th => th.Topic.StudentQuantity > currentQuantity);
+                                          .Any(th => th.Topic.StudentQuantity >= currentQuantity);
             return waiting;
         }
 

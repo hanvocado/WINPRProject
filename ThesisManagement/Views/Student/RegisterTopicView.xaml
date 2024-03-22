@@ -98,7 +98,7 @@
                             <TextBlock Text="Số sinh viên tối đa" Style="{StaticResource label}" />
                             <TextBox IsReadOnly="True"
                                     Height="40"
-                                        Text="{Binding SelectedTopic.StudentQuantity}"
+                                    Text="{Binding SelectedTopic.StudentQuantity}"
                                     VerticalAlignment="Top"
                                     Style="{StaticResource TextBoxExtend}" />
                         </StackPanel>
@@ -152,8 +152,7 @@
                                           DisplayMemberPath="DisplayName"
                                           SelectionChanged="CheckComboBox_SelectionChanged"
                                           Style="{StaticResource CheckComboBoxExtend}"
-                                          ItemsSource="{Binding Students}" >
-                        </hc:CheckComboBox>
+                                          ItemsSource="{Binding Students}" >                        </hc:CheckComboBox>
                     </StackPanel>
                 </Border>
 
