@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories.EF;
-using static ThesisManagement.Helpers.Query;
 
 namespace ThesisManagement.Repositories
 {
@@ -13,6 +12,7 @@ namespace ThesisManagement.Repositories
         ObservableCollection<Student> GetAll();
         ObservableCollection<Student> Get(string filter);
         Student GetStudent(string id);
+        Thesis? GetThesis(string studentId);
     }
     public class StudentRepository : IStudentRepository
     {
@@ -59,6 +59,14 @@ namespace ThesisManagement.Repositories
         {
             var student = _context.Students.Where(st => st.Id == id).FirstOrDefault();
             return student;
+        }
+
+        public Thesis? GetThesis(string studentId)
+        {
+            var student = _context.Students.Include(s => s.Thesis)
+                                            .ThenInclude(t => t.Topic)
+                                            .FirstOrDefault(s => s.Id == studentId);
+            return student?.Thesis;
         }
     }
 }

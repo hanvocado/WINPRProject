@@ -115,7 +115,7 @@ namespace ThesisManagement.Repositories.EF
                 {
                     Id = 1,
                     ProfessorId = "P1",
-                    Name = "Database Design",
+                    Name = "Quản lý ngân ",
                     Description = "Introductory course on database design",
                     Category = "Computer Science",
                     Technology = "SQL",
@@ -127,12 +127,12 @@ namespace ThesisManagement.Repositories.EF
                 {
                     Id = 2,
                     ProfessorId = "P1",
-                    Name = "Web Development",
-                    Description = "Building dynamic websites using ASP.NET Core",
+                    Name = "Quản lý công ty",
+                    Description = "Xây dựng website Quản lý công ty quy mô vừa và nhỏ",
                     Category = "Web Development",
                     Technology = "ASP.NET Core",
-                    Requirement = "",
-                    Function = "Add product to cart, pay order invoice",
+                    Requirement = "Đúng deadline, teamwork",
+                    Function = "Trả lương nhân viên. Giao Tasks theo các cấp.",
                     StudentQuantity = 3
                 },
                 new Topic
@@ -158,18 +158,6 @@ namespace ThesisManagement.Repositories.EF
                     Requirement = "Requirement something here",
                     Function = "",
                     StudentQuantity = 2
-                },
-                new Topic
-                {
-                    Id = 5,
-                    ProfessorId = "P2",
-                    Name = "Topic opq",
-                    Description = "Description xyz",
-                    Category = "Other",
-                    Technology = "Other",
-                    Requirement = "Requirement something here",
-                    Function = "",
-                    StudentQuantity = 2
                 }
             );
 
@@ -181,48 +169,48 @@ namespace ThesisManagement.Repositories.EF
 
             });
 
-            modelBuilder.Entity<Thesis>().HasData(
-                new Thesis
-                {
-                    Id = 1,
-                    TopicId = 2,
-                    TopicStatus = "Approved",
-                    File = null,
-                    Score = 8
-                },
-                new Thesis
-                {
-                    Id = 2,
-                    TopicId = 1,
-                    TopicStatus = "Waiting",
-                    File = null,
-                    Score = 9
-                },
-                new Thesis
-                {
-                    Id = 3,
-                    TopicId = 3,
-                    TopicStatus = "Rejected",
-                    File = null,
-                    Score = 10
-                },
-                new Thesis
-                {
-                    Id = 4,
-                    TopicId = 2,
-                    TopicStatus = "Waiting",
-                    File = null,
-                    Score = 10
-                },
-                new Thesis
-                {
-                    Id = 5,
-                    TopicId = 2,
-                    TopicStatus = "Waiting",
-                    File = null,
-                    Score = 10
-                }
-            );
+            //modelBuilder.Entity<Thesis>().HasData(
+            //    new Thesis
+            //    {
+            //        Id = 1,
+            //        TopicId = 2,
+            //        TopicStatus = "Approved",
+            //        File = null,
+            //        Score = 8
+            //    },
+            //    new Thesis
+            //    {
+            //        Id = 2,
+            //        TopicId = 1,
+            //        TopicStatus = "Waiting",
+            //        File = null,
+            //        Score = 9
+            //    },
+            //    new Thesis
+            //    {
+            //        Id = 3,
+            //        TopicId = 3,
+            //        TopicStatus = "Rejected",
+            //        File = null,
+            //        Score = 10
+            //    },
+            //    new Thesis
+            //    {
+            //        Id = 4,
+            //        TopicId = 2,
+            //        TopicStatus = "Waiting",
+            //        File = null,
+            //        Score = 10
+            //    },
+            //    new Thesis
+            //    {
+            //        Id = 5,
+            //        TopicId = 2,
+            //        TopicStatus = "Waiting",
+            //        File = null,
+            //        Score = 10
+            //    }
+            //);
 
             modelBuilder.Entity<Task>(entity =>
             {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories.EF;
 
@@ -13,10 +14,12 @@ namespace ThesisManagement.Repositories
         bool Delete(int id);
         Topic? Get(int id);
         ObservableCollection<Topic> GetAll();
+        ObservableCollection<Topic> GetProfessorTopics();
         ObservableCollection<Topic> GetAll(string professorId);
         ObservableCollection<Topic> GetByTopicName(string name);
-        public ObservableCollection<Topic> GetFilteredTopics(string category, string technology, string professorname);
+        ObservableCollection<Topic> GetFilteredTopics(string category, string technology, string professorname);
 
+        bool CanRegisterTopic(string studentId);
     }
 
     public class TopicRepository : ITopicRepository
@@ -69,7 +72,7 @@ namespace ThesisManagement.Repositories
 
         public ObservableCollection<Topic> GetFilteredTopics(string category, string technology, string professorname)
         {
-            IEnumerable<Topic> filteredTopicList = _context.Topics.Include(t => t.Professor);
+            IEnumerable<Topic> filteredTopicList = _context.Topics.Include(t => t.Professor).Where(t => String.IsNullOrEmpty(t.StudentId));
 
             if (category != null)
             {
@@ -108,6 +111,24 @@ namespace ThesisManagement.Repositories
         {
             var topics = _context.Topics.Include(t => t.Professor)
                                        .Include(t => t.Theses)
+                                       .AsNoTracking().ToList();
+            return new ObservableCollection<Topic>(topics);
+        }
+
+        public bool CanRegisterTopic(string studentId)
+        {
+            var student = _context.Students.Include(s => s.Thesis).FirstOrDefault(s => s.Id == studentId);
+            if (student == null || student.ThesisId <= 0 || student.Thesis?.TopicStatus == Variable.StatusTopic.Waiting)
+                return false;
+
+            return true;
+        }
+
+        public ObservableCollection<Topic> GetProfessorTopics()
+        {
+            var topics = _context.Topics.Include(t => t.Professor)
+                                       .Include(t => t.Theses)
+                                       .Where(t => String.IsNullOrEmpty(t.StudentId))
                                        .AsNoTracking().ToList();
             return new ObservableCollection<Topic>(topics);
         }
