@@ -14,7 +14,7 @@ namespace ThesisManagement.Repositories
         bool Delete(int id);
         Topic? Get(int id);
         ObservableCollection<Topic> GetAll();
-        ObservableCollection<Topic> GetProfessorTopics();
+        ObservableCollection<Topic> GetMyTopicsAndProfessorTopics(string studentId);
         ObservableCollection<Topic> GetAll(string professorId);
         ObservableCollection<Topic> GetByTopicName(string name);
         ObservableCollection<Topic> GetFilteredTopics(string category, string technology, string professorname);
@@ -124,12 +124,12 @@ namespace ThesisManagement.Repositories
             return true;
         }
 
-        public ObservableCollection<Topic> GetProfessorTopics()
+        public ObservableCollection<Topic> GetMyTopicsAndProfessorTopics(string studentId)
         {
             var topics = _context.Topics.Include(t => t.Professor)
                                        .Include(t => t.Theses)
-                                       .Where(t => String.IsNullOrEmpty(t.StudentId))
-                                       .AsNoTracking().ToList();
+                                       .Where(t => String.IsNullOrEmpty(t.StudentId) || t.StudentId == studentId)
+                                       .AsNoTracking().OrderByDescending(t => !String.IsNullOrEmpty(t.StudentId));
             return new ObservableCollection<Topic>(topics);
         }
     }

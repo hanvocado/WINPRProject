@@ -34,8 +34,8 @@ namespace ThesisManagement.Repositories.EF
                 {
                     Id = "P1",
                     Name = "Trần Văn Anh",
-                    Email = "anh@hcmute.vn.edu",
-                    Password = "12345",
+                    Email = "anh@hcmute.edu.vn",
+                    Password = "anh12345",
                     Phone = "123-456-7890",
                     Birthday = new DateTime(1980, 1, 1)
                 },
@@ -44,7 +44,16 @@ namespace ThesisManagement.Repositories.EF
                     Id = "P2",
                     Name = "Lê Nguyên",
                     Email = "lenguyen@gmail.com",
-                    Password = "54321",
+                    Password = "nguyen12345",
+                    Phone = "987-654-3210",
+                    Birthday = new DateTime(1975, 5, 15)
+                },
+                new Professor
+                {
+                    Id = "P3",
+                    Name = "Đặng Lâm",
+                    Email = "lam@hcmute.edu.vn",
+                    Password = "lam12345",
                     Phone = "987-654-3210",
                     Birthday = new DateTime(1975, 5, 15)
                 }
