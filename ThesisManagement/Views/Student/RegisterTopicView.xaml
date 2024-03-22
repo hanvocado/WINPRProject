@@ -152,8 +152,7 @@
                                           DisplayMemberPath="DisplayName"
                                           SelectionChanged="CheckComboBox_SelectionChanged"
                                           Style="{StaticResource CheckComboBoxExtend}"
-                                          ItemsSource="{Binding Students}" 
-                                          SelectedItem="{Binding SelectedStudents}">
+                                          ItemsSource="{Binding Students}">
                         </hc:CheckComboBox>
                     </StackPanel>
                 </Border>
