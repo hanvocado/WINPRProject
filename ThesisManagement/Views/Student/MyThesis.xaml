@@ -12,48 +12,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="900"
              Background="White">
-    <UserControl.Resources>
-        <Style x:Key="Button1Style" TargetType="Button">
-            <Setter Property="Background" Value="Green"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}" BorderBrush="Green" BorderThickness="1" CornerRadius="8">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="White"/>
-                    <Setter Property="Foreground" Value="Green"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-
-        <Style x:Key="Button2Style" TargetType="Button">
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="Foreground" Value="Green"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}" BorderBrush="Green" BorderThickness="1" CornerRadius="8">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="Green"/>
-                    <Setter Property="Foreground" Value="White"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </UserControl.Resources>
+    
+    <UserControl.DataContext>
+        <viewModels:MyThesisVM />
+    </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
@@ -70,9 +32,10 @@
                 <Image Source="/Resources/Images/UTE.png" Height="70" Width="70" Margin="10 0 0 0" />
             </Grid>
             <Border Grid.Column="1" Padding="0 0 20 0">
-                <TextBlock 
-                    Text="Đề tài : Ứng dụng bản đồ số xây dựng website tìm kiếm và cho thuê bất động sản khu vực Hà Nội " 
-                    Style="{StaticResource title}" />
+                <TextBlock Style="{StaticResource title}" HorizontalAlignment="Left" >
+                    <Run Text="Đề tài: "/>
+                    <Run Text="{Binding Thesis.Topic.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </TextBlock>
             </Border>
         </Grid>
         
@@ -99,33 +62,39 @@
 
 
                         <TextBlock Grid.Row="0"
-                                   Text="Giảng viên "
+                                   Text="Giảng viên: "
+                                   Style="{StaticResource label}"
                                    Margin="10"
                                    FontWeight="Medium"/>
                         
                         <TextBlock Grid.Row="1"
-                                    Text="Thể loại"
+                                    Text="Thể loại: "
+                                    Style="{StaticResource label}"
                                     Margin="10"
                                     FontWeight="Medium"/>
                         
                         <TextBlock Grid.Row="2"
                                     Text="Công nghệ"
+                                   Style="{StaticResource label}"
                                     Margin="10"
                                     FontWeight="Medium"/>
                         
                         <TextBlock Grid.Row="3"
                                     Text="Thành viên "
+                                   Style="{StaticResource label}"
                                     Margin="10"
                                     FontWeight="Medium"/>
 
                         
                         <TextBlock Grid.Row="0"
                                        Grid.Column="3"
+                                   Style="{StaticResource label}"
                                        Text="Mô tả"
                                        Margin="10"
                                        FontWeight="Medium"/>
 
                          <TextBlock Grid.Row="1"
+                                    Style="{StaticResource label}"
                                        Grid.Column="3"
                                        Text="Yêu cầu"
                                        Margin="10"

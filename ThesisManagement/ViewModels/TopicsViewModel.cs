@@ -280,7 +280,7 @@ namespace ThesisManagement.ViewModels
                 Topics = _topicRepo.GetAll(currentUserId);
             }
             else
-                Topics = _topicRepo.GetAll();
+                Topics = _topicRepo.GetProfessorTopics();
             Students = _studentRepo.GetAll();
             Professors = _professorRepo.GetAll();
             ProfessorCreateTopic = new ViewModelCommand(ExecuteProfessorCreateCommand);
