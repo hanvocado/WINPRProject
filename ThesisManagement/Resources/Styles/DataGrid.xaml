@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:customControls="clr-namespace:ThesisManagement.CustomControls">
 
     <Style x:Key="columnHeader" TargetType="DataGridColumnHeader">
         <Setter Property="Background" Value="white"/>
@@ -34,6 +35,23 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="#EFEFEF"/>
             </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="itemContainer" TargetType="{x:Type ListViewItem}">
+        <Style.BasedOn>
+            <StaticResource ResourceKey="{x:Type ListViewItem}" />
+        </Style.BasedOn>
+        
+        <Style.Resources>
+            <customControls:StringNullOrEmptyConverter x:Key="StringNullOrEmptyConverter"/>
+        </Style.Resources>
+
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding StudentId, Converter={StaticResource StringNullOrEmptyConverter}}"
+                                         Value="False">
+                <Setter Property="Background" Value="Yellow" />
+            </DataTrigger>
         </Style.Triggers>
     </Style>
 
