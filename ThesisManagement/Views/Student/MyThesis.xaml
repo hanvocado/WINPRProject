@@ -33,7 +33,7 @@
             <Border Grid.Column="1" Padding="0 0 20 0">
                 <TextBlock Style="{StaticResource title}" HorizontalAlignment="Left" >
                     <Run Text="Đề tài: "/>
-                    <Run Text="{Binding Thesis.Topic.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Run Text="{Binding Topic.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </TextBlock>
             </Border>
         </Grid>
@@ -64,7 +64,7 @@
                                            Style="{StaticResource label}"
                                            Margin="10"
                                            FontWeight="Medium"/>
-                                <TextBlock Text="{Binding Thesis.Topic.Name}"
+                                <TextBlock Text="{Binding Professor.Name}"
                                            Height="40"
                                            Margin="30,0,0,0"/>
                             </StackPanel>
@@ -75,7 +75,7 @@
                                             Style="{StaticResource label}"
                                             Margin="10"
                                             FontWeight="Medium"/>
-                                <TextBlock Text=""
+                                <TextBlock Text="{Binding Topic.Category}"
                                             Height="40"
                                            Margin="30,0,0,0"/>
                             </StackPanel>
@@ -86,7 +86,7 @@
                                        Style="{StaticResource label}"
                                         Margin="10"
                                         FontWeight="Medium"/>
-                                <TextBlock Text=""
+                                <TextBlock Text="{Binding Topic.Technology}"
                                             Height="40"
                                            Margin="30,0,0,0"/>
                             </StackPanel>
@@ -97,7 +97,7 @@
                                             Style="{StaticResource label}"
                                             Margin="10"
                                             FontWeight="Medium"/>
-                                <TextBlock Text=""
+                                <TextBlock Text="{Binding Student.Name}"
                                             Height="40"
                                            Margin="30,0,0,0"/>
                             </StackPanel>
@@ -115,7 +115,7 @@
                                        Text="Mô tả: "
                                        Margin="10"
                                        FontWeight="Medium"/>
-                                <TextBlock Text=""
+                                <TextBlock Text="{Binding Topic.Description}"
                                            Height="100"
                                            Margin="10,0,0,0"/>
                             </StackPanel>
@@ -127,7 +127,7 @@
                                            Text="Yêu cầu: "
                                            Margin="10"
                                            FontWeight="Medium"/>
-                                <TextBlock Text=""
+                                <TextBlock Text="{Binding Topic.Requirement}"
                                            Height="110"
                                            Margin="10,0,0,0"/>
                             </StackPanel>
