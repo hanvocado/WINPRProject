@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories.EF;
+using static ThesisManagement.Helpers.Query;
 
 namespace ThesisManagement.Repositories
 {
@@ -9,14 +10,23 @@ namespace ThesisManagement.Repositories
     {
         ObservableCollection<Professor> GetAll();
         IEnumerable<string> GetNames();
+        Professor? Get(string id);
     }
 
     public class ProfessorRepository : IProfessorRepository
     {
         private AppDbContext _context;
+        private Professor? professor;
+
         public ProfessorRepository()
         {
             _context = DataProvider.Instance.Context;
+        }
+
+        public Professor? Get(string id)
+        {
+            professor = _context.Professors.Include(pr => pr.Topics).FirstOrDefault(pr => pr.Id == id);
+            return professor;
         }
 
         public ObservableCollection<Professor> GetAll()
