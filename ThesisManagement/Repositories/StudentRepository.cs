@@ -12,6 +12,7 @@ namespace ThesisManagement.Repositories
         bool Update(Student student);
         ObservableCollection<Student> GetAll();
         ObservableCollection<Student> Get(string filter);
+        Student GetStudent(string id);
     }
     public class StudentRepository : IStudentRepository
     {
@@ -52,6 +53,12 @@ namespace ThesisManagement.Repositories
         {
             var students = _context.Students.Where(s => s.Name.Contains(filter, StringComparison.OrdinalIgnoreCase) || s.Id.Contains(filter, StringComparison.OrdinalIgnoreCase)).AsNoTracking().ToList();
             return new ObservableCollection<Student>(students);
+        }
+
+        public Student GetStudent(string id)
+        {
+            var student = _context.Students.Where(st => st.Id == id).FirstOrDefault();
+            return student;
         }
     }
 }

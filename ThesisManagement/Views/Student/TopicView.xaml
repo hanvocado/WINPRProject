@@ -47,7 +47,8 @@
                             Height="40"
                             VerticalAlignment="Top"
                              ToolTip="{Binding ElementName=Nametextbox,Path=(Validation.Errors)[0].ErrorContent}"
-                            Style="{StaticResource TextBoxExtend}" />
+                            Style="{StaticResource TextBoxExtend}" 
+                             Text="{Binding Name}"/>
                 </StackPanel>
             </Border>
             
@@ -103,7 +104,9 @@
                                       VerticalAlignment="Top"
                                       DisplayMemberPath="DisplayName"
                                       Style="{StaticResource CheckComboBoxExtend}"
-                                      ItemsSource="{Binding Students}" >
+                                      ItemsSource="{Binding Students}" 
+                                      SelectedItem="{Binding SelectedStudents}"
+                                      SelectionChanged="CheckComboBox_SelectionChanged">
                     </hc:CheckComboBox>
                 </StackPanel>
             </Border>
@@ -124,7 +127,7 @@
             
             <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
                               HoverColor="{StaticResource secondaryBrush}"
-                                          Command="{Binding RegisterNewTopic}"
+                              Command="{Binding RegisterNewTopicCommand}"
                               Content="Gửi"
                               Margin="0 -10 0 20"
                               Width="100"

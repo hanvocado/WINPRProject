@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
 using System.Windows;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
@@ -206,7 +205,7 @@ namespace ThesisManagement.ViewModels
         public ViewModelCommand DeleteCommand { get; set; }
         public ViewModelCommand SaveCommand { get; set; }
         public ViewModelCommand RegisterThesisCommand { get; set; }
-        public ViewModelCommand RegisterNewTopic { get; set; }
+        public ViewModelCommand RegisterNewTopicCommand { get; set; }
 
         public string CurrentUserId
         {
@@ -289,10 +288,10 @@ namespace ThesisManagement.ViewModels
             CreateOrUpdateCommand = new ViewModelCommand(ExecuteCreateOrUpdateCommand, CanCreateOrUpdateTopic);
             DeleteCommand = new ViewModelCommand(ExecuteDeleteCommand);
             RegisterThesisCommand = new ViewModelCommand(ExecuteRegisterThesisCommand);
-            RegisterNewTopic = new ViewModelCommand(ExecuteRegisterNewTopic);
+            RegisterNewTopicCommand = new ViewModelCommand(ExecuteRegisterNewTopicCommand);
         }
 
-        private void ExecuteRegisterNewTopic(object obj)
+        private void ExecuteRegisterNewTopicCommand(object obj)
         {
             if (IsTopicNotValid())
                 return;
@@ -303,15 +302,28 @@ namespace ThesisManagement.ViewModels
                 Id = id,
                 Name = name,
                 ProfessorId = professorId,
-                StudentId = studentId,
+                StudentId = currentUserId,
                 Category = category,
                 Technology = technology,
-                Description = description,
+                Description = description
             };
 
             var success = _topicRepo.Add(topic);
+            ShowMessage(success, Message.RegisterSuccess, Message.RegisterFailed);
 
-            //Xử lý tiếp tương tự ExcuteRegisterThesisCommand
+            Thesis thesis = new Thesis
+            {
+                TopicId = topic.Id,
+                TopicStatus = Variable.StatusTopic.Waiting,
+                File = null,
+                Score = 0
+            };
+            _thesisRepo.Add(thesis);
+            foreach (var student in SelectedStudents)
+            {
+                student.ThesisId = thesis.Id;
+                _studentRepo.Update(student);
+            }
 
             if (topicView != null)
                 topicView.Close();
@@ -331,9 +343,9 @@ namespace ThesisManagement.ViewModels
             };
             var success = _thesisRepo.Add(thesis);
             ShowMessage(success, Message.RegisterSuccess, Message.RegisterFailed);
+
             foreach (var student in SelectedStudents)
             {
-                Trace.WriteLine($"{student.Id}, {student.ThesisId}");
                 student.ThesisId = thesis.Id;
                 _studentRepo.Update(student);
             }
