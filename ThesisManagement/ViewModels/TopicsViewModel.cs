@@ -17,8 +17,8 @@ namespace ThesisManagement.ViewModels
         private readonly IStudentRepository _studentRepo;
         private readonly IThesisRepository _thesisRepo;
 
-        private readonly string currentUserId;
         private readonly Role currentUserRole;
+        private User currentUser;
 
         private Topic? selectedTopic;
         private List<Student> selectedStudents;
@@ -217,11 +217,6 @@ namespace ThesisManagement.ViewModels
         public ViewModelCommand ChooseMembersCommand { get; set; }
         public ViewModelCommand AddMembersCommand { get; set; }
 
-        public string CurrentUserId
-        {
-            get { return currentUserId; }
-        }
-
         public ObservableCollection<Topic> Topics
         {
             get { return topics; }
@@ -275,7 +270,6 @@ namespace ThesisManagement.ViewModels
 
         public TopicsViewModel()
         {
-            currentUserId = SessionInfo.UserId;
             currentUserRole = SessionInfo.Role;
             studentFilter = "";
             _topicRepo = new TopicRepository();
@@ -286,28 +280,38 @@ namespace ThesisManagement.ViewModels
 
             if (currentUserRole == Role.Professor)
             {
-                Topics = _topicRepo.GetAll(currentUserId);
+                Topics = _topicRepo.GetAll(SessionInfo.UserId);
             }
             else
-                Topics = _topicRepo.GetMyTopicsAndProfessorTopics(currentUserId);
+                Topics = _topicRepo.GetMyTopicsAndProfessorTopics(SessionInfo.UserId);
             Students = _studentRepo.GetAll();
             Professors = _professorRepo.GetAll();
             ProfessorCreateTopic = new ViewModelCommand(ExecuteProfessorCreateCommand);
-            StudentCreateTopic = new ViewModelCommand(ExecuteStudentCreateCommand);
+            StudentCreateTopic = new ViewModelCommand(ExecuteStudentCreateCommand, CanStudentRegisterTopic);
             CreateOrUpdateCommand = new ViewModelCommand(ExecuteCreateOrUpdateCommand, CanCreateOrUpdateTopic);
             DeleteCommand = new ViewModelCommand(ExecuteDeleteCommand);
-            RegisterThesisCommand = new ViewModelCommand(ExecuteRegisterThesisCommand);
-            RegisterNewTopicCommand = new ViewModelCommand(ExecuteRegisterNewTopicCommand);
-            ChooseMembersCommand = new ViewModelCommand(ExecuteChooseMembers);
+            RegisterThesisCommand = new ViewModelCommand(ExecuteRegisterThesisCommand, CanStudentRegisterTopic);
+            RegisterNewTopicCommand = new ViewModelCommand(ExecuteRegisterNewTopicCommand, CanStudentRegisterTopic);
+            ChooseMembersCommand = new ViewModelCommand(ExecuteChooseMembers, CanStudentRegisterTopic);
             AddMembersCommand = new ViewModelCommand(ExecuteAddMembers);
+        }
+
+        private bool CanStudentRegisterTopic(object obj)
+        {
+            return true;
+            var currentStudent = _studentRepo.GetStudent(SessionInfo.UserId);
+            return currentStudent.ThesisId <= 0 || currentStudent.Thesis.TopicStatus == Variable.StatusTopic.Rejected;
         }
 
         private void ExecuteAddMembers(object obj)
         {
             var members = Students.Where(s => s.IsSelected).ToList();
+            SelectedStudents.Clear();
+            SelectedStudents.Add((Student)currentUser);
+            SelectedStudentNames = currentUser.Name;
             foreach (var st in members)
             {
-                SelectedStudentNames += $"   {st.Id}";
+                SelectedStudentNames += $" - {st.Name}";
                 SelectedStudents.Add(st);
             }
             var chooseMembersView = obj as ChooseMembersView;
@@ -332,7 +336,7 @@ namespace ThesisManagement.ViewModels
                 Id = id,
                 Name = name,
                 ProfessorId = professorId,
-                StudentId = currentUserId,
+                StudentId = SessionInfo.UserId,
                 Category = category,
                 Technology = technology,
                 Description = description
@@ -397,7 +401,7 @@ namespace ThesisManagement.ViewModels
         {
             ProfessorTopicView topicView = new();
             ResetTopicProperties();
-            this.ProfessorId = currentUserId;
+            this.ProfessorId = SessionInfo.UserId;
             topicView.DataContext = this;
             topicView.Owner = Application.Current.MainWindow;
             topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -408,12 +412,13 @@ namespace ThesisManagement.ViewModels
         {
             StudentTopicView topicView = new();
             ResetTopicProperties();
-            this.StudentId = currentUserId;
+            this.StudentId = SessionInfo.UserId;
             topicView.DataContext = this;
 
-            var currentStudent = _studentRepo.GetStudent(SessionInfo.UserId);
-            SelectedStudents.Add(currentStudent);
-            SelectedStudentNames = currentStudent.Id;
+            currentUser = Students.FirstOrDefault(s => s.Id == SessionInfo.UserId);
+            Students.Remove((Student)currentUser);
+            SelectedStudents.Add((Student)currentUser);
+            SelectedStudentNames = currentUser.Name;
 
             topicView.Owner = Application.Current.MainWindow;
             topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -451,7 +456,7 @@ namespace ThesisManagement.ViewModels
                 ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
             }
 
-            Topics = _topicRepo.GetAll(currentUserId);
+            Topics = _topicRepo.GetAll(SessionInfo.UserId);
 
             topicView?.Close();
 
@@ -463,7 +468,7 @@ namespace ThesisManagement.ViewModels
         {
             var success = _topicRepo.Delete(id);
             ShowMessage(success, Message.DeleteSuccess, Message.DeleteFailed);
-            Topics = _topicRepo.GetAll(currentUserId);
+            Topics = _topicRepo.GetAll(SessionInfo.UserId);
         }
 
         private void FilterData()
