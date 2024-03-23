@@ -11,6 +11,7 @@ namespace ThesisManagement.Repositories
         List<Student> GetAll();
         List<Student> Get(string? filter);
         Student GetStudent(string id);
+        IEnumerable<Student> GetStudent(int thesisId);
         Thesis? GetThesis(string studentId);
     }
     public class StudentRepository : IStudentRepository
@@ -61,6 +62,12 @@ namespace ThesisManagement.Repositories
         {
             var student = _context.Students.Where(st => st.Id == id).FirstOrDefault();
             return student;
+        }
+
+        public IEnumerable<Student> GetStudent(int thesisId)
+        {
+            var students = _context.Students.Include(th => th.Thesis).Where(st => st.ThesisId == thesisId).ToList();
+            return students;
         }
 
         public Thesis? GetThesis(string studentId)

@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:ThesisManagement.Views.Student"
         xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
         xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         mc:Ignorable="d"
         xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
         Title="TopicView" Height="570" Width="600"
@@ -125,11 +126,20 @@
                 <StackPanel>
                     <TextBlock Text="Thành viên" Style="{StaticResource label}" />
                     <StackPanel Orientation="Horizontal">
-                        <TextBox Width="500" Margin="0 0 10 0" 
+                        <TextBox Width="480" Margin="0 0 10 0" 
+                                 IsReadOnly="True"
                                  Text="{Binding SelectedStudentNames, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <customControls:ControlButton Content="+" DefaultColor="{StaticResource success}"
+                        <customControls:ControlButton DefaultColor="{StaticResource success}"
+                                                      HoverColor="{StaticResource successHover}"
                                                       Command="{Binding ChooseMembersCommand}"
-                                                      Width="30"/>
+                                                      Width="40">
+                            <customControls:ControlButton.Content>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="+ " />
+                                    <fa:IconImage Icon="UserGroup" Style="{StaticResource btnIcon}" />
+                                </StackPanel>
+                            </customControls:ControlButton.Content>
+                        </customControls:ControlButton>
                     </StackPanel>
                 </StackPanel>
             </Border>

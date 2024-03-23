@@ -307,7 +307,7 @@ namespace ThesisManagement.ViewModels
             var members = Students.Where(s => s.IsSelected).ToList();
             foreach (var st in members)
             {
-                SelectedStudentNames += $"   {st.DisplayName}";
+                SelectedStudentNames += $"   {st.Id}";
                 SelectedStudents.Add(st);
             }
             var chooseMembersView = obj as ChooseMembersView;
@@ -413,7 +413,7 @@ namespace ThesisManagement.ViewModels
 
             var currentStudent = _studentRepo.GetStudent(SessionInfo.UserId);
             SelectedStudents.Add(currentStudent);
-            SelectedStudentNames = currentStudent.DisplayName;
+            SelectedStudentNames = currentStudent.Id;
 
             topicView.Owner = Application.Current.MainWindow;
             topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
