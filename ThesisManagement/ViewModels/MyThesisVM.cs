@@ -28,6 +28,14 @@ namespace ThesisManagement.ViewModels
             set { thesis = value; OnPropertyChanged(nameof(Thesis)); }
         }
 
+        private IEnumerable<Student> students;
+
+        public IEnumerable<Student> Students
+        {
+            get { return students; }
+            set { students = value; OnPropertyChanged(nameof(Students)); }
+        }
+
 
         public MyThesisVM()
         {
@@ -37,26 +45,7 @@ namespace ThesisManagement.ViewModels
             _studentRepo = new StudentRepository();
             Thesis = _studentRepo.GetThesis(SessionInfo.UserId) ?? new Thesis();
             Topic = _topicRepo.Get(Thesis.TopicId) ?? new Topic();
-
-            Trace.WriteLine("Thesis:");
-            Trace.WriteLine($"  Id: {Thesis.Id}");
-
-            Trace.WriteLine("Topic:");
-            Trace.WriteLine($"  Id: {Topic.Id}");
-            Trace.WriteLine($"  Name: {Topic.Name}");
-            Trace.WriteLine($"  Thể loại: {Topic.Category}");
-            Trace.WriteLine($"  Công nghệ: {Topic.Technology}");
-            Trace.WriteLine($"  Chức năng: {Topic.Function}");
-
-            Trace.WriteLine("Professor:");
-            Trace.WriteLine($"  Id: {Topic.ProfessorId}");
-            Trace.WriteLine($"  Name: {Topic.Professor.Name}");
-
-            Trace.WriteLine("Thành viên:");
-            foreach(var student in Thesis.Students)
-            {
-                Trace.WriteLine($"  Name: {student.Name}");
-            }
+            Students = _studentRepo.GetStudent(Thesis.Id)?.ToList() ?? new List<Student>();
 
         }
     }

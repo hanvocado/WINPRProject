@@ -14,11 +14,12 @@
              Background="White"
              FontSize="12">
 
-    <UserControl.DataContext>
-        <viewModels:MyThesisVM />
-    </UserControl.DataContext>
+    <UserControl.Resources>
+        <viewModels:MyThesisVM x:Key="MyThesisVM"/>
+        <customControls:CollectionToStringConverter x:Key="CollectionToStringConverter"/>
+    </UserControl.Resources>
 
-    <md:Card Background="{DynamicResource MaterialDesignPaper}" Margin="0,0,0,10">
+    <md:Card Background="{DynamicResource MaterialDesignPaper}" Margin="0,0,0,10" DataContext="{StaticResource MyThesisVM}">
         <Grid Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="70"/>
@@ -68,7 +69,7 @@
                                            Margin="10,5"
                                            FontWeight="Medium"/>
                                     <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,0,0"> 
-                                        <TextBlock Text="{Binding Professor.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        <TextBlock Text="{Binding Topic.Professor.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                            Height="30"
                                            Margin="10,5,0,0"/>
                                     </md:ColorZone>
@@ -107,7 +108,7 @@
                                             Margin="10,5"
                                             FontWeight="Medium"/>
                                     <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,0,20">
-                                        <TextBlock Text="{Binding Student.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        <TextBlock Text="{Binding Students, Converter={StaticResource CollectionToStringConverter}}"
                                                     Height="70"
                                                     Margin="15"/>
                                     </md:ColorZone>
