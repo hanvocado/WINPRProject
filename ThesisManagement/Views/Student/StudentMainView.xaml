@@ -72,7 +72,7 @@
                             <fa:IconImage Icon="Book" Style="{StaticResource navIcon}" />
                         </RadioButton>
                         
-                        <RadioButton Style="{StaticResource navBtn}">
+                        <RadioButton Style="{StaticResource navBtn}" Command="{Binding LogoutCommand}">
                             <RadioButton.ToolTip>
                                 <ToolTip Content="Đăng xuất" Style="{StaticResource navToolTip}" />
                             </RadioButton.ToolTip>

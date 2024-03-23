@@ -44,7 +44,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Width="110">
+                    <GridViewColumn Width="200">
                         <GridViewColumn.Header>
                             <GridViewColumnHeader Template="{StaticResource lvHeader}" />
                         </GridViewColumn.Header>

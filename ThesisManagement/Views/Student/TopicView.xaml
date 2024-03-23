@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:ThesisManagement.Views.Student"
         xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
         xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         mc:Ignorable="d"
         xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
         Title="TopicView" Height="570" Width="600"
@@ -62,6 +63,9 @@
                         <TextBlock Text="Thể loại"
                                    Style="{StaticResource label}" />
                         <ComboBox Grid.Row="1"
+                                  IsEditable="True"
+                                  IsTextSearchEnabled="True"
+                                  IsTextSearchCaseSensitive="False"
                                   VerticalAlignment="Top"
                                   Height="40"
                                   ItemsSource="{Binding Categories}"
@@ -74,6 +78,9 @@
                     <StackPanel>
                         <TextBlock Text="Công nghệ" Style="{StaticResource label}" />
                         <ComboBox Grid.Row="1"
+                                  IsEditable="True"
+                                  IsTextSearchEnabled="True"
+                                  IsTextSearchCaseSensitive="False"
                                   VerticalAlignment="Top"
                                   Height="40"
                                   ItemsSource="{Binding Technologies}"
@@ -86,28 +93,54 @@
             <Border Grid.Row="4" Padding="30 0">
                 <StackPanel>
                     <TextBlock Text="Giảng viên" Style="{StaticResource label}" />
-                    <ComboBox Grid.Row="1"
+                    <!--<ComboBox Grid.Row="1"
+                              IsEditable="True"
+                              IsTextSearchEnabled="True"
+                              IsTextSearchCaseSensitive="False"
                                 VerticalAlignment="Top"
                                 Height="40"
                               DisplayMemberPath="Name"
                               SelectedValuePath="Id"
                                 ItemsSource="{Binding Professors}"
                                 SelectedValue="{Binding ProfessorId}"
-                                Style="{StaticResource ComboBoxExtend}" />
+                                Style="{StaticResource ComboBoxExtend}" />-->
+                    <customControls:FilterComboBox  Height="40"
+                                                    ItemsSource="{Binding Professors}"
+                                                    SelectedValue="{Binding ProfessorId}"
+                                                    SelectedValuePath="Id"
+                                                    Style="{StaticResource ComboBoxExtend}"
+                                                    DisplayMemberPath="Name"
+                                                    IsEditable="True" 
+                                                    IsTextSearchEnabled="False" 
+                                                    StaysOpenOnEdit="True">
+                        <customControls:FilterComboBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel VirtualizationMode="Recycling" />
+                            </ItemsPanelTemplate>
+                        </customControls:FilterComboBox.ItemsPanel>
+                    </customControls:FilterComboBox>
                 </StackPanel>
             </Border>
 
             <Border Grid.Row="5" Padding="30 0">
                 <StackPanel>
                     <TextBlock Text="Thành viên" Style="{StaticResource label}" />
-                    <hc:CheckComboBox Height="40"
-                                      VerticalAlignment="Top"
-                                      DisplayMemberPath="DisplayName"
-                                      Style="{StaticResource CheckComboBoxExtend}"
-                                      ItemsSource="{Binding Students}" 
-                                      SelectedItem="{Binding SelectedStudents}"
-                                      SelectionChanged="CheckComboBox_SelectionChanged">
-                    </hc:CheckComboBox>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Width="480" Margin="0 0 10 0" 
+                                 IsReadOnly="True"
+                                 Text="{Binding SelectedStudentNames, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <customControls:ControlButton DefaultColor="{StaticResource success}"
+                                                      HoverColor="{StaticResource successHover}"
+                                                      Command="{Binding ChooseMembersCommand}"
+                                                      Width="40">
+                            <customControls:ControlButton.Content>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="+ " />
+                                    <fa:IconImage Icon="UserGroup" Style="{StaticResource btnIcon}" />
+                                </StackPanel>
+                            </customControls:ControlButton.Content>
+                        </customControls:ControlButton>
+                    </StackPanel>
                 </StackPanel>
             </Border>
 
@@ -128,6 +161,7 @@
             <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
                               HoverColor="{StaticResource secondaryBrush}"
                               Command="{Binding RegisterNewTopicCommand}"
+                                          CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
                               Content="Gửi"
                               Margin="0 -10 0 20"
                               Width="100"

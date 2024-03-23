@@ -32,5 +32,10 @@ namespace ThesisManagement.Models
         {
             get { return $"{Id} - {Name}"; }
         }
+
+        public override string ToString()
+        {
+            return DisplayName;
+        }
     }
 }

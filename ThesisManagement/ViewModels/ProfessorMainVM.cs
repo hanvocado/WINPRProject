@@ -1,4 +1,7 @@
-﻿using System.Windows.Input;
+﻿using System.Windows;
+using System.Windows.Input;
+using ThesisManagement.Repositories;
+using ThesisManagement.Views.Shared;
 
 namespace ThesisManagement.ViewModels
 {
@@ -20,6 +23,7 @@ namespace ThesisManagement.ViewModels
         public ICommand ShowStudentView { get; set; }
         public ICommand ShowThesisView { get; set; }
         public ICommand ShowProfessorProfileView { get; set; }
+        public ICommand LogoutCommand { get; set; }
 
         public ProfessorMainVM()
         {
@@ -27,8 +31,18 @@ namespace ThesisManagement.ViewModels
             ShowStudentView = new ViewModelCommand(ExecuteShowStudentView);
             ShowThesisView = new ViewModelCommand(ExecuteShowThesisView);
             ShowProfessorProfileView = new ViewModelCommand(ExcututeShowProfessorProfileView);
-
+            LogoutCommand = new ViewModelCommand(ExcuteLogout);
             ExecuteShowTopicsView(null);
+        }
+
+        private void ExcuteLogout(object obj)
+        {
+            var currentWindow = Application.Current.MainWindow;
+            var loginWindow = new LoginView();
+            Application.Current.MainWindow = loginWindow;
+            loginWindow.Show();
+            currentWindow.Close();
+            SessionInfo.Clear();
         }
 
         private void ExcututeShowProfessorProfileView(object obj)

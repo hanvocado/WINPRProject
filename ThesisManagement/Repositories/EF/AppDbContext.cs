@@ -34,8 +34,8 @@ namespace ThesisManagement.Repositories.EF
                 {
                     Id = "P1",
                     Name = "Trần Văn Anh",
-                    Email = "anh@hcmute.vn.edu",
-                    Password = "12345",
+                    Email = "anh@hcmute.edu.vn",
+                    Password = "anh12345",
                     Phone = "123-456-7890",
                     Birthday = new DateTime(1980, 1, 1)
                 },
@@ -44,7 +44,16 @@ namespace ThesisManagement.Repositories.EF
                     Id = "P2",
                     Name = "Lê Nguyên",
                     Email = "lenguyen@gmail.com",
-                    Password = "54321",
+                    Password = "nguyen12345",
+                    Phone = "987-654-3210",
+                    Birthday = new DateTime(1975, 5, 15)
+                },
+                new Professor
+                {
+                    Id = "P3",
+                    Name = "Đặng Lâm",
+                    Email = "lam@hcmute.edu.vn",
+                    Password = "lam12345",
                     Phone = "987-654-3210",
                     Birthday = new DateTime(1975, 5, 15)
                 }
@@ -54,7 +63,6 @@ namespace ThesisManagement.Repositories.EF
                 new Student
                 {
                     Id = "22133010",
-                    ThesisId = 2,
                     Name = "Nguyễn A",
                     Email = "a@student.com",
                     Password = "a12345",
@@ -64,7 +72,6 @@ namespace ThesisManagement.Repositories.EF
                 new Student
                 {
                     Id = "22133011",
-                    ThesisId = 4,
                     Name = "Lâm B",
                     Email = "b@student.com",
                     Password = "b12345",
@@ -74,7 +81,6 @@ namespace ThesisManagement.Repositories.EF
                 new Student
                 {
                     Id = "22110001",
-                    ThesisId = 4,
                     Name = "Võ C",
                     Email = "c@student.com",
                     Password = "c12345",
@@ -84,7 +90,6 @@ namespace ThesisManagement.Repositories.EF
                 new Student
                 {
                     Id = "22110010",
-                    ThesisId = 4,
                     Name = "Nguyễn D",
                     Email = "d@student.com",
                     Password = "d12345",
@@ -94,7 +99,6 @@ namespace ThesisManagement.Repositories.EF
                 new Student
                 {
                     Id = "22133015",
-                    ThesisId = 5,
                     Name = "Trần E",
                     Email = "e@student.com",
                     Password = "e12346",
