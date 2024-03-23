@@ -35,7 +35,7 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteShowThesisView(object? obj)
         {
-            CurrentChildView = new ThesesVM();
+            CurrentChildView = new MyThesisVM();
         }
 
         private void ExecuteShowTopicsView(object? obj)

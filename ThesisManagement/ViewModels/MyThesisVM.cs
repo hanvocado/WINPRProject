@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Windows;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
 
@@ -19,14 +20,6 @@ namespace ThesisManagement.ViewModels
             set { topic = value; OnPropertyChanged(nameof(Topic)); }
         }  
 
-        private Professor professor;
-
-        public Professor Professor
-        {
-            get { return professor; }
-            set { professor = value; OnPropertyChanged(nameof(Professor)); }
-        }
-
         private Thesis thesis;
 
         public Thesis Thesis
@@ -35,13 +28,6 @@ namespace ThesisManagement.ViewModels
             set { thesis = value; OnPropertyChanged(nameof(Thesis)); }
         }
 
-        private Student student;
-
-        public Student Student
-        {
-            get { return student; }
-            set { student = value; OnPropertyChanged(nameof(Student)); }
-        }
 
         public MyThesisVM()
         {
@@ -49,24 +35,28 @@ namespace ThesisManagement.ViewModels
             _professorRepo = new ProfessorRepository();
             _topicRepo = new TopicRepository();
             _studentRepo = new StudentRepository();
-            //Thesis = _studentRepo.GetThesis(SessionInfo.UserId) ?? new Thesis();
-            //Topic = _topicRepo.Get(Thesis.TopicId) ?? new Topic();
-            //Professor = _professorRepo.Get(Topic.ProfessorId) ?? new Professor();
+            Thesis = _studentRepo.GetThesis(SessionInfo.UserId) ?? new Thesis();
+            Topic = _topicRepo.Get(Thesis.TopicId) ?? new Topic();
 
             Trace.WriteLine("Thesis:");
-            thesis = _studentRepo.GetThesis(SessionInfo.UserId) ?? new Thesis();
-            Trace.WriteLine($"  Id: {thesis.Id}");
-         
+            Trace.WriteLine($"  Id: {Thesis.Id}");
 
             Trace.WriteLine("Topic:");
-            topic = _topicRepo.Get(thesis.TopicId) ?? new Topic();
-            Trace.WriteLine($"  Id: {topic.Id}");
-            Trace.WriteLine($"  Title: {topic.Name}");
+            Trace.WriteLine($"  Id: {Topic.Id}");
+            Trace.WriteLine($"  Name: {Topic.Name}");
+            Trace.WriteLine($"  Thể loại: {Topic.Category}");
+            Trace.WriteLine($"  Công nghệ: {Topic.Technology}");
+            Trace.WriteLine($"  Chức năng: {Topic.Function}");
 
             Trace.WriteLine("Professor:");
-            professor = _professorRepo.Get(topic.ProfessorId) ?? new Professor();
-            Trace.WriteLine($"  Id: {professor.Id}");
-            Trace.WriteLine($"  Name: {professor.Name}");
+            Trace.WriteLine($"  Id: {Topic.ProfessorId}");
+            Trace.WriteLine($"  Name: {Topic.Professor.Name}");
+
+            Trace.WriteLine("Thành viên:");
+            foreach(var student in Thesis.Students)
+            {
+                Trace.WriteLine($"  Name: {student.Name}");
+            }
 
         }
     }
