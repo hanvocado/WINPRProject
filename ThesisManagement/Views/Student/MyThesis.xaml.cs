@@ -11,7 +11,6 @@ namespace ThesisManagement.Views.Student
     {
         public MyThesis()
         {
-            InitializeComponent();
             YourTaskList = new ObservableCollection<_Task>
             {
                 new _Task { tieude = "Thiết kế giao diện", tiendo = "80%", start = "12/03/2024",end="12/04/2024" ,trangthai="Đã hoàn thành"},
@@ -24,6 +23,7 @@ namespace ThesisManagement.Views.Student
                 // Thêm các công việc khác vào đây
             };
             DataContext = this;
+            InitializeComponent();
         }
         private void ListViewItem_Click(object sender, RoutedEventArgs e)
         {

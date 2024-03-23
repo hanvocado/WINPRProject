@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Windows;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
 
@@ -19,14 +20,6 @@ namespace ThesisManagement.ViewModels
             set { topic = value; OnPropertyChanged(nameof(Topic)); }
         }  
 
-        private Professor professor;
-
-        public Professor Professor
-        {
-            get { return professor; }
-            set { professor = value; OnPropertyChanged(nameof(Professor)); }
-        }
-
         private Thesis thesis;
 
         public Thesis Thesis
@@ -35,13 +28,14 @@ namespace ThesisManagement.ViewModels
             set { thesis = value; OnPropertyChanged(nameof(Thesis)); }
         }
 
-        private Student student;
+        private IEnumerable<Student> students;
 
-        public Student Student
+        public IEnumerable<Student> Students
         {
-            get { return student; }
-            set { student = value; OnPropertyChanged(nameof(Student)); }
+            get { return students; }
+            set { students = value; OnPropertyChanged(nameof(Students)); }
         }
+
 
         public MyThesisVM()
         {
@@ -49,24 +43,9 @@ namespace ThesisManagement.ViewModels
             _professorRepo = new ProfessorRepository();
             _topicRepo = new TopicRepository();
             _studentRepo = new StudentRepository();
-            //Thesis = _studentRepo.GetThesis(SessionInfo.UserId) ?? new Thesis();
-            //Topic = _topicRepo.Get(Thesis.TopicId) ?? new Topic();
-            //Professor = _professorRepo.Get(Topic.ProfessorId) ?? new Professor();
-
-            Trace.WriteLine("Thesis:");
-            thesis = _studentRepo.GetThesis(SessionInfo.UserId) ?? new Thesis();
-            Trace.WriteLine($"  Id: {thesis.Id}");
-         
-
-            Trace.WriteLine("Topic:");
-            topic = _topicRepo.Get(thesis.TopicId) ?? new Topic();
-            Trace.WriteLine($"  Id: {topic.Id}");
-            Trace.WriteLine($"  Title: {topic.Name}");
-
-            Trace.WriteLine("Professor:");
-            professor = _professorRepo.Get(topic.ProfessorId) ?? new Professor();
-            Trace.WriteLine($"  Id: {professor.Id}");
-            Trace.WriteLine($"  Name: {professor.Name}");
+            Thesis = _studentRepo.GetThesis(SessionInfo.UserId) ?? new Thesis();
+            Topic = _topicRepo.Get(Thesis.TopicId) ?? new Topic();
+            Students = _studentRepo.GetStudent(Thesis.Id)?.ToList() ?? new List<Student>();
 
         }
     }

@@ -10,144 +10,183 @@
              xmlns:userControls="clr-namespace:ThesisManagement.Views.Student"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="900"
-             Background="White">
-    
-    <UserControl.DataContext>
-        <viewModels:MyThesisVM />
-    </UserControl.DataContext>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
-                <Image Source="/Resources/Images/UTE.png" Height="70" Width="70" Margin="10 0 0 0" />
-            </Grid>
-            <Border Grid.Column="1" Padding="0 0 20 0">
-                <TextBlock Style="{StaticResource title}" HorizontalAlignment="Left" >
+             d:DesignHeight="550" d:DesignWidth="800"
+             Background="White"
+             FontSize="12">
+
+    <UserControl.Resources>
+        <viewModels:MyThesisVM x:Key="MyThesisVM"/>
+        <customControls:CollectionToStringConverter x:Key="CollectionToStringConverter"/>
+    </UserControl.Resources>
+
+    <md:Card Background="{DynamicResource MaterialDesignPaper}" Margin="0,0,0,10" DataContext="{StaticResource MyThesisVM}">
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Image Source="/Resources/Images/UTE.png" Height="70" Width="70" />
+                </Grid>
+                <Border Grid.Column="1" Padding="0 0 20 0">
+                    <TextBlock Style="{StaticResource title}" HorizontalAlignment="Left" >
                     <Run Text="Đề tài: "/>
                     <Run Text="{Binding Topic.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                </TextBlock>
-            </Border>
-        </Grid>
-        
+                    </TextBlock>
+                </Border>
+            </Grid>
 
-        <Grid Grid.Row="1">
-            <TabControl 
+
+            <Grid Grid.Row="1">
+                <TabControl 
                     HorizontalContentAlignment="Left"
                     Style="{StaticResource MaterialDesignUniformTabControl}">
-                <TabItem Header="Tổng quan">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
+                    <TabItem Header="Tổng quan">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="280"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
 
-                        <Grid Grid.Column="0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
+                            <Grid Grid.Column="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="70"/>
+                                    <RowDefinition Height="70"/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
 
-                            <StackPanel Orientation="Vertical"
-                                        Grid.Row="0">
-                                <TextBlock Text="Giảng viên: "
+                                <StackPanel Orientation="Vertical"
+                                            Grid.Row="0">
+                                    <TextBlock Text="Giảng viên: "
                                            Style="{StaticResource label}"
-                                           Margin="10"
+                                           Margin="10,5"
                                            FontWeight="Medium"/>
-                                <TextBlock Text="{Binding Professor.Name}"
-                                           Height="40"
-                                           Margin="30,0,0,0"/>
-                            </StackPanel>
+                                    <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,0,0"> 
+                                        <TextBlock Text="{Binding Topic.Professor.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                           Height="30"
+                                           Margin="10,5,0,0"/>
+                                    </md:ColorZone>
+                                </StackPanel>
 
-                            <StackPanel Orientation="Vertical"
+                                <StackPanel Orientation="Vertical"
                                         Grid.Row="1">
-                                <TextBlock Text="Thể loại: "
+                                    <TextBlock Text="Thể loại: "
                                             Style="{StaticResource label}"
-                                            Margin="10"
+                                            Margin="10,5"
                                             FontWeight="Medium"/>
-                                <TextBlock Text="{Binding Topic.Category}"
-                                            Height="40"
-                                           Margin="30,0,0,0"/>
-                            </StackPanel>
+                                    <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,0,20">
+                                        <TextBlock Text="{Binding Topic.Category, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    Height="30"
+                                                    Margin="10,10,0,0"/>
+                                    </md:ColorZone>
+                                </StackPanel>
 
-                            <StackPanel Orientation="Vertical"
+                                <StackPanel Orientation="Vertical"
                                         Grid.Row="2">
-                                <TextBlock Text="Công nghệ: "
+                                    <TextBlock Text="Công nghệ: "
                                        Style="{StaticResource label}"
-                                        Margin="10"
+                                        Margin="10,5"
                                         FontWeight="Medium"/>
-                                <TextBlock Text="{Binding Topic.Technology}"
-                                            Height="40"
-                                           Margin="30,0,0,0"/>
-                            </StackPanel>
+                                    <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,0,20">
+                                        <TextBlock Text="{Binding Topic.Technology, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    Height="70"
+                                                    Margin="15"/>
+                                    </md:ColorZone>
+                                </StackPanel>
 
-                            <StackPanel Orientation="Vertical"
+                                <StackPanel Orientation="Vertical"
                                         Grid.Row="3">
-                                <TextBlock Text="Thành viên: "
+                                    <TextBlock Text="Thành viên: "
                                             Style="{StaticResource label}"
-                                            Margin="10"
+                                            Margin="10,5"
                                             FontWeight="Medium"/>
-                                <TextBlock Text="{Binding Student.Name}"
-                                            Height="40"
-                                           Margin="30,0,0,0"/>
-                            </StackPanel>
-                        </Grid>
+                                    <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,0,20">
+                                        <TextBlock Text="{Binding Students, Converter={StaticResource CollectionToStringConverter}}"
+                                                    Height="70"
+                                                    Margin="15"/>
+                                    </md:ColorZone>
+                                </StackPanel>
+                            </Grid>
 
-                        <Grid Grid.Column="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
+                            <Grid Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
 
-                            <StackPanel Orientation="Vertical"
-                                        Grid.Row="0">
-                                <TextBlock Style="{StaticResource label}"
-                                       Text="Mô tả: "
-                                       Margin="10"
-                                       FontWeight="Medium"/>
-                                <TextBlock Text="{Binding Topic.Description}"
-                                           Height="100"
-                                           Margin="10,0,0,0"/>
-                            </StackPanel>
+                                <StackPanel Orientation="Vertical"
+                                                    Grid.Row="0">
+                                    <TextBlock Style="{StaticResource label}"
+                                           Text="Mô tả: "
+                                           Margin="10,5"
+                                           FontWeight="Medium"/>
+                                    <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,10,10">
+                                        <ScrollViewer>
+                                            <TextBlock Text="{Binding Topic.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    Height="70"
+                                                    Margin="15"
+                                                    TextWrapping="Wrap"/>
+                                        </ScrollViewer>
+                                    </md:ColorZone> 
+                                </StackPanel>
 
-                            <StackPanel Orientation="Vertical"
+                                <StackPanel Orientation="Vertical"
                                         Grid.Row="1">
-                                <TextBlock Style="{StaticResource label}"
+                                    <TextBlock Style="{StaticResource label}"
+                                       Text="Chức năng:: "
+                                       Margin="10,5"
+                                       FontWeight="Medium"/>
+                                    <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,10,10">
+                                        <ScrollViewer>
+                                            <TextBlock Text="{Binding Topic.Function, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                     Height="70"
+                                                     Margin="15"
+                                                    TextWrapping="Wrap"/>
+                                        </ScrollViewer>
+                                    </md:ColorZone>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Vertical"
+                                        Grid.Row="2">
+                                    <TextBlock Style="{StaticResource label}"
                                            Grid.Column="3"
                                            Text="Yêu cầu: "
-                                           Margin="10"
+                                           Margin="10,5"
                                            FontWeight="Medium"/>
-                                <TextBlock Text="{Binding Topic.Requirement}"
-                                           Height="110"
-                                           Margin="10,0,0,0"/>
-                            </StackPanel>
+                                    <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,10,10">
+                                        <ScrollViewer>
+                                            <TextBlock Text="{Binding Topic.Requirement, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                     Height="70"
+                                                     Margin="15"
+                                                    TextWrapping="Wrap"/>
+                                        </ScrollViewer>
+                                    </md:ColorZone>
+                                </StackPanel>
+                            </Grid>
                         </Grid>
-                    </Grid>
-                </TabItem>
+                    </TabItem>
 
-                <TabItem Header="Nhiệm vụ">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
+                    <TabItem Header="Nhiệm vụ">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0"
                                     Orientation="Horizontal">
-                            <fa:IconImage Icon="Search"
+                                <fa:IconImage Icon="Search"
                                           Margin="0 4 5 0"
                                           Height="17" 
                                           Width="20"/>
-                            <ComboBox VerticalAlignment="Center"
+                                <ComboBox VerticalAlignment="Center"
                                       Padding="10"
                                       Margin="0,0,20,0"
                                       Width="200"
@@ -156,76 +195,77 @@
                                       md:HintAssist.Hint="Trạng thái"
                                       md:TextFieldAssist.HasClearButton="True"
                                       Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                                <ComboBoxItem>Đã hoàn thành</ComboBoxItem>
-                                <ComboBoxItem>Chưa hoàn thành</ComboBoxItem>
-                            </ComboBox>
-                        </StackPanel>
-                        
-                        <ListView Grid.Row="1"
+                                    <ComboBoxItem>Đã hoàn thành</ComboBoxItem>
+                                    <ComboBoxItem>Chưa hoàn thành</ComboBoxItem>
+                                </ComboBox>
+                            </StackPanel>
+
+                            <ListView Grid.Row="1"
                                 Name="AdminsListView"
                                 ItemsSource="{Binding YourTaskList}">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Width="50">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <customControls:ControlButton DefaultColor="#4fc3f7"
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Width="50">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <customControls:ControlButton DefaultColor="#4fc3f7"
                                                                                     HoverColor="#0093C4"
                                                                                     Width="30"
                                                                                     Margin="5 0 0 0"
                                                                                     Click="button_click">
-                                                        <customControls:ControlButton.Content>
-                                                            <fa:IconImage Icon="Pen" Style="{StaticResource btnIcon}" />
-                                                        </customControls:ControlButton.Content>
-                                                    </customControls:ControlButton>
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-                                    <GridViewColumn Width="150"
+                                                            <customControls:ControlButton.Content>
+                                                                <fa:IconImage Icon="Pen" Style="{StaticResource btnIcon}" />
+                                                            </customControls:ControlButton.Content>
+                                                        </customControls:ControlButton>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Width="150"
                                                     DisplayMemberBinding="{Binding tieude}" >
-                                        <GridViewColumn.Header>
-                                            <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Tiêu đề" />
-                                        </GridViewColumn.Header>
-                                    </GridViewColumn>
+                                            <GridViewColumn.Header>
+                                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Tiêu đề" />
+                                            </GridViewColumn.Header>
+                                        </GridViewColumn>
 
-                                    <GridViewColumn Width="100"
+                                        <GridViewColumn Width="100"
                     DisplayMemberBinding="{Binding tiendo}">
-                                        <GridViewColumn.Header>
-                                            <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Tiến độ" />
-                                        </GridViewColumn.Header>
-                                    </GridViewColumn>
+                                            <GridViewColumn.Header>
+                                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Tiến độ" />
+                                            </GridViewColumn.Header>
+                                        </GridViewColumn>
 
-                                    <GridViewColumn Width="150"
+                                        <GridViewColumn Width="150"
                     DisplayMemberBinding="{Binding start}">
-                                        <GridViewColumn.Header>
-                                            <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Ngày bắt đầu" />
-                                        </GridViewColumn.Header>
-                                    </GridViewColumn>
+                                            <GridViewColumn.Header>
+                                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Ngày bắt đầu" />
+                                            </GridViewColumn.Header>
+                                        </GridViewColumn>
 
-                                    <GridViewColumn Width="150"
+                                        <GridViewColumn Width="150"
                     DisplayMemberBinding="{Binding end}">
-                                        <GridViewColumn.Header>
-                                            <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Ngày kết thúc" />
-                                        </GridViewColumn.Header>
-                                    </GridViewColumn>
+                                            <GridViewColumn.Header>
+                                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Ngày kết thúc" />
+                                            </GridViewColumn.Header>
+                                        </GridViewColumn>
 
-                                    <GridViewColumn Width="100"
+                                        <GridViewColumn Width="100"
                     DisplayMemberBinding="{Binding trangthai}">
-                                        <GridViewColumn.Header>
-                                            <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Trạng thái" />
-                                        </GridViewColumn.Header>
-                                    </GridViewColumn>
+                                            <GridViewColumn.Header>
+                                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Trạng thái" />
+                                            </GridViewColumn.Header>
+                                        </GridViewColumn>
 
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
-                    </Grid>
-                    
-                </TabItem>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </Grid>
 
-            </TabControl>
+                    </TabItem>
+
+                </TabControl>
+            </Grid>
         </Grid>
-    </Grid>
+    </md:Card>
 </UserControl>
