@@ -29,10 +29,10 @@
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="5*"/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
-                    <Image Source="/Resources/Images/UTE.png" Height="70" Width="70" Margin="10 0 0 0" />
+                    <Image Source="/Resources/Images/UTE.png" Height="70" Width="70" />
                 </Grid>
                 <Border Grid.Column="1" Padding="0 0 20 0">
                     <TextBlock Style="{StaticResource title}" HorizontalAlignment="Left" >
@@ -125,12 +125,12 @@
                                 <StackPanel Orientation="Vertical"
                                                     Grid.Row="0">
                                     <TextBlock Style="{StaticResource label}"
-                                           Text="Chức năng: "
+                                           Text="Mô tả: "
                                            Margin="10,5"
                                            FontWeight="Medium"/>
                                     <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,10,10">
                                         <ScrollViewer>
-                                            <TextBlock Text="{Binding Topic.Function, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            <TextBlock Text="{Binding Topic.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                     Height="70"
                                                     Margin="15"
                                                     TextWrapping="Wrap"/>
@@ -141,12 +141,12 @@
                                 <StackPanel Orientation="Vertical"
                                         Grid.Row="1">
                                     <TextBlock Style="{StaticResource label}"
-                                       Text="Mô tả: "
+                                       Text="Chức năng:: "
                                        Margin="10,5"
                                        FontWeight="Medium"/>
                                     <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,10,10">
                                         <ScrollViewer>
-                                            <TextBlock Text="{Binding Topic.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            <TextBlock Text="{Binding Topic.Function, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                      Height="70"
                                                      Margin="15"
                                                     TextWrapping="Wrap"/>
