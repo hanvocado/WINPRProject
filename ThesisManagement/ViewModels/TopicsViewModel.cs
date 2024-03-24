@@ -139,7 +139,7 @@ namespace ThesisManagement.ViewModels
 
         private int studentQuantity;
 
-        [Range(1, 5)]
+        [Range(1, 5, ErrorMessage = "Số lượng từ 1 đến 5")]
         public int StudentQuantity
         {
             get { return studentQuantity; }

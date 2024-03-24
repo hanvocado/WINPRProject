@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using HandyControl.Controls;
+using HandyControl.Data;
+using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
-using System.Windows;
+using ThesisManagement.Views.Shared;
 
 namespace ThesisManagement.ViewModels
 {
@@ -54,9 +56,15 @@ namespace ThesisManagement.ViewModels
         public void ShowMessage(bool success, string successMessage, string failedMessage)
         {
             if (success)
-                MessageBox.Show(successMessage);
+            {
+                var notif = new SuccessNotify(successMessage);
+                Notification.Show(notif, ShowAnimation.HorizontalMove, false);
+            }
             else
-                MessageBox.Show(failedMessage);
+            {
+                var notif = new FailedNotify(failedMessage);
+                Notification.Show(notif, ShowAnimation.HorizontalMove, false);
+            }
         }
     }
 }

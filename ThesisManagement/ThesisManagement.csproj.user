@@ -192,6 +192,9 @@
     <Page Update="Views\Shared\LoginView.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\Shared\FailedNotify.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Student\ChooseMembers.xaml">
       <SubType>Designer</SubType>
     </Page>

@@ -47,7 +47,7 @@
                     <StackPanel>
                         <TextBlock Text="Tên đề tài" Style="{StaticResource label}" />
                         <TextBox Grid.Row="0"
-                                Height="40"
+                                Height="35"
                                 VerticalAlignment="Top"
                                 Style="{StaticResource TextBoxExtend}" 
                                 Text="{Binding Name}"/>
@@ -67,7 +67,7 @@
                                 Style="{StaticResource label}" />
                             <ComboBox Grid.Row="1"
                                 VerticalAlignment="Top"
-                                Height="40"
+                                Height="35"
                                 ItemsSource="{Binding Categories}"
                                 SelectedValue="{Binding Category}" 
                                 Style="{StaticResource ComboBoxExtend}"/>
@@ -79,7 +79,7 @@
                             <TextBlock Text="Công nghệ" Style="{StaticResource label}" />
                             <ComboBox Grid.Row="1"
                                 VerticalAlignment="Top"
-                                Height="40"
+                                Height="35"
                                 ItemsSource="{Binding Technologies}"
                                 SelectedValue="{Binding Technology}"
                                 Style="{StaticResource ComboBoxExtend}" />
@@ -90,7 +90,7 @@
                         <StackPanel>
                             <TextBlock Text="Số sinh viên tối đa" Style="{StaticResource label}" />
                             <TextBox Grid.Row="0"
-                                    Height="40"
+                                    Height="35"
                                         Text="{Binding StudentQuantity}"
                                     VerticalAlignment="Top"
                                     Style="{StaticResource TextBoxExtend}" />
@@ -103,7 +103,7 @@
                         <TextBlock Text="Mô tả" Style="{StaticResource label}" />
                         <TextBox  VerticalAlignment="Top"
                                   Text="{Binding Description,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                  Height="90"
+                                  Height="85"
                                   AcceptsReturn="True"
                                   TextWrapping="Wrap"
                                   VerticalScrollBarVisibility="Auto" />
@@ -116,7 +116,7 @@
                         <TextBox
                                   VerticalAlignment="Top"
                                   Text="{Binding Requirement,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                  Height="90"
+                                  Height="85"
                                   AcceptsReturn="True"
                                   TextWrapping="Wrap"
                                   VerticalScrollBarVisibility="Auto" />
@@ -129,7 +129,7 @@
                         <TextBox
                                   VerticalAlignment="Top"
                                   Text="{Binding Function,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                  Height="90"
+                                  Height="85"
                                   AcceptsReturn="True"
                                   TextWrapping="Wrap"
                                   VerticalScrollBarVisibility="Auto" />
