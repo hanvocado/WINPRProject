@@ -16,6 +16,7 @@
 
     <Grid>
         <ListView Grid.Row="1"
+                  Background="{DynamicResource MaterialDesignPaper}"
           Name="ThesisListView"
           MouseLeftButtonUp="ListViewItem_MouseEnter"
           ItemsSource="{Binding Theses, UpdateSourceTrigger=PropertyChanged}"

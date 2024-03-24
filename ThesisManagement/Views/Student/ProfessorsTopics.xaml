@@ -85,6 +85,7 @@
 
                        <!--ItemContainerStyle="{StaticResource itemContainer}"--> 
             <ListView Grid.Row="1"
+                      Background="{DynamicResource MaterialDesignPaper}"
             Name="TopicsListView"
             ItemsSource="{Binding Topics,  UpdateSourceTrigger=PropertyChanged}"
             MouseLeftButtonUp="ListViewItem_Click"

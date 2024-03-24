@@ -66,6 +66,7 @@
             <ListView Grid.Row="1"
                       MouseLeftButtonUp="ListViewItem_Click"
                       Name="TopicListView"
+                      Background="{DynamicResource MaterialDesignPaper}"
                       ItemsSource="{Binding Topics, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding SelectedTopic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ListView.View>
