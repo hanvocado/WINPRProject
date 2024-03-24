@@ -298,6 +298,7 @@ namespace ThesisManagement.ViewModels
 
         private bool CanStudentRegisterTopic(object obj)
         {
+            return true;
             return _studentRepo.CanRegisterTopic(SessionInfo.UserId);
         }
 
@@ -305,12 +306,18 @@ namespace ThesisManagement.ViewModels
         {
             var members = Students.Where(s => s.IsSelected).ToList();
             SelectedStudents.Clear();
-            SelectedStudents.Add((Student)currentUser);
-            SelectedStudentNames = currentUser.Name;
+            var currentStudent = _studentRepo.GetStudent(SessionInfo.UserId);
+            SelectedStudents.Add(currentStudent);
+            SelectedStudentNames = SessionInfo.Name;
             foreach (var st in members)
             {
                 SelectedStudentNames += $" - {st.Name}";
                 SelectedStudents.Add(st);
+            }
+            if (selectedStudents.Count > selectedTopic?.StudentQuantity)
+            {
+                ShowMessage(false, "", Message.ExceedStudentQuantity);
+                return;
             }
             var chooseMembersView = obj as ChooseMembersView;
             chooseMembersView?.Close();
@@ -368,6 +375,11 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteRegisterThesisCommand(object obj)
         {
+            if (selectedStudents.Count > selectedTopic?.StudentQuantity)
+            {
+                ShowMessage(false, "", Message.ExceedStudentQuantity);
+                return;
+            }
             RegisterTopicView registerView = obj as RegisterTopicView;
             Thesis thesis = new Thesis
             {
@@ -376,13 +388,15 @@ namespace ThesisManagement.ViewModels
                 File = null,
             };
             var success = _thesisRepo.Add(thesis);
-            ShowMessage(success, Message.RegisterSuccess, Message.RegisterFailed);
 
-            foreach (var student in SelectedStudents)
-            {
-                student.ThesisId = thesis.Id;
-                _studentRepo.Update(student);
-            }
+            if (success)
+                foreach (var student in SelectedStudents)
+                {
+                    student.ThesisId = thesis.Id;
+                    success = _studentRepo.Update(student);
+                }
+
+            ShowMessage(success, Message.RegisterSuccess, Message.RegisterFailed);
 
             registerView?.Close();
 

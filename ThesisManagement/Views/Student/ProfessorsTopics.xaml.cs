@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using ThesisManagement.Models;
+using ThesisManagement.Repositories;
 using ThesisManagement.ViewModels;
 
 namespace ThesisManagement.Views.Student
@@ -31,7 +32,7 @@ namespace ThesisManagement.Views.Student
                     currenTopicView.Close();
                 }
 
-                this.DataContext = new TopicsViewModel
+                var vm = new TopicsViewModel
                 {
                     SelectedTopic = new Topic
                     {
@@ -51,6 +52,11 @@ namespace ThesisManagement.Views.Student
                         Function = topic.Function
                     }
                 };
+                this.DataContext = vm;
+                var currentUser = vm.Students.FirstOrDefault(s => s.Id == SessionInfo.UserId);
+                vm.Students.Remove(currentUser);
+                vm.SelectedStudents.Add(currentUser);
+                vm.SelectedStudentNames = currentUser.Name;
 
                 registerTopic.DataContext = this.DataContext;
                 registerTopic.Owner = Application.Current.MainWindow;

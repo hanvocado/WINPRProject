@@ -7,7 +7,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:sf="http://schemas.syncfusion.com/wpf"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
              mc:Ignorable="d" 
@@ -147,25 +147,36 @@
                 <Border Grid.Row="7" Padding="30 0">
                     <StackPanel>
                         <TextBlock Text="Thành viên" Style="{StaticResource label}" />
-                        <hc:CheckComboBox Height="40"
-                                          VerticalAlignment="Top"
-                                          DisplayMemberPath="DisplayName"
-                                          SelectionChanged="CheckComboBox_SelectionChanged"
-                                          Style="{StaticResource CheckComboBoxExtend}"
-                                          ItemsSource="{Binding Students}" >                        </hc:CheckComboBox>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Width="480" Margin="0 0 10 0" 
+                                     IsReadOnly="True"
+                                     Text="{Binding SelectedStudentNames, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <customControls:ControlButton DefaultColor="{StaticResource success}"
+                                  HoverColor="{StaticResource successHover}"
+                                  Command="{Binding ChooseMembersCommand}"
+                                  Width="40">
+                                <customControls:ControlButton.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="+ " />
+                                        <fa:IconImage Icon="UserGroup" Style="{StaticResource btnIcon}" />
+                                    </StackPanel>
+                                </customControls:ControlButton.Content>
+                            </customControls:ControlButton>
+                        </StackPanel>
                     </StackPanel>
                 </Border>
 
                 <Grid Grid.Row="8" >
 
                     <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
-                              HoverColor="{StaticResource secondaryBrush}"
-                              Content="Đăng kí"
-                              Width="100"
-                              Height="50"
-                              FontSize="14"
-                              Command="{Binding RegisterThesisCommand}"
-                              Grid.Row="3"/>
+                                                  CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                                                HoverColor="{StaticResource secondaryBrush}"
+                                                Content="Đăng kí"
+                                                Width="100"
+                                                Height="50"
+                                                FontSize="14"
+                                                Command="{Binding RegisterThesisCommand}"
+                                                Grid.Row="3"/>
                 </Grid>
             </Grid>
         </Border>

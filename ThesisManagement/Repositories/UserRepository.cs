@@ -25,6 +25,7 @@ namespace ThesisManagement.Repositories
             if (user != null)
             {
                 SessionInfo.UserId = user.Id;
+                SessionInfo.Name = user.Name;
                 SessionInfo.Role = Role.Student;
                 return true;
             }
@@ -33,6 +34,7 @@ namespace ThesisManagement.Repositories
             if (user != null)
             {
                 SessionInfo.UserId = user.Id;
+                SessionInfo.Name = user.Name;
                 SessionInfo.Role = Role.Professor;
                 return true;
             }
@@ -41,6 +43,7 @@ namespace ThesisManagement.Repositories
             if (user != null)
             {
                 SessionInfo.UserId = user.Id;
+                SessionInfo.Name = user.Name;
                 SessionInfo.Role = Role.Admin;
                 return true;
             }

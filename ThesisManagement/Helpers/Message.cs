@@ -14,5 +14,7 @@
 
         public static string Approve = "Đã duyệt luận văn";
         public static string Reject = "Đã từ chối luận văn";
+
+        public static string ExceedStudentQuantity = "Vượt quá số lượng sinh viên tối đa!";
     }
 }

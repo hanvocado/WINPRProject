@@ -93,17 +93,6 @@
             <Border Grid.Row="4" Padding="30 0">
                 <StackPanel>
                     <TextBlock Text="Giảng viên" Style="{StaticResource label}" />
-                    <!--<ComboBox Grid.Row="1"
-                              IsEditable="True"
-                              IsTextSearchEnabled="True"
-                              IsTextSearchCaseSensitive="False"
-                                VerticalAlignment="Top"
-                                Height="40"
-                              DisplayMemberPath="Name"
-                              SelectedValuePath="Id"
-                                ItemsSource="{Binding Professors}"
-                                SelectedValue="{Binding ProfessorId}"
-                                Style="{StaticResource ComboBoxExtend}" />-->
                     <customControls:FilterComboBox  Height="40"
                                                     ItemsSource="{Binding Professors}"
                                                     SelectedValue="{Binding ProfessorId}"
