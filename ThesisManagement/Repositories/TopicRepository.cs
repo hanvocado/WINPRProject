@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories.EF;
 
@@ -19,7 +18,7 @@ namespace ThesisManagement.Repositories
         ObservableCollection<Topic> GetByTopicName(string name);
         ObservableCollection<Topic> GetFilteredTopics(string category, string technology, string professorname);
 
-        bool CanRegisterTopic(string studentId);
+        bool CanBeDeleted(int topicId);
     }
 
     public class TopicRepository : ITopicRepository
@@ -115,15 +114,6 @@ namespace ThesisManagement.Repositories
             return new ObservableCollection<Topic>(topics);
         }
 
-        public bool CanRegisterTopic(string studentId)
-        {
-            var student = _context.Students.Include(s => s.Thesis).FirstOrDefault(s => s.Id == studentId);
-            if (student == null || student.ThesisId <= 0 || student.Thesis?.TopicStatus == Variable.StatusTopic.Waiting)
-                return false;
-
-            return true;
-        }
-
         public ObservableCollection<Topic> GetMyTopicsAndProfessorTopics(string studentId)
         {
             var topics = _context.Topics.Include(t => t.Professor)
@@ -131,6 +121,12 @@ namespace ThesisManagement.Repositories
                                        .Where(t => String.IsNullOrEmpty(t.StudentId) || t.StudentId == studentId)
                                        .AsNoTracking().OrderByDescending(t => !String.IsNullOrEmpty(t.StudentId));
             return new ObservableCollection<Topic>(topics);
+        }
+
+        public bool CanBeDeleted(int topicId)
+        {
+            bool hasStudents = _context.Theses.FirstOrDefault(t => t.TopicId == topicId) != null;
+            return !hasStudents;
         }
     }
 }

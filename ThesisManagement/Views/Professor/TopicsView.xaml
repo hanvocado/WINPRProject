@@ -100,6 +100,7 @@
                                         <customControls:ControlButton DefaultColor="{StaticResource danger}"
                                                                       HoverColor="{StaticResource dangerHover}"
                                                                       Width="30"
+                                                                      CommandParameter="{Binding Id}"
                                                                       Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
                                             <customControls:ControlButton.Content>
                                                 <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />

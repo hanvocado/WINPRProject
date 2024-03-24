@@ -289,7 +289,7 @@ namespace ThesisManagement.ViewModels
             ProfessorCreateTopic = new ViewModelCommand(ExecuteProfessorCreateCommand);
             StudentCreateTopic = new ViewModelCommand(ExecuteStudentCreateCommand, CanStudentRegisterTopic);
             CreateOrUpdateCommand = new ViewModelCommand(ExecuteCreateOrUpdateCommand, CanCreateOrUpdateTopic);
-            DeleteCommand = new ViewModelCommand(ExecuteDeleteCommand);
+            DeleteCommand = new ViewModelCommand(ExecuteDeleteCommand, CanExecuteDelete);
             RegisterThesisCommand = new ViewModelCommand(ExecuteRegisterThesisCommand, CanStudentRegisterTopic);
             RegisterNewTopicCommand = new ViewModelCommand(ExecuteRegisterNewTopicCommand, CanStudentRegisterTopic);
             ChooseMembersCommand = new ViewModelCommand(ExecuteChooseMembers, CanStudentRegisterTopic);
@@ -298,9 +298,7 @@ namespace ThesisManagement.ViewModels
 
         private bool CanStudentRegisterTopic(object obj)
         {
-            return true;
-            var currentStudent = _studentRepo.GetStudent(SessionInfo.UserId);
-            return currentStudent.ThesisId <= 0 || currentStudent.Thesis.TopicStatus == Variable.StatusTopic.Rejected;
+            return _studentRepo.CanRegisterTopic(SessionInfo.UserId);
         }
 
         private void ExecuteAddMembers(object obj)
@@ -469,6 +467,12 @@ namespace ThesisManagement.ViewModels
             var success = _topicRepo.Delete(id);
             ShowMessage(success, Message.DeleteSuccess, Message.DeleteFailed);
             Topics = _topicRepo.GetAll(SessionInfo.UserId);
+        }
+
+        private bool CanExecuteDelete(object parameter)
+        {
+            int id = (int)parameter;
+            return _topicRepo.CanBeDeleted(id);
         }
 
         private void FilterData()

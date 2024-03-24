@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories.EF;
 
@@ -13,6 +14,8 @@ namespace ThesisManagement.Repositories
         Student GetStudent(string id);
         IEnumerable<Student> GetStudent(int thesisId);
         Thesis? GetThesis(string studentId);
+        bool CanRegisterTopic(string studentId);
+
     }
     public class StudentRepository : IStudentRepository
     {
@@ -76,6 +79,15 @@ namespace ThesisManagement.Repositories
                                             .ThenInclude(t => t.Topic)
                                             .FirstOrDefault(s => s.Id == studentId);
             return student?.Thesis;
+        }
+
+        public bool CanRegisterTopic(string studentId)
+        {
+            var student = _context.Students.Include(s => s.Thesis).FirstOrDefault(s => s.Id == studentId);
+            if (student == null || student.Thesis?.TopicStatus != Variable.StatusTopic.Rejected)
+                return false;
+
+            return true;
         }
     }
 }

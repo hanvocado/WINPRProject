@@ -1,13 +1,9 @@
-﻿using static ThesisManagement.Helpers.Variable;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories.EF;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.ObjectModel;
-using static ThesisManagement.Helpers.Query;
-using System.Diagnostics;
-using System.Windows;
-using System.Linq.Expressions;
 
 namespace ThesisManagement.Repositories
 {
@@ -16,12 +12,10 @@ namespace ThesisManagement.Repositories
         bool Add(Thesis thesis);
         bool Update(Thesis thesis);
         IEnumerable<Thesis> GetAll();
-        IEnumerable<Thesis> Get(string userId,string topicStatus);
+        IEnumerable<Thesis> Get(string userId, string topicStatus);
         IEnumerable<Thesis> Get(int topicId, string topicStatus);
         IEnumerable<Student> GetMembers(int thesisId);
         bool CanRegisterTopic(int thesisId);
-
-        //void AddMembers(int topicId, IEnumerable<Student> members);
     }
     public class ThesisRepository : IThesisRepository
     {
