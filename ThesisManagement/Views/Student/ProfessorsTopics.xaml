@@ -83,13 +83,13 @@
 
         <Border Grid.Row="1" >
 
-                       <!--ItemContainerStyle="{StaticResource itemContainer}"--> 
             <ListView Grid.Row="1"
+                      ItemContainerStyle="{StaticResource lvItem}" 
                       Background="{DynamicResource MaterialDesignPaper}"
-            Name="TopicsListView"
-            ItemsSource="{Binding Topics,  UpdateSourceTrigger=PropertyChanged}"
-            MouseLeftButtonUp="ListViewItem_Click"
-            SelectedItem="{Binding SelectedTopic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    Name="TopicsListView"
+                    ItemsSource="{Binding Topics,  UpdateSourceTrigger=PropertyChanged}"
+                    MouseLeftButtonUp="ListViewItem_Click"
+                    SelectedItem="{Binding SelectedTopic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Width="330"

@@ -2,22 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:customControls="clr-namespace:ThesisManagement.CustomControls">
 
-    <Style x:Key="columnHeader" TargetType="DataGridColumnHeader">
-        <Setter Property="Background" Value="white"/>
-        <Setter Property="Padding" Value="10,0,0,10"/>
-        <Setter Property="FontFamily" Value="Montserrat"/>
-        <Setter Property="FontSize" Value="15"/>
-    </Style>
-
-    <Style TargetType="{x:Type ListViewItem}">
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#EFEFEF" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
     <ControlTemplate x:Key="lvHeader" TargetType="GridViewColumnHeader">
         <Grid Background="#6ccb5f" Height="40">
             <TextBlock Background="#6ccb5f" Foreground="White" Padding="10 0"
@@ -27,27 +11,19 @@
         </Grid>
     </ControlTemplate>
 
-    <Style TargetType="{x:Type GridViewColumnHeader}">
-        <Setter Property="Foreground" Value="DarkGray"/>
-        <Setter Property="Background" Value="#EFEFEF"/>
-        <Setter Property="FontWeight" Value="DemiBold"/>
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#EFEFEF"/>
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
-    <Style x:Key="itemContainer" TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource {x:Type ListViewItem}}">
+    <Style x:Key="lvItem" TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource ListViewItemBaseStyle}">
         <Style.Resources>
-            <customControls:StringNullOrEmptyConverter x:Key="StringNullOrEmptyConverter"/>
+            <customControls:StringNullOrEmptyConverter x:Key="StringNullOrEmptyConverter" />
         </Style.Resources>
-
         <Style.Triggers>
             <DataTrigger Binding="{Binding StudentId, Converter={StaticResource StringNullOrEmptyConverter}}"
                                          Value="False">
-                <Setter Property="Background" Value="Yellow" />
+                <Setter Property="IsSelected" Value="True" />
             </DataTrigger>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="{StaticResource WarningBrush}" />
+                <Setter Property="Foreground" Value="White" />
+            </Trigger>
         </Style.Triggers>
     </Style>
 

@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories.EF;
-using static ThesisManagement.Helpers.Query;
 
 namespace ThesisManagement.Repositories
 {
