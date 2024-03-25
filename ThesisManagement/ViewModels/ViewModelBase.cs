@@ -1,9 +1,9 @@
-﻿using HandyControl.Controls;
-using HandyControl.Data;
+﻿using HandyControl.Data;
 using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
+using ThesisManagement.CustomControls;
 using ThesisManagement.Views.Shared;
 
 namespace ThesisManagement.ViewModels

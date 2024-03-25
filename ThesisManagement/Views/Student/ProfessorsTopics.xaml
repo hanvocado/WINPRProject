@@ -83,8 +83,8 @@
 
         <Border Grid.Row="1" >
 
+                      <!--ItemContainerStyle="{StaticResource lvItem}"--> 
             <ListView Grid.Row="1"
-                      ItemContainerStyle="{StaticResource lvItem}" 
                       Background="{DynamicResource MaterialDesignPaper}"
                     Name="TopicsListView"
                     ItemsSource="{Binding Topics,  UpdateSourceTrigger=PropertyChanged}"
