@@ -84,10 +84,10 @@ namespace ThesisManagement.Repositories
         public bool CanRegisterTopic(string studentId)
         {
             var student = _context.Students.Include(s => s.Thesis).FirstOrDefault(s => s.Id == studentId);
-            if (student == null || student.Thesis?.TopicStatus != Variable.StatusTopic.Rejected)
-                return false;
+            if (student?.ThesisId == null || student?.Thesis?.TopicStatus == Variable.StatusTopic.Rejected)
+                return true;
 
-            return true;
+            return false;
         }
     }
 }

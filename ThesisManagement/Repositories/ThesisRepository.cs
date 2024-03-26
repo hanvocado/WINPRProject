@@ -37,14 +37,15 @@ namespace ThesisManagement.Repositories
         {
             _context.Add(thesis);
             var isThesisAdded = DbSave();
-            if (isThesisAdded) 
+            if (isThesisAdded)
             {
+                _context.ChangeTracker.Clear();
                 foreach (var student in students)
                 {
-                    student.ThesisId = thesis.Id;
+                    var st = _context.Students.FirstOrDefault(s => s.Id == student.Id);
+                    st.ThesisId = thesis.Id;
+                    _context.Update(st);
                 }
-                _context.ChangeTracker.Clear();
-                _context.Students.UpdateRange(students);
                 return DbSave();
             }
             return false;

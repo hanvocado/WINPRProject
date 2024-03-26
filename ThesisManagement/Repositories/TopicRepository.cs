@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories.EF;
@@ -12,11 +11,11 @@ namespace ThesisManagement.Repositories
         bool Update(Topic topic);
         bool Delete(int id);
         Topic? Get(int id);
-        ObservableCollection<Topic> GetAll();
-        ObservableCollection<Topic> GetMyTopicsAndProfessorTopics(string studentId);
-        ObservableCollection<Topic> GetAll(string professorId);
-        ObservableCollection<Topic> GetByTopicName(string name);
-        ObservableCollection<Topic> GetFilteredTopics(string category, string technology, string professorname);
+        List<Topic> GetAll();
+        List<Topic> GetMyTopicAndProfessorTopics(string studentId);
+        List<Topic> GetAll(string professorId);
+        List<Topic> GetByTopicName(string name);
+        List<Topic> GetFilteredTopics(string category, string technology, string professorname);
 
         bool CanBeDeleted(int topicId);
     }
@@ -69,7 +68,7 @@ namespace ThesisManagement.Repositories
             return topic;
         }
 
-        public ObservableCollection<Topic> GetFilteredTopics(string category, string technology, string professorname)
+        public List<Topic> GetFilteredTopics(string category, string technology, string professorname)
         {
             IEnumerable<Topic> filteredTopicList = _context.Topics.Include(t => t.Professor).Where(t => String.IsNullOrEmpty(t.StudentId));
 
@@ -85,42 +84,55 @@ namespace ThesisManagement.Repositories
             {
                 filteredTopicList = filteredTopicList.Where(topic => topic.Professor != null && topic.Professor.Name == professorname);
             }
-            return new ObservableCollection<Topic>(filteredTopicList);
+            return filteredTopicList.ToList();
         }
 
 
-        public ObservableCollection<Topic> GetAll(string professorId)
+        public List<Topic> GetAll(string professorId)
         {
             var topics = _context.Topics.Include(t => t.Professor)
                                         .Include(t => t.Theses)
                                         .Where(t => t.ProfessorId == professorId)
                                         .AsNoTracking().ToList();
-            return new ObservableCollection<Topic>(topics);
+            return topics;
         }
 
-        public ObservableCollection<Topic> GetByTopicName(string name)
+        public List<Topic> GetByTopicName(string name)
         {
             var topics = _context.Topics.Include(t => t.Professor)
                                         .Where(t => t.Name.ToLower().Contains(name.ToLower()))
                                         .AsNoTracking().ToList();
-            return new ObservableCollection<Topic>(topics);
+            return topics;
         }
 
-        public ObservableCollection<Topic> GetAll()
+        public List<Topic> GetAll()
         {
             var topics = _context.Topics.Include(t => t.Professor)
                                        .Include(t => t.Theses)
                                        .AsNoTracking().ToList();
-            return new ObservableCollection<Topic>(topics);
+            return topics;
         }
 
-        public ObservableCollection<Topic> GetMyTopicsAndProfessorTopics(string studentId)
+        public List<Topic> GetMyTopicAndProfessorTopics(string studentId)
         {
             var topics = _context.Topics.Include(t => t.Professor)
-                                       .Include(t => t.Theses)
-                                       .Where(t => String.IsNullOrEmpty(t.StudentId) || t.StudentId == studentId)
-                                       .AsNoTracking().OrderByDescending(t => !String.IsNullOrEmpty(t.StudentId));
-            return new ObservableCollection<Topic>(topics);
+                                        .Where(t => String.IsNullOrEmpty(t.StudentId))
+                                       .AsNoTracking().ToList();
+
+            var currentStudent = _context.Students.Include(s => s.Thesis)
+                                            .ThenInclude(th => th.Topic)
+                                            .ThenInclude(t => t.Professor)
+                                            .FirstOrDefault(s => s.Id == studentId);
+            if (currentStudent == null || currentStudent.ThesisId == null)
+                return topics;
+
+            var myTopic = currentStudent.Thesis!.Topic;
+            if (myTopic.StudentId != null)
+                topics.Insert(0, myTopic);
+            else
+                topics = topics.OrderByDescending(t => t.Id == myTopic.Id).ToList();
+
+            return topics;
         }
 
         public bool CanBeDeleted(int topicId)

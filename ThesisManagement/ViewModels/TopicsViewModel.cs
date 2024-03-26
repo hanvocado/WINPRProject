@@ -206,8 +206,8 @@ namespace ThesisManagement.ViewModels
         public IEnumerable<string> Categories { get; set; } = new List<string>() { "Computer Science", "Web Development", "Data Science", "Other" };
         public IEnumerable<string> Technologies { get; set; } = new List<string>() { "JavaScript", "Wpf", ".NET", "Java", "Python", "SQL", "ASP.NET Core", "Other" };
 
-        private ObservableCollection<Topic> topics;
-        public ObservableCollection<Topic> Topics
+        private List<Topic> topics;
+        public List<Topic> Topics
         {
             get { return topics; }
             set
@@ -271,7 +271,7 @@ namespace ThesisManagement.ViewModels
             if (SessionInfo.Role == Role.Professor)
                 Topics = _topicRepo.GetAll(SessionInfo.UserId);
             else
-                Topics = _topicRepo.GetMyTopicsAndProfessorTopics(SessionInfo.UserId);
+                Topics = _topicRepo.GetMyTopicAndProfessorTopics(SessionInfo.UserId);
 
             Students = _studentRepo.GetAll();
             Professors = _professorRepo.GetAll();
@@ -286,7 +286,6 @@ namespace ThesisManagement.ViewModels
 
         private bool CanStudentRegisterTopic(object obj)
         {
-            return true;
             return _studentRepo.CanRegisterTopic(SessionInfo.UserId);
         }
 
@@ -331,7 +330,7 @@ namespace ThesisManagement.ViewModels
                 RegisterTopic(obj);
             }
 
-            Topics = _topicRepo.GetMyTopicsAndProfessorTopics(SessionInfo.UserId);
+            Topics = _topicRepo.GetMyTopicAndProfessorTopics(SessionInfo.UserId);
         }
 
         private void ExecuteRegisterTopicCommand(object obj)
@@ -354,6 +353,7 @@ namespace ThesisManagement.ViewModels
             };
             var success = _thesisRepo.Add(thesis, selectedStudents);
             ShowMessage(success, Message.RegisterSuccess, Message.RegisterFailed);
+            RegisterNewTopicCommand.RaiseCanExecuteChanged();
 
             currentView?.Close();
             var mainWindow = Application.Current.MainWindow;
@@ -385,7 +385,7 @@ namespace ThesisManagement.ViewModels
                 currentUser = Students.FirstOrDefault(s => s.Id == SessionInfo.UserId);
                 Students.Remove((Student)currentUser);
                 SelectedStudents.Add((Student)currentUser);
-                SelectedStudentNames = currentUser.Name;
+                SelectedStudentNames = SessionInfo.Name;
             }
             else
             {
@@ -448,6 +448,7 @@ namespace ThesisManagement.ViewModels
 
         private void ResetTopicProperties()
         {
+            SelectedTopic = new Topic();
             Id = 0;
             Name = "";
             Description = "";
