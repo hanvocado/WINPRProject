@@ -18,56 +18,61 @@
         <viewModels:TopicsViewModel />
     </Window.DataContext>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <Border>
-            <Grid >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="25" />
-                    <RowDefinition Height="70" />
-                    <RowDefinition Height="75" />
-                    <RowDefinition Height="75"/>
-                    <RowDefinition Height="125"/>
-                    <RowDefinition Height="125"/>
-                    <RowDefinition Height="125"/>
-                    <RowDefinition Height="75"/>
-                    <RowDefinition Height="50" />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
+    <Border>
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-                <customControls:PopupControlBar />
+            <customControls:PopupControlBar />
 
-                <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top">
-                    <Image Source="/Resources/Images/UTE.png" Height="50" Width="50" Margin="20 0 20 0" />
-                    <TextBlock Style="{StaticResource title}" >
+            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                          Grid.Row="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70" />
+                        <RowDefinition Height="75" />
+                        <RowDefinition Height="75"/>
+                        <RowDefinition Height="125"/>
+                        <RowDefinition Height="125"/>
+                        <RowDefinition Height="125"/>
+                        <RowDefinition Height="75"/>
+                        <RowDefinition Height="50" />
+                    </Grid.RowDefinitions>
+                    
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Top">
+                        <Image Source="/Resources/Images/UTE.png" Height="50" Width="50" Margin="20 0 20 0" />
+                        <TextBlock Style="{StaticResource title}" >
                         <Run Text="Đề tài: "/>
                         <Run Text="{Binding SelectedTopic.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    </TextBlock>
-                </StackPanel>
+                        </TextBlock>
+                    </StackPanel>
 
-                <Border Grid.Row="2" Padding="30 0">
-                    <StackPanel>
-                        <TextBlock Text="Giảng viên" Style="{StaticResource label}" />
-                        <TextBox Grid.Row="0"
+                    <Border Grid.Row="1" Padding="30 0">
+                        <StackPanel>
+                            <TextBlock Text="Giảng viên" Style="{StaticResource label}" />
+                            <TextBox Grid.Row="0"
                                 Height="40"
-                                 IsReadOnly="True"
+                                    IsReadOnly="True"
                                 VerticalAlignment="Top"
                                 Text="{Binding SelectedTopic.Professor.Name}" />
-                    </StackPanel>
-                </Border>
+                        </StackPanel>
+                    </Border>
 
-                <Grid Grid.Row="3">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="1.5*"/>
-                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1.5*"/>
+                        </Grid.ColumnDefinitions>
 
-                    <Border Grid.Column="0" Padding="30 0 10 0">
-                        <StackPanel>
-                            <TextBlock Text="Thể loại"
+                        <Border Grid.Column="0" Padding="30 0 10 0">
+                            <StackPanel>
+                                <TextBlock Text="Thể loại"
                                 Style="{StaticResource label}" />
-                            <ComboBox Grid.Row="1"
-                                      IsHitTestVisible="False"
+                                <ComboBox Grid.Row="1"
+                                        IsHitTestVisible="False"
                                     IsEditable="True"
                                     IsReadOnly="True"
                                     VerticalAlignment="Top"
@@ -75,14 +80,14 @@
                                     ItemsSource="{Binding Categories}"
                                     SelectedValue="{Binding SelectedTopic.Category}" 
                                     Style="{StaticResource ComboBoxExtend}"/>
-                        </StackPanel>
-                    </Border>
+                            </StackPanel>
+                        </Border>
 
-                    <Border Grid.Column="1" Padding="10 0 10 0">
-                        <StackPanel>
-                            <TextBlock Text="Công nghệ" Style="{StaticResource label}" />
-                            <ComboBox Grid.Row="1"
-                                      IsHitTestVisible="False"
+                        <Border Grid.Column="1" Padding="10 0 10 0">
+                            <StackPanel>
+                                <TextBlock Text="Công nghệ" Style="{StaticResource label}" />
+                                <ComboBox Grid.Row="1"
+                                        IsHitTestVisible="False"
                                         IsEditable="True"
                                         IsReadOnly="True"
                                 VerticalAlignment="Top"
@@ -90,95 +95,96 @@
                                 ItemsSource="{Binding Technologies}"
                                 SelectedValue="{Binding SelectedTopic.Technology}"
                                 Style="{StaticResource ComboBoxExtend}" />
-                        </StackPanel>
-                    </Border>
+                            </StackPanel>
+                        </Border>
 
-                    <Border Grid.Column="2" Padding="10 0 30 0">
-                        <StackPanel>
-                            <TextBlock Text="Số sinh viên tối đa" Style="{StaticResource label}" />
-                            <TextBox IsReadOnly="True"
+                        <Border Grid.Column="2" Padding="10 0 30 0">
+                            <StackPanel>
+                                <TextBlock Text="Số sinh viên tối đa" Style="{StaticResource label}" />
+                                <TextBox IsReadOnly="True"
                                     Height="40"
                                     Text="{Binding SelectedTopic.StudentQuantity}"
                                     VerticalAlignment="Top"
                                     Style="{StaticResource TextBoxExtend}" />
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+
+                    <Border Grid.Row="3" Padding="30 0">
+                        <StackPanel>
+                            <TextBlock Text="Mô tả" Style="{StaticResource label}" />
+                            <TextBox  VerticalAlignment="Top"
+                                    IsReadOnly="True"
+                                    Text="{Binding SelectedTopic.Description,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Height="90"
+                                    AcceptsReturn="True"
+                                    TextWrapping="Wrap"
+                                    VerticalScrollBarVisibility="Auto" />
                         </StackPanel>
                     </Border>
-                </Grid>
 
-                <Border Grid.Row="4" Padding="30 0">
-                    <StackPanel>
-                        <TextBlock Text="Mô tả" Style="{StaticResource label}" />
-                        <TextBox  VerticalAlignment="Top"
-                                  IsReadOnly="True"
-                                  Text="{Binding SelectedTopic.Description,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                  Height="90"
-                                  AcceptsReturn="True"
-                                  TextWrapping="Wrap"
-                                  VerticalScrollBarVisibility="Auto" />
-                    </StackPanel>
-                </Border>
-
-                <Border Grid.Row="5" Padding="30 0">
-                    <StackPanel>
-                        <TextBlock Text="Yêu cầu" Style="{StaticResource label}" />
-                        <TextBox  IsReadOnly="True"
-                                  VerticalAlignment="Top"
-                                  Text="{Binding SelectedTopic.Requirement,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                  Height="90"
-                                  AcceptsReturn="True"
-                                  TextWrapping="Wrap"
-                                  VerticalScrollBarVisibility="Auto" />
-                    </StackPanel>
-                </Border>
-
-                <Border Grid.Row="6" Padding="30 0">
-                    <StackPanel>
-                        <TextBlock Text="Chức năng" Style="{StaticResource label}" />
-                        <TextBox  IsReadOnly="True"
-                                  VerticalAlignment="Top"
-                                  Text="{Binding SelectedTopic.Function,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                  Height="90"
-                                  AcceptsReturn="True"
-                                  TextWrapping="Wrap"
-                                  VerticalScrollBarVisibility="Auto" />
-                    </StackPanel>
-                </Border>
-
-                <Border Grid.Row="7" Padding="30 0">
-                    <StackPanel>
-                        <TextBlock Text="Thành viên" Style="{StaticResource label}" />
-                        <StackPanel Orientation="Horizontal">
-                            <TextBox Width="480" Margin="0 0 10 0" 
-                                     IsReadOnly="True"
-                                     Text="{Binding SelectedStudentNames, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                            <customControls:ControlButton DefaultColor="{StaticResource success}"
-                                  HoverColor="{StaticResource successHover}"
-                                  Command="{Binding ChooseMembersCommand}"
-                                  Width="40">
-                                <customControls:ControlButton.Content>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="+ " />
-                                        <fa:IconImage Icon="UserGroup" Style="{StaticResource btnIcon}" />
-                                    </StackPanel>
-                                </customControls:ControlButton.Content>
-                            </customControls:ControlButton>
+                    <Border Grid.Row="4" Padding="30 0">
+                        <StackPanel>
+                            <TextBlock Text="Yêu cầu" Style="{StaticResource label}" />
+                            <TextBox  IsReadOnly="True"
+                                    VerticalAlignment="Top"
+                                    Text="{Binding SelectedTopic.Requirement,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Height="90"
+                                    AcceptsReturn="True"
+                                    TextWrapping="Wrap"
+                                    VerticalScrollBarVisibility="Auto" />
                         </StackPanel>
-                    </StackPanel>
-                </Border>
+                    </Border>
 
-                <Grid Grid.Row="8" >
+                    <Border Grid.Row="5" Padding="30 0">
+                        <StackPanel>
+                            <TextBlock Text="Chức năng" Style="{StaticResource label}" />
+                            <TextBox  IsReadOnly="True"
+                                    VerticalAlignment="Top"
+                                    Text="{Binding SelectedTopic.Function,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Height="90"
+                                    AcceptsReturn="True"
+                                    TextWrapping="Wrap"
+                                    VerticalScrollBarVisibility="Auto" />
+                        </StackPanel>
+                    </Border>
 
-                    <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
-                                                  HoverColor="{StaticResource secondaryBrush}"
-                                                  Content="Đăng kí"
-                                                  Width="100"
-                                                  Height="50"
-                                                  FontSize="14"
-                                                  Command="{Binding RegisterTopicCommand}"
-                                                  CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
-                                                  Grid.Row="3"/>
+                    <Border Grid.Row="6" Padding="30 0">
+                        <StackPanel>
+                            <TextBlock Text="Thành viên" Style="{StaticResource label}" />
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Width="480" Margin="0 0 10 0" 
+                                        IsReadOnly="True"
+                                        Text="{Binding SelectedStudentNames, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <customControls:ControlButton DefaultColor="{StaticResource success}"
+                                    HoverColor="{StaticResource successHover}"
+                                    Command="{Binding ChooseMembersCommand}"
+                                    Width="40">
+                                    <customControls:ControlButton.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="+ " />
+                                            <fa:IconImage Icon="UserGroup" Style="{StaticResource btnIcon}" />
+                                        </StackPanel>
+                                    </customControls:ControlButton.Content>
+                                </customControls:ControlButton>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <Grid Grid.Row="7" >
+                        <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
+                                                    HoverColor="{StaticResource secondaryBrush}"
+                                                    Content="Đăng kí"
+                                                    Width="100"
+                                                    Height="50"
+                                                    FontSize="14"
+                                                    Command="{Binding RegisterTopicCommand}"
+                                                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                                                    Grid.Row="3"/>
+                    </Grid>
                 </Grid>
-            </Grid>
-        </Border>
-    </ScrollViewer>
+            </ScrollViewer>
+
+        </Grid>
+    </Border>
 </Window>

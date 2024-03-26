@@ -9,7 +9,7 @@
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         mc:Ignorable="d"
         xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
-        Title="TopicView" Height="570" Width="600"
+        Title="TopicView" Height="670" Width="600"
         WindowStyle="None"
         Style="{StaticResource formStyle}"
         WindowStartupLocation="CenterScreen">
@@ -21,12 +21,13 @@
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="40"/>
                 <RowDefinition Height="75"/>
                 <RowDefinition Height="75"/>
                 <RowDefinition Height="75"/>
                 <RowDefinition Height="75"/>
-                <RowDefinition Height="140"/>
+                <RowDefinition Height="125"/>
+                <RowDefinition Height="125"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
             
@@ -45,10 +46,9 @@
                 <StackPanel>
                     <TextBlock Text="Tên đề tài" Style="{StaticResource label}" />
                     <TextBox Grid.Row="0"
-                            Height="40"
-                            VerticalAlignment="Top"
-                             ToolTip="{Binding ElementName=Nametextbox,Path=(Validation.Errors)[0].ErrorContent}"
-                            Style="{StaticResource TextBoxExtend}" 
+                             Height="35"
+                             VerticalAlignment="Top"
+                             Style="{StaticResource TextBoxExtend}" 
                              Text="{Binding Name}"/>
                 </StackPanel>
             </Border>
@@ -67,7 +67,7 @@
                                   IsTextSearchEnabled="True"
                                   IsTextSearchCaseSensitive="False"
                                   VerticalAlignment="Top"
-                                  Height="40"
+                                  Height="35"
                                   ItemsSource="{Binding Categories}"
                                   SelectedValue="{Binding Category}" 
                                   Style="{StaticResource ComboBoxExtend}"/>
@@ -82,7 +82,7 @@
                                   IsTextSearchEnabled="True"
                                   IsTextSearchCaseSensitive="False"
                                   VerticalAlignment="Top"
-                                  Height="40"
+                                  Height="35"
                                   ItemsSource="{Binding Technologies}"
                                   SelectedValue="{Binding Technology}"
                                   Style="{StaticResource ComboBoxExtend}" />
@@ -93,7 +93,7 @@
             <Border Grid.Row="4" Padding="30 0">
                 <StackPanel>
                     <TextBlock Text="Giảng viên" Style="{StaticResource label}" />
-                    <customControls:FilterComboBox  Height="40"
+                    <customControls:FilterComboBox  Height="35"
                                                     ItemsSource="{Binding Professors}"
                                                     SelectedValue="{Binding ProfessorId}"
                                                     SelectedValuePath="Id"
@@ -135,12 +135,24 @@
 
             <Border Grid.Row="6" Padding="30 0">
                 <StackPanel>
-                    <TextBlock Text="Chú thích" Style="{StaticResource label}" />
+                    <TextBlock Text="Mô tả" Style="{StaticResource label}" />
                     <TextBox Grid.Row="2"
                              VerticalAlignment="Top"
-                             Height="100"
+                             Height="85"
                              Text="{Binding Description}" 
-                             Style="{StaticResource TextBoxExtend}"
+                             AcceptsReturn="True"
+                             TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"/>
+                </StackPanel>
+            </Border>
+            
+            <Border Grid.Row="7" Padding="30 0">
+                <StackPanel>
+                    <TextBlock Text="Chức năng" Style="{StaticResource label}" />
+                    <TextBox Grid.Row="2"
+                             VerticalAlignment="Top"
+                             Height="85"
+                             Text="{Binding Function}" 
                              AcceptsReturn="True"
                              TextWrapping="Wrap"
                              VerticalScrollBarVisibility="Auto"/>
@@ -148,15 +160,15 @@
             </Border>
             
             <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
-                              HoverColor="{StaticResource secondaryBrush}"
-                              Command="{Binding RegisterNewTopicCommand}"
-                                          CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
-                              Content="Gửi"
-                              Margin="0 -10 0 20"
-                              Width="100"
-                              Height="50"
-                              FontSize="14"
-                              Grid.Row="7"/>
+                                            HoverColor="{StaticResource secondaryBrush}"
+                                            Command="{Binding RegisterNewTopicCommand}"
+                                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                                            Content="Gửi"
+                                            Width="200"
+                                            Height="50"
+                                          Margin="0 -20 0 0"
+                                            FontSize="14"
+                                            Grid.Row="8"/>
         </Grid>
     </Border>
 </Window>
