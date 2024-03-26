@@ -31,7 +31,7 @@
     <Compile Update="Views\Admin\ProfessorsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Professor\Task.xaml.cs">
+    <Compile Update="Views\Professor\TaskView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Professor\ProfessorMainView.xaml.cs">
@@ -46,7 +46,7 @@
     <Compile Update="Views\Professor\StudentsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Professor\Tasks.xaml.cs">
+    <Compile Update="Views\Professor\TasksView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Professor\ThesisDetailsView.xaml.cs">
@@ -153,7 +153,7 @@
     <Page Update="Views\Admin\ProfessorsView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Professor\Task.xaml">
+    <Page Update="Views\Professor\TaskView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Professor\ProfessorMainView.xaml">
@@ -168,7 +168,7 @@
     <Page Update="Views\Professor\StudentsView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Professor\Tasks.xaml">
+    <Page Update="Views\Professor\TasksView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Professor\ThesisDetailsView.xaml">

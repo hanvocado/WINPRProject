@@ -218,9 +218,9 @@ namespace ThesisManagement.Repositories.EF
 
             modelBuilder.Entity<Task>(entity =>
             {
-                entity.HasOne(tp => tp.Topic)
+                entity.HasOne(tp => tp.Thesis)
                       .WithMany(t => t.Tasks)
-                      .HasForeignKey(t => t.TopicId);
+                      .HasForeignKey(t => t.ThesisId);
             });
 
             modelBuilder.Entity<Feedback>(entity =>

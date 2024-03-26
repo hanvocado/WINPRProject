@@ -26,6 +26,8 @@ namespace ThesisManagement.Models
         public ICollection<Feedback>? Feedbacks { get; set; }
 
         public ICollection<Student>? Students { get; set; }
+        public ICollection<Task>? Tasks { get; set; }
+
 
         [NotMapped]
         public string StatusColor

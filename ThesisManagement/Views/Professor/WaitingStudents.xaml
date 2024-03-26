@@ -19,7 +19,7 @@
                   Background="{DynamicResource MaterialDesignPaper}"
           Name="ThesisListView"
           MouseLeftButtonUp="ListViewItem_MouseEnter"
-          ItemsSource="{Binding Theses, UpdateSourceTrigger=PropertyChanged}"
+          ItemsSource="{Binding WaitingTheses, UpdateSourceTrigger=PropertyChanged}"
           SelectedItem="{Binding SelectedThesis, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ListView.View>
                 <GridView>

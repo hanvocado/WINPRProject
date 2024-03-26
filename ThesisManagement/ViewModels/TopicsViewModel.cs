@@ -315,11 +315,6 @@ namespace ThesisManagement.ViewModels
                 SelectedStudentNames += $" - {st.Name}";
                 SelectedStudents.Add(st);
             }
-            Trace.WriteLine("Danh sách sv đã chọn");
-            foreach (var mem in SelectedStudents)
-            {
-                Trace.WriteLine($"{mem.Name}");
-            }
             if (selectedStudents.Count > selectedTopic?.StudentQuantity)
             {
                 ShowMessage(false, "", Message.ExceedStudentQuantity);

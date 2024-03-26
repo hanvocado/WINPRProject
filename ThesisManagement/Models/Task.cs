@@ -9,15 +9,18 @@ namespace ThesisManagement.Models
         public int Id { get; set; }
 
         [Required]
-        public int TopicId { get; set; }
+        public int ThesisId { get; set; }
+        [Required]
+        public string Name { get; set; }
 
-        public string Text { get; set; }
+        public string Description { get; set; }
 
-        public DateTime DeadLine { get; set; }
+        public DateTime Start { get; set; }
+        public DateTime End { get; set; }
 
-        public bool Status { get; set; }
+        public int Progress { get; set; }
 
-        [ForeignKey(nameof(TopicId))]
-        public Topic Topic { get; set; }
+        [ForeignKey(nameof(ThesisId))]
+        public Thesis Thesis { get; set; }
     }
 }
