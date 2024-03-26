@@ -10,7 +10,6 @@
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              mc:Ignorable="d" 
-             x:Name="topicsUC"
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
     <UserControl.DataContext>
@@ -49,10 +48,9 @@
             <StackPanel Grid.Row="0" Grid.Column="1"
                         VerticalAlignment="Center">
                 <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
-                                               HoverColor="{StaticResource secondaryBrush}"
-                                               Command="{Binding ProfessorCreateTopic}"
-                                              CommandParameter="{Binding ElementName=topicsUC}"
-                                               Width="90">
+                                              HoverColor="{StaticResource secondaryBrush}"
+                                              Command="{Binding ShowTopicViewCommand}"
+                                              Width="90">
                     <customControls:ControlButton.Content>
                         <TextBlock Text="+ Tạo mới" Style="{StaticResource btnContent}"/>
                     </customControls:ControlButton.Content>

@@ -169,14 +169,14 @@
                 <Grid Grid.Row="8" >
 
                     <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
+                                                  HoverColor="{StaticResource secondaryBrush}"
+                                                  Content="Đăng kí"
+                                                  Width="100"
+                                                  Height="50"
+                                                  FontSize="14"
+                                                  Command="{Binding RegisterTopicCommand}"
                                                   CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
-                                                HoverColor="{StaticResource secondaryBrush}"
-                                                Content="Đăng kí"
-                                                Width="100"
-                                                Height="50"
-                                                FontSize="14"
-                                                Command="{Binding RegisterThesisCommand}"
-                                                Grid.Row="3"/>
+                                                  Grid.Row="3"/>
                 </Grid>
             </Grid>
         </Border>
