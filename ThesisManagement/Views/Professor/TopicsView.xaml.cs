@@ -86,7 +86,8 @@ namespace ThesisManagement.Views.Professor
                 foreach (var item in TopicListView.Items)
                 {
                     ListViewItem listViewItem = (ListViewItem)TopicListView.ItemContainerGenerator.ContainerFromItem(item);
-                    listViewItem.MouseEnter += ListViewItem_MouseEnter;
+                    if (listViewItem != null)
+                        listViewItem.MouseEnter += ListViewItem_MouseEnter;
                 }
             }
         }

@@ -26,7 +26,7 @@ namespace ThesisManagement.Models
         public string? Requirement { get; set; }
         public string? Function { get; set; }
 
-        public int StudentQuantity { get; set; } = 1;
+        public int StudentQuantity { get; set; }
 
         [StringLength(100)]
         public string? Technology { get; set; }

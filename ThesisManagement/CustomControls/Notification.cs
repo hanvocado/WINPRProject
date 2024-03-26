@@ -37,14 +37,15 @@ public sealed class Notification : Window
             Opacity = 0,
             ShowAnimation = showAnimation
         };
+        var window = Application.Current.MainWindow;
 
         notification.Show();
 
         var desktopWorkingArea = SystemParameters.WorkArea;
         //var leftMax = (desktopWorkingArea.Width - notification.ActualWidth) / 2;
         //var topMax = desktopWorkingArea.Height - notification.ActualHeight;
-        var leftMax = desktopWorkingArea.Width - notification.ActualWidth;
-        var topMax = 20;
+        var leftMax = (desktopWorkingArea.Width - window.ActualWidth) / 2 + window.ActualWidth - notification.ActualWidth;
+        var topMax = (desktopWorkingArea.Height - window.ActualHeight) / 2;
 
         switch (showAnimation)
         {

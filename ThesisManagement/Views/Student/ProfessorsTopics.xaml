@@ -72,7 +72,7 @@
             <customControls:ControlButton Grid.Column="1"
                                           DefaultColor="{StaticResource primaryBrush}"
                                           HoverColor="{StaticResource secondaryBrush}"
-                                          Command="{Binding StudentCreateTopic}"
+                                          Command="{Binding ShowTopicViewCommand}"
                                           Width="80">
                 <customControls:ControlButton.Content>
                     <TextBlock Text="+ Đề xuất" Style="{StaticResource btnContent}"/>

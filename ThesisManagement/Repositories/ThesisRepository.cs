@@ -10,6 +10,7 @@ namespace ThesisManagement.Repositories
     public interface IThesisRepository
     {
         bool Add(Thesis thesis);
+        bool Add(Thesis thesis, IEnumerable<Student> students);
         bool Update(Thesis thesis);
         IEnumerable<Thesis> GetAll();
         IEnumerable<Thesis> Get(string userId, string topicStatus);
@@ -30,6 +31,24 @@ namespace ThesisManagement.Repositories
         {
             _context.Add(thesis);
             return DbSave();
+        }
+
+        public bool Add(Thesis thesis, IEnumerable<Student> students)
+        {
+            _context.Add(thesis);
+            var isThesisAdded = DbSave();
+            if (isThesisAdded)
+            {
+                _context.ChangeTracker.Clear();
+                foreach (var student in students)
+                {
+                    var st = _context.Students.FirstOrDefault(s => s.Id == student.Id);
+                    st.ThesisId = thesis.Id;
+                    _context.Update(st);
+                }
+                return DbSave();
+            }
+            return false;
         }
 
         public bool Update(Thesis thesis)
@@ -91,6 +110,7 @@ namespace ThesisManagement.Repositories
                 return false;
             }
         }
+
 
         //public void AddMembers(int topicId, IEnumerable<Student> members)
         //{
