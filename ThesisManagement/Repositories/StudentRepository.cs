@@ -13,6 +13,7 @@ namespace ThesisManagement.Repositories
         List<Student> Get(string? filter);
         Student GetStudent(string id);
         IEnumerable<Student> GetStudent(int thesisId);
+        List<Student> GetUnRegisteredStudents();
         Thesis? GetThesis(string studentId);
         bool CanRegisterTopic(string studentId);
 
@@ -27,7 +28,6 @@ namespace ThesisManagement.Repositories
 
         public bool Update(Student student)
         {
-            _context.ChangeTracker.Clear();
             _context.Update(student);
             return DbSave();
         }
@@ -88,6 +88,15 @@ namespace ThesisManagement.Repositories
                 return false;
 
             return true;
+        }
+
+        public List<Student> GetUnRegisteredStudents()
+        {
+            var unRegisterStd = _context.Students
+                                        .Include(st => st.Thesis)
+                                        .Where(st => st.ThesisId == null || st.Thesis.TopicStatus == Variable.StatusTopic.Rejected)
+                                        .ToList();
+            return unRegisterStd;
         }
     }
 }

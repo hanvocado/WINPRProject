@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Windows;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
@@ -284,7 +285,7 @@ namespace ThesisManagement.ViewModels
             }
             else
                 Topics = _topicRepo.GetMyTopicsAndProfessorTopics(SessionInfo.UserId);
-            Students = _studentRepo.GetAll();
+            Students = _studentRepo.GetUnRegisteredStudents();
             Professors = _professorRepo.GetAll();
             ProfessorCreateTopic = new ViewModelCommand(ExecuteProfessorCreateCommand);
             StudentCreateTopic = new ViewModelCommand(ExecuteStudentCreateCommand, CanStudentRegisterTopic);
@@ -314,6 +315,11 @@ namespace ThesisManagement.ViewModels
                 SelectedStudentNames += $" - {st.Name}";
                 SelectedStudents.Add(st);
             }
+            Trace.WriteLine("Danh sách sv đã chọn");
+            foreach (var mem in SelectedStudents)
+            {
+                Trace.WriteLine($"{mem.Name}");
+            }
             if (selectedStudents.Count > selectedTopic?.StudentQuantity)
             {
                 ShowMessage(false, "", Message.ExceedStudentQuantity);
@@ -334,7 +340,6 @@ namespace ThesisManagement.ViewModels
         {
             if (IsTopicNotValid())
                 return;
-
             StudentTopicView topicView = obj as StudentTopicView;
             Topic topic = new Topic
             {
@@ -388,11 +393,16 @@ namespace ThesisManagement.ViewModels
                 File = null,
             };
             var success = _thesisRepo.Add(thesis);
-
+            Trace.WriteLine("Thay đối data danh sách sv đã chọn");
+            foreach (var mem in SelectedStudents)
+            {
+                Trace.WriteLine($"{mem.Name}");
+            }
             if (success)
                 foreach (var student in SelectedStudents)
                 {
                     student.ThesisId = thesis.Id;
+                    Trace.WriteLine($"{student.Name} - {student.ThesisId}");
                     success = _studentRepo.Update(student);
                 }
 
