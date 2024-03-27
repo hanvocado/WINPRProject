@@ -189,26 +189,9 @@
                             <TabItem Header="Nhiệm vụ">
                                 <local:TasksView x:Name="tasksView" />
                             </TabItem>
-
+                            
                             <TabItem Header="Lịch họp">
-                                <ListView ItemsSource="{Binding Thesis.Notifications}">
-                                    <ListView.View>
-                                        <GridView>
-                                            <GridViewColumn Width="300"
-                                                            DisplayMemberBinding="{Binding Title}">
-                                                <GridViewColumn.Header>
-                                                    <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Tiêu đề" />
-                                                </GridViewColumn.Header>
-                                            </GridViewColumn>
-                                            <GridViewColumn Width="500"
-                                                            DisplayMemberBinding="{Binding Details}">
-                                                <GridViewColumn.Header>
-                                                    <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Chi tiết" />
-                                                </GridViewColumn.Header>
-                                            </GridViewColumn>
-                                        </GridView>
-                                    </ListView.View>
-                                </ListView>
+                                <local:ScheduleView x:Name="scheduleView" />
                             </TabItem>
                         </TabControl>
                     </Grid>

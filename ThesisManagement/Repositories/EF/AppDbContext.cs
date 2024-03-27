@@ -14,6 +14,7 @@ namespace ThesisManagement.Repositories.EF
         public DbSet<Thesis> Theses { get; set; }
         public DbSet<Task> Tasks { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<ScheduleInfo> ScheduleInfos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -170,6 +171,14 @@ namespace ThesisManagement.Repositories.EF
                 entity.HasOne(tp => tp.Topic)
                         .WithMany(th => th.Theses)
                         .HasForeignKey(th => th.TopicId);
+
+            }); 
+            
+            modelBuilder.Entity<ScheduleInfo>(entity =>
+            {
+                entity.HasOne(th => th.Thesis)
+                        .WithMany(sch => sch.ScheduleInfos)
+                        .HasForeignKey(m => m.ThesisId);
 
             });
 

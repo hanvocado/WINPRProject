@@ -22,6 +22,10 @@ namespace ThesisManagement.Views.Professor
                 ThesisId = thesisVM.Thesis.Id,
                 Thesis = thesisVM.Thesis,
             };
+            scheduleView.DataContext = new ScheduleViewModel
+            {
+                ThesisId = thesisVM.Thesis.Id
+            };
         }
     }
 }

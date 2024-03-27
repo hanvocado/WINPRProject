@@ -87,6 +87,35 @@ namespace ThesisManagement.Migrations
                     b.ToTable("Feedbacks");
                 });
 
+            modelBuilder.Entity("ThesisManagement.Models.Notification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Details")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Read")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ThesisId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ThesisId");
+
+                    b.ToTable("Notification");
+                });
+
             modelBuilder.Entity("ThesisManagement.Models.Professor", b =>
                 {
                     b.Property<string>("Id")
@@ -148,6 +177,42 @@ namespace ThesisManagement.Migrations
                             Password = "lam12345",
                             Phone = "987-654-3210"
                         });
+                });
+
+            modelBuilder.Entity("ThesisManagement.Models.ScheduleInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Color")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EventName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("From")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ThesisId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("To")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ThesisId");
+
+                    b.ToTable("ScheduleInfos");
                 });
 
             modelBuilder.Entity("ThesisManagement.Models.Student", b =>
@@ -409,6 +474,28 @@ namespace ThesisManagement.Migrations
                     b.Navigation("Thesis");
                 });
 
+            modelBuilder.Entity("ThesisManagement.Models.Notification", b =>
+                {
+                    b.HasOne("ThesisManagement.Models.Thesis", "Thesis")
+                        .WithMany("Notifications")
+                        .HasForeignKey("ThesisId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Thesis");
+                });
+
+            modelBuilder.Entity("ThesisManagement.Models.ScheduleInfo", b =>
+                {
+                    b.HasOne("ThesisManagement.Models.Thesis", "Thesis")
+                        .WithMany("ScheduleInfos")
+                        .HasForeignKey("ThesisId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Thesis");
+                });
+
             modelBuilder.Entity("ThesisManagement.Models.Student", b =>
                 {
                     b.HasOne("ThesisManagement.Models.Thesis", "Thesis")
@@ -459,6 +546,10 @@ namespace ThesisManagement.Migrations
             modelBuilder.Entity("ThesisManagement.Models.Thesis", b =>
                 {
                     b.Navigation("Feedbacks");
+
+                    b.Navigation("Notifications");
+
+                    b.Navigation("ScheduleInfos");
 
                     b.Navigation("Students");
 
