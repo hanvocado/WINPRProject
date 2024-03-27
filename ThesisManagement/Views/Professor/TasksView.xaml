@@ -50,21 +50,11 @@
         </Grid.RowDefinitions>
         
 
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Image Source="/Resources/Images/UTE.png" Height="50" Width="50" Margin="20 0 20 0" />
-            <TextBlock Style="{StaticResource title}" >
-                <Run Text="Đề tài: "/>
-                <Run Text="{Binding SelectedThesis.Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            </TextBlock>
-        </StackPanel>
-
         <Expander  IsExpanded="False" Grid.Row="1" HorizontalAlignment="Stretch" Background="Transparent">
             <Expander.Header>
                 <TextBlock Text="Đang thực hiện" Style="{StaticResource A}" MinHeight="40" Margin="-23,0,-63,0"/>
             </Expander.Header>
-            <ListView
-                Name="TaskListView"
-                    ItemsSource="{Binding Tasks}">
+            <ListView ItemsSource="{Binding PendingTasks}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Width="50">
@@ -85,35 +75,35 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Width="220"
-                    DisplayMemberBinding="{Binding tieude}" >
+                    DisplayMemberBinding="{Binding Name}" >
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Nhiệm vụ" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
 
                         <GridViewColumn Width="200"
-                    DisplayMemberBinding="{Binding tiendo}">
+                    DisplayMemberBinding="{Binding Description}">
                             <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Sinh viên" />
+                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Mô tả" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
 
                         <GridViewColumn Width="150"
-                    DisplayMemberBinding="{Binding start}">
+                    DisplayMemberBinding="{Binding Start}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Ngày bắt đầu" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
 
                         <GridViewColumn Width="150"
-                    DisplayMemberBinding="{Binding end}">
+                    DisplayMemberBinding="{Binding End}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Ngày kết thúc" />
                             </GridViewColumn.Header>
                         </GridViewColumn>
 
                         <GridViewColumn Width="150"
-                    DisplayMemberBinding="{Binding trangthai}">
+                    DisplayMemberBinding="{Binding Progress}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Tiến độ" />
                             </GridViewColumn.Header>
@@ -123,16 +113,19 @@
                 </ListView.View>
             </ListView>
         </Expander>
+        
         <Expander IsExpanded="False" Grid.Row="2" HorizontalAlignment="Stretch" Background="Transparent">
             <Expander.Header>
                 <TextBlock Text="Đã hoàn thành" Style="{StaticResource B}" MinHeight="40" Margin="-23,0,-63,0"  />
             </Expander.Header>
         </Expander>
+        
         <Expander  IsExpanded="False" Grid.Row="3" HorizontalAlignment="Stretch" Background="Transparent">
             <Expander.Header>
                 <TextBlock Text="Đã Quá hạn" Style="{StaticResource C}" MinHeight="40" Margin="-23,0,-63,0"/>
             </Expander.Header>
         </Expander>
+        
         <Grid Grid.Row="4">
             <Button Width="750" Height="30" Margin="10 10 10 10" Command="{Binding CreateTaskCommand}">
                 <Button.Template>

@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
@@ -12,6 +11,18 @@ namespace ThesisManagement.ViewModels
     public class TasksViewModel : ViewModelBase
     {
         private readonly ITaskRepository _taskRepo;
+
+        private Thesis thesis;
+        public Thesis Thesis
+        {
+            get { return thesis; }
+            set
+            {
+                thesis = value;
+                LoadTasks();
+                OnPropertyChanged(nameof(Thesis));
+            }
+        }
 
         private int id;
         public int Id
@@ -28,17 +39,6 @@ namespace ThesisManagement.ViewModels
             {
                 thesisId = value;
                 OnPropertyChanged(nameof(ThesisId));
-            }
-        }
-
-        private Thesis thesis;
-        public Thesis Thesis
-        {
-            get { return thesis; }
-            set
-            {
-                thesis = value;
-                OnPropertyChanged(nameof(Thesis));
             }
         }
 
@@ -64,7 +64,7 @@ namespace ThesisManagement.ViewModels
             }
         }
 
-        private DateTime start;
+        private DateTime start = DateTime.Now;
         public DateTime Start
         {
             get { return start; }
@@ -75,7 +75,7 @@ namespace ThesisManagement.ViewModels
             }
         }
 
-        private DateTime end;
+        private DateTime end = DateTime.Now.AddDays(7);
         public DateTime End
         {
             get { return end; }
@@ -104,14 +104,36 @@ namespace ThesisManagement.ViewModels
             set { selectedTask = value; OnPropertyChanged(nameof(SelectedTask)); }
         }
 
-        private IEnumerable<Task> tasks;
-        public IEnumerable<Task> Tasks
+        private IEnumerable<Task> pendingTasks;
+        public IEnumerable<Task> PendingTasks
         {
-            get { return tasks; }
+            get { return pendingTasks; }
             set
             {
-                tasks = value;
-                OnPropertyChanged(nameof(Tasks));
+                pendingTasks = value;
+                OnPropertyChanged(nameof(PendingTasks));
+            }
+        }
+
+        private IEnumerable<Task> doneTasks;
+        public IEnumerable<Task> DoneTasks
+        {
+            get { return doneTasks; }
+            set
+            {
+                doneTasks = value;
+                OnPropertyChanged(nameof(DoneTasks));
+            }
+        }
+
+        private IEnumerable<Task> overdueTasks;
+        public IEnumerable<Task> OverdueTasks
+        {
+            get { return overdueTasks; }
+            set
+            {
+                overdueTasks = value;
+                OnPropertyChanged(nameof(OverdueTasks));
             }
         }
 
@@ -121,6 +143,7 @@ namespace ThesisManagement.ViewModels
         public TasksViewModel()
         {
             _taskRepo = new TaskRepository();
+            Thesis = new Thesis();
             CreateTaskCommand = new ViewModelCommand(ExecuteCreateTaskCommand);
             CreateOrUpdateCommand = new ViewModelCommand(ExecuteCreateOrUpdateCommand);
         }
@@ -141,7 +164,6 @@ namespace ThesisManagement.ViewModels
                 End = end,
                 Progress = progress
             };
-            Trace.WriteLine($"Selected Thesis nhận được là {thesisId}");
             if (id <= 0)
             {
                 var success = _taskRepo.Add(task);
@@ -153,10 +175,8 @@ namespace ThesisManagement.ViewModels
                 ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
             }
 
-            Tasks = _taskRepo.Get(thesisId);
-
+            LoadTasks();
             taskView?.Close();
-
             var mainWindow = Application.Current.MainWindow;
             mainWindow.Focus();
         }
@@ -164,11 +184,28 @@ namespace ThesisManagement.ViewModels
         private void ExecuteCreateTaskCommand(object obj)
         {
             TaskView taskView = new();
+            ResetTaskProperties();
             taskView.DataContext = this;
             taskView.Owner = Application.Current.MainWindow;
             taskView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             taskView.Show();
         }
 
+        private void LoadTasks()
+        {
+            PendingTasks = _taskRepo.GetPendingTasks(thesis.Id);
+            DoneTasks = _taskRepo.GetDoneTasks(thesis.Id);
+            OverdueTasks = _taskRepo.GetOverdueTasks(thesis.Id);
+        }
+
+        private void ResetTaskProperties()
+        {
+            Id = 0;
+            Name = "";
+            Description = "";
+            Start = DateTime.Now;
+            End = DateTime.Now.AddDays(7);
+            Progress = 0;
+        }
     }
 }

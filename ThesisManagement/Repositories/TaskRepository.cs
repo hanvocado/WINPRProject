@@ -1,12 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ThesisManagement.Models;
 using ThesisManagement.Repositories.EF;
 using Task = ThesisManagement.Models.Task;
 
@@ -19,6 +13,9 @@ namespace ThesisManagement.Repositories
         bool Delete(int id);
         ObservableCollection<Task> GetAll();
         IEnumerable<Task> Get(int thesisId);
+        IEnumerable<Task> GetPendingTasks(int thesisId);
+        IEnumerable<Task> GetDoneTasks(int thesisId);
+        IEnumerable<Task> GetOverdueTasks(int thesisId);
     }
 
     public class TaskRepository : ITaskRepository
@@ -72,6 +69,34 @@ namespace ThesisManagement.Repositories
         {
             var tasks = _context.Tasks.Include(th => th.Thesis)
                                       .Where(t => t.ThesisId == thesisId)
+                                      .AsNoTracking()
+                                      .ToList();
+            return tasks;
+        }
+
+        public IEnumerable<Task> GetPendingTasks(int thesisId)
+        {
+            var tasks = _context.Tasks.Include(th => th.Thesis)
+                                      .Where(t => t.ThesisId == thesisId && t.Progress < 100 && t.End >= DateTime.Now)
+                                      .AsNoTracking()
+                                      .ToList();
+            return tasks;
+        }
+
+        public IEnumerable<Task> GetDoneTasks(int thesisId)
+        {
+            var tasks = _context.Tasks.Include(th => th.Thesis)
+                                      .Where(t => t.ThesisId == thesisId && t.Progress == 100)
+                                      .AsNoTracking()
+                                      .ToList();
+            return tasks;
+        }
+
+        public IEnumerable<Task> GetOverdueTasks(int thesisId)
+        {
+            var tasks = _context.Tasks.Include(th => th.Thesis)
+                                      .Where(t => t.ThesisId == thesisId && t.Progress < 100 && t.End < DateTime.Now)
+                                      .AsNoTracking()
                                       .ToList();
             return tasks;
         }

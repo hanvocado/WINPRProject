@@ -1,7 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Input;
 using ThesisManagement.ViewModels;
 using Task = ThesisManagement.Models.Task;
 
@@ -17,7 +15,7 @@ namespace ThesisManagement.Views.Professor
         public TasksView()
         {
             InitializeComponent();
-            TaskListView.ItemContainerGenerator.StatusChanged += OnListViewItemStatusChanged;
+            //TaskListView.ItemContainerGenerator.StatusChanged += OnListViewItemStatusChanged;
         }
 
         private void ListViewItem_Click(object sender, RoutedEventArgs e)
@@ -55,37 +53,37 @@ namespace ThesisManagement.Views.Professor
             }
         }
 
-        private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)
-        {
-            //if (!Window.GetWindow(this).IsActive)
-            //    return;
+        //private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)
+        //{
+        //    //if (!Window.GetWindow(this).IsActive)
+        //    //    return;
 
-            var listViewItem = sender as ListViewItem;
-            var task = listViewItem?.DataContext as Task;
-            TasksViewModel dataContext = this.DataContext as TasksViewModel ?? new TasksViewModel();
-            if (task != null)
-            {
-                dataContext.Id = task.Id;
-                dataContext.ThesisId = task.ThesisId;
-                dataContext.Name = task.Name;
-                dataContext.Description = task.Description;
-                dataContext.Start = task.Start;
-                dataContext.End = task.End;
-                dataContext.Progress = task.Progress;
-            }
-        }
+        //    var listViewItem = sender as ListViewItem;
+        //    var task = listViewItem?.DataContext as Task;
+        //    TasksViewModel dataContext = this.DataContext as TasksViewModel ?? new TasksViewModel();
+        //    if (task != null)
+        //    {
+        //        dataContext.Id = task.Id;
+        //        dataContext.ThesisId = task.ThesisId;
+        //        dataContext.Name = task.Name;
+        //        dataContext.Description = task.Description;
+        //        dataContext.Start = task.Start;
+        //        dataContext.End = task.End;
+        //        dataContext.Progress = task.Progress;
+        //    }
+        //}
 
-        private void OnListViewItemStatusChanged(object sender, EventArgs e)
-        {
-            if (TaskListView.ItemContainerGenerator.Status == GeneratorStatus.ContainersGenerated)
-            {
-                foreach (var item in TaskListView.Items)
-                {
-                    ListViewItem listViewItem = (ListViewItem)TaskListView.ItemContainerGenerator.ContainerFromItem(item);
-                    if (listViewItem != null)
-                        listViewItem.MouseEnter += ListViewItem_MouseEnter;
-                }
-            }
-        }
+        //private void OnListViewItemStatusChanged(object sender, EventArgs e)
+        //{
+        //    if (TaskListView.ItemContainerGenerator.Status == GeneratorStatus.ContainersGenerated)
+        //    {
+        //        foreach (var item in TaskListView.Items)
+        //        {
+        //            ListViewItem listViewItem = (ListViewItem)TaskListView.ItemContainerGenerator.ContainerFromItem(item);
+        //            if (listViewItem != null)
+        //                listViewItem.MouseEnter += ListViewItem_MouseEnter;
+        //        }
+        //    }
+        //}
     }
 }
