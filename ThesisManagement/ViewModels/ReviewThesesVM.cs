@@ -1,8 +1,5 @@
-﻿using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
-using System.Xml.Linq;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
@@ -33,6 +30,7 @@ namespace ThesisManagement.ViewModels
         public ICommand ApproveCommand { get; set; }
         public ICommand RejectCommand { get; set; }
         public ICommand UndoCommand { get; set; }
+        public ICommand ShowTasksCommand { get; set; }
 
         public ReviewThesesVM()
         {
@@ -44,6 +42,7 @@ namespace ThesisManagement.ViewModels
             ApproveCommand = new ViewModelCommand(ExecuteApproveCommand);
             RejectCommand = new ViewModelCommand(ExecuteRejectCommand);
             UndoCommand = new ViewModelCommand(ExecuteUndoCommand);
+            ShowTasksCommand = new ViewModelCommand(ExecuteShowTasksCommand);
         }
 
         private void ExecuteApproveCommand(object obj)
@@ -55,6 +54,7 @@ namespace ThesisManagement.ViewModels
                 _thesisRepo.Update(selectedThesis);
                 WaitingTheses = _thesisRepo.Get(currentUserId, Variable.StatusTopic.Waiting);
             }
+            ApprovedTheses = _thesisRepo.Get(currentUserId, Variable.StatusTopic.Approved);
         }
 
         private void ExecuteRejectCommand(object obj)
@@ -97,6 +97,19 @@ namespace ThesisManagement.ViewModels
             MessageTimeRemain = "";
             if (timer > 0)
                 MessageTimeRemain = "Còn " + timer + " giây để hoàn tác!";
+        }
+
+        private void ExecuteShowTasksCommand(object obj)
+        {
+            TasksView tasksView = new();
+            tasksView.DataContext = new TasksViewModel
+            {
+                ThesisId = (int)obj,
+                Thesis = selectedThesis
+            };
+            tasksView.Owner = Application.Current.MainWindow;
+            tasksView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            tasksView.Show();
         }
     }
 }

@@ -1,20 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Syncfusion.Windows.Shared;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
 using ThesisManagement.Views.Professor;
-using Role = ThesisManagement.Repositories.Role;
 using Task = ThesisManagement.Models.Task;
 
 namespace ThesisManagement.ViewModels
@@ -39,8 +29,19 @@ namespace ThesisManagement.ViewModels
                 thesisId = value;
                 OnPropertyChanged(nameof(ThesisId));
             }
-        } 
-        
+        }
+
+        private Thesis thesis;
+        public Thesis Thesis
+        {
+            get { return thesis; }
+            set
+            {
+                thesis = value;
+                OnPropertyChanged(nameof(Thesis));
+            }
+        }
+
         private string name;
         public string Name
         {
@@ -50,8 +51,8 @@ namespace ThesisManagement.ViewModels
                 name = value;
                 OnPropertyChanged(nameof(Name));
             }
-        } 
-        
+        }
+
         private string description;
         public string Description
         {
@@ -114,14 +115,12 @@ namespace ThesisManagement.ViewModels
             }
         }
 
-        public ICommand ShowTasksCommand { get; set; }
         public ICommand CreateTaskCommand { get; set; }
         public ICommand CreateOrUpdateCommand { get; set; }
 
         public TasksViewModel()
         {
             _taskRepo = new TaskRepository();
-            ShowTasksCommand = new ViewModelCommand(ExecuteShowTasksCommand);
             CreateTaskCommand = new ViewModelCommand(ExecuteCreateTaskCommand);
             CreateOrUpdateCommand = new ViewModelCommand(ExecuteCreateOrUpdateCommand);
         }
@@ -171,13 +170,5 @@ namespace ThesisManagement.ViewModels
             taskView.Show();
         }
 
-        private void ExecuteShowTasksCommand(object obj)
-        {
-            TasksView tasksView = new();
-            tasksView.DataContext = this;
-            tasksView.Owner = Application.Current.MainWindow;
-            tasksView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            tasksView.Show();
-        }
     }
 }
