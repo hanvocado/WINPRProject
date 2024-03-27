@@ -12,11 +12,7 @@ using ThesisManagement.Repositories.EF;
 namespace ThesisManagement.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-<<<<<<<< HEAD:ThesisManagement/Migrations/20240326072921_Initial.Designer.cs
-    [Migration("20240326072921_Initial")]
-========
-    [Migration("20240326073102_Initial")]
->>>>>>>> main:ThesisManagement/Migrations/20240326073102_Initial.Designer.cs
+    [Migration("20240327004855_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
