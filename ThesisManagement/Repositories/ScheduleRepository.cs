@@ -1,11 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories.EF;
 
@@ -63,6 +57,7 @@ namespace ThesisManagement.Repositories
         {
             var meetings = _context.ScheduleInfos.Include(th => th.Thesis)
                                                   .Where(sch => sch.ThesisId == thesisId)
+                                                  .AsNoTracking()
                                                   .ToList();
             return meetings;
         }

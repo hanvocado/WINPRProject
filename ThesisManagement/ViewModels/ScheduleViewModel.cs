@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ThesisManagement.Models;
+﻿using ThesisManagement.Models;
 using ThesisManagement.Repositories;
 
 namespace ThesisManagement.ViewModels
@@ -17,8 +12,8 @@ namespace ThesisManagement.ViewModels
         {
             get { return id; }
             set { id = value; }
-        } 
-        
+        }
+
         private int thesisId;
         public int ThesisId
         {
@@ -26,6 +21,7 @@ namespace ThesisManagement.ViewModels
             set
             {
                 thesisId = value;
+                ScheduleInfos = _scheduleRepo.GetScheduleInfos(thesisId);
                 OnPropertyChanged(nameof(ThesisId));
             }
         }
@@ -100,8 +96,6 @@ namespace ThesisManagement.ViewModels
         {
             _scheduleRepo = new ScheduleRepository();
             selectedSchedule = new();
-            ScheduleInfos = _scheduleRepo.GetScheduleInfos(thesisId);
         }
-
     }
 }
