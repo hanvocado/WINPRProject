@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using ThesisManagement.Helpers;
 
 namespace ThesisManagement.Models
 {
@@ -27,31 +26,14 @@ namespace ThesisManagement.Models
 
         public ICollection<Student>? Students { get; set; }
 
-        [NotMapped]
-        public string StatusColor
-        {
-            get
-            {
-                if (TopicStatus == Variable.StatusTopic.Waiting)
-                    return "Yellow";
-                else if (TopicStatus == Variable.StatusTopic.Approved)
-                    return "Green";
-                else
-                    return "Red";
-            }
-        }
+        public ICollection<Notification> Notifications { get; set; } = new List<Notification>();
 
         [NotMapped]
-        public string StatusHoverColor
+        public int NoUnreadNotifications
         {
             get
             {
-                if (TopicStatus == Variable.StatusTopic.Waiting)
-                    return "Yellow";
-                else if (TopicStatus == Variable.StatusTopic.Approved)
-                    return "Green";
-                else
-                    return "Red";
+                return Notifications.Where(n => n.Read == false).Count();
             }
         }
     }

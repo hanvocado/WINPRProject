@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using ThesisManagement.Helpers;
 
 namespace ThesisManagement.Models
 {
@@ -35,34 +34,8 @@ namespace ThesisManagement.Models
         public ICollection<Thesis>? Theses { get; set; }
         public ICollection<Task>? Tasks { get; set; }
 
-
         [NotMapped]
-        public string PenColor
-        {
-            get
-            {
-                if (Theses != null)
-                {
-                    foreach (Thesis thesis in Theses)
-                    {
-                        if (thesis.TopicStatus == Variable.StatusTopic.Waiting)
-                        {
-                            return "#ffdd52";
-                        }
-                    }
-                }
-                return "LightGray";
-            }
-        }
-
-        [NotMapped]
-        public bool PenEnable
-        {
-            get
-            {
-                return PenColor != "LightGray";
-            }
-        }
+        public bool RegisteredByCurrentUser { get; set; } = false;
 
         public override string ToString()
         {

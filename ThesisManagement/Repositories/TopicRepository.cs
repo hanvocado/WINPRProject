@@ -127,11 +127,13 @@ namespace ThesisManagement.Repositories
                 return topics;
 
             var myTopic = currentStudent.Thesis!.Topic;
+
             if (myTopic.StudentId != null)
                 topics.Insert(0, myTopic);
             else
                 topics = topics.OrderByDescending(t => t.Id == myTopic.Id).ToList();
 
+            topics[0].RegisteredByCurrentUser = true;
             return topics;
         }
 
