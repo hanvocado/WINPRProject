@@ -1,19 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using ThesisManagement.Models;
 using ThesisManagement.ViewModels;
 using Task = ThesisManagement.Models.Task;
 
@@ -22,7 +10,7 @@ namespace ThesisManagement.Views.Professor
     /// <summary>
     /// Interaction logic for Taskss.xaml
     /// </summary>
-    public partial class TasksView : Window
+    public partial class TasksView : UserControl
     {
         private TaskView currentTaskView;
         public static bool IsTasksViewOpen { get; set; } = false;
@@ -69,8 +57,8 @@ namespace ThesisManagement.Views.Professor
 
         private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)
         {
-            if (!Window.GetWindow(this).IsActive)
-                return;
+            //if (!Window.GetWindow(this).IsActive)
+            //    return;
 
             var listViewItem = sender as ListViewItem;
             var task = listViewItem?.DataContext as Task;
@@ -94,7 +82,8 @@ namespace ThesisManagement.Views.Professor
                 foreach (var item in TaskListView.Items)
                 {
                     ListViewItem listViewItem = (ListViewItem)TaskListView.ItemContainerGenerator.ContainerFromItem(item);
-                    listViewItem.MouseEnter += ListViewItem_MouseEnter;
+                    if (listViewItem != null)
+                        listViewItem.MouseEnter += ListViewItem_MouseEnter;
                 }
             }
         }

@@ -30,7 +30,7 @@ namespace ThesisManagement.ViewModels
         public ICommand ApproveCommand { get; set; }
         public ICommand RejectCommand { get; set; }
         public ICommand UndoCommand { get; set; }
-        public ICommand ShowTasksCommand { get; set; }
+        public ICommand ShowThesisCommand { get; set; }
 
         public ReviewThesesVM()
         {
@@ -42,7 +42,7 @@ namespace ThesisManagement.ViewModels
             ApproveCommand = new ViewModelCommand(ExecuteApproveCommand);
             RejectCommand = new ViewModelCommand(ExecuteRejectCommand);
             UndoCommand = new ViewModelCommand(ExecuteUndoCommand);
-            ShowTasksCommand = new ViewModelCommand(ExecuteShowTasksCommand);
+            ShowThesisCommand = new ViewModelCommand(ExecuteShowThesisCommand);
         }
 
         private void ExecuteApproveCommand(object obj)
@@ -99,17 +99,15 @@ namespace ThesisManagement.ViewModels
                 MessageTimeRemain = "Còn " + timer + " giây để hoàn tác!";
         }
 
-        private void ExecuteShowTasksCommand(object obj)
+        private void ExecuteShowThesisCommand(object obj)
         {
-            TasksView tasksView = new();
-            tasksView.DataContext = new TasksViewModel
+            var vm = new MyThesisVM
             {
-                ThesisId = (int)obj,
                 Thesis = selectedThesis
             };
-            tasksView.Owner = Application.Current.MainWindow;
-            tasksView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            tasksView.Show();
+            var thesisView = new ThesisView { DataContext = vm };
+            thesisView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            thesisView.Show();
         }
     }
 }

@@ -96,7 +96,7 @@
                                             <customControls:ControlButton DefaultColor="#4fc3f7"
                                                                         HoverColor="#0093C4"
                                                                         Width="30"
-                                                                        Command="{Binding DataContext.ShowTasksCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                                        Command="{Binding DataContext.ShowThesisCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                                           CommandParameter="{Binding Id}">
                                                 <customControls:ControlButton.Content>
                                                     <fa:IconImage Icon="Pen" Style="{StaticResource btnIcon}" />
