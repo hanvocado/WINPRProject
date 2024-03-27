@@ -26,7 +26,7 @@ namespace ThesisManagement.Models
 
         public ICollection<Student>? Students { get; set; }
         public ICollection<Task>? Tasks { get; set; }
-
+        public ICollection<ScheduleInfo>? ScheduleInfos { get; set; }
 
         public ICollection<Notification> Notifications { get; set; } = new List<Notification>();
 

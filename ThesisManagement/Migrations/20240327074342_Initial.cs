@@ -111,6 +111,52 @@ namespace ThesisManagement.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Notification",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Details = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ThesisId = table.Column<int>(type: "int", nullable: false),
+                    Read = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notification", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Notification_Theses_ThesisId",
+                        column: x => x.ThesisId,
+                        principalTable: "Theses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ScheduleInfos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ThesisId = table.Column<int>(type: "int", nullable: false),
+                    From = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    To = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EventName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Color = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ScheduleInfos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ScheduleInfos_Theses_ThesisId",
+                        column: x => x.ThesisId,
+                        principalTable: "Theses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Students",
                 columns: table => new
                 {
@@ -206,10 +252,20 @@ namespace ThesisManagement.Migrations
                 column: "ThesisId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Notification_ThesisId",
+                table: "Notification",
+                column: "ThesisId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Professor_Email",
                 table: "Professor",
                 column: "Email",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ScheduleInfos_ThesisId",
+                table: "ScheduleInfos",
+                column: "ThesisId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Students_Email",
@@ -245,6 +301,12 @@ namespace ThesisManagement.Migrations
 
             migrationBuilder.DropTable(
                 name: "Feedbacks");
+
+            migrationBuilder.DropTable(
+                name: "Notification");
+
+            migrationBuilder.DropTable(
+                name: "ScheduleInfos");
 
             migrationBuilder.DropTable(
                 name: "Students");
