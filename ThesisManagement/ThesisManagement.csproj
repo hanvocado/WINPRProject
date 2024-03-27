@@ -34,6 +34,7 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
     <PackageReference Include="Syncfusion.Licensing" Version="24.2.9" />
+    <PackageReference Include="Syncfusion.SfNavigationDrawer.WPF" Version="24.2.9" />
     <PackageReference Include="Syncfusion.SfScheduler.WPF" Version="24.2.9" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
   </ItemGroup>

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ThesisManagement.Views.Professor"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        xmlns:sf="http://schemas.syncfusion.com/wpf"
         xmlns:viewModel="clr-namespace:ThesisManagement.ViewModels"
         xmlns:customControl="clr-namespace:ThesisManagement.CustomControls"
         mc:Ignorable="d"
@@ -35,81 +36,101 @@
     </Window.Resources>
 
     <Border CornerRadius="0">
-        <Grid>
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="65" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-            <Border Grid.Column="0" Background="{StaticResource primaryBrush}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="120"/>
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    
-                    <StackPanel Grid.Row="1">
-                        <RadioButton Style="{StaticResource navBtn}" IsChecked="True"
-                                     Command="{Binding ShowTopicsView}">
-                            <RadioButton.ToolTip>
-                                <ToolTip Content="Đề tài" Style="{StaticResource navToolTip}" />
-                            </RadioButton.ToolTip>
-                            <fa:IconImage Icon="RectangleList" Style="{StaticResource navIcon}" />
-                        </RadioButton>
-
-                        <RadioButton Style="{StaticResource navBtn}"
-                                     Command="{Binding ShowStudentView}">
-                            <RadioButton.ToolTip>
-                                <ToolTip Content="Sinh viên" Style="{StaticResource navToolTip}" />
-                            </RadioButton.ToolTip>
-                            <fa:IconImage Icon="UserLarge" Style="{StaticResource navIcon}" />
-                        </RadioButton>
-
-                        <RadioButton Style="{StaticResource navBtn}" 
-                                     Command="{Binding ShowThesisView}">
-                            <RadioButton.ToolTip>
-                                <ToolTip Content="Luận văn" Style="{StaticResource navToolTip}" />
-                            </RadioButton.ToolTip>
-                            <fa:IconImage Icon="Book" Style="{StaticResource navIcon}" />
-                        </RadioButton>
-
-                        <RadioButton Style="{StaticResource navBtn}"
-                                     Command="{Binding ShowProfessorProfileView}">
-                            <RadioButton.ToolTip>
-                                <ToolTip Content="Đề tài" Style="{StaticResource navToolTip}" />
-                            </RadioButton.ToolTip>
-                            <fa:IconImage Icon="UserTie" Style="{StaticResource navIcon}" />
-                        </RadioButton>
-
-                        <RadioButton Style="{StaticResource navBtn}"
-                                     Command="{Binding LogoutCommand}">
-                            <RadioButton.ToolTip>
-                                <ToolTip Content="Đăng xuất" Style="{StaticResource navToolTip}" />
-                            </RadioButton.ToolTip>
-                            <fa:IconImage Icon="RightFromBracket" Style="{StaticResource navIcon}" />
-                        </RadioButton>
+        <Border Grid.Column="0">
+            <sf:SfNavigationDrawer x:Name="navigationDrawer" 
+                                   CompactModeWidth="50"
+                                   ExpandedModeWidth="150"
+                                    DisplayMode="Compact"
+                                   DrawerBackground="{StaticResource primaryBrush}"
+                                   Foreground="White"
+                                    AutoChangeDisplayMode="True" ExpandedModeThresholdWidth="900">
+                <sf:SfNavigationDrawer.DrawerHeaderView>
+                    <Grid Background="#31ade9">
+                        <Label Content="Header View" />
+                    </Grid>
+                </sf:SfNavigationDrawer.DrawerHeaderView>
+                <sf:NavigationItem Header="Đề tài" Command="{Binding ShowTopicsView}">
+                    <sf:NavigationItem.Icon>
+                        <fa:IconImage Icon="RectangleList" Style="{StaticResource navIcon}"/>
+                    </sf:NavigationItem.Icon>
+                </sf:NavigationItem>
+                
+                <sf:NavigationItem Header="Sinh viên" Command="{Binding ShowStudentView}">
+                    <sf:NavigationItem.Icon>
+                        <fa:IconImage Icon="UserGraduate" Style="{StaticResource navIcon}"/>
+                    </sf:NavigationItem.Icon>
+                </sf:NavigationItem>
+                
+                <sf:NavigationItem Header="Tôi" Command="{Binding ShowProfessorProfileView}">
+                    <sf:NavigationItem.Icon>
+                        <fa:IconImage Icon="Person" Style="{StaticResource navIcon}"/>
+                    </sf:NavigationItem.Icon>
+                </sf:NavigationItem>
+                
+                <sf:NavigationItem Header="Đăng xuất" Command="{Binding LogoutCommand}">
+                    <sf:NavigationItem.Icon>
+                        <fa:IconImage Icon="RightFromBracket" Style="{StaticResource navIcon}" />
+                    </sf:NavigationItem.Icon>
+                </sf:NavigationItem>
+                
+                <sf:SfNavigationDrawer.ContentView>
+                    <StackPanel>
+                        <customControl:WindowControlBar />
+                        <ContentControl Margin="20 5 20 0"
+                                        Content="{Binding CurrentChildView}">
+                        </ContentControl>
                     </StackPanel>
-                </Grid>
-            </Border>
+                </sf:SfNavigationDrawer.ContentView>
+            </sf:SfNavigationDrawer>
+            <!--<Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="120"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                    
+                <StackPanel Grid.Row="1">
+                    <RadioButton Style="{StaticResource navBtn}" IsChecked="True"
+                                    Command="{Binding ShowTopicsView}">
+                        <RadioButton.ToolTip>
+                            <ToolTip Content="Đề tài" Style="{StaticResource navToolTip}" />
+                        </RadioButton.ToolTip>
+                        <fa:IconImage Icon="RectangleList" Style="{StaticResource navIcon}" />
+                    </RadioButton>
 
-            <Border Grid.Column="1">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+                    <RadioButton Style="{StaticResource navBtn}"
+                                    Command="{Binding ShowStudentView}">
+                        <RadioButton.ToolTip>
+                            <ToolTip Content="Sinh viên" Style="{StaticResource navToolTip}" />
+                        </RadioButton.ToolTip>
+                        <fa:IconImage Icon="UserLarge" Style="{StaticResource navIcon}" />
+                    </RadioButton>
 
-                    <customControl:WindowControlBar />
+                    <RadioButton Style="{StaticResource navBtn}" 
+                                    Command="{Binding ShowThesisView}">
+                        <RadioButton.ToolTip>
+                            <ToolTip Content="Luận văn" Style="{StaticResource navToolTip}" />
+                        </RadioButton.ToolTip>
+                        <fa:IconImage Icon="Book" Style="{StaticResource navIcon}" />
+                    </RadioButton>
 
-                    <ContentControl Grid.Row="1"
-                                    Margin="20 5 20 0"
-                                    Content="{Binding CurrentChildView}">
-                    </ContentControl>
+                    <RadioButton Style="{StaticResource navBtn}"
+                                    Command="{Binding ShowProfessorProfileView}">
+                        <RadioButton.ToolTip>
+                            <ToolTip Content="Đề tài" Style="{StaticResource navToolTip}" />
+                        </RadioButton.ToolTip>
+                        <fa:IconImage Icon="UserTie" Style="{StaticResource navIcon}" />
+                    </RadioButton>
 
-                </Grid>
-            </Border>
-        </Grid>
+                    <RadioButton Style="{StaticResource navBtn}"
+                                    Command="{Binding LogoutCommand}">
+                        <RadioButton.ToolTip>
+                            <ToolTip Content="Đăng xuất" Style="{StaticResource navToolTip}" />
+                        </RadioButton.ToolTip>
+                        <fa:IconImage Icon="RightFromBracket" Style="{StaticResource navIcon}" />
+                    </RadioButton>
+                </StackPanel>
+            </Grid>-->
+        </Border>
     </Border>
 
 </Window>
