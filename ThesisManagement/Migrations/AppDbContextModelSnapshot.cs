@@ -244,22 +244,29 @@ namespace ThesisManagement.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("DeadLine")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Text")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TopicId")
+                    b.Property<DateTime>("End")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Progress")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Start")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ThesisId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TopicId");
+                    b.HasIndex("ThesisId");
 
                     b.ToTable("Tasks");
                 });
@@ -413,13 +420,13 @@ namespace ThesisManagement.Migrations
 
             modelBuilder.Entity("ThesisManagement.Models.Task", b =>
                 {
-                    b.HasOne("ThesisManagement.Models.Topic", "Topic")
+                    b.HasOne("ThesisManagement.Models.Thesis", "Thesis")
                         .WithMany("Tasks")
-                        .HasForeignKey("TopicId")
+                        .HasForeignKey("ThesisId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Topic");
+                    b.Navigation("Thesis");
                 });
 
             modelBuilder.Entity("ThesisManagement.Models.Thesis", b =>
@@ -454,12 +461,12 @@ namespace ThesisManagement.Migrations
                     b.Navigation("Feedbacks");
 
                     b.Navigation("Students");
+
+                    b.Navigation("Tasks");
                 });
 
             modelBuilder.Entity("ThesisManagement.Models.Topic", b =>
                 {
-                    b.Navigation("Tasks");
-
                     b.Navigation("Theses");
                 });
 #pragma warning restore 612, 618

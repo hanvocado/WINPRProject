@@ -7,10 +7,16 @@
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="900"
              Background="white">
-    <Grid>
+    <UserControl.Resources>
+        <viewModels:ReviewThesesVM x:Key="ReviewThesesVM"/>
+        <viewModels:TasksViewModel x:Key="TasksViewModel"/>
+    </UserControl.Resources>
+    
+    <Grid DataContext="{StaticResource ReviewThesesVM}">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition />
@@ -53,32 +59,46 @@
 
             <TabItem Header="Đã duyệt">
                 <ListView Grid.Row="1"
-                        Name="AdminsListView"
-                        ItemsSource="{Binding Topics}">
+                            Background="{DynamicResource MaterialDesignPaper}"
+                            Name="ThesisListView"
+                            ItemsSource="{Binding ApprovedTheses, UpdateSourceTrigger=PropertyChanged}"
+                            SelectedItem="{Binding SelectedThesis, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Width="300"
-                                    DisplayMemberBinding="{Binding Topic}" >
+                            <GridViewColumn Width="400"
+                                            DisplayMemberBinding="{Binding Topic.Name, Mode=TwoWay}">
                                 <GridViewColumn.Header>
                                     <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Đề tài" />
                                 </GridViewColumn.Header>
                             </GridViewColumn>
-
-                            <GridViewColumn Width="300"
-                                        DisplayMemberBinding="{Binding Students}">
+                            <GridViewColumn Width="300">
                                 <GridViewColumn.Header>
-                                    <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Sinh viên" />
+                                    <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Danh sách sinh viên" />
                                 </GridViewColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ItemsControl ItemsSource="{Binding Students}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Name}" Margin="2"/>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn Width="140">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Template="{StaticResource lvHeader}" />
+                                </GridViewColumn.Header>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
                                             <customControls:ControlButton DefaultColor="#4fc3f7"
                                                                         HoverColor="#0093C4"
                                                                         Width="30"
-                                                                        Margin="5 0 0 0"
-                                                                        Click="Button_click">
+                                                                        DataContext="{StaticResource TasksViewModel}"
+                                                                        Command="{Binding ShowTasksCommand }">
                                                 <customControls:ControlButton.Content>
                                                     <fa:IconImage Icon="Pen" Style="{StaticResource btnIcon}" />
                                                 </customControls:ControlButton.Content>
@@ -87,8 +107,6 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-
-
                         </GridView>
                     </ListView.View>
                 </ListView>

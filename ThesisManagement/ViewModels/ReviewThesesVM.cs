@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
+using ThesisManagement.Views.Professor;
 using Task = System.Threading.Tasks.Task;
 
 namespace ThesisManagement.ViewModels
@@ -14,11 +15,13 @@ namespace ThesisManagement.ViewModels
     {
         private readonly string currentUserId;
         private readonly IThesisRepository _thesisRepo;
-        private IEnumerable<Thesis> theses;
+        private IEnumerable<Thesis> waitingTheses;
+        private IEnumerable<Thesis> approvedTheses;
         private Thesis selectedThesis;
 
         public Thesis SelectedThesis { get => selectedThesis; set { selectedThesis = value; OnPropertyChanged(nameof(SelectedThesis)); } }
-        public IEnumerable<Thesis> Theses { get => theses; set { theses = value; OnPropertyChanged(nameof(Theses)); } }
+        public IEnumerable<Thesis> WaitingTheses { get => waitingTheses; set { waitingTheses = value; OnPropertyChanged(nameof(WaitingTheses)); } }
+        public IEnumerable<Thesis> ApprovedTheses { get => approvedTheses; set { approvedTheses = value; OnPropertyChanged(nameof(ApprovedTheses)); } }
 
         private Visibility visibleRestoreButton = Visibility.Hidden;
         public Visibility VisibleRestoreButton { get => visibleRestoreButton; set { visibleRestoreButton = value; OnPropertyChanged(); } }
@@ -36,7 +39,8 @@ namespace ThesisManagement.ViewModels
             _thesisRepo = new ThesisRepository();
             currentUserId = SessionInfo.UserId;
             selectedThesis = new Thesis();
-            Theses = _thesisRepo.Get(currentUserId, Variable.StatusTopic.Waiting);
+            WaitingTheses = _thesisRepo.Get(currentUserId, Variable.StatusTopic.Waiting);
+            ApprovedTheses = _thesisRepo.Get(currentUserId, Variable.StatusTopic.Approved);
             ApproveCommand = new ViewModelCommand(ExecuteApproveCommand);
             RejectCommand = new ViewModelCommand(ExecuteRejectCommand);
             UndoCommand = new ViewModelCommand(ExecuteUndoCommand);
@@ -49,7 +53,7 @@ namespace ThesisManagement.ViewModels
             {
                 selectedThesis.TopicStatus = Variable.StatusTopic.Approved;
                 _thesisRepo.Update(selectedThesis);
-                Theses = _thesisRepo.Get(currentUserId, Variable.StatusTopic.Waiting);
+                WaitingTheses = _thesisRepo.Get(currentUserId, Variable.StatusTopic.Waiting);
             }
         }
 
@@ -57,7 +61,7 @@ namespace ThesisManagement.ViewModels
         {
             selectedThesis.TopicStatus = Variable.StatusTopic.Rejected;
             _thesisRepo.Update(selectedThesis);
-            Theses = _thesisRepo.Get(currentUserId, Variable.StatusTopic.Waiting);
+            WaitingTheses = _thesisRepo.Get(currentUserId, Variable.StatusTopic.Waiting);
         }
 
         private void ExecuteUndoCommand(object obj)

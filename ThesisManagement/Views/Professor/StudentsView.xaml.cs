@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -14,34 +15,44 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ThesisManagement.Models;
+using ThesisManagement.ViewModels;
 
 namespace ThesisManagement.Views.Professor
 {
-    /// <summary>
-    /// Interaction logic for StudentView.xaml
-    /// </summary>
     public partial class StudentsView : UserControl
     {
         public StudentsView()
         {
             InitializeComponent();
-            Topics = new ObservableCollection<AceptTopic>
-            {
-                new AceptTopic {Topic="Website bán hàng",Students="Võ Văn Nam, Nguyễn Bảo Hân , kha Văn Hoàng " },
-            };
-            this.DataContext = this;
+            ThesisListView.ItemContainerGenerator.StatusChanged += OnListViewItemStatusChanged;
         }
-        public class AceptTopic
-        {
-            public string Topic { get; set; }
-            public string Students { get; set; }
 
-        }
-        public ObservableCollection<AceptTopic> Topics { get; set; }
-        private void Button_click(object sender, RoutedEventArgs e)
+        private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)
         {
-            Tasks tasks = new Tasks();
-            tasks.ShowDialog();
+            if (!Window.GetWindow(this).IsActive)
+                return;
+
+            var listViewItem = sender as ListViewItem;
+            var thesis = listViewItem?.DataContext as Thesis;
+            TasksViewModel dataContext = new TasksViewModel();
+            if (thesis != null)
+            {
+                dataContext.ThesisId = thesis.Id;
+                //MessageBox.Show($"{dataContext.ThesisId}" );
+            }
+        }
+
+        private void OnListViewItemStatusChanged(object sender, EventArgs e)
+        {
+            if (ThesisListView.ItemContainerGenerator.Status == GeneratorStatus.ContainersGenerated)
+            {
+                foreach (var item in ThesisListView.Items)
+                {
+                    ListViewItem listViewItem = (ListViewItem)ThesisListView.ItemContainerGenerator.ContainerFromItem(item);
+                    listViewItem.MouseEnter += ListViewItem_MouseEnter;
+                }
+            }
         }
     }
 }

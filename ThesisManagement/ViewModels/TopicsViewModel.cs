@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Windows;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
