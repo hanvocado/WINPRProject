@@ -22,6 +22,7 @@ namespace ThesisManagement.ViewModels
             {
                 thesisId = value;
                 ScheduleInfos = _scheduleRepo.GetScheduleInfos(thesisId);
+                CountUpcomingSchedules = _scheduleRepo.CountUpcomingSchedules(thesisId);
                 OnPropertyChanged(nameof(ThesisId));
             }
         }
@@ -89,6 +90,17 @@ namespace ThesisManagement.ViewModels
             {
                 scheduleInfos = value;
                 OnPropertyChanged(nameof(ScheduleInfos));
+            }
+        }
+
+        private int countUpcomingSchedules;
+        public int CountUpcomingSchedules
+        {
+            get => countUpcomingSchedules;
+            set
+            {
+                countUpcomingSchedules = value;
+                OnPropertyChanged(nameof(CountUpcomingSchedules));
             }
         }
 
