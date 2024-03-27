@@ -16,10 +16,11 @@ namespace ThesisManagement.Views.Professor
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var thesisVM = this.DataContext as MyThesisVM;
+            mainContainer.DataContext = thesisVM;
             tasksView.DataContext = new TasksViewModel
             {
                 ThesisId = thesisVM.Thesis.Id,
-                Thesis = thesisVM.Thesis
+                Thesis = thesisVM.Thesis,
             };
         }
     }

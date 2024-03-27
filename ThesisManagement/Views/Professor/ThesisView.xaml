@@ -12,206 +12,218 @@
         WindowStyle="None"
         Loaded="Window_Loaded"
         FontSize="12"
+        Style="{StaticResource formStyle}"
         Title="ThesisView" Height="550" Width="900">
     <Window.Resources>
         <viewModels:MyThesisVM x:Key="MyThesisVM"/>
         <customControls:CollectionToStringConverter x:Key="CollectionToStringConverter"/>
     </Window.Resources>
 
-    <md:Card Background="{DynamicResource MaterialDesignPaper}" Margin="0,0,0,10" DataContext="{StaticResource MyThesisVM}">
-        <Grid Margin="5">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="25"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        
+        <customControls:PopupControlBar />
 
-            <customControls:PopupControlBar />
-
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="5*"/>
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
-                    <Image Source="/Resources/Images/UTE.png" Height="50" Width="50" />
-                </Grid>
-                <Border Grid.Column="1" Padding="0 0 20 0">
-                    <TextBlock Style="{StaticResource title}" HorizontalAlignment="Left" >
-                <Run Text="Đề tài: "/>
-                <Run Text="{Binding Topic.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    </TextBlock>
-                </Border>
-            </Grid>
+        <Border Grid.Row="1" Background="White" Padding="15 0 15 15">
+            <md:Card Background="{DynamicResource MaterialDesignPaper}" x:Name="mainContainer">
+                <Grid Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
 
-            <Grid Grid.Row="2">
-                <TabControl
-                HorizontalContentAlignment="Center"
-                Style="{StaticResource MaterialDesignUniformTabControl}">
-                    <TabItem Header="Tổng quan">
-                        <Border Padding="0 15 0 0">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="280"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-
-                                <Grid Grid.Column="0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="70"/>
-                                        <RowDefinition Height="70"/>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                    </Grid.RowDefinitions>
-
-                                    <StackPanel Orientation="Vertical"
-                                            Grid.Row="0">
-                                        <TextBlock Text="Giảng viên: "
-                                               Style="{StaticResource label}"
-                                               Margin="10,5"
-                                               FontWeight="Medium"/>
-                                        <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,0,0">
-                                            <TextBlock Text="{Binding Topic.Professor.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                   Height="30"
-                                                   Margin="10,5,0,0"/>
-                                        </md:ColorZone>
-                                    </StackPanel>
-
-                                    <StackPanel Orientation="Vertical"
-                                            Grid.Row="1">
-                                        <TextBlock Text="Thể loại: "
-                                                Style="{StaticResource label}"
-                                                Margin="10,5"
-                                                FontWeight="Medium"/>
-                                        <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,0,20">
-                                            <TextBlock Text="{Binding Topic.Category, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                    Height="30"
-                                                    Margin="10,10,0,0"/>
-                                        </md:ColorZone>
-                                    </StackPanel>
-
-                                    <StackPanel Orientation="Vertical"
-                                            Grid.Row="2">
-                                        <TextBlock Text="Công nghệ: "
-                                               Style="{StaticResource label}"
-                                                Margin="10,5"
-                                                FontWeight="Medium"/>
-                                        <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,0,20">
-                                            <TextBlock Text="{Binding Topic.Technology, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                    Height="70"
-                                                    Margin="15"/>
-                                        </md:ColorZone>
-                                    </StackPanel>
-
-                                    <StackPanel Orientation="Vertical"
-                                            Grid.Row="3">
-                                        <TextBlock Text="Thành viên: "
-                                                Style="{StaticResource label}"
-                                                Margin="10,5"
-                                                FontWeight="Medium"/>
-                                        <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,0,20">
-                                            <TextBlock Text="{Binding Students, Converter={StaticResource CollectionToStringConverter}}"
-                                                    Height="70"
-                                                    Margin="15"/>
-                                        </md:ColorZone>
-                                    </StackPanel>
-                                </Grid>
-
-                                <Grid Grid.Column="1">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-
-                                    <StackPanel Orientation="Vertical"
-                                            Grid.Row="0">
-                                        <TextBlock Style="{StaticResource label}"
-                                               Text="Mô tả: "
-                                               Margin="10,5"
-                                               FontWeight="Medium"/>
-                                        <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,10,10">
-                                            <ScrollViewer>
-                                                <TextBlock Text="{Binding Topic.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                        Height="70"
-                                                        Margin="15"
-                                                        TextWrapping="Wrap"/>
-                                            </ScrollViewer>
-                                        </md:ColorZone>
-                                    </StackPanel>
-
-                                    <StackPanel Orientation="Vertical"
-                                            Grid.Row="1">
-                                        <TextBlock Style="{StaticResource label}"
-                                               Text="Chức năng:: "
-                                               Margin="10,5"
-                                               FontWeight="Medium"/>
-                                        <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,10,10">
-                                            <ScrollViewer>
-                                                <TextBlock Text="{Binding Topic.Function, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                         Height="70"
-                                                         Margin="15"
-                                                        TextWrapping="Wrap"/>
-                                            </ScrollViewer>
-                                        </md:ColorZone>
-                                    </StackPanel>
-
-                                    <StackPanel Orientation="Vertical"
-                                            Grid.Row="2">
-                                        <TextBlock Style="{StaticResource label}"
-                                               Grid.Column="3"
-                                               Text="Yêu cầu: "
-                                               Margin="10,5"
-                                               FontWeight="Medium"/>
-                                        <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,10,10">
-                                            <ScrollViewer>
-                                                <TextBlock Text="{Binding Topic.Requirement, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                         Height="70"
-                                                         Margin="15"
-                                                        TextWrapping="Wrap"/>
-                                            </ScrollViewer>
-                                        </md:ColorZone>
-                                    </StackPanel>
-                                </Grid>
-                            </Grid>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <Image Source="/Resources/Images/UTE.png" Height="50" Width="50" />
+                        </Grid>
+                        <Border Grid.Column="1" Padding="0 0 20 0">
+                            <TextBlock Style="{StaticResource title}" HorizontalAlignment="Left" >
+                            <Run Text="Đề tài: "/>
+                            <Run Text="{Binding Topic.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            </TextBlock>
                         </Border>
-                    </TabItem>
+                    </Grid>
 
-                    <TabItem Header="Nhiệm vụ">
-                        <local:TasksView x:Name="tasksView" />
-                    </TabItem>
 
-                    <TabItem>
-                        <TabItem.Header>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Thông báo" Margin="0 0 0 0" VerticalAlignment="Center" />
-                                <Border CornerRadius="20" Background="red" Margin="-2 -8 2 8" Width="13" Height="13">
-                                    <TextBlock Foreground="white" Text="2" TextAlignment="Center" FontWeight="Medium" FontSize="10" />
+                    <Grid Grid.Row="1">
+                        <TabControl
+                            HorizontalContentAlignment="Center"
+                            Style="{StaticResource MaterialDesignUniformTabControl}">
+                            <TabItem Header="Tổng quan">
+                                <Border Padding="0 15 0 0">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="280"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid Grid.Column="0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="70"/>
+                                                <RowDefinition Height="70"/>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+
+                                            <StackPanel Orientation="Vertical"
+                                                        Grid.Row="0">
+                                                <TextBlock Text="Giảng viên: "
+                                                           Style="{StaticResource label}"
+                                                           Margin="10,5"
+                                                           FontWeight="Medium"/>
+                                                <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,0,0">
+                                                    <TextBlock Text="{Binding Topic.Professor.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                               Height="30"
+                                                               Margin="10,5,0,0"/>
+                                                </md:ColorZone>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Vertical"
+                                                        Grid.Row="1">
+                                                <TextBlock Text="Thể loại: "
+                                                            Style="{StaticResource label}"
+                                                            Margin="10,5"
+                                                            FontWeight="Medium"/>
+                                                <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,0,20">
+                                                    <TextBlock Text="{Binding Topic.Category, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                                Height="30"
+                                                                Margin="10,10,0,0"/>
+                                                </md:ColorZone>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Vertical"
+                                                        Grid.Row="2">
+                                                <TextBlock Text="Công nghệ: "
+                                                           Style="{StaticResource label}"
+                                                            Margin="10,5"
+                                                            FontWeight="Medium"/>
+                                                <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,0,20">
+                                                    <TextBlock Text="{Binding Topic.Technology, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                                Height="70"
+                                                                Margin="15"/>
+                                                </md:ColorZone>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Vertical"
+                                                        Grid.Row="3">
+                                                <TextBlock Text="Thành viên: "
+                                                            Style="{StaticResource label}"
+                                                            Margin="10,5"
+                                                            FontWeight="Medium"/>
+                                                <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,0,20">
+                                                    <TextBlock Text="{Binding Thesis.Students, Converter={StaticResource CollectionToStringConverter}}"
+                                                                Height="70"
+                                                                Margin="15"/>
+                                                </md:ColorZone>
+                                            </StackPanel>
+                                        </Grid>
+
+                                        <Grid Grid.Column="1">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+
+                                            <StackPanel Orientation="Vertical"
+                                                        Grid.Row="0">
+                                                <TextBlock Style="{StaticResource label}"
+                                                           Text="Mô tả: "
+                                                           Margin="10,5"
+                                                           FontWeight="Medium"/>
+                                                <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,10,10">
+                                                    <ScrollViewer>
+                                                        <TextBlock Text="{Binding Topic.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                                    Height="70"
+                                                                    Margin="15"
+                                                                    TextWrapping="Wrap"/>
+                                                    </ScrollViewer>
+                                                </md:ColorZone>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Vertical"
+                                                        Grid.Row="1">
+                                                <TextBlock Style="{StaticResource label}"
+                                                           Text="Chức năng:: "
+                                                           Margin="10,5"
+                                                           FontWeight="Medium"/>
+                                                <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,10,10">
+                                                    <ScrollViewer>
+                                                        <TextBlock Text="{Binding Topic.Function, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                                     Height="70"
+                                                                     Margin="15"
+                                                                    TextWrapping="Wrap"/>
+                                                    </ScrollViewer>
+                                                </md:ColorZone>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Vertical"
+                                                        Grid.Row="2">
+                                                <TextBlock Style="{StaticResource label}"
+                                                           Grid.Column="3"
+                                                           Text="Yêu cầu: "
+                                                           Margin="10,5"
+                                                           FontWeight="Medium"/>
+                                                <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,10,10">
+                                                    <ScrollViewer>
+                                                        <TextBlock Text="{Binding Topic.Requirement, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                                     Height="70"
+                                                                     Margin="15"
+                                                                    TextWrapping="Wrap"/>
+                                                    </ScrollViewer>
+                                                </md:ColorZone>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Grid>
                                 </Border>
-                            </StackPanel>
-                        </TabItem.Header>
-                        <ListView ItemsSource="{Binding Thesis.Notifications}">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Width="300"
-                                                DisplayMemberBinding="{Binding Title}">
-                                        <GridViewColumn.Header>
-                                            <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Tiêu đề" />
-                                        </GridViewColumn.Header>
-                                    </GridViewColumn>
-                                    <GridViewColumn Width="500"
-                                                DisplayMemberBinding="{Binding Details}">
-                                        <GridViewColumn.Header>
-                                            <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Chi tiết" />
-                                        </GridViewColumn.Header>
-                                    </GridViewColumn>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
-                    </TabItem>
-                </TabControl>
-            </Grid>
-        </Grid>
-    </md:Card>
+                            </TabItem>
+
+                            <TabItem Header="Nhiệm vụ">
+                                <local:TasksView x:Name="tasksView" />
+                            </TabItem>
+
+                            <TabItem>
+                                <TabItem.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Thông báo" Margin="0 0 0 0" VerticalAlignment="Center" />
+                                        <Border CornerRadius="20" Background="red" Margin="-2 -8 2 8" Width="13" Height="13">
+                                            <TextBlock Foreground="white" Text="2" TextAlignment="Center" FontWeight="Medium" FontSize="10" />
+                                        </Border>
+                                    </StackPanel>
+                                </TabItem.Header>
+                                <ListView ItemsSource="{Binding Thesis.Notifications}">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Width="300"
+                                                            DisplayMemberBinding="{Binding Title}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Tiêu đề" />
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                            <GridViewColumn Width="500"
+                                                            DisplayMemberBinding="{Binding Details}">
+                                                <GridViewColumn.Header>
+                                                    <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Chi tiết" />
+                                                </GridViewColumn.Header>
+                                            </GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </TabItem>
+                        </TabControl>
+                    </Grid>
+                </Grid>
+            </md:Card>
+        </Border>
+        
+    </Grid>
+
 </Window>

@@ -101,10 +101,9 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteShowThesisCommand(object obj)
         {
-            var vm = new MyThesisVM
-            {
-                Thesis = selectedThesis
-            };
+            var vm = new MyThesisVM();
+            vm.Thesis = selectedThesis;
+            vm.Topic = selectedThesis.Topic;
             var thesisView = new ThesisView { DataContext = vm };
             thesisView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             thesisView.Show();

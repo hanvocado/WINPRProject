@@ -109,7 +109,7 @@
                                                     Margin="10,5"
                                                     FontWeight="Medium"/>
                                         <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,0,20">
-                                            <TextBlock Text="{Binding Students, Converter={StaticResource CollectionToStringConverter}}"
+                                            <TextBlock Text="{Binding Thesis.Students, Converter={StaticResource CollectionToStringConverter}}"
                                                         Height="70"
                                                         Margin="15"/>
                                         </md:ColorZone>
