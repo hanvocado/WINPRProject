@@ -48,8 +48,6 @@
                         <RowDefinition Height="120"/>
                         <RowDefinition />
                     </Grid.RowDefinitions>
-
-                    <Image Source="/Resources/Images/logo-bright.png" Height="28" Margin="0 22 0 0" />
                     
                     <StackPanel Grid.Row="1">
                         <RadioButton Style="{StaticResource navBtn}" IsChecked="True"

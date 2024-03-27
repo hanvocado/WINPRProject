@@ -190,15 +190,7 @@
                                 <local:TasksView x:Name="tasksView" />
                             </TabItem>
 
-                            <TabItem>
-                                <TabItem.Header>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Thông báo" Margin="0 0 0 0" VerticalAlignment="Center" />
-                                        <Border CornerRadius="20" Background="red" Margin="-2 -8 2 8" Width="13" Height="13">
-                                            <TextBlock Foreground="white" Text="2" TextAlignment="Center" FontWeight="Medium" FontSize="10" />
-                                        </Border>
-                                    </StackPanel>
-                                </TabItem.Header>
+                            <TabItem Header="Lịch họp">
                                 <ListView ItemsSource="{Binding Thesis.Notifications}">
                                     <ListView.View>
                                         <GridView>
