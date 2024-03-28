@@ -28,9 +28,6 @@
     <Compile Update="Views\Admin\ProfessorsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Professor\ScheduleView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Views\Professor\TaskView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -67,6 +64,9 @@
     <Compile Update="Views\Shared\LoginView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Shared\SchedulesView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Shared\TasksView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -89,6 +89,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Student\ProfileStudentView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Student\ScheduleDetailsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Student\SearchThesis.xaml.cs">
@@ -153,9 +156,6 @@
     <Page Update="Views\Admin\ProfessorsView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Professor\ScheduleView.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="Views\Professor\TaskView.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -195,6 +195,9 @@
     <Page Update="Views\Shared\FailedNotify.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\Shared\SchedulesView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Shared\TasksView.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -217,6 +220,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Student\ProfileStudentView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Student\ScheduleDetailsView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Student\SearchThesis.xaml">

@@ -68,7 +68,7 @@
                                 </Border>
                             </StackPanel>
                         </TabItem.Header>
-                        <professor:ScheduleView DataContext="{Binding ElementName=notificationView, Path=DataContext}" />
+                        <shared:SchedulesView DataContext="{Binding ElementName=notificationView, Path=DataContext}" />
                     </TabItem>
                 </TabControl>
             </Grid>

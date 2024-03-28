@@ -76,7 +76,7 @@
                                         </Border>
                                     </StackPanel>
                                 </TabItem.Header>
-                                <local:ScheduleView DataContext="{Binding ElementName=scheduleView, Path=DataContext}" />
+                                <shared:SchedulesView DataContext="{Binding ElementName=scheduleView, Path=DataContext}" />
                             </TabItem>
                         </TabControl>
                     </Grid>

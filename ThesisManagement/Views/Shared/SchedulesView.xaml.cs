@@ -3,24 +3,22 @@ using System.Windows.Controls;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
 using ThesisManagement.ViewModels;
+using ThesisManagement.Views.Student;
 
-namespace ThesisManagement.Views.Professor
+namespace ThesisManagement.Views.Shared
 {
     /// <summary>
-    /// Interaction logic for ScheduleView.xaml
+    /// Interaction logic for SchedulesView.xaml
     /// </summary>
-    public partial class ScheduleView : UserControl
+    public partial class SchedulesView : UserControl
     {
         private readonly IScheduleRepository _scheduleRepo;
-        public ScheduleView()
+        public SchedulesView()
         {
             _scheduleRepo = new ScheduleRepository();
             InitializeComponent();
             System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("vi");
-            if (SessionInfo.Role == Role.Student)
-            {
-                Schedule.AppointmentEditFlag = AppointmentEditFlag.None;
-            }
+            this.Schedule.AppointmentEditorOpening += Schedule_AppointmentEditorOpening;
             this.Schedule.AppointmentEditorClosing += Schedule_AppointmentEditorClosing;
         }
 
@@ -57,5 +55,28 @@ namespace ThesisManagement.Views.Professor
             ((ScheduleViewModel)this.DataContext).CountUpcomingSchedules = _scheduleRepo.CountUpcomingSchedules(scheduleVM.ThesisId);
         }
 
+        private void Schedule_AppointmentEditorOpening(object sender, AppointmentEditorOpeningEventArgs e)
+        {
+            if (SessionInfo.Role == Role.Student)
+            {
+                e.Cancel = true;
+                var appointment = e.Appointment as ScheduleAppointment;
+                if (appointment != null)
+                {
+                    ScheduleInfo schedule = new ScheduleInfo
+                    {
+                        From = appointment.StartTime,
+                        To = appointment.EndTime,
+                        EventName = appointment.Subject,
+                        Location = appointment.Location,
+                        Note = appointment.Notes
+                    };
+                    var scheduleView = new ScheduleDetailsView { DataContext = schedule };
+                    scheduleView.Show();
+                }
+                return;
+            }
+            e.AppointmentEditorOptions = AppointmentEditorOptions.All | (~AppointmentEditorOptions.Background & ~AppointmentEditorOptions.Foreground & ~AppointmentEditorOptions.Reminder & ~AppointmentEditorOptions.Resource);
+        }
     }
 }
