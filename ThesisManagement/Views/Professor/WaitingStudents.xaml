@@ -23,6 +23,36 @@
           SelectedItem="{Binding SelectedThesis, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ListView.View>
                 <GridView>
+                    <GridViewColumn Width="200">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Template="{StaticResource lvHeader}" />
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel VerticalAlignment="Center"
+                                            Orientation="Horizontal">
+                                    <customControls:ControlButton DefaultColor="{StaticResource success}"
+                                                           HoverColor="{StaticResource successHover}"
+                                                           Style="{StaticResource lvBtn}"
+                                                           Margin="5"
+                                                           Command="{Binding DataContext.ApproveCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
+                                        <customControls:ControlButton.Content>
+                                            <fa:IconImage Icon="Check" Style="{StaticResource btnIcon}" />
+                                        </customControls:ControlButton.Content>
+                                    </customControls:ControlButton>
+
+                                    <customControls:ControlButton DefaultColor="{StaticResource danger}"
+                                                           HoverColor="{StaticResource dangerHover}"
+                                                           Style="{StaticResource lvBtn}"
+                                                           Command="{Binding DataContext.RejectCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
+                                        <customControls:ControlButton.Content>
+                                            <fa:IconImage Icon="X" Style="{StaticResource btnIcon}" />
+                                        </customControls:ControlButton.Content>
+                                    </customControls:ControlButton>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn Width="280"
                                     DisplayMemberBinding="{Binding Topic.Name, Mode=TwoWay}">
                         <GridViewColumn.Header>
@@ -42,36 +72,6 @@
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Width="200">
-                        <GridViewColumn.Header>
-                            <GridViewColumnHeader Template="{StaticResource lvHeader}" />
-                        </GridViewColumn.Header>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel VerticalAlignment="Center"
-                                            Orientation="Horizontal">
-                                    <customControls:ControlButton DefaultColor="{StaticResource success}"
-                                                           HoverColor="{StaticResource successHover}"
-                                                           Width="30"
-                                                           Margin="5"
-                                                           Command="{Binding DataContext.ApproveCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
-                                        <customControls:ControlButton.Content>
-                                            <fa:IconImage Icon="Check" Style="{StaticResource btnIcon}" />
-                                        </customControls:ControlButton.Content>
-                                    </customControls:ControlButton>
-
-                                    <customControls:ControlButton DefaultColor="{StaticResource danger}"
-                                                           HoverColor="{StaticResource dangerHover}"
-                                                           Width="30"
-                                                           Command="{Binding DataContext.RejectCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
-                                        <customControls:ControlButton.Content>
-                                            <fa:IconImage Icon="X" Style="{StaticResource btnIcon}" />
-                                        </customControls:ControlButton.Content>
-                                    </customControls:ControlButton>
-                                </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

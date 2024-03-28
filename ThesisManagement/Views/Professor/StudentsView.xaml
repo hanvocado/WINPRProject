@@ -61,13 +61,33 @@
                             SelectedItem="{Binding SelectedThesis, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Width="400"
+                            <GridViewColumn Width="40">
+                                <GridViewColumn.Header>
+                                    <GridViewColumnHeader Template="{StaticResource lvHeader}" />
+                                </GridViewColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
+                                                                        HoverColor="{StaticResource secondaryBrush}"
+                                                                        Style="{StaticResource lvBtn}"
+                                                                        Command="{Binding DataContext.ShowThesisCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                                          CommandParameter="{Binding Id}">
+                                                <customControls:ControlButton.Content>
+                                                    <fa:IconImage Icon="Pen" Style="{StaticResource btnIcon}" />
+                                                </customControls:ControlButton.Content>
+                                            </customControls:ControlButton>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Width="500"
                                             DisplayMemberBinding="{Binding Topic.Name, Mode=TwoWay}">
                                 <GridViewColumn.Header>
                                     <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Đề tài" />
                                 </GridViewColumn.Header>
                             </GridViewColumn>
-                            <GridViewColumn Width="300">
+                            <GridViewColumn Width="350">
                                 <GridViewColumn.Header>
                                     <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Danh sách sinh viên" />
                                 </GridViewColumn.Header>
@@ -80,26 +100,6 @@
                                                 </DataTemplate>
                                             </ItemsControl.ItemTemplate>
                                         </ItemsControl>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            <GridViewColumn Width="140">
-                                <GridViewColumn.Header>
-                                    <GridViewColumnHeader Template="{StaticResource lvHeader}" />
-                                </GridViewColumn.Header>
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <customControls:ControlButton DefaultColor="#4fc3f7"
-                                                                        HoverColor="#0093C4"
-                                                                        Style="{StaticResource lvBtn}"
-                                                                        Command="{Binding DataContext.ShowThesisCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                                          CommandParameter="{Binding Id}">
-                                                <customControls:ControlButton.Content>
-                                                    <fa:IconImage Icon="Pen" Style="{StaticResource btnIcon}" />
-                                                </customControls:ControlButton.Content>
-                                            </customControls:ControlButton>
-                                        </StackPanel>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>

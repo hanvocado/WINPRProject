@@ -7,10 +7,10 @@
     <SolidColorBrush x:Key="primaryBrush">#326cf3</SolidColorBrush>
     <SolidColorBrush x:Key="secondaryBrush">#2755c0</SolidColorBrush>
 
-    <SolidColorBrush x:Key="danger" Color="#b10000" />
-    <SolidColorBrush x:Key="dangerHover" Color="#d70000" />
-    <SolidColorBrush x:Key="warning" Color="#ffc107" />
-    <SolidColorBrush x:Key="warningHover" Color="#ffca2c" />
+    <SolidColorBrush x:Key="danger" Color="#f54234" />
+    <SolidColorBrush x:Key="dangerHover" Color="#ff5236" />
+    <SolidColorBrush x:Key="warning" Color="#ffdd52" />
+    <SolidColorBrush x:Key="warningHover" Color="#ffe851" />
     <SolidColorBrush x:Key="success" Color="#157347" />
     <SolidColorBrush x:Key="successHover" Color="#198754" />
 
