@@ -47,13 +47,9 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteApproveCommand(object obj)
         {
-            bool canRegister = _thesisRepo.CanRegisterTopic(selectedThesis.Id);
-            if (canRegister)
-            {
-                selectedThesis.TopicStatus = Variable.StatusTopic.Approved;
-                _thesisRepo.Update(selectedThesis);
-                WaitingTheses = _thesisRepo.Get(currentUserId, Variable.StatusTopic.Waiting);
-            }
+            selectedThesis.TopicStatus = Variable.StatusTopic.Approved;
+            var success = _thesisRepo.Update(selectedThesis);
+            WaitingTheses = _thesisRepo.Get(currentUserId, Variable.StatusTopic.Waiting);
             ApprovedTheses = _thesisRepo.Get(currentUserId, Variable.StatusTopic.Approved);
         }
 

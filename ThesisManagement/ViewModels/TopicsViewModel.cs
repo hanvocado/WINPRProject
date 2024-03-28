@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
 using System.Windows;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
@@ -274,7 +273,7 @@ namespace ThesisManagement.ViewModels
             else
                 Topics = _topicRepo.GetMyTopicAndProfessorTopics(SessionInfo.UserId);
 
-            Students = _studentRepo.GetAll();
+            Students = _studentRepo.GetUnRegisteredStudents();
             Professors = _professorRepo.GetAll();
             ShowTopicViewCommand = new ViewModelCommand(ExecuteShowTopicView, CanShowTopicView);
             CreateOrUpdateCommand = new ViewModelCommand(ExecuteCreateOrUpdateCommand, CanCreateOrUpdateTopic);
