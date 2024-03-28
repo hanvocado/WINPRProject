@@ -37,12 +37,14 @@ namespace ThesisManagement.Views.Professor
             switch (e.Action)
             {
                 case AppointmentEditorAction.Add:
-                    _scheduleRepo.Add(schedule);
+                    var success = _scheduleRepo.Add(schedule);
                     break;
                 case AppointmentEditorAction.Edit:
+                    schedule.Id = (int)appointment.Id;
                     _scheduleRepo.Update(schedule);
                     break;
                 case AppointmentEditorAction.Delete:
+                    schedule.Id = (int)appointment.Id;
                     _scheduleRepo.Delete(schedule.Id);
                     break;
             }
