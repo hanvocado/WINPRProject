@@ -16,6 +16,10 @@ namespace ThesisManagement.Views.Professor
         {
             _scheduleRepo = new ScheduleRepository();
             InitializeComponent();
+            if(SessionInfo.Role == Role.Student)
+            {
+                Schedule.AppointmentEditFlag = AppointmentEditFlag.None;
+            }
             this.Schedule.AppointmentEditorClosing += Schedule_AppointmentEditorClosing;
         }
 
@@ -32,7 +36,7 @@ namespace ThesisManagement.Views.Professor
                 EventName = appointment.Subject,
                 Location = appointment.Location,
                 ThesisId = scheduleVM.ThesisId,
-                Note = scheduleVM.Note
+                Note = appointment.Notes
             };
             switch (e.Action)
             {

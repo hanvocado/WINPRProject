@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ThesisManagement.Views.Student"
+             xmlns:professor="clr-namespace:ThesisManagement.Views.Professor"
              xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
              xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
@@ -12,6 +13,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="800"
              Background="White"
+             Loaded="Window_Loaded"
              FontSize="12">
 
     <UserControl.Resources>
@@ -265,33 +267,16 @@
                         </Grid>
                     </TabItem>
 
-                    <TabItem>
+                    <TabItem x:Name="notificationView">
                         <TabItem.Header>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Thông báo" Margin="0 0 0 0" VerticalAlignment="Center" />
-                                <Border CornerRadius="20" Background="red" Margin="-2 -8 2 8" Width="13" Height="13">
-                                    <TextBlock Foreground="white" Text="2" TextAlignment="Center" FontWeight="Medium" FontSize="10" />
+                                <Border CornerRadius="20" Background="red" Margin="-1 -8 1 8" Width="13" Height="13">
+                                    <TextBlock Foreground="white" Text="{Binding CountUpcomingSchedules}" TextAlignment="Center" FontWeight="Bold" FontSize="10" />
                                 </Border>
                             </StackPanel>
                         </TabItem.Header>
-                        <ListView ItemsSource="{Binding Thesis.Notifications}">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Width="300"
-                                                    DisplayMemberBinding="{Binding Title}">
-                                        <GridViewColumn.Header>
-                                            <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Tiêu đề" />
-                                        </GridViewColumn.Header>
-                                    </GridViewColumn>
-                                    <GridViewColumn Width="500"
-                                                    DisplayMemberBinding="{Binding Details}">
-                                        <GridViewColumn.Header>
-                                            <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Chi tiết" />
-                                        </GridViewColumn.Header>
-                                    </GridViewColumn>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
+                        <professor:ScheduleView DataContext="{Binding ElementName=notificationView, Path=DataContext}" />
                     </TabItem>
                 </TabControl>
             </Grid>
