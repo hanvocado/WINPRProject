@@ -3,6 +3,7 @@ using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
 using ThesisManagement.Views.Professor;
+using ThesisManagement.Views.Shared;
 using Task = ThesisManagement.Models.Task;
 
 namespace ThesisManagement.ViewModels
@@ -137,6 +138,8 @@ namespace ThesisManagement.ViewModels
         }
 
         public ICommand CreateTaskCommand { get; set; }
+        public ICommand UpdateTaskCommand { get; set; }
+        public ICommand DeleteTaskCommand { get; set; }
         public ICommand CreateOrUpdateCommand { get; set; }
 
         public TasksViewModel()
@@ -144,7 +147,23 @@ namespace ThesisManagement.ViewModels
             _taskRepo = new TaskRepository();
             Thesis = new Thesis();
             CreateTaskCommand = new ViewModelCommand(ExecuteCreateTaskCommand);
+            UpdateTaskCommand = new ViewModelCommand(ExecuteUpdateTaskCommand);
+            DeleteTaskCommand = new ViewModelCommand(ExecuteDeleteTaskCommand);
             CreateOrUpdateCommand = new ViewModelCommand(ExecuteCreateOrUpdateCommand);
+        }
+
+        private void ExecuteUpdateTaskCommand(object obj)
+        {
+            TaskView taskView = new();
+            taskView.DataContext = this;
+            taskView.Show();
+        }
+
+        private void ExecuteDeleteTaskCommand(object obj)
+        {
+            var success = _taskRepo.Delete(id);
+            ShowMessage(success, Message.DeleteSuccess, Message.DeleteFailed);
+            LoadTasks();
         }
 
         private void ExecuteCreateOrUpdateCommand(object obj)

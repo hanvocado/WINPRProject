@@ -41,6 +41,7 @@ namespace ThesisManagement.Repositories
         }
         public bool Update(Task task)
         {
+            _context.ChangeTracker.Clear();
             _context.Update(task);
             return DbSave();
         }
