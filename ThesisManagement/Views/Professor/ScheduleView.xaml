@@ -22,7 +22,8 @@
                             Subject="EventName"
                             StartTime="From"
                             EndTime="To"
-                            Location="Location"/>
+                            Location="Location"
+                            Notes="Note"/>
             </syncfusion:SfScheduler.AppointmentMapping>
         </syncfusion:SfScheduler>
     </Grid>

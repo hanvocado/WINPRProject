@@ -70,6 +70,17 @@ namespace ThesisManagement.ViewModels
             }
         }
 
+        private string note;
+        public string Note
+        {
+            get { return note; }
+            set
+            {
+                note = value;
+                OnPropertyChanged(nameof(Note));
+            }
+        }
+
         private ScheduleInfo selectedSchedule;
         public ScheduleInfo SelectedSchedule
         {

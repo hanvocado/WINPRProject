@@ -42,6 +42,7 @@ namespace ThesisManagement.Views.Professor
                 dataContext.SelectedSchedule.To = appointment.EndTime;
                 dataContext.SelectedSchedule.EventName = appointment.Subject;
                 dataContext.SelectedSchedule.Location = appointment.Location;
+                dataContext.SelectedSchedule.Note = appointment.Notes;
                 dataContext.SelectedSchedule.ThesisId = dataContext.ThesisId;
                 _scheduleRepo.Add(dataContext.SelectedSchedule);
             }
