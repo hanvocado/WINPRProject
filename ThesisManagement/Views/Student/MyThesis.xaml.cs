@@ -1,8 +1,5 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using ThesisManagement.ViewModels;
-using ThesisManagement.Views.Professor;
 
 namespace ThesisManagement.Views.Student
 {
@@ -16,13 +13,22 @@ namespace ThesisManagement.Views.Student
             InitializeComponent();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void UserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
             var thesisVM = this.DataContext as MyThesisVM;
-            notificationView.DataContext = new ScheduleViewModel
+            if (thesisVM != null)
             {
-                ThesisId = thesisVM.Thesis.Id
-            };
+                tasksView.DataContext = new TasksViewModel
+                {
+                    ThesisId = thesisVM.Thesis.Id,
+                    Thesis = thesisVM.Thesis,
+                };
+                notificationView.DataContext = new ScheduleViewModel
+                {
+                    ThesisId = thesisVM.Thesis.Id
+                };
+            }
+
         }
     }
 }

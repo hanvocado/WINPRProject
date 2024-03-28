@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
@@ -177,8 +176,6 @@ namespace ThesisManagement.ViewModels
 
             LoadTasks();
             taskView?.Close();
-            var mainWindow = Application.Current.MainWindow;
-            mainWindow.Focus();
         }
 
         private void ExecuteCreateTaskCommand(object obj)
@@ -186,8 +183,6 @@ namespace ThesisManagement.ViewModels
             TaskView taskView = new();
             ResetTaskProperties();
             taskView.DataContext = this;
-            taskView.Owner = Application.Current.MainWindow;
-            taskView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             taskView.Show();
         }
 

@@ -98,7 +98,7 @@
                                     <StackPanel Orientation="Horizontal">
                                         <customControls:ControlButton DefaultColor="{StaticResource danger}"
                                                                       HoverColor="{StaticResource dangerHover}"
-                                                                      Width="30"
+                                                                      Style="{StaticResource lvBtn}"
                                                                       CommandParameter="{Binding Id}"
                                                                       Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
                                             <customControls:ControlButton.Content>
