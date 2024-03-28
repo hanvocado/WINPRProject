@@ -27,7 +27,6 @@ namespace ThesisManagement.Views.Professor
             ScheduleViewModel? scheduleVM = this.DataContext as ScheduleViewModel ?? new ScheduleViewModel();
             ScheduleInfo schedule = new ScheduleInfo
             {
-                Id = (int)appointment.Id,
                 From = appointment.StartTime,
                 To = appointment.EndTime,
                 EventName = appointment.Subject,
@@ -37,12 +36,14 @@ namespace ThesisManagement.Views.Professor
             switch (e.Action)
             {
                 case AppointmentEditorAction.Add:
-                    _scheduleRepo.Add(schedule);
+                    var success = _scheduleRepo.Add(schedule);
                     break;
                 case AppointmentEditorAction.Edit:
+                    schedule.Id = (int)appointment.Id;
                     _scheduleRepo.Update(schedule);
                     break;
                 case AppointmentEditorAction.Delete:
+                    schedule.Id = (int)appointment.Id;
                     _scheduleRepo.Delete(schedule.Id);
                     break;
             }
