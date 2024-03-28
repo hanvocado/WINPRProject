@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ThesisManagement.CustomControls
+namespace ThesisManagement.Views.Shared
 {
     /// <summary>
-    /// Interaction logic for Dialog.xaml
+    /// Interaction logic for TasksView.xaml
     /// </summary>
-    public partial class Dialog : UserControl
+    public partial class TasksView : UserControl
     {
-        public Dialog()
+        public TasksView()
         {
             InitializeComponent();
         }

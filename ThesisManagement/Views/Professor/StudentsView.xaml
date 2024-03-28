@@ -52,9 +52,6 @@
         <TabControl Grid.Row="1"
                     HorizontalContentAlignment="Left"
                     Style="{StaticResource MaterialDesignUniformTabControl}">
-            <TabItem Header="Đang chờ">
-                <local:WaitingStudents />
-            </TabItem>
 
             <TabItem Header="Đã duyệt">
                 <ListView Grid.Row="1"
@@ -95,7 +92,7 @@
                                         <StackPanel Orientation="Horizontal">
                                             <customControls:ControlButton DefaultColor="#4fc3f7"
                                                                         HoverColor="#0093C4"
-                                                                        Width="30"
+                                                                        Style="{StaticResource lvBtn}"
                                                                         Command="{Binding DataContext.ShowThesisCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                                           CommandParameter="{Binding Id}">
                                                 <customControls:ControlButton.Content>
@@ -110,6 +107,19 @@
                     </ListView.View>
                 </ListView>
             </TabItem>
+            
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Đang chờ" Style="{StaticResource tabText}"  />
+                        <Border CornerRadius="15" Background="red" Margin="-22 -8 22 8" Width="13" Height="13">
+                            <TextBlock Text="{Binding WaitingTheses.Count}" Foreground="White" TextAlignment="Center" FontWeight="Medium" FontSize="10" />
+                        </Border>
+                    </StackPanel>
+                </TabItem.Header>
+                <local:WaitingStudents />
+            </TabItem>
+            
         </TabControl>
     </Grid>
 </UserControl>

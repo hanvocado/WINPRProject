@@ -49,11 +49,37 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    
+    <Style x:Key="lvBtn" TargetType="{x:Type customControls:ControlButton}">
+        <Setter Property="Background" Value="{Binding DefaultColor, RelativeSource={RelativeSource Self}}"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Foreground" Value="{StaticResource plainTextColor}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type customControls:ControlButton}">
+                    <Border Height="22"
+                            Width="22"
+                            CornerRadius="15"
+                            Background="{TemplateBinding Background}"
+                            BorderThickness="0">
+                        <ContentPresenter VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{Binding HoverColor, RelativeSource={RelativeSource Self}}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
     <Style x:Key = "btnIcon" TargetType = "fa:IconImage" >
         <Setter Property = "Foreground" Value = "{StaticResource plainTextColor}" />
-        <Setter Property = "Width" Value = "12" />
-        <Setter Property = "Height" Value = "12" />
+        <Setter Property = "Width" Value = "10" />
+        <Setter Property = "Height" Value = "10" />
     </Style>
 
     <Style x:Key="toggleBtn" TargetType="{x:Type ToggleButton}">
