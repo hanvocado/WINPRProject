@@ -37,7 +37,8 @@
                 Background="{DynamicResource MaterialDesignPaper}"
                 BorderThickness="1.5 0 1.5 1.5"
                 BorderBrush="#5aedff"
-                ItemsSource="{Binding PendingTasks}">
+                ItemsSource="{Binding PendingTasks}"
+                    SelectedItem="{Binding SelectedTask}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Width="50">
@@ -48,6 +49,7 @@
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
                                             <customControls:ControlButton Style="{StaticResource lvBtn}"
+                                                                          Command="{Binding DataContext.ShowTaskCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                                       DefaultColor="{StaticResource primaryBrush}"
                                                                         Margin="5 0 0 0">
                                                 <customControls:ControlButton.Content>
