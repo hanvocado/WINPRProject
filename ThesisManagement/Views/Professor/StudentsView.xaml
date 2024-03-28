@@ -117,7 +117,7 @@
                         </Border>
                     </StackPanel>
                 </TabItem.Header>
-                <local:WaitingStudents />
+                <local:WaitingStudents DataContext="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext}" />
             </TabItem>
             
         </TabControl>
