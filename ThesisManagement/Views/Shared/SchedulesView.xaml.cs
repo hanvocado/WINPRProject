@@ -48,7 +48,7 @@ namespace ThesisManagement.Views.Shared
                     break;
                 case AppointmentEditorAction.Delete:
                     schedule.Id = (int)appointment.Id;
-                    _scheduleRepo.Delete(schedule.Id);
+                    var deleted = _scheduleRepo.Delete(schedule.Id);
                     break;
             }
 
@@ -76,7 +76,6 @@ namespace ThesisManagement.Views.Shared
                 }
                 return;
             }
-            e.AppointmentEditorOptions = AppointmentEditorOptions.All | (~AppointmentEditorOptions.Background & ~AppointmentEditorOptions.Foreground & ~AppointmentEditorOptions.Reminder & ~AppointmentEditorOptions.Resource);
         }
     }
 }
