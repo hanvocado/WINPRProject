@@ -81,7 +81,7 @@
                         <TextBlock Text="Thời gian kết thúc"
                                 Style="{StaticResource label}" />
                         <hc:DateTimePicker SelectedDateTime="{Binding To}"
-                                           DateTimeFormat="dd-MM-yyyy hh:mm"
+                                           DateTimeFormat="hh:mm dd-MM-yyyy"
                                            Height="35"/>
                     </StackPanel>
                 </Border>
