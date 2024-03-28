@@ -2,7 +2,9 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using ThesisManagement.Repositories.EF;
+using ThesisManagement.ViewModels;
 using Task = ThesisManagement.Models.Task;
+using TaskStatus = ThesisManagement.ViewModels.TaskStatus;
 
 namespace ThesisManagement.Repositories
 {
@@ -16,6 +18,7 @@ namespace ThesisManagement.Repositories
         IEnumerable<Task> GetPendingTasks(int thesisId);
         IEnumerable<Task> GetDoneTasks(int thesisId);
         IEnumerable<Task> GetOverdueTasks(int thesisId);
+        IEnumerable<TasksPie> GetTasksPieData(int thesisId);
     }
 
     public class TaskRepository : ITaskRepository
@@ -99,6 +102,29 @@ namespace ThesisManagement.Repositories
                                       .AsNoTracking()
                                       .ToList();
             return tasks;
+        }
+
+        public IEnumerable<TasksPie> GetTasksPieData(int thesisId)
+        {
+            var data = new List<TasksPie>();
+            var tasks = _context.Tasks.Include(th => th.Thesis)
+                                      .Where(t => t.ThesisId == thesisId)
+                                      .AsNoTracking();
+            int totalTasks = tasks.Count();
+
+            if (totalTasks > 0)
+            {
+                int countDone = tasks.Where(t => t.Progress == 100).Count();
+                int countPending = tasks.Where(t => t.Progress < 100 && t.End >= DateTime.Now).Count();
+                int countOverdue = tasks.Where(t => t.Progress < 100 && t.End < DateTime.Now).Count();
+                data = new List<TasksPie>
+                {
+                    new TasksPie { TaskStatus = TaskStatus.Done, Count = countDone, Percentage = (countDone/totalTasks)*100 },
+                    new TasksPie { TaskStatus = TaskStatus.Pending, Count = countPending, Percentage = (countPending/totalTasks)*100 },
+                    new TasksPie { TaskStatus = TaskStatus.Overdue, Count = countOverdue, Percentage = (countOverdue/totalTasks)*100 }
+                };
+            }
+            return data;
         }
     }
 }

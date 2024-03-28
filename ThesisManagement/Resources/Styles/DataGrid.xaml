@@ -47,7 +47,7 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="lvItem" TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource ListViewItemBaseStyle}">
+    <!--<Style x:Key="lvItem" TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource ListViewItemBaseStyle}">
         <Style.Resources>
             <customControls:StringNullOrEmptyConverter x:Key="StringNullOrEmptyConverter" />
         </Style.Resources>
@@ -60,7 +60,7 @@
                 <Setter Property="Foreground" Value="White" />
             </Trigger>
         </Style.Triggers>
-    </Style>
+    </Style>-->
 
 </ResourceDictionary>
     
