@@ -143,6 +143,7 @@ namespace ThesisManagement.Migrations
                     To = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EventName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Color = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
