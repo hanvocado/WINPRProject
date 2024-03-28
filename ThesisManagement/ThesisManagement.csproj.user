@@ -28,9 +28,6 @@
     <Compile Update="Views\Admin\ProfessorsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Professor\TaskView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Views\Professor\ProfessorMainView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -41,9 +38,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Professor\StudentsView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\Professor\TasksView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Professor\ThesesView.xaml.cs">
@@ -68,6 +62,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Shared\TasksView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Shared\TaskView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Shared\ThesisOverview.xaml.cs">
@@ -98,9 +95,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Student\StudentMainView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\Student\ProfessorTask.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Student\ThesisDetailViewStudent.xaml.cs">
@@ -156,9 +150,6 @@
     <Page Update="Views\Admin\ProfessorsView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Professor\TaskView.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="Views\Professor\ProfessorMainView.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -169,9 +160,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Professor\StudentsView.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\Professor\TasksView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Professor\ThesesView.xaml">
@@ -199,6 +187,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Shared\TasksView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Shared\TaskView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Shared\ThesisOverview.xaml">
@@ -229,9 +220,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Student\StudentMainView.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\Student\ProfessorTask.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Student\ThesisDetailViewStudent.xaml">

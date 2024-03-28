@@ -1,0 +1,116 @@
+﻿<Window x:Class="ThesisManagement.Views.Shared.TaskView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ThesisManagement.Views.Shared"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
+         mc:Ignorable="d"
+         xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
+         Title="TopicView" Height="480" Width="600"
+         WindowStartupLocation="CenterScreen"
+         Style="{StaticResource formStyle}">
+    <Window.DataContext>
+        <viewModels:TasksViewModel />
+    </Window.DataContext>
+    <Border>
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25" />
+                <RowDefinition Height="25" />
+                <RowDefinition Height="75" />
+                <RowDefinition Height="130" />
+                <RowDefinition Height="75" />
+                <RowDefinition Height="70" />
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+
+            <customControls:PopupControlBar />
+            <Grid Grid.Row="1">
+                <TextBlock 
+            Text="Nhiệm vụ" 
+            Style="{StaticResource title}" 
+            FontSize="20"
+            TextWrapping="Wrap"
+            Padding="20"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"/>
+            </Grid>
+            <Border Grid.Row="2" Padding="30 0">
+                <StackPanel>
+                    <TextBlock Text="Tiêu đề" Style="{StaticResource label}" />
+                    <TextBox Grid.Row="2"
+                     Height="35"
+                     VerticalAlignment="Top"
+                     Style="{StaticResource TextBoxExtend}" 
+                     Text="{Binding Name}"/>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Row="3" Padding="30 0">
+                <StackPanel>
+                    <TextBlock Text="Mô tả" Style="{StaticResource label}" />
+                    <TextBox Grid.Row="3"
+                     VerticalAlignment="Top"
+                     Height="90"
+                     Text="{Binding Description}" 
+                     AcceptsReturn="True"
+                     TextWrapping="Wrap"
+                     VerticalScrollBarVisibility="Auto"/>
+                </StackPanel>
+            </Border>
+
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Padding="30 0">
+                    <StackPanel>
+                        <TextBlock Text="Ngày bắt đầu nhiệm vụ"
+                            Style="{StaticResource label}" />
+                        <hc:DateTimePicker SelectedDateTime="{Binding Start, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                       DateTimeFormat="hh:mm dd-MM-yyyy"
+                                       Height="35"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="1" Padding="30 0">
+                    <StackPanel>
+                        <TextBlock Text="Ngày kết thúc nhiệm vụ"
+                            Style="{StaticResource label}" />
+                        <hc:DateTimePicker SelectedDateTime="{Binding End, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                       DateTimeFormat="hh:mm dd-MM-yyyy"
+                                       Height="35"/>
+                    </StackPanel>
+                </Border>
+
+            </Grid>
+            <Border Grid.Row="5" Padding="30 0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock 
+                               Text="Tiến độ"
+                               Style="{StaticResource label}"/>
+                    <Slider Width="412" 
+                                    Value="{Binding Progress}"
+                                    hc:TipElement.Visibility="Visible" 
+                                    hc:TipElement.Placement="Top" 
+                                    Minimum="0" Maximum="100" TickFrequency="10"
+                                    TickPlacement="Both"
+                                    Margin="0,22,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <Grid Grid.Row="6" >
+                <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
+                  HoverColor="{StaticResource secondaryBrush}"
+                  Content="Lưu"
+                  Width="200"
+                  FontSize="14"
+                  Command="{Binding CreateOrUpdateCommand}"
+                  CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

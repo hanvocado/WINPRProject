@@ -55,8 +55,7 @@
                     </TabItem>
 
                     <TabItem Header="Nhiệm vụ">
-                        <shared:TasksView x:Name="tasksView"
-                                            Grid.Row="1" />
+                        <shared:TasksView x:Name="tasksView"  />
                     </TabItem>
 
                     <TabItem x:Name="notificationView">

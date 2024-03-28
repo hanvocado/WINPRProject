@@ -64,7 +64,7 @@
                             </TabItem>
 
                             <TabItem Header="Nhiệm vụ">
-                                <local:TasksView x:Name="tasksView" />
+                                <shared:TasksView x:Name="tasksView" />
                             </TabItem>
 
                             <TabItem x:Name="scheduleView">

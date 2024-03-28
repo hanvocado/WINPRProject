@@ -2,7 +2,6 @@
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
-using ThesisManagement.Views.Professor;
 using ThesisManagement.Views.Shared;
 using Task = ThesisManagement.Models.Task;
 
@@ -64,7 +63,7 @@ namespace ThesisManagement.ViewModels
             }
         }
 
-        private DateTime start = DateTime.Now;
+        private DateTime start;
         public DateTime Start
         {
             get { return start; }
@@ -75,7 +74,7 @@ namespace ThesisManagement.ViewModels
             }
         }
 
-        private DateTime end = DateTime.Now.AddDays(7);
+        private DateTime end;
         public DateTime End
         {
             get { return end; }
@@ -137,6 +136,17 @@ namespace ThesisManagement.ViewModels
             }
         }
 
+        public string DeleteBtnVisibility
+        {
+            get
+            {
+                if (SessionInfo.Role == Role.Student)
+                    return "Hidden";
+                else
+                    return "Visible";
+            }
+        }
+
         public ICommand CreateTaskCommand { get; set; }
         public ICommand UpdateTaskCommand { get; set; }
         public ICommand DeleteTaskCommand { get; set; }
@@ -148,8 +158,13 @@ namespace ThesisManagement.ViewModels
             Thesis = new Thesis();
             CreateTaskCommand = new ViewModelCommand(ExecuteCreateTaskCommand);
             UpdateTaskCommand = new ViewModelCommand(ExecuteUpdateTaskCommand);
-            DeleteTaskCommand = new ViewModelCommand(ExecuteDeleteTaskCommand);
+            DeleteTaskCommand = new ViewModelCommand(ExecuteDeleteTaskCommand, CanExecuteDeleteTask);
             CreateOrUpdateCommand = new ViewModelCommand(ExecuteCreateOrUpdateCommand);
+        }
+
+        private bool CanExecuteDeleteTask(object obj)
+        {
+            return SessionInfo.Role != Role.Student;
         }
 
         private void ExecuteUpdateTaskCommand(object obj)

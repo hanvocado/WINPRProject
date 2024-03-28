@@ -12,10 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ThesisManagement.Views.Professor
+namespace ThesisManagement.Views.Shared
 {
     /// <summary>
-    /// Interaction logic for NewTasks.xaml
+    /// Interaction logic for TaskView.xaml
     /// </summary>
     public partial class TaskView : Window
     {

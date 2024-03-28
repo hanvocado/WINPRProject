@@ -22,241 +22,216 @@
     <UserControl.DataContext>
         <viewModels:TasksViewModel />
     </UserControl.DataContext>
-    
-    <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
-        <StackPanel Grid.Row="1" Margin="0 0 10 0">
-            <Expander x:Name="PendingTasksExpander"  IsExpanded="False" Grid.Row="1" HorizontalAlignment="Stretch" Background="#5aedff">
-                <Expander.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource header}" Text="Đang thực hiện" />
-                        <Border CornerRadius="20" Background="#0074b0" Margin="-2 -8 2 8" Width="13" Height="13">
-                            <TextBlock Foreground="white" Text="{Binding PendingTasks.Count}" TextAlignment="Center" FontWeight="Medium" FontSize="10" />
-                        </Border>
-                    </StackPanel>
-                </Expander.Header>
 
-                <Expander.Content>
-                    <ListView Name="PendingTaskListView"
-                        Background="{DynamicResource MaterialDesignPaper}"
-                        BorderThickness="1.5 0 1.5 1.5"
-                        BorderBrush="#5aedff"
-                        ItemsSource="{Binding PendingTasks}">
+    <StackPanel>
+        <customControls:ControlButton Width="150" Height="30" Margin="0 0 20 20" 
+                              HorizontalAlignment="Right"
+                              FontWeight="Medium"
+                              DefaultColor="{StaticResource primaryBrush}"
+                              HoverColor="{StaticResource secondaryBrush}"
+                              Command="{Binding CreateTaskCommand}"
+                              Content="+ Tạo nhiệm vụ mới">
+        </customControls:ControlButton>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
+            <StackPanel Grid.Row="1" Margin="0 0 10 0">
+                <Expander x:Name="PendingTasksExpander"  IsExpanded="False" Grid.Row="1" HorizontalAlignment="Stretch" Background="#5aedff">
+                    <Expander.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource header}" Text="Đang thực hiện" />
+                            <Border CornerRadius="20" Background="#0074b0" Margin="-2 -8 2 8" Width="13" Height="13">
+                                <TextBlock Foreground="white" Text="{Binding PendingTasks.Count}" TextAlignment="Center" FontWeight="Medium" FontSize="10" />
+                            </Border>
+                        </StackPanel>
+                    </Expander.Header>
+
+                    <Expander.Content>
+                        <ListView Name="PendingTaskListView"
+                            Background="{DynamicResource MaterialDesignPaper}"
+                            BorderThickness="1.5 0 1.5 1.5"
+                            BorderBrush="#5aedff"
+                            ItemsSource="{Binding PendingTasks}">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="70">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Template="{StaticResource lvHeader}" />
+                                        </GridViewColumn.Header>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <customControls:ControlButton Style="{StaticResource lvBtn}"
+                                                                              DefaultColor="{StaticResource primaryBrush}"
+                                                                              HoverColor="{StaticResource secondaryBrush}"
+                                                                              Margin="2 0 0 0"
+                                                                              Command="{Binding DataContext.UpdateTaskCommand,RelativeSource={RelativeSource AncestorType=ListView}}">
+                                                        <customControls:ControlButton.Content>
+                                                            <fa:IconImage Icon="Pen" Style="{StaticResource btnIcon}" />
+                                                        </customControls:ControlButton.Content>
+                                                    </customControls:ControlButton>
+
+                                                    <customControls:ControlButton Style="{StaticResource lvBtn}"
+                                                                                  Visibility="{Binding DataContext.DeleteBtnVisibility ,RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                                              DefaultColor="{StaticResource danger}"
+                                                                              HoverColor="{StaticResource dangerHover}"
+                                                                              Margin="5 0 0 0"
+                                                                              CommandParameter="{Binding Id}"
+                                                                              Command="{Binding DataContext.DeleteTaskCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
+                                                        <customControls:ControlButton.Content>
+                                                            <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
+                                                        </customControls:ControlButton.Content>
+                                                    </customControls:ControlButton>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="180"
+                        DisplayMemberBinding="{Binding Name}" >
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Tiêu đề" />
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Width="200"
+                        DisplayMemberBinding="{Binding Description}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Mô tả" />
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Width="150"
+                        DisplayMemberBinding="{Binding Start}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Thời gian bắt đầu" />
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Width="150"
+                        DisplayMemberBinding="{Binding End}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Thời gian kết thúc" />
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Width="100"
+                        DisplayMemberBinding="{Binding Progress}">
+                                        <GridViewColumn.Header>
+                                            <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Tiến độ" />
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Expander.Content>
+                </Expander>
+
+                <Expander IsExpanded="False" Grid.Row="2" HorizontalAlignment="Stretch" Background="#9ae2ca"  Margin="0 30 0 30">
+                    <Expander.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Đã hoàn thành" Style="{StaticResource header}"  />
+                            <Border CornerRadius="20" Background="#3a7e00" Margin="-2 -8 2 8" Width="13" Height="13">
+                                <TextBlock Foreground="white" Text="{Binding DoneTasks.Count}" TextAlignment="Center" FontWeight="Medium" FontSize="10" />
+                            </Border>
+                        </StackPanel>
+                    </Expander.Header>
+                    <ListView   BorderThickness="1.5 0 1.5 1.5"
+                            BorderBrush="#9ae2ca"                        
+                            ItemsSource="{Binding DoneTasks}">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Width="70">
-                                    <GridViewColumn.Header>
-                                        <GridViewColumnHeader Template="{StaticResource lvHeader}" />
-                                    </GridViewColumn.Header>
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <customControls:ControlButton Style="{StaticResource lvBtn}"
-                                                                          DefaultColor="{StaticResource primaryBrush}"
-                                                                          HoverColor="{StaticResource secondaryBrush}"
-                                                                          Margin="2 0 0 0"
-                                                                          Command="{Binding DataContext.UpdateTaskCommand,RelativeSource={RelativeSource AncestorType=ListView}}">
-                                                    <customControls:ControlButton.Content>
-                                                        <fa:IconImage Icon="Pen" Style="{StaticResource btnIcon}" />
-                                                    </customControls:ControlButton.Content>
-                                                </customControls:ControlButton>
-
-                                                <customControls:ControlButton Style="{StaticResource lvBtn}"
-                                                                          DefaultColor="{StaticResource danger}"
-                                                                          HoverColor="{StaticResource dangerHover}"
-                                                                          Margin="5 0 0 0"
-                                                                          CommandParameter="{Binding Id}"
-                                                                          Command="{Binding DataContext.DeleteTaskCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
-                                                    <customControls:ControlButton.Content>
-                                                        <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
-                                                    </customControls:ControlButton.Content>
-                                                </customControls:ControlButton>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
                                 <GridViewColumn Width="200"
-                    DisplayMemberBinding="{Binding Name}" >
+                                            DisplayMemberBinding="{Binding Name}" >
                                     <GridViewColumn.Header>
                                         <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Tiêu đề" />
                                     </GridViewColumn.Header>
                                 </GridViewColumn>
 
-                                <GridViewColumn Width="200"
-                    DisplayMemberBinding="{Binding Description}">
+                                <GridViewColumn Width="250"
+                                            DisplayMemberBinding="{Binding Description}">
                                     <GridViewColumn.Header>
                                         <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Mô tả" />
                                     </GridViewColumn.Header>
                                 </GridViewColumn>
 
                                 <GridViewColumn Width="150"
-                    DisplayMemberBinding="{Binding Start}">
+                                            DisplayMemberBinding="{Binding Start}">
                                     <GridViewColumn.Header>
-                                        <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Ngày bắt đầu" />
+                                        <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Thời gian bắt đầu" />
                                     </GridViewColumn.Header>
                                 </GridViewColumn>
 
                                 <GridViewColumn Width="150"
-                    DisplayMemberBinding="{Binding End}">
+                                            DisplayMemberBinding="{Binding End}">
                                     <GridViewColumn.Header>
-                                        <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Ngày kết thúc" />
+                                        <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Thời gian kết thúc" />
                                     </GridViewColumn.Header>
                                 </GridViewColumn>
 
-                                <GridViewColumn Width="80"
-                    DisplayMemberBinding="{Binding Progress}">
+                                <GridViewColumn Width="100"
+                                            DisplayMemberBinding="{Binding Progress}">
                                     <GridViewColumn.Header>
-                                        <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Tiến độ (%)" />
+                                        <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Tiến độ" />
                                     </GridViewColumn.Header>
                                 </GridViewColumn>
 
                             </GridView>
                         </ListView.View>
                     </ListView>
-                </Expander.Content>
-            </Expander>
-            
-            <Expander IsExpanded="False" Grid.Row="2" HorizontalAlignment="Stretch" Background="#9ae2ca"  Margin="0 30 0 30">
-                <Expander.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Đã hoàn thành" Style="{StaticResource header}"  />
-                        <Border CornerRadius="20" Background="#3a7e00" Margin="-2 -8 2 8" Width="13" Height="13">
-                            <TextBlock Foreground="white" Text="{Binding DoneTasks.Count}" TextAlignment="Center" FontWeight="Medium" FontSize="10" />
-                        </Border>
-                    </StackPanel>
-                </Expander.Header>
-                <ListView   BorderThickness="1.5 0 1.5 1.5"
-                        BorderBrush="#9ae2ca"                        
-                        ItemsSource="{Binding DoneTasks}">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Width="50">
-                                <GridViewColumn.Header>
-                                    <GridViewColumnHeader Template="{StaticResource lvHeader}" />
-                                </GridViewColumn.Header>
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
-                                                                     Style="{StaticResource lvBtn}"
-                                                                     Margin="5 0 0 0">
-                                                <customControls:ControlButton.Content>
-                                                    <fa:IconImage Icon="Pen" Style="{StaticResource btnIcon}" />
-                                                </customControls:ControlButton.Content>
-                                            </customControls:ControlButton>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            <GridViewColumn Width="200"
-                                        DisplayMemberBinding="{Binding Name}" >
-                                <GridViewColumn.Header>
-                                    <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Tiêu đề" />
-                                </GridViewColumn.Header>
-                            </GridViewColumn>
+                </Expander>
+                <Expander  IsExpanded="False" Grid.Row="3" HorizontalAlignment="Stretch" Background="#fee9ee" >
+                    <Expander.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Đã quá hạn" Style="{StaticResource header}"  />
+                            <Border CornerRadius="20" Background="#8e0000" Margin="-2 -8 2 8" Width="13" Height="13">
+                                <TextBlock Foreground="white" Text="{Binding OverdueTasks.Count}" TextAlignment="Center" FontWeight="Medium" FontSize="10" />
+                            </Border>
+                        </StackPanel>
+                    </Expander.Header>
+                    <ListView ItemsSource="{Binding OverdueTasks}"
+                          BorderThickness="1.5 0 1.5 1.5"
+                          BorderBrush="#fee9ee">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="200"
+                                            DisplayMemberBinding="{Binding Name}" >
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Tiêu đề" />
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
 
-                            <GridViewColumn Width="200"
-                                        DisplayMemberBinding="{Binding Description}">
-                                <GridViewColumn.Header>
-                                    <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Sinh viên" />
-                                </GridViewColumn.Header>
-                            </GridViewColumn>
+                                <GridViewColumn Width="250"
+                                            DisplayMemberBinding="{Binding Description}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Mô tả" />
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
 
-                            <GridViewColumn Width="150"
-                                        DisplayMemberBinding="{Binding Start}">
-                                <GridViewColumn.Header>
-                                    <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Ngày bắt đầu" />
-                                </GridViewColumn.Header>
-                            </GridViewColumn>
+                                <GridViewColumn Width="150"
+                                            DisplayMemberBinding="{Binding Start}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Thời gian bắt đầu" />
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
 
-                            <GridViewColumn Width="150"
-                                        DisplayMemberBinding="{Binding End}">
-                                <GridViewColumn.Header>
-                                    <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Ngày kết thúc" />
-                                </GridViewColumn.Header>
-                            </GridViewColumn>
+                                <GridViewColumn Width="150"
+                                            DisplayMemberBinding="{Binding End}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Thời gian kết thúc" />
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
 
-                            <GridViewColumn Width="80"
-                                        DisplayMemberBinding="{Binding Progress}">
-                                <GridViewColumn.Header>
-                                    <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Tiến độ" />
-                                </GridViewColumn.Header>
-                            </GridViewColumn>
+                                <GridViewColumn Width="100"
+                                            DisplayMemberBinding="{Binding Progress}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Tiến độ" />
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
 
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </Expander>
-            <Expander  IsExpanded="False" Grid.Row="3" HorizontalAlignment="Stretch" Background="#fee9ee" >
-                <Expander.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Đã quá hạn" Style="{StaticResource header}"  />
-                        <Border CornerRadius="20" Background="#8e0000" Margin="-2 -8 2 8" Width="13" Height="13">
-                            <TextBlock Foreground="white" Text="{Binding OverdueTasks.Count}" TextAlignment="Center" FontWeight="Medium" FontSize="10" />
-                        </Border>
-                    </StackPanel>
-                </Expander.Header>
-                <ListView ItemsSource="{Binding OverdueTasks}"
-                      BorderThickness="1.5 0 1.5 1.5"
-                      BorderBrush="#fee9ee">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Width="50">
-                                <GridViewColumn.Header>
-                                    <GridViewColumnHeader Template="{StaticResource lvHeader}" />
-                                </GridViewColumn.Header>
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
-                                                                     Style="{StaticResource lvBtn}"
-                                                                     Margin="5 0 0 0">
-                                                <customControls:ControlButton.Content>
-                                                    <fa:IconImage Icon="Pen" Style="{StaticResource btnIcon}" />
-                                                </customControls:ControlButton.Content>
-                                            </customControls:ControlButton>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            <GridViewColumn Width="200"
-                                        DisplayMemberBinding="{Binding Name}" >
-                                <GridViewColumn.Header>
-                                    <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Tiêu đề" />
-                                </GridViewColumn.Header>
-                            </GridViewColumn>
-
-                            <GridViewColumn Width="200"
-                                        DisplayMemberBinding="{Binding Description}">
-                                <GridViewColumn.Header>
-                                    <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Sinh viên" />
-                                </GridViewColumn.Header>
-                            </GridViewColumn>
-
-                            <GridViewColumn Width="150"
-                                        DisplayMemberBinding="{Binding Start}">
-                                <GridViewColumn.Header>
-                                    <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Ngày bắt đầu" />
-                                </GridViewColumn.Header>
-                            </GridViewColumn>
-
-                            <GridViewColumn Width="150"
-                                        DisplayMemberBinding="{Binding End}">
-                                <GridViewColumn.Header>
-                                    <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Ngày kết thúc" />
-                                </GridViewColumn.Header>
-                            </GridViewColumn>
-
-                            <GridViewColumn Width="80"
-                                        DisplayMemberBinding="{Binding Progress}">
-                                <GridViewColumn.Header>
-                                    <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Tiến độ" />
-                                </GridViewColumn.Header>
-                            </GridViewColumn>
-
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </Expander>
-        </StackPanel>
-    </ScrollViewer>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Expander>
+            </StackPanel>
+        </ScrollViewer>
+    </StackPanel>
 </UserControl>
