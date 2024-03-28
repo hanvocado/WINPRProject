@@ -11,6 +11,7 @@ namespace ThesisManagement.Repositories
         bool Update(ScheduleInfo scheduleInfo);
         bool Delete(int id);
         IEnumerable<ScheduleInfo> GetScheduleInfos(int thesisId);
+        int CountUpcomingSchedules(int thesisId);
     }
 
     public class ScheduleRepository : IScheduleRepository
@@ -30,13 +31,17 @@ namespace ThesisManagement.Repositories
 
         public bool Update(ScheduleInfo scheduleInfo)
         {
+            _context.ChangeTracker.Clear();
             _context.Update(scheduleInfo);
             return DbSave();
         }
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            var schedule = _context.ScheduleInfos.FirstOrDefault(s => s.Id == id);
+            if (schedule == null) return false;
+            _context.Remove(schedule);
+            return DbSave();
         }
 
         public bool DbSave()
@@ -60,6 +65,15 @@ namespace ThesisManagement.Repositories
                                                   .AsNoTracking()
                                                   .ToList();
             return meetings;
+        }
+
+        public int CountUpcomingSchedules(int thesisId)
+        {
+            var count = _context.ScheduleInfos.Include(th => th.Thesis)
+                                                  .Where(sch => sch.ThesisId == thesisId && sch.From > DateTime.Now)
+                                                  .AsNoTracking()
+                                                  .Count();
+            return count;
         }
     }
 }

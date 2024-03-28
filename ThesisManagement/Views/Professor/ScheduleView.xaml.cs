@@ -1,18 +1,5 @@
 ﻿using Syncfusion.UI.Xaml.Scheduler;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
 using ThesisManagement.ViewModels;
@@ -35,17 +22,32 @@ namespace ThesisManagement.Views.Professor
         private void Schedule_AppointmentEditorClosing(object sender, AppointmentEditorClosingEventArgs e)
         {
             var appointment = e.Appointment as ScheduleAppointment;
-            ScheduleViewModel dataContext = this.DataContext as ScheduleViewModel ?? new ScheduleViewModel();
-            if (appointment != null)
+            if (appointment == null) return;
+
+            ScheduleViewModel? scheduleVM = this.DataContext as ScheduleViewModel ?? new ScheduleViewModel();
+            ScheduleInfo schedule = new ScheduleInfo
             {
-                dataContext.SelectedSchedule.From = appointment.StartTime;
-                dataContext.SelectedSchedule.To = appointment.EndTime;
-                dataContext.SelectedSchedule.EventName = appointment.Subject;
-                dataContext.SelectedSchedule.Location = appointment.Location;
-                dataContext.SelectedSchedule.Note = appointment.Notes;
-                dataContext.SelectedSchedule.ThesisId = dataContext.ThesisId;
-                _scheduleRepo.Add(dataContext.SelectedSchedule);
+                From = appointment.StartTime,
+                To = appointment.EndTime,
+                EventName = appointment.Subject,
+                Location = appointment.Location,
+                ThesisId = scheduleVM.ThesisId,
+                Note = scheduleVM.Note
+            };
+            switch (e.Action)
+            {
+                case AppointmentEditorAction.Add:
+                    _scheduleRepo.Add(schedule);
+                    break;
+                case AppointmentEditorAction.Edit:
+                    _scheduleRepo.Update(schedule);
+                    break;
+                case AppointmentEditorAction.Delete:
+                    _scheduleRepo.Delete(schedule.Id);
+                    break;
             }
+
+            ((ScheduleViewModel)this.DataContext).CountUpcomingSchedules = _scheduleRepo.CountUpcomingSchedules(scheduleVM.ThesisId);
         }
 
     }

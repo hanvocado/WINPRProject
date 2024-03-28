@@ -95,7 +95,7 @@
                             <Slider x:Name="progressSlider" 
                                     TickFrequency="10" 
                                     IsSnapToTickEnabled="True" 
-                                    Value="{Binding SelectedTask.Progress}" 
+                                    Value="{Binding Progress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                     Maximum="100" 
                                     Minimum="0" 
                                     Margin="20 5 20 0"/>

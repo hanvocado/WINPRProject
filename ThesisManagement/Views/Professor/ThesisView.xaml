@@ -189,9 +189,17 @@
                             <TabItem Header="Nhiệm vụ">
                                 <local:TasksView x:Name="tasksView" />
                             </TabItem>
-                            
-                            <TabItem Header="Lịch họp">
-                                <local:ScheduleView x:Name="scheduleView" />
+
+                            <TabItem x:Name="scheduleView">
+                                <TabItem.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Lịch" Margin="0 0 0 0" VerticalAlignment="Center" />
+                                        <Border CornerRadius="20" Background="red" Margin="-1 -8 1 8" Width="13" Height="13">
+                                            <TextBlock Foreground="white" Text="{Binding CountUpcomingSchedules}" TextAlignment="Center" FontWeight="Bold" FontSize="10" />
+                                        </Border>
+                                    </StackPanel>
+                                </TabItem.Header>
+                                <local:ScheduleView DataContext="{Binding ElementName=scheduleView, Path=DataContext}" />
                             </TabItem>
                         </TabControl>
                     </Grid>
