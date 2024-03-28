@@ -100,7 +100,7 @@
     <Compile Update="Views\Student\StudentMainView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Student\Task.xaml.cs">
+    <Compile Update="Views\Student\ProfessorTask.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Student\ThesisDetailViewStudent.xaml.cs">
@@ -231,7 +231,7 @@
     <Page Update="Views\Student\StudentMainView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Student\Task.xaml">
+    <Page Update="Views\Student\ProfessorTask.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Student\ThesisDetailViewStudent.xaml">
