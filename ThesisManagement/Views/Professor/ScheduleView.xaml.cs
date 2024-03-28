@@ -16,7 +16,8 @@ namespace ThesisManagement.Views.Professor
         {
             _scheduleRepo = new ScheduleRepository();
             InitializeComponent();
-            if(SessionInfo.Role == Role.Student)
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("vi");
+            if (SessionInfo.Role == Role.Student)
             {
                 Schedule.AppointmentEditFlag = AppointmentEditFlag.None;
             }
