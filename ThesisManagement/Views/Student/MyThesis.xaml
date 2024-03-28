@@ -15,12 +15,11 @@
              Background="White"
              FontSize="12">
 
-    <UserControl.Resources>
-        <viewModels:MyThesisVM x:Key="MyThesisVM"/>
-        <customControls:CollectionToStringConverter x:Key="CollectionToStringConverter"/>
-    </UserControl.Resources>
+    <UserControl.DataContext>
+        <viewModels:MyThesisVM />
+    </UserControl.DataContext>
 
-    <md:Card Background="{DynamicResource MaterialDesignPaper}" Margin="0,0,0,10" DataContext="{StaticResource MyThesisVM}">
+    <md:Card Background="{DynamicResource MaterialDesignPaper}" Margin="0,0,0,10">
         <Grid Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>

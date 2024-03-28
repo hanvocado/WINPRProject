@@ -15,10 +15,9 @@
         FontSize="12"
         Style="{StaticResource formStyle}"
         Title="ThesisView" Height="550" Width="900">
-    <Window.Resources>
-        <viewModels:MyThesisVM x:Key="MyThesisVM"/>
-        <customControls:CollectionToStringConverter x:Key="CollectionToStringConverter"/>
-    </Window.Resources>
+    <Window.DataContext>
+        <viewModels:MyThesisVM />
+    </Window.DataContext>
 
     <Grid>
         <Grid.RowDefinitions>

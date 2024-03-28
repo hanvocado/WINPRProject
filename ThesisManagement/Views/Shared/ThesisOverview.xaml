@@ -9,10 +9,9 @@
              xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.Resources>
-        <viewModels:MyThesisVM x:Key="MyThesisVM"/>
-        <customControls:CollectionToStringConverter x:Key="CollectionToStringConverter"/>
-    </UserControl.Resources>
+    <UserControl.DataContext>
+        <viewModels:MyThesisVM/>
+    </UserControl.DataContext>
 
     <Grid>
         <Grid.ColumnDefinitions>
