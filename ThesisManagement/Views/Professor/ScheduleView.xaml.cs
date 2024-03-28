@@ -1,5 +1,6 @@
 ﻿using Syncfusion.UI.Xaml.Scheduler;
 using System.Windows.Controls;
+using ThesisManagement.Models;
 using ThesisManagement.Repositories;
 using ThesisManagement.ViewModels;
 
@@ -21,20 +22,32 @@ namespace ThesisManagement.Views.Professor
         private void Schedule_AppointmentEditorClosing(object sender, AppointmentEditorClosingEventArgs e)
         {
             var appointment = e.Appointment as ScheduleAppointment;
-            ScheduleViewModel? scheduleVM = this.DataContext as ScheduleViewModel;
-            if (scheduleVM != null && appointment != null)
+            if (appointment == null) return;
+
+            ScheduleViewModel? scheduleVM = this.DataContext as ScheduleViewModel ?? new ScheduleViewModel();
+            ScheduleInfo schedule = new ScheduleInfo
             {
-                var newSchedule = new Models.ScheduleInfo
-                {
-                    From = appointment.StartTime,
-                    To = appointment.EndTime,
-                    EventName = appointment.Subject,
-                    Location = appointment.Location,
-                    ThesisId = scheduleVM.ThesisId
-                };
-                _scheduleRepo.Add(newSchedule);
-                ((ScheduleViewModel)this.DataContext).CountUpcomingSchedules = _scheduleRepo.CountUpcomingSchedules(scheduleVM.ThesisId);
+                Id = (int)appointment.Id,
+                From = appointment.StartTime,
+                To = appointment.EndTime,
+                EventName = appointment.Subject,
+                Location = appointment.Location,
+                ThesisId = scheduleVM.ThesisId
+            };
+            switch (e.Action)
+            {
+                case AppointmentEditorAction.Add:
+                    _scheduleRepo.Add(schedule);
+                    break;
+                case AppointmentEditorAction.Edit:
+                    _scheduleRepo.Update(schedule);
+                    break;
+                case AppointmentEditorAction.Delete:
+                    _scheduleRepo.Delete(schedule.Id);
+                    break;
             }
+
+            ((ScheduleViewModel)this.DataContext).CountUpcomingSchedules = _scheduleRepo.CountUpcomingSchedules(scheduleVM.ThesisId);
         }
 
     }

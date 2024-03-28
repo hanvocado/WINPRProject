@@ -19,6 +19,7 @@
                                 ViewType="Week">
             <syncfusion:SfScheduler.AppointmentMapping>
                 <syncfusion:AppointmentMapping
+                            Id ="Id"
                             Subject="EventName"
                             StartTime="From"
                             EndTime="To"

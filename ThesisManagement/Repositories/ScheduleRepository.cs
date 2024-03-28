@@ -31,13 +31,17 @@ namespace ThesisManagement.Repositories
 
         public bool Update(ScheduleInfo scheduleInfo)
         {
+            _context.ChangeTracker.Clear();
             _context.Update(scheduleInfo);
             return DbSave();
         }
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            var schedule = _context.ScheduleInfos.FirstOrDefault(s => s.Id == id);
+            if (schedule == null) return false;
+            _context.Remove(schedule);
+            return DbSave();
         }
 
         public bool DbSave()
