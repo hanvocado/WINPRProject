@@ -99,14 +99,14 @@
                                     </GridViewColumn>
 
                                     <GridViewColumn Width="150"
-                        DisplayMemberBinding="{Binding Start}">
+                        DisplayMemberBinding="{Binding Start, StringFormat=HH:mm dd-MM-yyyy}">
                                         <GridViewColumn.Header>
                                             <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Thời gian bắt đầu" />
                                         </GridViewColumn.Header>
                                     </GridViewColumn>
 
                                     <GridViewColumn Width="150"
-                        DisplayMemberBinding="{Binding End}">
+                        DisplayMemberBinding="{Binding End, StringFormat=HH:mm dd-MM-yyyy}">
                                         <GridViewColumn.Header>
                                             <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Thời gian kết thúc" />
                                         </GridViewColumn.Header>
