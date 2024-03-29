@@ -78,6 +78,7 @@
                                 </TabItem.Header>
                                 <shared:SchedulesView DataContext="{Binding ElementName=scheduleView, Path=DataContext}" />
                             </TabItem>
+                            
                         </TabControl>
                     </Grid>
                 </Grid>

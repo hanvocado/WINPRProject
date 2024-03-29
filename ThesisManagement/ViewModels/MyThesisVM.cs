@@ -1,4 +1,5 @@
-﻿using ThesisManagement.Models;
+﻿using System.Windows.Input;
+using ThesisManagement.Models;
 using ThesisManagement.Repositories;
 
 namespace ThesisManagement.ViewModels
@@ -11,7 +12,6 @@ namespace ThesisManagement.ViewModels
         private readonly IProfessorRepository _professorRepo;
 
         private Topic topic;
-
         public Topic Topic
         {
             get { return topic; }
@@ -19,7 +19,6 @@ namespace ThesisManagement.ViewModels
         }
 
         private Thesis thesis;
-
         public Thesis Thesis
         {
             get { return thesis; }
@@ -32,6 +31,22 @@ namespace ThesisManagement.ViewModels
             }
         }
 
+        private string evaluation;
+        public string Evaluation
+        {
+            get { return evaluation; }
+            set { evaluation = value; OnPropertyChanged(nameof(Evaluation)); }
+        }
+
+        private int score;
+        public int Score
+        {
+            get { return score; }
+            set { score = value; OnPropertyChanged(nameof(Score)); }
+        }
+
+        public ICommand MakeEvaluationCommand { get; set; }
+
         public MyThesisVM()
         {
             _thesisRepo = new ThesisRepository();
@@ -39,6 +54,14 @@ namespace ThesisManagement.ViewModels
             _topicRepo = new TopicRepository();
             _studentRepo = new StudentRepository();
             Thesis ??= _studentRepo.GetThesis(SessionInfo.UserId) ?? new Thesis();
+            MakeEvaluationCommand = new ViewModelCommand(ExecuteMakeEvaluationCommand);
+        }
+
+        private void ExecuteMakeEvaluationCommand(object obj)
+        {
+            thesis.Evaluation = evaluation;
+            thesis.Score = score;
+            _thesisRepo.Update(thesis);
         }
     }
 }

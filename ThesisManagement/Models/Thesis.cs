@@ -18,6 +18,7 @@ namespace ThesisManagement.Models
         public byte[]? File { get; set; }
 
         public float? Score { get; set; }
+        public string? Evaluation { get; set; }
 
         [ForeignKey(nameof(TopicId))]
         public Topic Topic { get; set; }
