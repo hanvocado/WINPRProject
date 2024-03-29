@@ -25,7 +25,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         
-        <customControls:PopupControlBar />
+        <customControls:WindowControlBar />
 
         <Border Grid.Row="1" Background="White" Padding="15 0 15 15">
             <md:Card Background="{DynamicResource MaterialDesignPaper}" x:Name="mainContainer">
