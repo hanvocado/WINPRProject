@@ -1,11 +1,9 @@
 ﻿using System.Windows.Controls;
 using ThesisManagement.ViewModels;
+using ThesisManagement.Views.Professor;
 
 namespace ThesisManagement.Views.Student
 {
-    /// <summary>
-    /// Interaction logic for MyTopics.xaml
-    /// </summary>
     public partial class MyThesis : UserControl
     {
         public MyThesis()
@@ -27,6 +25,7 @@ namespace ThesisManagement.Views.Student
                 {
                     ThesisId = thesisVM.Thesis.Id
                 };
+                professorEvaluationView.DataContext = thesisVM;
             }
 
         }

@@ -61,13 +61,22 @@
                     <TabItem x:Name="notificationView">
                         <TabItem.Header>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Thông báo" Margin="0 0 0 0" VerticalAlignment="Center" />
+                                <TextBlock Text="Lịch" Margin="0 0 0 0" VerticalAlignment="Center" />
                                 <Border CornerRadius="20" Background="red" Margin="-1 -8 1 8" Width="13" Height="13">
                                     <TextBlock Foreground="white" Text="{Binding CountUpcomingSchedules}" TextAlignment="Center" FontWeight="Bold" FontSize="10" />
                                 </Border>
                             </StackPanel>
                         </TabItem.Header>
                         <shared:SchedulesView DataContext="{Binding ElementName=notificationView, Path=DataContext}" />
+                    </TabItem>
+
+                    <TabItem x:Name="professorEvaluationView">
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Luận văn" Margin="0 0 0 0" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </TabItem.Header>
+                        <local:EvaluationsView DataContext="{Binding ElementName=professorEvaluationView, Path=DataContext}" />
                     </TabItem>
                 </TabControl>
             </Grid>

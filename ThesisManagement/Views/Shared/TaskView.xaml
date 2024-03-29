@@ -70,9 +70,10 @@
                     <StackPanel>
                         <TextBlock Text="Ngày bắt đầu nhiệm vụ"
                             Style="{StaticResource label}" />
-                        <hc:DateTimePicker SelectedDateTime="{Binding Start, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                        <!--<hc:DateTimePicker SelectedDateTime="{Binding Start, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
                                        DateTimeFormat="hh:mm dd-MM-yyyy"
-                                       Height="35"/>
+                                       Height="35"/>-->
+                        <DatePicker SelectedDate="{Binding Start}" SelectedDateFormat="Short" Height="35" />
                     </StackPanel>
                 </Border>
 
@@ -80,9 +81,11 @@
                     <StackPanel>
                         <TextBlock Text="Ngày kết thúc nhiệm vụ"
                             Style="{StaticResource label}" />
-                        <hc:DateTimePicker SelectedDateTime="{Binding End, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                        <DatePicker SelectedDate="{Binding End, StringFormat=dd-MM-yyyy}"
+                                    SelectedDateFormat="Short" Height="35" />
+                        <!--<hc:DateTimePicker SelectedDateTime="{Binding End, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
                                        DateTimeFormat="hh:mm dd-MM-yyyy"
-                                       Height="35"/>
+                                       Height="35"/>-->
                     </StackPanel>
                 </Border>
 

@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
 
@@ -45,6 +46,7 @@ namespace ThesisManagement.ViewModels
             set { score = value; OnPropertyChanged(nameof(Score)); }
         }
 
+
         public ICommand MakeEvaluationCommand { get; set; }
 
         public MyThesisVM()
@@ -61,7 +63,8 @@ namespace ThesisManagement.ViewModels
         {
             thesis.Evaluation = evaluation;
             thesis.Score = score;
-            _thesisRepo.Update(thesis);
+            var success = _thesisRepo.Update(thesis);
+            ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
         }
     }
 }

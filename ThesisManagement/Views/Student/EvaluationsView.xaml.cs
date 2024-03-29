@@ -1,13 +1,13 @@
 ﻿using System.Windows.Controls;
 
-namespace ThesisManagement.Views.Shared
+namespace ThesisManagement.Views.Student
 {
     /// <summary>
     /// Interaction logic for Feedback.xaml
     /// </summary>
-    public partial class Evaluation : UserControl
+    public partial class EvaluationsView : UserControl
     {
-        public Evaluation()
+        public EvaluationsView()
         {
             InitializeComponent();
         }

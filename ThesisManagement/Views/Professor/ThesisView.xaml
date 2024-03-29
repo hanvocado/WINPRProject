@@ -78,7 +78,19 @@
                                 </TabItem.Header>
                                 <shared:SchedulesView DataContext="{Binding ElementName=scheduleView, Path=DataContext}" />
                             </TabItem>
-                            
+
+                            <TabItem x:Name="evaluationView">
+                                <TabItem.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Đánh giá" Margin="0 0 0 0" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </TabItem.Header>
+                                <local:EvaluationsView />
+                            </TabItem>
+
+                            <TabItem Header="Thống kê">
+                                <local:ChartView x:Name="chartView" DataContext="{Binding ElementName=tasksView, Path=DataContext}" />
+                            </TabItem>
                         </TabControl>
                     </Grid>
                 </Grid>

@@ -7,6 +7,8 @@ namespace ThesisManagement.ViewModels
 {
     public class StudentMainVM : ViewModelBase
     {
+        private IStudentRepository _studentRepo;
+
         private ViewModelBase _currentChildView;
 
         public ViewModelBase CurrentChildView
@@ -18,6 +20,15 @@ namespace ThesisManagement.ViewModels
                 OnPropertyChanged(nameof(CurrentChildView));
             }
         }
+
+        private bool registeredTopic;
+
+        public bool RegisteredTopic
+        {
+            get { return registeredTopic; }
+            set { registeredTopic = value; OnPropertyChanged(nameof(RegisteredTopic)); }
+        }
+
         public ICommand ShowTopicsView { get; set; }
         public ICommand ShowThesisView { get; set; }
         public ICommand ShowStudentProfileView { get; set; }
@@ -30,8 +41,12 @@ namespace ThesisManagement.ViewModels
             ShowThesisView = new ViewModelCommand(ExecuteShowThesisView);
             ShowStudentProfileView = new ViewModelCommand(ExcututeShowStudentProfileView);
             LogoutCommand = new ViewModelCommand(ExcuteLogout);
-
-            ExecuteShowTopicsView(null);
+            _studentRepo = new StudentRepository();
+            RegisteredTopic = _studentRepo.GetThesis(SessionInfo.UserId) != null;
+            if (registeredTopic)
+                ExecuteShowThesisView(null);
+            else
+                ExecuteShowTopicsView(null);
         }
 
         private void ExcututeShowStudentProfileView(object obj)

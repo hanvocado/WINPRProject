@@ -26,6 +26,7 @@ namespace ThesisManagement.Views.Professor
             {
                 ThesisId = thesisVM.Thesis.Id
             };
+            evaluationView.DataContext = thesisVM;
         }
     }
 }
