@@ -4,7 +4,6 @@ using System.Diagnostics;
 using ThesisManagement.Repositories.EF;
 using ThesisManagement.ViewModels;
 using Task = ThesisManagement.Models.Task;
-using TaskStatus = ThesisManagement.ViewModels.TaskStatus;
 
 namespace ThesisManagement.Repositories
 {
@@ -120,9 +119,9 @@ namespace ThesisManagement.Repositories
                 int countOverdue = tasks.Where(t => t.Progress < 100 && t.End < DateTime.Now).Count();
                 data = new List<TasksPie>
                 {
-                    new TasksPie { TaskStatus = TaskStatus.Done, Count = countDone, Percentage = (countDone/totalTasks)*100 },
-                    new TasksPie { TaskStatus = TaskStatus.Pending, Count = countPending, Percentage = (countPending/totalTasks)*100 },
-                    new TasksPie { TaskStatus = TaskStatus.Overdue, Count = countOverdue, Percentage = (countOverdue/totalTasks)*100 }
+                    new TasksPie { TaskStatus = "Đã hoàn thành", Count = countDone, Percentage = (countDone/totalTasks)*100 },
+                    new TasksPie { TaskStatus = "Đang thực hiện", Count = countPending, Percentage = (countPending/totalTasks)*100 },
+                    new TasksPie { TaskStatus = "Đã quá hạn", Count = countOverdue, Percentage = (countOverdue/totalTasks)*100 }
                 };
             }
             return data;

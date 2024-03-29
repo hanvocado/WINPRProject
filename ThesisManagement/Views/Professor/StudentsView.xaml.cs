@@ -25,7 +25,6 @@ namespace ThesisManagement.Views.Professor
             if (thesis != null)
             {
                 ((ReviewThesesVM)this.DataContext).SelectedThesis = thesis;
-                //MessageBox.Show($"{dataContext.ThesisId}" );
             }
         }
 
@@ -36,7 +35,8 @@ namespace ThesisManagement.Views.Professor
                 foreach (var item in ThesisListView.Items)
                 {
                     ListViewItem listViewItem = (ListViewItem)ThesisListView.ItemContainerGenerator.ContainerFromItem(item);
-                    listViewItem.MouseEnter += ListViewItem_MouseEnter;
+                    if (listViewItem != null)
+                        listViewItem.MouseEnter += ListViewItem_MouseEnter;
                 }
             }
         }

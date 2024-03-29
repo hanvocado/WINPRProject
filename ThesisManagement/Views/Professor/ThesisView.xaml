@@ -78,6 +78,10 @@
                                 </TabItem.Header>
                                 <shared:SchedulesView DataContext="{Binding ElementName=scheduleView, Path=DataContext}" />
                             </TabItem>
+
+                            <TabItem Header="Thống kê">
+                                <local:ChartView x:Name="chartView" DataContext="{Binding ElementName=tasksView, Path=DataContext}" />
+                            </TabItem>
                         </TabControl>
                     </Grid>
                 </Grid>

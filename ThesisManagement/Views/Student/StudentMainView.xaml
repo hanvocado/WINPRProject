@@ -45,10 +45,9 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <Image Source="/Resources/Images/logo-bright.png" Height="28" Margin="0 22 0 0" />
 
                     <StackPanel Grid.Row="1">
-                        <RadioButton Style="{StaticResource navBtn}" IsChecked="True"
+                        <RadioButton Style="{StaticResource navBtn}"
                                  Command="{Binding ShowTopicsView}">
                             <RadioButton.ToolTip>
                                 <ToolTip Content="Đề tài" Style="{StaticResource navToolTip}" />

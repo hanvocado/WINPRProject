@@ -28,6 +28,9 @@
     <Compile Update="Views\Admin\ProfessorsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Professor\ChartView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Professor\ProfessorMainView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -148,6 +151,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Admin\ProfessorsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Professor\ChartView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Professor\ProfessorMainView.xaml">

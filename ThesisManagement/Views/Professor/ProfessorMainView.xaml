@@ -58,20 +58,20 @@
                             <fa:IconImage Icon="RectangleList" Style="{StaticResource navIcon}" />
                         </RadioButton>
 
-                        <RadioButton Style="{StaticResource navBtn}"
+                        <!--<RadioButton Style="{StaticResource navBtn}"
                                      Command="{Binding ShowStudentView}">
                             <RadioButton.ToolTip>
                                 <ToolTip Content="Sinh viên" Style="{StaticResource navToolTip}" />
                             </RadioButton.ToolTip>
                             <fa:IconImage Icon="UserLarge" Style="{StaticResource navIcon}" />
-                        </RadioButton>
+                        </RadioButton>-->
 
                         <RadioButton Style="{StaticResource navBtn}" 
-                                     Command="{Binding ShowThesisView}">
+                                     Command="{Binding ShowStudentView}">
                             <RadioButton.ToolTip>
                                 <ToolTip Content="Luận văn" Style="{StaticResource navToolTip}" />
                             </RadioButton.ToolTip>
-                            <fa:IconImage Icon="Book" Style="{StaticResource navIcon}" />
+                            <fa:IconImage Icon="AddressBook" Style="{StaticResource navIcon}" />
                         </RadioButton>
 
                         <RadioButton Style="{StaticResource navBtn}"

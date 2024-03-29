@@ -18,7 +18,7 @@ namespace ThesisManagement.ViewModels
             set
             {
                 thesis = value;
-                LoadTasks();
+                Reload();
                 OnPropertyChanged(nameof(Thesis));
             }
         }
@@ -147,6 +147,13 @@ namespace ThesisManagement.ViewModels
             }
         }
 
+        private IEnumerable<TasksPie> tasksPieData;
+        public IEnumerable<TasksPie> TasksPieData
+        {
+            get { return tasksPieData; }
+            set { tasksPieData = value; OnPropertyChanged(nameof(TasksPieData)); }
+        }
+
         public ICommand CreateTaskCommand { get; set; }
         public ICommand UpdateTaskCommand { get; set; }
         public ICommand DeleteTaskCommand { get; set; }
@@ -178,7 +185,7 @@ namespace ThesisManagement.ViewModels
         {
             var success = _taskRepo.Delete(id);
             ShowMessage(success, Message.DeleteSuccess, Message.DeleteFailed);
-            LoadTasks();
+            Reload();
         }
 
         private void ExecuteCreateOrUpdateCommand(object obj)
@@ -208,23 +215,23 @@ namespace ThesisManagement.ViewModels
                 ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
             }
 
-            LoadTasks();
+            Reload();
             taskView?.Close();
         }
 
         private void ExecuteCreateTaskCommand(object obj)
         {
-            TaskView taskView = new();
             ResetTaskProperties();
-            taskView.DataContext = this;
+            var taskView = new TaskView { DataContext = this };
             taskView.Show();
         }
 
-        private void LoadTasks()
+        private void Reload()
         {
             PendingTasks = _taskRepo.GetPendingTasks(thesis.Id);
             DoneTasks = _taskRepo.GetDoneTasks(thesis.Id);
             OverdueTasks = _taskRepo.GetOverdueTasks(thesis.Id);
+            TasksPieData = _taskRepo.GetTasksPieData(thesis.Id);
         }
 
         private void ResetTaskProperties()
