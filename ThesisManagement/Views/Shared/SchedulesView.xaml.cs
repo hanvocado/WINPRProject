@@ -1,4 +1,5 @@
 ﻿using Syncfusion.UI.Xaml.Scheduler;
+using System.Windows;
 using System.Windows.Controls;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
@@ -72,6 +73,8 @@ namespace ThesisManagement.Views.Shared
                         Note = appointment.Notes
                     };
                     var scheduleView = new ScheduleDetailsView { DataContext = schedule };
+                    scheduleView.Owner = Window.GetWindow(this);
+                    scheduleView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                     scheduleView.Show();
                 }
                 return;

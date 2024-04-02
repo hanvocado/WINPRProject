@@ -203,8 +203,8 @@ namespace ThesisManagement.ViewModels
             set { selectedStudentNames = value; OnPropertyChanged(nameof(SelectedStudentNames)); }
         }
 
-        public IEnumerable<string> Categories { get; set; } = new List<string>() { "Computer Science", "Web Development", "Data Science", "Other" };
-        public IEnumerable<string> Technologies { get; set; } = new List<string>() { "JavaScript", "Wpf", ".NET", "Java", "Python", "SQL", "ASP.NET Core", "Other" };
+        public IEnumerable<string> Categories { get; set; } = new List<string>() { "Desktop App", "Web App", "Data Science", "Machine Learning", "Other" };
+        public IEnumerable<string> Technologies { get; set; } = new List<string>() { "MernStack", "Wpf", ".NET", "Java", "Python", "Other" };
 
         private List<Topic> topics;
         public List<Topic> Topics
@@ -425,9 +425,13 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteDeleteCommand(object parameter)
         {
-            var success = _topicRepo.Delete(id);
-            ShowMessage(success, Message.DeleteSuccess, Message.DeleteFailed);
-            Topics = _topicRepo.GetAll(SessionInfo.UserId);
+            var confirmed = ConfirmDelete();
+            if (confirmed == MessageBoxResult.Yes)
+            {
+                var success = _topicRepo.Delete(id);
+                ShowMessage(success, Message.DeleteSuccess, Message.DeleteFailed);
+                Topics = _topicRepo.GetAll(SessionInfo.UserId);
+            }
         }
 
         private bool CanExecuteDelete(object parameter)

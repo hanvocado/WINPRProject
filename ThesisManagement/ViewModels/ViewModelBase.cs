@@ -3,6 +3,7 @@ using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using ThesisManagement.CustomControls;
 using ThesisManagement.Views.Shared;
 
@@ -65,6 +66,12 @@ namespace ThesisManagement.ViewModels
                 var notif = new FailedNotify(failedMessage);
                 Notification.Show(notif, ShowAnimation.HorizontalMove, false);
             }
+        }
+
+        public MessageBoxResult ConfirmDelete()
+        {
+            MessageBoxResult result = MessageBox.Show("Bạn chắc chắn muốn xóa?", "Xác nhận", MessageBoxButton.YesNo);
+            return result;
         }
     }
 }

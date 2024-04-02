@@ -9,7 +9,6 @@
         xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
         mc:Ignorable="d"
         WindowStyle="None"
-        WindowStartupLocation="CenterScreen"
         Style="{StaticResource formStyle}"
         Title="Schedule" Height="420" Width="600">
     <Window.DataContext>
