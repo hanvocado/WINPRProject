@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ThesisManagement.Views.Student"
         xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
         xmlns:models="clr-namespace:ThesisManagement.Models"
-        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:sf="http://schemas.syncfusion.com/wpf"
         xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
         mc:Ignorable="d"
         WindowStyle="None"
@@ -43,7 +43,7 @@
                     <TextBlock Text="Tiêu đề" Style="{StaticResource label}" />
                     <TextBox Grid.Row="2"
                          Height="35"
-                         VerticalAlignment="Top"
+                         IsReadOnly="True"
                          Text="{Binding EventName}"/>
                 </StackPanel>
             </Border>
@@ -52,7 +52,7 @@
                 <StackPanel>
                     <TextBlock Text="Mô tả" Style="{StaticResource label}" />
                     <TextBox Grid.Row="3"
-                         VerticalAlignment="Top"
+                         IsReadOnly="True"
                          Height="90"
                          Text="{Binding Note}" 
                          AcceptsReturn="True"
@@ -69,9 +69,9 @@
                     <StackPanel>
                         <TextBlock Text="Thời gian bắt đầu"
                                 Style="{StaticResource label}" />
-                        <DatePicker SelectedDate="{Binding From}"
-                                    SelectedDateFormat="Short"
-                                           Height="35"/>
+                        <TextBox Height="35"
+                                 IsReadOnly="True"
+                                 Text="{Binding DisplayFrom, Mode=OneWay}"/>
 
                     </StackPanel>
                 </Border>
@@ -80,9 +80,9 @@
                     <StackPanel>
                         <TextBlock Text="Thời gian kết thúc"
                                 Style="{StaticResource label}" />
-                        <DatePicker SelectedDate="{Binding To}" 
-                                    SelectedDateFormat="Short"
-                                           Height="35"/>
+                        <TextBox Height="35"
+                                 IsReadOnly="True"
+                                 Text="{Binding DisplayTo, Mode=OneWay}"/>
                     </StackPanel>
                 </Border>
             </Grid>
@@ -92,7 +92,7 @@
                     <TextBlock Text="Địa điểm" Style="{StaticResource label}" />
                     <TextBox Grid.Row="2"
                              Height="35"
-                             VerticalAlignment="Top"
+                             IsReadOnly="True"
                              Text="{Binding Location, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
             </Border>

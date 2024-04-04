@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
 
 namespace ThesisManagement.Models
@@ -30,5 +25,23 @@ namespace ThesisManagement.Models
 
         [NotMapped]
         public Brush ColorBrush { get; }
+
+        [NotMapped]
+        public string DisplayFrom
+        {
+            get
+            {
+                return From.ToString("HH:mm dd-MM-yyyy");
+            }
+        }
+
+        [NotMapped]
+        public string DisplayTo
+        {
+            get
+            {
+                return To.ToString("HH:mm dd-MM-yyyy");
+            }
+        }
     }
 }
