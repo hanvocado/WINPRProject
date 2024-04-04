@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ThesisManagement.Views.Student"
         xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
+        xmlns:models="clr-namespace:ThesisManagement.Models"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
         mc:Ignorable="d"
@@ -12,7 +13,7 @@
         Style="{StaticResource formStyle}"
         Title="Schedule" Height="420" Width="600">
     <Window.DataContext>
-        <viewModels:ScheduleViewModel />
+        <models:ScheduleInfo />
     </Window.DataContext>
     <Border>
         <Grid >
@@ -43,7 +44,7 @@
                     <TextBox Grid.Row="2"
                          Height="35"
                          VerticalAlignment="Top"
-                         Text="{Binding EventName, UpdateSourceTrigger=PropertyChanged}"/>
+                         Text="{Binding EventName}"/>
                 </StackPanel>
             </Border>
 
@@ -53,7 +54,7 @@
                     <TextBox Grid.Row="3"
                          VerticalAlignment="Top"
                          Height="90"
-                         Text="{Binding Note,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                         Text="{Binding Note}" 
                          AcceptsReturn="True"
                          TextWrapping="Wrap"
                          VerticalScrollBarVisibility="Auto"/>
@@ -68,8 +69,8 @@
                     <StackPanel>
                         <TextBlock Text="Thời gian bắt đầu"
                                 Style="{StaticResource label}" />
-                        <hc:DateTimePicker SelectedDateTime="{Binding From}"
-                                           DateTimeFormat="hh:mm dd-MM-yyyy"
+                        <DatePicker SelectedDate="{Binding From}"
+                                    SelectedDateFormat="Short"
                                            Height="35"/>
 
                     </StackPanel>
@@ -79,8 +80,8 @@
                     <StackPanel>
                         <TextBlock Text="Thời gian kết thúc"
                                 Style="{StaticResource label}" />
-                        <hc:DateTimePicker SelectedDateTime="{Binding To}"
-                                           DateTimeFormat="hh:mm dd-MM-yyyy"
+                        <DatePicker SelectedDate="{Binding To}" 
+                                    SelectedDateFormat="Short"
                                            Height="35"/>
                     </StackPanel>
                 </Border>

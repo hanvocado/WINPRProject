@@ -21,7 +21,7 @@ namespace ThesisManagement.Views.Student
                     ThesisId = thesisVM.Thesis.Id,
                     Thesis = thesisVM.Thesis,
                 };
-                notificationView.DataContext = new ScheduleViewModel
+                notificationView.DataContext = new ScheduleVM
                 {
                     ThesisId = thesisVM.Thesis.Id
                 };

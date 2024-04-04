@@ -3,7 +3,7 @@ using ThesisManagement.Repositories;
 
 namespace ThesisManagement.ViewModels
 {
-    public class ScheduleViewModel : ViewModelBase
+    public class ScheduleVM : ViewModelBase
     {
         private readonly IScheduleRepository _scheduleRepo;
 
@@ -82,17 +82,6 @@ namespace ThesisManagement.ViewModels
             }
         }
 
-        private ScheduleInfo selectedSchedule;
-        public ScheduleInfo SelectedSchedule
-        {
-            get { return selectedSchedule; }
-            set
-            {
-                selectedSchedule = value;
-                OnPropertyChanged(nameof(SelectedSchedule));
-            }
-        }
-
         private IEnumerable<ScheduleInfo> scheduleInfos;
         public IEnumerable<ScheduleInfo> ScheduleInfos
         {
@@ -115,10 +104,9 @@ namespace ThesisManagement.ViewModels
             }
         }
 
-        public ScheduleViewModel()
+        public ScheduleVM()
         {
             _scheduleRepo = new ScheduleRepository();
-            selectedSchedule = new();
         }
     }
 }
