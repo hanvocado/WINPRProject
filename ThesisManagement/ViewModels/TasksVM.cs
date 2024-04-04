@@ -163,10 +163,15 @@ namespace ThesisManagement.ViewModels
         {
             _taskRepo = new TaskRepository();
             Thesis = new Thesis();
-            CreateTaskCommand = new ViewModelCommand(ExecuteCreateTaskCommand);
+            CreateTaskCommand = new ViewModelCommand(ExecuteCreateTaskCommand, CanExecuteCreateTask);
             UpdateTaskCommand = new ViewModelCommand(ExecuteUpdateTaskCommand);
             DeleteTaskCommand = new ViewModelCommand(ExecuteDeleteTaskCommand, CanExecuteDeleteTask);
             CreateOrUpdateCommand = new ViewModelCommand(ExecuteCreateOrUpdateCommand);
+        }
+
+        private bool CanExecuteCreateTask(object obj)
+        {
+            return thesis.TopicStatus == Variable.StatusTopic.Approved;
         }
 
         private bool CanExecuteDeleteTask(object obj)

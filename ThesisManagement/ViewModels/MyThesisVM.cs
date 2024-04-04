@@ -46,11 +46,11 @@ namespace ThesisManagement.ViewModels
             set { score = value; OnPropertyChanged(nameof(Score)); }
         }
 
-        public string DetailsVisibility
+        public bool IsTopicApproved
         {
             get
             {
-                return this.Thesis.TopicStatus == Variable.StatusTopic.Approved ? "Visible" : "Collapsed";
+                return this.Thesis.TopicStatus == Variable.StatusTopic.Approved;
             }
         }
 

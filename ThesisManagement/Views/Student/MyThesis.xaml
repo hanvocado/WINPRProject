@@ -20,8 +20,7 @@
         <viewModels:MyThesisVM />
     </UserControl.DataContext>
 
-    <md:Card Background="{DynamicResource MaterialDesignPaper}" Margin="0,0,0,10"
-             Visibility="{Binding DetailsVisibility}">
+    <md:Card Background="{DynamicResource MaterialDesignPaper}" Margin="0,0,0,10">
         <Grid Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
@@ -36,11 +35,16 @@
                 <Grid Grid.Column="0">
                     <Image Source="/Resources/Images/UTE.png" Height="50" Width="50" />
                 </Grid>
-                <Border Grid.Column="1" Padding="0 0 20 0">
-                    <TextBlock Style="{StaticResource title}" HorizontalAlignment="Left" >
-                        <Run Text="Đề tài: "/>
-                        <Run Text="{Binding Topic.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    </TextBlock>
+                <Border Grid.Column="1" Padding="0 5 20 0">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource title}" HorizontalAlignment="Left" >
+                            <Run Text="Đề tài: "/>
+                            <Run Text="{Binding Topic.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        </TextBlock>
+                        <TextBlock Text="{Binding Thesis.TopicStatus}" 
+                                   Margin="0 5 0 0"
+                                   FontSize="12" FontWeight="DemiBold" Foreground="Gray" />
+                    </StackPanel>
                 </Border>
             </Grid>
 
@@ -55,23 +59,23 @@
                         </Border>
                     </TabItem>
 
-                    <TabItem Header="Nhiệm vụ">
+                    <TabItem Header="Nhiệm vụ" IsEnabled="{Binding IsTopicApproved}">
                         <shared:TasksView x:Name="tasksView"  />
                     </TabItem>
 
-                    <TabItem x:Name="notificationView">
+                    <TabItem IsEnabled="{Binding IsTopicApproved}">
                         <TabItem.Header>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Lịch" Margin="0 0 0 0" VerticalAlignment="Center" />
                                 <Border CornerRadius="20" Background="red" Margin="-1 -8 1 8" Width="13" Height="13">
-                                    <TextBlock Foreground="white" Text="{Binding CountUpcomingSchedules}" TextAlignment="Center" FontWeight="Bold" FontSize="10" />
+                                    <TextBlock Foreground="white" Text="{Binding DataContext.CountUpcomingSchedules, ElementName=notificationView}" TextAlignment="Center" FontWeight="Bold" FontSize="10" />
                                 </Border>
                             </StackPanel>
                         </TabItem.Header>
-                        <shared:SchedulesView DataContext="{Binding ElementName=notificationView, Path=DataContext}" />
+                        <shared:SchedulesView x:Name="notificationView" />
                     </TabItem>
 
-                    <TabItem x:Name="professorEvaluationView">
+                    <TabItem x:Name="professorEvaluationView" IsEnabled="{Binding IsTopicApproved}">
                         <TabItem.Header>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Luận văn" Margin="0 0 0 0" VerticalAlignment="Center" />
