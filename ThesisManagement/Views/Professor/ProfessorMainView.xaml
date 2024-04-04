@@ -17,7 +17,7 @@
     </Window.DataContext>
 
     <Window.Resources>
-        <DataTemplate DataType="{x:Type viewModel:TopicsViewModel}">
+        <DataTemplate DataType="{x:Type viewModel:TopicsVM}">
             <local:TopicsView />
         </DataTemplate>
 

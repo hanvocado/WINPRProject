@@ -17,7 +17,7 @@ namespace ThesisManagement.Views.Professor
         {
             var thesisVM = this.DataContext as MyThesisVM;
             mainContainer.DataContext = thesisVM;
-            tasksView.DataContext = new TasksViewModel
+            tasksView.DataContext = new TasksVM
             {
                 ThesisId = thesisVM.Thesis.Id,
                 Thesis = thesisVM.Thesis,

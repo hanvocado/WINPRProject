@@ -32,7 +32,7 @@ namespace ThesisManagement.Views.Student
                     currenTopicView.Close();
                 }
 
-                var vm = new TopicsViewModel
+                var vm = new TopicsVM
                 {
                     SelectedTopic = new Topic
                     {

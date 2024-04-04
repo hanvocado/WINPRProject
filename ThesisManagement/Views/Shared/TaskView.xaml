@@ -12,7 +12,7 @@
          WindowStartupLocation="CenterScreen"
          Style="{StaticResource formStyle}">
     <Window.DataContext>
-        <viewModels:TasksViewModel />
+        <viewModels:TasksVM />
     </Window.DataContext>
     <Border>
         <Grid >

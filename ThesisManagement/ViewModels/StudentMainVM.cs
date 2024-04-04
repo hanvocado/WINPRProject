@@ -54,7 +54,7 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteShowTopicsView(object? obj)
         {
-            CurrentChildView = new TopicsViewModel();
+            CurrentChildView = new TopicsVM();
         }
 
         private void ExcuteLogout(object obj)

@@ -35,7 +35,7 @@ namespace ThesisManagement.Views.Professor
                     currentTopicView.Close();
                 }
 
-                this.DataContext = new TopicsViewModel
+                this.DataContext = new TopicsVM
                 {
                     Id = topic.Id,
                     Name = topic.Name,
@@ -65,7 +65,7 @@ namespace ThesisManagement.Views.Professor
 
             var listViewItem = sender as ListViewItem;
             var topic = listViewItem?.DataContext as Topic;
-            TopicsViewModel dataContext = this.DataContext as TopicsViewModel ?? new TopicsViewModel();
+            TopicsVM dataContext = this.DataContext as TopicsVM ?? new TopicsVM();
             if (topic != null)
             {
                 dataContext.Id = topic.Id;

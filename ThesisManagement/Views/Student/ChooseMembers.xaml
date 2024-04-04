@@ -13,7 +13,7 @@
         Style="{StaticResource formStyle}"
         Title="ChooseMembers" Height="340" Width="370">
     <Window.DataContext>
-        <viewModels:TopicsViewModel />
+        <viewModels:TopicsVM />
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>

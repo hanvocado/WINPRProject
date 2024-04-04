@@ -7,7 +7,7 @@ using Task = ThesisManagement.Models.Task;
 
 namespace ThesisManagement.ViewModels
 {
-    public class TasksViewModel : ViewModelBase
+    public class TasksVM : ViewModelBase
     {
         private readonly ITaskRepository _taskRepo;
 
@@ -159,7 +159,7 @@ namespace ThesisManagement.ViewModels
         public ICommand DeleteTaskCommand { get; set; }
         public ICommand CreateOrUpdateCommand { get; set; }
 
-        public TasksViewModel()
+        public TasksVM()
         {
             _taskRepo = new TaskRepository();
             Thesis = new Thesis();

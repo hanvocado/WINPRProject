@@ -10,7 +10,7 @@ using StudentTopicView = ThesisManagement.Views.Student.TopicView;
 
 namespace ThesisManagement.ViewModels
 {
-    public class TopicsViewModel : ViewModelBase
+    public class TopicsVM : ViewModelBase
     {
         private readonly ITopicRepository _topicRepo;
         private readonly IProfessorRepository _professorRepo;
@@ -259,7 +259,7 @@ namespace ThesisManagement.ViewModels
         public ViewModelCommand ChooseMembersCommand { get; set; }
         public ViewModelCommand AddMembersCommand { get; set; }
 
-        public TopicsViewModel()
+        public TopicsVM()
         {
             _topicRepo = new TopicRepository();
             _professorRepo = new ProfessorRepository();
