@@ -8,6 +8,7 @@
              xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:sf="http://schemas.syncfusion.com/wpf"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
@@ -92,11 +93,17 @@
                     SelectedItem="{Binding SelectedTopic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Width="90"
-                                    DisplayMemberBinding="{Binding RegisteredStatusByCurrentUser}" >
+                        <GridViewColumn Width="80" >
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Trạng thái" />
                             </GridViewColumn.Header>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <sf:SfBadge Content="{Binding RegisteredStatusByCurrentUser}" Shape="Oval" Margin="0 0 5 0"
+                                                Background="PaleVioletRed"
+                                                Padding="2" FontWeight="Medium"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Width="330"
                                     DisplayMemberBinding="{Binding Name}" >
