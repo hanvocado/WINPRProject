@@ -329,8 +329,6 @@ namespace ThesisManagement.ViewModels
             {
                 RegisterTopic(obj);
             }
-
-            Topics = _topicRepo.GetMyTopicAndProfessorTopics(SessionInfo.UserId);
         }
 
         private void ExecuteRegisterTopicCommand(object obj)
@@ -353,6 +351,7 @@ namespace ThesisManagement.ViewModels
             };
             var success = _thesisRepo.Add(thesis, selectedStudents);
             ShowMessage(success, Message.RegisterSuccess, Message.RegisterFailed);
+            Topics = _topicRepo.GetMyTopicAndProfessorTopics(SessionInfo.UserId);
             RegisterNewTopicCommand.RaiseCanExecuteChanged();
 
             currentView?.Close();

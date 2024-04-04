@@ -133,7 +133,7 @@ namespace ThesisManagement.Repositories
             else
                 topics = topics.OrderByDescending(t => t.Id == myTopic.Id).ToList();
 
-            topics[0].RegisteredByCurrentUser = true;
+            topics[0].RegisteredStatusByCurrentUser = currentStudent.Thesis.TopicStatus;
             return topics;
         }
 

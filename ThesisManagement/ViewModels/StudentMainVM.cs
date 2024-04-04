@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using ThesisManagement.Helpers;
 using ThesisManagement.Repositories;
 using ThesisManagement.Views.Shared;
 
@@ -21,14 +22,6 @@ namespace ThesisManagement.ViewModels
             }
         }
 
-        private bool registeredTopic;
-
-        public bool RegisteredTopic
-        {
-            get { return registeredTopic; }
-            set { registeredTopic = value; OnPropertyChanged(nameof(RegisteredTopic)); }
-        }
-
         public ICommand ShowTopicsView { get; set; }
         public ICommand ShowThesisView { get; set; }
         public ICommand ShowStudentProfileView { get; set; }
@@ -42,8 +35,8 @@ namespace ThesisManagement.ViewModels
             ShowStudentProfileView = new ViewModelCommand(ExcututeShowStudentProfileView);
             LogoutCommand = new ViewModelCommand(ExcuteLogout);
             _studentRepo = new StudentRepository();
-            RegisteredTopic = _studentRepo.GetThesis(SessionInfo.UserId) != null;
-            if (registeredTopic)
+            var registeredTopic = _studentRepo.GetThesis(SessionInfo.UserId);
+            if (registeredTopic?.TopicStatus == Variable.StatusTopic.Approved)
                 ExecuteShowThesisView(null);
             else
                 ExecuteShowTopicsView(null);

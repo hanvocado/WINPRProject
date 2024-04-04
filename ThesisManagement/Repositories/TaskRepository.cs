@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using ThesisManagement.Models;
 using ThesisManagement.Repositories.EF;
-using ThesisManagement.ViewModels;
 using Task = ThesisManagement.Models.Task;
 
 namespace ThesisManagement.Repositories

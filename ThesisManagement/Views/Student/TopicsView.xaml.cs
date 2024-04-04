@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
@@ -10,11 +9,11 @@ namespace ThesisManagement.Views.Student
     /// <summary>
     /// Interaction logic for ProfessorsTopics.xaml
     /// </summary>
-    public partial class ProfessorsTopics : UserControl
+    public partial class TopicsView : UserControl
     {
         private RegisterTopicView currenTopicView;
 
-        public ProfessorsTopics()
+        public TopicsView()
         {
             InitializeComponent();
         }
@@ -54,15 +53,10 @@ namespace ThesisManagement.Views.Student
                     }
                 };
                 this.DataContext = vm;
-                Trace.WriteLine("Lấy danh sách sv chưa đki thesis nào và sv bị từ chối");
-                foreach (var std in vm.Students)
-                {
-                    Trace.WriteLine($"{std.Name}");
-                }
                 var currentUser = vm.Students.FirstOrDefault(s => s.Id == SessionInfo.UserId);
                 vm.Students.Remove(currentUser);
                 vm.SelectedStudents.Add(currentUser);
-                vm.SelectedStudentNames = currentUser.Name;
+                vm.SelectedStudentNames = SessionInfo.Name;
 
                 registerTopic.DataContext = this.DataContext;
                 registerTopic.Owner = Application.Current.MainWindow;

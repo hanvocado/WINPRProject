@@ -23,4 +23,12 @@ namespace ThesisManagement.Models
         [ForeignKey(nameof(ThesisId))]
         public Thesis Thesis { get; set; }
     }
+
+    public class TasksPie
+    {
+        public string TaskStatus { get; set; }
+        public int Count { get; set; }
+        public int Percentage { get; set; }
+
+    }
 }

@@ -46,6 +46,14 @@ namespace ThesisManagement.ViewModels
             set { score = value; OnPropertyChanged(nameof(Score)); }
         }
 
+        public string DetailsVisibility
+        {
+            get
+            {
+                return this.Thesis.TopicStatus == Variable.StatusTopic.Approved ? "Visible" : "Collapsed";
+            }
+        }
+
 
         public ICommand MakeEvaluationCommand { get; set; }
 
