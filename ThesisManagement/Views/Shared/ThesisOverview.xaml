@@ -21,10 +21,10 @@
 
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="70"/>
-                <RowDefinition Height="70"/>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <StackPanel Orientation="Vertical"
@@ -35,8 +35,8 @@
                         FontWeight="Medium"/>
                 <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,0,0">
                     <TextBlock Text="{Binding Topic.Professor.Name, UpdateSourceTrigger=PropertyChanged}"
-                            Height="30"
-                            Margin="10,5,0,0"/>
+                                Height="30"
+                                Padding="15 6"/>
                 </md:ColorZone>
             </StackPanel>
 
@@ -46,10 +46,10 @@
                         Style="{StaticResource label}"
                         Margin="10,5"
                         FontWeight="Medium"/>
-                <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,0,20">
+                <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,0,0">
                     <TextBlock Text="{Binding Topic.Category, UpdateSourceTrigger=PropertyChanged}"
                             Height="30"
-                            Margin="10,10,0,0"/>
+                            Padding="15 6" />
                 </md:ColorZone>
             </StackPanel>
 
@@ -59,10 +59,10 @@
                         Style="{StaticResource label}"
                         Margin="10,5"
                         FontWeight="Medium"/>
-                <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,0,20">
+                <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,0,0">
                     <TextBlock Text="{Binding Topic.Technology, UpdateSourceTrigger=PropertyChanged}"
-                            Height="70"
-                            Margin="15"/>
+                            Height="80"
+                            Margin="15 6 15 9"/>
                 </md:ColorZone>
             </StackPanel>
 
@@ -74,8 +74,8 @@
                         FontWeight="Medium"/>
                 <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,0,20">
                     <TextBlock Text="{Binding Thesis.Students, Converter={StaticResource CollectionToStringConverter}}"
-                            Height="70"
-                            Margin="15"/>
+                            Height="80"
+                            Margin="15 6 15 9"/>
                 </md:ColorZone>
             </StackPanel>
         </Grid>
@@ -96,8 +96,8 @@
                 <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,10,10">
                     <ScrollViewer>
                         <TextBlock Text="{Binding Topic.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Height="70"
-                                Margin="15"
+                                Height="80"
+                                Margin="15 6 15 9"
                                 TextWrapping="Wrap"/>
                     </ScrollViewer>
                 </md:ColorZone>
@@ -112,8 +112,8 @@
                 <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,10,10">
                     <ScrollViewer>
                         <TextBlock Text="{Binding Topic.Function, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                    Height="70"
-                                    Margin="15"
+                                    Height="80"
+                                    Margin="15 6 15 9"
                                 TextWrapping="Wrap"/>
                     </ScrollViewer>
                 </md:ColorZone>
@@ -129,8 +129,8 @@
                 <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,10,10">
                     <ScrollViewer>
                         <TextBlock Text="{Binding Topic.Requirement, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                    Height="70"
-                                    Margin="15"
+                                    Margin="15 6 15 9"
+                                   Height="80"
                                 TextWrapping="Wrap"/>
                     </ScrollViewer>
                 </md:ColorZone>
