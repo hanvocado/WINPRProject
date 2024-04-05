@@ -8,15 +8,7 @@ namespace ThesisManagement.CustomControls;
 public sealed class Notification : Window
 {
     private const int WaitTime = 3;
-
-    /// <summary>
-    ///     计数
-    /// </summary>
     private int _tickCount;
-
-    /// <summary>
-    ///     关闭计时器
-    /// </summary>
     private DispatcherTimer _timerClose;
 
     private ShowAnimation ShowAnimation { get; set; }
@@ -42,10 +34,8 @@ public sealed class Notification : Window
         notification.Show();
 
         var desktopWorkingArea = SystemParameters.WorkArea;
-        //var leftMax = (desktopWorkingArea.Width - notification.ActualWidth) / 2;
-        //var topMax = desktopWorkingArea.Height - notification.ActualHeight;
         var leftMax = (desktopWorkingArea.Width - window.ActualWidth) / 2 + window.ActualWidth - notification.ActualWidth;
-        var topMax = (desktopWorkingArea.Height - window.ActualHeight) / 2;
+        var topMax = (desktopWorkingArea.Height - window.ActualHeight) / 2 - 25;
 
         switch (showAnimation)
         {
@@ -129,9 +119,6 @@ public sealed class Notification : Window
 
     private void Animation_Completed(object sender, EventArgs e) => Close();
 
-    /// <summary>
-    ///     开始计时器
-    /// </summary>
     private void StartTimer()
     {
         _timerClose = new DispatcherTimer
