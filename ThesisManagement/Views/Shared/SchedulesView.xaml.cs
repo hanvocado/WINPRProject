@@ -1,4 +1,5 @@
 ﻿using Syncfusion.UI.Xaml.Scheduler;
+using System.Windows;
 using System.Windows.Controls;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
@@ -27,7 +28,7 @@ namespace ThesisManagement.Views.Shared
             var appointment = e.Appointment as ScheduleAppointment;
             if (appointment == null) return;
 
-            ScheduleViewModel? scheduleVM = this.DataContext as ScheduleViewModel ?? new ScheduleViewModel();
+            ScheduleVM? scheduleVM = this.DataContext as ScheduleVM ?? new ScheduleVM();
             ScheduleInfo schedule = new ScheduleInfo
             {
                 From = appointment.StartTime,
@@ -52,7 +53,7 @@ namespace ThesisManagement.Views.Shared
                     break;
             }
 
-            ((ScheduleViewModel)this.DataContext).CountUpcomingSchedules = _scheduleRepo.CountUpcomingSchedules(scheduleVM.ThesisId);
+            ((ScheduleVM)this.DataContext).CountUpcomingSchedules = _scheduleRepo.CountUpcomingSchedules(scheduleVM.ThesisId);
         }
 
         private void Schedule_AppointmentEditorOpening(object sender, AppointmentEditorOpeningEventArgs e)
@@ -72,6 +73,8 @@ namespace ThesisManagement.Views.Shared
                         Note = appointment.Notes
                     };
                     var scheduleView = new ScheduleDetailsView { DataContext = schedule };
+                    scheduleView.Owner = Window.GetWindow(this);
+                    scheduleView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                     scheduleView.Show();
                 }
                 return;

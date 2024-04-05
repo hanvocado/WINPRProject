@@ -5,15 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ThesisManagement.Views.Student"
         xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
-        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:models="clr-namespace:ThesisManagement.Models"
+        xmlns:sf="http://schemas.syncfusion.com/wpf"
         xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
         mc:Ignorable="d"
         WindowStyle="None"
-        WindowStartupLocation="CenterScreen"
         Style="{StaticResource formStyle}"
         Title="Schedule" Height="420" Width="600">
     <Window.DataContext>
-        <viewModels:ScheduleViewModel />
+        <models:ScheduleInfo />
     </Window.DataContext>
     <Border>
         <Grid >
@@ -43,8 +43,8 @@
                     <TextBlock Text="Tiêu đề" Style="{StaticResource label}" />
                     <TextBox Grid.Row="2"
                          Height="35"
-                         VerticalAlignment="Top"
-                         Text="{Binding EventName, UpdateSourceTrigger=PropertyChanged}"/>
+                         IsReadOnly="True"
+                         Text="{Binding EventName}"/>
                 </StackPanel>
             </Border>
 
@@ -52,9 +52,9 @@
                 <StackPanel>
                     <TextBlock Text="Mô tả" Style="{StaticResource label}" />
                     <TextBox Grid.Row="3"
-                         VerticalAlignment="Top"
+                         IsReadOnly="True"
                          Height="90"
-                         Text="{Binding Note,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                         Text="{Binding Note}" 
                          AcceptsReturn="True"
                          TextWrapping="Wrap"
                          VerticalScrollBarVisibility="Auto"/>
@@ -69,9 +69,9 @@
                     <StackPanel>
                         <TextBlock Text="Thời gian bắt đầu"
                                 Style="{StaticResource label}" />
-                        <hc:DateTimePicker SelectedDateTime="{Binding From}"
-                                           DateTimeFormat="hh:mm dd-MM-yyyy"
-                                           Height="35"/>
+                        <TextBox Height="35"
+                                 IsReadOnly="True"
+                                 Text="{Binding DisplayFrom, Mode=OneWay}"/>
 
                     </StackPanel>
                 </Border>
@@ -80,9 +80,9 @@
                     <StackPanel>
                         <TextBlock Text="Thời gian kết thúc"
                                 Style="{StaticResource label}" />
-                        <hc:DateTimePicker SelectedDateTime="{Binding To}"
-                                           DateTimeFormat="hh:mm dd-MM-yyyy"
-                                           Height="35"/>
+                        <TextBox Height="35"
+                                 IsReadOnly="True"
+                                 Text="{Binding DisplayTo, Mode=OneWay}"/>
                     </StackPanel>
                 </Border>
             </Grid>
@@ -92,7 +92,7 @@
                     <TextBlock Text="Địa điểm" Style="{StaticResource label}" />
                     <TextBox Grid.Row="2"
                              Height="35"
-                             VerticalAlignment="Top"
+                             IsReadOnly="True"
                              Text="{Binding Location, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
             </Border>

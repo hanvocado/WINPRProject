@@ -16,12 +16,12 @@ namespace ThesisManagement.Views.Student
             var thesisVM = this.DataContext as MyThesisVM;
             if (thesisVM != null)
             {
-                tasksView.DataContext = new TasksViewModel
+                tasksView.DataContext = new TasksVM
                 {
                     ThesisId = thesisVM.Thesis.Id,
                     Thesis = thesisVM.Thesis,
                 };
-                notificationView.DataContext = new ScheduleViewModel
+                notificationView.DataContext = new ScheduleVM
                 {
                     ThesisId = thesisVM.Thesis.Id
                 };

@@ -14,7 +14,7 @@
         Style="{StaticResource formStyle}"
         WindowStartupLocation="CenterScreen">
     <Window.DataContext>
-        <viewModels:TopicsViewModel />
+        <viewModels:TopicsVM />
     </Window.DataContext>
     <Border>
         <Grid>

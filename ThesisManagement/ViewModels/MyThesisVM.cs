@@ -46,6 +46,14 @@ namespace ThesisManagement.ViewModels
             set { score = value; OnPropertyChanged(nameof(Score)); }
         }
 
+        public bool IsTopicApproved
+        {
+            get
+            {
+                return this.Thesis.TopicStatus == Variable.StatusTopic.Approved;
+            }
+        }
+
 
         public ICommand MakeEvaluationCommand { get; set; }
 

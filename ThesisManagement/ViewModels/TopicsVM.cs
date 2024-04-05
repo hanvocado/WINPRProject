@@ -11,7 +11,7 @@ using StudentTopicView = ThesisManagement.Views.Student.TopicView;
 
 namespace ThesisManagement.ViewModels
 {
-    public class TopicsViewModel : ViewModelBase
+    public class TopicsVM : ViewModelBase
     {
         private readonly ITopicRepository _topicRepo;
         private readonly IProfessorRepository _professorRepo;
@@ -223,8 +223,8 @@ namespace ThesisManagement.ViewModels
             set { selectedStudentNames = value; OnPropertyChanged(nameof(SelectedStudentNames)); }
         }
 
-        public IEnumerable<string> Categories { get; set; } = new List<string>() { "Computer Science", "Web Development", "Data Science", "Other" };
-        public IEnumerable<string> Technologies { get; set; } = new List<string>() { "JavaScript", "Wpf", ".NET", "Java", "Python", "SQL", "ASP.NET Core", "Other" };
+        public IEnumerable<string> Categories { get; set; } = new List<string>() { "Desktop App", "Web App", "Data Science", "Machine Learning", "Other" };
+        public IEnumerable<string> Technologies { get; set; } = new List<string>() { "MernStack", "Wpf", ".NET", "Java", "Python", "Other" };
 
         private List<Topic> topics;
         public List<Topic> Topics
@@ -279,7 +279,7 @@ namespace ThesisManagement.ViewModels
         public ViewModelCommand ChooseMembersCommand { get; set; }
         public ViewModelCommand AddMembersCommand { get; set; }
 
-        public TopicsViewModel()
+        public TopicsVM()
         {
             _topicRepo = new TopicRepository();
             _professorRepo = new ProfessorRepository();
@@ -350,8 +350,6 @@ namespace ThesisManagement.ViewModels
             {
                 RegisterTopic(obj);
             }
-
-            Topics = _topicRepo.GetMyTopicAndProfessorTopics(SessionInfo.UserId);
         }
 
         private void ExecuteRegisterTopicCommand(object obj)
@@ -374,6 +372,7 @@ namespace ThesisManagement.ViewModels
             };
             var success = _thesisRepo.Add(thesis, selectedStudents);
             ShowMessage(success, Message.RegisterSuccess, Message.RegisterFailed);
+            Topics = _topicRepo.GetMyTopicAndProfessorTopics(SessionInfo.UserId);
             RegisterNewTopicCommand.RaiseCanExecuteChanged();
 
             currentView?.Close();
@@ -446,9 +445,13 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteDeleteCommand(object parameter)
         {
-            var success = _topicRepo.Delete(id);
-            ShowMessage(success, Message.DeleteSuccess, Message.DeleteFailed);
-            Topics = _topicRepo.GetAll(SessionInfo.UserId);
+            var confirmed = ConfirmDelete();
+            if (confirmed == MessageBoxResult.Yes)
+            {
+                var success = _topicRepo.Delete(id);
+                ShowMessage(success, Message.DeleteSuccess, Message.DeleteFailed);
+                Topics = _topicRepo.GetAll(SessionInfo.UserId);
+            }
         }
 
         private bool CanExecuteDelete(object parameter)

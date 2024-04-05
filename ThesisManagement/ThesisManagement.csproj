@@ -38,6 +38,7 @@
     <PackageReference Include="Syncfusion.SfChart.WPF" Version="24.2.9" />
     <PackageReference Include="Syncfusion.SfNavigationDrawer.WPF" Version="24.2.9" />
     <PackageReference Include="Syncfusion.SfScheduler.WPF" Version="24.2.9" />
+    <PackageReference Include="Syncfusion.Tools.WPF" Version="24.2.9" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
   </ItemGroup>
 

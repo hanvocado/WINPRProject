@@ -77,6 +77,7 @@ namespace ThesisManagement.Repositories
         {
             var student = _context.Students.Include(s => s.Thesis)
                                             .ThenInclude(t => t.Topic)
+                                            .ThenInclude(t => t.Professor)
                                             .FirstOrDefault(s => s.Id == studentId);
             return student?.Thesis;
         }

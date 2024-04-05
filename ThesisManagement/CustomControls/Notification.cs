@@ -7,7 +7,7 @@ using System.Windows.Threading;
 namespace ThesisManagement.CustomControls;
 public sealed class Notification : Window
 {
-    private const int WaitTime = 6;
+    private const int WaitTime = 3;
 
     /// <summary>
     ///     计数

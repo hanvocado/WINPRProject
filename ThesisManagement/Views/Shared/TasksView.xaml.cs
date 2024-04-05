@@ -25,7 +25,7 @@ namespace ThesisManagement.Views.Shared
 
             var listViewItem = sender as ListViewItem;
             var task = listViewItem?.DataContext as Task;
-            TasksViewModel tasksVM = this.DataContext as TasksViewModel ?? new TasksViewModel();
+            TasksVM tasksVM = this.DataContext as TasksVM ?? new TasksVM();
             if (task != null)
             {
                 tasksVM.Id = task.Id;

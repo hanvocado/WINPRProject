@@ -15,8 +15,8 @@
         <viewModel:StudentMainVM/>
     </Window.DataContext>
     <Window.Resources>
-        <DataTemplate DataType="{x:Type viewModel:TopicsViewModel}">
-            <local:ProfessorsTopics/>
+        <DataTemplate DataType="{x:Type viewModel:TopicsVM}">
+            <local:TopicsView/>
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type viewModel:StudentsVM}">

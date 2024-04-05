@@ -34,7 +34,7 @@ namespace ThesisManagement.Models
         public ICollection<Thesis>? Theses { get; set; }
 
         [NotMapped]
-        public bool RegisteredByCurrentUser { get; set; } = false;
+        public string? RegisteredStatusByCurrentUser { get; set; }
 
         public override string ToString()
         {

@@ -20,7 +20,7 @@
     </UserControl.Resources>
     
     <UserControl.DataContext>
-        <viewModels:TasksViewModel />
+        <viewModels:TasksVM />
     </UserControl.DataContext>
 
     <StackPanel>

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ThesisManagement.Views.Shared"
         xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:sf="http://schemas.syncfusion.com/wpf"
         xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
          mc:Ignorable="d"
          xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
@@ -12,7 +13,7 @@
          WindowStartupLocation="CenterScreen"
          Style="{StaticResource formStyle}">
     <Window.DataContext>
-        <viewModels:TasksViewModel />
+        <viewModels:TasksVM />
     </Window.DataContext>
     <Border>
         <Grid >
@@ -70,10 +71,16 @@
                     <StackPanel>
                         <TextBlock Text="Ngày bắt đầu nhiệm vụ"
                             Style="{StaticResource label}" />
-                        <!--<hc:DateTimePicker SelectedDateTime="{Binding Start, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
-                                       DateTimeFormat="hh:mm dd-MM-yyyy"
-                                       Height="35"/>-->
-                        <DatePicker SelectedDate="{Binding Start}" SelectedDateFormat="Short" Height="35" />
+                        <Border CornerRadius="4" BorderBrush="LightGray" BorderThickness="1" >
+                            <sf:DateTimeEdit Height="35"
+                                             DateTime="{Binding Start}"
+                                             BorderThickness="0"
+                                             Padding="5"
+                                             DropDownView="Combined"
+                                             CanEdit="True"
+                                             CustomPattern="HH:mm dd-MM-yyyy"
+                                             Pattern="CustomPattern" />                            
+                        </Border>
                     </StackPanel>
                 </Border>
 
@@ -81,11 +88,17 @@
                     <StackPanel>
                         <TextBlock Text="Ngày kết thúc nhiệm vụ"
                             Style="{StaticResource label}" />
-                        <DatePicker SelectedDate="{Binding End, StringFormat=dd-MM-yyyy}"
-                                    SelectedDateFormat="Short" Height="35" />
-                        <!--<hc:DateTimePicker SelectedDateTime="{Binding End, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
-                                       DateTimeFormat="hh:mm dd-MM-yyyy"
-                                       Height="35"/>-->
+                        <Border CornerRadius="4" BorderBrush="LightGray" BorderThickness="1" >
+                            <sf:DateTimeEdit Height="35"
+                                             DateTime="{Binding End}"
+                                             BorderThickness="0"
+                                             Padding="5"
+                                             DropDownView="Combined"
+                                             CanEdit="True"
+                                             CustomPattern="HH:mm dd-MM-yyyy"
+                                             Pattern="CustomPattern" >
+                            </sf:DateTimeEdit>
+                        </Border>
                     </StackPanel>
                 </Border>
 

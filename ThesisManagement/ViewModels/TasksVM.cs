@@ -7,7 +7,7 @@ using Task = ThesisManagement.Models.Task;
 
 namespace ThesisManagement.ViewModels
 {
-    public class TasksViewModel : ViewModelBase
+    public class TasksVM : ViewModelBase
     {
         private readonly ITaskRepository _taskRepo;
 
@@ -159,14 +159,19 @@ namespace ThesisManagement.ViewModels
         public ICommand DeleteTaskCommand { get; set; }
         public ICommand CreateOrUpdateCommand { get; set; }
 
-        public TasksViewModel()
+        public TasksVM()
         {
             _taskRepo = new TaskRepository();
             Thesis = new Thesis();
-            CreateTaskCommand = new ViewModelCommand(ExecuteCreateTaskCommand);
+            CreateTaskCommand = new ViewModelCommand(ExecuteCreateTaskCommand, CanExecuteCreateTask);
             UpdateTaskCommand = new ViewModelCommand(ExecuteUpdateTaskCommand);
             DeleteTaskCommand = new ViewModelCommand(ExecuteDeleteTaskCommand, CanExecuteDeleteTask);
             CreateOrUpdateCommand = new ViewModelCommand(ExecuteCreateOrUpdateCommand);
+        }
+
+        private bool CanExecuteCreateTask(object obj)
+        {
+            return thesis.TopicStatus == Variable.StatusTopic.Approved;
         }
 
         private bool CanExecuteDeleteTask(object obj)
