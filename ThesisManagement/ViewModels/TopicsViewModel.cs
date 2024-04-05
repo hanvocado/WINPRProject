@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Windows;
+using ThesisManagement.CustomControls;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
@@ -95,6 +96,25 @@ namespace ThesisManagement.ViewModels
             {
                 technology = value;
                 OnPropertyChanged(nameof(Technology));
+            }
+        }
+
+        private ObservableCollection<string>? selectedTechnologies ;
+        public ObservableCollection<string> SelectedTechnologies
+        {
+            get
+            {
+                if (selectedTechnologies != null)
+                {
+                    selectedTechnologies = new ObservableCollection<string>(Technology?.Split(','));
+                }
+                return selectedTechnologies;
+            }
+            set
+            {
+                 selectedTechnologies = value;
+                 OnPropertyChanged(nameof(SelectedTechnologies));
+                 Technology = string.Join(",", SelectedTechnologies);
             }
         }
 
@@ -267,6 +287,7 @@ namespace ThesisManagement.ViewModels
             _thesisRepo = new ThesisRepository();
             SelectedStudents = new List<Student>();
             SelectedTopic = new Topic();
+            selectedTechnologies = new ObservableCollection<string>(Technology?.Split(',') ?? new string[0]);
 
             if (SessionInfo.Role == Role.Professor)
                 Topics = _topicRepo.GetAll(SessionInfo.UserId);

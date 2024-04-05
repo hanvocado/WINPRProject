@@ -11,5 +11,6 @@ namespace ThesisManagement.Views.Professor
         {
             InitializeComponent();
         }
+
     }
 }

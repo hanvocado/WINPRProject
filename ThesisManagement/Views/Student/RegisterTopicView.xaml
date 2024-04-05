@@ -11,7 +11,7 @@
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
              mc:Ignorable="d" 
-             Height="600" Width="600"
+             Height="720" Width="600"
              Background="White"
              Style="{StaticResource formStyle}">
     <Window.DataContext>
@@ -31,9 +31,10 @@
                           Grid.Row="1">
                 <Grid>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="60" />
                         <RowDefinition Height="70" />
-                        <RowDefinition Height="75" />
-                        <RowDefinition Height="75"/>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="70"/>
                         <RowDefinition Height="125"/>
                         <RowDefinition Height="125"/>
                         <RowDefinition Height="125"/>
@@ -62,9 +63,8 @@
 
                     <Grid Grid.Row="2">
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
                             <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="1.5*"/>
                         </Grid.ColumnDefinitions>
 
                         <Border Grid.Column="0" Padding="30 0 10 0">
@@ -83,22 +83,7 @@
                             </StackPanel>
                         </Border>
 
-                        <Border Grid.Column="1" Padding="10 0 10 0">
-                            <StackPanel>
-                                <TextBlock Text="Công nghệ" Style="{StaticResource label}" />
-                                <ComboBox Grid.Row="1"
-                                        IsHitTestVisible="False"
-                                        IsEditable="True"
-                                        IsReadOnly="True"
-                                VerticalAlignment="Top"
-                                Height="40"
-                                ItemsSource="{Binding Technologies}"
-                                SelectedValue="{Binding SelectedTopic.Technology}"
-                                Style="{StaticResource ComboBoxExtend}" />
-                            </StackPanel>
-                        </Border>
-
-                        <Border Grid.Column="2" Padding="10 0 30 0">
+                        <Border Grid.Column="1" Padding="10 0 30 0">
                             <StackPanel>
                                 <TextBlock Text="Số sinh viên tối đa" Style="{StaticResource label}" />
                                 <TextBox IsReadOnly="True"
@@ -109,8 +94,23 @@
                             </StackPanel>
                         </Border>
                     </Grid>
+                    
+                    <Border Grid.Row = "3" Padding="30 0">
+                        <StackPanel>
+                            <TextBlock Text="Công nghệ" Style="{StaticResource label}" />
+                            <ComboBox Grid.Row="1"
+                                      IsHitTestVisible="False"
+                                      IsEditable="True"
+                                      IsReadOnly="True"
+                                      VerticalAlignment="Top"
+                                      Height="40"
+                                      ItemsSource="{Binding Technologies}"
+                                      SelectedValue="{Binding SelectedTopic.Technology}"
+                                      Style="{StaticResource ComboBoxExtend}" />      
+                        </StackPanel>
+                    </Border>
 
-                    <Border Grid.Row="3" Padding="30 0">
+                    <Border Grid.Row="4" Padding="30 0">
                         <StackPanel>
                             <TextBlock Text="Mô tả" Style="{StaticResource label}" />
                             <TextBox  VerticalAlignment="Top"
@@ -123,7 +123,7 @@
                         </StackPanel>
                     </Border>
 
-                    <Border Grid.Row="4" Padding="30 0">
+                    <Border Grid.Row="5" Padding="30 0">
                         <StackPanel>
                             <TextBlock Text="Yêu cầu" Style="{StaticResource label}" />
                             <TextBox  IsReadOnly="True"
@@ -136,7 +136,7 @@
                         </StackPanel>
                     </Border>
 
-                    <Border Grid.Row="5" Padding="30 0">
+                    <Border Grid.Row="6" Padding="30 0">
                         <StackPanel>
                             <TextBlock Text="Chức năng" Style="{StaticResource label}" />
                             <TextBox  IsReadOnly="True"
@@ -149,7 +149,7 @@
                         </StackPanel>
                     </Border>
 
-                    <Border Grid.Row="6" Padding="30 0">
+                    <Border Grid.Row="7" Padding="30 0">
                         <StackPanel>
                             <TextBlock Text="Thành viên" Style="{StaticResource label}" />
                             <StackPanel Orientation="Horizontal">
@@ -171,7 +171,7 @@
                         </StackPanel>
                     </Border>
 
-                    <Grid Grid.Row="7" >
+                    <Grid Grid.Row="8" >
                         <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
                                                     HoverColor="{StaticResource secondaryBrush}"
                                                     Content="Đăng kí"
