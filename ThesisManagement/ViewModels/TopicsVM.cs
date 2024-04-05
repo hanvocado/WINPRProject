@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Windows;
+using System.Windows.Controls.Primitives;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
@@ -204,7 +205,7 @@ namespace ThesisManagement.ViewModels
         }
 
         public IEnumerable<string> Categories { get; set; } = new List<string>() { "Desktop App", "Web App", "Data Science", "Machine Learning", "Other" };
-        public IEnumerable<string> Technologies { get; set; } = new List<string>() { "MernStack", "Wpf", ".NET", "Java", "Python", "Other" };
+        public IEnumerable<Technology> Technologies { get; set; } = Models.Technology.GetTechnologies();
 
         private List<Topic> topics;
         public List<Topic> Topics
@@ -250,6 +251,26 @@ namespace ThesisManagement.ViewModels
             }
         }
 
+        private IEnumerable<Technology> selectedTechnologies;
+        public IEnumerable<Technology> SelectedTechnologies
+        {
+            get { return selectedTechnologies; }
+            set
+            {
+                selectedTechnologies = value;
+                OnPropertyChanged(nameof(SelectedTechnologies));
+            }
+        }
+
+        private bool isTechnologyFocused;
+
+        public bool IsTechnologyFocused
+        {
+            get { return isTechnologyFocused; }
+            set { isTechnologyFocused = value; OnPropertyChanged(nameof(IsTechnologyFocused)); }
+        }
+
+
         public ViewModelCommand ShowTopicViewCommand { get; set; }
         public ViewModelCommand CreateOrUpdateCommand { get; set; }
         public ViewModelCommand DeleteCommand { get; set; }
@@ -258,6 +279,7 @@ namespace ThesisManagement.ViewModels
         public ViewModelCommand RegisterNewTopicCommand { get; set; }
         public ViewModelCommand ChooseMembersCommand { get; set; }
         public ViewModelCommand AddMembersCommand { get; set; }
+        public ViewModelCommand SelectTechnologiesCommand { get; set; }
 
         public TopicsVM()
         {
@@ -282,6 +304,18 @@ namespace ThesisManagement.ViewModels
             RegisterNewTopicCommand = new ViewModelCommand(ExecuteRegisterNewTopicCommand, CanStudentRegisterTopic);
             ChooseMembersCommand = new ViewModelCommand(ExecuteChooseMembers, CanStudentRegisterTopic);
             AddMembersCommand = new ViewModelCommand(ExecuteAddMembers);
+            SelectTechnologiesCommand = new ViewModelCommand(ExecuteSelectTechnologies);
+        }
+
+        private void ExecuteSelectTechnologies(object obj)
+        {
+            SelectedTechnologies = Technologies.Where(s => s.IsSelected);
+            Technology = String.Join(" - ", selectedTechnologies.Select(t => t.Name));
+            Popup? selectTechPopup = obj as Popup;
+            if (selectTechPopup != null)
+            {
+                selectTechPopup.IsOpen = false;
+            }
         }
 
         private bool CanStudentRegisterTopic(object obj)
@@ -461,6 +495,7 @@ namespace ThesisManagement.ViewModels
             Function = "";
             ProfessorId = "";
             studentQuantity = 1;
+            SelectedTechnologies = new List<Technology>();
         }
 
         private void UpdateSelectedTopicProperties()

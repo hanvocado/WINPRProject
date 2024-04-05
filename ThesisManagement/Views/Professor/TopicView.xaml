@@ -7,6 +7,7 @@
         xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
         xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
         xmlns:local="clr-namespace:ThesisManagement.Views.Professor"
+        xmlns:shared="clr-namespace:ThesisManagement.Views.Shared"
         mc:Ignorable="d"
         x:Name="topicUC"
         Title="TopicView" Height="660" Width="650"
@@ -82,12 +83,20 @@
                         <Border Grid.Column="1" Padding="10 0 10 0">
                             <StackPanel>
                                 <TextBlock Text="Công nghệ" Style="{StaticResource label}" />
-                                <ComboBox Grid.Row="1"
-                                VerticalAlignment="Top"
-                                Height="35"
-                                ItemsSource="{Binding Technologies}"
-                                SelectedValue="{Binding Technology}"
-                                Style="{StaticResource ComboBoxExtend}" />
+                                <TextBox Grid.Row="1"
+                                         x:Name="TechnologyTxt"
+                                         Text="{Binding Technology, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                        VerticalAlignment="Top"
+                                         GotFocus="TechnologyTxt_GotFocus"
+                                        Height="35"/>
+                                <Popup PlacementTarget="{Binding ElementName=txtTechnology}"
+                                        Placement="Bottom"
+                                        HorizontalOffset="-5"
+                                        VerticalOffset="-22"
+                                        SnapsToDevicePixels="True"
+                                        x:Name="TechnologiesList" >
+                                    <shared:SelectTechnologies DataContext="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext}" />
+                                </Popup>
                             </StackPanel>
                         </Border>
 

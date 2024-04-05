@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="ThesisManagement.Views.Shared.SelectTechnologies"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ThesisManagement.Views.Shared"
+             xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
+             xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <viewModels:TopicsVM />
+    </UserControl.DataContext>
+
+    <Border Padding="30 10" Background="white" BorderBrush="{StaticResource primaryBrush}">
+        <StackPanel>
+            <ListBox ItemsSource="{Binding Technologies}" SelectionMode="Multiple"
+                Style="{StaticResource ListBoxBaseStyle}"
+                Height="150"
+                ScrollViewer.CanContentScroll="True"
+                customControls:ListBoxExtensions.SelectedItems="{Binding SelectedTechnologies, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                        <Setter Property="Margin" Value="3" />
+                        <Setter Property="Padding" Value="20 0" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                            Content="{Binding Name}" >
+                        </CheckBox>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <customControls:ControlButton Command="{Binding SelectTechnologiesCommand}"
+                                            DefaultColor="{StaticResource primaryBrush}"
+                                            Margin="0 10 0 0"
+                                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Popup}}"
+                                            Content="OK" />
+        </StackPanel>
+    </Border>
+</UserControl>

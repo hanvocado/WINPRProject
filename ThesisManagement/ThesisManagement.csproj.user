@@ -64,6 +64,9 @@
     <Compile Update="Views\Shared\SchedulesView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Shared\SelectTechnologies.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Shared\TasksView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -187,6 +190,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Shared\SchedulesView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Shared\SelectTechnologies.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Shared\TasksView.xaml">
