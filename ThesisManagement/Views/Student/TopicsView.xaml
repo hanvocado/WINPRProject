@@ -82,56 +82,52 @@
 
         </Grid>
 
-        <Border Grid.Row="1" >
-
-                      <!--ItemContainerStyle="{StaticResource lvItem}"--> 
+        <Border Grid.Row="1" Margin="0 10 0 0">
             <ListView Grid.Row="1"
                       Background="{DynamicResource MaterialDesignPaper}"
                     Name="TopicsListView"
                     ItemsSource="{Binding Topics,  UpdateSourceTrigger=PropertyChanged}"
                     MouseLeftButtonUp="ListViewItem_Click"
                     SelectedItem="{Binding SelectedTopic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <ListView.Resources>
+                    <Style TargetType="GridViewColumnHeader">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                    </Style>
+                </ListView.Resources>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Width="80" >
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Trạng thái" />
-                            </GridViewColumn.Header>
+                        <GridViewColumn Width="800">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <sf:SfBadge Content="{Binding RegisteredStatusByCurrentUser}" Shape="Oval" Margin="0 0 5 0"
-                                                Background="PaleVioletRed"
-                                                Padding="2" FontWeight="Medium"/>
+                                    <Border Padding="5 10">
+                                        <StackPanel>
+                                            <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight">
+                                                <TextBlock Style="{StaticResource topicTitle}"
+                                                           TextWrapping="Wrap"
+                                                           Text="{Binding Name}" />
+                                                <sf:SfBadge Content="{Binding RegisteredStatusByCurrentUser}" Shape="Oval" Margin="10 -4 5 4"
+                                                            Background="{StaticResource info}"
+                                                            Padding="2" FontWeight="Medium"/>
+                                            </StackPanel>
+                                            <Border Margin="0 5">
+                                                <TextBlock Foreground="DarkGray" FontWeight="Medium">
+                                                    <Run Text="GVHD: " />
+                                                    <Run Text="{Binding Professor.Name}" />
+                                                </TextBlock>
+                                            </Border>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Border Background="White" CornerRadius="4" Padding="10 3" BorderBrush="{StaticResource info}" BorderThickness="1">
+                                                    <TextBlock Text="{Binding Category}" Foreground="{StaticResource info}"/>
+                                                </Border>
+                                                <Border Background="White" CornerRadius="4" Padding="10 3" BorderBrush="{StaticResource info}" BorderThickness="1" Margin="5 0">
+                                                    <TextBlock Text="{Binding Technology}" Foreground="{StaticResource info}"/>
+                                                </Border>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Border>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Width="330"
-                                    DisplayMemberBinding="{Binding Name}" >
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Đề tài" />
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
-                        <GridViewColumn Width="130"
-                                    DisplayMemberBinding="{Binding Category}">
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Thể loại" />
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
-
-                        <GridViewColumn Width="120"
-                                DisplayMemberBinding="{Binding Technology}">
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Công nghệ" />
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
-
-                        <GridViewColumn Width="220"
-                                DisplayMemberBinding="{Binding Professor.Name}">
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Giảng viên" />
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
-
+                        </GridViewColumn>                        
                     </GridView>
                 </ListView.View>
             </ListView>
