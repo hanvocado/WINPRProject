@@ -12,7 +12,7 @@ using ThesisManagement.Repositories.EF;
 namespace ThesisManagement.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240329023900_Initial")]
+    [Migration("20240405025833_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -350,8 +350,8 @@ namespace ThesisManagement.Migrations
                     b.Property<string>("Evaluation")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("File")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("File")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<float?>("Score")
                         .HasColumnType("real");

@@ -15,7 +15,7 @@ namespace ThesisManagement.Models
         [StringLength(50)]
         public string TopicStatus { get; set; }
 
-        public byte[]? File { get; set; }
+        public string? File { get; set; }
 
         public float? Score { get; set; }
         public string? Evaluation { get; set; }

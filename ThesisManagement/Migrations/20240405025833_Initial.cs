@@ -76,7 +76,7 @@ namespace ThesisManagement.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TopicId = table.Column<int>(type: "int", nullable: false),
                     TopicStatus = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    File = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    File = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Score = table.Column<float>(type: "real", nullable: true),
                     Evaluation = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },

@@ -348,8 +348,8 @@ namespace ThesisManagement.Migrations
                     b.Property<string>("Evaluation")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("File")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("File")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<float?>("Score")
                         .HasColumnType("real");

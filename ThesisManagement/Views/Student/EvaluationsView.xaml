@@ -13,9 +13,7 @@
              DataContext="MyThesisVM"
              Background="White"
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.Resources>
-        <viewModels:PdfViewerVM x:Key="PdfViewerVM"/>
-    </UserControl.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
@@ -25,12 +23,19 @@
         <Grid Grid.Column="2" >
             <Grid >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="120"/>
+                    <RowDefinition Height="200"/>
                     <RowDefinition Height="100"/>
                     <RowDefinition Height="80"/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                
+
+                <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
+                                              HoverColor="{StaticResource secondaryBrush}"
+                                              Content="Upload"
+                                              Width="150"
+                                              FontSize="14"
+                                              Command="{Binding UploadFileCommand}"/>
+
                 <Border Grid.Row="1" Padding="10 0"  CornerRadius="1" Background="White" Margin="-2 -8 2 8" >
                     <StackPanel>
                         <TextBlock Text="Đánh giá" Style="{StaticResource label}" />
@@ -63,12 +68,11 @@
         <Border Grid.Column="1" Background="#2755c0" Width="2" VerticalAlignment="Stretch"/>
 
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
-            <syncfusion:PdfViewerControl DataContext="{StaticResource PdfViewerVM}" 
-                                         ZoomMode="FitWidth"
-                                 Zoom="0.5"
-                                 MaxHeight="560"
+            <syncfusion:PdfViewerControl ZoomMode="FitWidth"
+                                         Zoom="0.5"
+                                         MaxHeight="560"
                                          Margin="0 10"
-                                 ItemSource="{Binding DocumentStream}" />
+                                         ItemSource="{Binding DocumentStream}" />
         </ScrollViewer>
 
     </Grid>
