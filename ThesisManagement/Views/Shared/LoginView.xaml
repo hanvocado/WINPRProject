@@ -139,7 +139,8 @@
                     <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
                                               HoverColor="{StaticResource secondaryBrush}"
                                               Command="{Binding LoginCommand}"
-                                              Width="110" Margin="0 5 0 0">
+                                              Width="110" Margin="0 5 0 0"
+                                              IsDefault="True">
                         <customControls:ControlButton.Content>
                             <TextBlock Text="Đăng nhập" Style="{StaticResource btnContent}"/>
                         </customControls:ControlButton.Content>

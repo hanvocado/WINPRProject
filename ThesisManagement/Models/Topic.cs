@@ -41,4 +41,27 @@ namespace ThesisManagement.Models
             return Name;
         }
     }
+
+    public class Technology
+    {
+        public string Name { get; set; }
+        public bool IsSelected { get; set; } = false;
+
+        public Technology(string name)
+        {
+            Name = name;
+        }
+
+        public static List<Technology> GetTechnologies()
+        {
+            return new List<Technology>
+                    {   new Technology("MernStack"),
+                        new Technology("WPF"),
+                        new Technology(".NET"),
+                        new Technology("Java"),
+                        new Technology("Python"),
+                        new Technology("Other")
+                    };
+        }
+    }
 }

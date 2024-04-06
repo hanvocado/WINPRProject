@@ -67,47 +67,57 @@
                       Background="{DynamicResource MaterialDesignPaper}"
                       ItemsSource="{Binding Topics, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding SelectedTopic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <ListView.Resources>
+                    <Style TargetType="GridViewColumnHeader">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                    </Style>
+                </ListView.Resources>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Width="40">
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" />
-                            </GridViewColumn.Header>
+                        <GridViewColumn>
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <customControls:ControlButton DefaultColor="{StaticResource danger}"
-                                                                      HoverColor="{StaticResource dangerHover}"
-                                                                      Style="{StaticResource lvBtn}"
-                                                                      CommandParameter="{Binding Id}"
-                                                                      Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
-                                            <customControls:ControlButton.Content>
-                                                <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
-                                            </customControls:ControlButton.Content>
-                                        </customControls:ControlButton>
-                                    </StackPanel>
+                                    <Border Padding="5 10">
+                                        <StackPanel>
+                                            <TextBlock Style="{StaticResource topicTitle}"
+                                                        TextWrapping="Wrap"
+                                                        Text="{Binding Name}" />
+                                            <Border Margin="0 5">
+                                                <TextBlock Foreground="#757575" FontWeight="Medium">
+                                                            <Run Text="GVHD: " />
+                                                            <Run Text="{Binding Professor.Name}" />
+                                                </TextBlock>
+                                            </Border>
+                                            <Grid Width="740" HorizontalAlignment="Left">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="3*" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel Orientation="Horizontal" Grid.Column="0">
+                                                    <Border Background="White" CornerRadius="4" Padding="10 3" BorderBrush="{StaticResource info}" BorderThickness="1">
+                                                        <TextBlock Text="{Binding Category}" Foreground="{StaticResource info}"/>
+                                                    </Border>
+                                                    <Border Background="White" CornerRadius="4" Padding="10 3" BorderBrush="{StaticResource info}" BorderThickness="1" Margin="5 0">
+                                                        <TextBlock Text="{Binding Technology}" Foreground="{StaticResource info}"/>
+                                                    </Border>
+                                                </StackPanel>
+
+                                                <Border Grid.Column="1" HorizontalAlignment="Right">
+                                                    <customControls:ControlButton DefaultColor="{StaticResource danger}"
+                                                                                    HoverColor="{StaticResource dangerHover}"
+                                                                                    Style="{StaticResource lvBtn}"
+                                                                                    CommandParameter="{Binding Id}"
+                                                                                    Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
+                                                        <customControls:ControlButton.Content>
+                                                            <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
+                                                        </customControls:ControlButton.Content>
+                                                    </customControls:ControlButton>
+                                                </Border>
+                                            </Grid>
+                                        </StackPanel>
+                                    </Border>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Width="0" x:Name="id"
-                                        DisplayMemberBinding="{Binding Id, Mode=TwoWay}" />
-                        <GridViewColumn Width="390"
-                                        DisplayMemberBinding="{Binding Name, Mode=TwoWay}">
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Đề tài" />
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
-                        <GridViewColumn Width="170"
-                            DisplayMemberBinding="{Binding Category}">
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Thể loại" />
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
-                        <GridViewColumn Width="200"
-                                        DisplayMemberBinding="{Binding Technology, Mode=TwoWay}">
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Công nghệ" />
-                            </GridViewColumn.Header>
                         </GridViewColumn>
                     </GridView>
                 </ListView.View>

@@ -9,6 +9,7 @@
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf"      
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:local="clr-namespace:ThesisManagement.Views.Professor"
+        xmlns:shared="clr-namespace:ThesisManagement.Views.Shared"
         mc:Ignorable="d"
         x:Name="topicUC"
         Title="TopicView" Height="710" Width="650"
@@ -81,7 +82,27 @@
                             </StackPanel>
                         </Border>
 
-                        <Border Grid.Column="1" Padding="10 0 30 0">
+                        <Border Grid.Column="1" Padding="10 0 10 0">
+                            <StackPanel>
+                                <TextBlock Text="Công nghệ" Style="{StaticResource label}" />
+                                <TextBox Grid.Row="1"
+                                         x:Name="TechnologyTxt"
+                                         Text="{Binding Technology, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                        VerticalAlignment="Top"
+                                         GotFocus="TechnologyTxt_GotFocus"
+                                        Height="35"/>
+                                <Popup PlacementTarget="{Binding ElementName=txtTechnology}"
+                                        Placement="Bottom"
+                                        HorizontalOffset="-5"
+                                        VerticalOffset="-22"
+                                        SnapsToDevicePixels="True"
+                                        x:Name="TechnologiesList" >
+                                    <shared:SelectTechnologies DataContext="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext}" />
+                                </Popup>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Column="2" Padding="10 0 30 0">
                             <StackPanel>
                                 <TextBlock Text="Số sinh viên tối đa" Style="{StaticResource label}" />
                                 <TextBox Grid.Row="0"

@@ -35,7 +35,7 @@ namespace ThesisManagement.ViewModels
                 Topic = thesis.Topic;
                 Thesis.Students = _studentRepo.GetStudent(Thesis.Id)?.ToList() ?? new List<Student>();
                 OnPropertyChanged(nameof(Thesis));
-                UpdateStudentFilePath();
+                UpdateEvaluations();
             }
         }
 
@@ -46,8 +46,8 @@ namespace ThesisManagement.ViewModels
             set { evaluation = value; OnPropertyChanged(nameof(Evaluation)); }
         }
 
-        private int score;
-        public int Score
+        private float? score;
+        public float? Score
         {
             get { return score; }
             set { score = value; OnPropertyChanged(nameof(Score)); }
@@ -93,10 +93,14 @@ namespace ThesisManagement.ViewModels
             UploadFileCommand = new ViewModelCommand(ExecuteUploadFileCommand);
         }
 
-        private void UpdateStudentFilePath()
+        private void UpdateEvaluations()
         {
             if (Thesis != null && !string.IsNullOrEmpty(Thesis.File))
             {
+                //Update professor evaluation
+                Evaluation = thesis.Evaluation;
+                Score = thesis.Score;
+
                 //Current file path
                 for (int i = 0; i < 3; i++)
                 {

@@ -12,5 +12,9 @@ namespace ThesisManagement.Views.Professor
             InitializeComponent();
         }
 
+        private void TechnologyTxt_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TechnologiesList.IsOpen = true;
+        }
     }
 }
