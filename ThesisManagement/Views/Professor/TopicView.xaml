@@ -6,13 +6,11 @@
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
         xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
-        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"      
-        xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:local="clr-namespace:ThesisManagement.Views.Professor"
         xmlns:shared="clr-namespace:ThesisManagement.Views.Shared"
         mc:Ignorable="d"
         x:Name="topicUC"
-        Title="TopicView" Height="710" Width="650"
+        Title="TopicView" Height="660" Width="650"
         Style="{StaticResource formStyle}">
 
     <Window.DataContext>
@@ -33,9 +31,8 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50" />
-                        <RowDefinition Height="70" />
-                        <RowDefinition Height="70"/>
-                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="75" />
+                        <RowDefinition Height="75"/>
                         <RowDefinition Height="125"/>
                         <RowDefinition Height="125"/>
                         <RowDefinition Height="125"/>
@@ -65,8 +62,9 @@
 
                     <Grid Grid.Row="2">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*"/>
                             <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1.5*"/>
                         </Grid.ColumnDefinitions>
 
                         <Border Grid.Column="0" Padding="30 0 10 0">
@@ -114,21 +112,7 @@
                         </Border>
                     </Grid>
 
-                    <Border Grid.Row = "3" Padding="30 0">
-                        <StackPanel>
-                            <TextBlock Text="Công nghệ" Style="{StaticResource label}" />
-                            <hc:CheckComboBox Grid.Row="1"
-                                              Style="{StaticResource CheckComboBoxPlus}" 
-                                             VerticalAlignment="Top"
-                                             Height="35"
-                                             ItemsSource="{Binding Technologies}"
-                                             customControls:CheckComboBoxExtensions.Attach="True"
-                                             customControls:CheckComboBoxExtensions.SelectedItems="{Binding SelectedTechnologies, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                             hc:InfoElement.Necessary="True"/>
-                        </StackPanel>
-                    </Border>
-
-                    <Border Grid.Row="4" Padding="30 0">
+                    <Border Grid.Row="3" Padding="30 0">
                         <StackPanel>
                             <TextBlock Text="Mô tả" Style="{StaticResource label}" />
                             <TextBox  VerticalAlignment="Top"
@@ -140,7 +124,7 @@
                         </StackPanel>
                     </Border>
 
-                    <Border Grid.Row="5" Padding="30 0">
+                    <Border Grid.Row="4" Padding="30 0">
                         <StackPanel>
                             <TextBlock Text="Yêu cầu" Style="{StaticResource label}" />
                             <TextBox
@@ -153,7 +137,7 @@
                         </StackPanel>
                     </Border>
 
-                    <Border Grid.Row="6" Padding="30 0">
+                    <Border Grid.Row="5" Padding="30 0">
                         <StackPanel>
                             <TextBlock Text="Chức năng" Style="{StaticResource label}" />
                             <TextBox
@@ -166,7 +150,7 @@
                         </StackPanel>
                     </Border>
 
-                    <Grid Grid.Row="7" >
+                    <Grid Grid.Row="6" >
                         <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
                                                         HoverColor="{StaticResource secondaryBrush}"
                                                         Content="Lưu"
