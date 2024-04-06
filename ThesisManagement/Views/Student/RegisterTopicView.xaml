@@ -11,7 +11,7 @@
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
              mc:Ignorable="d" 
-             Height="720" Width="600"
+             Height="600" Width="600"
              Background="White"
              Style="{StaticResource formStyle}">
     <Window.DataContext>
