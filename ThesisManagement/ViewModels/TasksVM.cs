@@ -158,6 +158,7 @@ namespace ThesisManagement.ViewModels
         public ICommand UpdateTaskCommand { get; set; }
         public ICommand DeleteTaskCommand { get; set; }
         public ICommand CreateOrUpdateCommand { get; set; }
+        public ICommand ShowUpdateProgressCommand { get; set; }
 
         public TasksVM()
         {
@@ -167,6 +168,13 @@ namespace ThesisManagement.ViewModels
             UpdateTaskCommand = new ViewModelCommand(ExecuteUpdateTaskCommand);
             DeleteTaskCommand = new ViewModelCommand(ExecuteDeleteTaskCommand, CanExecuteDeleteTask);
             CreateOrUpdateCommand = new ViewModelCommand(ExecuteCreateOrUpdateCommand);
+            ShowUpdateProgressCommand = new ViewModelCommand(ExecuteShowUpdateProgressCommand);
+        }
+
+        private void ExecuteShowUpdateProgressCommand(object obj)
+        {
+            UpdateTaskProgressView updateView = new();
+            updateView.Show();
         }
 
         private bool CanExecuteCreateTask(object obj)

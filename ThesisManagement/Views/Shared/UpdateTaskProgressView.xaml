@@ -1,0 +1,131 @@
+﻿<Window x:Class="ThesisManagement.Views.Shared.UpdateTaskProgressView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ThesisManagement.Views.Shared"
+        xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
+         mc:Ignorable="d"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+         xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+         Title="TopicView" Height="590" Width="600"
+         WindowStartupLocation="CenterScreen"
+         Style="{StaticResource formStyle}">
+    <Window.DataContext>
+        <viewModels:TasksVM />
+    </Window.DataContext>
+    <Border>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25" />
+                <RowDefinition Height="35" />
+                <RowDefinition Height="70" />
+                <RowDefinition Height="70" />
+                <RowDefinition Height="130" />
+                <RowDefinition Height="70" />
+                <RowDefinition Height="130" />
+                <RowDefinition Height="30" />
+            </Grid.RowDefinitions>
+
+            <customControls:PopupControlBar />
+            
+            <TextBlock Margin="0 0 0 10"
+                        Grid.Row="1"
+                        Text="Cập nhật tiến độ" 
+                        Style="{StaticResource title}" 
+                        HorizontalAlignment="Center" />
+
+            <Border Grid.Row="2" Padding="30 0">
+                <StackPanel>
+                    <TextBlock Text="Sinh viên" Style="{StaticResource label}" />
+                    <TextBox Grid.Row="2"
+                             IsReadOnly="True"
+                             Height="35"
+                             VerticalAlignment="Top"
+                             Text="{Binding Student.Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Row="3" Padding="30 0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Tiến độ"
+                               Style="{StaticResource label}"/>
+                    <Slider Width="412"
+                            Height="30"
+                            VerticalAlignment="Top"
+                        Value="{Binding Progress}"
+                        hc:TipElement.Visibility="Visible" 
+                        hc:TipElement.Placement="Top" 
+                        Minimum="0" Maximum="100" TickFrequency="10"
+                        TickPlacement="Both"
+                        Margin="0,22,0,0"/>
+                </StackPanel>
+            </Border>
+            
+            <Border Grid.Row="4" Padding="30 0">
+                <StackPanel>
+                    <TextBlock Text="Chú thích" Style="{StaticResource label}" />
+                    <TextBox Grid.Row="3"
+                             VerticalAlignment="Top"
+                             Height="90"
+                             Text="{Binding Description}" 
+                             AcceptsReturn="True"
+                             TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"/>
+                </StackPanel>
+            </Border>
+            
+            <Border Grid.Row="5" Padding="30 0">
+                <StackPanel>
+                    <TextBlock Text="Đính kèm" Style="{StaticResource label}" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="*" MaxWidth="50" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="3"
+                                   Margin="0 0 20 0"
+                                 Height="30"
+                                 Text="{Binding ProgressFileName}" 
+                                 TextWrapping="Wrap" />
+
+                        <customControls:ControlButton DefaultColor="{StaticResource info}"
+                                                      HoverColor="{StaticResource infoHover}"
+                                                      FontSize="14"
+                                                      Command="{Binding UploadFileCommand}"
+                                                      Grid.Column="1">
+                            <customControls:ControlButton.Content>
+                                <fa:IconImage Icon="Upload" Foreground="White" Style="{StaticResource btnIcon}" />
+                            </customControls:ControlButton.Content>
+                        </customControls:ControlButton>
+                    </Grid>
+                </StackPanel>
+            </Border>
+            
+            <Border Grid.Row="6" Padding="30 0">
+                <StackPanel>
+                    <TextBlock Text="Phản hồi" Style="{StaticResource label}" />
+                    <TextBox Grid.Row="3"
+                             VerticalAlignment="Top"
+                             Height="90"
+                             IsReadOnly="{Binding IsStudent}"
+                             Text="{Binding Description}" 
+                             AcceptsReturn="True"
+                             TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"/>
+                </StackPanel>
+            </Border>
+            
+            <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
+                                          Grid.Row="7"
+                                            HoverColor="{StaticResource secondaryBrush}"
+                                            Content="OK"
+                                            Width="200"
+                                            FontSize="14"
+                                            Command="{Binding UpdateTaskProgressCommand}"
+                                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+        </Grid>
+    </Border>
+</Window>

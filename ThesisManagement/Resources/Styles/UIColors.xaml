@@ -15,6 +15,7 @@
     <SolidColorBrush x:Key="successHover" Color="#2db84d" />
     <SolidColorBrush x:Key="accent" Color="#f8491e" />
     <SolidColorBrush x:Key="info" Color="LightSeaGreen" />
+    <SolidColorBrush x:Key="infoHover" Color="#188b84" />
 
     <SolidColorBrush x:Key="titleColor" Color = "#BCBEE0" />
     <SolidColorBrush x:Key="plainTextColor" Color = "#F1F1F1" />

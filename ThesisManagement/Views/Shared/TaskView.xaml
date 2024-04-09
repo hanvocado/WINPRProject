@@ -19,7 +19,7 @@
         <Grid >
             <Grid.RowDefinitions>
                 <RowDefinition Height="25" />
-                <RowDefinition Height="25" />
+                <RowDefinition Height="35" />
                 <RowDefinition Height="75" />
                 <RowDefinition Height="130" />
                 <RowDefinition Height="75" />
@@ -28,16 +28,11 @@
             </Grid.RowDefinitions>
 
             <customControls:PopupControlBar />
-            <Grid Grid.Row="1">
-                <TextBlock 
-            Text="Nhiệm vụ" 
-            Style="{StaticResource title}" 
-            FontSize="20"
-            TextWrapping="Wrap"
-            Padding="20"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"/>
-            </Grid>
+            <TextBlock Grid.Row="1"
+                       Margin="0 0 0 10"
+                        Text="Nhiệm vụ" 
+                        Style="{StaticResource title}" 
+                        HorizontalAlignment="Center"/>
             <Border Grid.Row="2" Padding="30 0">
                 <StackPanel>
                     <TextBlock Text="Tiêu đề" Style="{StaticResource label}" />

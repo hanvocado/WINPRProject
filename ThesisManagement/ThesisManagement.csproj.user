@@ -76,6 +76,9 @@
     <Compile Update="Views\Shared\ThesisOverview.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Shared\UpdateTaskProgressView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Student\ChooseMembers.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -202,6 +205,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Shared\ThesisOverview.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Shared\UpdateTaskProgressView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Student\ChooseMembers.xaml">

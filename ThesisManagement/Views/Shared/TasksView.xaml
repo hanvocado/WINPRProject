@@ -63,7 +63,7 @@
                                                                               DefaultColor="{StaticResource primaryBrush}"
                                                                               HoverColor="{StaticResource secondaryBrush}"
                                                                               Margin="2 0 0 0"
-                                                                              Command="{Binding DataContext.UpdateTaskCommand,RelativeSource={RelativeSource AncestorType=ListView}}">
+                                                                              Command="{Binding DataContext.ShowUpdateProgressCommand,RelativeSource={RelativeSource AncestorType=ListView}}">
                                                         <customControls:ControlButton.Content>
                                                             <fa:IconImage Icon="Pen" Style="{StaticResource btnIcon}" />
                                                         </customControls:ControlButton.Content>
