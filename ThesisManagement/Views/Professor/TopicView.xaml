@@ -91,9 +91,7 @@
                                         Height="35"/>
                                 <Popup PlacementTarget="{Binding ElementName=txtTechnology}"
                                         Placement="Bottom"
-                                        HorizontalOffset="-5"
                                         VerticalOffset="-22"
-                                        SnapsToDevicePixels="True"
                                         x:Name="TechnologiesList" >
                                     <shared:SelectTechnologies DataContext="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext}" />
                                 </Popup>

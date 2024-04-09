@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
@@ -28,12 +27,19 @@ namespace ThesisManagement.Views.Professor
 
             if (selectedItem != null)
             {
-                Topic topic = selectedItem as Topic;
+                Topic? topic = selectedItem as Topic;
+                if (topic == null) return;
+
                 TopicView topicView = new TopicView();
 
                 if (currentTopicView != null && currentTopicView.IsVisible)
                 {
                     currentTopicView.Close();
+                }
+                var topicTech = new List<Technology>();
+                foreach (var str in topic.Technology!.Split("-"))
+                {
+                    topicTech.Add(new Technology(str, true));
                 }
 
                 this.DataContext = new TopicsVM
@@ -47,7 +53,8 @@ namespace ThesisManagement.Views.Professor
                     Description = topic.Description,
                     Requirement = topic.Requirement,
                     StudentQuantity = topic.StudentQuantity,
-                    Function = topic.Function
+                    Function = topic.Function,
+                    SelectedTechnologies = topicTech
                 };
 
                 topicView.DataContext = this.DataContext;

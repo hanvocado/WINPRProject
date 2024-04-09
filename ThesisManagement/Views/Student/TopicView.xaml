@@ -18,7 +18,6 @@
     </Window.DataContext>
     <Border>
         <Grid>
-
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/>
                 <RowDefinition Height="40"/>

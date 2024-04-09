@@ -52,6 +52,12 @@ namespace ThesisManagement.Models
             Name = name;
         }
 
+        public Technology(string name, bool isSelected)
+        {
+            Name = name;
+            IsSelected = isSelected;
+        }
+
         public static List<Technology> GetTechnologies()
         {
             return new List<Technology>

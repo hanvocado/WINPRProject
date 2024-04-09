@@ -280,6 +280,7 @@ namespace ThesisManagement.ViewModels
         public ViewModelCommand ChooseMembersCommand { get; set; }
         public ViewModelCommand AddMembersCommand { get; set; }
         public ViewModelCommand SelectTechnologiesCommand { get; set; }
+        public ViewModelCommand CancelPopupCommand { get; set; }
 
         public TopicsVM()
         {
@@ -305,6 +306,12 @@ namespace ThesisManagement.ViewModels
             ChooseMembersCommand = new ViewModelCommand(ExecuteChooseMembers, CanStudentRegisterTopic);
             AddMembersCommand = new ViewModelCommand(ExecuteAddMembers);
             SelectTechnologiesCommand = new ViewModelCommand(ExecuteSelectTechnologies);
+            CancelPopupCommand = new ViewModelCommand(ExecuteCancelPopupCommand);
+        }
+
+        private void ExecuteCancelPopupCommand(object obj)
+        {
+            ((Popup)obj).IsOpen = false;
         }
 
         private void ExecuteSelectTechnologies(object obj)
