@@ -78,7 +78,8 @@ namespace ThesisManagement.Migrations
                     TopicStatus = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     File = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Score = table.Column<float>(type: "real", nullable: true),
-                    Evaluation = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Evaluation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NoUpdates = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -105,28 +106,6 @@ namespace ThesisManagement.Migrations
                     table.PrimaryKey("PK_Feedbacks", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Feedbacks_Theses_ThesisId",
-                        column: x => x.ThesisId,
-                        principalTable: "Theses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Notification",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Details = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ThesisId = table.Column<int>(type: "int", nullable: false),
-                    Read = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Notification", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Notification_Theses_ThesisId",
                         column: x => x.ThesisId,
                         principalTable: "Theses",
                         principalColumn: "Id",
@@ -236,10 +215,10 @@ namespace ThesisManagement.Migrations
                 columns: new[] { "Id", "Category", "Description", "Function", "Name", "ProfessorId", "Requirement", "StudentId", "StudentQuantity", "Technology" },
                 values: new object[,]
                 {
-                    { 1, "Computer Science", "Introductory course on database design", "Access and query data", "Quản lý ngân ", "P1", "", null, 2, "SQL" },
+                    { 1, "Computer Science", "Introductory course on database design", "Access and query data", "Quản lý ngân hàng", "P1", "Đúng deadline", null, 2, "SQL" },
                     { 2, "Web Development", "Xây dựng website Quản lý công ty quy mô vừa và nhỏ", "Trả lương nhân viên. Giao Tasks theo các cấp.", "Quản lý công ty", "P1", "Đúng deadline, teamwork", null, 3, "ASP.NET Core" },
-                    { 3, "Data Science", "Exploring algorithms for predictive modeling", "Train model for project", "Machine Learning", "P2", "", null, 3, "Python" },
-                    { 4, "Data Science", "Description xyz", "", "Topic abc", "P2", "Requirement something here", null, 2, "Python" }
+                    { 3, "Data Science", "Exploring algorithms for predictive modeling", "Train model for project", "Machine Learning", "P2", "Đúng tiến độ", null, 3, "Python" },
+                    { 4, "Data Science", "Description xyz", "", "Khảo sát và phân tích chất lượng thư viện trường HCMUTE", "P2", "Requirement something here", null, 2, "Python" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -251,11 +230,6 @@ namespace ThesisManagement.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Feedbacks_ThesisId",
                 table: "Feedbacks",
-                column: "ThesisId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Notification_ThesisId",
-                table: "Notification",
                 column: "ThesisId");
 
             migrationBuilder.CreateIndex(
@@ -303,9 +277,6 @@ namespace ThesisManagement.Migrations
 
             migrationBuilder.DropTable(
                 name: "Feedbacks");
-
-            migrationBuilder.DropTable(
-                name: "Notification");
 
             migrationBuilder.DropTable(
                 name: "ScheduleInfos");

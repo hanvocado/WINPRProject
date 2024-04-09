@@ -19,6 +19,15 @@ namespace ThesisManagement.ViewModels
             }
         }
 
+        private string updateCount;
+
+        public string UpdateCount
+        {
+            get { return updateCount; }
+            set { updateCount = value; OnPropertyChanged(nameof(UpdateCount)); }
+        }
+
+
         public ICommand ShowTopicsView { get; set; }
         public ICommand ShowStudentView { get; set; }
         public ICommand ShowThesisView { get; set; }

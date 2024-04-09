@@ -12,7 +12,7 @@ using ThesisManagement.Repositories.EF;
 namespace ThesisManagement.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240405025833_Initial")]
+    [Migration("20240409083845_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -87,35 +87,6 @@ namespace ThesisManagement.Migrations
                     b.HasIndex("ThesisId");
 
                     b.ToTable("Feedbacks");
-                });
-
-            modelBuilder.Entity("ThesisManagement.Models.Notification", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Details")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Read")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("ThesisId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ThesisId");
-
-                    b.ToTable("Notification");
                 });
 
             modelBuilder.Entity("ThesisManagement.Models.Professor", b =>
@@ -353,6 +324,9 @@ namespace ThesisManagement.Migrations
                     b.Property<string>("File")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("NoUpdates")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<float?>("Score")
                         .HasColumnType("real");
 
@@ -425,9 +399,9 @@ namespace ThesisManagement.Migrations
                             Category = "Computer Science",
                             Description = "Introductory course on database design",
                             Function = "Access and query data",
-                            Name = "Quản lý ngân ",
+                            Name = "Quản lý ngân hàng",
                             ProfessorId = "P1",
-                            Requirement = "",
+                            Requirement = "Đúng deadline",
                             StudentQuantity = 2,
                             Technology = "SQL"
                         },
@@ -451,7 +425,7 @@ namespace ThesisManagement.Migrations
                             Function = "Train model for project",
                             Name = "Machine Learning",
                             ProfessorId = "P2",
-                            Requirement = "",
+                            Requirement = "Đúng tiến độ",
                             StudentQuantity = 3,
                             Technology = "Python"
                         },
@@ -461,7 +435,7 @@ namespace ThesisManagement.Migrations
                             Category = "Data Science",
                             Description = "Description xyz",
                             Function = "",
-                            Name = "Topic abc",
+                            Name = "Khảo sát và phân tích chất lượng thư viện trường HCMUTE",
                             ProfessorId = "P2",
                             Requirement = "Requirement something here",
                             StudentQuantity = 2,
@@ -473,17 +447,6 @@ namespace ThesisManagement.Migrations
                 {
                     b.HasOne("ThesisManagement.Models.Thesis", "Thesis")
                         .WithMany("Feedbacks")
-                        .HasForeignKey("ThesisId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Thesis");
-                });
-
-            modelBuilder.Entity("ThesisManagement.Models.Notification", b =>
-                {
-                    b.HasOne("ThesisManagement.Models.Thesis", "Thesis")
-                        .WithMany("Notifications")
                         .HasForeignKey("ThesisId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -552,8 +515,6 @@ namespace ThesisManagement.Migrations
             modelBuilder.Entity("ThesisManagement.Models.Thesis", b =>
                 {
                     b.Navigation("Feedbacks");
-
-                    b.Navigation("Notifications");
 
                     b.Navigation("ScheduleInfos");
 

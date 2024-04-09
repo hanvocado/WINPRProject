@@ -7,6 +7,7 @@
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:viewModel="clr-namespace:ThesisManagement.ViewModels"
         xmlns:customControl="clr-namespace:ThesisManagement.CustomControls"
+        xmlns:sf="http://schemas.syncfusion.com/wpf"
         mc:Ignorable="d"
         Title="ProfessorMainView" Height="550" Width="900"
         WindowStartupLocation="CenterScreen"
@@ -23,10 +24,6 @@
 
         <DataTemplate DataType="{x:Type viewModel:StudentsVM}">
             <local:StudentsView />
-        </DataTemplate>
-
-        <DataTemplate DataType="{x:Type viewModel:ThesesVM}">
-            <local:ThesesView />
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type viewModel:ProfessorProfileVM}">
@@ -69,9 +66,17 @@
                         <RadioButton Style="{StaticResource navBtn}" 
                                      Command="{Binding ShowStudentView}">
                             <RadioButton.ToolTip>
-                                <ToolTip Content="Luận văn" Style="{StaticResource navToolTip}" />
+                                <ToolTip Content="Sinh viên" Style="{StaticResource navToolTip}" />
                             </RadioButton.ToolTip>
-                            <fa:IconImage Icon="AddressBook" Style="{StaticResource navIcon}" />
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="AddressBook" Style="{StaticResource navIcon}" />
+                                <sf:SfBadge Content="{Binding UpdateCount}"
+                                            Shape="Ellipse"
+                                            Width="5"
+                                            Background="{StaticResource accent}"
+                                            Margin="-5 -3 5 3"
+                                            Height="5"/>
+                            </StackPanel>
                         </RadioButton>
 
                         <RadioButton Style="{StaticResource navBtn}"

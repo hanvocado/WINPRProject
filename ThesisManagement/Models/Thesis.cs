@@ -18,7 +18,10 @@ namespace ThesisManagement.Models
         public string? File { get; set; }
 
         public float? Score { get; set; }
+
         public string? Evaluation { get; set; }
+
+        public string? NoUpdates { get; set; }
 
         [ForeignKey(nameof(TopicId))]
         public Topic Topic { get; set; }
@@ -29,15 +32,5 @@ namespace ThesisManagement.Models
         public ICollection<Task>? Tasks { get; set; }
         public ICollection<ScheduleInfo>? ScheduleInfos { get; set; }
 
-        public ICollection<Notification> Notifications { get; set; } = new List<Notification>();
-
-        [NotMapped]
-        public int NoUnreadNotifications
-        {
-            get
-            {
-                return Notifications.Where(n => n.Read == false).Count();
-            }
-        }
     }
 }

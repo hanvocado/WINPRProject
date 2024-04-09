@@ -120,11 +120,11 @@ namespace ThesisManagement.Repositories.EF
                 {
                     Id = 1,
                     ProfessorId = "P1",
-                    Name = "Quản lý ngân ",
+                    Name = "Quản lý ngân hàng",
                     Description = "Introductory course on database design",
                     Category = "Computer Science",
                     Technology = "SQL",
-                    Requirement = "",
+                    Requirement = "Đúng deadline",
                     Function = "Access and query data",
                     StudentQuantity = 2
                 },
@@ -148,7 +148,7 @@ namespace ThesisManagement.Repositories.EF
                     Description = "Exploring algorithms for predictive modeling",
                     Category = "Data Science",
                     Technology = "Python",
-                    Requirement = "",
+                    Requirement = "Đúng tiến độ",
                     Function = "Train model for project",
                     StudentQuantity = 3
                 },
@@ -156,7 +156,7 @@ namespace ThesisManagement.Repositories.EF
                 {
                     Id = 4,
                     ProfessorId = "P2",
-                    Name = "Topic abc",
+                    Name = "Khảo sát và phân tích chất lượng thư viện trường HCMUTE",
                     Description = "Description xyz",
                     Category = "Data Science",
                     Technology = "Python",
@@ -172,8 +172,8 @@ namespace ThesisManagement.Repositories.EF
                         .WithMany(th => th.Theses)
                         .HasForeignKey(th => th.TopicId);
 
-            }); 
-            
+            });
+
             modelBuilder.Entity<ScheduleInfo>(entity =>
             {
                 entity.HasOne(th => th.Thesis)
