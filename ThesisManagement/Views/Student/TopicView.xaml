@@ -7,6 +7,7 @@
         xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        xmlns:shared="clr-namespace:ThesisManagement.Views.Shared"
         mc:Ignorable="d"
         xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
         Title="TopicView" Height="670" Width="600"
@@ -54,8 +55,8 @@
             
             <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="0" Padding="30 0">
                     <StackPanel>
@@ -67,7 +68,7 @@
                                   IsTextSearchEnabled="True"
                                   IsTextSearchCaseSensitive="False"
                                   VerticalAlignment="Top"
-                                  Height="45"
+                                  Height="35"
                                   ItemsSource="{Binding Categories}"
                                   SelectedValue="{Binding Category}" 
                                   Style="{StaticResource ComboBoxExtend}"/>
@@ -75,15 +76,7 @@
                 </Border>
 
                 <Border Grid.Column="1" Padding="0 0 30 0">
-                    <StackPanel>
-                        <TextBlock Text="Công nghệ" Style="{StaticResource label}" />
-                        <hc:CheckComboBox Grid.Row="1"
-                                          Style="{StaticResource CheckComboBoxPlus}" 
-                                        VerticalAlignment="Top"
-                                        Height="45"
-                                        ItemsSource="{Binding Technologies}"
-                                        SelectedValue="{Binding Technology}"/>
-                    </StackPanel>
+                    <shared:SelectTechnologies DataContext="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext}" />
                 </Border>
             </Grid>
 

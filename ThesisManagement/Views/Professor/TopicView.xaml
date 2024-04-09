@@ -81,21 +81,7 @@
                         </Border>
 
                         <Border Grid.Column="1" Padding="10 0 10 0">
-                            <StackPanel>
-                                <TextBlock Text="Công nghệ" Style="{StaticResource label}" />
-                                <TextBox Grid.Row="1"
-                                         x:Name="TechnologyTxt"
-                                         Text="{Binding Technology, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                        VerticalAlignment="Top"
-                                         GotFocus="TechnologyTxt_GotFocus"
-                                        Height="35"/>
-                                <Popup PlacementTarget="{Binding ElementName=txtTechnology}"
-                                        Placement="Bottom"
-                                        VerticalOffset="-22"
-                                        x:Name="TechnologiesList" >
-                                    <shared:SelectTechnologies DataContext="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext}" />
-                                </Popup>
-                            </StackPanel>
+                            <shared:SelectTechnologies DataContext="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext}" />
                         </Border>
 
                         <Border Grid.Column="2" Padding="10 0 30 0">

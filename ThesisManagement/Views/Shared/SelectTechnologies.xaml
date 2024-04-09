@@ -7,61 +7,77 @@
              xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
              xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
              mc:Ignorable="d" 
+             Background="White"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.DataContext>
         <viewModels:TopicsVM />
     </UserControl.DataContext>
+    <StackPanel>
+        <TextBlock Text="Công nghệ" Style="{StaticResource label}" />
+        <TextBox Grid.Row="1"
+                 x:Name="TechnologyTxt"
+                 Text="{Binding Technology, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                VerticalAlignment="Top"
+                 GotFocus="TechnologyTxt_GotFocus"
+                Height="35"/>
+        <Popup PlacementTarget="{Binding ElementName=txtTechnology}"
+                Placement="Bottom"
+                VerticalOffset="-22"
+               HorizontalOffset="5"
+                x:Name="TechnologiesList">
+            <Border Background="White"
+                    BorderThickness="1 0 1 1"
+                    BorderBrush="DodgerBlue"
+                    Padding="30 10"
+                    MaxHeight="240"
+                    MaxWidth="300">
+                <StackPanel>
+                    <ListBox ItemsSource="{Binding Technologies}" SelectionMode="Multiple"
+                        Style="{StaticResource ListBoxBaseStyle}"
+                        Height="150"
+                        ScrollViewer.CanContentScroll="True"
+                        customControls:ListBoxExtensions.SelectedItems="{Binding SelectedTechnologies, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                                <Setter Property="Margin" Value="3" />
+                                <Setter Property="Padding" Value="20 2" />
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                    Content="{Binding Name}" >
+                                </CheckBox>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
 
-    <Border Background="White"
-            BorderThickness="1 0 1 1"
-            BorderBrush="DodgerBlue"
-            Padding="30 10"
-            MaxHeight="240"
-            MaxWidth="300">
-        <StackPanel>
-            <ListBox ItemsSource="{Binding Technologies}" SelectionMode="Multiple"
-                Style="{StaticResource ListBoxBaseStyle}"
-                Height="150"
-                ScrollViewer.CanContentScroll="True"
-                customControls:ListBoxExtensions.SelectedItems="{Binding SelectedTechnologies, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
-                        <Setter Property="Margin" Value="3" />
-                        <Setter Property="Padding" Value="20 2" />
-                    </Style>
-                </ListBox.ItemContainerStyle>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}"
-                            Content="{Binding Name}" >
-                        </CheckBox>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <customControls:ControlButton Command="{Binding SelectTechnologiesCommand}"
+                                                      Grid.Column="1"
+                                                        DefaultColor="{StaticResource primaryBrush}"
+                                                        HoverColor="{StaticResource secondaryBrush}"
+                                                        Margin="10 10 0 0"
+                                                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Popup}}"
+                                                        Content="OK" />
+                        <customControls:ControlButton Command="{Binding CancelPopupCommand}"
+                                                      Grid.Column="0"
+                                                        DefaultColor="#f0f0f0"
+                                                        HoverColor="LightGray"
+                                                        Margin="0 10 10 0"
+                                                          Foreground="Black"
+                                                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Popup}}"
+                                                        Content="Cancel" />
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <customControls:ControlButton Command="{Binding SelectTechnologiesCommand}"
-                                              Grid.Column="1"
-                                                DefaultColor="{StaticResource primaryBrush}"
-                                                HoverColor="{StaticResource secondaryBrush}"
-                                                Margin="10 10 0 0"
-                                                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Popup}}"
-                                                Content="OK" />
-                <customControls:ControlButton Command="{Binding CancelPopupCommand}"
-                                              Grid.Column="0"
-                                                DefaultColor="#f0f0f0"
-                                                HoverColor="LightGray"
-                                                Margin="0 10 10 0"
-                                                  Foreground="Black"
-                                                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Popup}}"
-                                                Content="Cancel" />
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Popup>
+    </StackPanel>
 
-            </Grid>
-        </StackPanel>
-    </Border>
 </UserControl>

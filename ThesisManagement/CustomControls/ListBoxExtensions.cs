@@ -39,11 +39,13 @@ namespace ThesisManagement.CustomControls
             var selectedItems = GetSelectedItems(listBox);
             foreach (var item in e.AddedItems)
             {
-                selectedItems.Add(item);
+                if (selectedItems != null)
+                    selectedItems.Add(item);
             }
             foreach (var item in e.RemovedItems)
             {
-                selectedItems.Remove(item);
+                if (selectedItems != null)
+                    selectedItems.Remove(item);
             }
         }
     }

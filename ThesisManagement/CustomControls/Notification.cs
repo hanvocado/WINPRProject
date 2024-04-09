@@ -35,7 +35,7 @@ public sealed class Notification : Window
 
         var desktopWorkingArea = SystemParameters.WorkArea;
         var leftMax = (desktopWorkingArea.Width - window.ActualWidth) / 2 + window.ActualWidth - notification.ActualWidth;
-        var topMax = (desktopWorkingArea.Height - window.ActualHeight) / 2 - 25;
+        var topMax = (desktopWorkingArea.Height - window.ActualHeight) / 2 + 30;
 
         switch (showAnimation)
         {
