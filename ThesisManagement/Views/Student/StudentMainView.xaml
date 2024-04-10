@@ -32,7 +32,6 @@
     </Window.Resources>
     <Border CornerRadius="0">
         <Grid>
-
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="65" />
                 <ColumnDefinition Width="*" />
@@ -41,14 +40,23 @@
             <Border Grid.Column="0" Background="{StaticResource primaryBrush}">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="120"/>
-                        <RowDefinition />
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="4*" MaxHeight="300" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
 
-                    <StackPanel Grid.Row="1">
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        
                         <RadioButton Style="{StaticResource navBtn}"
-                                 Command="{Binding ShowTopicsView}">
+                                     Grid.Row="0"
+                                     Command="{Binding ShowTopicsView}">
                             <RadioButton.ToolTip>
                                 <ToolTip Content="Đề tài" Style="{StaticResource navToolTip}" />
                             </RadioButton.ToolTip>
@@ -56,7 +64,8 @@
                         </RadioButton>
 
                         <RadioButton Style="{StaticResource navBtn}"
-                                 Command="{Binding ShowStudentProfileView}">
+                                     Grid.Row="1"
+                                     Command="{Binding ShowStudentProfileView}">
                             <RadioButton.ToolTip>
                                 <ToolTip Content="Hồ sơ" Style="{StaticResource navToolTip}" />
                             </RadioButton.ToolTip>
@@ -64,20 +73,23 @@
                         </RadioButton>
 
                         <RadioButton Style="{StaticResource navBtn}" 
-                                 Command="{Binding ShowThesisView}">
+                                     Grid.Row="2"
+                                     Command="{Binding ShowThesisView}">
                             <RadioButton.ToolTip>
                                 <ToolTip Content="Luận văn" Style="{StaticResource navToolTip}" />
                             </RadioButton.ToolTip>
                             <fa:IconImage Icon="Book" Style="{StaticResource navIcon}" />
                         </RadioButton>
                         
-                        <RadioButton Style="{StaticResource navBtn}" Command="{Binding LogoutCommand}">
+                        <RadioButton Style="{StaticResource navBtn}" 
+                                     Grid.Row="3"
+                                     Command="{Binding LogoutCommand}">
                             <RadioButton.ToolTip>
                                 <ToolTip Content="Đăng xuất" Style="{StaticResource navToolTip}" />
                             </RadioButton.ToolTip>
                             <fa:IconImage Icon="RightFromBracket" Style="{StaticResource navIcon}" />
                         </RadioButton>
-                    </StackPanel>
+                    </Grid>
                 </Grid>
             </Border>
 

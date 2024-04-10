@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using ThesisManagement.Models;
 using ThesisManagement.ViewModels;
 
@@ -47,7 +36,6 @@ namespace ThesisManagement.Views.Professor
                     File = thesis.File,
                     Score = thesis.Score
                 };
-                //MessageBox.Show($"{dataContext.SelectedTopic.Id},{dataContext.SelectedTopic.Name} ,  {dataContext.SelectedTopic.Category} ,  {dataContext.SelectedTopic.Technology} ,  {dataContext.SelectedTopic.Description}");
             }
         }
 
@@ -58,8 +46,18 @@ namespace ThesisManagement.Views.Professor
                 foreach (var item in ThesisListView.Items)
                 {
                     ListViewItem listViewItem = (ListViewItem)ThesisListView.ItemContainerGenerator.ContainerFromItem(item);
-                    listViewItem.MouseEnter += ListViewItem_MouseEnter;
+                    if (listViewItem != null)
+                        listViewItem.MouseEnter += ListViewItem_MouseEnter;
                 }
+            }
+        }
+
+        private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var gridView = ThesisListView.View as GridView;
+            if (gridView != null)
+            {
+                gridView.Columns[1].Width = ThesisListView.ActualWidth - gridView.Columns[0].Width - gridView.Columns[2].Width;
             }
         }
     }

@@ -22,8 +22,12 @@
             <local:TopicsView />
         </DataTemplate>
 
-        <DataTemplate DataType="{x:Type viewModel:StudentsVM}">
-            <local:StudentsView />
+        <DataTemplate DataType="{x:Type viewModel:ReviewThesesVM}">
+            <local:WaitingStudents />
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type viewModel:ThesesVM}">
+            <local:ThesesView />
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type viewModel:ProfessorProfileVM}">
@@ -33,7 +37,6 @@
 
     <Border CornerRadius="0">
         <Grid>
-
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="65" />
                 <ColumnDefinition Width="*" />
@@ -42,12 +45,22 @@
             <Border Grid.Column="0" Background="{StaticResource primaryBrush}">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="120"/>
-                        <RowDefinition />
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="4*" MaxHeight="300"/>
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     
-                    <StackPanel Grid.Row="1">
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        
                         <RadioButton Style="{StaticResource navBtn}" IsChecked="True"
+                                     Grid.Row="0"
                                      Command="{Binding ShowTopicsView}">
                             <RadioButton.ToolTip>
                                 <ToolTip Content="Đề tài" Style="{StaticResource navToolTip}" />
@@ -56,7 +69,8 @@
                         </RadioButton>
 
                         <RadioButton Style="{StaticResource navBtn}"
-                                     Command="{Binding ShowStudentView}">
+                                     Grid.Row="1"
+                                     Command="{Binding ShowWaitingStudentsView}">
                             <RadioButton.ToolTip>
                                 <ToolTip Content="Đang chờ duyệt" Style="{StaticResource navToolTip}" />
                             </RadioButton.ToolTip>
@@ -64,7 +78,8 @@
                         </RadioButton>
 
                         <RadioButton Style="{StaticResource navBtn}" 
-                                     Command="{Binding ShowStudentView}">
+                                     Grid.Row="2"
+                                     Command="{Binding ShowThesesView}">
                             <RadioButton.ToolTip>
                                 <ToolTip Content="Luận văn" Style="{StaticResource navToolTip}" />
                             </RadioButton.ToolTip>
@@ -80,6 +95,7 @@
                         </RadioButton>
 
                         <RadioButton Style="{StaticResource navBtn}"
+                                     Grid.Row="3"
                                      Command="{Binding ShowProfessorProfileView}">
                             <RadioButton.ToolTip>
                                 <ToolTip Content="Đề tài" Style="{StaticResource navToolTip}" />
@@ -88,13 +104,14 @@
                         </RadioButton>
 
                         <RadioButton Style="{StaticResource navBtn}"
+                                     Grid.Row="4"
                                      Command="{Binding LogoutCommand}">
                             <RadioButton.ToolTip>
                                 <ToolTip Content="Đăng xuất" Style="{StaticResource navToolTip}" />
                             </RadioButton.ToolTip>
                             <fa:IconImage Icon="RightFromBracket" Style="{StaticResource navIcon}" />
                         </RadioButton>
-                    </StackPanel>
+                    </Grid>
                 </Grid>
             </Border>
 

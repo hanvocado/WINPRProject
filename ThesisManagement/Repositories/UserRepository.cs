@@ -21,33 +21,36 @@ namespace ThesisManagement.Repositories
         {
             var email = credential.UserName.ToLower();
             var pw = credential.Password;
-            user = _context.Students.FirstOrDefault(p => p.Email.ToLower() == email && p.Password == pw);
+            user = _context.Students.FirstOrDefault(p => p.Email.ToLower() == email);
             if (user != null)
             {
-                SessionInfo.UserId = user.Id;
-                SessionInfo.Name = user.Name;
-                SessionInfo.Role = Role.Student;
-                return true;
+                return LoginUser(Role.Student, pw);
             }
 
-            user = _context.Professors.FirstOrDefault(p => p.Email.ToLower() == email && p.Password == pw);
+            user = _context.Professors.FirstOrDefault(p => p.Email.ToLower() == email);
             if (user != null)
             {
-                SessionInfo.UserId = user.Id;
-                SessionInfo.Name = user.Name;
-                SessionInfo.Role = Role.Professor;
-                return true;
+                return LoginUser(Role.Professor, pw);
             }
 
             user = _context.Admins.FirstOrDefault(p => p.Email.ToLower() == email && p.Password == pw);
             if (user != null)
             {
-                SessionInfo.UserId = user.Id;
-                SessionInfo.Name = user.Name;
-                SessionInfo.Role = Role.Admin;
-                return true;
+                return LoginUser(Role.Admin, pw);
             }
 
+            return false;
+        }
+
+        private bool LoginUser(Role role, string pw)
+        {
+            if (user.Password == pw)
+            {
+                SessionInfo.UserId = user.Id;
+                SessionInfo.Name = user.Name;
+                SessionInfo.Role = role;
+                return true;
+            }
             return false;
         }
     }
