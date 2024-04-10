@@ -65,7 +65,7 @@ namespace ThesisManagement.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ThesisManagement.Models.Attachement", b =>
+            modelBuilder.Entity("ThesisManagement.Models.Attachment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -83,7 +83,7 @@ namespace ThesisManagement.Migrations
 
                     b.HasIndex("TaskProgressId");
 
-                    b.ToTable("Attachements");
+                    b.ToTable("Attachments");
                 });
 
             modelBuilder.Entity("ThesisManagement.Models.Feedback", b =>
@@ -498,10 +498,10 @@ namespace ThesisManagement.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ThesisManagement.Models.Attachement", b =>
+            modelBuilder.Entity("ThesisManagement.Models.Attachment", b =>
                 {
                     b.HasOne("ThesisManagement.Models.TaskProgress", "TaskProgress")
-                        .WithMany("Attachements")
+                        .WithMany("Attachments")
                         .HasForeignKey("TaskProgressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -609,7 +609,7 @@ namespace ThesisManagement.Migrations
 
             modelBuilder.Entity("ThesisManagement.Models.TaskProgress", b =>
                 {
-                    b.Navigation("Attachements");
+                    b.Navigation("Attachments");
                 });
 
             modelBuilder.Entity("ThesisManagement.Models.Thesis", b =>

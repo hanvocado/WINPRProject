@@ -16,7 +16,7 @@ namespace ThesisManagement.Repositories.EF
         public DbSet<TaskProgress> TaskProgresses { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<ScheduleInfo> ScheduleInfos { get; set; }
-        public DbSet<Attachement> Attachements { get; set; }
+        public DbSet<Attachment> Attachments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -252,10 +252,10 @@ namespace ThesisManagement.Repositories.EF
                       .HasForeignKey(tp => tp.StudentId);
             });
 
-            modelBuilder.Entity<Attachement>(entity =>
+            modelBuilder.Entity<Attachment>(entity =>
             {
                 entity.HasOne(tp => tp.TaskProgress)
-                      .WithMany(at => at.Attachements)
+                      .WithMany(at => at.Attachments)
                       .HasForeignKey(at => at.TaskProgressId);
             });
 
