@@ -18,5 +18,10 @@
         public static string ExceedStudentQuantity = "Vượt quá số lượng sinh viên tối đa!";
 
         public static string LoginFailed = "Thông tin đăng nhập không chính xác!";
+
+        public static string ApproveSuccess = "Duyệt thành công";
+        public static string ApproveFailed = "Duyệt thất bại";
+        public static string RejectSuccess = "Từ chối thành công";
+        public static string RejectFailed = "Từ chối thất bại";
     }
 }

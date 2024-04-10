@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Windows;
+using System.Windows.Input;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
@@ -34,14 +35,20 @@ namespace ThesisManagement.ViewModels
         {
             selectedThesis.TopicStatus = Variable.StatusTopic.Approved;
             var success = _thesisRepo.Update(selectedThesis);
+            ShowMessage(success, Message.ApproveSuccess, Message.ApproveFailed);
             WaitingTheses = _thesisRepo.Get(currentUserId, Variable.StatusTopic.Waiting);
+            Window profWindow = Application.Current.MainWindow;
+            profWindow.DataContext = new ProfessorMainVM();
         }
 
         private void ExecuteRejectCommand(object obj)
         {
             selectedThesis.TopicStatus = Variable.StatusTopic.Rejected;
-            _thesisRepo.Update(selectedThesis);
+            var success = _thesisRepo.Update(selectedThesis);
+            ShowMessage(success, Message.RejectSuccess, Message.RejectFailed);
             WaitingTheses = _thesisRepo.Get(currentUserId, Variable.StatusTopic.Waiting);
+            Window profWindow = Application.Current.MainWindow;
+            profWindow.DataContext = new ProfessorMainVM();
         }
     }
 }
