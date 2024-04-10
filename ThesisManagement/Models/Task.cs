@@ -24,6 +24,24 @@ namespace ThesisManagement.Models
         public Thesis Thesis { get; set; }
 
         public ICollection<TaskProgress>? TaskProgresses { get; set; }
+
+        [NotMapped]
+        public int UpdateCount
+        {
+            get
+            {
+                if (TaskProgresses == null || TaskProgresses.Count == 0)
+                    return 0;
+
+                int res = 0;
+                foreach (var progress in this.TaskProgresses)
+                {
+                    if (String.IsNullOrEmpty(progress.Response))
+                        ++res;
+                }
+                return res;
+            }
+        }
     }
 
     public class TasksPie

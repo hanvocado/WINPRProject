@@ -214,7 +214,7 @@ namespace ThesisManagement.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Attachements",
+                name: "Attachments",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -224,9 +224,9 @@ namespace ThesisManagement.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Attachements", x => x.Id);
+                    table.PrimaryKey("PK_Attachments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Attachements_TaskProgresses_TaskProgressId",
+                        name: "FK_Attachments_TaskProgresses_TaskProgressId",
                         column: x => x.TaskProgressId,
                         principalTable: "TaskProgresses",
                         principalColumn: "Id",
@@ -278,8 +278,8 @@ namespace ThesisManagement.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Attachements_TaskProgressId",
-                table: "Attachements",
+                name: "IX_Attachments_TaskProgressId",
+                table: "Attachments",
                 column: "TaskProgressId");
 
             migrationBuilder.CreateIndex(
@@ -341,7 +341,7 @@ namespace ThesisManagement.Migrations
                 name: "Admin");
 
             migrationBuilder.DropTable(
-                name: "Attachements");
+                name: "Attachments");
 
             migrationBuilder.DropTable(
                 name: "Feedbacks");

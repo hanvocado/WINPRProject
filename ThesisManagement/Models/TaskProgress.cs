@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ThesisManagement.Models
 {
@@ -33,7 +28,7 @@ namespace ThesisManagement.Models
         [ForeignKey(nameof(StudentId))]
         public Student Student { get; set; }
 
-        public ICollection<Attachement>? Attachements { get; set; }
+        public ICollection<Attachment>? Attachments { get; set; }
 
     }
 }
