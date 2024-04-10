@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using ThesisManagement.Helpers;
 using ThesisManagement.Repositories;
 using ThesisManagement.Views.Shared;
 
@@ -8,6 +9,7 @@ namespace ThesisManagement.ViewModels
     public class ProfessorMainVM : ViewModelBase
     {
         private readonly IProfessorRepository _profRepo;
+        private readonly IThesisRepository _thesisRepo;
         private ViewModelBase _currentChildView;
 
         public ViewModelBase CurrentChildView
@@ -28,6 +30,14 @@ namespace ThesisManagement.ViewModels
             set { updateCount = value; OnPropertyChanged(nameof(UpdateCount)); }
         }
 
+        private int? registerCount;
+
+        public int? RegisterCount
+        {
+            get { return registerCount; }
+            set { registerCount = value; OnPropertyChanged(nameof(RegisterCount)); }
+        }
+
 
         public ICommand ShowTopicsView { get; set; }
         public ICommand ShowWaitingStudentsView { get; set; }
@@ -38,7 +48,15 @@ namespace ThesisManagement.ViewModels
         public ProfessorMainVM()
         {
             _profRepo = new ProfessorRepository();
+            _thesisRepo = new ThesisRepository();
+
+            RegisterCount = _thesisRepo.Get(SessionInfo.UserId, Variable.StatusTopic.Waiting).Count();
+            if (RegisterCount == 0)
+            {
+                RegisterCount = null;
+            }
             UpdateCount = _profRepo.NoStudentUpdates(SessionInfo.UserId);
+
             ShowTopicsView = new ViewModelCommand(ExecuteShowTopicsView);
             ShowWaitingStudentsView = new ViewModelCommand(ExecuteShowWaitingStudentsView);
             ShowThesesView = new ViewModelCommand(ExecuteShowThesesView);

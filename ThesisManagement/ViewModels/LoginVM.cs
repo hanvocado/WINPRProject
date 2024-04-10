@@ -3,6 +3,7 @@ using System.Net;
 using System.Security;
 using System.Text.RegularExpressions;
 using System.Windows;
+using ThesisManagement.Helpers;
 using ThesisManagement.Repositories;
 using ThesisManagement.Views.Professor;
 using ThesisManagement.Views.Shared;
@@ -17,8 +18,6 @@ namespace ThesisManagement.ViewModels
         private string email;
 
         private bool isLoading = false;
-        private string loadingVisibility = "Hidden";
-
         public bool IsLoading
         {
             get
@@ -29,14 +28,15 @@ namespace ThesisManagement.ViewModels
             {
                 isLoading = value;
                 if (value)
-                    LoadingVisibility = "Visible";
+                    LoadingVisibility = Visibility.Visible;
                 else
-                    LoadingVisibility = "Hidden";
+                    LoadingVisibility = Visibility.Hidden;
                 OnPropertyChanged(nameof(IsLoading));
             }
         }
 
-        public string LoadingVisibility
+        private Visibility loadingVisibility = Visibility.Hidden;
+        public Visibility LoadingVisibility
         {
             get
             {
@@ -135,7 +135,7 @@ namespace ThesisManagement.ViewModels
                     logicView.Close();
                 }
             }
-            ErrorMessage = "Thông tin đăng nhập không chính xác!";
+            ErrorMessage = Message.LoginFailed;
             IsLoading = false;
         }
 
@@ -152,18 +152,12 @@ namespace ThesisManagement.ViewModels
 
             try
             {
-                // Normalize the domain
                 email = Regex.Replace(email, @"(@)(.+)$", DomainMapper, RegexOptions.None, TimeSpan.FromMilliseconds(200));
 
-                // Examines the domain part of the email and normalizes it.
                 string DomainMapper(Match match)
                 {
-                    // Use IdnMapping class to convert Unicode domain names.
                     var idn = new System.Globalization.IdnMapping();
-
-                    // Pull out and process domain name (throws ArgumentException on invalid)
                     var domainName = idn.GetAscii(match.Groups[2].Value);
-
                     return match.Groups[1].Value + domainName;
                 }
             }

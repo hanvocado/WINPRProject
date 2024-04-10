@@ -16,5 +16,7 @@
         public static string Reject = "Đã từ chối luận văn";
 
         public static string ExceedStudentQuantity = "Vượt quá số lượng sinh viên tối đa!";
+
+        public static string LoginFailed = "Thông tin đăng nhập không chính xác!";
     }
 }

@@ -9,7 +9,7 @@
         xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
          mc:Ignorable="d"
          xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
-         Title="TopicView" Height="480" Width="600"
+         Title="TopicView" Height="410" Width="600"
          WindowStartupLocation="CenterScreen"
          Style="{StaticResource formStyle}">
     <Window.DataContext>
@@ -23,7 +23,6 @@
                 <RowDefinition Height="75" />
                 <RowDefinition Height="130" />
                 <RowDefinition Height="75" />
-                <RowDefinition Height="70" />
                 <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
 
@@ -98,22 +97,8 @@
                 </Border>
 
             </Grid>
-            <Border Grid.Row="5" Padding="30 0">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock 
-                               Text="Tiến độ"
-                               Style="{StaticResource label}"/>
-                    <Slider Width="412" 
-                                    Value="{Binding Progress}"
-                                    hc:TipElement.Visibility="Visible" 
-                                    hc:TipElement.Placement="Top" 
-                                    Minimum="0" Maximum="100" TickFrequency="10"
-                                    TickPlacement="Both"
-                                    Margin="0,22,0,0"/>
-                </StackPanel>
-            </Border>
 
-            <Grid Grid.Row="6" >
+            <Grid Grid.Row="5" >
                 <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
                   HoverColor="{StaticResource secondaryBrush}"
                   Content="Lưu"

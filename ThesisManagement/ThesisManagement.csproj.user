@@ -76,12 +76,6 @@
     <Compile Update="Views\Student\ChooseMembers.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Student\DetailFeedback.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\Student\GroupStudent.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Views\Student\MyThesis.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -94,16 +88,7 @@
     <Compile Update="Views\Student\ScheduleDetailsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Student\SearchThesis.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Views\Student\StudentMainView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\Student\ThesisDetailViewStudent.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\Student\ThesisViewStudent.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Student\TopicView.xaml.cs">
@@ -201,13 +186,7 @@
     <Page Update="Views\Student\ChooseMembers.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Student\DetailFeedback.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="Views\Student\EvaluationsView.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\Student\GroupStudent.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Student\MyThesis.xaml">
@@ -222,16 +201,7 @@
     <Page Update="Views\Student\ScheduleDetailsView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Student\SearchThesis.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="Views\Student\StudentMainView.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\Student\ThesisDetailViewStudent.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\Student\ThesisViewStudent.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Student\TopicView.xaml">

@@ -74,7 +74,17 @@
                             <RadioButton.ToolTip>
                                 <ToolTip Content="Đang chờ duyệt" Style="{StaticResource navToolTip}" />
                             </RadioButton.ToolTip>
-                            <fa:IconImage Icon="UserGroup" Style="{StaticResource navIcon}" />
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="UserGroup" Style="{StaticResource navIcon}" />
+                                <sf:SfBadge Content="{Binding RegisterCount}"
+                                            FontSize="9"
+                                            Padding="0"
+                                            Shape="Ellipse"
+                                            Width="11"
+                                            Background="{StaticResource accent}"
+                                            Margin="-5 -5 0 0"
+                                            Height="11"/>
+                            </StackPanel>
                         </RadioButton>
 
                         <RadioButton Style="{StaticResource navBtn}" 
@@ -86,11 +96,13 @@
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="AddressBook" Style="{StaticResource navIcon}" />
                                 <sf:SfBadge Content="{Binding UpdateCount}"
+                                            FontSize="9"
+                                            Padding="0"
                                             Shape="Ellipse"
-                                            Width="5"
+                                            Width="11"
                                             Background="{StaticResource accent}"
-                                            Margin="-5 -3 5 3"
-                                            Height="5"/>
+                                            Margin="-5 -5 0 0"
+                                            Height="11"/>
                             </StackPanel>
                         </RadioButton>
 
