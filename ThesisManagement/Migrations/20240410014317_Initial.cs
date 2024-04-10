@@ -194,7 +194,6 @@ namespace ThesisManagement.Migrations
                     Progress = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Response = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Attachement = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -210,6 +209,26 @@ namespace ThesisManagement.Migrations
                         name: "FK_TaskProgresses_Tasks_TaskId",
                         column: x => x.TaskId,
                         principalTable: "Tasks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Attachements",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TaskProgressId = table.Column<int>(type: "int", nullable: false),
+                    AttachedFile = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Attachements", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Attachements_TaskProgresses_TaskProgressId",
+                        column: x => x.TaskProgressId,
+                        principalTable: "TaskProgresses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -257,6 +276,11 @@ namespace ThesisManagement.Migrations
                 table: "Admin",
                 column: "Email",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Attachements_TaskProgressId",
+                table: "Attachements",
+                column: "TaskProgressId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Feedbacks_ThesisId",
@@ -315,6 +339,9 @@ namespace ThesisManagement.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Admin");
+
+            migrationBuilder.DropTable(
+                name: "Attachements");
 
             migrationBuilder.DropTable(
                 name: "Feedbacks");

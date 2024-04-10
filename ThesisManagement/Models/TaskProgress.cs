@@ -25,8 +25,6 @@ namespace ThesisManagement.Models
 
         public string? Response { get; set; }
 
-        public string? Attachement { get; set; }
-
         public DateTime UpdateAt { get; set; }
 
         [ForeignKey(nameof(TaskId))]
@@ -34,6 +32,8 @@ namespace ThesisManagement.Models
 
         [ForeignKey(nameof(StudentId))]
         public Student Student { get; set; }
+
+        public ICollection<Attachement>? Attachements { get; set; }
 
     }
 }

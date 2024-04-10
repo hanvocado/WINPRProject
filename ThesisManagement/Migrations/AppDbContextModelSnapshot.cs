@@ -65,6 +65,27 @@ namespace ThesisManagement.Migrations
                         });
                 });
 
+            modelBuilder.Entity("ThesisManagement.Models.Attachement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AttachedFile")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TaskProgressId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TaskProgressId");
+
+                    b.ToTable("Attachements");
+                });
+
             modelBuilder.Entity("ThesisManagement.Models.Feedback", b =>
                 {
                     b.Property<int>("Id")
@@ -316,9 +337,6 @@ namespace ThesisManagement.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Attachement")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -480,6 +498,17 @@ namespace ThesisManagement.Migrations
                         });
                 });
 
+            modelBuilder.Entity("ThesisManagement.Models.Attachement", b =>
+                {
+                    b.HasOne("ThesisManagement.Models.TaskProgress", "TaskProgress")
+                        .WithMany("Attachements")
+                        .HasForeignKey("TaskProgressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TaskProgress");
+                });
+
             modelBuilder.Entity("ThesisManagement.Models.Feedback", b =>
                 {
                     b.HasOne("ThesisManagement.Models.Thesis", "Thesis")
@@ -576,6 +605,11 @@ namespace ThesisManagement.Migrations
             modelBuilder.Entity("ThesisManagement.Models.Task", b =>
                 {
                     b.Navigation("TaskProgresses");
+                });
+
+            modelBuilder.Entity("ThesisManagement.Models.TaskProgress", b =>
+                {
+                    b.Navigation("Attachements");
                 });
 
             modelBuilder.Entity("ThesisManagement.Models.Thesis", b =>
