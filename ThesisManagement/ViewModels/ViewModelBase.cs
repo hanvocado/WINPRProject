@@ -39,7 +39,7 @@ namespace ThesisManagement.ViewModels
 
             if (results.Any())
             {
-                Errors.Add(propertyName, results.Select(r => r.ErrorMessage).ToList());
+                Errors[propertyName] = results.Select(r => r.ErrorMessage).ToList();
                 ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
             }
             else
