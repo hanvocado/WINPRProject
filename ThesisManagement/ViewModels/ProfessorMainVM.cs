@@ -7,6 +7,7 @@ namespace ThesisManagement.ViewModels
 {
     public class ProfessorMainVM : ViewModelBase
     {
+        private readonly IProfessorRepository _profRepo;
         private ViewModelBase _currentChildView;
 
         public ViewModelBase CurrentChildView
@@ -21,7 +22,7 @@ namespace ThesisManagement.ViewModels
 
         private string updateCount;
 
-        public string UpdateCount
+        public string? UpdateCount
         {
             get { return updateCount; }
             set { updateCount = value; OnPropertyChanged(nameof(UpdateCount)); }
@@ -29,17 +30,19 @@ namespace ThesisManagement.ViewModels
 
 
         public ICommand ShowTopicsView { get; set; }
-        public ICommand ShowStudentView { get; set; }
-        public ICommand ShowThesisView { get; set; }
+        public ICommand ShowWaitingStudentsView { get; set; }
+        public ICommand ShowThesesView { get; set; }
         public ICommand ShowProfessorProfileView { get; set; }
         public ICommand LogoutCommand { get; set; }
 
         public ProfessorMainVM()
         {
+            _profRepo = new ProfessorRepository();
+            UpdateCount = _profRepo.NoStudentUpdates(SessionInfo.UserId);
             ShowTopicsView = new ViewModelCommand(ExecuteShowTopicsView);
-            ShowStudentView = new ViewModelCommand(ExecuteShowStudentView);
-            ShowThesisView = new ViewModelCommand(ExecuteShowThesisView);
-            ShowProfessorProfileView = new ViewModelCommand(ExcututeShowProfessorProfileView);
+            ShowWaitingStudentsView = new ViewModelCommand(ExecuteShowWaitingStudentsView);
+            ShowThesesView = new ViewModelCommand(ExecuteShowThesesView);
+            ShowProfessorProfileView = new ViewModelCommand(ExecuteShowProfileView);
             LogoutCommand = new ViewModelCommand(ExcuteLogout);
             ExecuteShowTopicsView(null);
         }
@@ -54,19 +57,19 @@ namespace ThesisManagement.ViewModels
             SessionInfo.Clear();
         }
 
-        private void ExcututeShowProfessorProfileView(object obj)
+        private void ExecuteShowProfileView(object obj)
         {
             CurrentChildView = new ProfessorProfileVM();
         }
 
-        private void ExecuteShowThesisView(object? obj)
+        private void ExecuteShowWaitingStudentsView(object? obj)
         {
-            CurrentChildView = new ThesesVM();
+            CurrentChildView = new ReviewThesesVM();
         }
 
-        private void ExecuteShowStudentView(object? obj)
+        private void ExecuteShowThesesView(object? obj)
         {
-            CurrentChildView = new StudentsVM();
+            CurrentChildView = new ThesesVM();
         }
 
         private void ExecuteShowTopicsView(object? obj)

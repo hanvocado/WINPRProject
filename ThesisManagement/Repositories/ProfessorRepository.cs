@@ -10,6 +10,7 @@ namespace ThesisManagement.Repositories
         ObservableCollection<Professor> GetAll();
         IEnumerable<string> GetNames();
         Professor? Get(string id);
+        string? NoStudentUpdates(string professorId);
     }
 
     public class ProfessorRepository : IProfessorRepository
@@ -38,6 +39,25 @@ namespace ThesisManagement.Repositories
         {
             var names = _context.Professors.Select(prof => prof.Name).ToList();
             return names;
+        }
+
+        public string? NoStudentUpdates(string professorId)
+        {
+            var topics = _context.Professors.Include(p => p.Topics).ThenInclude(t => t.Theses).FirstOrDefault(p => p.Id == professorId).Topics;
+            if (topics != null)
+                foreach (Topic topic in topics)
+                {
+                    if (topic?.Theses?.Any() ?? false)
+                    {
+                        foreach (Thesis thesis in topic.Theses)
+                        {
+                            if (!String.IsNullOrEmpty(thesis.UpdateCount))
+                                return thesis.UpdateCount;
+                        }
+                    }
+                }
+
+            return null;
         }
     }
 }

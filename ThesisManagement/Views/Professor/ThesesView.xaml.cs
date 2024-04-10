@@ -7,14 +7,16 @@ using ThesisManagement.ViewModels;
 
 namespace ThesisManagement.Views.Professor
 {
-    public partial class StudentsView : UserControl
+    /// <summary>
+    /// Interaction logic for ThesesView.xaml
+    /// </summary>
+    public partial class ThesesView : UserControl
     {
-        public StudentsView()
+        public ThesesView()
         {
             InitializeComponent();
             ThesisListView.ItemContainerGenerator.StatusChanged += OnListViewItemStatusChanged;
         }
-
         private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)
         {
             if (!Window.GetWindow(this).IsActive)
@@ -24,7 +26,7 @@ namespace ThesisManagement.Views.Professor
             var thesis = listViewItem?.DataContext as Thesis;
             if (thesis != null)
             {
-                ((ReviewThesesVM)this.DataContext).SelectedThesis = thesis;
+                ((ThesesVM)this.DataContext).SelectedThesis = thesis;
             }
         }
 
@@ -38,6 +40,15 @@ namespace ThesisManagement.Views.Professor
                     if (listViewItem != null)
                         listViewItem.MouseEnter += ListViewItem_MouseEnter;
                 }
+            }
+        }
+
+        private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var gridView = ThesisListView.View as GridView;
+            if (gridView != null)
+            {
+                gridView.Columns[1].Width = ThesisListView.ActualWidth - gridView.Columns[0].Width - gridView.Columns[2].Width;
             }
         }
     }

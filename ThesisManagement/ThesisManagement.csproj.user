@@ -37,10 +37,7 @@
     <Compile Update="Views\Professor\ProfilesView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Professor\ReviewTheses.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\Professor\StudentsView.xaml.cs">
+    <Compile Update="Views\Professor\ThesesView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Professor\ThesisView.xaml.cs">
@@ -162,10 +159,7 @@
     <Page Update="Views\Professor\ProfilesView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Professor\ReviewTheses.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\Professor\StudentsView.xaml">
+    <Page Update="Views\Professor\ThesesView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Professor\ThesisView.xaml">

@@ -9,7 +9,7 @@
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
          xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
         xmlns:hc="https://handyorg.github.io/handycontrol"
-         Title="TopicView" Height="590" Width="600"
+         Title="TopicView" Height="620" Width="600"
          WindowStartupLocation="CenterScreen"
          Style="{StaticResource formStyle}">
     <Window.DataContext>
@@ -23,7 +23,7 @@
                 <RowDefinition Height="70" />
                 <RowDefinition Height="70" />
                 <RowDefinition Height="130" />
-                <RowDefinition Height="70" />
+                <RowDefinition Height="100" />
                 <RowDefinition Height="130" />
                 <RowDefinition Height="30" />
             </Grid.RowDefinitions>
@@ -51,7 +51,7 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Tiến độ"
                                Style="{StaticResource label}"/>
-                    <Slider Width="412"
+                    <Slider Width="440"
                             Height="30"
                             VerticalAlignment="Top"
                         Value="{Binding Progress}"
@@ -85,11 +85,30 @@
                             <ColumnDefinition Width="*" MaxWidth="50" />
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Row="3"
+                        <!--<TextBlock Grid.Row="3"
                                    Margin="0 0 20 0"
                                  Height="30"
                                  Text="{Binding ProgressFileName}" 
-                                 TextWrapping="Wrap" />
+                                 TextWrapping="Wrap" />-->
+
+
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <ListView ItemsSource="{Binding Attachments}"
+                                      MouseLeftButtonUp="Attachment_Click"
+                                      Margin="0 0 10 0"
+                                      MinHeight="60">
+                                <ListView.Resources>
+                                    <Style TargetType="GridViewColumnHeader">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </Style>
+                                </ListView.Resources>
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn DisplayMemberBinding="{Binding AttachedFile}" />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </ScrollViewer>
 
                         <customControls:ControlButton DefaultColor="{StaticResource info}"
                                                       HoverColor="{StaticResource infoHover}"

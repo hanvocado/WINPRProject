@@ -25,21 +25,25 @@ namespace ThesisManagement.Models
 
         public ICollection<TaskProgress>? TaskProgresses { get; set; }
 
+
         [NotMapped]
-        public int UpdateCount
+        public string? UpdateCount
         {
             get
             {
                 if (TaskProgresses == null || TaskProgresses.Count == 0)
-                    return 0;
+                    return null;
 
-                int res = 0;
+                int count = 0;
                 foreach (var progress in this.TaskProgresses)
                 {
                     if (String.IsNullOrEmpty(progress.Response))
-                        ++res;
+                        ++count;
+                    if (count > 2)
+                        return count.ToString() + "+";
                 }
-                return res;
+
+                return count.ToString();
             }
         }
     }

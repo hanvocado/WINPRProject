@@ -32,5 +32,22 @@ namespace ThesisManagement.Models
         public ICollection<Task>? Tasks { get; set; }
         public ICollection<ScheduleInfo>? ScheduleInfos { get; set; }
 
+        [NotMapped]
+        public string? UpdateCount
+        {
+            get
+            {
+                if (Tasks != null)
+                {
+                    foreach (var task in this.Tasks)
+                    {
+                        if (!String.IsNullOrEmpty(task.UpdateCount))
+                            return task.UpdateCount;
+                    }
+                }
+                return null;
+            }
+        }
+
     }
 }
