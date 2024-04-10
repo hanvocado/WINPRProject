@@ -2,20 +2,56 @@
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using ThesisManagement.Models;
 using ThesisManagement.ViewModels;
 using Task = ThesisManagement.Models.Task;
 
 namespace ThesisManagement.Views.Shared
 {
-    /// <summary>
-    /// Interaction logic for TasksView.xaml
-    /// </summary>
     public partial class TasksView : UserControl
     {
+        private TaskView currentTaskView;
         public TasksView()
         {
             InitializeComponent();
             PendingTaskListView.ItemContainerGenerator.StatusChanged += OnListViewItemStatusChanged;
+        }
+
+        private void PendingTaskListView_Click(object sender, RoutedEventArgs e)
+        {
+            var listView = sender as ListView;
+            var selectedItem = listView?.SelectedItem;
+
+            if (selectedItem != null)
+            {
+                Task? task = selectedItem as Task;
+                if (task == null) return;
+
+                TaskView taskView = new TaskView();
+
+                if (currentTaskView != null && currentTaskView.IsVisible)
+                {
+                    currentTaskView.Close();
+                }
+
+                this.DataContext = new TasksVM
+                {
+                    Id = task.Id,
+                    ThesisId = task.ThesisId,
+                    Name = task.Name,
+                    Description = task.Description,
+                    Start = task.Start,
+                    End = task.End,
+                    Progress = task.Progress                
+                };
+
+                taskView.DataContext = this.DataContext;
+                taskView.Owner = Application.Current.MainWindow;
+                taskView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                taskView.Show();
+
+                currentTaskView = taskView;
+            }
         }
 
         private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)

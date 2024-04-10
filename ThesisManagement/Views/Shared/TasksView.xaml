@@ -46,6 +46,7 @@
 
                     <Expander.Content>
                         <ListView Name="PendingTaskListView"
+                                  MouseLeftButtonUp="PendingTaskListView_Click"
                             Background="{DynamicResource MaterialDesignPaper}"
                             BorderThickness="1.5 0 1.5 1.5"
                             BorderBrush="#5aedff"
