@@ -7,6 +7,7 @@ namespace ThesisManagement.ViewModels
 {
     public class ProfessorMainVM : ViewModelBase
     {
+        private readonly IProfessorRepository _profRepo;
         private ViewModelBase _currentChildView;
 
         public ViewModelBase CurrentChildView
@@ -21,7 +22,7 @@ namespace ThesisManagement.ViewModels
 
         private string updateCount;
 
-        public string UpdateCount
+        public string? UpdateCount
         {
             get { return updateCount; }
             set { updateCount = value; OnPropertyChanged(nameof(UpdateCount)); }
@@ -36,6 +37,8 @@ namespace ThesisManagement.ViewModels
 
         public ProfessorMainVM()
         {
+            _profRepo = new ProfessorRepository();
+            UpdateCount = _profRepo.NoStudentUpdates(SessionInfo.UserId);
             ShowTopicsView = new ViewModelCommand(ExecuteShowTopicsView);
             ShowStudentView = new ViewModelCommand(ExecuteShowStudentView);
             ShowThesisView = new ViewModelCommand(ExecuteShowThesisView);

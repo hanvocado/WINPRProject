@@ -55,18 +55,18 @@
                             <fa:IconImage Icon="RectangleList" Style="{StaticResource navIcon}" />
                         </RadioButton>
 
-                        <!--<RadioButton Style="{StaticResource navBtn}"
+                        <RadioButton Style="{StaticResource navBtn}"
                                      Command="{Binding ShowStudentView}">
                             <RadioButton.ToolTip>
-                                <ToolTip Content="Sinh viên" Style="{StaticResource navToolTip}" />
+                                <ToolTip Content="Đang chờ duyệt" Style="{StaticResource navToolTip}" />
                             </RadioButton.ToolTip>
-                            <fa:IconImage Icon="UserLarge" Style="{StaticResource navIcon}" />
-                        </RadioButton>-->
+                            <fa:IconImage Icon="UserGroup" Style="{StaticResource navIcon}" />
+                        </RadioButton>
 
                         <RadioButton Style="{StaticResource navBtn}" 
                                      Command="{Binding ShowStudentView}">
                             <RadioButton.ToolTip>
-                                <ToolTip Content="Sinh viên" Style="{StaticResource navToolTip}" />
+                                <ToolTip Content="Luận văn" Style="{StaticResource navToolTip}" />
                             </RadioButton.ToolTip>
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="AddressBook" Style="{StaticResource navIcon}" />

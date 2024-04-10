@@ -50,6 +50,8 @@
                           Margin="0,0,20,0"
                           Width="200"
                           ItemsSource="{Binding Technologies}"
+                          DisplayMemberPath="Name"
+                          SelectedValuePath="Name"
                           SelectedValue="{Binding FilterTechnology}"
                           md:HintAssist.Hint="Công nghệ"
                           md:TextFieldAssist.HasClearButton="True"
