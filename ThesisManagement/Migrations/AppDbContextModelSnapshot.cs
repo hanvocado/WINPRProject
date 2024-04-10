@@ -308,6 +308,45 @@ namespace ThesisManagement.Migrations
                     b.ToTable("Tasks");
                 });
 
+            modelBuilder.Entity("ThesisManagement.Models.TaskProgress", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Attachement")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Progress")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Response")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("TaskId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdateAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("TaskId");
+
+                    b.ToTable("TaskProgresses");
+                });
+
             modelBuilder.Entity("ThesisManagement.Models.Thesis", b =>
                 {
                     b.Property<int>("Id")
@@ -483,6 +522,25 @@ namespace ThesisManagement.Migrations
                     b.Navigation("Thesis");
                 });
 
+            modelBuilder.Entity("ThesisManagement.Models.TaskProgress", b =>
+                {
+                    b.HasOne("ThesisManagement.Models.Student", "Student")
+                        .WithMany("TaskProgresses")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ThesisManagement.Models.Task", "Task")
+                        .WithMany("TaskProgresses")
+                        .HasForeignKey("TaskId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Student");
+
+                    b.Navigation("Task");
+                });
+
             modelBuilder.Entity("ThesisManagement.Models.Thesis", b =>
                 {
                     b.HasOne("ThesisManagement.Models.Topic", "Topic")
@@ -508,6 +566,16 @@ namespace ThesisManagement.Migrations
             modelBuilder.Entity("ThesisManagement.Models.Professor", b =>
                 {
                     b.Navigation("Topics");
+                });
+
+            modelBuilder.Entity("ThesisManagement.Models.Student", b =>
+                {
+                    b.Navigation("TaskProgresses");
+                });
+
+            modelBuilder.Entity("ThesisManagement.Models.Task", b =>
+                {
+                    b.Navigation("TaskProgresses");
                 });
 
             modelBuilder.Entity("ThesisManagement.Models.Thesis", b =>

@@ -13,6 +13,7 @@ namespace ThesisManagement.Repositories.EF
         public DbSet<Student> Students { get; set; }
         public DbSet<Thesis> Theses { get; set; }
         public DbSet<Task> Tasks { get; set; }
+        public DbSet<TaskProgress> TaskProgresses { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<ScheduleInfo> ScheduleInfos { get; set; }
 
@@ -237,6 +238,17 @@ namespace ThesisManagement.Repositories.EF
                 entity.HasOne(fb => fb.Thesis)
                       .WithMany(ts => ts.Feedbacks)
                       .HasForeignKey(fb => fb.ThesisId);
+            });
+
+            modelBuilder.Entity<TaskProgress>(entity =>
+            {
+                entity.HasOne(t => t.Task)
+                      .WithMany(tp => tp.TaskProgresses)
+                      .HasForeignKey(tp => tp.TaskId);
+
+                entity.HasOne(st => st.Student)
+                      .WithMany(tp => tp.TaskProgresses)
+                      .HasForeignKey(tp => tp.StudentId);
             });
 
         }

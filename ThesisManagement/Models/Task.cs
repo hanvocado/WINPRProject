@@ -22,6 +22,8 @@ namespace ThesisManagement.Models
 
         [ForeignKey(nameof(ThesisId))]
         public Thesis Thesis { get; set; }
+
+        public ICollection<TaskProgress>? TaskProgresses { get; set; }
     }
 
     public class TasksPie

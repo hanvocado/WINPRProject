@@ -183,6 +183,37 @@ namespace ThesisManagement.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "TaskProgresses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TaskId = table.Column<int>(type: "int", nullable: false),
+                    StudentId = table.Column<string>(type: "nvarchar(20)", nullable: false),
+                    Progress = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Response = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Attachement = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TaskProgresses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TaskProgresses_Students_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Students",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TaskProgresses_Tasks_TaskId",
+                        column: x => x.TaskId,
+                        principalTable: "Tasks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Admin",
                 columns: new[] { "Id", "Birthday", "Email", "Name", "Password", "Phone" },
@@ -255,6 +286,16 @@ namespace ThesisManagement.Migrations
                 column: "ThesisId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TaskProgresses_StudentId",
+                table: "TaskProgresses",
+                column: "StudentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TaskProgresses_TaskId",
+                table: "TaskProgresses",
+                column: "TaskId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Tasks_ThesisId",
                 table: "Tasks",
                 column: "ThesisId");
@@ -280,6 +321,9 @@ namespace ThesisManagement.Migrations
 
             migrationBuilder.DropTable(
                 name: "ScheduleInfos");
+
+            migrationBuilder.DropTable(
+                name: "TaskProgresses");
 
             migrationBuilder.DropTable(
                 name: "Students");
