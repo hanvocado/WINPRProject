@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Windows;
+using System.Windows.Input;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
@@ -173,7 +174,10 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteShowUpdateProgressCommand(object obj)
         {
-            UpdateTaskProgressView updateView = new();
+            var vm = new TaskProgressVM();
+            vm.TaskId = id;
+            var updateView = new UpdateTaskProgressView { DataContext = vm };
+            updateView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             updateView.Show();
         }
 

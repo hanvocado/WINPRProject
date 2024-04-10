@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
@@ -24,6 +25,7 @@ namespace ThesisManagement.Views.Shared
 
             if (selectedItem != null)
             {
+                TasksVM tasksVM = this.DataContext as TasksVM ?? new TasksVM();
                 Task? task = selectedItem as Task;
                 if (task == null) return;
 
@@ -34,20 +36,15 @@ namespace ThesisManagement.Views.Shared
                     currentTaskView.Close();
                 }
 
-                this.DataContext = new TasksVM
-                {
-                    Id = task.Id,
-                    ThesisId = task.ThesisId,
-                    Name = task.Name,
-                    Description = task.Description,
-                    Start = task.Start,
-                    End = task.End,
-                    Progress = task.Progress                
-                };
+                tasksVM.Id = task.Id;
+                tasksVM.ThesisId = task.ThesisId;
+                tasksVM.Name = task.Name;
+                tasksVM.Description = task.Description;
+                tasksVM.Start = task.Start;
+                tasksVM.End = task.End;
+                tasksVM.Progress = task.Progress;
 
                 taskView.DataContext = this.DataContext;
-                taskView.Owner = Application.Current.MainWindow;
-                taskView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 taskView.Show();
 
                 currentTaskView = taskView;
