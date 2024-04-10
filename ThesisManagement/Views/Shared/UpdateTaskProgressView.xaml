@@ -13,7 +13,7 @@
          WindowStartupLocation="CenterScreen"
          Style="{StaticResource formStyle}">
     <Window.DataContext>
-        <viewModels:TasksVM />
+        <viewModels:TaskProgressVM />
     </Window.DataContext>
     <Border>
         <Grid>
@@ -130,7 +130,7 @@
                              VerticalAlignment="Top"
                              Height="90"
                              IsReadOnly="{Binding IsStudent}"
-                             Text="{Binding Description}" 
+                             Text="{Binding Response}" 
                              AcceptsReturn="True"
                              TextWrapping="Wrap"
                              VerticalScrollBarVisibility="Auto"/>
