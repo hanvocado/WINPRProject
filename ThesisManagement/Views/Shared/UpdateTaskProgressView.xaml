@@ -113,7 +113,7 @@
                         <customControls:ControlButton DefaultColor="{StaticResource info}"
                                                       HoverColor="{StaticResource infoHover}"
                                                       FontSize="14"
-                                                      Command="{Binding UploadFileCommand}"
+                                                      Command="{Binding UploadAttachmentCommand}"
                                                       Grid.Column="1">
                             <customControls:ControlButton.Content>
                                 <fa:IconImage Icon="Upload" Foreground="White" Style="{StaticResource btnIcon}" />

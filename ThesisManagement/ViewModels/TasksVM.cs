@@ -261,7 +261,7 @@ namespace ThesisManagement.ViewModels
             taskView.Show();
         }
 
-        private void Reload()
+        public void Reload()
         {
             PendingTasks = _taskRepo.GetPendingTasks(thesis.Id);
             DoneTasks = _taskRepo.GetDoneTasks(thesis.Id);
