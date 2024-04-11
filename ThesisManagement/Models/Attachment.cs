@@ -16,5 +16,14 @@ namespace ThesisManagement.Models
 
         [ForeignKey(nameof(TaskProgressId))]
         public TaskProgress TaskProgress { get; set; }
+
+        [NotMapped]
+        public string OriginalFileName
+        {
+            get
+            {
+                return FileName.Substring(14);
+            }
+        }
     }
 }

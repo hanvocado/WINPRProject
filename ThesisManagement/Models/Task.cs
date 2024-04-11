@@ -43,7 +43,9 @@ namespace ThesisManagement.Models
                         return count.ToString() + "+";
                 }
 
-                return count.ToString();
+                if (count > 0)
+                    return count.ToString();
+                return null;
             }
         }
     }
