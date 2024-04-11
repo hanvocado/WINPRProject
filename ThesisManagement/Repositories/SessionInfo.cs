@@ -1,4 +1,6 @@
-﻿namespace ThesisManagement.Repositories
+﻿using System.IO;
+
+namespace ThesisManagement.Repositories
 {
     public static class SessionInfo
     {
@@ -23,6 +25,14 @@
         {
             get { return role; }
             set { role = value; }
+        }
+
+        public static string BinDirectory
+        {
+            get
+            {
+                return Directory.GetParent(Environment.CurrentDirectory)!.Parent!.FullName;
+            }
         }
 
         public static void Clear()

@@ -164,7 +164,7 @@ namespace ThesisManagement.ViewModels
             _studentRepo = new StudentRepository();
             _attachmentRepo = new AttachmentRepository();
             _taskProgressRepo = new TaskProgressRepository();
-            appDirectory = Directory.GetParent(Environment.CurrentDirectory)!.Parent!.FullName;
+            appDirectory = SessionInfo.BinDirectory;
             selectedTaskProgress = new TaskProgress();
             attachment = new Attachment();
 
@@ -185,7 +185,7 @@ namespace ThesisManagement.ViewModels
 
             //    //Current file path
 
-            //    var attachmentPath = Path.Combine(appDirectory,"UserAttachment", attachment.AttachedFile);
+            //    var attachmentPath = Path.Combine(appDirectory, attachment.AttachedFile);
             //    docStream = new FileStream(attachmentPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
             //}
         }
@@ -200,7 +200,7 @@ namespace ThesisManagement.ViewModels
                 string userAttachmentName = SessionInfo.UserId + Path.GetFileName(attachmentName);
 
                 //Storage attachment name
-                destinationPath = Path.Combine(appDirectory, "UserAttachment", userAttachmentName);
+                destinationPath = Path.Combine(appDirectory, userAttachmentName);
                 File.Copy(attachmentName, destinationPath, true);
                 DocumentStream = new FileStream(destinationPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
 

@@ -83,7 +83,7 @@ namespace ThesisManagement.ViewModels
             _professorRepo = new ProfessorRepository();
             _topicRepo = new TopicRepository();
             _studentRepo = new StudentRepository();
-            appDirectory = Directory.GetParent(Environment.CurrentDirectory)!.Parent!.FullName;
+            appDirectory = SessionInfo.BinDirectory;
 
             if (SessionInfo.Role == Role.Student)
                 Thesis ??= _studentRepo.GetThesis(SessionInfo.UserId) ?? new Thesis();
