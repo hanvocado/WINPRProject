@@ -16,6 +16,7 @@ namespace ThesisManagement.Repositories
         IEnumerable<Thesis> Get(string userId, string topicStatus);
         IEnumerable<Thesis> Get(int topicId, string topicStatus);
         IEnumerable<Student> GetMembers(int thesisId);
+        Thesis? GetThesis(int taskId);
         bool CanRegisterTopic(int thesisId);
     }
     public class ThesisRepository : IThesisRepository
@@ -109,6 +110,16 @@ namespace ThesisManagement.Repositories
                 Trace.WriteLine(ex);
                 return false;
             }
+        }
+
+        public Thesis? GetThesis(int taskId)
+        {
+            var task = _context.Tasks.Include(th => th.Thesis)
+                                       .Where(t => t.Id == taskId)
+                                       .AsNoTracking()
+                                       .FirstOrDefault();
+            return task?.Thesis;
+                            
         }
 
 

@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+using Microsoft.Win32;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Input;
 using ThesisManagement.Helpers;
@@ -11,8 +12,14 @@ namespace ThesisManagement.ViewModels
     public class TaskProgressVM : ViewModelBase
     {
         private readonly IStudentRepository _studentRepo;
+        private readonly IAttachmentRepository _attachmentRepo;
         private readonly ITaskRepository _taskRepo;
+        private readonly IThesisRepository _thesisRepo;
         private readonly ITaskProgressRepository _taskProgressRepo;
+        private TasksVM taskVM;
+        private Attachment attachment;
+        public string appDirectory;
+        public string destinationPath;
 
         private int taskId;
         public int TaskId
@@ -91,7 +98,12 @@ namespace ThesisManagement.ViewModels
         public TaskProgress SelectedTaskProgress
         {
             get { return selectedTaskProgress; }
-            set { selectedTaskProgress = value; OnPropertyChanged(nameof(SelectedTaskProgress)); }
+            set
+            {
+                selectedTaskProgress = value;
+                OnPropertyChanged(nameof(SelectedTaskProgress));
+                LoadTaskProgress();
+            }
         }
 
         public bool IsStudent
@@ -105,46 +117,99 @@ namespace ThesisManagement.ViewModels
             }
         }
 
+        private Stream docStream;
+        public Stream DocumentStream
+        {
+            get
+            {
+                return docStream;
+            }
+            set
+            {
+                docStream = value;
+                OnPropertyChanged(nameof(DocumentStream));
+            }
+        }
+
+        private string attachedFile;
+        public string AttachedFile
+        {
+            get { return attachedFile; }
+            set
+            {
+                attachedFile = value;
+                OnPropertyChanged(nameof(AttachedFile));
+            }
+        }
 
         private IEnumerable<Attachment> attachments;
-
         public IEnumerable<Attachment> Attachments
         {
             get { return attachments; }
-            set { attachments = value; OnPropertyChanged(nameof(Attachments)); }
-        }
-
-
-        private string appDirectory;
-
-        private Attachment selectedFile;
-        public Attachment SelectedFile
-        {
-            get { return selectedFile; }
             set
             {
-                if (!String.IsNullOrEmpty(value.FileName) && value != selectedFile)
-                {
-                    selectedFile = value;
-                    OnPropertyChanged(nameof(SelectedFile));
-                    StartDownload(selectedFile);
-                }
+                attachments = value;
+                OnPropertyChanged(nameof(Attachments));
             }
         }
 
         public ICommand UpdateTaskProgressCommand { get; set; }
+        public ICommand UploadAttachmentCommand { get; set; }
         public ICommand TestDownloadFile { get; set; }
 
         public TaskProgressVM()
         {
             _taskRepo = new TaskRepository();
+            _thesisRepo = new ThesisRepository();
             _studentRepo = new StudentRepository();
+            _attachmentRepo = new AttachmentRepository();
             _taskProgressRepo = new TaskProgressRepository();
             appDirectory = Directory.GetParent(Environment.CurrentDirectory)!.Parent!.FullName;
             selectedTaskProgress = new TaskProgress();
+            attachment = new Attachment();
 
             UpdateTaskProgressCommand = new ViewModelCommand(ExecuteUpdateTaskProgressCommand);
             TestDownloadFile = new ViewModelCommand(ExecuteTestDownload);
+            UploadAttachmentCommand = new ViewModelCommand(ExecuteUploadAttachmentCommand);
+        }
+
+        private void LoadTaskProgress()
+        {
+            //Attachments = _attachmentRepo.GetAttachments(selectedTaskProgress.Id);
+
+            //if (selectedTaskProgress != null && !string.IsNullOrEmpty(selectedTaskProgress.Attachments))
+            //{
+            //    //Update professor evaluation
+            //    Evaluation = thesis.Evaluation;
+            //    Score = thesis.Score;
+
+            //    //Current file path
+
+            //    var attachmentPath = Path.Combine(appDirectory,"UserAttachment", attachment.AttachedFile);
+            //    docStream = new FileStream(attachmentPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
+            //}
+        }
+
+        private void ExecuteUploadAttachmentCommand(object obj)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                //Uploaded attachment name
+                string attachmentName = openFileDialog.FileName;
+                string userAttachmentName = SessionInfo.UserId + Path.GetFileName(attachmentName);
+
+                //Storage attachment name
+                destinationPath = Path.Combine(appDirectory, "UserAttachment", userAttachmentName);
+                File.Copy(attachmentName, destinationPath, true);
+                DocumentStream = new FileStream(destinationPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
+
+                //Update database
+                attachment.FileName = userAttachmentName;
+                attachment.TaskProgressId = selectedTaskProgress.Id;
+                var success = _attachmentRepo.Add(attachment);
+                ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
+            }
         }
 
         private void ExecuteUpdateTaskProgressCommand(object obj)
@@ -166,18 +231,15 @@ namespace ThesisManagement.ViewModels
             }
             else if (SessionInfo.Role == Role.Professor)
             {
-                if (progress < 100)
-                {
-                    var success = _taskProgressRepo.Update(selectedTaskProgress);
-                    ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
-                }
-                else
-                {
-                    var acceptedTask = _taskRepo.GetTask(taskId);
-                    acceptedTask.Progress = progress;
-                    var success = _taskRepo.Update(acceptedTask);
-                    ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
-                }
+                var updateTaskProgress = _taskProgressRepo.Update(selectedTaskProgress);
+                var acceptedTask = _taskRepo.GetTask(taskId);
+                acceptedTask.Progress = progress;
+                var updateTask = _taskRepo.Update(acceptedTask);
+                ShowMessage(updateTaskProgress && updateTask, Message.UpdateSuccess, Message.UpdateFailed);
+
+                taskVM = new TasksVM();
+                taskVM.Thesis = _thesisRepo.GetThesis(selectedTaskProgress.TaskId);
+                taskVM.Reload();
             }
             taskProgressView?.Close();
         }
