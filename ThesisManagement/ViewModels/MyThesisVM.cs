@@ -1,6 +1,5 @@
 ﻿using Microsoft.Win32;
 using System.IO;
-using System.Windows;
 using System.Windows.Input;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
@@ -14,9 +13,9 @@ namespace ThesisManagement.ViewModels
         private readonly IThesisRepository _thesisRepo;
         private readonly IStudentRepository _studentRepo;
         private readonly IProfessorRepository _professorRepo;
-        public string destinationPath;
-        public string appDirectory;
-        public string studentFilePath;
+        private string destinationPath;
+        private string appDirectory;
+        private string studentFilePath;
 
         private Topic topic;
         public Topic Topic
@@ -88,7 +87,7 @@ namespace ThesisManagement.ViewModels
 
             if (SessionInfo.Role == Role.Student)
                 Thesis ??= _studentRepo.GetThesis(SessionInfo.UserId) ?? new Thesis();
-          
+
             MakeEvaluationCommand = new ViewModelCommand(ExecuteMakeEvaluationCommand);
             UploadFileCommand = new ViewModelCommand(ExecuteUploadFileCommand);
         }
@@ -127,7 +126,7 @@ namespace ThesisManagement.ViewModels
                 //Uploaded file name
                 string fileName = openFileDialog.FileName;
                 string userFileName = SessionInfo.UserId + Path.GetFileName(fileName);
-               
+
                 //Storage file name
                 destinationPath = Path.Combine(appDirectory, "UserFile", userFileName);
                 File.Copy(fileName, destinationPath, true);

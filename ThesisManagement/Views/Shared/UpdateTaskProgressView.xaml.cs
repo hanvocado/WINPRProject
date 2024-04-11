@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Input;
 
 namespace ThesisManagement.Views.Shared
 {
@@ -11,11 +10,6 @@ namespace ThesisManagement.Views.Shared
         public UpdateTaskProgressView()
         {
             InitializeComponent();
-        }
-
-        private void Attachment_Click(object sender, MouseButtonEventArgs e)
-        {
-
         }
     }
 }

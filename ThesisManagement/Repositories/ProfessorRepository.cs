@@ -43,7 +43,10 @@ namespace ThesisManagement.Repositories
 
         public string? NoStudentUpdates(string professorId)
         {
-            var topics = _context.Professors.Include(p => p.Topics).ThenInclude(t => t.Theses).FirstOrDefault(p => p.Id == professorId).Topics;
+            var topics = _context.Professors.Include(p => p.Topics)
+                                            .ThenInclude(t => t.Theses)
+                                            .ThenInclude(th => th.Tasks)
+                                            .FirstOrDefault(p => p.Id == professorId).Topics;
             if (topics != null)
                 foreach (Topic topic in topics)
                 {

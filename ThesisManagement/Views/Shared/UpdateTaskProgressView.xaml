@@ -93,21 +93,13 @@
 
 
                         <ScrollViewer VerticalScrollBarVisibility="Auto">
-                            <ListView ItemsSource="{Binding Attachments}"
-                                      MouseLeftButtonUp="Attachment_Click"
-                                      Margin="0 0 10 0"
-                                      MinHeight="60">
-                                <ListView.Resources>
-                                    <Style TargetType="GridViewColumnHeader">
-                                        <Setter Property="Visibility" Value="Collapsed"/>
-                                    </Style>
-                                </ListView.Resources>
-                                <ListView.View>
-                                    <GridView>
-                                        <GridViewColumn DisplayMemberBinding="{Binding AttachedFile}" />
-                                    </GridView>
-                                </ListView.View>
-                            </ListView>
+                            <ListBox ItemsSource="{Binding Attachments}"
+                                     x:Name="AttachmentsListBox"
+                                     Margin="0 0 10 0"
+                                     SelectedItem="{Binding SelectedFile}"
+                                     DisplayMemberPath="FileName"
+                                     MinHeight="60">
+                            </ListBox>
                         </ScrollViewer>
 
                         <customControls:ControlButton DefaultColor="{StaticResource info}"

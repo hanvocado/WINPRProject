@@ -11,7 +11,8 @@ namespace ThesisManagement.Models
         [Required]
         public int TaskProgressId { get; set; }
 
-        public string? AttachedFile { get; set; }
+        [Required]
+        public string FileName { get; set; }
 
         [ForeignKey(nameof(TaskProgressId))]
         public TaskProgress TaskProgress { get; set; }

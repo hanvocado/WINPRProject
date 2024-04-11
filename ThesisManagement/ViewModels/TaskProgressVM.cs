@@ -1,10 +1,10 @@
-﻿using System.Windows.Input;
-using System.Xml.Linq;
+﻿using System.Diagnostics;
+using System.IO;
+using System.Windows.Input;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
 using ThesisManagement.Views.Shared;
-using Task = ThesisManagement.Models.Task;
 
 namespace ThesisManagement.ViewModels
 {
@@ -18,10 +18,10 @@ namespace ThesisManagement.ViewModels
         public int TaskId
         {
             get { return taskId; }
-            set 
-            { 
+            set
+            {
                 taskId = value;
-                OnPropertyChanged(nameof(TaskId)); 
+                OnPropertyChanged(nameof(TaskId));
             }
         }
 
@@ -29,10 +29,10 @@ namespace ThesisManagement.ViewModels
         public Student? Student
         {
             get { return student; }
-            set 
-            { 
-                student = value; 
-                OnPropertyChanged(nameof(Student)); 
+            set
+            {
+                student = value;
+                OnPropertyChanged(nameof(Student));
             }
         }
 
@@ -87,13 +87,40 @@ namespace ThesisManagement.ViewModels
             }
         }
 
+        private IEnumerable<Attachment> attachments;
+
+        public IEnumerable<Attachment> Attachments
+        {
+            get { return attachments; }
+            set { attachments = value; OnPropertyChanged(nameof(Attachments)); }
+        }
+
+
+        private string appDirectory;
+
+        private Attachment selectedFile;
+        public Attachment SelectedFile
+        {
+            get { return selectedFile; }
+            set
+            {
+                if (!String.IsNullOrEmpty(value.FileName) && value != selectedFile)
+                {
+                    selectedFile = value;
+                    OnPropertyChanged(nameof(SelectedFile));
+                    StartDownload(selectedFile);
+                }
+            }
+        }
+
         public ICommand UpdateTaskProgressCommand { get; set; }
 
         public TaskProgressVM()
         {
             _taskRepo = new TaskRepository();
-            _studentRepo = new StudentRepository(); 
+            _studentRepo = new StudentRepository();
             _taskProgressRepo = new TaskProgressRepository();
+            appDirectory = Directory.GetCurrentDirectory();
             if (SessionInfo.Role == Role.Student)
                 Student = _studentRepo.GetStudent(SessionInfo.UserId);
             UpdateTaskProgressCommand = new ViewModelCommand(ExecuteUpdateTaskProgressCommand);
@@ -124,8 +151,28 @@ namespace ThesisManagement.ViewModels
                     var success = _taskProgressRepo.Update(taskProgress);
                     ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
                 }
-            }         
+            }
             taskProgressView?.Close();
+        }
+
+        private void StartDownload(Attachment selectedFile)
+        {
+            string filePath = Path.Combine(appDirectory, "UserFile", selectedFile.FileName);
+            if (File.Exists(filePath))
+            {
+                try
+                {
+                    Process.Start(filePath);
+                }
+                catch (Exception ex)
+                {
+                    ShowMessage(false, null, ex.Message);
+                }
+            }
+            else
+            {
+                ShowMessage(false, null, Message.FileNotFound);
+            }
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using System.Windows;
-using System.Windows.Input;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Windows;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
@@ -32,6 +32,7 @@ namespace ThesisManagement.ViewModels
         }
 
         private int thesisId;
+
         public int ThesisId
         {
             get { return thesisId; }
@@ -43,6 +44,7 @@ namespace ThesisManagement.ViewModels
         }
 
         private string name;
+        [Required]
         public string Name
         {
             get { return name; }
@@ -54,6 +56,7 @@ namespace ThesisManagement.ViewModels
         }
 
         private string description;
+        [Required]
         public string Description
         {
             get { return description; }
@@ -137,14 +140,14 @@ namespace ThesisManagement.ViewModels
             }
         }
 
-        public string DeleteBtnVisibility
+        public Visibility DeleteBtnVisibility
         {
             get
             {
                 if (SessionInfo.Role == Role.Student)
-                    return "Hidden";
+                    return Visibility.Hidden;
                 else
-                    return "Visible";
+                    return Visibility.Visible;
             }
         }
 
@@ -155,11 +158,11 @@ namespace ThesisManagement.ViewModels
             set { tasksPieData = value; OnPropertyChanged(nameof(TasksPieData)); }
         }
 
-        public ICommand CreateTaskCommand { get; set; }
-        public ICommand UpdateTaskCommand { get; set; }
-        public ICommand DeleteTaskCommand { get; set; }
-        public ICommand CreateOrUpdateCommand { get; set; }
-        public ICommand ShowUpdateProgressCommand { get; set; }
+        public ViewModelCommand CreateTaskCommand { get; set; }
+        public ViewModelCommand UpdateTaskCommand { get; set; }
+        public ViewModelCommand DeleteTaskCommand { get; set; }
+        public ViewModelCommand CreateOrUpdateCommand { get; set; }
+        public ViewModelCommand ShowUpdateProgressCommand { get; set; }
 
         public TasksVM()
         {
@@ -174,10 +177,8 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteShowUpdateProgressCommand(object obj)
         {
-            var vm = new TaskProgressVM();
-            vm.TaskId = id;
+            var vm = new TaskProgressVM { TaskId = this.id };
             var updateView = new UpdateTaskProgressView { DataContext = vm };
-            updateView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             updateView.Show();
         }
 
@@ -207,33 +208,33 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteCreateOrUpdateCommand(object obj)
         {
-            //if (IsTaskNotValid())
-            //    return;
+            if (ValidTask())
+            {
+                TaskView taskView = obj as TaskView;
+                Task task = new Task
+                {
+                    Id = id,
+                    ThesisId = thesisId,
+                    Name = name,
+                    Description = description,
+                    Start = start,
+                    End = end,
+                    Progress = progress
+                };
+                if (id <= 0)
+                {
+                    var success = _taskRepo.Add(task);
+                    ShowMessage(success, Message.AddSuccess, Message.AddFailed);
+                }
+                else
+                {
+                    var success = _taskRepo.Update(task);
+                    ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
+                }
 
-            TaskView taskView = obj as TaskView;
-            Task task = new Task
-            {
-                Id = id,
-                ThesisId = thesisId,
-                Name = name,
-                Description = description,
-                Start = start,
-                End = end,
-                Progress = progress
-            };
-            if (id <= 0)
-            {
-                var success = _taskRepo.Add(task);
-                ShowMessage(success, Message.AddSuccess, Message.AddFailed);
+                Reload();
+                taskView?.Close();
             }
-            else
-            {
-                var success = _taskRepo.Update(task);
-                ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
-            }
-
-            Reload();
-            taskView?.Close();
         }
 
         private void ExecuteCreateTaskCommand(object obj)
@@ -259,6 +260,13 @@ namespace ThesisManagement.ViewModels
             Start = DateTime.Now;
             End = DateTime.Now.AddDays(7);
             Progress = 0;
+        }
+
+        private bool ValidTask()
+        {
+            bool validName = Validate(nameof(Name), name, CreateOrUpdateCommand);
+            bool validDes = Validate(nameof(Description), description, CreateOrUpdateCommand);
+            return validName && validDes;
         }
     }
 }

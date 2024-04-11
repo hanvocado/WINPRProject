@@ -23,5 +23,7 @@
         public static string ApproveFailed = "Duyệt thất bại";
         public static string RejectSuccess = "Từ chối thành công";
         public static string RejectFailed = "Từ chối thất bại";
+
+        public static string FileNotFound = "Không tìm thấy file";
     }
 }
