@@ -184,6 +184,7 @@ namespace ThesisManagement.ViewModels
         {
             var vm = new TaskProgressVM();
             vm.TaskId = id;
+            vm.UpdateAt = DateTime.Now;
             TaskProgress lastestTaskProgress = _taskProgressRepo.GetLastestTaskProgress(id);
             if (lastestTaskProgress == null)
             {

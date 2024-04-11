@@ -84,6 +84,17 @@ namespace ThesisManagement.ViewModels
             }
         }
 
+        private DateTime updateAt;
+        public DateTime UpdateAt
+        {
+            get { return updateAt; }
+            set
+            {
+                updateAt = value;
+                OnPropertyChanged(nameof(UpdateAt));
+            }
+        }
+
         private string response;
         public string Response
         {
@@ -224,7 +235,7 @@ namespace ThesisManagement.ViewModels
             selectedTaskProgress.Progress = progress;
             selectedTaskProgress.Description = description;
             selectedTaskProgress.Response = response;
-            selectedTaskProgress.UpdateAt = DateTime.Now;
+            selectedTaskProgress.UpdateAt = UpdateAt;
         }
 
         public void UpdateLastestTaskProgress()
@@ -235,6 +246,7 @@ namespace ThesisManagement.ViewModels
             progress = selectedTaskProgress.Progress;
             description = selectedTaskProgress.Description;
             response = selectedTaskProgress.Response;
+            updateAt = selectedTaskProgress.UpdateAt;
         }
 
 

@@ -9,7 +9,7 @@
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
          xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
         xmlns:hc="https://handyorg.github.io/handycontrol"
-         Title="TopicView" Height="620" Width="600"
+         Title="TopicView" Height="700" Width="600"
          WindowStartupLocation="CenterScreen"
          Style="{StaticResource formStyle}">
     <Window.DataContext>
@@ -24,6 +24,7 @@
                 <RowDefinition Height="70" />
                 <RowDefinition Height="130" />
                 <RowDefinition Height="100" />
+                <RowDefinition Height="70" />
                 <RowDefinition Height="130" />
                 <RowDefinition Height="30" />
             </Grid.RowDefinitions>
@@ -102,6 +103,8 @@
                                      MinHeight="60">
                             </ListBox>
                         </ScrollViewer>
+                        
+                        
 
                         <customControls:ControlButton DefaultColor="{StaticResource info}"
                                                       HoverColor="{StaticResource infoHover}"
@@ -117,8 +120,19 @@
                     </Grid>
                 </StackPanel>
             </Border>
-            
+
             <Border Grid.Row="6" Padding="30 0">
+                <StackPanel>
+                    <TextBlock Text="Thời gian cập nhật" Style="{StaticResource label}" />
+                    <TextBox Grid.Row="2"
+                             IsReadOnly="True"
+                             Height="35"
+                             VerticalAlignment="Top"
+                             Text="{Binding UpdateAt, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat='HH:mm dd-MM-yyyy'}"/>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Row="7" Padding="30 0">
                 <StackPanel>
                     <TextBlock Text="Phản hồi" Style="{StaticResource label}" />
                     <TextBox Grid.Row="3"
@@ -133,7 +147,7 @@
             </Border>
             
             <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
-                                          Grid.Row="7"
+                                          Grid.Row="8"
                                             HoverColor="{StaticResource secondaryBrush}"
                                             Content="OK"
                                             Width="200"
