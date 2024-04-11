@@ -94,6 +94,15 @@ namespace ThesisManagement.ViewModels
             }
         }
 
+        private DateTime updateAt;
+
+        public DateTime UpdateAt
+        {
+            get { return updateAt; }
+            set { updateAt = value; OnPropertyChanged(nameof(UpdateAt)); }
+        }
+
+
         private TaskProgress selectedTaskProgress;
         public TaskProgress SelectedTaskProgress
         {
@@ -288,7 +297,7 @@ namespace ThesisManagement.ViewModels
 
         public void ExecuteTestDownload(object obj)
         {
-            string filePath = Path.Combine(appDirectory, "22133010Bài tập thiết kế CSDL.pdf");
+            string filePath = Path.Combine(appDirectory, "2324.jpg");
             if (File.Exists(filePath))
             {
                 try

@@ -37,14 +37,30 @@
                         HorizontalAlignment="Center" />
 
             <Border Grid.Row="2" Padding="30 0">
-                <StackPanel>
-                    <TextBlock Text="Sinh viên" Style="{StaticResource label}" />
-                    <TextBox Grid.Row="2"
-                             IsReadOnly="True"
-                             Height="35"
-                             VerticalAlignment="Top"
-                             Text="{Binding Student.Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
-                </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <StackPanel Grid.Column="0" Margin="0 0 10 0">
+                        <TextBlock Text="Sinh viên" Style="{StaticResource label}" />
+                        <TextBox Grid.Row="2"
+                                 IsReadOnly="True"
+                                 Height="35"
+                                 VerticalAlignment="Top"
+                                 Text="{Binding Student.Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Margin="10 0 0 0">
+                        <TextBlock Text="Thời gian" Style="{StaticResource label}" />
+                        <TextBox Grid.Row="2"
+                                 IsReadOnly="True"
+                                 Height="35"
+                                 VerticalAlignment="Top"
+                                 Text="{Binding UpdateAt, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>                    
+                </Grid>
             </Border>
 
             <Border Grid.Row="3" Padding="30 0">
