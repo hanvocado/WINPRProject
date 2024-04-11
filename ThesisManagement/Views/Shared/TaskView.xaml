@@ -47,12 +47,12 @@
                 <StackPanel>
                     <TextBlock Text="Mô tả" Style="{StaticResource label}" />
                     <TextBox Grid.Row="3"
-                     VerticalAlignment="Top"
-                     Height="90"
-                     Text="{Binding Description}" 
-                     AcceptsReturn="True"
-                     TextWrapping="Wrap"
-                     VerticalScrollBarVisibility="Auto"/>
+                             VerticalAlignment="Top"
+                             Height="90"
+                             Text="{Binding Description}" 
+                             AcceptsReturn="True"
+                             TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"/>
                 </StackPanel>
             </Border>
 
@@ -100,12 +100,12 @@
 
             <Grid Grid.Row="5" >
                 <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
-                  HoverColor="{StaticResource secondaryBrush}"
-                  Content="Lưu"
-                  Width="200"
-                  FontSize="14"
-                  Command="{Binding CreateOrUpdateCommand}"
-                  CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+                                              HoverColor="{StaticResource secondaryBrush}"
+                                              Content="Lưu"
+                                              Width="200"
+                                              FontSize="14"
+                                              Command="{Binding CreateOrUpdateCommand}"
+                                              CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
             </Grid>
         </Grid>
     </Border>

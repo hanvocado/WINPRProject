@@ -2,9 +2,13 @@
 using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using ThesisManagement.CustomControls;
+using ThesisManagement.Helpers;
+using ThesisManagement.Repositories;
 using ThesisManagement.Views.Shared;
 
 namespace ThesisManagement.ViewModels
@@ -72,6 +76,26 @@ namespace ThesisManagement.ViewModels
         {
             MessageBoxResult result = MessageBox.Show("Bạn chắc chắn muốn xóa?", "Xác nhận", MessageBoxButton.YesNo);
             return result;
+        }
+
+        public void StartProcess(string fileName)
+        {
+            string filePath = Path.Combine(SessionInfo.BinDirectory, fileName);
+            if (File.Exists(filePath))
+            {
+                try
+                {
+                    Process.Start(new ProcessStartInfo { FileName = filePath, UseShellExecute = true });
+                }
+                catch (Exception ex)
+                {
+                    ShowMessage(false, null, ex.Message);
+                }
+            }
+            else
+            {
+                ShowMessage(false, null, Message.FileNotFound);
+            }
         }
     }
 }

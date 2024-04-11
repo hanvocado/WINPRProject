@@ -402,6 +402,8 @@ namespace ThesisManagement.ViewModels
 
         private bool CanCreateOrUpdateTopic(object obj)
         {
+            if (SessionInfo.Role == Role.Professor)
+                return SessionInfo.UserId == professorId;
             return true;
         }
 

@@ -106,7 +106,15 @@ namespace ThesisManagement.ViewModels
         public Task? SelectedTask
         {
             get { return selectedTask; }
-            set { selectedTask = value; OnPropertyChanged(nameof(SelectedTask)); }
+            set
+            {
+                selectedTask = value;
+                OnPropertyChanged(nameof(SelectedTask));
+                if (value != null)
+                {
+                    ShowSelectedTaskView();
+                }
+            }
         }
 
         private IEnumerable<Task> pendingTasks;
@@ -164,7 +172,7 @@ namespace ThesisManagement.ViewModels
         public ViewModelCommand UpdateTaskCommand { get; set; }
         public ViewModelCommand DeleteTaskCommand { get; set; }
         public ViewModelCommand CreateOrUpdateCommand { get; set; }
-        public ViewModelCommand ShowUpdateProgressCommand { get; set; }
+        public ViewModelCommand ShowTaskProgressHistory { get; set; }
 
         public TasksVM()
         {
@@ -177,29 +185,19 @@ namespace ThesisManagement.ViewModels
             UpdateTaskCommand = new ViewModelCommand(ExecuteUpdateTaskCommand);
             DeleteTaskCommand = new ViewModelCommand(ExecuteDeleteTaskCommand, CanExecuteDeleteTask);
             CreateOrUpdateCommand = new ViewModelCommand(ExecuteCreateOrUpdateCommand);
-            ShowUpdateProgressCommand = new ViewModelCommand(ExecuteShowUpdateProgressCommand);
+            ShowTaskProgressHistory = new ViewModelCommand(ExecuteShowTaskHistory);
         }
 
-        private void ExecuteShowUpdateProgressCommand(object obj)
+        private void ExecuteShowTaskHistory(object obj)
         {
-            var vm = new TaskProgressVM();
-            vm.TaskId = id;
-            vm.UpdateAt = DateTime.Now;
-            TaskProgress lastestTaskProgress = _taskProgressRepo.GetLastestTaskProgress(id);
-            if (lastestTaskProgress == null)
+            TasksView? parentTasksView = obj as TasksView;
+            var viewModel = new TaskProgressHistoryVM
             {
-                if (SessionInfo.Role == Role.Student)
-                {
-                    vm.Student = _studentRepo.GetStudent(SessionInfo.UserId);
-                }
-            }
-            else
-            {
-                vm.SelectedTaskProgress = lastestTaskProgress;
-                vm.UpdateLastestTaskProgress();
-            }
-            var updateView = new UpdateTaskProgressView { DataContext = vm };
-            updateView.Show();
+                ParentTasksView = parentTasksView,
+                TaskId = id
+            };
+            var view = new TaskProgressHistoryView { DataContext = viewModel };
+            view.Show();
         }
 
         private bool CanExecuteCreateTask(object obj)
@@ -262,6 +260,23 @@ namespace ThesisManagement.ViewModels
             ResetTaskProperties();
             var taskView = new TaskView { DataContext = this };
             taskView.Show();
+        }
+
+        private void ShowSelectedTaskView()
+        {
+            TaskView taskView = new TaskView();
+
+            Id = selectedTask.Id;
+            ThesisId = selectedTask.ThesisId;
+            Name = selectedTask.Name;
+            Description = selectedTask.Description;
+            Start = selectedTask.Start;
+            End = selectedTask.End;
+            Progress = selectedTask.Progress;
+
+            taskView.DataContext = this;
+            taskView.Show();
+            SelectedTask = null;
         }
 
         public void Reload()

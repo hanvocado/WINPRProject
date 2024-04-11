@@ -1,5 +1,4 @@
 using Microsoft.Win32;
-using System.Diagnostics;
 using System.IO;
 using System.Windows.Input;
 using ThesisManagement.Helpers;
@@ -73,28 +72,6 @@ namespace ThesisManagement.ViewModels
             }
         }
 
-        private string progressFileName;
-        public string ProgressFileName
-        {
-            get { return progressFileName; }
-            set
-            {
-                progressFileName = value;
-                OnPropertyChanged(nameof(ProgressFileName));
-            }
-        }
-
-        private DateTime updateAt;
-        public DateTime UpdateAt
-        {
-            get { return updateAt; }
-            set
-            {
-                updateAt = value;
-                OnPropertyChanged(nameof(UpdateAt));
-            }
-        }
-
         private string response;
         public string Response
         {
@@ -105,6 +82,15 @@ namespace ThesisManagement.ViewModels
                 OnPropertyChanged(nameof(Response));
             }
         }
+
+        private DateTime? updateAt;
+
+        public DateTime? UpdateAt
+        {
+            get { return updateAt; }
+            set { updateAt = value; OnPropertyChanged(nameof(UpdateAt)); }
+        }
+
 
         private TaskProgress selectedTaskProgress;
         public TaskProgress SelectedTaskProgress
@@ -129,19 +115,33 @@ namespace ThesisManagement.ViewModels
             }
         }
 
-        private string attachedFile;
-        public string AttachedFile
+        private Attachment selectedFile;
+
+        public Attachment SelectedFile
         {
-            get { return attachedFile; }
+            get { return selectedFile; }
             set
             {
-                attachedFile = value;
-                OnPropertyChanged(nameof(AttachedFile));
+                if (value != null)
+                {
+                    selectedFile = value;
+                    OnPropertyChanged(nameof(SelectedFile));
+                    StartProcess(selectedFile.FileName);
+                }
             }
         }
 
-        private IEnumerable<Attachment> attachments;
-        public IEnumerable<Attachment> Attachments
+        private TasksView parentTasksView;
+
+        public TasksView ParentTasksView
+        {
+            get { return parentTasksView; }
+            set { parentTasksView = value; }
+        }
+
+
+        private List<Attachment> attachments;
+        public List<Attachment> Attachments
         {
             get { return attachments; }
             set
@@ -153,7 +153,6 @@ namespace ThesisManagement.ViewModels
 
         public ICommand UpdateTaskProgressCommand { get; set; }
         public ICommand UploadAttachmentCommand { get; set; }
-        public ICommand TestDownloadFile { get; set; }
 
         public TaskProgressVM()
         {
@@ -167,7 +166,6 @@ namespace ThesisManagement.ViewModels
             attachment = new Attachment();
 
             UpdateTaskProgressCommand = new ViewModelCommand(ExecuteUpdateTaskProgressCommand);
-            TestDownloadFile = new ViewModelCommand(ExecuteTestDownload);
             UploadAttachmentCommand = new ViewModelCommand(ExecuteUploadAttachmentCommand);
         }
 
@@ -178,7 +176,7 @@ namespace ThesisManagement.ViewModels
             {
                 //Uploaded attachment name
                 string attachmentName = openFileDialog.FileName;
-                userAttachmentName = SessionInfo.UserId + Path.GetFileName(attachmentName);
+                userAttachmentName = DateTime.Now.ToString("ddMMyyyyhhmmss") + Path.GetFileName(attachmentName);
 
                 //Storage attachment name
                 destinationPath = Path.Combine(appDirectory, userAttachmentName);
@@ -188,7 +186,7 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteUpdateTaskProgressCommand(object obj)
         {
-            UpdateTaskProgressView taskProgressView = obj as UpdateTaskProgressView;
+            UpdateTaskProgressView? taskProgressView = obj as UpdateTaskProgressView;
             UpdateSelectedTaskProgressProperties();
             if (SessionInfo.Role == Role.Student)
             {
@@ -215,6 +213,7 @@ namespace ThesisManagement.ViewModels
                 taskVM.Thesis = _thesisRepo.GetThesis(selectedTaskProgress.TaskId);
                 taskVM.Reload();
             }
+            ((TasksVM)parentTasksView.DataContext).Reload();
             taskProgressView?.Close();
         }
 
@@ -222,9 +221,8 @@ namespace ThesisManagement.ViewModels
         {
             //Update database
             attachment.FileName = userAttachmentName;
-            attachment.TaskProgressId = selectedTaskProgress.Id ;
+            attachment.TaskProgressId = selectedTaskProgress.Id;
             var success = _attachmentRepo.Add(attachment);
-            ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
         }
 
         private void UpdateSelectedTaskProgressProperties()
@@ -235,7 +233,7 @@ namespace ThesisManagement.ViewModels
             selectedTaskProgress.Progress = progress;
             selectedTaskProgress.Description = description;
             selectedTaskProgress.Response = response;
-            selectedTaskProgress.UpdateAt = UpdateAt;
+            selectedTaskProgress.UpdateAt = DateTime.Now;
         }
 
         public void UpdateLastestTaskProgress()
@@ -247,47 +245,6 @@ namespace ThesisManagement.ViewModels
             description = selectedTaskProgress.Description;
             response = selectedTaskProgress.Response;
             updateAt = selectedTaskProgress.UpdateAt;
-        }
-
-
-        private void StartDownload(Attachment selectedFile)
-        {
-            string filePath = Path.Combine(appDirectory, selectedFile.FileName);
-            if (File.Exists(filePath))
-            {
-                try
-                {
-                    Process.Start(filePath);
-                }
-                catch (Exception ex)
-                {
-                    ShowMessage(false, null, ex.Message);
-                }
-            }
-            else
-            {
-                ShowMessage(false, null, Message.FileNotFound);
-            }
-        }
-
-        public void ExecuteTestDownload(object obj)
-        {
-            string filePath = Path.Combine(appDirectory, "22133010Bài tập thiết kế CSDL.pdf");
-            if (File.Exists(filePath))
-            {
-                try
-                {
-                    Process.Start(new ProcessStartInfo { FileName = filePath, UseShellExecute = true });
-                }
-                catch (Exception ex)
-                {
-                    ShowMessage(false, null, ex.Message);
-                }
-            }
-            else
-            {
-                ShowMessage(false, null, Message.FileNotFound);
-            }
         }
     }
 }

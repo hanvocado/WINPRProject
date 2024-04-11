@@ -44,7 +44,7 @@
                     
                     <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Top">
                         <Image Source="/Resources/Images/UTE.png" Height="50" Width="50" Margin="20 0 20 0" />
-                        <TextBlock Style="{StaticResource title}" >
+                        <TextBlock Style="{StaticResource title}" Width="500" >
                         <Run Text="Đề tài: "/>
                         <Run Text="{Binding SelectedTopic.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </TextBlock>

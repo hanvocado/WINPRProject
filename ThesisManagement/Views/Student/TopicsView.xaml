@@ -106,6 +106,7 @@
                                             <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight">
                                                 <TextBlock Style="{StaticResource topicTitle}"
                                                            TextWrapping="Wrap"
+                                                           MinWidth="780"
                                                            Text="{Binding Name}" />
                                                 <sf:SfBadge Content="{Binding RegisteredStatusByCurrentUser}" Shape="Oval" Margin="10 -4 5 4"
                                                             Background="{StaticResource info}"

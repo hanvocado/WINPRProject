@@ -7,9 +7,6 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="CustomControls\BindablePasswordBox.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="CustomControls\PopupControlBar.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -61,6 +58,9 @@
     <Compile Update="Views\Shared\SelectTechnologies.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Shared\TaskProgressHistoryView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Shared\TasksView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -99,9 +99,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="CustomControls\BindablePasswordBox.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="CustomControls\PopupControlBar.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -169,6 +166,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Shared\SelectTechnologies.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Shared\TaskProgressHistoryView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Shared\TasksView.xaml">

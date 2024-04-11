@@ -10,57 +10,5 @@
             <Thumb x:Name="PART_HeaderGripper" HorizontalAlignment="Right" Margin="0" Width="1"/>
         </Grid>
     </ControlTemplate>
-
-    <Style x:Key="ListViewItemBaseStyle" TargetType="ListViewItem">
-        <Setter Property="Background" Value="LightGray" />
-        <Setter Property="BorderThickness" Value="0" />
-        <!--<Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />-->
-        <Setter Property="SnapsToDevicePixels" Value="true" />
-        <Setter Property="Margin" Value="0,0,0,4" />
-        <Setter Property="Padding" Value="5" />
-        <Setter Property="MinHeight" Value="44" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="ListViewItem">
-                    <Border CornerRadius="4" x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
-                        <GridViewRowPresenter Content="{TemplateBinding Content}" Columns="{TemplateBinding GridView.ColumnCollection}" />
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="true">
-                <Setter Property="Background" Value="{StaticResource DarkDefaultBrush}" />
-            </Trigger>
-            <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="{StaticResource PrimaryBrush}" />
-                <Setter Property="TextElement.Foreground" Value="{StaticResource TextIconBrush}" />
-            </Trigger>
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsSelected" Value="true" />
-                    <Condition Property="Selector.IsSelectionActive" Value="false" />
-                </MultiTrigger.Conditions>
-                <Setter Property="Background" Value="{StaticResource DarkDefaultBrush}" />
-                <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
-            </MultiTrigger>
-        </Style.Triggers>
-    </Style>
-
-    <!--<Style x:Key="lvItem" TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource ListViewItemBaseStyle}">
-        <Style.Resources>
-            <customControls:StringNullOrEmptyConverter x:Key="StringNullOrEmptyConverter" />
-        </Style.Resources>
-        <Style.Triggers>
-            <DataTrigger Binding="{Binding RegisteredByCurrentUser}" Value="True">
-                <Setter Property="IsSelected" Value="True" />
-            </DataTrigger>
-            <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="{StaticResource WarningBrush}" />
-                <Setter Property="Foreground" Value="White" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>-->
-
 </ResourceDictionary>
     

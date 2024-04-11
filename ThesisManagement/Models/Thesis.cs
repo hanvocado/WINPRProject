@@ -21,7 +21,7 @@ namespace ThesisManagement.Models
 
         public string? Evaluation { get; set; }
 
-        public string? NoUpdates { get; set; }
+        public int? NoUpdates { get; set; }
 
         [ForeignKey(nameof(TopicId))]
         public Topic Topic { get; set; }

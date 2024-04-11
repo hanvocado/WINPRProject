@@ -25,6 +25,7 @@ namespace ThesisManagement.Models
 
         public ICollection<TaskProgress>? TaskProgresses { get; set; }
 
+        //public int WaitingForResponse { get; set; }
 
         [NotMapped]
         public string? UpdateCount
@@ -43,7 +44,9 @@ namespace ThesisManagement.Models
                         return count.ToString() + "+";
                 }
 
-                return count.ToString();
+                if (count > 0)
+                    return count.ToString();
+                return null;
             }
         }
     }

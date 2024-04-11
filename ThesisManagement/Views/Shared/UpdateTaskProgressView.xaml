@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ThesisManagement.Views.Shared"
         xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
-         mc:Ignorable="d"
+        mc:Ignorable="d"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-         xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
+        xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
         xmlns:hc="https://handyorg.github.io/handycontrol"
-         Title="TopicView" Height="700" Width="600"
+         Title="TopicView" Height="620" Width="600"
          WindowStartupLocation="CenterScreen"
          Style="{StaticResource formStyle}">
     <Window.DataContext>
@@ -24,7 +24,6 @@
                 <RowDefinition Height="70" />
                 <RowDefinition Height="130" />
                 <RowDefinition Height="100" />
-                <RowDefinition Height="70" />
                 <RowDefinition Height="130" />
                 <RowDefinition Height="30" />
             </Grid.RowDefinitions>
@@ -38,14 +37,30 @@
                         HorizontalAlignment="Center" />
 
             <Border Grid.Row="2" Padding="30 0">
-                <StackPanel>
-                    <TextBlock Text="Sinh viên" Style="{StaticResource label}" />
-                    <TextBox Grid.Row="2"
-                             IsReadOnly="True"
-                             Height="35"
-                             VerticalAlignment="Top"
-                             Text="{Binding Student.Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
-                </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <StackPanel Grid.Column="0" Margin="0 0 10 0">
+                        <TextBlock Text="Sinh viên" Style="{StaticResource label}" />
+                        <TextBox Grid.Row="2"
+                                 IsReadOnly="True"
+                                 Height="35"
+                                 VerticalAlignment="Top"
+                                 Text="{Binding Student.Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Margin="10 0 0 0">
+                        <TextBlock Text="Thời gian" Style="{StaticResource label}" />
+                        <TextBox Grid.Row="2"
+                                 IsReadOnly="True"
+                                 Height="35"
+                                 VerticalAlignment="Top"
+                                 Text="{Binding UpdateAt, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat='HH:mm dd-MM-yyyy'}" />
+                    </StackPanel>                    
+                </Grid>
             </Border>
 
             <Border Grid.Row="3" Padding="30 0">
@@ -76,7 +91,7 @@
                              VerticalScrollBarVisibility="Auto"/>
                 </StackPanel>
             </Border>
-            
+
             <Border Grid.Row="5" Padding="30 0">
                 <StackPanel>
                     <TextBlock Text="Đính kèm" Style="{StaticResource label}" />
@@ -84,27 +99,17 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="4*" />
                             <ColumnDefinition Width="*" MaxWidth="50" />
-                            <ColumnDefinition Width="*" MaxWidth="50" />
                         </Grid.ColumnDefinitions>
-
-                        <!--<TextBlock Grid.Row="3"
-                                   Margin="0 0 20 0"
-                                 Height="30"
-                                 Text="{Binding ProgressFileName}" 
-                                 TextWrapping="Wrap" />-->
-
 
                         <ScrollViewer VerticalScrollBarVisibility="Auto">
                             <ListBox ItemsSource="{Binding Attachments}"
                                      x:Name="AttachmentsListBox"
                                      Margin="0 0 10 0"
                                      SelectedItem="{Binding SelectedFile}"
-                                     DisplayMemberPath="FileName"
+                                     DisplayMemberPath="OriginalFileName"
                                      MinHeight="60">
                             </ListBox>
                         </ScrollViewer>
-                        
-                        
 
                         <customControls:ControlButton DefaultColor="{StaticResource info}"
                                                       HoverColor="{StaticResource infoHover}"
@@ -116,28 +121,14 @@
                             </customControls:ControlButton.Content>
                         </customControls:ControlButton>
 
-                        <Button Command="{Binding TestDownloadFile}" Grid.Column="2" Background="blue" />
                     </Grid>
                 </StackPanel>
             </Border>
 
             <Border Grid.Row="6" Padding="30 0">
                 <StackPanel>
-                    <TextBlock Text="Thời gian cập nhật" Style="{StaticResource label}" />
-                    <TextBox Grid.Row="2"
-                             IsReadOnly="True"
-                             Height="35"
-                             VerticalAlignment="Top"
-                             Text="{Binding UpdateAt, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat='HH:mm dd-MM-yyyy'}"/>
-                </StackPanel>
-            </Border>
-
-            <Border Grid.Row="7" Padding="30 0">
-                <StackPanel>
                     <TextBlock Text="Phản hồi" Style="{StaticResource label}" />
-                    <TextBox Grid.Row="3"
-                             VerticalAlignment="Top"
-                             Height="90"
+                    <TextBox Height="90"
                              IsReadOnly="{Binding IsStudent}"
                              Text="{Binding Response}" 
                              AcceptsReturn="True"
@@ -147,7 +138,7 @@
             </Border>
             
             <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
-                                          Grid.Row="8"
+                                          Grid.Row="7"
                                             HoverColor="{StaticResource secondaryBrush}"
                                             Content="OK"
                                             Width="200"

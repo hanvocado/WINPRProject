@@ -130,7 +130,11 @@ namespace ThesisManagement.Repositories
 
         public Task GetTask(int id)
         {
-            var task = _context.Tasks.FirstOrDefault(t => t.Id == id);
+            var task = _context.Tasks.Include(t => t.TaskProgresses)
+                                    .ThenInclude(p => p.Student)
+                                    .Include(t => t.TaskProgresses)
+                                    .ThenInclude(p => p.Attachments)
+                                    .FirstOrDefault(t => t.Id == id);
             return task;
         }
     }

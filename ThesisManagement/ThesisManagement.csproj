@@ -68,12 +68,7 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="Resources\Syncfusion.SfGrid.WPF.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
+    <Folder Include="Resources\Converters\" />
   </ItemGroup>
 
 </Project>

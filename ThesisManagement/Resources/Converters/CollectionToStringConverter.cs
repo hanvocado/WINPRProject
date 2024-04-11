@@ -10,7 +10,7 @@ using System.Windows.Data;
 using ThesisManagement.Models;
 using ThesisManagement.ViewModels;
 
-namespace ThesisManagement.CustomControls
+namespace ThesisManagement.Resources.Converters
 {
     class CollectionToStringConverter : IValueConverter
     {

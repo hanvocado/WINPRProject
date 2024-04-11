@@ -80,8 +80,9 @@
                                     <Border Padding="5 10">
                                         <StackPanel>
                                             <TextBlock Style="{StaticResource topicTitle}"
-                                                        TextWrapping="Wrap"
-                                                        Text="{Binding Name}" />
+                                                       TextWrapping="Wrap"
+                                                       MinWidth="780"
+                                                       Text="{Binding Name}" />
                                             <Border Margin="0 5">
                                                 <TextBlock Foreground="#757575" FontWeight="Medium">
                                                             <Run Text="GVHD: " />
@@ -94,10 +95,12 @@
                                                     <ColumnDefinition Width="*" />
                                                 </Grid.ColumnDefinitions>
                                                 <StackPanel Orientation="Horizontal" Grid.Column="0">
-                                                    <Border Background="White" CornerRadius="4" Padding="10 3" BorderBrush="{StaticResource info}" BorderThickness="1">
-                                                        <TextBlock Text="{Binding Category}" Foreground="{StaticResource info}"/>
+                                                    <Border CornerRadius="8" Padding="10 3" 
+                                                            Background="#befefa"
+                                                            BorderThickness="1">
+                                                        <TextBlock Text="{Binding Category}" Foreground="{StaticResource info}" />
                                                     </Border>
-                                                    <Border Background="White" CornerRadius="4" Padding="10 3" BorderBrush="{StaticResource info}" BorderThickness="1" Margin="5 0">
+                                                    <Border Background="White" CornerRadius="8" Padding="10 3" BorderBrush="{StaticResource info}" BorderThickness="1" Margin="5 0">
                                                         <TextBlock Text="{Binding Technology}" Foreground="{StaticResource info}"/>
                                                     </Border>
                                                 </StackPanel>

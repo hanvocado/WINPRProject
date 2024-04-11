@@ -26,7 +26,8 @@
 
     <Style TargetType="{x:Type customControls:ControlButton}">
         <Setter Property="Background" Value="{Binding DefaultColor, RelativeSource={RelativeSource Self}}"/>
-        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontWeight" Value="Medium"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Foreground" Value="{StaticResource plainTextColor}"/>
         <Setter Property="Template">
