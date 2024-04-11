@@ -11,6 +11,8 @@ namespace ThesisManagement.ViewModels
     public class TasksVM : ViewModelBase
     {
         private readonly ITaskRepository _taskRepo;
+        private readonly IStudentRepository _studentRepo;
+        private readonly ITaskProgressRepository _taskProgressRepo;
 
         private Thesis thesis;
         public Thesis Thesis
@@ -164,7 +166,10 @@ namespace ThesisManagement.ViewModels
         public TasksVM()
         {
             _taskRepo = new TaskRepository();
+            _studentRepo = new StudentRepository();
+            _taskProgressRepo = new TaskProgressRepository();
             Thesis = new Thesis();
+
             CreateTaskCommand = new ViewModelCommand(ExecuteCreateTaskCommand, CanExecuteCreateTask);
             UpdateTaskCommand = new ViewModelCommand(ExecuteUpdateTaskCommand);
             DeleteTaskCommand = new ViewModelCommand(ExecuteDeleteTaskCommand, CanExecuteDeleteTask);
@@ -176,6 +181,19 @@ namespace ThesisManagement.ViewModels
         {
             var vm = new TaskProgressVM();
             vm.TaskId = id;
+            TaskProgress lastestTaskProgress = _taskProgressRepo.GetLastestTaskProgress(id);
+            if (lastestTaskProgress == null)
+            {
+                if (SessionInfo.Role == Role.Student)
+                {
+                    vm.Student = _studentRepo.GetStudent(SessionInfo.UserId);
+                }
+            }
+            else
+            {
+                vm.SelectedTaskProgress = lastestTaskProgress;
+                vm.UpdateLastestTaskProgress();
+            }
             var updateView = new UpdateTaskProgressView { DataContext = vm };
             updateView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             updateView.Show();
