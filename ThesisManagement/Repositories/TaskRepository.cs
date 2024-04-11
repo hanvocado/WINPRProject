@@ -13,6 +13,7 @@ namespace ThesisManagement.Repositories
         bool Update(Task task);
         bool Delete(int id);
         ObservableCollection<Task> GetAll();
+        Task GetTask(int id);
         IEnumerable<Task> Get(int thesisId);
         IEnumerable<Task> GetPendingTasks(int thesisId);
         IEnumerable<Task> GetDoneTasks(int thesisId);
@@ -125,6 +126,12 @@ namespace ThesisManagement.Repositories
                 };
             }
             return data;
+        }
+
+        public Task GetTask(int id)
+        {
+            var task = _context.Tasks.FirstOrDefault(t => t.Id == id);
+            return task;
         }
     }
 }

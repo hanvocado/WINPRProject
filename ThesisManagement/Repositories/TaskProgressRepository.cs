@@ -17,6 +17,7 @@ namespace ThesisManagement.Repositories
         bool Update(TaskProgress taskProgress);
         bool Delete(int id);
         ObservableCollection<TaskProgress> GetAll();
+        TaskProgress GetLastestTaskProgress(int taskId);
     }
 
     public class TaskProgressRepository : ITaskProgressRepository
@@ -65,6 +66,16 @@ namespace ThesisManagement.Repositories
         {
             var taskProgresses = _context.TaskProgresses.Include(t => t.Task).AsNoTracking().ToList();
             return new ObservableCollection<TaskProgress>(taskProgresses);
+        }
+
+        public TaskProgress GetLastestTaskProgress(int taskId)
+        {
+            var lastestTaskProgress = _context.TaskProgresses.Include(t => t.Task)
+                                                             .Where(tp => tp.TaskId == taskId)
+                                                             .AsNoTracking()
+                                                             .OrderByDescending(tp => tp.Id)
+                                                             .FirstOrDefault();
+            return lastestTaskProgress;
         }
     }
 }
