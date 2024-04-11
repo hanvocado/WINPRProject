@@ -107,7 +107,7 @@
                                      x:Name="AttachmentsListBox"
                                      Margin="0 0 10 0"
                                      SelectedItem="{Binding SelectedFile}"
-                                     DisplayMemberPath="FileName"
+                                     DisplayMemberPath="OriginalFileName"
                                      MinHeight="60">
                             </ListBox>
                         </ScrollViewer>

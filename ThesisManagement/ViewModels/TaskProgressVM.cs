@@ -116,6 +116,23 @@ namespace ThesisManagement.ViewModels
             }
         }
 
+        private Attachment selectedFile;
+
+        public Attachment SelectedFile
+        {
+            get { return selectedFile; }
+            set
+            {
+                if (value != null)
+                {
+                    selectedFile = value;
+                    OnPropertyChanged(nameof(SelectedFile));
+                    StartProcess(selectedFile);
+                }
+            }
+        }
+
+
         private List<Attachment> attachments;
         public List<Attachment> Attachments
         {
@@ -129,7 +146,6 @@ namespace ThesisManagement.ViewModels
 
         public ICommand UpdateTaskProgressCommand { get; set; }
         public ICommand UploadAttachmentCommand { get; set; }
-        public ICommand TestDownloadFile { get; set; }
 
         public TaskProgressVM()
         {
@@ -143,7 +159,6 @@ namespace ThesisManagement.ViewModels
             attachment = new Attachment();
 
             UpdateTaskProgressCommand = new ViewModelCommand(ExecuteUpdateTaskProgressCommand);
-            TestDownloadFile = new ViewModelCommand(ExecuteTestDownload);
             UploadAttachmentCommand = new ViewModelCommand(ExecuteUploadAttachmentCommand);
         }
 
@@ -164,7 +179,7 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteUpdateTaskProgressCommand(object obj)
         {
-            UpdateTaskProgressView taskProgressView = obj as UpdateTaskProgressView;
+            UpdateTaskProgressView? taskProgressView = obj as UpdateTaskProgressView;
             UpdateSelectedTaskProgressProperties();
             if (SessionInfo.Role == Role.Student)
             {
@@ -225,29 +240,9 @@ namespace ThesisManagement.ViewModels
         }
 
 
-        private void StartDownload(Attachment selectedFile)
+        private void StartProcess(Attachment selectedFile)
         {
             string filePath = Path.Combine(appDirectory, selectedFile.FileName);
-            if (File.Exists(filePath))
-            {
-                try
-                {
-                    Process.Start(filePath);
-                }
-                catch (Exception ex)
-                {
-                    ShowMessage(false, null, ex.Message);
-                }
-            }
-            else
-            {
-                ShowMessage(false, null, Message.FileNotFound);
-            }
-        }
-
-        public void ExecuteTestDownload(object obj)
-        {
-            string filePath = Path.Combine(appDirectory, "2324.jpg");
             if (File.Exists(filePath))
             {
                 try
