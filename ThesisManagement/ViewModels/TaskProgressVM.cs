@@ -20,6 +20,7 @@ namespace ThesisManagement.ViewModels
         private Attachment attachment;
         public string appDirectory;
         public string destinationPath;
+        public string userAttachmentName;
 
         private int taskId;
         public int TaskId
@@ -111,7 +112,7 @@ namespace ThesisManagement.ViewModels
             {
                 selectedTaskProgress = value;
                 OnPropertyChanged(nameof(SelectedTaskProgress));
-                LoadTaskProgress();
+                Attachments = _attachmentRepo.GetAttachments(selectedTaskProgress.Id);
             }
         }
 
@@ -123,20 +124,6 @@ namespace ThesisManagement.ViewModels
                     return true;
                 else
                     return false;
-            }
-        }
-
-        private Stream docStream;
-        public Stream DocumentStream
-        {
-            get
-            {
-                return docStream;
-            }
-            set
-            {
-                docStream = value;
-                OnPropertyChanged(nameof(DocumentStream));
             }
         }
 
@@ -182,23 +169,6 @@ namespace ThesisManagement.ViewModels
             UploadAttachmentCommand = new ViewModelCommand(ExecuteUploadAttachmentCommand);
         }
 
-        private void LoadTaskProgress()
-        {
-            //Attachments = _attachmentRepo.GetAttachments(selectedTaskProgress.Id);
-
-            //if (selectedTaskProgress != null && !string.IsNullOrEmpty(selectedTaskProgress.Attachments))
-            //{
-            //    //Update professor evaluation
-            //    Evaluation = thesis.Evaluation;
-            //    Score = thesis.Score;
-
-            //    //Current file path
-
-            //    var attachmentPath = Path.Combine(appDirectory, attachment.AttachedFile);
-            //    docStream = new FileStream(attachmentPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
-            //}
-        }
-
         private void ExecuteUploadAttachmentCommand(object obj)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -206,18 +176,11 @@ namespace ThesisManagement.ViewModels
             {
                 //Uploaded attachment name
                 string attachmentName = openFileDialog.FileName;
-                string userAttachmentName = SessionInfo.UserId + Path.GetFileName(attachmentName);
+                userAttachmentName = SessionInfo.UserId + Path.GetFileName(attachmentName);
 
                 //Storage attachment name
                 destinationPath = Path.Combine(appDirectory, userAttachmentName);
                 File.Copy(attachmentName, destinationPath, true);
-                DocumentStream = new FileStream(destinationPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
-
-                //Update database
-                attachment.FileName = userAttachmentName;
-                attachment.TaskProgressId = selectedTaskProgress.Id;
-                var success = _attachmentRepo.Add(attachment);
-                ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
             }
         }
 
@@ -237,6 +200,7 @@ namespace ThesisManagement.ViewModels
                     var success = _taskProgressRepo.Update(selectedTaskProgress);
                     ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
                 }
+                UpdateAttachment();
             }
             else if (SessionInfo.Role == Role.Professor)
             {
@@ -245,12 +209,20 @@ namespace ThesisManagement.ViewModels
                 acceptedTask.Progress = progress;
                 var updateTask = _taskRepo.Update(acceptedTask);
                 ShowMessage(updateTaskProgress && updateTask, Message.UpdateSuccess, Message.UpdateFailed);
-
                 taskVM = new TasksVM();
                 taskVM.Thesis = _thesisRepo.GetThesis(selectedTaskProgress.TaskId);
                 taskVM.Reload();
             }
             taskProgressView?.Close();
+        }
+
+        public void UpdateAttachment()
+        {
+            //Update database
+            attachment.FileName = userAttachmentName;
+            attachment.TaskProgressId = selectedTaskProgress.Id ;
+            var success = _attachmentRepo.Add(attachment);
+            ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
         }
 
         private void UpdateSelectedTaskProgressProperties()
