@@ -66,7 +66,7 @@ namespace ThesisManagement.Repositories
         public IEnumerable<Attachment> GetAttachments(int taskProgressId)
         {
             var attachments = _context.Attachments.Include(tp => tp.TaskProgress)
-                                                             .Where(at => at.Id == taskProgressId)
+                                                             .Where(at => at.TaskProgressId == taskProgressId)
                                                              .AsNoTracking()
                                                              .ToList();
             return attachments;
