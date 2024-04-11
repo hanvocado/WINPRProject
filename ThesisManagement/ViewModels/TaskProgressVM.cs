@@ -5,8 +5,6 @@ using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
 using ThesisManagement.Views.Shared;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-using Task = ThesisManagement.Models.Task;
 
 namespace ThesisManagement.ViewModels
 {
@@ -135,16 +133,18 @@ namespace ThesisManagement.ViewModels
         }
 
         public ICommand UpdateTaskProgressCommand { get; set; }
+        public ICommand TestDownloadFile { get; set; }
 
         public TaskProgressVM()
         {
             _taskRepo = new TaskRepository();
             _studentRepo = new StudentRepository();
             _taskProgressRepo = new TaskProgressRepository();
-            appDirectory = Directory.GetCurrentDirectory();
+            appDirectory = Directory.GetParent(Environment.CurrentDirectory)!.Parent!.FullName;
             selectedTaskProgress = new TaskProgress();
 
             UpdateTaskProgressCommand = new ViewModelCommand(ExecuteUpdateTaskProgressCommand);
+            TestDownloadFile = new ViewModelCommand(ExecuteTestDownload);
         }
 
         private void ExecuteUpdateTaskProgressCommand(object obj)
@@ -153,7 +153,7 @@ namespace ThesisManagement.ViewModels
             UpdateSelectedTaskProgressProperties();
             if (SessionInfo.Role == Role.Student)
             {
-                if (id<=0)
+                if (id <= 0)
                 {
                     var success = _taskProgressRepo.Add(selectedTaskProgress);
                     ShowMessage(success, Message.AddSuccess, Message.AddFailed);
@@ -170,14 +170,14 @@ namespace ThesisManagement.ViewModels
                 {
                     var success = _taskProgressRepo.Update(selectedTaskProgress);
                     ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
-                }    
+                }
                 else
                 {
                     var acceptedTask = _taskRepo.GetTask(taskId);
                     acceptedTask.Progress = progress;
                     var success = _taskRepo.Update(acceptedTask);
                     ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
-                }    
+                }
             }
             taskProgressView?.Close();
         }
@@ -195,7 +195,7 @@ namespace ThesisManagement.ViewModels
 
         public void UpdateLastestTaskProgress()
         {
-            id = selectedTaskProgress.Id; 
+            id = selectedTaskProgress.Id;
             selectedTaskProgress.TaskId = taskId;
             Student = _studentRepo.GetStudent(selectedTaskProgress.StudentId);
             progress = selectedTaskProgress.Progress;
@@ -206,12 +206,32 @@ namespace ThesisManagement.ViewModels
 
         private void StartDownload(Attachment selectedFile)
         {
-            string filePath = Path.Combine(appDirectory, "UserFile", selectedFile.FileName);
+            string filePath = Path.Combine(appDirectory, selectedFile.FileName);
             if (File.Exists(filePath))
             {
                 try
                 {
                     Process.Start(filePath);
+                }
+                catch (Exception ex)
+                {
+                    ShowMessage(false, null, ex.Message);
+                }
+            }
+            else
+            {
+                ShowMessage(false, null, Message.FileNotFound);
+            }
+        }
+
+        public void ExecuteTestDownload(object obj)
+        {
+            string filePath = Path.Combine(appDirectory, "22133010Bài tập thiết kế CSDL.pdf");
+            if (File.Exists(filePath))
+            {
+                try
+                {
+                    Process.Start(new ProcessStartInfo { FileName = filePath, UseShellExecute = true });
                 }
                 catch (Exception ex)
                 {

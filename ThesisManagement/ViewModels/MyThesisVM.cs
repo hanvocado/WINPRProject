@@ -83,7 +83,7 @@ namespace ThesisManagement.ViewModels
             _professorRepo = new ProfessorRepository();
             _topicRepo = new TopicRepository();
             _studentRepo = new StudentRepository();
-            appDirectory = Directory.GetCurrentDirectory();
+            appDirectory = Directory.GetParent(Environment.CurrentDirectory)!.Parent!.FullName;
 
             if (SessionInfo.Role == Role.Student)
                 Thesis ??= _studentRepo.GetThesis(SessionInfo.UserId) ?? new Thesis();
@@ -99,13 +99,7 @@ namespace ThesisManagement.ViewModels
                 //Update professor evaluation
                 Evaluation = thesis.Evaluation;
                 Score = thesis.Score;
-
-                //Current file path
-                for (int i = 0; i < 3; i++)
-                {
-                    appDirectory = Directory.GetParent(appDirectory).FullName;
-                }
-                studentFilePath = Path.Combine(appDirectory, "UserFile", Thesis.File);
+                studentFilePath = Path.Combine(appDirectory, Thesis.File);
                 docStream = new FileStream(studentFilePath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
             }
         }
@@ -128,7 +122,7 @@ namespace ThesisManagement.ViewModels
                 string userFileName = SessionInfo.UserId + Path.GetFileName(fileName);
 
                 //Storage file name
-                destinationPath = Path.Combine(appDirectory, "UserFile", userFileName);
+                destinationPath = Path.Combine(appDirectory, userFileName);
                 File.Copy(fileName, destinationPath, true);
                 DocumentStream = new FileStream(destinationPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
 
