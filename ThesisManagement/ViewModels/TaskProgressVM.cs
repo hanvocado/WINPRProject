@@ -73,17 +73,6 @@ namespace ThesisManagement.ViewModels
             }
         }
 
-        private string progressFileName;
-        public string ProgressFileName
-        {
-            get { return progressFileName; }
-            set
-            {
-                progressFileName = value;
-                OnPropertyChanged(nameof(ProgressFileName));
-            }
-        }
-
         private string response;
         public string Response
         {
@@ -127,19 +116,8 @@ namespace ThesisManagement.ViewModels
             }
         }
 
-        private string attachedFile;
-        public string AttachedFile
-        {
-            get { return attachedFile; }
-            set
-            {
-                attachedFile = value;
-                OnPropertyChanged(nameof(AttachedFile));
-            }
-        }
-
-        private IEnumerable<Attachment> attachments;
-        public IEnumerable<Attachment> Attachments
+        private List<Attachment> attachments;
+        public List<Attachment> Attachments
         {
             get { return attachments; }
             set
@@ -176,7 +154,7 @@ namespace ThesisManagement.ViewModels
             {
                 //Uploaded attachment name
                 string attachmentName = openFileDialog.FileName;
-                userAttachmentName = SessionInfo.UserId + Path.GetFileName(attachmentName);
+                userAttachmentName = DateTime.Now.ToString("ddMMyyyyhhmmss") + Path.GetFileName(attachmentName);
 
                 //Storage attachment name
                 destinationPath = Path.Combine(appDirectory, userAttachmentName);
@@ -220,7 +198,7 @@ namespace ThesisManagement.ViewModels
         {
             //Update database
             attachment.FileName = userAttachmentName;
-            attachment.TaskProgressId = selectedTaskProgress.Id ;
+            attachment.TaskProgressId = selectedTaskProgress.Id;
             var success = _attachmentRepo.Add(attachment);
             ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
         }

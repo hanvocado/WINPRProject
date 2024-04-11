@@ -102,13 +102,6 @@
                             <ColumnDefinition Width="*" MaxWidth="50" />
                         </Grid.ColumnDefinitions>
 
-                        <!--<TextBlock Grid.Row="3"
-                                   Margin="0 0 20 0"
-                                 Height="30"
-                                 Text="{Binding ProgressFileName}" 
-                                 TextWrapping="Wrap" />-->
-
-
                         <ScrollViewer VerticalScrollBarVisibility="Auto">
                             <ListBox ItemsSource="{Binding Attachments}"
                                      x:Name="AttachmentsListBox"
