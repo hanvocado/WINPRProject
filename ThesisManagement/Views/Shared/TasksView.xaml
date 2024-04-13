@@ -25,8 +25,14 @@
         <viewModels:TasksVM />
     </UserControl.DataContext>
 
-    <StackPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="115" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        
         <md:Card Background="#f0f0f0" Padding="5"
+                 Grid.Row="0"
                  Margin="0 20">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -103,121 +109,123 @@
             </Grid>
         </md:Card>
 
-        <Grid>
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <md:Card Background="#f0f0f0" Margin="0 0 10 0">
-                <ScrollViewer VerticalScrollBarVisibility="Visible"
-                          Grid.Column="0">
-                    <ListBox ItemsSource="{Binding PendingTasks}" 
-                             SelectedItem="{Binding SelectedTask}"
-                             ScrollViewer.CanContentScroll="True"
-                             x:Name="PendingTaskListView">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                    </Grid.RowDefinitions>
+            <md:Card Background="#f0f0f0" Margin="0 0 10 0" Padding="5">
+                <ListBox ItemsSource="{Binding PendingTasks}" 
+                         SelectedItem="{Binding SelectedTask}"
+                         Background="{Binding RelativeSource={RelativeSource AncestorType=md:Card}, Path=Background}"
+                         BorderThickness="0"
+                         ItemContainerStyle="{StaticResource listBoxItemStyle}"
+                         ScrollViewer.CanContentScroll="True"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"
+                         x:Name="PendingTaskListView">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
 
-                                    <TextBlock Text="{Binding Name}" Style="{StaticResource topicTitle}" Margin="0 5" />
-                                    <StackPanel Orientation="Horizontal" Margin="0 0 0 10" Grid.Row="1">
-                                        <fa:IconImage Icon="Clock" Style="{StaticResource btnIcon}" Margin="0 0 8 0" />
-                                        <TextBlock Text="{Binding Start, StringFormat='HH:mm dd/MM'}" Style="{StaticResource historyTime}" />
-                                        <TextBlock Text=" - " Style="{StaticResource historyTime}" />
-                                        <TextBlock Text="{Binding End, StringFormat='HH:mm dd/MM'}" Style="{StaticResource historyTime}" />
-                                    </StackPanel>
-                                    <TextBlock Text="{Binding Description}" Grid.Row="2" />
-                                    <ProgressBar Value="{Binding Progress, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                                 Foreground="PaleVioletRed"
-                                                 MinWidth="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=ActualWidth}"
-                                                 Grid.Row="3"
-                                                 Margin="0 5" />
-                                    <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft"
-                                                        Grid.Row="4">
-                                        <customControls:ControlButton Style="{StaticResource lvBtn}"
-                                                                                DefaultColor="CornflowerBlue"
-                                                                                HoverColor="CornflowerBlue"
-                                                                                Margin="2 0 0 0"
-                                                                                CommandParameter="{Binding ElementName=tasksViewUC}"
-                                                                                Command="{Binding DataContext.ShowTaskProgressHistory,RelativeSource={RelativeSource AncestorType=ListBox}}">
-                                            <customControls:ControlButton.Content>
-                                                <fa:IconImage Icon="Message" Style="{StaticResource btnIcon}" />
-                                            </customControls:ControlButton.Content>
-                                        </customControls:ControlButton>
-                                        <customControls:ControlButton Style="{StaticResource lvBtn}"
-                                                                                Visibility="{Binding DataContext.DeleteBtnVisibility ,RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                                                DefaultColor="{StaticResource danger}"
-                                                                                HoverColor="{StaticResource dangerHover}"
-                                                                                Margin="5 0 0 0"
-                                                                                CommandParameter="{Binding Id}"
-                                                                                Command="{Binding DataContext.DeleteTaskCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
-                                            <customControls:ControlButton.Content>
-                                                <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
-                                            </customControls:ControlButton.Content>
-                                        </customControls:ControlButton>
-                                    </StackPanel>
-                                </Grid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </ScrollViewer>
+                                <TextBlock Text="{Binding Name}" Style="{StaticResource topicTitle}" Margin="0 5" />
+                                <StackPanel Orientation="Horizontal" Margin="0 0 0 10" Grid.Row="1">
+                                    <fa:IconImage Icon="Clock" Style="{StaticResource btnIcon}" Margin="0 0 8 0" Foreground="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=Foreground}" />
+                                    <TextBlock Text="{Binding Start, StringFormat='HH:mm dd/MM'}" Style="{StaticResource subTxtItem}" />
+                                    <TextBlock Text=" - " Style="{StaticResource subTxtItem}" />
+                                    <TextBlock Text="{Binding End, StringFormat='HH:mm dd/MM'}" Style="{StaticResource subTxtItem}" />
+                                </StackPanel>
+                                <TextBlock Text="{Binding Description}" Grid.Row="2" />
+                                <ProgressBar Value="{Binding Progress, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Foreground="PaleVioletRed"
+                                            MinWidth="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=ActualWidth}"
+                                            Grid.Row="3"
+                                            Margin="0 5" />
+                                <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft"
+                                                    Grid.Row="4">
+                                    <customControls:ControlButton Style="{StaticResource lvBtn}"
+                                                                            DefaultColor="CornflowerBlue"
+                                                                            HoverColor="CornflowerBlue"
+                                                                            Margin="2 0 0 0"
+                                                                            CommandParameter="{Binding ElementName=tasksViewUC}"
+                                                                            Command="{Binding DataContext.ShowTaskProgressHistory,RelativeSource={RelativeSource AncestorType=ListBox}}">
+                                        <customControls:ControlButton.Content>
+                                            <fa:IconImage Icon="Message" Style="{StaticResource btnIcon}" />
+                                        </customControls:ControlButton.Content>
+                                    </customControls:ControlButton>
+                                    <customControls:ControlButton Style="{StaticResource lvBtn}"
+                                                                            Visibility="{Binding DataContext.DeleteBtnVisibility ,RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                                            DefaultColor="{StaticResource danger}"
+                                                                            HoverColor="{StaticResource dangerHover}"
+                                                                            Margin="5 0 0 0"
+                                                                            CommandParameter="{Binding Id}"
+                                                                            Command="{Binding DataContext.DeleteTaskCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
+                                        <customControls:ControlButton.Content>
+                                            <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
+                                        </customControls:ControlButton.Content>
+                                    </customControls:ControlButton>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </md:Card>
 
-            <ScrollViewer VerticalScrollBarVisibility="Auto"
-                          ScrollViewer.CanContentScroll="True"
-                          Grid.Column="1">
-                <md:Card Background="#f0f0f0" Margin="10 0 0 0">
-                    <ListBox ItemsSource="{Binding DoneTasks}" x:Name="DoneTaskListView">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                    </Grid.RowDefinitions>
+            <md:Card Background="#f0f0f0" Margin="10 0 0 0" Padding="5"
+                     Grid.Column="1">
+                <ListBox ItemsSource="{Binding DoneTasks}" x:Name="DoneTaskListView"
+                         Background="{Binding RelativeSource={RelativeSource AncestorType=md:Card}, Path=Background}"
+                         BorderThickness="0"
+                         ScrollViewer.CanContentScroll="True"
+                         ItemContainerStyle="{StaticResource listBoxItemStyle}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
 
-                                    <TextBlock Text="{Binding Name}" Style="{StaticResource topicTitle}" Margin="0 5" />
-                                    <StackPanel Orientation="Horizontal" Margin="0 0 0 10" Grid.Row="1">
-                                        <fa:IconImage Icon="Clock" Style="{StaticResource btnIcon}" Margin="0 0 8 0" />
-                                        <TextBlock Text="{Binding Start, StringFormat='HH:mm dd/MM'}" Style="{StaticResource historyTime}" />
-                                        <TextBlock Text=" - " Style="{StaticResource historyTime}" />
-                                        <TextBlock Text="{Binding End, StringFormat='HH:mm dd/MM'}" Style="{StaticResource historyTime}" />
-                                    </StackPanel>
-                                    <TextBlock Text="{Binding Description}" Grid.Row="2" />
-                                    <ProgressBar Value="{Binding Progress, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                                Width="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=ActualWidth}"
-                                                Padding="10 0"
-                                                Grid.Row="3"
-                                                Margin="0 5" />
-                                    <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft"
-                                                            Grid.Row="4">
-                                        <customControls:ControlButton Style="{StaticResource lvBtn}"
-                                                                                  DefaultColor="{StaticResource primaryBrush}"
-                                                                                  HoverColor="{StaticResource secondaryBrush}"
-                                                                                  Margin="2 0 0 0"
-                                                                                  CommandParameter="{Binding ElementName=tasksViewUC}"
-                                                                                  Command="{Binding DataContext.ShowTaskProgressHistory,RelativeSource={RelativeSource AncestorType=ListView}}">
-                                            <customControls:ControlButton.Content>
-                                                <fa:IconImage Icon="Message" Style="{StaticResource btnIcon}" />
-                                            </customControls:ControlButton.Content>
-                                        </customControls:ControlButton>
-                                    </StackPanel>
-                                </Grid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </md:Card>
-            </ScrollViewer>
+                                <TextBlock Text="{Binding Name}" Style="{StaticResource topicTitle}" Margin="0 5" />
+                                <StackPanel Orientation="Horizontal" Margin="0 0 0 10" Grid.Row="1">
+                                    <fa:IconImage Icon="Clock" Style="{StaticResource btnIcon}" Margin="0 0 5 0" Foreground="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=Foreground}"/>
+                                    <TextBlock Text="{Binding Start, StringFormat='HH:mm dd/MM'}" Style="{StaticResource subTxtItem}" />
+                                    <TextBlock Text=" - " Style="{StaticResource subTxtItem}" />
+                                    <TextBlock Text="{Binding End, StringFormat='HH:mm dd/MM'}" Style="{StaticResource subTxtItem}" />
+                                </StackPanel>
+                                <TextBlock Text="{Binding Description}" Grid.Row="2" />
+                                <ProgressBar Value="{Binding Progress, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Width="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=ActualWidth}"
+                                            Padding="10 0"
+                                            Grid.Row="3"
+                                            Margin="0 5" />
+                                <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft"
+                                                        Grid.Row="4">
+                                    <customControls:ControlButton Style="{StaticResource lvBtn}"
+                                                                                DefaultColor="{StaticResource primaryBrush}"
+                                                                                HoverColor="{StaticResource secondaryBrush}"
+                                                                                Margin="2 0 0 0"
+                                                                                CommandParameter="{Binding ElementName=tasksViewUC}"
+                                                                                Command="{Binding DataContext.ShowTaskProgressHistory,RelativeSource={RelativeSource AncestorType=ListView}}">
+                                        <customControls:ControlButton.Content>
+                                            <fa:IconImage Icon="Message" Style="{StaticResource btnIcon}" />
+                                        </customControls:ControlButton.Content>
+                                    </customControls:ControlButton>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </md:Card>
         </Grid>
-    </StackPanel>
+    </Grid>
 </UserControl>
