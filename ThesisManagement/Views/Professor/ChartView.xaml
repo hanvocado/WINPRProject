@@ -16,58 +16,81 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto">
 
         <StackPanel>
-            <sf:SfChart Margin="0 10 0 0">
-                <sf:SfChart.Header>
-                    <TextBlock Text="Số lượng nhiệm vụ" Style="{StaticResource label}" FontSize="18" />
-                </sf:SfChart.Header>
-                <sf:SfChart.Legend>
-                    <sf:ChartLegend />
-                </sf:SfChart.Legend>
-                <sf:PieSeries XBindingPath="TaskStatus"
-                              Label="TaskStatus"
-                              ItemsSource="{Binding TasksPieData, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              YBindingPath="Count">
-                    <sf:PieSeries.AdornmentsInfo>
-                        <sf:ChartAdornmentInfo ShowLabel="True" />
-                    </sf:PieSeries.AdornmentsInfo>
-                </sf:PieSeries>
-            </sf:SfChart>
+            <Border Background="White" Margin="10 20 10 10"
+                    Padding="5 15"
+                    CornerRadius="10">
+                <sf:SfChart>
+                    <sf:SfChart.Header>
+                        <TextBlock Text="Nhiệm vụ" Style="{StaticResource label}" FontSize="14" />
+                    </sf:SfChart.Header>
+                    <sf:SfChart.Legend>
+                        <sf:ChartLegend />
+                    </sf:SfChart.Legend>
+                    <sf:DoughnutSeries XBindingPath="TaskStatus"
+                                       DoughnutCoefficient="0.85"
+                                      Label="TaskStatus"
+                                      ItemsSource="{Binding TasksPieData, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      YBindingPath="Count">
+                        <sf:DoughnutSeries.AdornmentsInfo>
+                            <sf:ChartAdornmentInfo ShowLabel="True" />
+                        </sf:DoughnutSeries.AdornmentsInfo>
+                    </sf:DoughnutSeries>
+                </sf:SfChart>
+            </Border>
             <Line />
-            <sf:SfChart Margin="0 20 0 0">
-                <sf:SfChart.Header>
-                    <TextBlock Text="Tiến độ nhiệm vụ đang thực hiện" Style="{StaticResource label}" FontSize="18" />
-                </sf:SfChart.Header>
-                <sf:SfChart.PrimaryAxis>
-                    <sf:CategoryAxis Header="Tiêu đề" />
-                </sf:SfChart.PrimaryAxis>
-                <sf:SfChart.SecondaryAxis>
-                    <sf:NumericalAxis Header="Tiến độ (%)" Maximum="100" />
-                </sf:SfChart.SecondaryAxis>
 
-                <sf:ColumnSeries ItemsSource="{Binding PendingTasks}"
-                                 sf:ChartSeriesBase.Spacing="0.5"
-                                 XBindingPath="Name" 
-                                 ShowTooltip="True"
-                                 YBindingPath="Progress" />
-            </sf:SfChart>
-            
-            <sf:SfChart Margin="0 20 0 0">
-                <sf:SfChart.Header>
-                    <TextBlock Text="Tiến độ nhiệm vụ đã quá hạn" Style="{StaticResource label}" FontSize="18" />
-                </sf:SfChart.Header>
-                <sf:SfChart.PrimaryAxis>
-                    <sf:CategoryAxis Header="Tiêu đề" />
-                </sf:SfChart.PrimaryAxis>
-                <sf:SfChart.SecondaryAxis>
-                    <sf:NumericalAxis Header="Tiến độ (%)" Maximum="100" />
-                </sf:SfChart.SecondaryAxis>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
 
-                <sf:ColumnSeries ItemsSource="{Binding OverdueTasks}"
-                                 sf:ChartSeriesBase.Spacing="0.5"
-                                 XBindingPath="Name" 
-                                 ShowTooltip="True"
-                                 YBindingPath="Progress" />
-            </sf:SfChart>
+                <Border Background="White" Padding="5 15"
+                        CornerRadius="10"
+                        Margin="10 10 10 10">
+                    <sf:SfChart>
+                        <sf:SfChart.Header>
+                            <TextBlock Text="Tiến độ nhiệm vụ đang thực hiện" Style="{StaticResource label}" FontSize="14" />
+                        </sf:SfChart.Header>
+                        <sf:SfChart.PrimaryAxis>
+                            <sf:CategoryAxis Header="Tiêu đề" />
+                        </sf:SfChart.PrimaryAxis>
+                        <sf:SfChart.SecondaryAxis>
+                            <sf:NumericalAxis Header="Tiến độ (%)" Maximum="100" />
+                        </sf:SfChart.SecondaryAxis>
+
+                        <sf:ColumnSeries ItemsSource="{Binding PendingTasks}"
+                                         Padding="10"
+                                            sf:ChartSeriesBase.Spacing="0.5"
+                                            XBindingPath="Name" 
+                                            ShowTooltip="True"
+                                            YBindingPath="Progress" />
+                    </sf:SfChart>
+                </Border>
+
+                <Border Background="White" Padding="5 15"
+                        Grid.Column="1"
+                        CornerRadius="10"
+                        Margin="10 10 10 10">
+                    <sf:SfChart Padding="10">
+                        <sf:SfChart.Header>
+                            <TextBlock Text="Tiến độ nhiệm vụ đã quá hạn" Style="{StaticResource label}" FontSize="14" />
+                        </sf:SfChart.Header>
+                        <sf:SfChart.PrimaryAxis>
+                            <sf:CategoryAxis Header="Tiêu đề" />
+                        </sf:SfChart.PrimaryAxis>
+                        <sf:SfChart.SecondaryAxis>
+                            <sf:NumericalAxis Header="Tiến độ (%)" Maximum="100" />
+                        </sf:SfChart.SecondaryAxis>
+
+                        <sf:ColumnSeries ItemsSource="{Binding OverdueTasks}"
+                                         sf:ChartSeriesBase.Spacing="0.5"
+                                         XBindingPath="Name" 
+                                         ShowTooltip="True"
+                                         YBindingPath="Progress" />
+                    </sf:SfChart>
+                </Border>
+            </Grid>
         </StackPanel>
     </ScrollViewer>
 

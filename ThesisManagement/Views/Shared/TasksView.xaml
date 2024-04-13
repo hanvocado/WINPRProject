@@ -33,7 +33,7 @@
         
         <md:Card Background="#f0f0f0" Padding="5"
                  Grid.Row="0"
-                 Margin="0 20">
+                 Margin="10 20">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -109,16 +109,17 @@
             </Grid>
         </md:Card>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="10 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <md:Card Background="#f0f0f0" Margin="0 0 10 0" Padding="5">
+            <Border Background="#f0f0f0" Margin="0 0 10 0" CornerRadius="10">
                 <ListBox ItemsSource="{Binding PendingTasks}" 
                          SelectedItem="{Binding SelectedTask}"
-                         Background="{Binding RelativeSource={RelativeSource AncestorType=md:Card}, Path=Background}"
+                         Background="{Binding RelativeSource={RelativeSource AncestorType=Border}, Path=Background}"
                          BorderThickness="0"
+                         Padding="10"
                          ItemContainerStyle="{StaticResource listBoxItemStyle}"
                          ScrollViewer.CanContentScroll="True"
                          ScrollViewer.VerticalScrollBarVisibility="Auto"
@@ -143,18 +144,18 @@
                                 </StackPanel>
                                 <TextBlock Text="{Binding Description}" Grid.Row="2" />
                                 <ProgressBar Value="{Binding Progress, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                            Foreground="PaleVioletRed"
+                                            Foreground="{StaticResource accent}"
                                             MinWidth="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=ActualWidth}"
                                             Grid.Row="3"
                                             Margin="0 5" />
                                 <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft"
                                                     Grid.Row="4">
                                     <customControls:ControlButton Style="{StaticResource lvBtn}"
-                                                                            DefaultColor="CornflowerBlue"
-                                                                            HoverColor="CornflowerBlue"
-                                                                            Margin="2 0 0 0"
-                                                                            CommandParameter="{Binding ElementName=tasksViewUC}"
-                                                                            Command="{Binding DataContext.ShowTaskProgressHistory,RelativeSource={RelativeSource AncestorType=ListBox}}">
+                                                                DefaultColor="{StaticResource warning}"
+                                                                HoverColor="{StaticResource warning}"
+                                                                Margin="2 0 0 5"
+                                                                CommandParameter="{Binding ElementName=tasksViewUC}"
+                                                                Command="{Binding DataContext.ShowTaskProgressHistory,RelativeSource={RelativeSource AncestorType=ListBox}}">
                                         <customControls:ControlButton.Content>
                                             <fa:IconImage Icon="Message" Style="{StaticResource btnIcon}" />
                                         </customControls:ControlButton.Content>
@@ -163,7 +164,7 @@
                                                                             Visibility="{Binding DataContext.DeleteBtnVisibility ,RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                                             DefaultColor="{StaticResource danger}"
                                                                             HoverColor="{StaticResource dangerHover}"
-                                                                            Margin="5 0 0 0"
+                                                                            Margin="5 0 5 5"
                                                                             CommandParameter="{Binding Id}"
                                                                             Command="{Binding DataContext.DeleteTaskCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
                                         <customControls:ControlButton.Content>
@@ -175,13 +176,15 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-            </md:Card>
+            </Border>
 
-            <md:Card Background="#f0f0f0" Margin="10 0 0 0" Padding="5"
+            <Border Background="#f0f0f0" Margin="10 0 0 0"
+                    CornerRadius="10"
                      Grid.Column="1">
                 <ListBox ItemsSource="{Binding DoneTasks}" x:Name="DoneTaskListView"
-                         Background="{Binding RelativeSource={RelativeSource AncestorType=md:Card}, Path=Background}"
+                         Background="{Binding RelativeSource={RelativeSource AncestorType=Border}, Path=Background}"
                          BorderThickness="0"
+                         Padding="10"
                          ScrollViewer.CanContentScroll="True"
                          ItemContainerStyle="{StaticResource listBoxItemStyle}">
                     <ListBox.ItemTemplate>
@@ -225,7 +228,7 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-            </md:Card>
+            </Border>
         </Grid>
     </Grid>
 </UserControl>

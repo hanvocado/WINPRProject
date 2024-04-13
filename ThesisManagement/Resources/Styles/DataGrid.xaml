@@ -42,9 +42,11 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListBoxItem">
-                    <md:Card BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
+                            SnapsToDevicePixels="True" CornerRadius="10"
+                            Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
                         <ContentPresenter VerticalAlignment="Center" />
-                    </md:Card>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
