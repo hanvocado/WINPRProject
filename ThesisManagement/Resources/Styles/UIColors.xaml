@@ -19,8 +19,9 @@
 
     <SolidColorBrush x:Key="titleColor" Color = "#BCBEE0" />
     <SolidColorBrush x:Key="plainTextColor" Color = "#F1F1F1" />
+    <SolidColorBrush x:Key="secondaryTxtColor" Color="#757575" />
     <SolidColorBrush x:Key="labelColor" Color = "#173373" />
-
+    <SolidColorBrush x:Key="nearWhite" Color="#f0f0f0" />
 
     <LinearGradientBrush x:Key="cs_Backgroud" StartPoint="0,0" EndPoint="0,5">
         <GradientStop Color="White" Offset="0.0"/>
