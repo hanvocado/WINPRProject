@@ -40,27 +40,27 @@
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
-                                        
+
                                         <TextBlock Text="{Binding Student.Name}" Margin="2 5 0 3" />
                                         <TextBlock Text="{Binding UpdateAt, StringFormat='HH:mm dd-MM-yyyy'}"
                                                    Style="{StaticResource subTxtItem}"
                                                    Grid.Column="1"
                                                    HorizontalAlignment="Center" />
-                                        
+
                                     </Grid>
-                                    <TextBox Background="#f9f9f9"
+
+                                    <StackPanel Visibility="{Binding Description, Converter={StaticResource VisibilityConverter}}">
+                                        <TextBox Background="#f9f9f9"
                                              IsReadOnly="True"
                                              HorizontalAlignment="Left"
-                                             Text="{Binding Description, Mode=OneWay}"
-                                             Visibility="{Binding Description, Converter={StaticResource VisibilityConverter}}"/>
+                                             Text="{Binding Description, Mode=OneWay}"/>
+                                        <local:Attachments HorizontalAlignment="Left"
+                                                           Margin="0 3 20 0"/>
+                                    </StackPanel>
                                 </StackPanel>
 
-                                <local:Attachments HorizontalAlignment="Left"
-                                                   Margin="0 3 20 0"/>
-
-                                <Border Grid.Row="1" Padding="0 0 20 0"
-                                        Visibility="{Binding Response, Converter={StaticResource VisibilityConverter}}">
-                                    <StackPanel>
+                                <Border Grid.Row="1" Padding="0 0 20 0">
+                                    <StackPanel Visibility="{Binding Response, Converter={StaticResource VisibilityConverter}}">
                                         <TextBlock Text="Giảng viên hướng dẫn" Margin="0 0 0 3"
                                                    HorizontalAlignment="Right" />
                                         <TextBox Background="{StaticResource info}"
