@@ -9,6 +9,7 @@ namespace ThesisManagement.Repositories
     public interface IAttachmentRepository
     {
         bool Add(Attachment attachment);
+        bool AddRange(IEnumerable<Attachment>? attachments);
         bool Update(Attachment attachment);
         bool Delete(int id);
         ObservableCollection<Attachment> GetAll();
@@ -70,6 +71,12 @@ namespace ThesisManagement.Repositories
                                                              .AsNoTracking()
                                                              .ToList();
             return attachments;
+        }
+
+        public bool AddRange(IEnumerable<Attachment>? attachments)
+        {
+            _context.Attachments.AddRange(attachments);
+            return DbSave();
         }
     }
 }

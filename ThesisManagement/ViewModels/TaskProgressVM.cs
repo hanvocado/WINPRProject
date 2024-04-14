@@ -1,4 +1,5 @@
 using Microsoft.Win32;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows.Input;
 using ThesisManagement.Helpers;
@@ -16,7 +17,6 @@ namespace ThesisManagement.ViewModels
         private readonly IThesisRepository _thesisRepo;
         private readonly ITaskProgressRepository _taskProgressRepo;
         private TasksVM taskVM;
-        private Attachment attachment;
         public string appDirectory;
         public string destinationPath;
         public string userAttachmentName;
@@ -100,7 +100,6 @@ namespace ThesisManagement.ViewModels
             {
                 selectedTaskProgress = value;
                 OnPropertyChanged(nameof(SelectedTaskProgress));
-                Attachments = _attachmentRepo.GetAttachments(selectedTaskProgress.Id);
             }
         }
 
@@ -140,8 +139,8 @@ namespace ThesisManagement.ViewModels
         }
 
 
-        private List<Attachment> attachments;
-        public List<Attachment> Attachments
+        private ObservableCollection<Attachment> attachments;
+        public ObservableCollection<Attachment> Attachments
         {
             get { return attachments; }
             set
@@ -163,7 +162,7 @@ namespace ThesisManagement.ViewModels
             _taskProgressRepo = new TaskProgressRepository();
             appDirectory = SessionInfo.BinDirectory;
             selectedTaskProgress = new TaskProgress();
-            attachment = new Attachment();
+            Attachments = new ObservableCollection<Attachment>();
 
             UpdateTaskProgressCommand = new ViewModelCommand(ExecuteUpdateTaskProgressCommand);
             UploadAttachmentCommand = new ViewModelCommand(ExecuteUploadAttachmentCommand);
@@ -171,16 +170,26 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteUploadAttachmentCommand(object obj)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+           OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Multiselect = true;
             if (openFileDialog.ShowDialog() == true)
             {
-                //Uploaded attachment name
-                string attachmentName = openFileDialog.FileName;
-                userAttachmentName = DateTime.Now.ToString("ddMMyyyyhhmmss") + Path.GetFileName(attachmentName);
+                // Uploaded attachment names (multiple files)
+                string[] attachmentNames = openFileDialog.FileNames;
 
-                //Storage attachment name
-                destinationPath = Path.Combine(appDirectory, userAttachmentName);
-                File.Copy(attachmentName, destinationPath, true);
+                foreach (string attachmentName in attachmentNames)
+                {
+                    // Storage attachment name for each file
+                    userAttachmentName = DateTime.Now.ToString("ddMMyyyyhhmmss") + Path.GetFileName(attachmentName);
+
+                    Attachment attachment = new Attachment();
+                    attachment.FileName = userAttachmentName;
+                    attachments.Add(attachment);
+
+                    // Storage path for each attachment
+                    string destinationPath = Path.Combine(appDirectory, userAttachmentName);
+                    File.Copy(attachmentName, destinationPath, true);
+                }
             }
         }
 
@@ -190,49 +199,50 @@ namespace ThesisManagement.ViewModels
             UpdateSelectedTaskProgressProperties();
             if (SessionInfo.Role == Role.Student)
             {
-                if (id <= 0)
-                {
-                    var success = _taskProgressRepo.Add(selectedTaskProgress);
-                    ShowMessage(success, Message.AddSuccess, Message.AddFailed);
-                }
-                else
-                {
-                    var success = _taskProgressRepo.Update(selectedTaskProgress);
-                    ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
-                }
-                UpdateAttachment();
+                //Add TaskProgress and Attachments
+                var addSuccess = _taskProgressRepo.Add(selectedTaskProgress);
+                var successAttach = UpdateAttachments();
+                ShowMessage(addSuccess && successAttach, Message.AddSuccess, Message.AddFailed);
             }
             else if (SessionInfo.Role == Role.Professor)
             {
-                var updateTaskProgress = _taskProgressRepo.Update(selectedTaskProgress);
+                //Add TaskProgress
+                var addResponse = _taskProgressRepo.Add(selectedTaskProgress);
+                //Update progress in Task
                 var acceptedTask = _taskRepo.GetTask(taskId);
                 acceptedTask.Progress = progress;
                 var updateTask = _taskRepo.Update(acceptedTask);
-                ShowMessage(updateTaskProgress && updateTask, Message.UpdateSuccess, Message.UpdateFailed);
-                taskVM = new TasksVM();
-                taskVM.Thesis = _thesisRepo.GetThesis(selectedTaskProgress.TaskId);
-                taskVM.Reload();
+                var successAttach = UpdateAttachments();
+                ShowMessage(addResponse && updateTask && successAttach, Message.UpdateSuccess, Message.UpdateFailed);
             }
             ((TasksVM)parentTasksView.DataContext).Reload();
             taskProgressView?.Close();
         }
 
-        public void UpdateAttachment()
+        public bool UpdateAttachments()
         {
-            //Update database
-            attachment.FileName = userAttachmentName;
-            attachment.TaskProgressId = selectedTaskProgress.Id;
-            var success = _attachmentRepo.Add(attachment);
+            var lastestTaskProgress = _taskProgressRepo.GetLastestTaskProgress(taskId);
+            foreach (var attachment in Attachments)
+            {
+                attachment.TaskProgressId = lastestTaskProgress.Id;
+            }
+            return _attachmentRepo.AddRange(Attachments); 
         }
 
         private void UpdateSelectedTaskProgressProperties()
         {
             selectedTaskProgress.Id = id;
             selectedTaskProgress.TaskId = taskId;
-            selectedTaskProgress.StudentId = student.Id;
+            if(SessionInfo.Role == Role.Student)
+            {
+                selectedTaskProgress.StudentId = student.Id;
+                selectedTaskProgress.Description = description;
+            }    
+            else if (SessionInfo.Role == Role.Professor)
+            {
+                selectedTaskProgress.Response = response;
+            }
             selectedTaskProgress.Progress = progress;
-            selectedTaskProgress.Description = description;
-            selectedTaskProgress.Response = response;
             selectedTaskProgress.UpdateAt = DateTime.Now;
         }
 

@@ -11,7 +11,6 @@ namespace ThesisManagement.Models
         [Required]
         public int TaskId { get; set; }
 
-        [Required]
         public string? StudentId { get; set; }
 
         public int Progress { get; set; }

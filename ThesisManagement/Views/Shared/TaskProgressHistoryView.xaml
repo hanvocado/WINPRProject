@@ -24,7 +24,8 @@
 
             <customControls:WindowControlBar />
 
-            <ScrollViewer VerticalScrollBarVisibility="Auto"
+            <ScrollViewer x:Name="taskHistoryScrollView" 
+                          VerticalScrollBarVisibility="Auto"
                           Grid.Row="1">
                 <ListBox ItemsSource="{Binding Progresses}" Margin="20 5"
                          ItemContainerStyle="{StaticResource noHighlight}"
@@ -50,7 +51,8 @@
                                     <TextBox Background="#f9f9f9"
                                              IsReadOnly="True"
                                              HorizontalAlignment="Left"
-                                             Text="{Binding Description, Mode=OneWay}"/>
+                                             Text="{Binding Description, Mode=OneWay}"
+                                             Visibility="{Binding Description, Converter={StaticResource VisibilityConverter}}"/>
                                 </StackPanel>
                                 
                                 <ListBox ItemsSource="{Binding Attachments}"

@@ -56,7 +56,6 @@ namespace ThesisManagement.ViewModels
             }
         }
 
-
         private IEnumerable<TaskProgress> progresses;
 
         public IEnumerable<TaskProgress> Progresses

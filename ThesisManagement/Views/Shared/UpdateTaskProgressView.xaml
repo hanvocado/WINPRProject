@@ -9,7 +9,7 @@
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
         xmlns:hc="https://handyorg.github.io/handycontrol"
-         Title="TopicView" Height="620" Width="600"
+         Title="TopicView" Height="640" Width="600"
          WindowStartupLocation="CenterScreen"
          Style="{StaticResource formStyle}">
     <Window.DataContext>
@@ -23,7 +23,7 @@
                 <RowDefinition Height="70" />
                 <RowDefinition Height="70" />
                 <RowDefinition Height="130" />
-                <RowDefinition Height="100" />
+                <RowDefinition Height="120" />
                 <RowDefinition Height="130" />
                 <RowDefinition Height="30" />
             </Grid.RowDefinitions>
@@ -107,7 +107,7 @@
                                      Margin="0 0 10 0"
                                      SelectedItem="{Binding SelectedFile}"
                                      DisplayMemberPath="OriginalFileName"
-                                     MinHeight="60">
+                                     Height="90">
                             </ListBox>
                         </ScrollViewer>
 
