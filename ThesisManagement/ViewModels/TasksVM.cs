@@ -150,6 +150,17 @@ namespace ThesisManagement.ViewModels
             }
         }
 
+        private IEnumerable<Task> undoneTasks;
+        public IEnumerable<Task> UndoneTasks
+        {
+            get { return undoneTasks; }
+            set
+            {
+                undoneTasks = value;
+                OnPropertyChanged(nameof(UndoneTasks));
+            }
+        }
+
         public Visibility DeleteBtnVisibility
         {
             get
@@ -285,6 +296,7 @@ namespace ThesisManagement.ViewModels
             DoneTasks = _taskRepo.GetDoneTasks(thesis.Id);
             OverdueTasks = _taskRepo.GetOverdueTasks(thesis.Id);
             TasksPieData = _taskRepo.GetTasksPieData(thesis.Id);
+            UndoneTasks = _taskRepo.GetUndoneTasks(thesis.Id);
         }
 
         private void ResetTaskProperties()
