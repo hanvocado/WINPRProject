@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:ThesisManagement.Views.Professor"
              xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
              xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-             xmlns:sf="http://schemas.syncfusion.com/wpf"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              SizeChanged="UserControl_SizeChanged"
@@ -17,18 +17,20 @@
         <viewModels:ThesesVM />
     </UserControl.DataContext>
 
-    <StackPanel>
-        <StackPanel Orientation="Horizontal"
-                    Margin="0 5 0 10"
-                    HorizontalAlignment="Center">
-            <Image Source="/Resources/Images/UTE.png" 
-                   Margin="0 0 20 0"
-                   Height="30" Width="30" />
-            <TextBlock Style="{StaticResource title}" 
-                        Text="DANH SÁCH LUẬN VĂN"
-                        HorizontalAlignment="Left" />            
-        </StackPanel>
-        <ListView Grid.Row="1"
+    <StackPanel Margin="5">
+        <md:Card Background="{StaticResource nearWhite}" SnapsToDevicePixels="True" >
+            <StackPanel Orientation="Horizontal"
+                        Margin="0 5 0 10"
+                        HorizontalAlignment="Center">
+                <Image Source="/Resources/Images/UTE.png" 
+                       Margin="0 0 20 0"
+                       Height="30" Width="30" />
+                <TextBlock Style="{StaticResource title}" 
+                            Text="ĐỀ TÀI ĐÃ DUYỆT"
+                            HorizontalAlignment="Left" />
+            </StackPanel>
+        </md:Card>
+        <!--<ListView Grid.Row="1"
                   Background="{DynamicResource MaterialDesignPaper}"
                   Name="ThesisListView"
                   ItemsSource="{Binding ApprovedTheses, UpdateSourceTrigger=PropertyChanged}"
@@ -91,7 +93,66 @@
                     </GridViewColumn>
                 </GridView>
             </ListView.View>
-        </ListView>
+        </ListView>-->
+
+        <Border Background="{StaticResource nearWhite}"
+                Padding="5" Margin="0 10 0 5"
+                CornerRadius="10">
+            <ListBox ItemsSource="{Binding ApprovedTheses}" 
+                     x:Name="ThesisListView"
+                     Background="{Binding RelativeSource={RelativeSource AncestorType=Border}, Path=Background}"
+                     BorderThickness="0" ItemContainerStyle="{StaticResource listBoxItemStyle}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border CornerRadius="10" Padding="5">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="5*" />
+                                    <ColumnDefinition Width="1.5*" />
+                                </Grid.ColumnDefinitions>
+                                <ItemsControl ItemsSource="{Binding Students}"
+                                              Grid.Column="1">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border BorderBrush="{StaticResource info}" CornerRadius="5" Padding="15 5" BorderThickness="1" Margin="5" HorizontalAlignment="Center" >
+                                                <StackPanel Orientation="Horizontal">
+                                                    <fa:IconImage Icon="UserAlt" Height="12" Foreground="{StaticResource info}" Margin="0 0 10 0" />
+                                                    <StackPanel>
+                                                        <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" FontWeight="DemiBold" Foreground="Black"/>
+                                                        <TextBlock Text="{Binding Id}" Foreground="{StaticResource secondaryTxtColor}"/>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <Border Grid.Column="0" Margin="5 5 5 0">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="{Binding Topic.Name}" Style="{StaticResource topicTitle}" />
+                                        <customControls:ControlButton DefaultColor="{StaticResource info}"
+                                                                      HoverColor="{StaticResource infoHover}"
+                                                                      Content="Chi tiết ->"
+                                                                      Grid.Row="1"
+                                                                      Width="150"
+                                                                      VerticalAlignment="Center"
+                                                                      HorizontalAlignment="Left"
+                                                                      Margin="0 5"
+                                                                      Foreground="white"
+                                                                      Command="{Binding DataContext.ShowThesisCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                                      CommandParameter="{Binding Id}">
+                                        </customControls:ControlButton>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
     </StackPanel>
     
 </UserControl>

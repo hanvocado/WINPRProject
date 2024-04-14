@@ -8,14 +8,15 @@ namespace ThesisManagement.ViewModels
     public class TaskProgressHistoryVM : ViewModelBase
     {
         private readonly ITaskRepository _taskRepo;
+        private readonly ITaskProgressRepository _progressRepo;
         private readonly IStudentRepository _studentRepo;
 
-        private TasksView? parentTasksView;
+        private TasksVM? parentTasksVM;
 
-        public TasksView? ParentTasksView
+        public TasksVM? ParentTasksVM
         {
-            get { return parentTasksView; }
-            set { parentTasksView = value; }
+            get { return parentTasksVM; }
+            set { parentTasksVM = value; }
         }
 
         private int taskId;
@@ -28,8 +29,7 @@ namespace ThesisManagement.ViewModels
                 taskId = value;
                 if (taskId > 0)
                 {
-                    this.Task = _taskRepo.GetTask(taskId);
-                    this.Progresses = task.TaskProgresses ?? new List<TaskProgress>();
+                    Reload();
                 }
             }
         }
@@ -71,20 +71,36 @@ namespace ThesisManagement.ViewModels
         {
             _taskRepo = new TaskRepository();
             _studentRepo = new StudentRepository();
+            _progressRepo = new TaskProgressRepository();
             ShowUpdateTaskProgressView = new ViewModelCommand(ExecuteShowUpdateTaskProgressView);
         }
 
         private void ExecuteShowUpdateTaskProgressView(object obj)
         {
-            var vm = new TaskProgressVM
+            var vm = new TaskProgressVM();
+            vm.TaskId = taskId;
+            vm.UpdateAt = null;
+            TaskProgress lastestTaskProgress = _progressRepo.GetLastestTaskProgress(taskId);
+            if (lastestTaskProgress == null)
             {
-                TaskId = taskId,
-                UpdateAt = null,
-                Student = _studentRepo.GetStudent(SessionInfo.UserId),
-                ParentTasksView = parentTasksView
-            };
+                if (SessionInfo.Role == Role.Student)
+                {
+                    vm.Student = _studentRepo.GetStudent(SessionInfo.UserId);
+                }
+            }
+            else
+            {
+                vm.SelectedTaskProgress = lastestTaskProgress;
+                vm.UpdateLastestTaskProgress();
+            }
             var updateView = new UpdateTaskProgressView { DataContext = vm };
             updateView.Show();
+        }
+
+        public void Reload()
+        {
+            this.Task = _taskRepo.GetTask(taskId);
+            this.Progresses = task.TaskProgresses ?? new List<TaskProgress>();
         }
     }
 }
