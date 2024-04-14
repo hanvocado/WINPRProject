@@ -25,7 +25,7 @@ namespace ThesisManagement.Models
         public Task Task { get; set; }
 
         [ForeignKey(nameof(StudentId))]
-        public Student Student { get; set; }
+        public Student? Student { get; set; }
 
         public ICollection<Attachment>? Attachments { get; set; }
 

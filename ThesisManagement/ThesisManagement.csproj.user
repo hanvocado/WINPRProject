@@ -49,6 +49,9 @@
     <Compile Update="Views\Professor\WaitingStudents.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Shared\Attachments.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Shared\LoginView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -154,6 +157,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Professor\WaitingStudents.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Shared\Attachments.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Shared\LoginView.xaml">

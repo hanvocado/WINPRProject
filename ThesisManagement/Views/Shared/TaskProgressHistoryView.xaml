@@ -54,39 +54,9 @@
                                              Text="{Binding Description, Mode=OneWay}"
                                              Visibility="{Binding Description, Converter={StaticResource VisibilityConverter}}"/>
                                 </StackPanel>
-                                
-                                <ListBox ItemsSource="{Binding Attachments}"
-                                         MaxWidth="300"
-                                         HorizontalAlignment="Left"
-                                        Visibility="{Binding Attachments.Count, Converter={StaticResource VisibilityConverter}}"
-                                        SelectedValuePath="FileName"
-                                        SelectedValue="{Binding DataContext.SelectedFileName, RelativeSource={RelativeSource AncestorType=Window}}"
-                                        DisplayMemberPath="OriginalFileName" Margin="0 3 20 0">
-                                    <ListBox.Resources>
-                                        <Style TargetType="ListBoxItem">
-                                            <Setter Property="FontSize" Value="11" />
-                                            <Setter Property="BorderBrush" Value="Transparent" />
-                                            <Setter Property="BorderThickness" Value="0" />
-                                            <Setter Property="Margin" Value="0,0,0,2" />
-                                            <Setter Property="IsSelected" Value="{Binding Content.IsSelected, Mode=TwoWay, RelativeSource={RelativeSource Self}}"/>
-                                            <Setter Property="Template">
-                                                <Setter.Value>
-                                                    <ControlTemplate TargetType="ListBoxItem">
-                                                        <Border CornerRadius="5" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" 
-                                                                Padding="6 0" SnapsToDevicePixels="true">
-                                                            <ContentPresenter VerticalAlignment="Center" />
-                                                        </Border>
-                                                    </ControlTemplate>
-                                                </Setter.Value>
-                                            </Setter>
-                                            <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="true">
-                                                    <Setter Property="Background" Value="#f0f0f0" />
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </ListBox.Resources>
-                                </ListBox>
+
+                                <local:Attachments HorizontalAlignment="Left"
+                                                   Margin="0 3 20 0"/>
 
                                 <Border Grid.Row="1" Padding="0 0 20 0"
                                         Visibility="{Binding Response, Converter={StaticResource VisibilityConverter}}">
@@ -98,6 +68,8 @@
                                                  Foreground="#f0f0f0"
                                                  HorizontalAlignment="Right"
                                                  Text="{Binding Response, Mode=OneWay}"/>
+                                        <local:Attachments HorizontalAlignment="Right"
+                                                           Margin="0 3 0 0"/>
                                     </StackPanel>
                                 </Border>
                             </StackPanel>

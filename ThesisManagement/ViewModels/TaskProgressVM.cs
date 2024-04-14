@@ -217,6 +217,7 @@ namespace ThesisManagement.ViewModels
             }
             ((TasksVM)parentTasksView.DataContext).Reload();
             taskProgressView?.Close();
+
         }
 
         public bool UpdateAttachments()
