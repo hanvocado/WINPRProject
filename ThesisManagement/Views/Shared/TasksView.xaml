@@ -145,9 +145,8 @@
                                 <TextBlock Text="{Binding Description}" Grid.Row="2" />
                                 <ProgressBar Value="{Binding Progress, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                             Foreground="{StaticResource accent}"
-                                            MinWidth="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=ActualWidth}"
                                             Grid.Row="3"
-                                            Margin="0 5" />
+                                            Margin="0 5 0 5" />
                                 <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft"
                                                     Grid.Row="4">
                                     <customControls:ControlButton Style="{StaticResource lvBtn}"
@@ -160,12 +159,12 @@
                                         </customControls:ControlButton.Content>
                                     </customControls:ControlButton>
                                     <customControls:ControlButton Style="{StaticResource lvBtn}"
-                                                                            Visibility="{Binding DataContext.DeleteBtnVisibility ,RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                                            DefaultColor="{StaticResource danger}"
-                                                                            HoverColor="{StaticResource dangerHover}"
-                                                                            Margin="5 0 5 5"
-                                                                            CommandParameter="{Binding Id}"
-                                                                            Command="{Binding DataContext.DeleteTaskCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
+                                                                Visibility="{Binding DataContext.IsProfessor ,RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource VisibilityConverter}}"
+                                                                DefaultColor="{StaticResource danger}"
+                                                                HoverColor="{StaticResource dangerHover}"
+                                                                Margin="5 0 5 5"
+                                                                CommandParameter="{Binding Id}"
+                                                                Command="{Binding DataContext.DeleteTaskCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
                                         <customControls:ControlButton.Content>
                                             <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
                                         </customControls:ControlButton.Content>

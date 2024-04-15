@@ -135,7 +135,7 @@
                                         <TextBlock Text="{Binding Topic.Name}" Style="{StaticResource topicTitle}" />
                                         <customControls:ControlButton DefaultColor="{StaticResource info}"
                                                                       HoverColor="{StaticResource infoHover}"
-                                                                      Content="Chi tiết ->"
+                                                                      Content="Chi tiết →"
                                                                       Grid.Row="1"
                                                                       Width="150"
                                                                       VerticalAlignment="Center"

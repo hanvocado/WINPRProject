@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Windows;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
@@ -158,17 +157,6 @@ namespace ThesisManagement.ViewModels
             {
                 undoneTasks = value;
                 OnPropertyChanged(nameof(UndoneTasks));
-            }
-        }
-
-        public Visibility DeleteBtnVisibility
-        {
-            get
-            {
-                if (SessionInfo.Role == Role.Student)
-                    return Visibility.Hidden;
-                else
-                    return Visibility.Visible;
             }
         }
 

@@ -1,4 +1,3 @@
-using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
@@ -16,6 +15,10 @@ namespace ThesisManagement.Resources.Converters
             else if (value is string str)
             {
                 return String.IsNullOrEmpty(str) ? Visibility.Collapsed : Visibility.Visible;
+            }
+            else if (value is bool val)
+            {
+                return val ? Visibility.Visible : Visibility.Hidden;
             }
             return Visibility.Collapsed;
         }
