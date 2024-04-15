@@ -45,19 +45,10 @@ namespace ThesisManagement.Views.Professor
             {
                 foreach (var item in ThesisListView.Items)
                 {
-                    ListViewItem listViewItem = (ListViewItem)ThesisListView.ItemContainerGenerator.ContainerFromItem(item);
+                    var listViewItem = (ListBoxItem)ThesisListView.ItemContainerGenerator.ContainerFromItem(item);
                     if (listViewItem != null)
                         listViewItem.MouseEnter += ListViewItem_MouseEnter;
                 }
-            }
-        }
-
-        private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            var gridView = ThesisListView.View as GridView;
-            if (gridView != null)
-            {
-                gridView.Columns[1].Width = ThesisListView.ActualWidth - gridView.Columns[0].Width - gridView.Columns[2].Width;
             }
         }
     }

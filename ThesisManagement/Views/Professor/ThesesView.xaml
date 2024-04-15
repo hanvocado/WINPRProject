@@ -10,7 +10,6 @@
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             SizeChanged="UserControl_SizeChanged"
              Background="White">
     
     <UserControl.DataContext>
@@ -30,71 +29,7 @@
                             HorizontalAlignment="Left" />
             </StackPanel>
         </md:Card>
-        <!--<ListView Grid.Row="1"
-                  Background="{DynamicResource MaterialDesignPaper}"
-                  Name="ThesisListView"
-                  ItemsSource="{Binding ApprovedTheses, UpdateSourceTrigger=PropertyChanged}"
-                  SelectedItem="{Binding SelectedThesis, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Width="40">
-                        <GridViewColumn.Header>
-                            <GridViewColumnHeader Template="{StaticResource lvHeader}" />
-                        </GridViewColumn.Header>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
-                                                            HoverColor="{StaticResource secondaryBrush}"
-                                                            Style="{StaticResource lvBtn}"
-                                                            Command="{Binding DataContext.ShowThesisCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                              CommandParameter="{Binding Id}">
-                                        <customControls:ControlButton.Content>
-                                            <fa:IconImage Icon="Pen" Style="{StaticResource btnIcon}" />
-                                        </customControls:ControlButton.Content>
-                                    </customControls:ControlButton>
-                                </StackPanel>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Width="500">
-                        <GridViewColumn.Header>
-                            <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Đề tài" />
-                        </GridViewColumn.Header>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <sf:SfBadge Content="{Binding NoUpdates}"
-                                            Shape="Ellipse"
-                                            Width="5"
-                                            Background="{StaticResource accent}"
-                                            Margin="0 0 3 0"
-                                            Height="5"/>
-                                    <TextBlock Text="{Binding Topic.Name}" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Width="240">
-                        <GridViewColumn.Header>
-                            <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Sinh viên" />
-                        </GridViewColumn.Header>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <ItemsControl ItemsSource="{Binding Students}">
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding Name}" Margin="2"/>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>-->
-
+        
         <Border Background="{StaticResource nearWhite}"
                 Padding="5" Margin="0 10 0 5"
                 CornerRadius="10">
@@ -111,6 +46,7 @@
                                     <ColumnDefinition Width="1.5*" />
                                 </Grid.ColumnDefinitions>
                                 <ItemsControl ItemsSource="{Binding Students}"
+                                              VerticalAlignment="Center"
                                               Grid.Column="1">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
@@ -126,7 +62,7 @@
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
-                                <Border Grid.Column="0" Margin="5 5 5 0">
+                                <Border Grid.Column="0" Margin="5 10 5 10">
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition />
@@ -136,11 +72,11 @@
                                         <customControls:ControlButton DefaultColor="{StaticResource info}"
                                                                       HoverColor="{StaticResource infoHover}"
                                                                       Content="Chi tiết →"
+                                                                      Margin="0 10 0 0"
                                                                       Grid.Row="1"
                                                                       Width="150"
                                                                       VerticalAlignment="Center"
                                                                       HorizontalAlignment="Left"
-                                                                      Margin="0 5"
                                                                       Foreground="white"
                                                                       Command="{Binding DataContext.ShowThesisCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                                       CommandParameter="{Binding Id}">

@@ -42,14 +42,5 @@ namespace ThesisManagement.Views.Professor
                 }
             }
         }
-
-        private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            //var gridView = ThesisListView.View as GridView;
-            //if (gridView != null)
-            //{
-            //    gridView.Columns[1].Width = ThesisListView.ActualWidth - gridView.Columns[0].Width - gridView.Columns[2].Width;
-            //}
-        }
     }
 }
