@@ -131,17 +131,17 @@ namespace ThesisManagement.ViewModels
             }
         }
 
-        private TasksView parentTasksView;
+        private TaskProgressHistoryVM parentVM;
 
-        public TasksView ParentTasksView
+        public TaskProgressHistoryVM ParentVM
         {
-            get { return parentTasksView; }
-            set { parentTasksView = value; }
+            get { return parentVM; }
+            set { parentVM = value; }
         }
 
 
-        private List<Attachment> attachments;
-        public List<Attachment> Attachments
+        private List<Attachment>? attachments;
+        public List<Attachment>? Attachments
         {
             get { return attachments; }
             set
@@ -213,7 +213,8 @@ namespace ThesisManagement.ViewModels
                 taskVM.Thesis = _thesisRepo.GetThesis(selectedTaskProgress.TaskId);
                 taskVM.Reload();
             }
-            ((TasksVM)parentTasksView.DataContext).Reload();
+            parentVM?.Reload();
+            parentVM?.ParentTasksVM?.Reload();
             taskProgressView?.Close();
         }
 

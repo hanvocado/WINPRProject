@@ -201,10 +201,9 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteShowTaskHistory(object obj)
         {
-            TasksView? parentTasksView = obj as TasksView;
             var viewModel = new TaskProgressHistoryVM
             {
-                ParentTasksView = parentTasksView,
+                ParentTasksVM = this,
                 TaskId = id
             };
             var view = new TaskProgressHistoryView { DataContext = viewModel };

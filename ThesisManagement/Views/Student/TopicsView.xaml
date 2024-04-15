@@ -103,13 +103,13 @@
                                 <DataTemplate>
                                     <Border Padding="5 10">
                                         <StackPanel>
-                                            <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight">
+                                            <StackPanel Orientation="Horizontal">
                                                 <TextBlock Style="{StaticResource topicTitle}"
                                                            MinWidth="770"
                                                            Text="{Binding Name}" />
-                                                <sf:SfBadge Content="{Binding RegisteredStatusByCurrentUser}" Shape="Oval" Margin="10 -4 5 4"
+                                                <!--<sf:SfBadge Content="{Binding RegisteredStatusByCurrentUser}" Shape="Oval" Margin="10 -4 5 4"
                                                             Background="{StaticResource info}"
-                                                            Padding="2" FontWeight="Medium"/>
+                                                            Padding="2" FontWeight="Medium"/>-->
                                             </StackPanel>
                                             <Border Margin="0 5">
                                                 <TextBlock Foreground="DarkGray" FontWeight="Medium">

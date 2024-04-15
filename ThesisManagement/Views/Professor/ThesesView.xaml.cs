@@ -22,7 +22,7 @@ namespace ThesisManagement.Views.Professor
             if (!Window.GetWindow(this).IsActive)
                 return;
 
-            var listViewItem = sender as ListViewItem;
+            var listViewItem = sender as ListBoxItem;
             var thesis = listViewItem?.DataContext as Thesis;
             if (thesis != null)
             {
@@ -36,7 +36,7 @@ namespace ThesisManagement.Views.Professor
             {
                 foreach (var item in ThesisListView.Items)
                 {
-                    ListViewItem listViewItem = (ListViewItem)ThesisListView.ItemContainerGenerator.ContainerFromItem(item);
+                    ListBoxItem listViewItem = (ListBoxItem)ThesisListView.ItemContainerGenerator.ContainerFromItem(item);
                     if (listViewItem != null)
                         listViewItem.MouseEnter += ListViewItem_MouseEnter;
                 }
@@ -45,11 +45,11 @@ namespace ThesisManagement.Views.Professor
 
         private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            var gridView = ThesisListView.View as GridView;
-            if (gridView != null)
-            {
-                gridView.Columns[1].Width = ThesisListView.ActualWidth - gridView.Columns[0].Width - gridView.Columns[2].Width;
-            }
+            //var gridView = ThesisListView.View as GridView;
+            //if (gridView != null)
+            //{
+            //    gridView.Columns[1].Width = ThesisListView.ActualWidth - gridView.Columns[0].Width - gridView.Columns[2].Width;
+            //}
         }
     }
 }

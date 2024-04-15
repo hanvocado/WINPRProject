@@ -109,7 +109,7 @@
                                           Grid.Row="2"
                                           Width="200"
                                           Command="{Binding ShowUpdateTaskProgressView}"
-                                          Content="+ Cập nhật mới" />
+                                          Content="+ Cập nhật / Phản hồi" />
         </Grid>
     </Border>
 </Window>
