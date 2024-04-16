@@ -93,7 +93,6 @@ namespace ThesisManagement.ViewModels
                 var vm = new TaskProgressVM
                 {
                     TaskId = taskId,
-                    UpdateAt = null,
                     Student = _studentRepo.GetStudent(SessionInfo.UserId),
                     ParentTasksView = parentTasksView
                 };

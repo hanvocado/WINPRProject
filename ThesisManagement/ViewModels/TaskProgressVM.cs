@@ -87,12 +87,20 @@ namespace ThesisManagement.ViewModels
             }
         }
 
-        private DateTime? updateAt;
+        private DateTime? studentUpdateAt;
 
-        public DateTime? UpdateAt
+        public DateTime? StudentUpdateAt
         {
-            get { return updateAt; }
-            set { updateAt = value; OnPropertyChanged(nameof(UpdateAt)); }
+            get { return studentUpdateAt; }
+            set { studentUpdateAt = value; OnPropertyChanged(nameof(StudentUpdateAt)); }
+        }
+        
+        private DateTime? professorUpdateAt;
+
+        public DateTime? ProfessorUpdateAt
+        {
+            get { return professorUpdateAt; }
+            set { professorUpdateAt = value; OnPropertyChanged(nameof(ProfessorUpdateAt)); }
         }
 
 
@@ -241,14 +249,15 @@ namespace ThesisManagement.ViewModels
             {
                 selectedTaskProgress.Id = lastestTaskProgress.Id;
                 selectedTaskProgress.Response = response;
+                selectedTaskProgress.ProfessorUpdateAt = DateTime.Now;
             }
             else if(SessionInfo.Role == Role.Student)
             {
                 selectedTaskProgress.Description = description;
                 selectedTaskProgress.StudentId = student.Id;
-            }    
+                selectedTaskProgress.StudentUpdateAt = DateTime.Now;
+            }
             selectedTaskProgress.Progress = progress;
-            selectedTaskProgress.UpdateAt = DateTime.Now;
         }
     }
 }

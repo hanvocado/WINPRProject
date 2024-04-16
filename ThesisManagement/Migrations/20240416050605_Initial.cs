@@ -79,7 +79,7 @@ namespace ThesisManagement.Migrations
                     File = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Score = table.Column<float>(type: "real", nullable: true),
                     Evaluation = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NoUpdates = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    NoUpdates = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -194,7 +194,8 @@ namespace ThesisManagement.Migrations
                     Progress = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Response = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    StudentUpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ProfessorUpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -203,8 +204,7 @@ namespace ThesisManagement.Migrations
                         name: "FK_TaskProgresses_Students_StudentId",
                         column: x => x.StudentId,
                         principalTable: "Students",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_TaskProgresses_Tasks_TaskId",
                         column: x => x.TaskId,
