@@ -147,7 +147,7 @@
                     </customControls:ControlButton>
 
                     <TextBlock Style="{StaticResource errorText}" Margin="0 15 5 0" HorizontalAlignment="Center"
-                           Text="{Binding ErrorMessage}" />
+                                Text="{Binding ErrorMessage}" />
 
                     <!--<TextBlock Text="Đăng nhập bắng tài khoản google" Style="{StaticResource label}" HorizontalAlignment="Center" Margin="0 30 0 10"/>
                 <customControls:ControlButton DefaultColor="{StaticResource danger}"

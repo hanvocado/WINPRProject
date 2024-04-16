@@ -10,7 +10,7 @@
         xmlns:shared="clr-namespace:ThesisManagement.Views.Shared"
         mc:Ignorable="d"
         xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
-        Title="TopicView" Height="670" Width="600"
+        Title="TopicView" Height="640" Width="600"
         WindowStyle="None"
         Style="{StaticResource formStyle}"
         WindowStartupLocation="CenterScreen">
@@ -21,26 +21,25 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="25"/>
                 <RowDefinition Height="70"/>
-                <RowDefinition Height="80"/>
+                <RowDefinition Height="70"/>
                 <RowDefinition Height="70"/>
                 <RowDefinition Height="70"/>
                 <RowDefinition Height="120"/>
                 <RowDefinition Height="120"/>
-                <RowDefinition Height="50"/>
+                <RowDefinition />
             </Grid.RowDefinitions>
             
             <customControls:PopupControlBar Grid.Row="0" />
-            <Grid Grid.Row="1">
+            <StackPanel Grid.Row="1">
                 <TextBlock  Text="Đăng Ký Đề Tài" 
                             Style="{StaticResource title}" 
-                            FontSize="20"
                             TextWrapping="Wrap"
-                            Padding="0 0 0 10"
+                            Margin="0 0 0 10"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"/>
-            </Grid>
+            </StackPanel>
 
             <Border Grid.Row="2" Padding="30 0">
                 <StackPanel>
@@ -63,10 +62,6 @@
                         <TextBlock Text="Thể loại"
                                    Style="{StaticResource label}" />
                         <ComboBox Grid.Row="1"
-                                  x:Name="multiSelectionComboBox"
-                                  IsEditable="True"
-                                  IsTextSearchEnabled="True"
-                                  IsTextSearchCaseSensitive="False"
                                   VerticalAlignment="Top"
                                   Height="35"
                                   ItemsSource="{Binding Categories}"
@@ -148,17 +143,17 @@
                              VerticalScrollBarVisibility="Auto"/>
                 </StackPanel>
             </Border>
-            
-            <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
-                                            HoverColor="{StaticResource secondaryBrush}"
-                                            Command="{Binding RegisterNewTopicCommand}"
-                                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
-                                            Content="Gửi"
-                                            Width="200"
-                                            Height="50"
-                                          Margin="0 -20 0 0"
-                                            FontSize="14"
-                                            Grid.Row="8"/>
+
+            <StackPanel Grid.Row="8">
+                <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
+                                                HoverColor="{StaticResource secondaryBrush}"
+                                                Command="{Binding RegisterNewTopicCommand}"
+                                                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                                                Content="Gửi"
+                                                Width="200"
+                                                Height="50"
+                                                FontSize="14" />
+            </StackPanel>
         </Grid>
     </Border>
 </Window>

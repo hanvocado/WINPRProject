@@ -10,7 +10,7 @@
         xmlns:shared="clr-namespace:ThesisManagement.Views.Shared"
         mc:Ignorable="d"
         x:Name="topicUC"
-        Title="TopicView" Height="660" Width="650"
+        Title="TopicView" Height="625" Width="650"
         Style="{StaticResource formStyle}">
 
     <Window.DataContext>
@@ -30,16 +30,16 @@
                             Grid.Row="1">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="50" />
-                        <RowDefinition Height="75" />
-                        <RowDefinition Height="75"/>
-                        <RowDefinition Height="125"/>
-                        <RowDefinition Height="125"/>
-                        <RowDefinition Height="125"/>
-                        <RowDefinition Height="50" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="70" />
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="120"/>
+                        <RowDefinition Height="120"/>
+                        <RowDefinition Height="120"/>
+                        <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <Grid Grid.Row="0">
+                    <StackPanel Grid.Row="0">
                         <TextBlock  Text="Đề tài" 
                                     Style="{StaticResource title}" 
                                     FontSize="20"
@@ -47,7 +47,7 @@
                                     Margin="0 0 0 10"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"/>
-                    </Grid>
+                    </StackPanel>
 
                     <Border Grid.Row="1" Padding="30 0">
                         <StackPanel>
@@ -72,11 +72,11 @@
                                 <TextBlock Text="Thể loại"
                                 Style="{StaticResource label}" />
                                 <ComboBox Grid.Row="1"
-                                VerticalAlignment="Top"
-                                Height="35"
-                                ItemsSource="{Binding Categories}"
-                                SelectedValue="{Binding Category}" 
-                                Style="{StaticResource ComboBoxExtend}"/>
+                                            VerticalAlignment="Top"
+                                            Height="35"
+                                            ItemsSource="{Binding Categories}"
+                                            SelectedValue="{Binding Category}" 
+                                            Style="{StaticResource ComboBoxExtend}"/>
                             </StackPanel>
                         </Border>
 
@@ -134,14 +134,14 @@
                         </StackPanel>
                     </Border>
 
-                    <Grid Grid.Row="6" >
+                    <Grid Grid.Row="6">
                         <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
                                                         HoverColor="{StaticResource secondaryBrush}"
                                                         Content="Lưu"
                                                         Width="200"
                                                         Height="50"
+                                                      Margin="0 -20 0 0"
                                                         FontSize="14"
-                                                        Margin="0 -15 0 0"
                                                         Command="{Binding CreateOrUpdateCommand}"
                                                         CommandParameter="{Binding ElementName=topicUC}"/>
                     </Grid>

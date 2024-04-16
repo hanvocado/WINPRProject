@@ -25,5 +25,7 @@
         public static string RejectFailed = "Từ chối thất bại";
 
         public static string FileNotFound = "Không tìm thấy file";
+
+        public static string RequiredError = "Vui lòng điền đầy đủ thông tin!";
     }
 }

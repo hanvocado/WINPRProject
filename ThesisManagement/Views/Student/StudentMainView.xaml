@@ -56,17 +56,8 @@
                             <fa:IconImage Icon="RectangleList" Style="{StaticResource navIcon}" />
                         </RadioButton>
 
-                        <RadioButton Style="{StaticResource navBtn}"
-                                     Grid.Row="1"
-                                     Command="{Binding ShowStudentProfileView}">
-                            <RadioButton.ToolTip>
-                                <ToolTip Content="Hồ sơ" Style="{StaticResource navToolTip}" />
-                            </RadioButton.ToolTip>
-                            <fa:IconImage Icon="UserLarge" Style="{StaticResource navIcon}" />
-                        </RadioButton>
-
                         <RadioButton Style="{StaticResource navBtn}" 
-                                     Grid.Row="2"
+                                     Grid.Row="1"
                                      Command="{Binding ShowThesisView}">
                             <RadioButton.ToolTip>
                                 <ToolTip Content="Luận văn" Style="{StaticResource navToolTip}" />
@@ -74,6 +65,15 @@
                             <fa:IconImage Icon="Book" Style="{StaticResource navIcon}" />
                         </RadioButton>
                         
+                        <RadioButton Style="{StaticResource navBtn}"
+                                     Grid.Row="2"
+                                     Command="{Binding ShowStudentProfileView}">
+                            <RadioButton.ToolTip>
+                                <ToolTip Content="Hồ sơ" Style="{StaticResource navToolTip}" />
+                            </RadioButton.ToolTip>
+                            <fa:IconImage Icon="UserLarge" Style="{StaticResource navIcon}" />
+                        </RadioButton>
+
                         <RadioButton Style="{StaticResource navBtn}" 
                                      Grid.Row="3"
                                      Command="{Binding LogoutCommand}">

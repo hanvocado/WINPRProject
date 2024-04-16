@@ -23,7 +23,7 @@ namespace ThesisManagement.Views.Professor
             if (!Window.GetWindow(this).IsActive)
                 return;
 
-            var listViewItem = sender as ListViewItem;
+            var listViewItem = sender as ListBoxItem;
             var thesis = listViewItem?.DataContext as Thesis;
             ReviewThesesVM dataContext = this.DataContext as ReviewThesesVM ?? new ReviewThesesVM();
             if (thesis != null)

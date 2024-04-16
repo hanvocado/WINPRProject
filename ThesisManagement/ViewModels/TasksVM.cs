@@ -224,7 +224,8 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteCreateOrUpdateCommand(object obj)
         {
-            if (ValidTask())
+            ValidateInput();
+            if (!existError)
             {
                 TaskView taskView = obj as TaskView;
                 Task task = new Task
@@ -296,11 +297,11 @@ namespace ThesisManagement.ViewModels
             Progress = 0;
         }
 
-        private bool ValidTask()
+        private void ValidateInput()
         {
-            bool validName = Validate(nameof(Name), name, CreateOrUpdateCommand);
-            bool validDes = Validate(nameof(Description), description, CreateOrUpdateCommand);
-            return validName && validDes;
+            ExistError = String.IsNullOrEmpty(name) || String.IsNullOrEmpty(description);
+            if (existError)
+                ShowMessage(false, null, Message.RequiredError);
         }
     }
 }

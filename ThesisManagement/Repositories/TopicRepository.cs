@@ -14,8 +14,8 @@ namespace ThesisManagement.Repositories
         List<Topic> GetAll();
         List<Topic> GetMyTopicAndProfessorTopics(string studentId);
         List<Topic> GetAll(string professorId);
-        List<Topic> GetByTopicName(string name);
-        List<Topic> GetFilteredTopics(string category, string technology, string professorname);
+        List<Topic> Get(string topicName, string professorId);
+        List<Topic> Get(string category, string technology, string professorname);
 
         bool CanBeDeleted(int topicId);
     }
@@ -68,7 +68,7 @@ namespace ThesisManagement.Repositories
             return topic;
         }
 
-        public List<Topic> GetFilteredTopics(string category, string technology, string professorname)
+        public List<Topic> Get(string category, string technology, string professorname)
         {
             IEnumerable<Topic> filteredTopicList = _context.Topics.Include(t => t.Professor).Where(t => String.IsNullOrEmpty(t.StudentId));
 
@@ -97,10 +97,10 @@ namespace ThesisManagement.Repositories
             return topics;
         }
 
-        public List<Topic> GetByTopicName(string name)
+        public List<Topic> Get(string name, string professorId)
         {
             var topics = _context.Topics.Include(t => t.Professor)
-                                        .Where(t => t.Name.ToLower().Contains(name.ToLower()))
+                                        .Where(t => t.ProfessorId == professorId && t.Name.ToLower().Contains(name.ToLower()))
                                         .AsNoTracking().ToList();
             return topics;
         }
