@@ -27,25 +27,7 @@ namespace ThesisManagement.ViewModels
             set
             {
                 isLoading = value;
-                if (value)
-                    LoadingVisibility = Visibility.Visible;
-                else
-                    LoadingVisibility = Visibility.Hidden;
                 OnPropertyChanged(nameof(IsLoading));
-            }
-        }
-
-        private Visibility loadingVisibility = Visibility.Hidden;
-        public Visibility LoadingVisibility
-        {
-            get
-            {
-                return loadingVisibility;
-            }
-            set
-            {
-                loadingVisibility = value;
-                OnPropertyChanged(nameof(LoadingVisibility));
             }
         }
 

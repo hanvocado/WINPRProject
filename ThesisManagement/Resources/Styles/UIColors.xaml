@@ -23,9 +23,9 @@
     <SolidColorBrush x:Key="labelColor" Color = "#173373" />
     <SolidColorBrush x:Key="nearWhite" Color="#f0f0f0" />
 
-    <LinearGradientBrush x:Key="cs_Backgroud" StartPoint="0,0" EndPoint="0,5">
+    <LinearGradientBrush x:Key="lightBlueBG" StartPoint="0,0" EndPoint="0,5">
         <GradientStop Color="White" Offset="0.0"/>
-        <GradientStop Color="#283593" Offset="0.5"/>
+        <GradientStop Color="#e6edfb" Offset="0.5"/>
     </LinearGradientBrush>
 
     <LinearGradientBrush x:Key="cs_PopupBackgroud" StartPoint="0,0" EndPoint="0,5">
