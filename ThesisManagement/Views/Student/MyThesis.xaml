@@ -20,14 +20,9 @@
         <viewModels:MyThesisVM />
     </UserControl.DataContext>
 
-    <md:Card Background="{DynamicResource MaterialDesignPaper}" Margin="0,0,0,10">
-        <Grid Margin="5">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <Grid Grid.Row="0">
+    <md:Card Background="{DynamicResource MaterialDesignPaper}" Margin="0,0,0,10" Padding="5">
+        <StackPanel>
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="5*"/>
@@ -49,7 +44,7 @@
             </Grid>
 
 
-            <Grid Grid.Row="1">
+            <Grid>
                 <TabControl
                     HorizontalContentAlignment="Center"
                     Style="{StaticResource MaterialDesignUniformTabControl}">
@@ -85,6 +80,6 @@
                     </TabItem>
                 </TabControl>
             </Grid>
-        </Grid>
+        </StackPanel>
     </md:Card>
 </UserControl>

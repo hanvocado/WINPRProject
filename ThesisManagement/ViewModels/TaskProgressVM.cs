@@ -1,7 +1,9 @@
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Win32;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows.Input;
+using System.Xml.Linq;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
@@ -142,12 +144,12 @@ namespace ThesisManagement.ViewModels
             }
         }
 
-        private TasksView parentTasksView;
+        private TaskProgressHistoryVM parentVM;
 
-        public TasksView ParentTasksView
+        public TaskProgressHistoryVM ParentVM
         {
-            get { return parentTasksView; }
-            set { parentTasksView = value; }
+            get { return parentVM; }
+            set { parentVM = value; }
         }
 
 
@@ -228,31 +230,39 @@ namespace ThesisManagement.ViewModels
                 var successAttach = UpdateAttachments();
                 ShowMessage(updateResponse && updateTask && successAttach, Message.UpdateSuccess, Message.UpdateFailed);
             }
-            ((TasksVM)parentTasksView.DataContext).Reload();
+            parentVM?.Reload();
+            parentVM?.ParentTasksVM?.Reload();
             taskProgressView?.Close();
 
         }
 
         public bool UpdateAttachments()
         {
-            foreach (var attachment in Attachments)
+            if (Attachments.Count() > 0)
             {
-                attachment.TaskProgressId = lastestTaskProgress.Id;
+                foreach (var attachment in Attachments)
+                {
+                    attachment.TaskProgressId = lastestTaskProgress.Id;
+                }
+                return _attachmentRepo.AddRange(Attachments);
             }
-            return _attachmentRepo.AddRange(Attachments); 
+            return true;
         }
 
         private void UpdateSelectedTaskProgressProperties()
         {
-            selectedTaskProgress.TaskId = taskId;
             if (SessionInfo.Role == Role.Professor)
             {
                 selectedTaskProgress.Id = lastestTaskProgress.Id;
+                selectedTaskProgress.TaskId = taskId;
                 selectedTaskProgress.Response = response;
                 selectedTaskProgress.ProfessorUpdateAt = DateTime.Now;
             }
             else if(SessionInfo.Role == Role.Student)
             {
+                //selectedTaskProgress.ResetProperties();
+                selectedTaskProgress.Id = id;
+                selectedTaskProgress.TaskId = taskId;
                 selectedTaskProgress.Description = description;
                 selectedTaskProgress.StudentId = student.Id;
                 selectedTaskProgress.StudentUpdateAt = DateTime.Now;

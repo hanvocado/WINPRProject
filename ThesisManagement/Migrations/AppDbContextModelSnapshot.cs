@@ -341,7 +341,7 @@ namespace ThesisManagement.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ProfessorUpdateAt")
+                    b.Property<DateTime?>("ProfessorUpdateAt")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Progress")
@@ -351,9 +351,10 @@ namespace ThesisManagement.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StudentId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("StudentUpdateAt")
+                    b.Property<DateTime?>("StudentUpdateAt")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("TaskId")
@@ -558,7 +559,9 @@ namespace ThesisManagement.Migrations
                 {
                     b.HasOne("ThesisManagement.Models.Student", "Student")
                         .WithMany("TaskProgresses")
-                        .HasForeignKey("StudentId");
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ThesisManagement.Models.Task", "Task")
                         .WithMany("TaskProgresses")

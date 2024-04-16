@@ -8,86 +8,96 @@
              xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="450" d:DesignWidth="700"
-             SizeChanged="UserControl_SizeChanged"
              Background="white">
     <UserControl.DataContext>
         <viewModels:ReviewThesesVM/>
     </UserControl.DataContext>
 
-    <StackPanel>
-        <StackPanel Orientation="Horizontal"
-            Margin="0 5 0 10"
-            HorizontalAlignment="Center">
-            <Image Source="/Resources/Images/UTE.png" 
+    <StackPanel Margin="5">
+        <md:Card Background="{StaticResource nearWhite}" SnapsToDevicePixels="True" >
+            <StackPanel Orientation="Horizontal"
+                    Margin="0 5 0 10"
+                    HorizontalAlignment="Center">
+                <Image Source="/Resources/Images/UTE.png" 
                    Margin="0 0 20 0"
                    Height="30" Width="30" />
-            <TextBlock Style="{StaticResource title}" 
-                Text="DANH SÁCH SINH VIÊN ĐĂNG KÝ ĐỀ TÀI"
-                HorizontalAlignment="Left" />
-        </StackPanel>
-        <ListView Grid.Row="1"
-                  Background="{DynamicResource MaterialDesignPaper}"
-                  Name="ThesisListView"
-                  MouseLeftButtonUp="ListViewItem_MouseEnter"
-                  ItemsSource="{Binding WaitingTheses, UpdateSourceTrigger=PropertyChanged}"
-                  SelectedItem="{Binding SelectedThesis, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Width="100">
-                        <GridViewColumn.Header>
-                            <GridViewColumnHeader Template="{StaticResource lvHeader}" />
-                        </GridViewColumn.Header>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel VerticalAlignment="Center"
-                                            Orientation="Horizontal">
-                                    <customControls:ControlButton DefaultColor="{StaticResource success}"
-                                                           HoverColor="{StaticResource successHover}"
-                                                           Style="{StaticResource lvBtn}"
-                                                           Margin="5"
-                                                           Command="{Binding DataContext.ApproveCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
-                                        <customControls:ControlButton.Content>
-                                            <fa:IconImage Icon="Check" Style="{StaticResource btnIcon}" />
-                                        </customControls:ControlButton.Content>
-                                    </customControls:ControlButton>
+                <TextBlock Style="{StaticResource title}" 
+                        Text="SINH VIÊN CHỜ DUYỆT ĐỀ TÀI"
+                        HorizontalAlignment="Left" />
+            </StackPanel>
+        </md:Card>
 
-                                    <customControls:ControlButton DefaultColor="{StaticResource danger}"
-                                                           HoverColor="{StaticResource dangerHover}"
-                                                           Style="{StaticResource lvBtn}"
-                                                           Command="{Binding DataContext.RejectCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
-                                        <customControls:ControlButton.Content>
-                                            <fa:IconImage Icon="X" Style="{StaticResource btnIcon}" />
-                                        </customControls:ControlButton.Content>
-                                    </customControls:ControlButton>
-                                </StackPanel>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Width="330"
-                                    DisplayMemberBinding="{Binding Topic.Name, Mode=TwoWay}">
-                        <GridViewColumn.Header>
-                            <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Đề tài" />
-                        </GridViewColumn.Header>
-                    </GridViewColumn>
-                    <GridViewColumn Width="240">
-                        <GridViewColumn.Header>
-                            <GridViewColumnHeader Template="{StaticResource lvHeader}" Tag="Sinh viên" />
-                        </GridViewColumn.Header>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <ItemsControl ItemsSource="{Binding Students}">
+        <Border Background="{StaticResource nearWhite}"
+            Padding="5" Margin="0 10 0 5"
+            CornerRadius="10">
+            <ListBox ItemsSource="{Binding WaitingTheses}" 
+                 x:Name="ThesisListView"
+                 Background="{Binding RelativeSource={RelativeSource AncestorType=Border}, Path=Background}"
+                 BorderThickness="0" ItemContainerStyle="{StaticResource listBoxItemStyle}"
+                 MouseLeftButtonUp="ListViewItem_MouseEnter">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border CornerRadius="10" Padding="5">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="5*" />
+                                    <ColumnDefinition Width="1.5*" />
+                                </Grid.ColumnDefinitions>
+                                <ItemsControl ItemsSource="{Binding Students}"
+                                              VerticalAlignment="Center"
+                                          Grid.Column="1">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="{Binding Name}" Margin="2"/>
+                                            <Border BorderBrush="{StaticResource warning}" CornerRadius="5" Padding="15 5" BorderThickness="1" Margin="5" HorizontalAlignment="Center" >
+                                                <StackPanel Orientation="Horizontal">
+                                                    <fa:IconImage Icon="UserAlt" Height="12" Foreground="{StaticResource warning}" Margin="0 0 10 0" />
+                                                    <StackPanel>
+                                                        <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" FontWeight="DemiBold" Foreground="Black"/>
+                                                        <TextBlock Text="{Binding Id}" Foreground="{StaticResource secondaryTxtColor}"/>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </Border>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
+                                <Border Grid.Column="0" Margin="5 5 5 5">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="{Binding Topic.Name}" Style="{StaticResource topicTitle}"
+                                                   Foreground="{StaticResource warningHover}"/>
+                                        <StackPanel Orientation="Horizontal" Grid.Row="1">
+                                            <customControls:ControlButton DefaultColor="{StaticResource success}"
+                                                                          Margin="0 10 0 0"
+                                                           HoverColor="{StaticResource successHover}"
+                                                           Style="{StaticResource lvBtn}"
+                                                           Command="{Binding DataContext.ApproveCommand, RelativeSource={RelativeSource AncestorType=ListBox}}">
+                                                <customControls:ControlButton.Content>
+                                                    <fa:IconImage Icon="Check" Style="{StaticResource btnIcon}" />
+                                                </customControls:ControlButton.Content>
+                                            </customControls:ControlButton>
+
+                                            <customControls:ControlButton DefaultColor="{StaticResource danger}"
+                                                                          Margin="10 10 0 0"
+                                                           HoverColor="{StaticResource dangerHover}"
+                                                           Style="{StaticResource lvBtn}"
+                                                           Command="{Binding DataContext.RejectCommand, RelativeSource={RelativeSource AncestorType=ListBox}}">
+                                                <customControls:ControlButton.Content>
+                                                    <fa:IconImage Icon="X" Style="{StaticResource btnIcon}" />
+                                                </customControls:ControlButton.Content>
+                                            </customControls:ControlButton>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
     </StackPanel>
 </UserControl>

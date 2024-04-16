@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Windows;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
@@ -150,14 +149,14 @@ namespace ThesisManagement.ViewModels
             }
         }
 
-        public Visibility DeleteBtnVisibility
+        private IEnumerable<Task> undoneTasks;
+        public IEnumerable<Task> UndoneTasks
         {
-            get
+            get { return undoneTasks; }
+            set
             {
-                if (SessionInfo.Role == Role.Student)
-                    return Visibility.Hidden;
-                else
-                    return Visibility.Visible;
+                undoneTasks = value;
+                OnPropertyChanged(nameof(UndoneTasks));
             }
         }
 
@@ -190,10 +189,9 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteShowTaskHistory(object obj)
         {
-            TasksView? parentTasksView = obj as TasksView;
             var viewModel = new TaskProgressHistoryVM
             {
-                ParentTasksView = parentTasksView,
+                ParentTasksVM = this,
                 TaskId = id
             };
             var view = new TaskProgressHistoryView { DataContext = viewModel };
@@ -285,6 +283,7 @@ namespace ThesisManagement.ViewModels
             DoneTasks = _taskRepo.GetDoneTasks(thesis.Id);
             OverdueTasks = _taskRepo.GetOverdueTasks(thesis.Id);
             TasksPieData = _taskRepo.GetTasksPieData(thesis.Id);
+            UndoneTasks = _taskRepo.GetUndoneTasks(thesis.Id);
         }
 
         private void ResetTaskProperties()

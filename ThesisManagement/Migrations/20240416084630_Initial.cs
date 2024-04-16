@@ -190,12 +190,12 @@ namespace ThesisManagement.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TaskId = table.Column<int>(type: "int", nullable: false),
-                    StudentId = table.Column<string>(type: "nvarchar(20)", nullable: true),
+                    StudentId = table.Column<string>(type: "nvarchar(20)", nullable: false),
                     Progress = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Response = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StudentUpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ProfessorUpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    StudentUpdateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ProfessorUpdateAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -204,7 +204,8 @@ namespace ThesisManagement.Migrations
                         name: "FK_TaskProgresses_Students_StudentId",
                         column: x => x.StudentId,
                         principalTable: "Students",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_TaskProgresses_Tasks_TaskId",
                         column: x => x.TaskId,

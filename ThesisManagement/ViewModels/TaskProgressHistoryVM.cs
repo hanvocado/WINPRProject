@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.Eventing.Reader;
+﻿using Syncfusion.XPS;
+using System.Diagnostics.Eventing.Reader;
 using System.Windows;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
@@ -10,15 +11,15 @@ namespace ThesisManagement.ViewModels
     public class TaskProgressHistoryVM : ViewModelBase
     {
         private readonly ITaskRepository _taskRepo;
-        private readonly ITaskProgressRepository _taskProgressRepo;
+        private readonly ITaskProgressRepository _progressRepo;
         private readonly IStudentRepository _studentRepo;
 
-        private TasksView? parentTasksView;
+        private TasksVM? parentTasksVM;
 
-        public TasksView? ParentTasksView
+        public TasksVM? ParentTasksVM
         {
-            get { return parentTasksView; }
-            set { parentTasksView = value; }
+            get { return parentTasksVM; }
+            set { parentTasksVM = value; }
         }
 
         private int taskId;
@@ -31,8 +32,7 @@ namespace ThesisManagement.ViewModels
                 taskId = value;
                 if (taskId > 0)
                 {
-                    this.Task = _taskRepo.GetTask(taskId);
-                    this.Progresses = task.TaskProgresses ?? new List<TaskProgress>();
+                    Reload();
                 }
             }
         }
@@ -72,33 +72,49 @@ namespace ThesisManagement.ViewModels
         public TaskProgressHistoryVM()
         {
             _taskRepo = new TaskRepository();
-            _taskProgressRepo = new TaskProgressRepository();
+            _progressRepo = new TaskProgressRepository();
             _studentRepo = new StudentRepository();
+            _progressRepo = new TaskProgressRepository();
             ShowUpdateTaskProgressView = new ViewModelCommand(ExecuteShowUpdateTaskProgressView);
         }
 
         private void ExecuteShowUpdateTaskProgressView(object obj)
         {
-            var professorResponse = _taskProgressRepo?.GetLastestTaskProgress(taskId).Response;
-            if (SessionInfo.Role == Role.Student && string.IsNullOrEmpty(professorResponse))
+            var professorResponse = _progressRepo?.GetLastestTaskProgress(taskId).Response;
+            int numOfProgress = _progressRepo.CountTaskProgress(taskId);
+            if(numOfProgress == 0 && SessionInfo.Role == Role.Professor)
             {
-                MessageBox.Show("Đang đợi phàn hồi từ giảng viên hướng dẫn");
-            }
-            else if (SessionInfo.Role == Role.Professor && !string.IsNullOrEmpty(professorResponse))
-            {
-                MessageBox.Show("Đang đợi trả lời từ sinh viên");
+                MessageBox.Show("Giảng viên chưa thể phản hồi");
             }    
             else
             {
-                var vm = new TaskProgressVM
+                if (numOfProgress > 0 && SessionInfo.Role == Role.Student && string.IsNullOrEmpty(professorResponse))
                 {
-                    TaskId = taskId,
-                    Student = _studentRepo.GetStudent(SessionInfo.UserId),
-                    ParentTasksView = parentTasksView
-                };
+                    MessageBox.Show("Đang đợi phàn hồi từ giảng viên hướng dẫn");
+                    return;
+                }
+                else if (SessionInfo.Role == Role.Professor && !string.IsNullOrEmpty(professorResponse))
+                {
+                    MessageBox.Show("Đang đợi trả lời từ sinh viên");
+                    return;
+                }
+                var vm = new TaskProgressVM();
+                TaskProgress lastestTaskProgress = _progressRepo.GetLastestTaskProgress(taskId);
+                vm.TaskId = taskId;
+                vm.SelectedTaskProgress = lastestTaskProgress;
+                if (SessionInfo.Role == Role.Student)
+                {
+                    vm.Student = _studentRepo.GetStudent(SessionInfo.UserId);
+                }
                 var updateView = new UpdateTaskProgressView { DataContext = vm };
                 updateView.Show();
             } 
+        }
+
+        public void Reload()
+        {
+            this.Task = _taskRepo.GetTask(taskId);
+            this.Progresses = task.TaskProgresses ?? new List<TaskProgress>();
         }
     }
 }

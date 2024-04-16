@@ -18,6 +18,7 @@ namespace ThesisManagement.Repositories
         bool Delete(int id);
         ObservableCollection<TaskProgress> GetAll();
         TaskProgress GetLastestTaskProgress(int taskId);
+        int CountTaskProgress (int taskId);
     }
 
     public class TaskProgressRepository : ITaskProgressRepository
@@ -74,8 +75,17 @@ namespace ThesisManagement.Repositories
                                                              .Where(tp => tp.TaskId == taskId)
                                                              .AsNoTracking()
                                                              .OrderByDescending(tp => tp.Id)
-                                                             .FirstOrDefault();
+                                                             .FirstOrDefault() ?? new TaskProgress(); 
             return lastestTaskProgress;
+        }
+
+        public int CountTaskProgress(int taskId)
+        {
+            int count = _context.TaskProgresses.Include(t => t.Task)
+                                               .Where(tp => tp.TaskId == taskId)
+                                               .AsNoTracking()
+                                               .Count();
+            return count;
         }
     }
 }

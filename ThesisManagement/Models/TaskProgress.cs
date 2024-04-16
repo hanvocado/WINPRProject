@@ -19,16 +19,28 @@ namespace ThesisManagement.Models
 
         public string? Response { get; set; }
 
-        public DateTime StudentUpdateAt { get; set; }
-        public DateTime ProfessorUpdateAt { get; set; }
+        public DateTime? StudentUpdateAt { get; set; }
+        public DateTime? ProfessorUpdateAt { get; set; }
 
         [ForeignKey(nameof(TaskId))]
         public Task Task { get; set; }
 
         [ForeignKey(nameof(StudentId))]
-        public Student? Student { get; set; }
+        public Student Student { get; set; }
 
         public ICollection<Attachment>? Attachments { get; set; }
 
+        public void ResetProperties()
+        {
+            Id = 0;
+            TaskId = 0;
+            StudentId = string.Empty;
+            Progress = 0;
+            Description = string.Empty;
+            Response = string.Empty;
+            StudentUpdateAt = null;
+            ProfessorUpdateAt = null;
+            Task = new Task();        
+        }
     }
 }

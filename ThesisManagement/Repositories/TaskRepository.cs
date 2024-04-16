@@ -19,6 +19,7 @@ namespace ThesisManagement.Repositories
         IEnumerable<Task> GetDoneTasks(int thesisId);
         IEnumerable<Task> GetOverdueTasks(int thesisId);
         IEnumerable<TasksPie> GetTasksPieData(int thesisId);
+        IEnumerable<Task> GetUndoneTasks(int thesisId);
     }
 
     public class TaskRepository : ITaskRepository
@@ -136,6 +137,14 @@ namespace ThesisManagement.Repositories
                                     .ThenInclude(p => p.Attachments)
                                     .FirstOrDefault(t => t.Id == id);
             return task;
+        }
+
+        public IEnumerable<Task> GetUndoneTasks(int thesisId)
+        {
+            var tasks = _context.Tasks.Where(t => t.ThesisId == thesisId && t.Progress < 100)
+                                      .AsNoTracking()
+                                      .ToList();
+            return tasks;
         }
     }
 }

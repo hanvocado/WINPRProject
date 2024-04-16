@@ -74,13 +74,12 @@
                 </ListView.Resources>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn>
+                        <GridViewColumn Width="800">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Border Padding="5 10">
                                         <StackPanel>
                                             <TextBlock Style="{StaticResource topicTitle}"
-                                                       TextWrapping="Wrap"
                                                        MinWidth="770"
                                                        Text="{Binding Name}" />
                                             <Border Margin="0 5">

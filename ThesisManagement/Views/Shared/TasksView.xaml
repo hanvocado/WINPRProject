@@ -114,7 +114,7 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <md:ColorZone Mode="Custom" ClipToBounds="False" Background="{StaticResource nearWhite}" Margin="0 0 5 0" CornerRadius="10">
+            <Border Background="{StaticResource nearWhite}" Margin="0 0 5 0" CornerRadius="10">
                 <ListBox ItemsSource="{Binding PendingTasks}" 
                          SelectedItem="{Binding SelectedTask}"
                          Background="{Binding RelativeSource={RelativeSource AncestorType=Border}, Path=Background}"
@@ -145,28 +145,26 @@
                                 <TextBlock Text="{Binding Description}" Grid.Row="2" />
                                 <ProgressBar Value="{Binding Progress, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                             Foreground="{StaticResource accent}"
-                                            MinWidth="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=ActualWidth}"
                                             Grid.Row="3"
-                                            Margin="0 5" />
+                                            Margin="0 5 0 5" />
                                 <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft"
                                                     Grid.Row="4">
                                     <customControls:ControlButton Style="{StaticResource lvBtn}"
                                                                 DefaultColor="{StaticResource warning}"
                                                                 HoverColor="{StaticResource warningHover}"
                                                                 Margin="2 0 0 5"
-                                                                CommandParameter="{Binding ElementName=tasksViewUC}"
                                                                 Command="{Binding DataContext.ShowTaskProgressHistory,RelativeSource={RelativeSource AncestorType=ListBox}}">
                                         <customControls:ControlButton.Content>
                                             <fa:IconImage Icon="Message" Style="{StaticResource btnIcon}" />
                                         </customControls:ControlButton.Content>
                                     </customControls:ControlButton>
                                     <customControls:ControlButton Style="{StaticResource lvBtn}"
-                                                                            Visibility="{Binding DataContext.DeleteBtnVisibility ,RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                                            DefaultColor="{StaticResource danger}"
-                                                                            HoverColor="{StaticResource dangerHover}"
-                                                                            Margin="5 0 5 5"
-                                                                            CommandParameter="{Binding Id}"
-                                                                            Command="{Binding DataContext.DeleteTaskCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
+                                                                Visibility="{Binding DataContext.IsProfessor ,RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource VisibilityConverter}}"
+                                                                DefaultColor="{StaticResource danger}"
+                                                                HoverColor="{StaticResource dangerHover}"
+                                                                Margin="5 0 5 5"
+                                                                CommandParameter="{Binding Id}"
+                                                                Command="{Binding DataContext.DeleteTaskCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
                                         <customControls:ControlButton.Content>
                                             <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
                                         </customControls:ControlButton.Content>
@@ -176,9 +174,9 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-            </md:ColorZone>
+            </Border>
 
-            <md:ColorZone Background="{StaticResource nearWhite}" Margin="5 0 0 0"
+            <Border Background="{StaticResource nearWhite}" Margin="5 0 0 0"
                           CornerRadius="10"
                           ClipToBounds="False"
                           Grid.Column="1">
@@ -230,7 +228,7 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-            </md:ColorZone>
+            </Border>
         </Grid>
     </Grid>
 </UserControl>

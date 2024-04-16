@@ -15,6 +15,11 @@ namespace ThesisManagement.ViewModels
 {
     public class ViewModelBase : INotifyPropertyChanged, INotifyDataErrorInfo
     {
+        public bool IsProfessor
+        {
+            get { return SessionInfo.Role == Role.Professor; }
+        }
+
         Dictionary<string, List<string>> Errors = new Dictionary<string, List<string>>();
         public bool HasErrors => Errors.Count > 0;
 
