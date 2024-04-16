@@ -22,7 +22,7 @@ namespace ThesisManagement.Views.Professor
 
         private void ListViewItem_Click(object sender, RoutedEventArgs e)
         {
-            var listView = sender as ListView;
+            var listView = sender as ListBox;
             var selectedItem = listView?.SelectedItem;
 
             if (selectedItem != null)
@@ -71,7 +71,7 @@ namespace ThesisManagement.Views.Professor
             if (!Window.GetWindow(this).IsActive)
                 return;
 
-            var listViewItem = sender as ListViewItem;
+            var listViewItem = sender as ListBoxItem;
             var topic = listViewItem?.DataContext as Topic;
             TopicsVM dataContext = this.DataContext as TopicsVM ?? new TopicsVM();
             if (topic != null)
@@ -93,7 +93,7 @@ namespace ThesisManagement.Views.Professor
             {
                 foreach (var item in TopicListView.Items)
                 {
-                    ListViewItem listViewItem = (ListViewItem)TopicListView.ItemContainerGenerator.ContainerFromItem(item);
+                    var listViewItem = (ListBoxItem)TopicListView.ItemContainerGenerator.ContainerFromItem(item);
                     if (listViewItem != null)
                         listViewItem.MouseEnter += ListViewItem_MouseEnter;
                 }

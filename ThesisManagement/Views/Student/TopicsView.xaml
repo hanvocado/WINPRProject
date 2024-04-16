@@ -16,125 +16,120 @@
         <viewModels:TopicsVM/>
     </UserControl.DataContext>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+    <md:Card Background="{DynamicResource MaterialDesignPaper}" Margin="0 0 0 10">
+        <Grid Background="{DynamicResource MaterialDesignPaper}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="62"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="120"/>
-            </Grid.ColumnDefinitions>
+            <Border Margin="10 10 10 0" Background="White"
+                    CornerRadius="10"
+                    Padding="10 5">
+                <Grid Grid.Row="0" Background="{Binding}">
+                    <DockPanel Grid.Column="0" >
+                        <fa:IconImage Icon="Search"
+                                  Margin="0 4 5 0"
+                                  Height="17" 
+                                  Width="20"/>
+                        <ComboBox VerticalAlignment="Center"
+                              Padding="10 6"
+                              Margin="0,0,20,0"
+                              Width="180"
+                              ItemsSource="{Binding Categories}"
+                              SelectedValue="{Binding FilterCategory}"
+                              md:HintAssist.Hint="Thể loại"
+                              md:TextFieldAssist.HasClearButton="True"
+                              Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                        </ComboBox>
 
-            <StackPanel Grid.Column="0"
-                    Orientation="Horizontal">
-                <fa:IconImage Icon="Search"
-                          Margin="0 4 5 0"
-                          Height="17" 
-                          Width="20"/>
-                <ComboBox VerticalAlignment="Center"
-                      Padding="10"
-                      Margin="0,0,20,0"
-                      Width="200"
-                      ItemsSource="{Binding Categories}"
-                      SelectedValue="{Binding FilterCategory}"
-                      md:HintAssist.Hint="Thể loại"
-                      md:TextFieldAssist.HasClearButton="True"
-                      Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                </ComboBox>
+                        <ComboBox VerticalAlignment="Center"
+                                  Padding="10 6"
+                                  Margin="0,0,20,0"
+                                  Width="180"
+                                  ItemsSource="{Binding Technologies}"
+                                  DisplayMemberPath="Name"
+                                  SelectedValuePath="Name"
+                                  SelectedValue="{Binding FilterTechnology}"
+                                  md:HintAssist.Hint="Công nghệ"
+                                  md:TextFieldAssist.HasClearButton="True"
+                                  Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                        </ComboBox>
 
-                <ComboBox VerticalAlignment="Center"
-                          Padding="10"
-                          Margin="0,0,20,0"
-                          Width="200"
-                          ItemsSource="{Binding Technologies}"
-                          DisplayMemberPath="Name"
-                          SelectedValuePath="Name"
-                          SelectedValue="{Binding FilterTechnology}"
-                          md:HintAssist.Hint="Công nghệ"
-                          md:TextFieldAssist.HasClearButton="True"
-                          Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                </ComboBox>
+                        <ComboBox VerticalAlignment="Center"
+                                  Padding="10 6"
+                                  Width="200"
+                                  ItemsSource="{Binding Professors}"
+                                  SelectedValuePath="Name"
+                                  DisplayMemberPath="Name"
+                                  SelectedValue="{Binding FilterProfessorName}"
+                                  md:HintAssist.Hint="Giảng viên"
+                                  md:TextFieldAssist.HasClearButton="True"
+                                  Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                        </ComboBox>
 
-                <ComboBox VerticalAlignment="Center"
-                          Padding="10"
-                          Width="200"
-                          ItemsSource="{Binding Professors}"
-                          SelectedValuePath="Name"
-                          DisplayMemberPath="Name"
-                          SelectedValue="{Binding FilterProfessorName}"
-                          md:HintAssist.Hint="Giảng viên"
-                          md:TextFieldAssist.HasClearButton="True"
-                          Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                </ComboBox>
+                        <customControls:ControlButton Grid.Column="1"
+                                                        HorizontalAlignment="Right"
+                                                        DockPanel.Dock="Right"
+                                                        Padding="20 0"
+                                                      Width="100"
+                                                        DefaultColor="{StaticResource primaryBrush}"
+                                                        HoverColor="{StaticResource secondaryBrush}"
+                                                        Command="{Binding ShowTopicViewCommand}" >
+                            <customControls:ControlButton.Content>
+                                <TextBlock Text="+ Đề xuất" Style="{StaticResource btnContent}"/>
+                            </customControls:ControlButton.Content>
+                        </customControls:ControlButton>
+                    </DockPanel>
+                </Grid>
+            </Border>
 
-            </StackPanel>
+            <Border Grid.Row="1" Background="{Binding}"
+                    Padding="10">
+                <ListBox Name="TopicsListView"
+                         Background="{Binding}"
+                         BorderThickness="0"
+                         ItemContainerStyle="{StaticResource listBoxItemStyle}"
+                         ItemsSource="{Binding Topics}"
+                         SelectedItem="{Binding SelectedTopic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         MouseLeftButtonUp="ListViewItem_Click">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="5 10">
+                                <StackPanel>
+                                    <DockPanel>
+                                        <TextBlock Style="{StaticResource topicTitle}"
+                                                   Text="{Binding Name}" />
+                                        <Border CornerRadius="5"
+                                                DockPanel.Dock="Right">
+                                            <sf:SfBadge Content="{Binding RegisteredStatusByCurrentUser}" Shape="Oval"
+                                                        Background="{StaticResource info}"
+                                                        MaxWidth="80"
+                                                        FontWeight="Medium"
+                                                        Padding="0 4" />
+                                        </Border>
 
-            <customControls:ControlButton Grid.Column="1"
-                                          DefaultColor="{StaticResource primaryBrush}"
-                                          HoverColor="{StaticResource secondaryBrush}"
-                                          Command="{Binding ShowTopicViewCommand}"
-                                          Width="80">
-                <customControls:ControlButton.Content>
-                    <TextBlock Text="+ Đề xuất" Style="{StaticResource btnContent}"/>
-                </customControls:ControlButton.Content>
-            </customControls:ControlButton>
-
-        </Grid>
-
-        <Border Grid.Row="1" Margin="0 10 0 0">
-            <ListView Grid.Row="1"
-                      Background="{DynamicResource MaterialDesignPaper}"
-                    Name="TopicsListView"
-                    ItemsSource="{Binding Topics,  UpdateSourceTrigger=PropertyChanged}"
-                    MouseLeftButtonUp="ListViewItem_Click"
-                    SelectedItem="{Binding SelectedTopic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                <ListView.Resources>
-                    <Style TargetType="GridViewColumnHeader">
-                        <Setter Property="Visibility" Value="Collapsed"/>
-                    </Style>
-                </ListView.Resources>
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Width="800">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Border Padding="5 10">
-                                        <StackPanel>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Style="{StaticResource topicTitle}"
-                                                           MinWidth="770"
-                                                           Text="{Binding Name}" />
-                                                <!--<sf:SfBadge Content="{Binding RegisteredStatusByCurrentUser}" Shape="Oval" Margin="10 -4 5 4"
-                                                            Background="{StaticResource info}"
-                                                            Padding="2" FontWeight="Medium"/>-->
-                                            </StackPanel>
-                                            <Border Margin="0 5">
-                                                <TextBlock Foreground="DarkGray" FontWeight="Medium">
+                                    </DockPanel>
+                                    <Border Margin="0 5">
+                                        <TextBlock Foreground="DarkGray" FontWeight="Medium">
                                                     <Run Text="GVHD: " />
                                                     <Run Text="{Binding Professor.Name}" />
-                                                </TextBlock>
-                                            </Border>
-                                            <StackPanel Orientation="Horizontal">
-                                                <Border Background="White" CornerRadius="4" Padding="10 3" BorderBrush="{StaticResource info}" BorderThickness="1">
-                                                    <TextBlock Text="{Binding Category}" Foreground="{StaticResource info}"/>
-                                                </Border>
-                                                <Border Background="White" CornerRadius="4" Padding="10 3" BorderBrush="{StaticResource info}" BorderThickness="1" Margin="5 0">
-                                                    <TextBlock Text="{Binding Technology}" Foreground="{StaticResource info}"/>
-                                                </Border>
-                                            </StackPanel>
-                                        </StackPanel>
+                                        </TextBlock>
                                     </Border>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>                        
-                    </GridView>
-                </ListView.View>
-            </ListView>
-
-        </Border>
-
-    </Grid>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border Background="White" CornerRadius="4" Padding="10 3" BorderBrush="{StaticResource info}" BorderThickness="1">
+                                            <TextBlock Text="{Binding Category}" Foreground="{StaticResource info}"/>
+                                        </Border>
+                                        <Border Background="White" CornerRadius="4" Padding="10 3" BorderBrush="{StaticResource info}" BorderThickness="1" Margin="5 0">
+                                            <TextBlock Text="{Binding Technology}" Foreground="{StaticResource info}"/>
+                                        </Border>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Border>
+        </Grid>
+    </md:Card>
 </UserControl>
