@@ -16,7 +16,7 @@ namespace ThesisManagement.ViewModels
         private readonly ITaskRepository _taskRepo;
         private readonly IThesisRepository _thesisRepo;
         private readonly ITaskProgressRepository _taskProgressRepo;
-        private TasksVM taskVM;
+        public TaskProgress lastestTaskProgress; 
         public string appDirectory;
         public string destinationPath;
         public string userAttachmentName;
@@ -29,6 +29,10 @@ namespace ThesisManagement.ViewModels
             {
                 taskId = value;
                 OnPropertyChanged(nameof(TaskId));
+                if (taskId > 0)
+                {
+                    lastestTaskProgress = _taskProgressRepo.GetLastestTaskProgress(taskId);
+                }
             }
         }
 
@@ -199,21 +203,22 @@ namespace ThesisManagement.ViewModels
             UpdateSelectedTaskProgressProperties();
             if (SessionInfo.Role == Role.Student)
             {
-                //Add TaskProgress and Attachments
+                //Add TaskProgress and Attachments to db
                 var addSuccess = _taskProgressRepo.Add(selectedTaskProgress);
                 var successAttach = UpdateAttachments();
                 ShowMessage(addSuccess && successAttach, Message.AddSuccess, Message.AddFailed);
             }
             else if (SessionInfo.Role == Role.Professor)
             {
-                //Add TaskProgress
-                var addResponse = _taskProgressRepo.Add(selectedTaskProgress);
-                //Update progress in Task
+                //Add TaskProgress to db
+                var updateResponse = _taskProgressRepo.Update(selectedTaskProgress);
+                //Update progress in Task to db
                 var acceptedTask = _taskRepo.GetTask(taskId);
                 acceptedTask.Progress = progress;
                 var updateTask = _taskRepo.Update(acceptedTask);
+                //Update attachment to db
                 var successAttach = UpdateAttachments();
-                ShowMessage(addResponse && updateTask && successAttach, Message.UpdateSuccess, Message.UpdateFailed);
+                ShowMessage(updateResponse && updateTask && successAttach, Message.UpdateSuccess, Message.UpdateFailed);
             }
             ((TasksVM)parentTasksView.DataContext).Reload();
             taskProgressView?.Close();
@@ -222,7 +227,6 @@ namespace ThesisManagement.ViewModels
 
         public bool UpdateAttachments()
         {
-            var lastestTaskProgress = _taskProgressRepo.GetLastestTaskProgress(taskId);
             foreach (var attachment in Attachments)
             {
                 attachment.TaskProgressId = lastestTaskProgress.Id;
@@ -232,30 +236,19 @@ namespace ThesisManagement.ViewModels
 
         private void UpdateSelectedTaskProgressProperties()
         {
-            selectedTaskProgress.Id = id;
             selectedTaskProgress.TaskId = taskId;
-            if(SessionInfo.Role == Role.Student)
+            if (SessionInfo.Role == Role.Professor)
             {
-                selectedTaskProgress.StudentId = student.Id;
-                selectedTaskProgress.Description = description;
-            }    
-            else if (SessionInfo.Role == Role.Professor)
-            {
+                selectedTaskProgress.Id = lastestTaskProgress.Id;
                 selectedTaskProgress.Response = response;
             }
+            else if(SessionInfo.Role == Role.Student)
+            {
+                selectedTaskProgress.Description = description;
+                selectedTaskProgress.StudentId = student.Id;
+            }    
             selectedTaskProgress.Progress = progress;
             selectedTaskProgress.UpdateAt = DateTime.Now;
-        }
-
-        public void UpdateLastestTaskProgress()
-        {
-            id = selectedTaskProgress.Id;
-            selectedTaskProgress.TaskId = taskId;
-            Student = _studentRepo.GetStudent(selectedTaskProgress.StudentId);
-            progress = selectedTaskProgress.Progress;
-            description = selectedTaskProgress.Description;
-            response = selectedTaskProgress.Response;
-            updateAt = selectedTaskProgress.UpdateAt;
         }
     }
 }

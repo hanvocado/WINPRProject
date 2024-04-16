@@ -1,4 +1,6 @@
-﻿using ThesisManagement.Models;
+﻿using System.Diagnostics.Eventing.Reader;
+using System.Windows;
+using ThesisManagement.Models;
 using ThesisManagement.Repositories;
 using ThesisManagement.Views.Shared;
 using Task = ThesisManagement.Models.Task;
@@ -8,6 +10,7 @@ namespace ThesisManagement.ViewModels
     public class TaskProgressHistoryVM : ViewModelBase
     {
         private readonly ITaskRepository _taskRepo;
+        private readonly ITaskProgressRepository _taskProgressRepo;
         private readonly IStudentRepository _studentRepo;
 
         private TasksView? parentTasksView;
@@ -69,21 +72,34 @@ namespace ThesisManagement.ViewModels
         public TaskProgressHistoryVM()
         {
             _taskRepo = new TaskRepository();
+            _taskProgressRepo = new TaskProgressRepository();
             _studentRepo = new StudentRepository();
             ShowUpdateTaskProgressView = new ViewModelCommand(ExecuteShowUpdateTaskProgressView);
         }
 
         private void ExecuteShowUpdateTaskProgressView(object obj)
         {
-            var vm = new TaskProgressVM
+            var professorResponse = _taskProgressRepo?.GetLastestTaskProgress(taskId).Response;
+            if (SessionInfo.Role == Role.Student && string.IsNullOrEmpty(professorResponse))
             {
-                TaskId = taskId,
-                UpdateAt = null,
-                Student = _studentRepo.GetStudent(SessionInfo.UserId),
-                ParentTasksView = parentTasksView
-            };
-            var updateView = new UpdateTaskProgressView { DataContext = vm };
-            updateView.Show();
+                MessageBox.Show("Đang đợi phàn hồi từ giảng viên hướng dẫn");
+            }
+            else if (SessionInfo.Role == Role.Professor && !string.IsNullOrEmpty(professorResponse))
+            {
+                MessageBox.Show("Đang đợi trả lời từ sinh viên");
+            }    
+            else
+            {
+                var vm = new TaskProgressVM
+                {
+                    TaskId = taskId,
+                    UpdateAt = null,
+                    Student = _studentRepo.GetStudent(SessionInfo.UserId),
+                    ParentTasksView = parentTasksView
+                };
+                var updateView = new UpdateTaskProgressView { DataContext = vm };
+                updateView.Show();
+            } 
         }
     }
 }
