@@ -7,8 +7,8 @@
              xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
              xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
@@ -16,117 +16,101 @@
         <viewModels:TopicsVM/>
     </UserControl.DataContext>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+    <md:Card Background="{DynamicResource MaterialDesignPaper}" Margin="0 0 0 10">
+        <Grid Background="{Binding}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="62"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="120"/>
-            </Grid.ColumnDefinitions>
+            <Border Margin="10 10 10 0" Background="White"
+                    CornerRadius="10"
+                    Padding="10 5">
+                <Grid Background="{Binding}">
+                    <DockPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Search"
+                                          Margin="0 5"
+                                          Height="17" 
+                                          Width="20"/>
+                            <TextBox Grid.Row="0"
+                                     Text="{Binding FilterTopicName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Width="200"
+                                     Padding="10 6"
+                                     Margin="5"
+                                     VerticalAlignment="Center"
+                                     hc:InfoElement.Placeholder="Tên đề tài..."
+                                     Style="{StaticResource TextBoxExtend}"/>
+                        </StackPanel>
 
-            <StackPanel Grid.Column="0"
-                        Orientation="Horizontal">
-                <fa:IconImage Icon="Search"
-                              Margin="0 5"
-                              Height="17" 
-                              Width="20"/>
-                <TextBox Grid.Row="0"
-                         Text="{Binding FilterTopicName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                         Width="200"
-                         Padding="10"
-                         Margin="5"
-                         VerticalAlignment="Center"
-                         hc:InfoElement.Placeholder="Tên đề tài..."
-                         Style="{StaticResource TextBoxExtend}"/>
+                        <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
+                                                      HoverColor="{StaticResource secondaryBrush}"
+                                                      Command="{Binding ShowTopicViewCommand}"
+                                                      DockPanel.Dock="Right"
+                                                      HorizontalAlignment="Right"
+                                                      Width="90">
+                            <customControls:ControlButton.Content>
+                                <TextBlock Text="+ Tạo mới" Style="{StaticResource btnContent}"/>
+                            </customControls:ControlButton.Content>
+                        </customControls:ControlButton>
+                    </DockPanel>
+                </Grid>
+            </Border>
 
-            </StackPanel>
-
-            <StackPanel Grid.Row="0" Grid.Column="1"
-                        VerticalAlignment="Center">
-                <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
-                                              HoverColor="{StaticResource secondaryBrush}"
-                                              Command="{Binding ShowTopicViewCommand}"
-                                              Width="90">
-                    <customControls:ControlButton.Content>
-                        <TextBlock Text="+ Tạo mới" Style="{StaticResource btnContent}"/>
-                    </customControls:ControlButton.Content>
-                </customControls:ControlButton>
-            </StackPanel>
-
-        </Grid>
-
-        <Border Grid.Row="1" >
-
-            <ListView Grid.Row="1"
-                      MouseLeftButtonUp="ListViewItem_Click"
-                      Name="TopicListView"
-                      Background="{DynamicResource MaterialDesignPaper}"
-                      ItemsSource="{Binding Topics, UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{Binding SelectedTopic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                <ListView.Resources>
-                    <Style TargetType="GridViewColumnHeader">
-                        <Setter Property="Visibility" Value="Collapsed"/>
-                    </Style>
-                </ListView.Resources>
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Width="800">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Border Padding="5 10">
-                                        <StackPanel>
-                                            <TextBlock Style="{StaticResource topicTitle}"
-                                                       MinWidth="770"
-                                                       Text="{Binding Name}" />
-                                            <Border Margin="0 5">
-                                                <TextBlock Foreground="{StaticResource secondaryTxtColor}" FontWeight="Medium">
+            <Border Grid.Row="1" Background="{Binding}" Padding="10">
+                <ListBox MouseLeftButtonUp="ListViewItem_Click"
+                         BorderThickness="0"
+                         Background="{Binding}"
+                         ItemContainerStyle="{StaticResource listBoxItemStyle}"
+                         ItemsSource="{Binding Topics, UpdateSourceTrigger=PropertyChanged}"
+                         SelectedItem="{Binding SelectedTopic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         Name="TopicListView">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="5 10">
+                                <StackPanel>
+                                    <DockPanel>
+                                        <TextBlock Style="{StaticResource topicTitle}"
+                                                            Text="{Binding Name}" />
+                                    </DockPanel>
+                                    <Border Margin="0 5">
+                                        <TextBlock Foreground="{StaticResource secondaryTxtColor}" FontWeight="Medium">
                                                             <Run Text="GVHD: " />
                                                             <Run Text="{Binding Professor.Name}" />
-                                                </TextBlock>
-                                            </Border>
-                                            <Grid Width="740" HorizontalAlignment="Left">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="3*" />
-                                                    <ColumnDefinition Width="*" />
-                                                </Grid.ColumnDefinitions>
-                                                <StackPanel Orientation="Horizontal" Grid.Column="0">
-                                                    <Border CornerRadius="8" Padding="10 3" 
-                                                            Background="White"
-                                                            BorderBrush="{StaticResource info}"
-                                                            BorderThickness="1">
-                                                        <TextBlock Text="{Binding Category}" Foreground="{StaticResource info}" />
-                                                    </Border>
-                                                    <Border Background="White" CornerRadius="8" Padding="10 3" BorderBrush="{StaticResource info}" BorderThickness="1" Margin="5 0">
-                                                        <TextBlock Text="{Binding Technology}" Foreground="{StaticResource info}"/>
-                                                    </Border>
-                                                </StackPanel>
-
-                                                <Border Grid.Column="1" HorizontalAlignment="Right">
-                                                    <customControls:ControlButton DefaultColor="{StaticResource danger}"
-                                                                                    HoverColor="{StaticResource dangerHover}"
-                                                                                    Style="{StaticResource lvBtn}"
-                                                                                    CommandParameter="{Binding Id}"
-                                                                                    Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
-                                                        <customControls:ControlButton.Content>
-                                                            <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
-                                                        </customControls:ControlButton.Content>
-                                                    </customControls:ControlButton>
-                                                </Border>
-                                            </Grid>
-                                        </StackPanel>
+                                        </TextBlock>
                                     </Border>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
+                                    <DockPanel>
+                                        <StackPanel Orientation="Horizontal" Grid.Column="0">
+                                            <Border CornerRadius="8" Padding="10 3" 
+                                                    Background="White"
+                                                    BorderBrush="{StaticResource info}"
+                                                    BorderThickness="1">
+                                                <TextBlock Text="{Binding Category}" Foreground="{StaticResource info}" />
+                                            </Border>
+                                            <Border Background="White" CornerRadius="8" Padding="10 3" BorderBrush="{StaticResource info}" BorderThickness="1" Margin="5 0">
+                                                <TextBlock Text="{Binding Technology}" Foreground="{StaticResource info}"/>
+                                            </Border>
+                                        </StackPanel>
 
-        </Border>
+                                        <customControls:ControlButton DefaultColor="{StaticResource danger}"
+                                                                        DockPanel.Dock="Right"
+                                                                        HorizontalAlignment="Right"
+                                                                    HoverColor="{StaticResource dangerHover}"
+                                                                    Style="{StaticResource lvBtn}"
+                                                                    CommandParameter="{Binding Id}"
+                                                                    Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
+                                            <customControls:ControlButton.Content>
+                                                <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
+                                            </customControls:ControlButton.Content>
+                                        </customControls:ControlButton>
+                                    </DockPanel>
+                                </StackPanel>
+                            </Border>
 
-    </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Border>
+        </Grid>
+    </md:Card>
 </UserControl>

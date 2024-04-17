@@ -19,7 +19,7 @@ namespace ThesisManagement.Views.Student
         }
         private void ListViewItem_Click(object sender, RoutedEventArgs e)
         {
-            var listView = sender as ListView;
+            var listView = sender as ListBox;
             var selectedItem = listView?.SelectedItem;
 
             if (selectedItem != null)
