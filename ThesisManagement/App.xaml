@@ -23,7 +23,8 @@
                 <hc:Theme Name="HandyTheme"/>
             </ResourceDictionary.MergedDictionaries>
             <converters:CollectionToStringConverter x:Key="CollectionToStringConverter"/>
-            <converters:VisibilityConverter x:Key="VisibilityConverter" />
+            <converters:VisibilityConverter x:Key="VisibilityConverter"/>
+            <converters:HorizontalAlignmentConverter x:Key="HorizontalAlignmentConverter"/>
         </ResourceDictionary>
     </Application.Resources>
     

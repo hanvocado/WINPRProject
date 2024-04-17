@@ -146,7 +146,7 @@ namespace ThesisManagement.ViewModels
             {
                 filterTopicName = value;
                 OnPropertyChanged(nameof(FilterTopicName));
-                Topics = _topicRepo.GetByTopicName(value);
+                Topics = _topicRepo.Get(value, SessionInfo.UserId);
             }
         }
         private string? filterProfessorName;
@@ -204,7 +204,7 @@ namespace ThesisManagement.ViewModels
             set { selectedStudentNames = value; OnPropertyChanged(nameof(SelectedStudentNames)); }
         }
 
-        public IEnumerable<string> Categories { get; set; } = new List<string>() { "Desktop App", "Web App", "Data Science", "Machine Learning", "Other" };
+        public IEnumerable<string> Categories { get; set; } = Models.Category.GetCategories();
         public IEnumerable<Technology> Technologies { get; set; } = Models.Technology.GetTechnologies();
 
         private List<Topic> topics;
@@ -360,7 +360,8 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteRegisterNewTopicCommand(object obj)
         {
-            if (IsTopicNotValid())
+            ValidateInput();
+            if (existError)
                 return;
 
             UpdateSelectedTopicProperties();
@@ -442,7 +443,8 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteCreateOrUpdateCommand(object obj)
         {
-            if (IsTopicNotValid())
+            ValidateInput();
+            if (existError)
                 return;
 
             UpdateSelectedTopicProperties();
@@ -484,7 +486,7 @@ namespace ThesisManagement.ViewModels
 
         private void FilterData()
         {
-            Topics = _topicRepo.GetFilteredTopics(FilterCategory, FilterTechnology, FilterProfessorName);
+            Topics = _topicRepo.Get(FilterCategory, FilterTechnology, FilterProfessorName);
         }
 
         private void FilterStudent()
@@ -521,14 +523,14 @@ namespace ThesisManagement.ViewModels
             selectedTopic.StudentQuantity = studentQuantity;
         }
 
-        private bool IsTopicNotValid()
+        private void ValidateInput()
         {
-            bool isProfessorValid = Validate(nameof(ProfessorId), professorId, CreateOrUpdateCommand);
-            bool isNameValid = Validate(nameof(Name), name, CreateOrUpdateCommand);
-            bool isCategoryValid = Validate(nameof(Category), category, CreateOrUpdateCommand);
-            bool isTechnologyValid = Validate(nameof(Technology), technology, CreateOrUpdateCommand);
-            bool isStudentQuantityValid = Validate(nameof(StudentQuantity), studentQuantity, CreateOrUpdateCommand);
-            return !isProfessorValid || !isNameValid || !isCategoryValid || !isTechnologyValid || !isStudentQuantityValid;
+            this.ExistError = String.IsNullOrEmpty(professorId) || String.IsNullOrEmpty(name)
+                            || String.IsNullOrEmpty(technology) || String.IsNullOrEmpty(category)
+                            || String.IsNullOrEmpty(description) || String.IsNullOrEmpty(function)
+                            || studentQuantity < 1;
+            if (existError)
+                ShowMessage(false, null, Message.RequiredError);
         }
     }
 }

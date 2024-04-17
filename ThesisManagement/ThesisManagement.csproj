@@ -68,7 +68,6 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
-    <Folder Include="Resources\Converters\" />
   </ItemGroup>
 
 </Project>

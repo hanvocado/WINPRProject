@@ -13,6 +13,7 @@ namespace ThesisManagement.Models
 
         [Required]
         public string FileName { get; set; }
+        public string Sender { get; set; }
 
         [ForeignKey(nameof(TaskProgressId))]
         public TaskProgress TaskProgress { get; set; }

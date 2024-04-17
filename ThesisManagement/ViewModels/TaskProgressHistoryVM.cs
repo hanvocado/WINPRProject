@@ -1,4 +1,5 @@
 ﻿using Syncfusion.XPS;
+using System.Collections.ObjectModel;
 using System.Diagnostics.Eventing.Reader;
 using System.Windows;
 using ThesisManagement.Models;
@@ -11,8 +12,10 @@ namespace ThesisManagement.ViewModels
     public class TaskProgressHistoryVM : ViewModelBase
     {
         private readonly ITaskRepository _taskRepo;
+        private readonly IAttachmentRepository _attachmentRepo;
         private readonly ITaskProgressRepository _progressRepo;
         private readonly IStudentRepository _studentRepo;
+        public TaskProgress lastestTaskProgress;
 
         private TasksVM? parentTasksVM;
 
@@ -67,6 +70,28 @@ namespace ThesisManagement.ViewModels
             set { progresses = value; OnPropertyChanged(nameof(Progresses)); }
         }
 
+        private ObservableCollection<Attachment> studentAttachments;
+        public ObservableCollection<Attachment> StudentAttachments
+        {
+            get { return studentAttachments; }
+            set
+            {
+                studentAttachments = value;
+                OnPropertyChanged(nameof(StudentAttachments));
+            }
+        }
+
+        private ObservableCollection<Attachment> professorAttachments;
+        public ObservableCollection<Attachment> ProfessorAttachments
+        {
+            get { return professorAttachments; }
+            set
+            {
+                professorAttachments = value;
+                OnPropertyChanged(nameof(ProfessorAttachments));
+            }
+        }
+
         public ViewModelCommand ShowUpdateTaskProgressView { get; set; }
 
         public TaskProgressHistoryVM()
@@ -75,6 +100,7 @@ namespace ThesisManagement.ViewModels
             _progressRepo = new TaskProgressRepository();
             _studentRepo = new StudentRepository();
             _progressRepo = new TaskProgressRepository();
+            _attachmentRepo = new AttachmentRepository();
             ShowUpdateTaskProgressView = new ViewModelCommand(ExecuteShowUpdateTaskProgressView);
         }
 
@@ -99,7 +125,6 @@ namespace ThesisManagement.ViewModels
                     return;
                 }
                 var vm = new TaskProgressVM();
-                TaskProgress lastestTaskProgress = _progressRepo.GetLastestTaskProgress(taskId);
                 vm.TaskId = taskId;
                 vm.SelectedTaskProgress = lastestTaskProgress;
                 if (SessionInfo.Role == Role.Student)
@@ -115,6 +140,11 @@ namespace ThesisManagement.ViewModels
         {
             this.Task = _taskRepo.GetTask(taskId);
             this.Progresses = task.TaskProgresses ?? new List<TaskProgress>();
+            if (lastestTaskProgress != null)
+            {
+                ProfessorAttachments = _attachmentRepo.GetAttachments(taskId, Role.Professor.ToString());
+                StudentAttachments = _attachmentRepo.GetAttachments(taskId, Role.Student.ToString());
+            }    
         }
     }
 }

@@ -70,4 +70,12 @@ namespace ThesisManagement.Models
                     };
         }
     }
+
+    public class Category
+    {
+        public static List<string> GetCategories()
+        {
+            return new List<string>() { "Desktop App", "Web App", "Data Science", "Machine Learning", "Other" };
+        }
+    }
 }

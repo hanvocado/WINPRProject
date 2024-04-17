@@ -21,10 +21,10 @@
                  GotFocus="TechnologyTxt_GotFocus"
                 Height="35"/>
         <Popup PlacementTarget="{Binding ElementName=txtTechnology}"
-                Placement="Bottom"
-                VerticalOffset="-22"
-               HorizontalOffset="5"
-                x:Name="TechnologiesList">
+               Placement="Bottom"
+               VerticalOffset="-17"
+               HorizontalOffset="2"
+               x:Name="TechnologiesList">
             <Border Background="White"
                     BorderThickness="1 0 1 1"
                     BorderBrush="DodgerBlue"

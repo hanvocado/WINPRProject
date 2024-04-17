@@ -10,7 +10,7 @@
         Height="620" Width="600"
         WindowStartupLocation="CenterScreen"
         Style="{StaticResource formStyle}">
-    
+
     <Window.DataContext>
         <viewModels:TaskProgressHistoryVM />
     </Window.DataContext>
@@ -33,7 +33,7 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Width="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=ActualWidth}">
-                                <StackPanel>
+                                <StackPanel Visibility="{Binding Description, Converter={StaticResource VisibilityConverter}}">
                                     <Grid Margin="0 5 0 0">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
@@ -41,7 +41,6 @@
                                             <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
 
-                                        <TextBlock Text="{Binding Student.Name}" Margin="2 5 0 3" />
                                         <TextBlock Text="{Binding StudentUpdateAt, StringFormat='HH:mm dd-MM-yyyy'}"
                                                    Style="{StaticResource subTxtItem}"
                                                    Grid.Column="1"
@@ -49,18 +48,31 @@
 
                                     </Grid>
 
-                                    <StackPanel Visibility="{Binding Description, Converter={StaticResource VisibilityConverter}}">
+                                    <StackPanel Name="StudentMessage"
+                                                Margin="0 0 20 0"
+                                                HorizontalAlignment="{Binding Converter={StaticResource HorizontalAlignmentConverter},ConverterParameter='StudentMessage', FallbackValue=Left}">
+                                        <TextBlock Text="{Binding Student.Name}"
+                                                   HorizontalAlignment="{Binding ElementName=StudentMessage, Path=HorizontalAlignment}"/>
                                         <TextBox Background="#f9f9f9"
-                                             IsReadOnly="True"
-                                             HorizontalAlignment="Left"
-                                             Text="{Binding Description, Mode=OneWay}"/>
-                                        <local:Attachments HorizontalAlignment="Left"
-                                                           Margin="0 3 20 0"/>
+                                                 IsReadOnly="True"
+                                                 Text="{Binding Description, Mode=OneWay}"
+                                                 HorizontalAlignment="{Binding ElementName=StudentMessage, Path=HorizontalAlignment}"/>
+                                        <ListBox ItemsSource="{Binding DataContext.StudentAttachments, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                 MaxWidth="300"
+                                                 Margin="0 3 0 0"
+                                                HorizontalAlignment="{Binding ElementName=StudentMessage, Path=HorizontalAlignment}"
+                                                Visibility="{Binding Attachments.Count, Converter={StaticResource VisibilityConverter}}"
+                                                SelectedValuePath="FileName"
+                                                SelectedValue="{Binding DataContext.SelectedFileName, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                DisplayMemberPath="OriginalFileName">
+                                            <ListBox.ItemContainerStyle>
+                                                <StaticResource ResourceKey="AttachmentsListBox" />
+                                            </ListBox.ItemContainerStyle>
+                                        </ListBox>
                                     </StackPanel>
                                 </StackPanel>
 
                                 <StackPanel Grid.Row="1" 
-                                            Margin="0 0 20 0"
                                             Visibility="{Binding Response, Converter={StaticResource VisibilityConverter}}">
                                     <Grid Margin="0 5 0 0">
                                         <Grid.ColumnDefinitions>
@@ -69,25 +81,39 @@
                                             <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
 
-                                        <TextBlock Text="Giảng viên hướng dẫn" Margin="0 0 0 3"
-                                                   HorizontalAlignment="Right" 
-                                                   Grid.Column="2"/>
                                         <TextBlock Text="{Binding ProfessorUpdateAt, StringFormat='HH:mm dd-MM-yyyy'}"
                                                    Style="{StaticResource subTxtItem}"
                                                    Grid.Column="1"
                                                    HorizontalAlignment="Center" />
                                     </Grid>
-                                    
-                                    <StackPanel>
+
+                                    <StackPanel Margin="0 0 20 0"
+                                                Name="ProfessorMessage"
+                                                HorizontalAlignment="{Binding Converter={StaticResource HorizontalAlignmentConverter},ConverterParameter='ProfessorMessage', FallbackValue=Left}">
+                                        <TextBlock Text="Giảng viên hướng dẫn" 
+                                                   Margin="0 0 0 3"
+                                                   HorizontalAlignment="{Binding ElementName=ProfessorMessage, Path=HorizontalAlignment}"
+                                                   Grid.Column="2"/>            
                                         <TextBox Background="{StaticResource info}"
                                                  IsReadOnly="True"
                                                  Foreground="#f0f0f0"
-                                                 HorizontalAlignment="Right"
-                                                 Text="{Binding Response, Mode=OneWay}"/>
-                                        <local:Attachments HorizontalAlignment="Right"
-                                                           Margin="0 3 0 0"/>
+                                                 Text="{Binding Response, Mode=OneWay}"
+                                                 HorizontalAlignment="{Binding ElementName=ProfessorMessage, Path=HorizontalAlignment}"/>
+                                        <ListBox ItemsSource="{Binding DataContext.ProfessorAttachments, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                 MaxWidth="300"
+                                                 Margin="0 3 0 0"
+                                                HorizontalAlignment="{Binding ElementName=ProfessorMessage, Path=HorizontalAlignment}"
+                                                Visibility="{Binding Attachments.Count, Converter={StaticResource VisibilityConverter}}"
+                                                SelectedValuePath="FileName"
+                                                SelectedValue="{Binding DataContext.SelectedFileName, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                DisplayMemberPath="OriginalFileName">
+                                            <ListBox.ItemContainerStyle>
+                                                <StaticResource ResourceKey="AttachmentsListBox" />
+                                            </ListBox.ItemContainerStyle>
+                                        </ListBox>
                                     </StackPanel>
                                 </StackPanel>
+                                
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>

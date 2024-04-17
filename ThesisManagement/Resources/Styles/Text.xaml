@@ -32,11 +32,9 @@
     </Style>
 
     <Style x:Key="errorText" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="#d75960" />
+        <Setter Property="Foreground" Value="{StaticResource danger}" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="FontWeight" Value="Medium" />
-        <Setter Property="Margin" Value="0 15 0 0" />
-        <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
 
     <Style TargetType="PasswordBox">
