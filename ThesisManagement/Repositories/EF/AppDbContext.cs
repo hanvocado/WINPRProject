@@ -66,7 +66,7 @@ namespace ThesisManagement.Repositories.EF
                 new Student
                 {
                     Id = "22133010",
-                    Name = "Nguyễn A",
+                    Name = "Nguyễn Văn Yên",
                     Email = "a@student.com",
                     Password = "a12345",
                     Phone = "123-456-7890",
@@ -75,7 +75,7 @@ namespace ThesisManagement.Repositories.EF
                 new Student
                 {
                     Id = "22133011",
-                    Name = "Lâm B",
+                    Name = "Lâm Khang",
                     Email = "b@student.com",
                     Password = "b12345",
                     Phone = "987-654-3210",
@@ -84,7 +84,7 @@ namespace ThesisManagement.Repositories.EF
                 new Student
                 {
                     Id = "22110001",
-                    Name = "Võ C",
+                    Name = "Võ Thị Thu Huyền",
                     Email = "c@student.com",
                     Password = "c12345",
                     Phone = "987-654-3210",
@@ -93,7 +93,7 @@ namespace ThesisManagement.Repositories.EF
                 new Student
                 {
                     Id = "22110010",
-                    Name = "Nguyễn D",
+                    Name = "Nguyễn Bình Minh",
                     Email = "d@student.com",
                     Password = "d12345",
                     Phone = "987-654-3210",
@@ -102,7 +102,7 @@ namespace ThesisManagement.Repositories.EF
                 new Student
                 {
                     Id = "22133015",
-                    Name = "Trần E",
+                    Name = "Trần Quốc Khánh",
                     Email = "e@student.com",
                     Password = "e12346",
                     Phone = "987-654-3210",

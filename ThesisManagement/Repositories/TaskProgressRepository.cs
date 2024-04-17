@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories.EF;
 
@@ -15,10 +10,11 @@ namespace ThesisManagement.Repositories
     {
         bool Add(TaskProgress taskProgress);
         bool Update(TaskProgress taskProgress);
+        bool Update(int progressId, string response);
         bool Delete(int id);
         ObservableCollection<TaskProgress> GetAll();
         TaskProgress GetLastestTaskProgress(int taskId);
-        int CountTaskProgress (int taskId);
+        int CountTaskProgress(int taskId);
     }
 
     public class TaskProgressRepository : ITaskProgressRepository
@@ -72,10 +68,11 @@ namespace ThesisManagement.Repositories
         public TaskProgress GetLastestTaskProgress(int taskId)
         {
             var lastestTaskProgress = _context.TaskProgresses.Include(t => t.Task)
+                                                             .Include(t => t.Student)
                                                              .Where(tp => tp.TaskId == taskId)
                                                              .AsNoTracking()
                                                              .OrderByDescending(tp => tp.Id)
-                                                             .FirstOrDefault() ?? new TaskProgress(); 
+                                                             .FirstOrDefault();
             return lastestTaskProgress;
         }
 
@@ -86,6 +83,18 @@ namespace ThesisManagement.Repositories
                                                .AsNoTracking()
                                                .Count();
             return count;
+        }
+
+        public bool Update(int progressId, string response)
+        {
+            var progress = _context.TaskProgresses.FirstOrDefault(t => t.Id == progressId);
+            if (progress != null)
+            {
+                progress.Response = response;
+                _context.Update(progress);
+                return DbSave();
+            }
+            return false;
         }
     }
 }

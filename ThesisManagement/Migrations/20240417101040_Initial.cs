@@ -252,11 +252,11 @@ namespace ThesisManagement.Migrations
                 columns: new[] { "Id", "Birthday", "Email", "Name", "Password", "Phone", "ThesisId" },
                 values: new object[,]
                 {
-                    { "22110001", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "c@student.com", "Võ C", "c12345", "987-654-3210", null },
-                    { "22110010", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "d@student.com", "Nguyễn D", "d12345", "987-654-3210", null },
-                    { "22133010", new DateTime(2000, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "a@student.com", "Nguyễn A", "a12345", "123-456-7890", null },
-                    { "22133011", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "b@student.com", "Lâm B", "b12345", "987-654-3210", null },
-                    { "22133015", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "e@student.com", "Trần E", "e12346", "987-654-3210", null }
+                    { "22110001", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "c@student.com", "Võ Thị Thu Huyền", "c12345", "987-654-3210", null },
+                    { "22110010", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "d@student.com", "Nguyễn Bình Minh", "d12345", "987-654-3210", null },
+                    { "22133010", new DateTime(2000, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "a@student.com", "Nguyễn Văn Yên", "a12345", "123-456-7890", null },
+                    { "22133011", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "b@student.com", "Lâm Khang", "b12345", "987-654-3210", null },
+                    { "22133015", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "e@student.com", "Trần Quốc Khánh", "e12346", "987-654-3210", null }
                 });
 
             migrationBuilder.InsertData(
