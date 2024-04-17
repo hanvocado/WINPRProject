@@ -35,8 +35,6 @@ namespace ThesisManagement.ViewModels
 
         private string? professorId;
 
-        [StringLength(20)]
-        [Required(ErrorMessage = "Giảng viên không thể để trống")]
         public string ProfessorId
         {
             get { return professorId; }
@@ -60,7 +58,6 @@ namespace ThesisManagement.ViewModels
 
         private string? name;
 
-        [Required(ErrorMessage = "Tên đề tài không thể để trống")]
         public string Name
         {
             get { return name; }
@@ -73,8 +70,6 @@ namespace ThesisManagement.ViewModels
 
         private string? category;
 
-        [Required(ErrorMessage = "Thể loại không thể để trống")]
-        [StringLength(100)]
         public string Category
         {
             get { return category; }
@@ -87,8 +82,6 @@ namespace ThesisManagement.ViewModels
 
         private string? technology;
 
-        [StringLength(100)]
-        [Required(ErrorMessage = "Thể loại không thể để trống")]
         public string Technology
         {
             get { return technology; }
@@ -101,7 +94,6 @@ namespace ThesisManagement.ViewModels
 
         private string? description;
 
-        [Required(ErrorMessage = "Mô tả không thể để trống")]
         public string? Description
         {
             get { return description; }
@@ -117,7 +109,6 @@ namespace ThesisManagement.ViewModels
 
         private string? function;
 
-        [Required(ErrorMessage = "Chức năng không thể để trống")]
         public string? Function
         {
             get { return function; }
@@ -127,7 +118,6 @@ namespace ThesisManagement.ViewModels
 
         private int studentQuantity;
 
-        [Range(1, 5, ErrorMessage = "Số lượng từ 1 đến 5")]
         public int StudentQuantity
         {
             get { return studentQuantity; }
