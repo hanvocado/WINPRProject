@@ -7,6 +7,7 @@
              xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
              xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:sf="http://schemas.syncfusion.com/wpf"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
              x:Name="tasksViewUC"
@@ -146,18 +147,25 @@
                                 <ProgressBar Value="{Binding Progress, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                             Foreground="{StaticResource accent}"
                                             Grid.Row="3"
-                                            Margin="0 5 0 5" />
+                                            Margin="0 10 0 5" />
                                 <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft"
                                                     Grid.Row="4">
-                                    <customControls:ControlButton Style="{StaticResource lvBtn}"
-                                                                DefaultColor="{StaticResource warning}"
-                                                                HoverColor="{StaticResource warningHover}"
-                                                                Margin="2 0 0 5"
-                                                                Command="{Binding DataContext.ShowTaskProgressHistory,RelativeSource={RelativeSource AncestorType=ListBox}}">
-                                        <customControls:ControlButton.Content>
-                                            <fa:IconImage Icon="Message" Style="{StaticResource btnIcon}" />
-                                        </customControls:ControlButton.Content>
-                                    </customControls:ControlButton>
+                                    <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight">
+                                        <customControls:ControlButton DefaultColor="{StaticResource warning}"
+                                                                      HoverColor="{StaticResource warningHover}"
+                                                                      Style="{StaticResource lvBtn}"
+                                                                      Margin="2 0 0 5"
+                                                                      Command="{Binding DataContext.ShowTaskProgressHistory,RelativeSource={RelativeSource AncestorType=ListBox}}">
+                                            <customControls:ControlButton.Content>
+                                                <fa:IconImage Icon="Message" Style="{StaticResource btnIcon}" />
+                                            </customControls:ControlButton.Content>
+                                        </customControls:ControlButton>
+                                        <Border Background="{StaticResource accent}" CornerRadius="10" Height="8" Width="8"
+                                                VerticalAlignment="Top"
+                                                Margin="-5 0 0 0"
+                                                Visibility="{Binding WaitingForResponse, Converter={StaticResource VisibilityConverter}}">
+                                        </Border>
+                                    </StackPanel>
                                     <customControls:ControlButton Style="{StaticResource lvBtn}"
                                                                 Visibility="{Binding DataContext.IsProfessor ,RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource VisibilityConverter}}"
                                                                 DefaultColor="{StaticResource danger}"
@@ -199,28 +207,27 @@
 
                                 <TextBlock Text="{Binding Name}" Style="{StaticResource topicTitle}" Margin="0 5" />
                                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10" Grid.Row="1">
-                                    <fa:IconImage Icon="Clock" Style="{StaticResource btnIcon}" Margin="0 0 5 0" Foreground="{Binding ElementName=subTxt, Path=Foreground}"/>
+                                    <fa:IconImage Icon="Clock" Style="{StaticResource btnIcon}" Margin="0 0 8 0" Foreground="{Binding ElementName=subTxt, Path=Foreground}" />
                                     <TextBlock Text="{Binding Start, StringFormat='HH:mm dd/MM'}" Style="{StaticResource subTxtItem}" />
                                     <TextBlock Text=" - " Style="{StaticResource subTxtItem}" x:Name="subTxt" />
                                     <TextBlock Text="{Binding End, StringFormat='HH:mm dd/MM'}" Style="{StaticResource subTxtItem}" />
                                 </StackPanel>
                                 <TextBlock Text="{Binding Description}" Grid.Row="2" />
                                 <ProgressBar Value="{Binding Progress, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                            Width="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=ActualWidth}"
-                                            Padding="10 0"
-                                             Foreground="{StaticResource successHover}"
+                                            Foreground="{StaticResource success}"
                                             Grid.Row="3"
-                                            Margin="0 5" />
+                                            Margin="0 5 0 5" />
                                 <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft"
-                                                        Grid.Row="4">
+                                            Grid.Row="4">
                                     <customControls:ControlButton Style="{StaticResource lvBtn}"
-                                                                                DefaultColor="{StaticResource primaryBrush}"
-                                                                                HoverColor="{StaticResource secondaryBrush}"
-                                                                                Margin="2 0 0 0"
-                                                                                CommandParameter="{Binding ElementName=tasksViewUC}"
-                                                                                Command="{Binding DataContext.ShowTaskProgressHistory,RelativeSource={RelativeSource AncestorType=ListView}}">
+                                                                  DefaultColor="{StaticResource warning}"
+                                                                  HoverColor="{StaticResource warningHover}"
+                                                                  Margin="2 0 0 5"
+                                                                  Command="{Binding DataContext.ShowTaskProgressHistory,RelativeSource={RelativeSource AncestorType=ListBox}}">
                                         <customControls:ControlButton.Content>
-                                            <fa:IconImage Icon="Message" Style="{StaticResource btnIcon}" />
+                                            <StackPanel Orientation="Horizontal">
+                                                <fa:IconImage Icon="Message" Style="{StaticResource btnIcon}" />
+                                            </StackPanel>
                                         </customControls:ControlButton.Content>
                                     </customControls:ControlButton>
                                 </StackPanel>

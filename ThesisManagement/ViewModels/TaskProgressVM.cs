@@ -1,5 +1,6 @@
 using Microsoft.Win32;
 using System.IO;
+using System.Windows;
 using System.Windows.Input;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
@@ -212,7 +213,12 @@ namespace ThesisManagement.ViewModels
             };
             var addSuccess = _taskProgressRepo.Add(newProgress);
             if (addSuccess)
+            {
                 addSuccess = UpdateAttachments(newProgress.Id);
+                var task = _taskRepo.GetTask(taskId);
+                task.WaitingForResponse += 1;
+                _taskRepo.Update(task);
+            }
             ShowMessage(addSuccess, Message.AddSuccess, Message.AddFailed);
         }
 
@@ -221,10 +227,13 @@ namespace ThesisManagement.ViewModels
             var success = _taskProgressRepo.Update(id, response);
             if (success)
             {
+                UpdateAttachments(id);
                 var acceptedTask = _taskRepo.GetTask(taskId);
                 acceptedTask.Progress = progress;
+                acceptedTask.WaitingForResponse -= 1;
                 _taskRepo.Update(acceptedTask);
-                UpdateAttachments(id);
+                Window profWindow = Application.Current.MainWindow;
+                profWindow.DataContext = new ProfessorMainVM { CurrentChildView = new ThesesVM() };
             }
             ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
         }

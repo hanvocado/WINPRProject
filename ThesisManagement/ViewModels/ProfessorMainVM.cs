@@ -22,12 +22,12 @@ namespace ThesisManagement.ViewModels
             }
         }
 
-        private string updateCount;
+        private bool hasNewUpdate;
 
-        public string? UpdateCount
+        public bool HasNewUpdate
         {
-            get { return updateCount; }
-            set { updateCount = value; OnPropertyChanged(nameof(UpdateCount)); }
+            get { return hasNewUpdate; }
+            set { hasNewUpdate = value; OnPropertyChanged(nameof(HasNewUpdate)); }
         }
 
         private int? registerCount;
@@ -55,7 +55,7 @@ namespace ThesisManagement.ViewModels
             {
                 RegisterCount = null;
             }
-            UpdateCount = _profRepo.NoStudentUpdates(SessionInfo.UserId);
+            hasNewUpdate = _profRepo.HasNewUpdate(SessionInfo.UserId);
 
             ShowTopicsView = new ViewModelCommand(ExecuteShowTopicsView);
             ShowWaitingStudentsView = new ViewModelCommand(ExecuteShowWaitingStudentsView);

@@ -95,9 +95,10 @@
                             </RadioButton.ToolTip>
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="AddressBook" Style="{StaticResource navIcon}" />
-                                <sf:SfBadge Content="{Binding UpdateCount}"
+                                <sf:SfBadge Content="+"
                                             FontSize="9"
                                             Padding="0"
+                                            Visibility="{Binding HasNewUpdate, Converter={StaticResource VisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
                                             Shape="Ellipse"
                                             Width="11"
                                             Background="{StaticResource accent}"

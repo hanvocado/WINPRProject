@@ -25,30 +25,7 @@ namespace ThesisManagement.Models
 
         public ICollection<TaskProgress>? TaskProgresses { get; set; }
 
-        //public int WaitingForResponse { get; set; }
-
-        [NotMapped]
-        public string? UpdateCount
-        {
-            get
-            {
-                if (TaskProgresses == null || TaskProgresses.Count == 0)
-                    return null;
-
-                int count = 0;
-                foreach (var progress in this.TaskProgresses)
-                {
-                    if (String.IsNullOrEmpty(progress.Response))
-                        ++count;
-                    if (count > 2)
-                        return count.ToString() + "+";
-                }
-
-                if (count > 0)
-                    return count.ToString();
-                return null;
-            }
-        }
+        public int WaitingForResponse { get; set; }
     }
 
     public class TasksPie

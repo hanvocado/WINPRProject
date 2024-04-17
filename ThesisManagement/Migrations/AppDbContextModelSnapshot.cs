@@ -323,6 +323,9 @@ namespace ThesisManagement.Migrations
                     b.Property<int>("ThesisId")
                         .HasColumnType("int");
 
+                    b.Property<int>("WaitingForResponse")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ThesisId");

@@ -33,21 +33,20 @@ namespace ThesisManagement.Models
         public ICollection<ScheduleInfo>? ScheduleInfos { get; set; }
 
         [NotMapped]
-        public string? UpdateCount
+        public bool HasNewUpdate
         {
             get
             {
                 if (Tasks != null)
                 {
-                    foreach (var task in this.Tasks)
+                    foreach (var task in Tasks)
                     {
-                        if (!String.IsNullOrEmpty(task.UpdateCount))
-                            return task.UpdateCount;
+                        if (task.WaitingForResponse > 0)
+                            return true;
                     }
                 }
-                return null;
+                return false;
             }
         }
-
     }
 }

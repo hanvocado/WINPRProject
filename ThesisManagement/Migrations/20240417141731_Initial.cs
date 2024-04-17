@@ -170,7 +170,8 @@ namespace ThesisManagement.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Start = table.Column<DateTime>(type: "datetime2", nullable: false),
                     End = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Progress = table.Column<int>(type: "int", nullable: false)
+                    Progress = table.Column<int>(type: "int", nullable: false),
+                    WaitingForResponse = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

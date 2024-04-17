@@ -31,10 +31,13 @@ namespace ThesisManagement.ViewModels
             set
             {
                 thesis = value;
-                Topic = thesis.Topic;
-                Thesis.Students = _studentRepo.GetStudent(Thesis.Id)?.ToList() ?? new List<Student>();
+                if (thesis != null)
+                {
+                    Topic = thesis.Topic;
+                    Thesis.Students = _studentRepo.GetStudent(Thesis.Id)?.ToList() ?? new List<Student>();
+                    UpdateEvaluations();
+                }
                 OnPropertyChanged(nameof(Thesis));
-                UpdateEvaluations();
             }
         }
 

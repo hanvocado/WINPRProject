@@ -8,9 +8,8 @@ namespace ThesisManagement.Repositories
     public interface IProfessorRepository
     {
         ObservableCollection<Professor> GetAll();
-        IEnumerable<string> GetNames();
         Professor? Get(string id);
-        string? NoStudentUpdates(string professorId);
+        bool HasNewUpdate(string professorId);
     }
 
     public class ProfessorRepository : IProfessorRepository
@@ -35,13 +34,7 @@ namespace ThesisManagement.Repositories
             return new ObservableCollection<Professor>(professors);
         }
 
-        public IEnumerable<string> GetNames()
-        {
-            var names = _context.Professors.Select(prof => prof.Name).ToList();
-            return names;
-        }
-
-        public string? NoStudentUpdates(string professorId)
+        public bool HasNewUpdate(string professorId)
         {
             var topics = _context.Professors.Include(p => p.Topics)
                                             .ThenInclude(t => t.Theses)
@@ -54,13 +47,13 @@ namespace ThesisManagement.Repositories
                     {
                         foreach (Thesis thesis in topic.Theses)
                         {
-                            if (!String.IsNullOrEmpty(thesis.UpdateCount))
-                                return thesis.UpdateCount;
+                            if (thesis.HasNewUpdate)
+                                return true;
                         }
                     }
                 }
 
-            return null;
+            return false;
         }
     }
 }

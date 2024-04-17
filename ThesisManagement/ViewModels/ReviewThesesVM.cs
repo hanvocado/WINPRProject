@@ -38,7 +38,7 @@ namespace ThesisManagement.ViewModels
             ShowMessage(success, Message.ApproveSuccess, Message.ApproveFailed);
             WaitingTheses = _thesisRepo.Get(currentUserId, Variable.StatusTopic.Waiting);
             Window profWindow = Application.Current.MainWindow;
-            profWindow.DataContext = new ProfessorMainVM();
+            profWindow.DataContext = new ProfessorMainVM { CurrentChildView = new ThesesVM() };
         }
 
         private void ExecuteRejectCommand(object obj)
@@ -48,7 +48,7 @@ namespace ThesisManagement.ViewModels
             ShowMessage(success, Message.RejectSuccess, Message.RejectFailed);
             WaitingTheses = _thesisRepo.Get(currentUserId, Variable.StatusTopic.Waiting);
             Window profWindow = Application.Current.MainWindow;
-            profWindow.DataContext = new ProfessorMainVM();
+            profWindow.DataContext = new ProfessorMainVM { CurrentChildView = new ReviewThesesVM() };
         }
     }
 }

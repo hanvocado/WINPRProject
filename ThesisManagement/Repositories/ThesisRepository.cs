@@ -68,7 +68,7 @@ namespace ThesisManagement.Repositories
 
         public IEnumerable<Thesis> Get(string userId, string topicStatus)
         {
-            var list = _context.Theses.Include(st => st.Students).Include(tp => tp.Topic)
+            var list = _context.Theses.Include(th => th.Students).Include(th => th.Tasks).Include(th => th.Topic)
                                                 .ThenInclude(pr => pr.Professor)
                                                 .Where(th => th.Topic.ProfessorId == userId && th.TopicStatus == topicStatus).AsNoTracking().ToList();
             return list;
@@ -119,7 +119,7 @@ namespace ThesisManagement.Repositories
                                        .AsNoTracking()
                                        .FirstOrDefault();
             return task?.Thesis;
-                            
+
         }
 
 
