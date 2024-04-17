@@ -143,6 +143,7 @@ namespace ThesisManagement.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     ThesisId = table.Column<int>(type: "int", nullable: true),
+                    Score = table.Column<float>(type: "real", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -249,14 +250,14 @@ namespace ThesisManagement.Migrations
 
             migrationBuilder.InsertData(
                 table: "Students",
-                columns: new[] { "Id", "Birthday", "Email", "Name", "Password", "Phone", "ThesisId" },
+                columns: new[] { "Id", "Birthday", "Email", "Name", "Password", "Phone", "Score", "ThesisId" },
                 values: new object[,]
                 {
-                    { "22110001", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "c@student.com", "Võ C", "c12345", "987-654-3210", null },
-                    { "22110010", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "d@student.com", "Nguyễn D", "d12345", "987-654-3210", null },
-                    { "22133010", new DateTime(2000, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "a@student.com", "Nguyễn A", "a12345", "123-456-7890", null },
-                    { "22133011", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "b@student.com", "Lâm B", "b12345", "987-654-3210", null },
-                    { "22133015", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "e@student.com", "Trần E", "e12346", "987-654-3210", null }
+                    { "22110001", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "c@student.com", "Võ C", "c12345", "987-654-3210", null, null },
+                    { "22110010", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "d@student.com", "Nguyễn D", "d12345", "987-654-3210", null, null },
+                    { "22133010", new DateTime(2000, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "a@student.com", "Nguyễn A", "a12345", "123-456-7890", null, null },
+                    { "22133011", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "b@student.com", "Lâm B", "b12345", "987-654-3210", null, null },
+                    { "22133015", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "e@student.com", "Trần E", "e12346", "987-654-3210", null, null }
                 });
 
             migrationBuilder.InsertData(

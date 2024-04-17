@@ -235,6 +235,9 @@ namespace ThesisManagement.Migrations
                         .HasMaxLength(12)
                         .HasColumnType("nvarchar(12)");
 
+                    b.Property<float?>("Score")
+                        .HasColumnType("real");
+
                     b.Property<int?>("ThesisId")
                         .HasColumnType("int");
 

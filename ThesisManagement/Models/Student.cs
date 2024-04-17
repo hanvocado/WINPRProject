@@ -9,6 +9,8 @@ namespace ThesisManagement.Models
         [ForeignKey(nameof(ThesisId))]
         public Thesis? Thesis { get; set; }
 
+        public float? Score { get; set; }
+
         public ICollection<TaskProgress>? TaskProgresses { get; set; }
 
         [NotMapped]

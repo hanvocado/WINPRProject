@@ -56,5 +56,13 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+    <Style TargetType="DataGrid" x:Key="GradeDataGridView">
+        <Setter Property="Background" Value="#3FFFFFFF"/>
+        <Setter Property="RowBackground" Value="White"/>
+        <Setter Property="AlternatingRowBackground" Value="#FFFAFAFA"/>
+        <Setter Property="HorizontalGridLinesBrush" Value="LightGray"/>
+        <Setter Property="VerticalGridLinesBrush" Value="LightGray"/>
+    </Style>
 </ResourceDictionary>
     

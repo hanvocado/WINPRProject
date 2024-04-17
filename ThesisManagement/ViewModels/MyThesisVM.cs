@@ -33,6 +33,9 @@ namespace ThesisManagement.ViewModels
                 thesis = value;
                 Topic = thesis.Topic;
                 Thesis.Students = _studentRepo.GetStudent(Thesis.Id)?.ToList() ?? new List<Student>();
+                Evaluation = Thesis.Evaluation ?? string.Empty;
+                var student = Thesis.Students.FirstOrDefault(st => st.Id == SessionInfo.UserId);
+                Score = (student != null) ? student.Score : 0;
                 OnPropertyChanged(nameof(Thesis));
                 UpdateEvaluations();
             }
@@ -96,9 +99,14 @@ namespace ThesisManagement.ViewModels
         {
             if (Thesis != null && !string.IsNullOrEmpty(Thesis.File))
             {
-                //Update professor evaluation
+                //Update professor evaluation and student score
                 Evaluation = thesis.Evaluation;
-                Score = thesis.Score;
+                bool success = true;
+                foreach (var student in Thesis.Students)
+                {
+                    success = _studentRepo.Update(student);
+                }
+                ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
                 studentFilePath = Path.Combine(appDirectory, Thesis.File);
                 docStream = new FileStream(studentFilePath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
             }
@@ -107,7 +115,6 @@ namespace ThesisManagement.ViewModels
         private void ExecuteMakeEvaluationCommand(object obj)
         {
             thesis.Evaluation = evaluation;
-            thesis.Score = score;
             var success = _thesisRepo.Update(thesis);
             ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
         }
