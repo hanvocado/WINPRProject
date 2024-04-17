@@ -91,22 +91,13 @@ namespace ThesisManagement.ViewModels
             }
         }
 
-        private DateTime? studentUpdateAt;
+        private DateTime? updateAt;
 
-        public DateTime? StudentUpdateAt
+        public DateTime? UpdateAt
         {
-            get { return studentUpdateAt; }
-            set { studentUpdateAt = value; OnPropertyChanged(nameof(StudentUpdateAt)); }
+            get { return updateAt; }
+            set { updateAt = value; OnPropertyChanged(nameof(UpdateAt)); }
         }
-
-        private DateTime? professorUpdateAt;
-
-        public DateTime? ProfessorUpdateAt
-        {
-            get { return professorUpdateAt; }
-            set { professorUpdateAt = value; OnPropertyChanged(nameof(ProfessorUpdateAt)); }
-        }
-
 
         private TaskProgress selectedTaskProgress;
         public TaskProgress SelectedTaskProgress
@@ -176,7 +167,7 @@ namespace ThesisManagement.ViewModels
             _attachmentRepo = new AttachmentRepository();
             _taskProgressRepo = new TaskProgressRepository();
             appDirectory = SessionInfo.BinDirectory;
-            selectedTaskProgress = new TaskProgress();
+            SelectedTaskProgress = new TaskProgress();
             attachments = new ObservableCollection<Attachment>();
 
             UpdateTaskProgressCommand = new ViewModelCommand(ExecuteUpdateTaskProgressCommand);
@@ -216,6 +207,7 @@ namespace ThesisManagement.ViewModels
             {
                 //Add TaskProgress and Attachments to db
                 var addSuccess = _taskProgressRepo.Add(studentTaskProgress);
+                lastestTaskProgress = _taskProgressRepo.GetLastestTaskProgress(taskId);
                 var successAttach = UpdateAttachments();
                 ShowMessage(addSuccess && successAttach, Message.AddSuccess, Message.AddFailed);
             }
@@ -246,7 +238,6 @@ namespace ThesisManagement.ViewModels
                 foreach (var attachment in Attachments)
                 {
                     attachment.TaskProgressId = lastestTaskProgress.Id;
-                    attachment.Sender = SessionInfo.Role.ToString();
                 }
                 return _attachmentRepo.AddRange(Attachments);
             }
@@ -261,7 +252,6 @@ namespace ThesisManagement.ViewModels
                 selectedTaskProgress.TaskId = taskId;
                 selectedTaskProgress.Response = response;
                 selectedTaskProgress.Progress = progress;
-                selectedTaskProgress.ProfessorUpdateAt = DateTime.Now;
             }
             else if (SessionInfo.Role == Role.Student)
             {
@@ -273,8 +263,7 @@ namespace ThesisManagement.ViewModels
                     StudentId = student.Id,
                     Progress = progress,
                     Response = string.Empty,
-                    StudentUpdateAt = DateTime.Now,
-                    ProfessorUpdateAt = null
+                    UpdateAt = DateTime.Now,
                 };
             }
         }

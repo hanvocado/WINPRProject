@@ -194,8 +194,7 @@ namespace ThesisManagement.Migrations
                     Progress = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Response = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StudentUpdateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ProfessorUpdateAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -220,8 +219,7 @@ namespace ThesisManagement.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TaskProgressId = table.Column<int>(type: "int", nullable: false),
-                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Sender = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

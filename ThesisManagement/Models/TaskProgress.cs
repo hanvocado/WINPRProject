@@ -19,8 +19,7 @@ namespace ThesisManagement.Models
 
         public string? Response { get; set; }
 
-        public DateTime? StudentUpdateAt { get; set; }
-        public DateTime? ProfessorUpdateAt { get; set; }
+        public DateTime? UpdateAt { get; set; }
 
         [ForeignKey(nameof(TaskId))]
         public Task? Task { get; set; }

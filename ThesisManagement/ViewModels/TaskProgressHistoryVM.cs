@@ -12,7 +12,6 @@ namespace ThesisManagement.ViewModels
     public class TaskProgressHistoryVM : ViewModelBase
     {
         private readonly ITaskRepository _taskRepo;
-        private readonly IAttachmentRepository _attachmentRepo;
         private readonly ITaskProgressRepository _progressRepo;
         private readonly IStudentRepository _studentRepo;
         public TaskProgress lastestTaskProgress;
@@ -70,28 +69,6 @@ namespace ThesisManagement.ViewModels
             set { progresses = value; OnPropertyChanged(nameof(Progresses)); }
         }
 
-        private ObservableCollection<Attachment> studentAttachments;
-        public ObservableCollection<Attachment> StudentAttachments
-        {
-            get { return studentAttachments; }
-            set
-            {
-                studentAttachments = value;
-                OnPropertyChanged(nameof(StudentAttachments));
-            }
-        }
-
-        private ObservableCollection<Attachment> professorAttachments;
-        public ObservableCollection<Attachment> ProfessorAttachments
-        {
-            get { return professorAttachments; }
-            set
-            {
-                professorAttachments = value;
-                OnPropertyChanged(nameof(ProfessorAttachments));
-            }
-        }
-
         public ViewModelCommand ShowUpdateTaskProgressView { get; set; }
 
         public TaskProgressHistoryVM()
@@ -100,13 +77,13 @@ namespace ThesisManagement.ViewModels
             _progressRepo = new TaskProgressRepository();
             _studentRepo = new StudentRepository();
             _progressRepo = new TaskProgressRepository();
-            _attachmentRepo = new AttachmentRepository();
             ShowUpdateTaskProgressView = new ViewModelCommand(ExecuteShowUpdateTaskProgressView);
         }
 
         private void ExecuteShowUpdateTaskProgressView(object obj)
         {
-            var professorResponse = _progressRepo?.GetLastestTaskProgress(taskId).Response;
+            TaskProgress lastestTaskProgress = _progressRepo.GetLastestTaskProgress(taskId);
+            var professorResponse = lastestTaskProgress.Response;
             int numOfProgress = _progressRepo.CountTaskProgress(taskId);
             if(numOfProgress == 0 && SessionInfo.Role == Role.Professor)
             {
@@ -126,6 +103,7 @@ namespace ThesisManagement.ViewModels
                 }
                 var vm = new TaskProgressVM();
                 vm.TaskId = taskId;
+                vm.ParentVM = this;
                 vm.SelectedTaskProgress = lastestTaskProgress;
                 if (SessionInfo.Role == Role.Student)
                 {
@@ -139,12 +117,7 @@ namespace ThesisManagement.ViewModels
         public void Reload()
         {
             this.Task = _taskRepo.GetTask(taskId);
-            this.Progresses = task.TaskProgresses ?? new List<TaskProgress>();
-            if (lastestTaskProgress != null)
-            {
-                ProfessorAttachments = _attachmentRepo.GetAttachments(taskId, Role.Professor.ToString());
-                StudentAttachments = _attachmentRepo.GetAttachments(taskId, Role.Student.ToString());
-            }    
+            this.Progresses = task.TaskProgresses.OrderBy(tp=>tp.Id).ToList() ?? new List<TaskProgress>();
         }
     }
 }

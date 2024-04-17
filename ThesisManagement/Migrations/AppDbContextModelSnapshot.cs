@@ -77,10 +77,6 @@ namespace ThesisManagement.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Sender")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("TaskProgressId")
                         .HasColumnType("int");
 
@@ -345,9 +341,6 @@ namespace ThesisManagement.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("ProfessorUpdateAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("Progress")
                         .HasColumnType("int");
 
@@ -357,11 +350,11 @@ namespace ThesisManagement.Migrations
                     b.Property<string>("StudentId")
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime?>("StudentUpdateAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("TaskId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdateAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 

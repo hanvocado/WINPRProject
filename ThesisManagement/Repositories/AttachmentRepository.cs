@@ -13,7 +13,7 @@ namespace ThesisManagement.Repositories
         bool Update(Attachment attachment);
         bool Delete(int id);
         ObservableCollection<Attachment> GetAll();
-        ObservableCollection<Attachment> GetAttachments(int taskProgressId, string sender);
+        ObservableCollection<Attachment> GetAttachments(int taskProgressId);
     }
 
     public class AttachmentRepository : IAttachmentRepository
@@ -64,10 +64,10 @@ namespace ThesisManagement.Repositories
             return new ObservableCollection<Attachment>(attachments);
         }
 
-        public ObservableCollection<Attachment> GetAttachments(int taskProgressId, string sender)
+        public ObservableCollection<Attachment> GetAttachments(int taskProgressId)
         {
             var attachments = _context.Attachments.Include(tp => tp.TaskProgress)
-                                                  .Where(at => at.TaskProgressId == taskProgressId && at.Sender == sender)
+                                                  .Where(at => at.TaskProgressId == taskProgressId)
                                                   .AsNoTracking()
                                                   .ToList() ?? new List<Attachment>();
             return new ObservableCollection<Attachment>(attachments);
