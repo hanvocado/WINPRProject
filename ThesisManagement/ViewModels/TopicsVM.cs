@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using ThesisManagement.Helpers;
@@ -17,7 +16,6 @@ namespace ThesisManagement.ViewModels
         private readonly IProfessorRepository _professorRepo;
         private readonly IStudentRepository _studentRepo;
         private readonly IThesisRepository _thesisRepo;
-        private User currentUser;
 
         private Topic selectedTopic;
         public Topic SelectedTopic
@@ -334,7 +332,7 @@ namespace ThesisManagement.ViewModels
             }
             if (selectedTopic?.StudentQuantity > 0 && selectedStudents.Count > selectedTopic?.StudentQuantity)
             {
-                ShowMessage(false, "", Message.ExceedStudentQuantity);
+                ShowMessage(false, null, Message.ExceedStudentQuantity);
                 return;
             }
             var chooseMembersView = obj as ChooseMembersView;
@@ -367,7 +365,7 @@ namespace ThesisManagement.ViewModels
         {
             if (selectedStudents.Count > selectedTopic?.StudentQuantity)
             {
-                ShowMessage(false, "", Message.ExceedStudentQuantity);
+                ShowMessage(false, null, Message.ExceedStudentQuantity);
                 return;
             }
             RegisterTopic(obj);
@@ -415,9 +413,9 @@ namespace ThesisManagement.ViewModels
             {
                 topicView = new StudentTopicView();
                 StudentId = SessionInfo.UserId;
-                currentUser = Students.FirstOrDefault(s => s.Id == SessionInfo.UserId);
-                Students.Remove((Student)currentUser);
-                SelectedStudents.Add((Student)currentUser);
+                var currentStudent = Students.FirstOrDefault(s => s.Id == SessionInfo.UserId);
+                Students.Remove(currentStudent);
+                SelectedStudents.Add(currentStudent);
                 SelectedStudentNames = SessionInfo.Name;
             }
             else

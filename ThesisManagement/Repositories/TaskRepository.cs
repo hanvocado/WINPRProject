@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using ThesisManagement.Models;
-using ThesisManagement.Repositories.EF;
 using Task = ThesisManagement.Models.Task;
 
 namespace ThesisManagement.Repositories
@@ -22,14 +20,10 @@ namespace ThesisManagement.Repositories
         IEnumerable<Task> GetUndoneTasks(int thesisId);
     }
 
-    public class TaskRepository : ITaskRepository
+    public class TaskRepository : BaseRepository, ITaskRepository
     {
-        private AppDbContext _context;
-        private Task? task;
-        public TaskRepository()
-        {
-            _context = DataProvider.Instance.Context;
-        }
+        public TaskRepository() { }
+
         public bool Add(Task task)
         {
             _context.Add(task);
@@ -38,7 +32,7 @@ namespace ThesisManagement.Repositories
 
         public bool Delete(int id)
         {
-            task = _context.Tasks.FirstOrDefault(t => t.Id == id);
+            var task = _context.Tasks.FirstOrDefault(t => t.Id == id);
             if (task == null) return false;
             _context.Remove(task);
             return DbSave();
@@ -48,20 +42,6 @@ namespace ThesisManagement.Repositories
             _context.ChangeTracker.Clear();
             _context.Update(task);
             return DbSave();
-        }
-
-        public bool DbSave()
-        {
-            try
-            {
-                _context.SaveChanges();
-                return true;
-            }
-            catch (DbUpdateException ex)
-            {
-                Trace.WriteLine(ex);
-                return false;
-            }
         }
 
         public ObservableCollection<Task> GetAll()

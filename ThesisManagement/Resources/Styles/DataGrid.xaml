@@ -42,8 +42,9 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListBoxItem">
-                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
-                            SnapsToDevicePixels="True" CornerRadius="10"
+                    <Border BorderThickness="1.5 0.5 1 2" 
+                            SnapsToDevicePixels="True" CornerRadius="8"
+                            BorderBrush="LightGray"
                             Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
                         <ContentPresenter VerticalAlignment="Center" />
                     </Border>

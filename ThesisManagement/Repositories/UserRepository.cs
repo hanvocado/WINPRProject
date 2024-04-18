@@ -1,6 +1,5 @@
 ﻿using System.Net;
 using ThesisManagement.Models;
-using ThesisManagement.Repositories.EF;
 
 namespace ThesisManagement.Repositories
 {
@@ -9,14 +8,10 @@ namespace ThesisManagement.Repositories
         bool Authenticate(NetworkCredential credential);
     }
 
-    public class UserRepository : IUserRepository
+    public class UserRepository : BaseRepository, IUserRepository
     {
-        private AppDbContext _context;
         private User? user;
-        public UserRepository()
-        {
-            _context = DataProvider.Instance.Context;
-        }
+        public UserRepository() { }
         public bool Authenticate(NetworkCredential credential)
         {
             var email = credential.UserName.ToLower();

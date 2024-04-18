@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using ThesisManagement.Models;
-using ThesisManagement.Repositories.EF;
 
 namespace ThesisManagement.Repositories
 {
@@ -14,17 +12,12 @@ namespace ThesisManagement.Repositories
         bool Delete(int id);
         ObservableCollection<TaskProgress> GetAll();
         TaskProgress GetLastestTaskProgress(int taskId);
-        int CountTaskProgress(int taskId);
     }
 
-    public class TaskProgressRepository : ITaskProgressRepository
+    public class TaskProgressRepository : BaseRepository, ITaskProgressRepository
     {
-        private AppDbContext _context;
-        private TaskProgress? taskProgress;
-        public TaskProgressRepository()
-        {
-            _context = DataProvider.Instance.Context;
-        }
+        public TaskProgressRepository() { }
+
         public bool Add(TaskProgress taskProgress)
         {
             _context.Add(taskProgress);
@@ -33,7 +26,7 @@ namespace ThesisManagement.Repositories
 
         public bool Delete(int id)
         {
-            taskProgress = _context.TaskProgresses.FirstOrDefault(tp => tp.Id == id);
+            var taskProgress = _context.TaskProgresses.FirstOrDefault(tp => tp.Id == id);
             if (taskProgress == null) return false;
             _context.Remove(taskProgress);
             return DbSave();
@@ -43,20 +36,6 @@ namespace ThesisManagement.Repositories
             _context.ChangeTracker.Clear();
             _context.Update(taskProgress);
             return DbSave();
-        }
-
-        public bool DbSave()
-        {
-            try
-            {
-                _context.SaveChanges();
-                return true;
-            }
-            catch (DbUpdateException ex)
-            {
-                Trace.WriteLine(ex);
-                return false;
-            }
         }
 
         public ObservableCollection<TaskProgress> GetAll()
@@ -74,15 +53,6 @@ namespace ThesisManagement.Repositories
                                                              .OrderByDescending(tp => tp.Id)
                                                              .FirstOrDefault();
             return lastestTaskProgress;
-        }
-
-        public int CountTaskProgress(int taskId)
-        {
-            int count = _context.TaskProgresses.Include(t => t.Task)
-                                               .Where(tp => tp.TaskId == taskId)
-                                               .AsNoTracking()
-                                               .Count();
-            return count;
         }
 
         public bool Update(int progressId, string response)

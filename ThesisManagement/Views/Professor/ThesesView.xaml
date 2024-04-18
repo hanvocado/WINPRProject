@@ -4,10 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ThesisManagement.Views.Professor"
-             xmlns:sf="http://schemas.syncfusion.com/wpf"
              xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
              xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
-             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
@@ -17,8 +15,9 @@
         <viewModels:ThesesVM />
     </UserControl.DataContext>
 
-    <StackPanel Margin="5">
-        <md:Card Background="{StaticResource nearWhite}" SnapsToDevicePixels="True" >
+    <DockPanel Margin="5">
+        <Border Style="{StaticResource borderCardStyle}" Background="{StaticResource nearWhite}" SnapsToDevicePixels="True"
+                DockPanel.Dock="Top">
             <StackPanel Orientation="Horizontal"
                         Margin="0 5 0 10"
                         HorizontalAlignment="Center">
@@ -29,13 +28,14 @@
                             Text="ĐỀ TÀI ĐÃ DUYỆT"
                             HorizontalAlignment="Left" />
             </StackPanel>
-        </md:Card>
+        </Border>
         
-        <md:Card Background="{StaticResource nearWhite}"
+        <Border Style="{StaticResource borderCardStyle}" Background="{StaticResource nearWhite}"
                 Visibility="{Binding ApprovedTheses.Count, Converter={StaticResource VisibilityConverter}}"
-                Padding="5" Margin="0 10 0 5" >
+                Margin="0 10 0 5" >
             <ListBox ItemsSource="{Binding ApprovedTheses}" 
                      x:Name="ThesisListView"
+                     Padding="10 10 10 0"
                      Background="{Binding RelativeSource={RelativeSource AncestorType=Border}, Path=Background}"
                      BorderThickness="0" ItemContainerStyle="{StaticResource listBoxItemStyle}">
                 <ListBox.ItemTemplate>
@@ -95,7 +95,6 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-        </md:Card>
-    </StackPanel>
-    
+        </Border>
+    </DockPanel>    
 </UserControl>
