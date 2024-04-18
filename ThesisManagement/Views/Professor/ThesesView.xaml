@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:ThesisManagement.Views.Professor"
              xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
              xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
-             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
@@ -16,8 +15,9 @@
         <viewModels:ThesesVM />
     </UserControl.DataContext>
 
-    <StackPanel Margin="5">
-        <md:Card Background="{StaticResource nearWhite}" SnapsToDevicePixels="True" >
+    <DockPanel Margin="5">
+        <Border Style="{StaticResource borderCardStyle}" Background="{StaticResource nearWhite}" SnapsToDevicePixels="True"
+                DockPanel.Dock="Top">
             <StackPanel Orientation="Horizontal"
                         Margin="0 5 0 10"
                         HorizontalAlignment="Center">
@@ -28,36 +28,35 @@
                             Text="ĐỀ TÀI ĐÃ DUYỆT"
                             HorizontalAlignment="Left" />
             </StackPanel>
-        </md:Card>
+        </Border>
         
-        <Border Background="{StaticResource nearWhite}"
-                Padding="5" Margin="0 10 0 5"
-                CornerRadius="10">
+        <Border Style="{StaticResource borderCardStyle}" Background="{StaticResource nearWhite}"
+                Visibility="{Binding ApprovedTheses.Count, Converter={StaticResource VisibilityConverter}}"
+                Margin="0 10 0 5" >
             <ListBox ItemsSource="{Binding ApprovedTheses}" 
                      x:Name="ThesisListView"
+                     Padding="10 10 10 0"
                      Background="{Binding RelativeSource={RelativeSource AncestorType=Border}, Path=Background}"
                      BorderThickness="0" ItemContainerStyle="{StaticResource listBoxItemStyle}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border CornerRadius="10" Padding="5">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="5*" />
-                                    <ColumnDefinition Width="1.5*" />
-                                </Grid.ColumnDefinitions>
+                            <DockPanel>
                                 <ItemsControl ItemsSource="{Binding Students}"
-                                              VerticalAlignment="Center"
-                                              Grid.Column="1">
+                                              DockPanel.Dock="Right"
+                                              VerticalAlignment="Center" >
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
-                                            <Border BorderBrush="{StaticResource info}" CornerRadius="5" Padding="15 5" BorderThickness="1" Margin="5" HorizontalAlignment="Center" >
-                                                <StackPanel Orientation="Horizontal">
-                                                    <fa:IconImage Icon="UserAlt" Height="12" Foreground="{StaticResource info}" Margin="0 0 10 0" />
-                                                    <StackPanel>
+                                            <Border BorderBrush="{StaticResource info}" CornerRadius="5" Padding="15 5" 
+                                                    Width="170"
+                                                    BorderThickness="1" Margin="5" HorizontalAlignment="Right" >
+                                                <DockPanel>
+                                                    <fa:IconImage Icon="UserAlt" Height="12" Foreground="{StaticResource info}" Margin="0 0 10 0" DockPanel.Dock="Left" />
+                                                    <StackPanel HorizontalAlignment="Center">
                                                         <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" FontWeight="DemiBold" Foreground="Black"/>
-                                                        <TextBlock Text="{Binding Id}" Foreground="{StaticResource secondaryTxtColor}"/>
+                                                        <TextBlock Text="{Binding Id}" Foreground="{StaticResource secondaryTxtColor}" HorizontalAlignment="Center"/>
                                                     </StackPanel>
-                                                </StackPanel>
+                                                </DockPanel>
                                             </Border>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
@@ -68,27 +67,34 @@
                                             <RowDefinition />
                                             <RowDefinition />
                                         </Grid.RowDefinitions>
-                                        <TextBlock Text="{Binding Topic.Name}" Style="{StaticResource topicTitle}" />
-                                        <customControls:ControlButton DefaultColor="{StaticResource info}"
-                                                                      HoverColor="{StaticResource infoHover}"
-                                                                      Content="Chi tiết →"
-                                                                      Margin="0 10 0 0"
-                                                                      Grid.Row="1"
-                                                                      Width="150"
-                                                                      VerticalAlignment="Center"
-                                                                      HorizontalAlignment="Left"
-                                                                      Foreground="white"
-                                                                      Command="{Binding DataContext.ShowThesisCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                                      CommandParameter="{Binding Id}">
-                                        </customControls:ControlButton>
+                                        <DockPanel>
+                                            <TextBlock Text="{Binding Topic.Name}" Style="{StaticResource topicTitle}" />
+                                        </DockPanel>
+                                        <StackPanel Orientation="Horizontal" Grid.Row="1">
+                                            <customControls:ControlButton DefaultColor="{StaticResource info}"
+                                                                          HoverColor="{StaticResource infoHover}"
+                                                                          Content="Chi tiết →"
+                                                                          Margin="0 20 0 0"
+                                                                          Width="150"
+                                                                          VerticalAlignment="Bottom"
+                                                                          HorizontalAlignment="Left"
+                                                                          Foreground="white"
+                                                                          Command="{Binding DataContext.ShowThesisCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                                          CommandParameter="{Binding Id}">
+                                            </customControls:ControlButton>
+                                            <Border Background="{StaticResource accent}" CornerRadius="10" Height="8" Width="8"
+                                                    ToolTip="Có cập nhật mới"
+                                                    Margin="-5 -5 0 0"
+                                                    Visibility="{Binding HasNewUpdate, Converter={StaticResource VisibilityConverter}}">
+                                            </Border>                                            
+                                        </StackPanel>
                                     </Grid>
                                 </Border>
-                            </Grid>
+                            </DockPanel>
                         </Border>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
         </Border>
-    </StackPanel>
-    
+    </DockPanel>    
 </UserControl>

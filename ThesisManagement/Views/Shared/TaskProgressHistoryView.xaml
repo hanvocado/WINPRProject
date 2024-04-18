@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ThesisManagement.Views.Shared"
         mc:Ignorable="d"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
         xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
         Height="620" Width="600"
@@ -115,12 +116,17 @@
                 </ListBox>
             </ScrollViewer>
 
-            <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
-                                          HoverColor="{StaticResource secondaryBrush}"
-                                          Grid.Row="2"
-                                          Width="200"
-                                          Command="{Binding ShowUpdateTaskProgressView}"
-                                          Content="+ Cập nhật / Phản hồi" />
+            <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
+                <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
+                                              HoverColor="{StaticResource secondaryBrush}"
+                                              Width="200"
+                                              Visibility="{Binding UpdateBtnVisibility, UpdateSourceTrigger=PropertyChanged}"
+                                              Command="{Binding ShowUpdateTaskProgressView}"
+                                              Content="+ Cập nhật" />
+                <fa:IconImage Icon="InfoCircle" Foreground="Gray" Height="15"
+                              ToolTip="Cập nhật của sinh viên cần được giảng viên xem xét. Cập nhật mới nhất cần được phản hồi trước khi sinh viên có thể tạo cập nhật mới."
+                              Margin="-6 0 0 25"/>
+            </StackPanel>
         </Grid>
     </Border>
 </Window>

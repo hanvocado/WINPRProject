@@ -1,7 +1,4 @@
-﻿using Syncfusion.XPS;
-using System.Collections.ObjectModel;
-using System.Diagnostics.Eventing.Reader;
-using System.Windows;
+﻿using System.Windows;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
 using ThesisManagement.Views.Shared;
@@ -68,6 +65,21 @@ namespace ThesisManagement.ViewModels
             get { return progresses; }
             set { progresses = value; OnPropertyChanged(nameof(Progresses)); }
         }
+        private TaskProgress? lastestProgress;
+
+        private Visibility updateBtnVisibility = Visibility.Visible;
+        public Visibility UpdateBtnVisibility
+        {
+            get
+            {
+                return updateBtnVisibility;
+            }
+            set
+            {
+                updateBtnVisibility = value;
+                OnPropertyChanged(nameof(UpdateBtnVisibility));
+            }
+        }
 
         public ViewModelCommand ShowUpdateTaskProgressView { get; set; }
 
@@ -82,42 +94,56 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteShowUpdateTaskProgressView(object obj)
         {
-            TaskProgress lastestTaskProgress = _progressRepo.GetLastestTaskProgress(taskId);
-            var professorResponse = lastestTaskProgress.Response;
-            int numOfProgress = _progressRepo.CountTaskProgress(taskId);
-            if(numOfProgress == 0 && SessionInfo.Role == Role.Professor)
+            if (SessionInfo.Role == Role.Professor)
             {
-                MessageBox.Show("Giảng viên chưa thể phản hồi");
-            }    
+                ShowLastestProgress();
+            }
             else
             {
-                if (numOfProgress > 0 && SessionInfo.Role == Role.Student && string.IsNullOrEmpty(professorResponse))
-                {
-                    MessageBox.Show("Đang đợi phàn hồi từ giảng viên hướng dẫn");
-                    return;
-                }
-                else if (SessionInfo.Role == Role.Professor && !string.IsNullOrEmpty(professorResponse))
-                {
-                    MessageBox.Show("Đang đợi trả lời từ sinh viên");
-                    return;
-                }
-                var vm = new TaskProgressVM();
-                vm.TaskId = taskId;
-                vm.ParentVM = this;
-                vm.SelectedTaskProgress = lastestTaskProgress;
-                if (SessionInfo.Role == Role.Student)
-                {
-                    vm.Student = _studentRepo.GetStudent(SessionInfo.UserId);
-                }
-                var updateView = new UpdateTaskProgressView { DataContext = vm };
-                updateView.Show();
-            } 
+                ShowNewProgressView();
+            }
         }
 
         public void Reload()
         {
             this.Task = _taskRepo.GetTask(taskId);
-            this.Progresses = task.TaskProgresses.OrderBy(tp=>tp.Id).ToList() ?? new List<TaskProgress>();
+            this.lastestProgress = _progressRepo.GetLastestTaskProgress(taskId);
+            this.Progresses = task?.TaskProgresses?.OrderBy(tp => tp.Id).ToList() ?? new List<TaskProgress>();
+            if (SessionInfo.Role == Role.Student && lastestProgress != null && lastestProgress.Response == null)
+                UpdateBtnVisibility = Visibility.Collapsed;
+            else if (SessionInfo.Role == Role.Professor && lastestProgress?.Response != null)
+                UpdateBtnVisibility = Visibility.Collapsed;
+        }
+
+        private void ShowLastestProgress()
+        {
+            var vm = new TaskProgressVM
+            {
+                ParentVM = this,
+                TaskId = lastestProgress.TaskId,
+                Id = lastestProgress.Id,
+                UpdateAt = lastestProgress?.UpdateAt,
+                Description = lastestProgress.Description,
+                Response = lastestProgress.Response,
+                StudentName = lastestProgress.Student?.Name,
+                Progress = lastestProgress.Progress,
+            };
+            var view = new UpdateTaskProgressView { DataContext = vm };
+            view.Show();
+        }
+
+        private void ShowNewProgressView()
+        {
+            var vm = new TaskProgressVM
+            {
+                ParentVM = this,
+                TaskId = taskId,
+                StudentId = SessionInfo.UserId,
+                StudentName = SessionInfo.Name
+            };
+
+            var view = new UpdateTaskProgressView { DataContext = vm };
+            view.Show();
         }
     }
 }

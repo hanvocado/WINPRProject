@@ -108,7 +108,7 @@ namespace ThesisManagement.ViewModels
         {
             WaitingTheses = _thesisRepo.Get(currentUserId, Variable.StatusTopic.Waiting);
             Window profWindow = Application.Current.MainWindow;
-            profWindow.DataContext = new ProfessorMainVM();
+            profWindow.DataContext = new ProfessorMainVM { CurrentChildView = new ThesesVM() };
         }
 
         private void LoadUndoButton()

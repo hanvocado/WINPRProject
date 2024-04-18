@@ -15,8 +15,9 @@
         <viewModels:ReviewThesesVM/>
     </UserControl.DataContext>
 
-    <StackPanel Margin="5">
-        <md:Card Background="{StaticResource nearWhite}" SnapsToDevicePixels="True" >
+    <DockPanel Margin="5">
+        <Border Style="{StaticResource borderCardStyle}" Background="{StaticResource nearWhite}" SnapsToDevicePixels="True"
+                DockPanel.Dock="Top">
             <StackPanel Orientation="Horizontal"
                     Margin="0 5 0 10"
                     HorizontalAlignment="Center">
@@ -24,41 +25,39 @@
                    Margin="0 0 20 0"
                    Height="30" Width="30" />
                 <TextBlock Style="{StaticResource title}" 
+                           VerticalAlignment="Center"
                         Text="SINH VIÊN CHỜ DUYỆT ĐỀ TÀI"
                         HorizontalAlignment="Left" />
             </StackPanel>
-        </md:Card>
+        </Border>
 
-        <Border Background="{StaticResource nearWhite}"
-            Padding="5" Margin="0 10 0 5"
-            CornerRadius="10">
+        <Border Style="{StaticResource borderCardStyle}" Background="{StaticResource nearWhite}"
+                Padding="5" Margin="0 10 0 5"
+                Visibility="{Binding WaitingTheses.Count, Converter={StaticResource VisibilityConverter}}" >
             <ListBox ItemsSource="{Binding WaitingTheses}" 
                      SelectedItem="{Binding SelectedThesis, Mode=OneWayToSource}"
-                 x:Name="ThesisListView"
-                 Background="{Binding RelativeSource={RelativeSource AncestorType=Border}, Path=Background}"
-                 BorderThickness="0" ItemContainerStyle="{StaticResource listBoxItemStyle}"
-                 MouseLeftButtonUp="ListViewItem_MouseEnter">
+                     x:Name="ThesisListView"
+                     Background="{Binding RelativeSource={RelativeSource AncestorType=Border}, Path=Background}"
+                     BorderThickness="0" ItemContainerStyle="{StaticResource listBoxItemStyle}" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border CornerRadius="10" Padding="5">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="5*" />
-                                    <ColumnDefinition Width="1.5*" />
-                                </Grid.ColumnDefinitions>
+                            <DockPanel>
                                 <ItemsControl ItemsSource="{Binding Students}"
-                                              VerticalAlignment="Center"
-                                          Grid.Column="1">
+                                              DockPanel.Dock="Right"
+                                              VerticalAlignment="Center" >
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
-                                            <Border BorderBrush="{StaticResource warning}" CornerRadius="5" Padding="15 5" BorderThickness="1" Margin="5" HorizontalAlignment="Center" >
-                                                <StackPanel Orientation="Horizontal">
-                                                    <fa:IconImage Icon="UserAlt" Height="12" Foreground="{StaticResource warning}" Margin="0 0 10 0" />
-                                                    <StackPanel>
+                                            <Border BorderBrush="{StaticResource warning}" CornerRadius="5" Padding="15 5" 
+                                                    Width="170"
+                                                    BorderThickness="1" Margin="5" HorizontalAlignment="Right" >
+                                                <DockPanel>
+                                                    <fa:IconImage Icon="UserAlt" Height="12" Foreground="{StaticResource warning}" Margin="0 0 10 0" DockPanel.Dock="Left" />
+                                                    <StackPanel HorizontalAlignment="Center">
                                                         <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" FontWeight="DemiBold" Foreground="Black"/>
-                                                        <TextBlock Text="{Binding Id}" Foreground="{StaticResource secondaryTxtColor}"/>
+                                                        <TextBlock Text="{Binding Id}" Foreground="{StaticResource secondaryTxtColor}" HorizontalAlignment="Center"/>
                                                     </StackPanel>
-                                                </StackPanel>
+                                                </DockPanel>
                                             </Border>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
@@ -109,11 +108,11 @@
                                         </StackPanel>
                                     </Grid>
                                 </Border>
-                            </Grid>
+                            </DockPanel>
                         </Border>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
         </Border>
-    </StackPanel>
+    </DockPanel>
 </UserControl>

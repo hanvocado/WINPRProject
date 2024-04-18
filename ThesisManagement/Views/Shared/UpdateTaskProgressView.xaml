@@ -49,7 +49,7 @@
                                  IsReadOnly="True"
                                  Height="35"
                                  VerticalAlignment="Top"
-                                 Text="{Binding Student.Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                 Text="{Binding StudentName, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
 
                     <StackPanel Grid.Column="1" Margin="10 0 0 0">
@@ -102,7 +102,7 @@
                         </Grid.ColumnDefinitions>
 
                         <ScrollViewer VerticalScrollBarVisibility="Auto">
-                            <ListBox ItemsSource="{Binding Attachments}"
+                            <ListBox ItemsSource="{Binding Attachments, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
                                      x:Name="AttachmentsListBox"
                                      Margin="0 0 10 0"
                                      SelectedItem="{Binding SelectedFile}"

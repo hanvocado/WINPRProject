@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:ThesisManagement.Views.Shared"
              xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
              xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
-             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
              x:Name="tasksViewUC"
@@ -31,8 +30,9 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         
-        <md:Card Background="{StaticResource nearWhite}" Padding="5 5"
+        <Border Background="{StaticResource nearWhite}" Padding="10"
                  Grid.Row="0"
+                Style="{StaticResource borderCardStyle}"
                  Margin="10 10">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -42,14 +42,14 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <md:Card Background="{StaticResource MaterialDesignPaper}" Padding="0 3"
+                <Border Style="{StaticResource borderCardStyle}" Background="white" Padding="5"
                          Margin="0 0 10 0">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="60" />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Border CornerRadius="15" Background="{StaticResource info}" Width="30" Height="30">
+                        <Border CornerRadius="15" Background="CornflowerBlue" Width="30" Height="30">
                             <fa:IconImage Icon="List" Width="15" Foreground="White" />
                         </Border>
                         <StackPanel Grid.Column="1" Margin="0 0 10 0">
@@ -57,12 +57,13 @@
                             <TextBlock Text="" FontSize="20" FontWeight="Medium" />
                         </StackPanel>
                     </Grid>
-                </md:Card>
+                </Border>
 
-                <md:Card Background="{StaticResource MaterialDesignPaper}"
+                <Border Background="white"
+                        Style="{StaticResource borderCardStyle}"
                          Grid.Column="1"
                          Margin="10 0 10 0"
-                         Padding="0 3">
+                         Padding="5">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="60" />
@@ -76,12 +77,13 @@
                             <TextBlock Text="{Binding DoneTasks.Count}" FontSize="20" FontWeight="Medium" />
                         </StackPanel>
                     </Grid>
-                </md:Card>
+                </Border>
                 
-                <md:Card Background="{StaticResource MaterialDesignPaper}"
-                         Grid.Column="2"
+                <Border Grid.Column="2"
+                        Style="{StaticResource borderCardStyle}"
+                        Background="white"
                          Margin="10 0 10 0"
-                         Padding="0 3">
+                         Padding="5">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="60" />
@@ -95,7 +97,7 @@
                             <TextBlock Text="" FontSize="20" FontWeight="Medium" />
                         </StackPanel>
                     </Grid>
-                </md:Card>
+                </Border>
       
                 <customControls:ControlButton Width="150" Height="30"
                                               HorizontalAlignment="Right"
@@ -107,14 +109,15 @@
                 </customControls:ControlButton>
                 
             </Grid>
-        </md:Card>
+        </Border>
 
         <Grid Grid.Row="1" Margin="10 0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Border Background="{StaticResource nearWhite}" Margin="0 0 5 0" CornerRadius="10">
+            <Border Style="{StaticResource borderCardStyle}" Margin="0 0 5 5">
                 <ListBox ItemsSource="{Binding PendingTasks}" 
                          SelectedItem="{Binding SelectedTask}"
                          Background="{Binding RelativeSource={RelativeSource AncestorType=Border}, Path=Background}"
@@ -144,27 +147,35 @@
                                 </StackPanel>
                                 <TextBlock Text="{Binding Description}" Grid.Row="2" />
                                 <ProgressBar Value="{Binding Progress, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                            Foreground="{StaticResource accent}"
+                                            Foreground="{StaticResource info}"
                                             Grid.Row="3"
-                                            Margin="0 5 0 5" />
+                                            Margin="0 10 0 5" />
                                 <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft"
                                                     Grid.Row="4">
-                                    <customControls:ControlButton Style="{StaticResource lvBtn}"
-                                                                DefaultColor="{StaticResource warning}"
-                                                                HoverColor="{StaticResource warningHover}"
-                                                                Margin="2 0 0 5"
-                                                                Command="{Binding DataContext.ShowTaskProgressHistory,RelativeSource={RelativeSource AncestorType=ListBox}}">
-                                        <customControls:ControlButton.Content>
-                                            <fa:IconImage Icon="Message" Style="{StaticResource btnIcon}" />
-                                        </customControls:ControlButton.Content>
-                                    </customControls:ControlButton>
+                                    <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight">
+                                        <customControls:ControlButton DefaultColor="{StaticResource warning}"
+                                                                      HoverColor="{StaticResource warningHover}"
+                                                                      Style="{StaticResource lvBtn}"
+                                                                      Margin="2 0 0 5"
+                                                                      CommandParameter="{Binding Id}"
+                                                                      Command="{Binding DataContext.ShowTaskProgressHistory,RelativeSource={RelativeSource AncestorType=ListBox}}">
+                                            <customControls:ControlButton.Content>
+                                                <fa:IconImage Icon="Message" Style="{StaticResource btnIcon}" />
+                                            </customControls:ControlButton.Content>
+                                        </customControls:ControlButton>
+                                        <Border Background="{StaticResource accent}" CornerRadius="10" Height="8" Width="8"
+                                                VerticalAlignment="Top"
+                                                Margin="-5 0 0 0"
+                                                Visibility="{Binding WaitingForResponse, Converter={StaticResource VisibilityConverter}}">
+                                        </Border>
+                                    </StackPanel>
                                     <customControls:ControlButton Style="{StaticResource lvBtn}"
                                                                 Visibility="{Binding DataContext.IsProfessor ,RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource VisibilityConverter}}"
                                                                 DefaultColor="{StaticResource danger}"
                                                                 HoverColor="{StaticResource dangerHover}"
                                                                 Margin="5 0 5 5"
                                                                 CommandParameter="{Binding Id}"
-                                                                Command="{Binding DataContext.DeleteTaskCommand, RelativeSource={RelativeSource AncestorType=ListView}}">
+                                                                Command="{Binding DataContext.DeleteTaskCommand, RelativeSource={RelativeSource AncestorType=ListBox}}">
                                         <customControls:ControlButton.Content>
                                             <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
                                         </customControls:ControlButton.Content>
@@ -176,11 +187,10 @@
                 </ListBox>
             </Border>
 
-            <Border Background="{StaticResource nearWhite}" Margin="5 0 0 0"
-                          CornerRadius="10"
-                          ClipToBounds="False"
-                          Grid.Column="1">
+            <Border Style="{StaticResource borderCardStyle}" Margin="5 0 0 5"
+                    Grid.Column="1">
                 <ListBox ItemsSource="{Binding DoneTasks}" x:Name="DoneTaskListView"
+                         SelectedItem="{Binding SelectedTask}"
                          Background="{Binding RelativeSource={RelativeSource AncestorType=Border}, Path=Background}"
                          BorderThickness="0"
                          Padding="10"
@@ -199,28 +209,82 @@
 
                                 <TextBlock Text="{Binding Name}" Style="{StaticResource topicTitle}" Margin="0 5" />
                                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10" Grid.Row="1">
-                                    <fa:IconImage Icon="Clock" Style="{StaticResource btnIcon}" Margin="0 0 5 0" Foreground="{Binding ElementName=subTxt, Path=Foreground}"/>
+                                    <fa:IconImage Icon="Clock" Style="{StaticResource btnIcon}" Margin="0 0 8 0" Foreground="{Binding ElementName=subTxt, Path=Foreground}" />
                                     <TextBlock Text="{Binding Start, StringFormat='HH:mm dd/MM'}" Style="{StaticResource subTxtItem}" />
                                     <TextBlock Text=" - " Style="{StaticResource subTxtItem}" x:Name="subTxt" />
                                     <TextBlock Text="{Binding End, StringFormat='HH:mm dd/MM'}" Style="{StaticResource subTxtItem}" />
                                 </StackPanel>
                                 <TextBlock Text="{Binding Description}" Grid.Row="2" />
                                 <ProgressBar Value="{Binding Progress, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                            Width="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=ActualWidth}"
-                                            Padding="10 0"
-                                             Foreground="{StaticResource successHover}"
+                                            Foreground="{StaticResource success}"
                                             Grid.Row="3"
-                                            Margin="0 5" />
+                                            Margin="0 5 0 5" />
                                 <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft"
-                                                        Grid.Row="4">
+                                            Grid.Row="4">
                                     <customControls:ControlButton Style="{StaticResource lvBtn}"
-                                                                                DefaultColor="{StaticResource primaryBrush}"
-                                                                                HoverColor="{StaticResource secondaryBrush}"
-                                                                                Margin="2 0 0 0"
-                                                                                CommandParameter="{Binding ElementName=tasksViewUC}"
-                                                                                Command="{Binding DataContext.ShowTaskProgressHistory,RelativeSource={RelativeSource AncestorType=ListView}}">
+                                                                  DefaultColor="{StaticResource warning}"
+                                                                  HoverColor="{StaticResource warningHover}"
+                                                                  Margin="2 0 0 5"
+                                                                  CommandParameter="{Binding Id}"
+                                                                  Command="{Binding DataContext.ShowTaskProgressHistory,RelativeSource={RelativeSource AncestorType=ListBox}}">
                                         <customControls:ControlButton.Content>
-                                            <fa:IconImage Icon="Message" Style="{StaticResource btnIcon}" />
+                                            <StackPanel Orientation="Horizontal">
+                                                <fa:IconImage Icon="Message" Style="{StaticResource btnIcon}" />
+                                            </StackPanel>
+                                        </customControls:ControlButton.Content>
+                                    </customControls:ControlButton>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Border>
+            
+            <Border Margin="10 0 0 5"
+                    Style="{StaticResource borderCardStyle}"
+                    Grid.Column="2">
+                <ListBox ItemsSource="{Binding OverdueTasks}"
+                         SelectedItem="{Binding SelectedTask}"
+                         Background="{Binding RelativeSource={RelativeSource AncestorType=Border}, Path=Background}"
+                         BorderThickness="0"
+                         Padding="10"
+                         ScrollViewer.CanContentScroll="True"
+                         ItemContainerStyle="{StaticResource listBoxItemStyle}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Text="{Binding Name}" Style="{StaticResource topicTitle}" Margin="0 5" />
+                                <StackPanel Orientation="Horizontal" Margin="0 0 0 10" Grid.Row="1">
+                                    <fa:IconImage Icon="Clock" Style="{StaticResource btnIcon}" Margin="0 0 8 0" Foreground="{Binding ElementName=subTxt, Path=Foreground}" />
+                                    <TextBlock Text="{Binding Start, StringFormat='HH:mm dd/MM'}" Style="{StaticResource subTxtItem}" />
+                                    <TextBlock Text=" - " Style="{StaticResource subTxtItem}" x:Name="subTxt" />
+                                    <TextBlock Text="{Binding End, StringFormat='HH:mm dd/MM'}" Style="{StaticResource subTxtItem}" />
+                                </StackPanel>
+                                <TextBlock Text="{Binding Description}" Grid.Row="2" />
+                                <ProgressBar Value="{Binding Progress, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Foreground="{StaticResource accent}"
+                                            Grid.Row="3"
+                                            Margin="0 5 0 5" />
+                                <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft"
+                                            Grid.Row="4">
+                                    <customControls:ControlButton Style="{StaticResource lvBtn}"
+                                                                  DefaultColor="{StaticResource warning}"
+                                                                  HoverColor="{StaticResource warningHover}"
+                                                                  Margin="2 0 0 5"
+                                                                  CommandParameter="{Binding Id}"
+                                                                  Command="{Binding DataContext.ShowTaskProgressHistory,RelativeSource={RelativeSource AncestorType=ListBox}}">
+                                        <customControls:ControlButton.Content>
+                                            <StackPanel Orientation="Horizontal">
+                                                <fa:IconImage Icon="Message" Style="{StaticResource btnIcon}" />
+                                            </StackPanel>
                                         </customControls:ControlButton.Content>
                                     </customControls:ControlButton>
                                 </StackPanel>

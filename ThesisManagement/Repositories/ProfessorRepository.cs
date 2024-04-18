@@ -1,31 +1,23 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using ThesisManagement.Models;
-using ThesisManagement.Repositories.EF;
 
 namespace ThesisManagement.Repositories
 {
     public interface IProfessorRepository
     {
         ObservableCollection<Professor> GetAll();
-        IEnumerable<string> GetNames();
         Professor? Get(string id);
-        string? NoStudentUpdates(string professorId);
+        bool HasNewUpdate(string professorId);
     }
 
-    public class ProfessorRepository : IProfessorRepository
+    public class ProfessorRepository : BaseRepository, IProfessorRepository
     {
-        private AppDbContext _context;
-        private Professor? professor;
-
-        public ProfessorRepository()
-        {
-            _context = DataProvider.Instance.Context;
-        }
+        public ProfessorRepository() { }
 
         public Professor? Get(string id)
         {
-            professor = _context.Professors.Include(pr => pr.Topics).FirstOrDefault(pr => pr.Id == id);
+            var professor = _context.Professors.Include(pr => pr.Topics).FirstOrDefault(pr => pr.Id == id);
             return professor;
         }
 
@@ -35,13 +27,7 @@ namespace ThesisManagement.Repositories
             return new ObservableCollection<Professor>(professors);
         }
 
-        public IEnumerable<string> GetNames()
-        {
-            var names = _context.Professors.Select(prof => prof.Name).ToList();
-            return names;
-        }
-
-        public string? NoStudentUpdates(string professorId)
+        public bool HasNewUpdate(string professorId)
         {
             var topics = _context.Professors.Include(p => p.Topics)
                                             .ThenInclude(t => t.Theses)
@@ -54,13 +40,13 @@ namespace ThesisManagement.Repositories
                     {
                         foreach (Thesis thesis in topic.Theses)
                         {
-                            if (!String.IsNullOrEmpty(thesis.UpdateCount))
-                                return thesis.UpdateCount;
+                            if (thesis.HasNewUpdate)
+                                return true;
                         }
                     }
                 }
 
-            return null;
+            return false;
         }
     }
 }

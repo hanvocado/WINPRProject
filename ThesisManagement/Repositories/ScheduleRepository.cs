@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
 using ThesisManagement.Models;
-using ThesisManagement.Repositories.EF;
 
 namespace ThesisManagement.Repositories
 {
@@ -14,14 +12,9 @@ namespace ThesisManagement.Repositories
         int CountUpcomingSchedules(int thesisId);
     }
 
-    public class ScheduleRepository : IScheduleRepository
+    public class ScheduleRepository : BaseRepository, IScheduleRepository
     {
-        private AppDbContext _context;
-
-        public ScheduleRepository()
-        {
-            _context = DataProvider.Instance.Context;
-        }
+        public ScheduleRepository() { }
 
         public bool Add(ScheduleInfo scheduleInfo)
         {
@@ -42,20 +35,6 @@ namespace ThesisManagement.Repositories
             if (schedule == null) return false;
             _context.Remove(schedule);
             return DbSave();
-        }
-
-        public bool DbSave()
-        {
-            try
-            {
-                _context.SaveChanges();
-                return true;
-            }
-            catch (DbUpdateException ex)
-            {
-                Trace.WriteLine(ex);
-                return false;
-            }
         }
 
         public IEnumerable<ScheduleInfo> GetScheduleInfos(int thesisId)

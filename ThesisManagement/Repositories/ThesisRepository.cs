@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using ThesisManagement.Helpers;
 using ThesisManagement.Models;
-using ThesisManagement.Repositories.EF;
 
 namespace ThesisManagement.Repositories
 {
@@ -17,16 +14,12 @@ namespace ThesisManagement.Repositories
         IEnumerable<Thesis> Get(int topicId, string topicStatus);
         IEnumerable<Student> GetMembers(int thesisId);
         Thesis? GetThesis(int taskId);
-        bool CanRegisterTopic(int thesisId);
+        Thesis? Get(int thesisId);
     }
-    public class ThesisRepository : IThesisRepository
-    {
-        private AppDbContext _context;
 
-        public ThesisRepository()
-        {
-            _context = DataProvider.Instance.Context;
-        }
+    public class ThesisRepository : BaseRepository, IThesisRepository
+    {
+        public ThesisRepository() { }
 
         public bool Add(Thesis thesis)
         {
@@ -59,7 +52,6 @@ namespace ThesisManagement.Repositories
             return DbSave();
         }
 
-
         public IEnumerable<Thesis> GetAll()
         {
             var theses = _context.Theses.Include(tp => tp.Topic).AsNoTracking().ToList();
@@ -68,7 +60,7 @@ namespace ThesisManagement.Repositories
 
         public IEnumerable<Thesis> Get(string userId, string topicStatus)
         {
-            var list = _context.Theses.Include(st => st.Students).Include(tp => tp.Topic)
+            var list = _context.Theses.Include(th => th.Students).Include(th => th.Tasks).Include(th => th.Topic)
                                                 .ThenInclude(pr => pr.Professor)
                                                 .Where(th => th.Topic.ProfessorId == userId && th.TopicStatus == topicStatus).AsNoTracking().ToList();
             return list;
@@ -82,34 +74,10 @@ namespace ThesisManagement.Repositories
             return list;
         }
 
-        public bool CanRegisterTopic(int thesisId)
-        {
-            var currentStudents = GetMembers(thesisId);
-            int currentQuantity = currentStudents.Count();
-            bool waiting = _context.Theses.Include(tp => tp.Topic)
-                                          .Where(th => th.Id == thesisId && th.TopicStatus == Variable.StatusTopic.Waiting)
-                                          .Any(th => th.Topic.StudentQuantity >= currentQuantity);
-            return waiting;
-        }
-
         public IEnumerable<Student> GetMembers(int thesisId)
         {
             var students = _context.Theses.Include(st => st.Students).Where(th => th.Id == thesisId).SelectMany(th => th.Students).ToList();
             return students;
-        }
-
-        public bool DbSave()
-        {
-            try
-            {
-                _context.SaveChanges();
-                return true;
-            }
-            catch (DbUpdateException ex)
-            {
-                Trace.WriteLine(ex);
-                return false;
-            }
         }
 
         public Thesis? GetThesis(int taskId)
@@ -119,19 +87,13 @@ namespace ThesisManagement.Repositories
                                        .AsNoTracking()
                                        .FirstOrDefault();
             return task?.Thesis;
-                            
         }
 
-
-        //public void AddMembers(int topicId, IEnumerable<Student> members)
-        //{
-        //    var studentTopics = new List<StudentTopic>();
-        //    foreach (Student member in members)
-        //    {
-        //        studentTopics.Add(new StudentTopic() { StudentId = member.Id, TopicId = topicId, Status = Variable.StudentTopic.Waiting });
-        //    }
-        //    _context.StudentTopics.AddRange(studentTopics);
-        //}
-
+        public Thesis? Get(int thesisId)
+        {
+            var thesis = _context.Theses.Include(t => t.Topic).ThenInclude(t => t.Professor)
+                        .AsNoTracking().FirstOrDefault(t => t.Id == thesisId);
+            return thesis;
+        }
     }
 }

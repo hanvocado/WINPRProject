@@ -1,13 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ThesisManagement.Models;
-using ThesisManagement.Repositories.EF;
 
 namespace ThesisManagement.Repositories
 {
@@ -15,20 +8,16 @@ namespace ThesisManagement.Repositories
     {
         bool Add(TaskProgress taskProgress);
         bool Update(TaskProgress taskProgress);
+        bool Update(int progressId, string response);
         bool Delete(int id);
         ObservableCollection<TaskProgress> GetAll();
         TaskProgress GetLastestTaskProgress(int taskId);
-        int CountTaskProgress (int taskId);
     }
 
-    public class TaskProgressRepository : ITaskProgressRepository
+    public class TaskProgressRepository : BaseRepository, ITaskProgressRepository
     {
-        private AppDbContext _context;
-        private TaskProgress? taskProgress;
-        public TaskProgressRepository()
-        {
-            _context = DataProvider.Instance.Context;
-        }
+        public TaskProgressRepository() { }
+
         public bool Add(TaskProgress taskProgress)
         {
             _context.Add(taskProgress);
@@ -37,7 +26,7 @@ namespace ThesisManagement.Repositories
 
         public bool Delete(int id)
         {
-            taskProgress = _context.TaskProgresses.FirstOrDefault(tp => tp.Id == id);
+            var taskProgress = _context.TaskProgresses.FirstOrDefault(tp => tp.Id == id);
             if (taskProgress == null) return false;
             _context.Remove(taskProgress);
             return DbSave();
@@ -49,20 +38,6 @@ namespace ThesisManagement.Repositories
             return DbSave();
         }
 
-        public bool DbSave()
-        {
-            try
-            {
-                _context.SaveChanges();
-                return true;
-            }
-            catch (DbUpdateException ex)
-            {
-                Trace.WriteLine(ex);
-                return false;
-            }
-        }
-
         public ObservableCollection<TaskProgress> GetAll()
         {
             var taskProgresses = _context.TaskProgresses.Include(t => t.Task).AsNoTracking().ToList();
@@ -72,20 +47,24 @@ namespace ThesisManagement.Repositories
         public TaskProgress GetLastestTaskProgress(int taskId)
         {
             var lastestTaskProgress = _context.TaskProgresses.Include(t => t.Task)
+                                                             .Include(t => t.Student)
                                                              .Where(tp => tp.TaskId == taskId)
                                                              .AsNoTracking()
                                                              .OrderByDescending(tp => tp.Id)
-                                                             .FirstOrDefault() ?? new TaskProgress(); 
+                                                             .FirstOrDefault();
             return lastestTaskProgress;
         }
 
-        public int CountTaskProgress(int taskId)
+        public bool Update(int progressId, string response)
         {
-            int count = _context.TaskProgresses.Include(t => t.Task)
-                                               .Where(tp => tp.TaskId == taskId)
-                                               .AsNoTracking()
-                                               .Count();
-            return count;
+            var progress = _context.TaskProgresses.FirstOrDefault(t => t.Id == progressId);
+            if (progress != null)
+            {
+                progress.Response = response;
+                _context.Update(progress);
+                return DbSave();
+            }
+            return false;
         }
     }
 }

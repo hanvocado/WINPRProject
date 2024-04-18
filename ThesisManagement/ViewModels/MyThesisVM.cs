@@ -33,13 +33,16 @@ namespace ThesisManagement.ViewModels
             set
             {
                 thesis = value;
-                Topic = thesis.Topic;
-                Thesis.Students = _studentRepo.GetStudent(Thesis.Id)?.ToList() ?? new List<Student>();
-                Evaluation = Thesis.Evaluation ?? string.Empty;
-                var student = Thesis.Students.FirstOrDefault(st => st.Id == SessionInfo.UserId);
-                Score = (student != null) ? student.Score : 0;
+                if (thesis != null)
+                {
+                    Topic = thesis.Topic;
+                    Thesis.Students = _studentRepo.GetStudent(Thesis.Id)?.ToList() ?? new List<Student>();
+                    Evaluation = Thesis.Evaluation ?? string.Empty;
+                    var student = Thesis.Students.FirstOrDefault(st => st.Id == SessionInfo.UserId);
+                    Score = (student != null) ? student.Score : 0;
+                    UpdateEvaluations();
+                }
                 OnPropertyChanged(nameof(Thesis));
-                UpdateEvaluations();
             }
         }
 

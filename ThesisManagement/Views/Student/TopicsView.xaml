@@ -8,7 +8,6 @@
              xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:sf="http://schemas.syncfusion.com/wpf"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
@@ -16,7 +15,7 @@
         <viewModels:TopicsVM/>
     </UserControl.DataContext>
 
-    <md:Card Background="{DynamicResource MaterialDesignPaper}" Margin="0 0 0 10">
+    <Border Style="{StaticResource borderCardStyle}" Background="{DynamicResource MaterialDesignPaper}" Margin="0 0 0 10">
         <Grid Background="{DynamicResource MaterialDesignPaper}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="62"/>
@@ -24,7 +23,7 @@
             </Grid.RowDefinitions>
 
             <Border Margin="10 10 10 0" Background="White"
-                    CornerRadius="10"
+                    Style="{StaticResource borderCardStyle}"
                     Padding="10 5">
                 <Grid Grid.Row="0" Background="{Binding}">
                     <DockPanel Grid.Column="0" >
@@ -84,9 +83,9 @@
                 </Grid>
             </Border>
 
-            <Border Grid.Row="1" Background="{Binding}"
-                    Padding="10">
+            <Border Grid.Row="1" Background="{Binding}" >
                 <ListBox Name="TopicsListView"
+                         Padding="10"
                          Background="{Binding}"
                          BorderThickness="0"
                          ItemContainerStyle="{StaticResource listBoxItemStyle}"
@@ -100,13 +99,11 @@
                                     <DockPanel>
                                         <TextBlock Style="{StaticResource topicTitle}"
                                                    Text="{Binding Name}" />
-                                        <Border CornerRadius="5"
-                                                DockPanel.Dock="Right">
-                                            <sf:SfBadge Content="{Binding RegisteredStatusByCurrentUser}" Shape="Oval"
-                                                        Background="{StaticResource info}"
-                                                        MaxWidth="80"
-                                                        FontWeight="Medium"
-                                                        Padding="0 4" />
+                                        <Border Background="{StaticResource info}" CornerRadius="5" Padding="10 3" BorderThickness="0"
+                                                DockPanel.Dock="Right" Width="80"
+                                                HorizontalAlignment="Right"
+                                                Visibility="{Binding RegisteredStatusByCurrentUser, Converter={StaticResource VisibilityConverter}}">
+                                            <TextBlock Text="{Binding RegisteredStatusByCurrentUser}" Foreground="white" FontWeight="Medium"/>
                                         </Border>
 
                                     </DockPanel>
@@ -131,5 +128,5 @@
                 </ListBox>
             </Border>
         </Grid>
-    </md:Card>
+    </Border>
 </UserControl>

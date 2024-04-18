@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using ThesisManagement.Repositories.EF;
 using Attachment = ThesisManagement.Models.Attachment;
 
 namespace ThesisManagement.Repositories
@@ -16,14 +14,10 @@ namespace ThesisManagement.Repositories
         ObservableCollection<Attachment> GetAttachments(int taskProgressId);
     }
 
-    public class AttachmentRepository : IAttachmentRepository
+    public class AttachmentRepository : BaseRepository, IAttachmentRepository
     {
-        private AppDbContext _context;
-        private Attachment? attachment;
-        public AttachmentRepository()
-        {
-            _context = DataProvider.Instance.Context;
-        }
+        public AttachmentRepository() { }
+
         public bool Add(Attachment attachment)
         {
             _context.Add(attachment);
@@ -32,7 +26,7 @@ namespace ThesisManagement.Repositories
 
         public bool Delete(int id)
         {
-            attachment = _context.Attachments.FirstOrDefault(at => at.Id == id);
+            var attachment = _context.Attachments.FirstOrDefault(at => at.Id == id);
             if (attachment == null) return false;
             _context.Remove(attachment);
             return DbSave();
@@ -42,20 +36,6 @@ namespace ThesisManagement.Repositories
             _context.ChangeTracker.Clear();
             _context.Update(attachment);
             return DbSave();
-        }
-
-        public bool DbSave()
-        {
-            try
-            {
-                _context.SaveChanges();
-                return true;
-            }
-            catch (DbUpdateException ex)
-            {
-                Trace.WriteLine(ex);
-                return false;
-            }
         }
 
         public ObservableCollection<Attachment> GetAll()
@@ -75,8 +55,12 @@ namespace ThesisManagement.Repositories
 
         public bool AddRange(IEnumerable<Attachment>? attachments)
         {
-            _context.Attachments.AddRange(attachments);
-            return DbSave();
+            if (attachments?.Count() > 0)
+            {
+                _context.Attachments.AddRange(attachments);
+                return DbSave();
+            }
+            return false;
         }
     }
 }
