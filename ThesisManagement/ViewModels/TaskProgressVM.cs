@@ -8,6 +8,7 @@ using System.Xml.Linq;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
+using ThesisManagement.Services;
 using ThesisManagement.Views.Shared;
 
 namespace ThesisManagement.ViewModels
@@ -19,6 +20,7 @@ namespace ThesisManagement.ViewModels
         private readonly ITaskRepository _taskRepo;
         private readonly IThesisRepository _thesisRepo;
         private readonly ITaskProgressRepository _taskProgressRepo;
+        private readonly IDialogService _dialogService;
         public TaskProgress lastestTaskProgress;
         public TaskProgress studentTaskProgress;
         public string appDirectory;
@@ -166,6 +168,7 @@ namespace ThesisManagement.ViewModels
             _studentRepo = new StudentRepository();
             _attachmentRepo = new AttachmentRepository();
             _taskProgressRepo = new TaskProgressRepository();
+            _dialogService = new DialogService();
             appDirectory = SessionInfo.BinDirectory;
             SelectedTaskProgress = new TaskProgress();
             attachments = new ObservableCollection<Attachment>();
@@ -201,34 +204,38 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteUpdateTaskProgressCommand(object obj)
         {
-            UpdateTaskProgressView? taskProgressView = obj as UpdateTaskProgressView;
-            UpdateSelectedTaskProgressProperties();
-            if (SessionInfo.Role == Role.Student)
+            bool? confirmUpdateProgress = _dialogService.ShowDialog(Message.Notification, Message.UpdateTaskProgressNotification);
+            if (confirmUpdateProgress == true)
             {
-                //Add TaskProgress and Attachments to db
-                var addSuccess = _taskProgressRepo.Add(studentTaskProgress);
-                lastestTaskProgress = _taskProgressRepo.GetLastestTaskProgress(taskId);
-                var successAttach = UpdateAttachments();
-                ShowMessage(addSuccess && successAttach, Message.AddSuccess, Message.AddFailed);
+                UpdateTaskProgressView? taskProgressView = obj as UpdateTaskProgressView;
+                UpdateSelectedTaskProgressProperties();
+                if (SessionInfo.Role == Role.Student)
+                {
+                    //Add TaskProgress and Attachments to db
+                    var addSuccess = _taskProgressRepo.Add(studentTaskProgress);
+                    lastestTaskProgress = _taskProgressRepo.GetLastestTaskProgress(taskId);
+                    var successAttach = UpdateAttachments();
+                    ShowMessage(addSuccess && successAttach, Message.AddSuccess, Message.AddFailed);
+                }
+                else if (SessionInfo.Role == Role.Professor)
+                {
+                    //Add TaskProgress to db
+                    var updateResponse = _taskProgressRepo.Update(selectedTaskProgress);
+
+                    //Update progress in Task to db
+                    var acceptedTask = _taskRepo.GetTask(taskId);
+                    acceptedTask.Progress = progress;
+                    var updateTask = _taskRepo.Update(acceptedTask);
+
+                    //Update attachment to db
+                    var successAttach = UpdateAttachments();
+                    ShowMessage(updateResponse && updateTask && successAttach, Message.UpdateSuccess, Message.UpdateFailed);
+                }
+                parentVM?.Reload();
+                parentVM?.ParentTasksVM?.Reload();
+                taskProgressView?.Close();
             }
-            else if (SessionInfo.Role == Role.Professor)
-            {
-                //Add TaskProgress to db
-                var updateResponse = _taskProgressRepo.Update(selectedTaskProgress);
-
-                //Update progress in Task to db
-                var acceptedTask = _taskRepo.GetTask(taskId);
-                acceptedTask.Progress = progress;
-                var updateTask = _taskRepo.Update(acceptedTask);
-
-                //Update attachment to db
-                var successAttach = UpdateAttachments();
-                ShowMessage(updateResponse && updateTask && successAttach, Message.UpdateSuccess, Message.UpdateFailed);
-            }
-            parentVM?.Reload();
-            parentVM?.ParentTasksVM?.Reload();
-            taskProgressView?.Close();
-
+            
         }
 
         public bool UpdateAttachments()

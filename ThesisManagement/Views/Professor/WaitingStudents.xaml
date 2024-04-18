@@ -67,30 +67,45 @@
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition />
-                                            <RowDefinition />
+                                            <RowDefinition Height="70"/>
                                         </Grid.RowDefinitions>
                                         <TextBlock Text="{Binding Topic.Name}" Style="{StaticResource topicTitle}"
                                                    Foreground="{StaticResource warningHover}"/>
-                                        <StackPanel Orientation="Horizontal" Grid.Row="1">
-                                            <customControls:ControlButton DefaultColor="{StaticResource success}"
+                                        <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                <customControls:ControlButton DefaultColor="{StaticResource success}"
                                                                           Margin="0 10 0 0"
                                                            HoverColor="{StaticResource successHover}"
                                                            Style="{StaticResource lvBtn}"
                                                            Command="{Binding DataContext.ApproveCommand, RelativeSource={RelativeSource AncestorType=ListBox}}">
-                                                <customControls:ControlButton.Content>
-                                                    <fa:IconImage Icon="Check" Style="{StaticResource btnIcon}" />
-                                                </customControls:ControlButton.Content>
-                                            </customControls:ControlButton>
+                                                    <customControls:ControlButton.Content>
+                                                        <fa:IconImage Icon="Check" Style="{StaticResource btnIcon}" />
+                                                    </customControls:ControlButton.Content>
+                                                </customControls:ControlButton>
 
-                                            <customControls:ControlButton DefaultColor="{StaticResource danger}"
+                                                <customControls:ControlButton DefaultColor="{StaticResource danger}"
                                                                           Margin="10 10 0 0"
                                                            HoverColor="{StaticResource dangerHover}"
                                                            Style="{StaticResource lvBtn}"
                                                            Command="{Binding DataContext.RejectCommand, RelativeSource={RelativeSource AncestorType=ListBox}}">
-                                                <customControls:ControlButton.Content>
-                                                    <fa:IconImage Icon="X" Style="{StaticResource btnIcon}" />
-                                                </customControls:ControlButton.Content>
-                                            </customControls:ControlButton>
+                                                    <customControls:ControlButton.Content>
+                                                        <fa:IconImage Icon="X" Style="{StaticResource btnIcon}" />
+                                                    </customControls:ControlButton.Content>
+                                                </customControls:ControlButton>
+                                            </StackPanel>
+
+                                            <StackPanel FlowDirection="RightToLeft" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="20 5">
+                                                <Button Visibility="{Binding DataContext.VisibleUndoButton, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    Content="Hoàn Tác"
+                                                    Height="30" Width="100"
+                                                    Foreground="White"
+                                                    Background="{StaticResource primaryBrush}"
+                                                    Command="{Binding DataContext.UndoApproveCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                                            </StackPanel>
+                                            <TextBlock Text="{Binding  DataContext.MessageTimeRemain,RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                                       Foreground="Red" 
+                                                       Width="auto" 
+                                                       VerticalAlignment="Center"/>
                                         </StackPanel>
                                     </Grid>
                                 </Border>

@@ -4,6 +4,7 @@ using System.Windows.Input;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
+using ThesisManagement.Services;
 
 namespace ThesisManagement.ViewModels
 {
@@ -13,6 +14,7 @@ namespace ThesisManagement.ViewModels
         private readonly IThesisRepository _thesisRepo;
         private readonly IStudentRepository _studentRepo;
         private readonly IProfessorRepository _professorRepo;
+        private readonly IDialogService _dialogService;
         private string destinationPath;
         private string appDirectory;
         private string studentFilePath;
@@ -85,6 +87,7 @@ namespace ThesisManagement.ViewModels
             _thesisRepo = new ThesisRepository();
             _professorRepo = new ProfessorRepository();
             _topicRepo = new TopicRepository();
+            _dialogService = new DialogService();
             _studentRepo = new StudentRepository();
             appDirectory = SessionInfo.BinDirectory;
 
@@ -114,9 +117,13 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteMakeEvaluationCommand(object obj)
         {
-            thesis.Evaluation = evaluation;
-            var success = _thesisRepo.Update(thesis);
-            ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
+            bool? confirmEvaluate = _dialogService.ShowDialog(Message.Notification, Message.EvaluateNotification);
+            if (confirmEvaluate == true)
+            {
+                thesis.Evaluation = evaluation;
+                var success = _thesisRepo.Update(thesis);
+                ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
+            }
         }
 
         private void ExecuteUploadFileCommand(object obj)

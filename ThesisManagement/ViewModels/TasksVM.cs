@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
+using ThesisManagement.Services;
 using ThesisManagement.Views.Shared;
 using Task = ThesisManagement.Models.Task;
 
@@ -12,6 +14,7 @@ namespace ThesisManagement.ViewModels
         private readonly ITaskRepository _taskRepo;
         private readonly IStudentRepository _studentRepo;
         private readonly ITaskProgressRepository _taskProgressRepo;
+        private readonly IDialogService _dialogService;
 
         private Thesis thesis;
         public Thesis Thesis
@@ -178,6 +181,7 @@ namespace ThesisManagement.ViewModels
             _taskRepo = new TaskRepository();
             _studentRepo = new StudentRepository();
             _taskProgressRepo = new TaskProgressRepository();
+            _dialogService = new DialogService();
             Thesis = new Thesis();
 
             CreateTaskCommand = new ViewModelCommand(ExecuteCreateTaskCommand, CanExecuteCreateTask);
@@ -217,9 +221,13 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteDeleteTaskCommand(object obj)
         {
-            var success = _taskRepo.Delete(id);
-            ShowMessage(success, Message.DeleteSuccess, Message.DeleteFailed);
-            Reload();
+            bool? confirmDelete = _dialogService.ShowDialog(Message.Notification, Message.DeleteTaskNotification);
+            if (confirmDelete == true)
+            {
+                var success = _taskRepo.Delete(id);
+                ShowMessage(success, Message.DeleteSuccess, Message.DeleteFailed);
+                Reload();
+            }
         }
 
         private void ExecuteCreateOrUpdateCommand(object obj)
@@ -238,15 +246,24 @@ namespace ThesisManagement.ViewModels
                     End = end,
                     Progress = progress
                 };
+
                 if (id <= 0)
                 {
-                    var success = _taskRepo.Add(task);
-                    ShowMessage(success, Message.AddSuccess, Message.AddFailed);
+                    bool? confirmAdd = _dialogService.ShowDialog(Message.Notification, Message.AddTaskNotification);
+                    if (confirmAdd == true)
+                    {
+                        var success = _taskRepo.Add(task);
+                        ShowMessage(success, Message.AddSuccess, Message.AddFailed);
+                    }
                 }
                 else
                 {
-                    var success = _taskRepo.Update(task);
-                    ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
+                    bool? confirmUpdate = _dialogService.ShowDialog(Message.Notification, Message.UpdateTaskNotification);
+                    if (confirmUpdate == true)
+                    {
+                        var success = _taskRepo.Update(task);
+                        ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
+                    }
                 }
 
                 Reload();
