@@ -46,12 +46,15 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteShowThesisCommand(object obj)
         {
-            var vm = new MyThesisVM();
-            vm.Thesis = selectedThesis;
-            vm.Topic = selectedThesis.Topic;
-            var thesisView = new ThesisView { DataContext = vm };
-            thesisView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            thesisView.Show();
+            int thesisId = (int)obj;
+            if (thesisId > 0)
+            {
+                selectedThesis = _thesisRepo.Get(thesisId);
+                var vm = new MyThesisVM { Thesis = selectedThesis, Topic = selectedThesis.Topic };
+                var thesisView = new ThesisView { DataContext = vm };
+                thesisView.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                thesisView.Show();
+            }
         }
     }
 }

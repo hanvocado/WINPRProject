@@ -192,7 +192,7 @@ namespace ThesisManagement.ViewModels
             var viewModel = new TaskProgressHistoryVM
             {
                 ParentTasksVM = this,
-                TaskId = id
+                TaskId = (int)obj
             };
             var view = new TaskProgressHistoryView { DataContext = viewModel };
             view.Show();
@@ -217,7 +217,7 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteDeleteTaskCommand(object obj)
         {
-            var success = _taskRepo.Delete(id);
+            var success = _taskRepo.Delete((int)obj);
             ShowMessage(success, Message.DeleteSuccess, Message.DeleteFailed);
             Reload();
         }

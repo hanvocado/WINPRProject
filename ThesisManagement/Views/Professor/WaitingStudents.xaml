@@ -15,8 +15,9 @@
         <viewModels:ReviewThesesVM/>
     </UserControl.DataContext>
 
-    <StackPanel Margin="5">
-        <md:Card Background="{StaticResource nearWhite}" SnapsToDevicePixels="True" >
+    <DockPanel Margin="5">
+        <Border Style="{StaticResource borderCardStyle}" Background="{StaticResource nearWhite}" SnapsToDevicePixels="True"
+                DockPanel.Dock="Top">
             <StackPanel Orientation="Horizontal"
                     Margin="0 5 0 10"
                     HorizontalAlignment="Center">
@@ -24,20 +25,20 @@
                    Margin="0 0 20 0"
                    Height="30" Width="30" />
                 <TextBlock Style="{StaticResource title}" 
+                           VerticalAlignment="Center"
                         Text="SINH VIÊN CHỜ DUYỆT ĐỀ TÀI"
                         HorizontalAlignment="Left" />
             </StackPanel>
-        </md:Card>
+        </Border>
 
-        <md:Card Background="{StaticResource nearWhite}"
+        <Border Style="{StaticResource borderCardStyle}" Background="{StaticResource nearWhite}"
                 Padding="5" Margin="0 10 0 5"
                 Visibility="{Binding WaitingTheses.Count, Converter={StaticResource VisibilityConverter}}" >
             <ListBox ItemsSource="{Binding WaitingTheses}" 
                      SelectedItem="{Binding SelectedThesis, Mode=OneWayToSource}"
                      x:Name="ThesisListView"
                      Background="{Binding RelativeSource={RelativeSource AncestorType=Border}, Path=Background}"
-                     BorderThickness="0" ItemContainerStyle="{StaticResource listBoxItemStyle}"
-                     MouseLeftButtonUp="ListViewItem_MouseEnter">
+                     BorderThickness="0" ItemContainerStyle="{StaticResource listBoxItemStyle}" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border CornerRadius="10" Padding="5">
@@ -97,6 +98,6 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-        </md:Card>
-    </StackPanel>
+        </Border>
+    </DockPanel>
 </UserControl>

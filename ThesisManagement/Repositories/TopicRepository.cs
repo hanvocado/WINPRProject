@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
 using ThesisManagement.Models;
-using ThesisManagement.Repositories.EF;
 
 namespace ThesisManagement.Repositories
 {
@@ -20,14 +18,10 @@ namespace ThesisManagement.Repositories
         bool CanBeDeleted(int topicId);
     }
 
-    public class TopicRepository : ITopicRepository
+    public class TopicRepository : BaseRepository, ITopicRepository
     {
-        private AppDbContext _context;
-        private Topic? topic;
-        public TopicRepository()
-        {
-            _context = DataProvider.Instance.Context;
-        }
+        public TopicRepository() { }
+
         public bool Add(Topic topic)
         {
             _context.Add(topic);
@@ -36,7 +30,7 @@ namespace ThesisManagement.Repositories
 
         public bool Delete(int id)
         {
-            topic = _context.Topics.FirstOrDefault(t => t.Id == id);
+            var topic = _context.Topics.FirstOrDefault(t => t.Id == id);
             if (topic == null) return false;
             _context.Remove(topic);
             return DbSave();
@@ -48,23 +42,9 @@ namespace ThesisManagement.Repositories
             return DbSave();
         }
 
-        public bool DbSave()
-        {
-            try
-            {
-                _context.SaveChanges();
-                return true;
-            }
-            catch (DbUpdateException ex)
-            {
-                Trace.WriteLine(ex);
-                return false;
-            }
-        }
-
         public Topic? Get(int id)
         {
-            topic = _context.Topics.Include(topic => topic.Professor).FirstOrDefault(topic => topic.Id == id);
+            var topic = _context.Topics.Include(topic => topic.Professor).FirstOrDefault(topic => topic.Id == id);
             return topic;
         }
 

@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
-using ThesisManagement.Repositories.EF;
 
 namespace ThesisManagement.Repositories
 {
@@ -18,32 +16,14 @@ namespace ThesisManagement.Repositories
         bool CanRegisterTopic(string studentId);
 
     }
-    public class StudentRepository : IStudentRepository
+    public class StudentRepository : BaseRepository, IStudentRepository
     {
-        private AppDbContext _context;
-        public StudentRepository()
-        {
-            _context = DataProvider.Instance.Context;
-        }
+        public StudentRepository() { }
 
         public bool Update(Student student)
         {
             _context.Update(student);
             return DbSave();
-        }
-
-        public bool DbSave()
-        {
-            try
-            {
-                _context.SaveChanges();
-                return true;
-            }
-            catch (DbUpdateException ex)
-            {
-                Trace.WriteLine(ex);
-                return false;
-            }
         }
 
         public List<Student> GetAll()

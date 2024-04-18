@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using ThesisManagement.Models;
-using ThesisManagement.Repositories.EF;
 
 namespace ThesisManagement.Repositories
 {
@@ -12,19 +11,13 @@ namespace ThesisManagement.Repositories
         bool HasNewUpdate(string professorId);
     }
 
-    public class ProfessorRepository : IProfessorRepository
+    public class ProfessorRepository : BaseRepository, IProfessorRepository
     {
-        private AppDbContext _context;
-        private Professor? professor;
-
-        public ProfessorRepository()
-        {
-            _context = DataProvider.Instance.Context;
-        }
+        public ProfessorRepository() { }
 
         public Professor? Get(string id)
         {
-            professor = _context.Professors.Include(pr => pr.Topics).FirstOrDefault(pr => pr.Id == id);
+            var professor = _context.Professors.Include(pr => pr.Topics).FirstOrDefault(pr => pr.Id == id);
             return professor;
         }
 
