@@ -4,6 +4,7 @@ using System.Windows.Input;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
+using ThesisManagement.Services;
 
 namespace ThesisManagement.ViewModels
 {
@@ -13,6 +14,7 @@ namespace ThesisManagement.ViewModels
         private readonly IThesisRepository _thesisRepo;
         private readonly IStudentRepository _studentRepo;
         private readonly IProfessorRepository _professorRepo;
+        private readonly IDialogService _dialogService;
         private string destinationPath;
         private string appDirectory;
         private string studentFilePath;
@@ -35,6 +37,9 @@ namespace ThesisManagement.ViewModels
                 {
                     Topic = thesis.Topic;
                     Thesis.Students = _studentRepo.GetStudent(Thesis.Id)?.ToList() ?? new List<Student>();
+                    Evaluation = Thesis.Evaluation ?? string.Empty;
+                    var student = Thesis.Students.FirstOrDefault(st => st.Id == SessionInfo.UserId);
+                    Score = (student != null) ? student.Score : 0;
                     UpdateEvaluations();
                 }
                 OnPropertyChanged(nameof(Thesis));
@@ -85,6 +90,7 @@ namespace ThesisManagement.ViewModels
             _thesisRepo = new ThesisRepository();
             _professorRepo = new ProfessorRepository();
             _topicRepo = new TopicRepository();
+            _dialogService = new DialogService();
             _studentRepo = new StudentRepository();
             appDirectory = SessionInfo.BinDirectory;
 
@@ -99,9 +105,14 @@ namespace ThesisManagement.ViewModels
         {
             if (Thesis != null && !string.IsNullOrEmpty(Thesis.File))
             {
-                //Update professor evaluation
+                //Update professor evaluation and student score
                 Evaluation = thesis.Evaluation;
-                Score = thesis.Score;
+                bool success = true;
+                foreach (var student in Thesis.Students)
+                {
+                    success = _studentRepo.Update(student);
+                }
+                ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
                 studentFilePath = Path.Combine(appDirectory, Thesis.File);
                 docStream = new FileStream(studentFilePath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
             }
@@ -109,10 +120,13 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteMakeEvaluationCommand(object obj)
         {
-            thesis.Evaluation = evaluation;
-            thesis.Score = score;
-            var success = _thesisRepo.Update(thesis);
-            ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
+            bool? confirmEvaluate = _dialogService.ShowDialog(Message.Notification, Message.EvaluateNotification);
+            if (confirmEvaluate == true)
+            {
+                thesis.Evaluation = evaluation;
+                var success = _thesisRepo.Update(thesis);
+                ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
+            }
         }
 
         private void ExecuteUploadFileCommand(object obj)

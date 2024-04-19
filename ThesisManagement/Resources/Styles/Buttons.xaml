@@ -50,7 +50,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
+
     <Style x:Key="lvBtn" TargetType="{x:Type customControls:ControlButton}">
         <Setter Property="Background" Value="{Binding DefaultColor, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="FontSize" Value="12"/>

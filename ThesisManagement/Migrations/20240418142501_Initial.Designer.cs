@@ -12,7 +12,7 @@ using ThesisManagement.Repositories.EF;
 namespace ThesisManagement.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240417141731_Initial")]
+    [Migration("20240418142501_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -236,6 +236,9 @@ namespace ThesisManagement.Migrations
                     b.Property<string>("Phone")
                         .HasMaxLength(12)
                         .HasColumnType("nvarchar(12)");
+
+                    b.Property<float?>("Score")
+                        .HasColumnType("real");
 
                     b.Property<int?>("ThesisId")
                         .HasColumnType("int");

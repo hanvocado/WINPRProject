@@ -23,10 +23,9 @@
         <Grid Grid.Column="2" >
             <Grid >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="200"/>
-                    <RowDefinition Height="100"/>
                     <RowDefinition Height="80"/>
-                    <RowDefinition />
+                    <RowDefinition Height="250"/>
+                    <RowDefinition Height="60"/>
                 </Grid.RowDefinitions>
 
                 <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
@@ -37,17 +36,17 @@
                                               Command="{Binding UploadFileCommand}"/>
 
                 <Border Grid.Row="1" Padding="10 0"  CornerRadius="1" Background="White" Margin="-2 -8 2 8" >
-                    <StackPanel>
+                    <StackPanel Margin="0 0 0 5">
                         <TextBlock Text="Đánh giá" Style="{StaticResource label}" />
                         <TextBox Grid.Row="2"
-                                 Height="80"
+                                 Height="210"
                                  VerticalAlignment="Top"
                                  IsReadOnly="True"
                                  AcceptsReturn="True"
                                  TextWrapping="Wrap"
                                  VerticalScrollBarVisibility="Auto"
                                  Style="{StaticResource TextBoxExtend}" 
-                                 Text="{Binding Thesis.Evaluation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                 Text="{Binding Thesis.Evaluation}" />
                     </StackPanel>
                 </Border>
                 <Border Grid.Row="2" Padding="10 0"  CornerRadius="1" Background="White" Margin="-2 -8 2 8" >
@@ -58,7 +57,7 @@
                                  IsReadOnly="True"
                                  VerticalAlignment="Top"
                                  Style="{StaticResource TextBoxExtend}" 
-                                 Text="{Binding Thesis.Score, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                 Text="{Binding Score}"/>
                     </StackPanel>
                 </Border>
 

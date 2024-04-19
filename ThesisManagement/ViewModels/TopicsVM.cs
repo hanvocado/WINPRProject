@@ -4,6 +4,7 @@ using System.Windows.Controls.Primitives;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
+using ThesisManagement.Services;
 using ThesisManagement.Views.Student;
 using ProfessorTopicView = ThesisManagement.Views.Professor.TopicView;
 using StudentTopicView = ThesisManagement.Views.Student.TopicView;
@@ -16,6 +17,7 @@ namespace ThesisManagement.ViewModels
         private readonly IProfessorRepository _professorRepo;
         private readonly IStudentRepository _studentRepo;
         private readonly IThesisRepository _thesisRepo;
+        private readonly IDialogService _dialogService;
 
         private Topic selectedTopic;
         public Topic SelectedTopic
@@ -276,6 +278,7 @@ namespace ThesisManagement.ViewModels
             _professorRepo = new ProfessorRepository();
             _studentRepo = new StudentRepository();
             _thesisRepo = new ThesisRepository();
+            _dialogService = new DialogService();
             SelectedStudents = new List<Student>();
             SelectedTopic = new Topic();
 
@@ -368,7 +371,14 @@ namespace ThesisManagement.ViewModels
                 ShowMessage(false, null, Message.ExceedStudentQuantity);
                 return;
             }
-            RegisterTopic(obj);
+            else
+            {
+                bool? confirmRegister = _dialogService.ShowDialog(Message.Notification, Message.RegisterTopicNotification);
+                if (confirmRegister == true)
+                {
+                    RegisterTopic(obj);
+                }
+            }
         }
 
         private void RegisterTopic(object obj)
@@ -440,13 +450,21 @@ namespace ThesisManagement.ViewModels
 
             if (id <= 0)
             {
-                var success = _topicRepo.Add(selectedTopic);
-                ShowMessage(success, Message.AddSuccess, Message.AddFailed);
+                bool? confirmAdd = _dialogService.ShowDialog(Message.Notification, Message.AddTopicNotification);
+                if (confirmAdd == true)
+                {
+                    var success = _topicRepo.Add(selectedTopic);
+                    ShowMessage(success, Message.AddSuccess, Message.AddFailed);
+                }
             }
             else
             {
-                var success = _topicRepo.Update(selectedTopic);
-                ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
+                bool? confirmUpdate = _dialogService.ShowDialog(Message.Notification, Message.UpdateTopicNotification);
+                if (confirmUpdate == true)
+                {
+                    var success = _topicRepo.Update(selectedTopic);
+                    ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
+                }
             }
 
             Topics = _topicRepo.GetAll(SessionInfo.UserId);
@@ -457,8 +475,8 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteDeleteCommand(object parameter)
         {
-            var confirmed = ConfirmDelete();
-            if (confirmed == MessageBoxResult.Yes)
+            bool? confirmDelete = _dialogService.ShowDialog(Message.Warning, Message.DeleteTopicNotification);
+            if (confirmDelete == true)
             {
                 var success = _topicRepo.Delete(id);
                 ShowMessage(success, Message.DeleteSuccess, Message.DeleteFailed);

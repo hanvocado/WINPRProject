@@ -79,6 +79,10 @@
                                 <shared:SchedulesView DataContext="{Binding ElementName=scheduleView, Path=DataContext}" />
                             </TabItem>
 
+                            <TabItem Header="Thống kê">
+                                <local:ChartView x:Name="chartView" DataContext="{Binding ElementName=tasksView, Path=DataContext}" />
+                            </TabItem>
+
                             <TabItem x:Name="evaluationView">
                                 <TabItem.Header>
                                     <StackPanel Orientation="Horizontal">
@@ -86,10 +90,6 @@
                                     </StackPanel>
                                 </TabItem.Header>
                                 <local:EvaluationsView DataContext="{Binding ElementName=evaluationView, Path=DataContext}" />
-                            </TabItem>
-
-                            <TabItem Header="Thống kê">
-                                <local:ChartView x:Name="chartView" DataContext="{Binding ElementName=tasksView, Path=DataContext}" />
                             </TabItem>
                         </TabControl>
                     </Grid>

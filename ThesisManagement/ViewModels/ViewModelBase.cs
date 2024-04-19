@@ -40,12 +40,6 @@ namespace ThesisManagement.ViewModels
             }
         }
 
-        public MessageBoxResult ConfirmDelete()
-        {
-            MessageBoxResult result = MessageBox.Show("Bạn chắc chắn muốn xóa?", "Xác nhận", MessageBoxButton.YesNo);
-            return result;
-        }
-
         public void StartProcess(string fileName)
         {
             string filePath = Path.Combine(SessionInfo.BinDirectory, fileName);

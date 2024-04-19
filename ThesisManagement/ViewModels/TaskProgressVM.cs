@@ -5,6 +5,7 @@ using System.Windows.Input;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
+using ThesisManagement.Services;
 using ThesisManagement.Views.Shared;
 
 namespace ThesisManagement.ViewModels
@@ -16,6 +17,7 @@ namespace ThesisManagement.ViewModels
         private readonly ITaskRepository _taskRepo;
         private readonly IThesisRepository _thesisRepo;
         private readonly ITaskProgressRepository _taskProgressRepo;
+        private readonly IDialogService _dialogService;
         private string appDirectory;
         public string userAttachmentName;
 
@@ -154,6 +156,7 @@ namespace ThesisManagement.ViewModels
             _studentRepo = new StudentRepository();
             _attachmentRepo = new AttachmentRepository();
             _taskProgressRepo = new TaskProgressRepository();
+            _dialogService = new DialogService();
             appDirectory = SessionInfo.BinDirectory;
             Attachments = new List<Attachment>();
 
@@ -185,7 +188,10 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteUpdateTaskProgressCommand(object obj)
         {
-            UpdateTaskProgressView? taskProgressView = obj as UpdateTaskProgressView;
+            bool? confirmUpdateProgress = _dialogService.ShowDialog(Message.Notification, Message.UpdateTaskProgressNotification);
+            if (confirmUpdateProgress == true)
+            {
+                UpdateTaskProgressView? taskProgressView = obj as UpdateTaskProgressView;
             if (SessionInfo.Role == Role.Student)
             {
                 CreateNewProgress();
@@ -197,6 +203,8 @@ namespace ThesisManagement.ViewModels
             parentVM?.Reload();
             parentVM?.ParentTasksVM?.Reload();
             taskProgressView?.Close();
+            }
+
         }
 
         private void CreateNewProgress()

@@ -23,30 +23,43 @@
         <Grid Grid.Column="2" >
             <Grid >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="120"/>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="80"/>
-                    <RowDefinition />
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
                 
                 <Border Grid.Row="1" Padding="10 0"  CornerRadius="1" Background="White" Margin="-2 -8 2 8" >
                     <StackPanel>
                         <TextBlock Text="Đánh giá" Style="{StaticResource label}" />
                         <TextBox Grid.Row="2"
-                                 Height="80"
+                                 Height="140"
                                  VerticalAlignment="Top"
                                  Style="{StaticResource TextBoxExtend}" 
-                                 Text="{Binding Evaluation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                 Text="{Binding Evaluation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                 AcceptsReturn="True"
+                                 TextWrapping="Wrap"
+                                 VerticalScrollBarVisibility="Auto"/>
                     </StackPanel>
                 </Border>
                 <Border Grid.Row="2" Padding="10 0"  CornerRadius="1" Background="White" Margin="-2 -8 2 8" >
                     <StackPanel>
                         <TextBlock Text="Điểm số:" Style="{StaticResource label}" />
-                        <TextBox Grid.Row="3"
-                                 Height="40"
-                                 VerticalAlignment="Top"
-                                 Style="{StaticResource TextBoxExtend}" 
-                                 Text="{Binding Score, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGrid AutoGenerateColumns="False" 
+                                  Style="{StaticResource GradeDataGridView}"
+                                  HeadersVisibility="Column"
+                                  ItemsSource="{Binding DataContext.Thesis.Students, RelativeSource={RelativeSource AncestorType=UserControl}}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Họ tên" 
+                                                    Binding="{Binding Name}" 
+                                                    IsReadOnly="True"
+                                                    Width="5*"/>
+                                <DataGridTextColumn Header="Điểm" 
+                                                    Binding="{Binding Score}" 
+                                                    IsReadOnly="False"
+                                                    Width="2*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
                     </StackPanel>
                 </Border>
                 <Grid Grid.Row="6" >

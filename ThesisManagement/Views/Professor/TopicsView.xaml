@@ -98,7 +98,7 @@
                                                                     HoverColor="{StaticResource dangerHover}"
                                                                     Style="{StaticResource lvBtn}"
                                                                     CommandParameter="{Binding Id}"
-                                                                    Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=ListBox}}">
+                                                                    Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}">
                                             <customControls:ControlButton.Content>
                                                 <fa:IconImage Icon="Trash" Style="{StaticResource btnIcon}" />
                                             </customControls:ControlButton.Content>

@@ -6,6 +6,7 @@
 
     <SolidColorBrush x:Key="primaryBrush">#326cf3</SolidColorBrush>
     <SolidColorBrush x:Key="secondaryBrush">#2755c0</SolidColorBrush>
+    <SolidColorBrush x:Key="notificationBrush">#779ecb</SolidColorBrush>
 
     <SolidColorBrush x:Key="danger" Color="#db3340" />
     <SolidColorBrush x:Key="dangerHover" Color="#ff5236" />
@@ -16,6 +17,9 @@
     <SolidColorBrush x:Key="accent" Color="#f8491e" />
     <SolidColorBrush x:Key="info" Color="LightSeaGreen" />
     <SolidColorBrush x:Key="infoHover" Color="#188b84" />
+    <SolidColorBrush x:Key="cancelDefault" Color="Gray" />
+    <SolidColorBrush x:Key="cancelHover" Color="LightGray" />
+    
 
     <SolidColorBrush x:Key="titleColor" Color = "#BCBEE0" />
     <SolidColorBrush x:Key="plainTextColor" Color = "#F1F1F1" />
