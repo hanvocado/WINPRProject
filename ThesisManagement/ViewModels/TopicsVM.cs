@@ -1,10 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls.Primitives;
+using ThesisManagement.CustomControls;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
-using ThesisManagement.Services;
 using ThesisManagement.Views.Student;
 using ProfessorTopicView = ThesisManagement.Views.Professor.TopicView;
 using StudentTopicView = ThesisManagement.Views.Student.TopicView;
@@ -17,7 +17,7 @@ namespace ThesisManagement.ViewModels
         private readonly IProfessorRepository _professorRepo;
         private readonly IStudentRepository _studentRepo;
         private readonly IThesisRepository _thesisRepo;
-        private readonly IDialogService _dialogService;
+        private readonly DialogService _dialogService;
 
         private Topic selectedTopic;
         public Topic SelectedTopic

@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Threading.Tasks;
+using ThesisManagement.CustomControls;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
-using ThesisManagement.Services;
 using ThesisManagement.Views.Shared;
 using Task = ThesisManagement.Models.Task;
 
@@ -14,7 +13,7 @@ namespace ThesisManagement.ViewModels
         private readonly ITaskRepository _taskRepo;
         private readonly IStudentRepository _studentRepo;
         private readonly ITaskProgressRepository _taskProgressRepo;
-        private readonly IDialogService _dialogService;
+        private readonly DialogService _dialogService;
 
         private Thesis thesis;
         public Thesis Thesis

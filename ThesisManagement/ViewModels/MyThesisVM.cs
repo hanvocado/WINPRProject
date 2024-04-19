@@ -1,10 +1,10 @@
 ﻿using Microsoft.Win32;
 using System.IO;
 using System.Windows.Input;
+using ThesisManagement.CustomControls;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
-using ThesisManagement.Services;
 
 namespace ThesisManagement.ViewModels
 {
@@ -14,7 +14,7 @@ namespace ThesisManagement.ViewModels
         private readonly IThesisRepository _thesisRepo;
         private readonly IStudentRepository _studentRepo;
         private readonly IProfessorRepository _professorRepo;
-        private readonly IDialogService _dialogService;
+        private readonly DialogService _dialogService;
         private string destinationPath;
         private string appDirectory;
         private string studentFilePath;

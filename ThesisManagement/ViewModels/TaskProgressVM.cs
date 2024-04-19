@@ -2,10 +2,10 @@ using Microsoft.Win32;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
+using ThesisManagement.CustomControls;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
-using ThesisManagement.Services;
 using ThesisManagement.Views.Shared;
 
 namespace ThesisManagement.ViewModels
@@ -17,7 +17,7 @@ namespace ThesisManagement.ViewModels
         private readonly ITaskRepository _taskRepo;
         private readonly IThesisRepository _thesisRepo;
         private readonly ITaskProgressRepository _taskProgressRepo;
-        private readonly IDialogService _dialogService;
+        private readonly DialogService _dialogService;
         private string appDirectory;
         public string userAttachmentName;
 
@@ -192,17 +192,17 @@ namespace ThesisManagement.ViewModels
             if (confirmUpdateProgress == true)
             {
                 UpdateTaskProgressView? taskProgressView = obj as UpdateTaskProgressView;
-            if (SessionInfo.Role == Role.Student)
-            {
-                CreateNewProgress();
-            }
-            else if (SessionInfo.Role == Role.Professor)
-            {
-                UpdateProgress();
-            }
-            parentVM?.Reload();
-            parentVM?.ParentTasksVM?.Reload();
-            taskProgressView?.Close();
+                if (SessionInfo.Role == Role.Student)
+                {
+                    CreateNewProgress();
+                }
+                else if (SessionInfo.Role == Role.Professor)
+                {
+                    UpdateProgress();
+                }
+                parentVM?.Reload();
+                parentVM?.ParentTasksVM?.Reload();
+                taskProgressView?.Close();
             }
 
         }

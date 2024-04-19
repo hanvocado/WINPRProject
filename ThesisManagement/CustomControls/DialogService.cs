@@ -1,14 +1,9 @@
 ﻿using ThesisManagement.ViewModels;
 using ThesisManagement.Views.Shared;
 
-namespace ThesisManagement.Services
+namespace ThesisManagement.CustomControls
 {
-    public interface IDialogService
-    {
-        bool? ShowDialog(string title, string message);
-    }
-
-    public class DialogService : IDialogService
+    public class DialogService
     {
         private ConfirmationDialogVM viewModel;
         private ConfirmationDialog dialog;

@@ -1,9 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using ThesisManagement.CustomControls;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
-using ThesisManagement.Services;
 
 namespace ThesisManagement.ViewModels
 {
@@ -11,7 +11,7 @@ namespace ThesisManagement.ViewModels
     {
         private readonly string currentUserId;
         private readonly IThesisRepository _thesisRepo;
-        private readonly IDialogService _dialogService;
+        private readonly DialogService _dialogService;
 
         private Thesis selectedThesis;
         public Thesis SelectedThesis { get => selectedThesis; set { selectedThesis = value; OnPropertyChanged(nameof(SelectedThesis)); } }
@@ -20,26 +20,26 @@ namespace ThesisManagement.ViewModels
         public IEnumerable<Thesis> WaitingTheses { get => waitingTheses; set { waitingTheses = value; OnPropertyChanged(nameof(WaitingTheses)); } }
 
         private Visibility visibleUndoButton = Visibility.Hidden;
-        public Visibility VisibleUndoButton 
+        public Visibility VisibleUndoButton
         {
-            get { return visibleUndoButton; } 
-            set 
-            { 
-                visibleUndoButton = value; 
-                OnPropertyChanged(nameof(VisibleUndoButton)); 
-            } 
+            get { return visibleUndoButton; }
+            set
+            {
+                visibleUndoButton = value;
+                OnPropertyChanged(nameof(VisibleUndoButton));
+            }
         }
 
         private int timer = 0;
-        public int Timer 
-        { 
-            get => timer; 
-            set 
-            { 
-                timer = value; 
-                OnPropertyChanged(); 
-                LoadTimeRemain(); 
-            } 
+        public int Timer
+        {
+            get => timer;
+            set
+            {
+                timer = value;
+                OnPropertyChanged();
+                LoadTimeRemain();
+            }
         }
 
         public string messageTimeRemain = "";
@@ -70,7 +70,7 @@ namespace ThesisManagement.ViewModels
                 LoadUndoButton();
                 selectedThesis.TopicStatus = Variable.StatusTopic.Approved;
                 var success = _thesisRepo.Update(selectedThesis);
-                ShowMessage(success, Message.ApproveSuccess, Message.ApproveFailed);                
+                ShowMessage(success, Message.ApproveSuccess, Message.ApproveFailed);
             }
         }
 
