@@ -10,6 +10,7 @@ namespace ThesisManagement.Models
         public Thesis? Thesis { get; set; }
 
         public float? Score { get; set; }
+        public float WorkingTime { get; set; }
 
         public ICollection<TaskProgress>? TaskProgresses { get; set; }
 

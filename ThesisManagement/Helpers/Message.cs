@@ -31,8 +31,7 @@
         public static string RequiredError = "Vui lòng điền đầy đủ thông tin!";
 
         //Notificaion title
-        public static string Notification = "Thông báo";
-        public static string Warning = "Cảnh báo";
+        public static string Notification = "Xác nhận";
 
         //Notification message for Professor
         public static string AddTopicNotification = "Bạn có chắc chắn muốn thêm đề tài?";

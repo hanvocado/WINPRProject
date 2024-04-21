@@ -91,6 +91,62 @@ namespace ThesisManagement.ViewModels
                 OnPropertyChanged(nameof(End));
             }
         }
+        
+        private float workingTime;
+        public float WorkingTime
+        {
+            get { return workingTime; }
+            set
+            {
+                workingTime = value;
+                OnPropertyChanged(nameof(WorkingTime));
+            }
+        }
+
+        private int day;
+        public int Day
+        {
+            get { return day; }
+            set
+            {
+                if (day != value)
+                {
+                    day = value;
+                    OnPropertyChanged(nameof(Day));
+                    UpdateWorkingTime();
+                }
+            }
+        }
+
+        private int hour;
+        public int Hour
+        {
+            get { return hour; }
+            set
+            {
+                if (hour != value)
+                {
+                    hour = value;
+                    OnPropertyChanged(nameof(Hour));
+                    UpdateWorkingTime();
+                }
+            }
+        }
+
+        private int minute;
+        public int Minute
+        {
+            get { return minute; }
+            set
+            {
+                if (minute != value)
+                {
+                    minute = value;
+                    OnPropertyChanged(nameof(Minute));
+                    UpdateWorkingTime();
+                }
+            }
+        }
 
         private int progress;
         public int Progress
@@ -169,6 +225,17 @@ namespace ThesisManagement.ViewModels
             set { tasksPieData = value; OnPropertyChanged(nameof(TasksPieData)); }
         }
 
+        public bool IsStudent
+        {
+            get
+            {
+                if (SessionInfo.Role == Role.Student)
+                    return true;
+                else
+                    return false;
+            }
+        }
+
         public ViewModelCommand CreateTaskCommand { get; set; }
         public ViewModelCommand UpdateTaskCommand { get; set; }
         public ViewModelCommand DeleteTaskCommand { get; set; }
@@ -243,6 +310,7 @@ namespace ThesisManagement.ViewModels
                     Description = description,
                     Start = start,
                     End = end,
+                    WorkingTime = workingTime,
                     Progress = progress
                 };
 
@@ -288,6 +356,10 @@ namespace ThesisManagement.ViewModels
             Start = selectedTask.Start;
             End = selectedTask.End;
             Progress = selectedTask.Progress;
+            var workingTime = selectedTask.WorkingTime;
+            Day = (int)(workingTime / 24);
+            Hour = (int)(workingTime % 24);
+            Minute = (int)((workingTime - (int)workingTime) * 60 + 0.5f); 
 
             taskView.DataContext = this;
             taskView.Show();
@@ -318,6 +390,12 @@ namespace ThesisManagement.ViewModels
             ExistError = String.IsNullOrEmpty(name) || String.IsNullOrEmpty(description);
             if (existError)
                 ShowMessage(false, null, Message.RequiredError);
+        }
+
+        private void UpdateWorkingTime()
+        {
+            float totalHours = Day * 24 + Hour + Minute / 60.0f;
+            WorkingTime = totalHours;
         }
     }
 }

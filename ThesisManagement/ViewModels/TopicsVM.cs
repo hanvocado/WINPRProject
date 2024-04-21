@@ -475,7 +475,7 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteDeleteCommand(object parameter)
         {
-            bool? confirmDelete = _dialogService.ShowDialog(Message.Warning, Message.DeleteTopicNotification);
+            bool? confirmDelete = _dialogService.ShowDialog(Message.Notification, Message.DeleteTopicNotification);
             if (confirmDelete == true)
             {
                 var success = _topicRepo.Delete(id);
