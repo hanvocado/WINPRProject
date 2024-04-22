@@ -85,7 +85,7 @@
                                             <Border Background="{StaticResource accent}" CornerRadius="10" Height="8" Width="8"
                                                     ToolTip="Có cập nhật mới"
                                                     Margin="-5 -5 0 0"
-                                                    Visibility="{Binding HasNewUpdate, Converter={StaticResource VisibilityConverter}}">
+                                                    Visibility="{Binding WaitingForResponse, Converter={StaticResource VisibilityConverter}}">
                                             </Border>                                            
                                         </StackPanel>
                                     </Grid>

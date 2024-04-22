@@ -91,7 +91,7 @@ namespace ThesisManagement.ViewModels
                 OnPropertyChanged(nameof(End));
             }
         }
-        
+
         private float workingTime;
         public float WorkingTime
         {
@@ -207,17 +207,6 @@ namespace ThesisManagement.ViewModels
             }
         }
 
-        private IEnumerable<Task> undoneTasks;
-        public IEnumerable<Task> UndoneTasks
-        {
-            get { return undoneTasks; }
-            set
-            {
-                undoneTasks = value;
-                OnPropertyChanged(nameof(UndoneTasks));
-            }
-        }
-
         private IEnumerable<TasksPie> tasksPieData;
         public IEnumerable<TasksPie> TasksPieData
         {
@@ -225,15 +214,12 @@ namespace ThesisManagement.ViewModels
             set { tasksPieData = value; OnPropertyChanged(nameof(TasksPieData)); }
         }
 
-        public bool IsStudent
+        private int totalTasks;
+
+        public int TotalTasks
         {
-            get
-            {
-                if (SessionInfo.Role == Role.Student)
-                    return true;
-                else
-                    return false;
-            }
+            get { return totalTasks; }
+            set { totalTasks = value; OnPropertyChanged(nameof(TotalTasks)); }
         }
 
         public ViewModelCommand CreateTaskCommand { get; set; }
@@ -314,27 +300,22 @@ namespace ThesisManagement.ViewModels
                     Progress = progress
                 };
 
-                if (id <= 0)
+                var confirmed = _dialogService.ShowDialog(Message.Notification, Message.UpdateTaskNotification);
+                if (confirmed ?? false)
                 {
-                    bool? confirmAdd = _dialogService.ShowDialog(Message.Notification, Message.AddTaskNotification);
-                    if (confirmAdd == true)
+                    if (id <= 0)
                     {
                         var success = _taskRepo.Add(task);
                         ShowMessage(success, Message.AddSuccess, Message.AddFailed);
                     }
-                }
-                else
-                {
-                    bool? confirmUpdate = _dialogService.ShowDialog(Message.Notification, Message.UpdateTaskNotification);
-                    if (confirmUpdate == true)
+                    else
                     {
                         var success = _taskRepo.Update(task);
                         ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
                     }
+                    Reload();
+                    taskView?.Close();
                 }
-
-                Reload();
-                taskView?.Close();
             }
         }
 
@@ -359,7 +340,7 @@ namespace ThesisManagement.ViewModels
             var workingTime = selectedTask.WorkingTime;
             Day = (int)(workingTime / 24);
             Hour = (int)(workingTime % 24);
-            Minute = (int)((workingTime - (int)workingTime) * 60 + 0.5f); 
+            Minute = (int)((workingTime - (int)workingTime) * 60 + 0.5f);
 
             taskView.DataContext = this;
             taskView.Show();
@@ -372,7 +353,7 @@ namespace ThesisManagement.ViewModels
             DoneTasks = _taskRepo.GetDoneTasks(thesis.Id);
             OverdueTasks = _taskRepo.GetOverdueTasks(thesis.Id);
             TasksPieData = _taskRepo.GetTasksPieData(thesis.Id);
-            UndoneTasks = _taskRepo.GetUndoneTasks(thesis.Id);
+            TotalTasks = PendingTasks.Count() + DoneTasks.Count() + OverdueTasks.Count();
         }
 
         private void ResetTaskProperties()

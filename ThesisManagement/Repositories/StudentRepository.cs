@@ -15,6 +15,7 @@ namespace ThesisManagement.Repositories
         Thesis? GetThesis(string studentId);
         bool CanRegisterTopic(string studentId);
 
+        float UpdateWorkTime(string studentId, float timeToAdd);
     }
     public class StudentRepository : BaseRepository, IStudentRepository
     {
@@ -78,6 +79,17 @@ namespace ThesisManagement.Repositories
                                         .Where(st => st.ThesisId == null || st.Thesis.TopicStatus == Variable.StatusTopic.Rejected)
                                         .ToList();
             return unRegisterStd;
+        }
+
+        public float UpdateWorkTime(string studentId, float timeToAdd)
+        {
+            var student = _context.Students.FirstOrDefault(t => t.Id == studentId);
+            if (student != null)
+            {
+                student.WorkingTime += timeToAdd;
+                DbSave();
+            }
+            return student?.WorkingTime ?? 0;
         }
     }
 }

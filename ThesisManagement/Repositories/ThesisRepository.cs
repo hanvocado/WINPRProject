@@ -9,6 +9,7 @@ namespace ThesisManagement.Repositories
         bool Add(Thesis thesis);
         bool Add(Thesis thesis, IEnumerable<Student> students);
         bool Update(Thesis thesis);
+        bool UpdateWaitingForResponse(int thesisId, int numberToAdd);
         IEnumerable<Thesis> GetAll();
         IEnumerable<Thesis> Get(string userId, string topicStatus);
         IEnumerable<Thesis> Get(int topicId, string topicStatus);
@@ -94,6 +95,16 @@ namespace ThesisManagement.Repositories
             var thesis = _context.Theses.Include(t => t.Topic).ThenInclude(t => t.Professor)
                         .AsNoTracking().FirstOrDefault(t => t.Id == thesisId);
             return thesis;
+        }
+
+        public bool UpdateWaitingForResponse(int thesisId, int numberToAdd)
+        {
+            var thesis = _context.Theses.FirstOrDefault(t => t.Id == thesisId);
+            if (thesis == null)
+                return false;
+
+            thesis.WaitingForResponse += numberToAdd;
+            return DbSave();
         }
     }
 }

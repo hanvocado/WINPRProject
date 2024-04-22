@@ -54,7 +54,7 @@
                         </Border>
                         <StackPanel Grid.Column="1" Margin="0 0 10 0">
                             <TextBlock Text="Tổng số nhiệm vụ" />
-                            <TextBlock Text="" FontSize="20" FontWeight="Medium" />
+                            <TextBlock Text="{Binding TotalTasks}" FontSize="20" FontWeight="Medium" />
                         </StackPanel>
                     </Grid>
                 </Border>
@@ -94,7 +94,7 @@
                         </Border>
                         <StackPanel Grid.Column="1" Margin="0 0 10 0">
                             <TextBlock Text="Chờ phản hồi" />
-                            <TextBlock Text="" FontSize="20" FontWeight="Medium" />
+                            <TextBlock Text="{Binding Thesis.WaitingForResponse}" FontSize="20" FontWeight="Medium" />
                         </StackPanel>
                     </Grid>
                 </Border>
@@ -166,7 +166,7 @@
                                         <Border Background="{StaticResource accent}" CornerRadius="10" Height="8" Width="8"
                                                 VerticalAlignment="Top"
                                                 Margin="-5 0 0 0"
-                                                Visibility="{Binding WaitingForResponse, Converter={StaticResource VisibilityConverter}}">
+                                                Visibility="{Binding HasNewUpdate, Converter={StaticResource VisibilityConverter}}">
                                         </Border>
                                     </StackPanel>
                                     <customControls:ControlButton Style="{StaticResource lvBtn}"

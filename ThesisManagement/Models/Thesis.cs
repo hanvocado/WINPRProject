@@ -32,21 +32,6 @@ namespace ThesisManagement.Models
         public ICollection<Task>? Tasks { get; set; }
         public ICollection<ScheduleInfo>? ScheduleInfos { get; set; }
 
-        [NotMapped]
-        public bool HasNewUpdate
-        {
-            get
-            {
-                if (Tasks != null)
-                {
-                    foreach (var task in Tasks)
-                    {
-                        if (task.WaitingForResponse > 0)
-                            return true;
-                    }
-                }
-                return false;
-            }
-        }
+        public int WaitingForResponse { get; set; }
     }
 }

@@ -224,8 +224,9 @@ namespace ThesisManagement.ViewModels
             {
                 addSuccess = UpdateAttachments(newProgress.Id);
                 var task = _taskRepo.GetTask(taskId);
-                task.WaitingForResponse += 1;
+                task.HasNewUpdate = true;
                 _taskRepo.Update(task);
+                _thesisRepo.UpdateWaitingForResponse(task.ThesisId, 1);
             }
             ShowMessage(addSuccess, Message.AddSuccess, Message.AddFailed);
         }
@@ -237,9 +238,12 @@ namespace ThesisManagement.ViewModels
             {
                 UpdateAttachments(id);
                 var acceptedTask = _taskRepo.GetTask(taskId);
+                var studentWorkTime = acceptedTask.WorkingTime * ((progress - acceptedTask.Progress) / 100);
+                _studentRepo.UpdateWorkTime(studentId, studentWorkTime);
                 acceptedTask.Progress = progress;
-                acceptedTask.WaitingForResponse -= 1;
+                acceptedTask.HasNewUpdate = false;
                 _taskRepo.Update(acceptedTask);
+                _thesisRepo.UpdateWaitingForResponse(acceptedTask.ThesisId, -1);
                 Window profWindow = Application.Current.MainWindow;
                 profWindow.DataContext = new ProfessorMainVM { CurrentChildView = new ThesesVM() };
             }
