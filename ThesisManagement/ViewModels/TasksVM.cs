@@ -310,40 +310,40 @@ namespace ThesisManagement.ViewModels
                         Progress = progress
                     };
 
-                ScheduleInfo schedule = new ScheduleInfo
-                {
-                    From = end.AddHours(-1),
-                    To = end,
-                    EventName = name,
-                    ThesisId = thesisId
-                };
+                    ScheduleInfo schedule = new ScheduleInfo
+                    {
+                        From = end.AddHours(-1),
+                        To = end,
+                        EventName = name,
+                        ThesisId = thesisId
+                    };
 
-                if (id <= 0)
-                {
-                    bool? confirmAdd = _dialogService.ShowDialog(Message.Notification, Message.AddTaskNotification);
-                    if (confirmAdd == true)
+                    if (id <= 0)
                     {
-                        var success = _taskRepo.Add(task);
-                        _scheduleRepo.Add(schedule);
-                        ShowMessage(success, Message.AddSuccess, Message.AddFailed);
-                    }
-                    else
-                    {
-                        if (SessionInfo.Role == Role.Student)
+                        bool? confirmAdd = _dialogService.ShowDialog(Message.Notification, Message.AddTaskNotification);
+                        if (confirmAdd == true)
                         {
-                            ShowMessage(false, null, Message.StudentCant);
-                            return;
+                            var success = _taskRepo.Add(task);
+                            _scheduleRepo.Add(schedule);
+                            ShowMessage(success, Message.AddSuccess, Message.AddFailed);
                         }
-                        var success = _taskRepo.Update(task);
-                        _scheduleRepo.Update(schedule);
-                        ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
+                        else
+                        {
+                            if (SessionInfo.Role == Role.Student)
+                            {
+                                ShowMessage(false, null, Message.StudentCant);
+                                return;
+                            }
+                            var success = _taskRepo.Update(task);
+                            _scheduleRepo.Update(schedule);
+                            ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
+                        }
+                        Reload();
+                        taskView?.Close();
                     }
-                    Reload();
-                    taskView?.Close();
                 }
             }
         }
-
         private void ExecuteCreateTaskCommand(object obj)
         {
             ResetTaskProperties();

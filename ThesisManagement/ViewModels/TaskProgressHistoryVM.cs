@@ -139,9 +139,7 @@ namespace ThesisManagement.ViewModels
                 ParentVM = this,
                 TaskId = taskId,
                 Progress = lastestProgress?.Progress ?? 0,
-                StudentId = SessionInfo.UserId,
-                StudentName = SessionInfo.Name,
-                Progress = lastestProgress.Progress
+                StudentId = SessionInfo.UserId
             };
 
             var view = new UpdateTaskProgressView { DataContext = vm };
