@@ -176,7 +176,7 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteUpdateTaskProgressCommand(object obj)
         {
-            bool? confirmUpdateProgress = _dialogService.ShowDialog(Message.Notification, Message.UpdateTaskProgressNotification);
+            bool? confirmUpdateProgress = _dialogService.ShowDialog(Message.Notification, Message.ContinueNotification);
             if (confirmUpdateProgress == true)
             {
                 UpdateTaskProgressView? taskProgressView = obj as UpdateTaskProgressView;

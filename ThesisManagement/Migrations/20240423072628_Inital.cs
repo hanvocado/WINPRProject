@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ThesisManagement.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Inital : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -79,7 +79,8 @@ namespace ThesisManagement.Migrations
                     File = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Score = table.Column<float>(type: "real", nullable: true),
                     Evaluation = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NoUpdates = table.Column<int>(type: "int", nullable: true)
+                    NoUpdates = table.Column<int>(type: "int", nullable: true),
+                    WaitingForResponse = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -174,7 +175,7 @@ namespace ThesisManagement.Migrations
                     Start = table.Column<DateTime>(type: "datetime2", nullable: false),
                     End = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Progress = table.Column<int>(type: "int", nullable: false),
-                    WaitingForResponse = table.Column<int>(type: "int", nullable: false)
+                    HasNewUpdate = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -256,11 +257,13 @@ namespace ThesisManagement.Migrations
                 columns: new[] { "Id", "Birthday", "Email", "Name", "Password", "Phone", "Score", "ThesisId", "WorkingTime" },
                 values: new object[,]
                 {
-                    { "22110001", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "c@student.com", "Võ Thị Thu Huyền", "c12345", "987-654-3210", null, null, 0f },
-                    { "22110010", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "d@student.com", "Nguyễn Bình Minh", "d12345", "987-654-3210", null, null, 0f },
-                    { "22133010", new DateTime(2000, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "a@student.com", "Nguyễn Văn Yên", "a12345", "123-456-7890", null, null, 0f },
-                    { "22133011", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "b@student.com", "Lâm Khang", "b12345", "987-654-3210", null, null, 0f },
-                    { "22133015", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "e@student.com", "Trần Quốc Khánh", "e12346", "987-654-3210", null, null, 0f }
+                    { "22110001", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "c@student.com", "Võ Thị Thu Huyền", "c12345", "987-654-3910", null, null, 0f },
+                    { "22110010", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "d@student.com", "Nguyễn Bình Minh", "d12345", "987-654-3410", null, null, 0f },
+                    { "22133010", new DateTime(2000, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "a@student.com", "Nguyễn Văn Yên", "a12345", "931-456-7890", null, null, 0f },
+                    { "22133011", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "b@student.com", "Lâm Khang", "b12345", "977-654-3210", null, null, 0f },
+                    { "22133015", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "e@student.com", "Trần Quốc Khánh", "e12345", "987-655-3210", null, null, 0f },
+                    { "22133016", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "f@student.com", "Trần Văn Nam", "f12346", "987-654-3215", null, null, 0f },
+                    { "22133017", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "g@student.com", "Nguyễn Ngọc Nữ", "g12346", "987-654-3220", null, null, 0f }
                 });
 
             migrationBuilder.InsertData(

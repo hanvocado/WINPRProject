@@ -124,7 +124,7 @@ namespace ThesisManagement.ViewModels
                 Id = lastestProgress.Id,
                 UpdateAt = lastestProgress?.UpdateAt,
                 Description = lastestProgress.Description,
-                Response = lastestProgress.Response,
+                Response = lastestProgress.Response ?? "ok",
                 StudentId = lastestProgress.StudentId,
                 Progress = lastestProgress.Progress,
             };

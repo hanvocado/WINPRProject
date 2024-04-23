@@ -12,8 +12,8 @@ using ThesisManagement.Repositories.EF;
 namespace ThesisManagement.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240421170948_Initial")]
-    partial class Initial
+    [Migration("20240423072628_Inital")]
+    partial class Inital
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -263,7 +263,7 @@ namespace ThesisManagement.Migrations
                             Email = "a@student.com",
                             Name = "Nguyễn Văn Yên",
                             Password = "a12345",
-                            Phone = "123-456-7890",
+                            Phone = "931-456-7890",
                             WorkingTime = 0f
                         },
                         new
@@ -273,7 +273,7 @@ namespace ThesisManagement.Migrations
                             Email = "b@student.com",
                             Name = "Lâm Khang",
                             Password = "b12345",
-                            Phone = "987-654-3210",
+                            Phone = "977-654-3210",
                             WorkingTime = 0f
                         },
                         new
@@ -283,7 +283,7 @@ namespace ThesisManagement.Migrations
                             Email = "c@student.com",
                             Name = "Võ Thị Thu Huyền",
                             Password = "c12345",
-                            Phone = "987-654-3210",
+                            Phone = "987-654-3910",
                             WorkingTime = 0f
                         },
                         new
@@ -293,7 +293,7 @@ namespace ThesisManagement.Migrations
                             Email = "d@student.com",
                             Name = "Nguyễn Bình Minh",
                             Password = "d12345",
-                            Phone = "987-654-3210",
+                            Phone = "987-654-3410",
                             WorkingTime = 0f
                         },
                         new
@@ -302,8 +302,28 @@ namespace ThesisManagement.Migrations
                             Birthday = new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "e@student.com",
                             Name = "Trần Quốc Khánh",
-                            Password = "e12346",
-                            Phone = "987-654-3210",
+                            Password = "e12345",
+                            Phone = "987-655-3210",
+                            WorkingTime = 0f
+                        },
+                        new
+                        {
+                            Id = "22133016",
+                            Birthday = new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "f@student.com",
+                            Name = "Trần Văn Nam",
+                            Password = "f12346",
+                            Phone = "987-654-3215",
+                            WorkingTime = 0f
+                        },
+                        new
+                        {
+                            Id = "22133017",
+                            Birthday = new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "g@student.com",
+                            Name = "Nguyễn Ngọc Nữ",
+                            Password = "g12346",
+                            Phone = "987-654-3220",
                             WorkingTime = 0f
                         });
                 });
@@ -323,6 +343,9 @@ namespace ThesisManagement.Migrations
                     b.Property<DateTime>("End")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("HasNewUpdate")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -334,9 +357,6 @@ namespace ThesisManagement.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("ThesisId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WaitingForResponse")
                         .HasColumnType("int");
 
                     b.Property<float>("WorkingTime")
@@ -411,6 +431,9 @@ namespace ThesisManagement.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("WaitingForResponse")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

@@ -10,58 +10,103 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.DataContext>
-        <viewModels:TasksVM />
+        <viewModels:ChartVM />
     </UserControl.DataContext>
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
 
-            <Border Background="White" Padding="5 15"
-                    CornerRadius="10"
-                    Margin="10 10 10 10">
-                <sf:SfChart>
-                    <sf:SfChart.Header>
-                        <TextBlock Text="Tỉ lệ hoàn thành nhiệm vụ (%)" Style="{StaticResource label}" FontSize="13" />
-                    </sf:SfChart.Header>
-                    <sf:SfChart.Legend>
-                        <sf:ChartLegend />
-                    </sf:SfChart.Legend>
-                    <sf:DoughnutSeries XBindingPath="TaskStatus"
-                    DoughnutCoefficient="0.85"
-                    Label="TaskStatus"
-                    ItemsSource="{Binding TasksPieData, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                    YBindingPath="Percentage">
-                        <sf:DoughnutSeries.AdornmentsInfo>
-                            <sf:ChartAdornmentInfo ShowLabel="True" />
-                        </sf:DoughnutSeries.AdornmentsInfo>
-                    </sf:DoughnutSeries>
-                </sf:SfChart>
-            </Border>
+                <Border Background="White" Padding="10 15"
+                        Style="{StaticResource borderCardStyle}"
+                        Margin="10 10 10 10">
+                    <sf:SfChart>
+                        <sf:SfChart.Header>
+                            <TextBlock Text="Tỉ lệ hoàn thành nhiệm vụ (%)" Style="{StaticResource label}" FontSize="13" />
+                        </sf:SfChart.Header>
+                        <sf:SfChart.Legend>
+                            <sf:ChartLegend />
+                        </sf:SfChart.Legend>
+                        <sf:DoughnutSeries XBindingPath="TaskStatus"
+                                            DoughnutCoefficient="0.85"
+                                            Label="TaskStatus"
+                                            ItemsSource="{Binding TasksPieData, UpdateSourceTrigger=PropertyChanged}"
+                                            YBindingPath="Count">
+                            <sf:DoughnutSeries.AdornmentsInfo>
+                                <sf:ChartAdornmentInfo ShowLabel="True" SegmentLabelContent="Percentage" />
+                            </sf:DoughnutSeries.AdornmentsInfo>
+                        </sf:DoughnutSeries>
+                    </sf:SfChart>
+                </Border>
 
-            <Border Background="White" Padding="5 15"
-                    Grid.Column="1"
-                    CornerRadius="10"
-                    Margin="10 10 10 10">
+                <Border Background="White" Padding="10 15"
+                        Style="{StaticResource borderCardStyle}"
+                        Grid.Column="1"
+                        Margin="10 10 10 10">
+                    <sf:SfChart Padding="10">
+                        <sf:SfChart.Header>
+                            <TextBlock Text="Đóng góp của các thành viên" Style="{StaticResource label}" FontSize="13" />
+                        </sf:SfChart.Header>
+                        <sf:SfChart.PrimaryAxis>
+                            <sf:CategoryAxis Header="Họ Tên" />
+                        </sf:SfChart.PrimaryAxis>
+                        <sf:SfChart.SecondaryAxis>
+                            <sf:NumericalAxis Header="Thời gian (giờ)"  />
+                        </sf:SfChart.SecondaryAxis>
+
+                        <sf:ColumnSeries ItemsSource="{Binding Students, UpdateSourceTrigger=PropertyChanged}"
+                                         sf:ChartSeriesBase.Spacing="0.5"
+                                         XBindingPath="Name" 
+                                         YBindingPath="WorkingTime">
+                            <sf:ColumnSeries.AdornmentsInfo>
+                                <sf:ChartAdornmentInfo LabelPosition="Inner" ShowLabel="True"
+                                                       SegmentLabelContent="YValue" />
+                            </sf:ColumnSeries.AdornmentsInfo>
+                        </sf:ColumnSeries>
+                    </sf:SfChart>
+                </Border>
+            </Grid>
+
+            <Border Grid.Row="1"
+                    Margin="10 10 10 10"
+                    Padding="10 15"
+                    Background="White"
+                    Style="{StaticResource borderCardStyle}">
                 <sf:SfChart Padding="10">
                     <sf:SfChart.Header>
-                        <TextBlock Text="Tiến độ nhiệm vụ chưa hoàn thành" Style="{StaticResource label}" FontSize="13" />
+                        <TextBlock Text="Tổng quan tổng thời gian cần thiết và thời gian đã thực hiện của mỗi nhóm" 
+                                   Margin="0 0 0 15"
+                                   Style="{StaticResource label}" FontSize="13" HorizontalAlignment="Center" />
                     </sf:SfChart.Header>
-                    <sf:SfChart.PrimaryAxis>
-                        <sf:CategoryAxis Header="Tiêu đề" />
-                    </sf:SfChart.PrimaryAxis>
                     <sf:SfChart.SecondaryAxis>
-                        <sf:NumericalAxis Header="Tiến độ (%)" Maximum="100" />
+                        <sf:NumericalAxis Header="Thời gian (giờ)" />
                     </sf:SfChart.SecondaryAxis>
-
-                    <sf:ColumnSeries ItemsSource="{Binding UndoneTasks}"
-                                        sf:ChartSeriesBase.Spacing="0.5"
-                                        XBindingPath="Name" 
-                                        ShowTooltip="True"
-                                        YBindingPath="Progress" />
+                    <sf:ColumnSeries ItemsSource="{Binding ThesesData, UpdateSourceTrigger=PropertyChanged}"
+                                     sf:ChartSeriesBase.Spacing="0.5"
+                                     XBindingPath="Students" 
+                                     YBindingPath="TotalTaskTime">
+                        <sf:ColumnSeries.AdornmentsInfo>
+                            <sf:ChartAdornmentInfo LabelPosition="Inner"
+                                                   ShowLabel="True" />
+                        </sf:ColumnSeries.AdornmentsInfo>
+                    </sf:ColumnSeries>
+                    <sf:ColumnSeries ItemsSource="{Binding ThesesData}"
+                                     sf:ChartSeriesBase.Spacing="0.5"
+                                     XBindingPath="Students" 
+                                     YBindingPath="WorkedTime">
+                        <sf:ColumnSeries.AdornmentsInfo>
+                            <sf:ChartAdornmentInfo LabelPosition="Inner"
+                                                   ShowLabel="True" />
+                        </sf:ColumnSeries.AdornmentsInfo>
+                    </sf:ColumnSeries>
                 </sf:SfChart>
             </Border>
         </Grid>

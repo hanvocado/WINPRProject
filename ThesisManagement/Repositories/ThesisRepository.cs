@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using ThesisManagement.Models;
+using ThesisManagement.ViewModels;
 
 namespace ThesisManagement.Repositories
 {
@@ -16,6 +17,7 @@ namespace ThesisManagement.Repositories
         IEnumerable<Student> GetMembers(int thesisId);
         Thesis? GetThesis(int taskId);
         Thesis? Get(int thesisId);
+        IEnumerable<ThesesChartData> CompareThesesData(string professorId);
     }
 
     public class ThesisRepository : BaseRepository, IThesisRepository
@@ -105,6 +107,22 @@ namespace ThesisManagement.Repositories
 
             thesis.WaitingForResponse += numberToAdd;
             return DbSave();
+        }
+
+        public IEnumerable<ThesesChartData> CompareThesesData(string professorId)
+        {
+            var data = new List<ThesesChartData>();
+            var theses = _context.Theses.Include(th => th.Tasks).Include(th => th.Students).Where(th => th.Topic.ProfessorId == professorId);
+            float workedTime, totalTaskTime;
+            string members;
+            foreach (var thesis in theses)
+            {
+                totalTaskTime = thesis.Tasks?.Sum(t => t.WorkingTime) ?? 0;
+                members = String.Join('\n', thesis.Students!.Select(s => s.Name));
+                workedTime = totalTaskTime == 0 ? 0 : thesis.Tasks?.Sum(t => (float)(t.Progress / 100) * t.WorkingTime) ?? 0;
+                data.Add(new ThesesChartData(members, totalTaskTime, workedTime));
+            }
+            return data;
         }
     }
 }

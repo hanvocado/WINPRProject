@@ -222,6 +222,8 @@ namespace ThesisManagement.ViewModels
             set { totalTasks = value; OnPropertyChanged(nameof(TotalTasks)); }
         }
 
+        public ChartVM? ChartViewModel;
+
         public ViewModelCommand CreateTaskCommand { get; set; }
         public ViewModelCommand UpdateTaskCommand { get; set; }
         public ViewModelCommand DeleteTaskCommand { get; set; }
@@ -287,22 +289,22 @@ namespace ThesisManagement.ViewModels
             ValidateInput();
             if (!existError)
             {
-                TaskView taskView = obj as TaskView;
-                Task task = new Task
+                var confirmed = _dialogService.ShowDialog(Message.Notification, Message.ContinueNotification);
+                if (confirmed == true)
                 {
-                    Id = id,
-                    ThesisId = thesisId,
-                    Name = name,
-                    Description = description,
-                    Start = start,
-                    End = end,
-                    WorkingTime = workingTime,
-                    Progress = progress
-                };
+                    TaskView taskView = obj as TaskView;
+                    Task task = new Task
+                    {
+                        Id = id,
+                        ThesisId = thesisId,
+                        Name = name,
+                        Description = description,
+                        Start = start,
+                        End = end,
+                        WorkingTime = workingTime,
+                        Progress = progress
+                    };
 
-                var confirmed = _dialogService.ShowDialog(Message.Notification, Message.UpdateTaskNotification);
-                if (confirmed ?? false)
-                {
                     if (id <= 0)
                     {
                         var success = _taskRepo.Add(task);
@@ -310,6 +312,11 @@ namespace ThesisManagement.ViewModels
                     }
                     else
                     {
+                        if (SessionInfo.Role == Role.Student)
+                        {
+                            ShowMessage(false, null, Message.StudentCant);
+                            return;
+                        }
                         var success = _taskRepo.Update(task);
                         ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
                     }
@@ -349,6 +356,7 @@ namespace ThesisManagement.ViewModels
 
         public void Reload()
         {
+            ChartViewModel?.Reload();
             PendingTasks = _taskRepo.GetPendingTasks(thesis.Id);
             DoneTasks = _taskRepo.GetDoneTasks(thesis.Id);
             OverdueTasks = _taskRepo.GetOverdueTasks(thesis.Id);
