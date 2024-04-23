@@ -18,6 +18,11 @@ namespace ThesisManagement.ViewModels
             get { return SessionInfo.Role == Role.Professor; }
         }
 
+        public bool IsStudent
+        {
+            get { return SessionInfo.Role == Role.Student; }
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
         public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
 

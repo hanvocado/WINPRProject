@@ -1,4 +1,5 @@
 using Microsoft.Win32;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
@@ -135,8 +136,8 @@ namespace ThesisManagement.ViewModels
             set { parentVM = value; }
         }
 
-        private List<Attachment> attachments;
-        public List<Attachment> Attachments
+        private ObservableCollection<Attachment> attachments;
+        public ObservableCollection<Attachment> Attachments
         {
             get { return attachments; }
             set
@@ -158,7 +159,7 @@ namespace ThesisManagement.ViewModels
             _taskProgressRepo = new TaskProgressRepository();
             _dialogService = new DialogService();
             appDirectory = SessionInfo.BinDirectory;
-            Attachments = new List<Attachment>();
+            Attachments = new ObservableCollection<Attachment>();
 
             UpdateTaskProgressCommand = new ViewModelCommand(ExecuteUpdateTaskProgressCommand);
             UploadAttachmentCommand = new ViewModelCommand(ExecuteUploadAttachmentCommand);

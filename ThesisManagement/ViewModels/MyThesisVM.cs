@@ -107,14 +107,8 @@ namespace ThesisManagement.ViewModels
             {
                 //Update professor evaluation and student score
                 Evaluation = thesis.Evaluation;
-                bool success = true;
-                foreach (var student in Thesis.Students)
-                {
-                    success = _studentRepo.Update(student);
-                }
-                ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
                 studentFilePath = Path.Combine(appDirectory, Thesis.File);
-                docStream = new FileStream(studentFilePath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
+                DocumentStream = new FileStream(studentFilePath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
             }
         }
 
@@ -124,8 +118,15 @@ namespace ThesisManagement.ViewModels
             if (confirmEvaluate == true)
             {
                 thesis.Evaluation = evaluation;
-                var success = _thesisRepo.Update(thesis);
-                ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
+                bool successAddScore = true;
+                foreach (var student in Thesis.Students)
+                {
+                    successAddScore = _studentRepo.Update(student);
+                    if (!successAddScore)
+                        break;
+                }
+                var successUpdateThesis = _thesisRepo.Update(thesis);
+                ShowMessage(successAddScore && successUpdateThesis, Message.UpdateSuccess, Message.UpdateFailed);
             }
         }
 

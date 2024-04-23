@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Drawing;
+using System.Windows.Media;
 
 namespace ThesisManagement.Models
 {
@@ -24,7 +24,7 @@ namespace ThesisManagement.Models
         public Thesis? Thesis { get; set; }
 
         [NotMapped]
-        public Brush ColorBrush { get; }
+        public Brush? Background { get; set; }
 
         [NotMapped]
         public string DisplayFrom

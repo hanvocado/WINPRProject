@@ -30,6 +30,32 @@
                         Location="Location"
                         Notes="Note"/>
             </syncfusion:SfScheduler.AppointmentMapping>
+
+            <syncfusion:SfScheduler.CellContextMenu>
+                <ContextMenu>
+                    <MenuItem Command="{Binding Source={x:Static Member=syncfusion:SchedulerCommands.Add}}" 
+                              CommandParameter ="{Binding}" 
+                              CommandTarget="{Binding ElementName=Schedule}" 
+                              Header="Add"
+                              Width="100">
+                    </MenuItem>
+                </ContextMenu>
+            </syncfusion:SfScheduler.CellContextMenu>
+
+            <syncfusion:SfScheduler.AppointmentContextMenu>
+                <ContextMenu>
+                    <MenuItem Command="{Binding Source={x:Static Member=syncfusion:SchedulerCommands.Edit}}"
+                            CommandParameter ="{Binding}" CommandTarget="{Binding ElementName=Schedule}"
+                            Header="Edit"
+                            Width="100">
+                    </MenuItem>
+                    <MenuItem Command="{Binding Source={x:Static Member=syncfusion:SchedulerCommands.Delete}}"
+                            CommandParameter ="{Binding}"
+                            Header="Delete"
+                            Width="100">
+                    </MenuItem>
+                </ContextMenu>
+            </syncfusion:SfScheduler.AppointmentContextMenu>
         </syncfusion:SfScheduler>
     </Grid>
 </UserControl>

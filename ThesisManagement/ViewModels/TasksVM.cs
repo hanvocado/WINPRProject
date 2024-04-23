@@ -1,4 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Drawing;
+using System.Windows;
+using System.Windows.Media;
 using ThesisManagement.CustomControls;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
@@ -13,6 +16,7 @@ namespace ThesisManagement.ViewModels
         private readonly ITaskRepository _taskRepo;
         private readonly IStudentRepository _studentRepo;
         private readonly ITaskProgressRepository _taskProgressRepo;
+        private readonly IScheduleRepository _scheduleRepo;
         private readonly DialogService _dialogService;
 
         private Thesis thesis;
@@ -247,6 +251,7 @@ namespace ThesisManagement.ViewModels
             _taskRepo = new TaskRepository();
             _studentRepo = new StudentRepository();
             _taskProgressRepo = new TaskProgressRepository();
+            _scheduleRepo = new ScheduleRepository();
             _dialogService = new DialogService();
             Thesis = new Thesis();
 
@@ -314,12 +319,21 @@ namespace ThesisManagement.ViewModels
                     Progress = progress
                 };
 
+                ScheduleInfo schedule = new ScheduleInfo
+                {
+                    From = end.AddHours(-1),
+                    To = end,
+                    EventName = name,
+                    ThesisId = thesisId
+                };
+
                 if (id <= 0)
                 {
                     bool? confirmAdd = _dialogService.ShowDialog(Message.Notification, Message.AddTaskNotification);
                     if (confirmAdd == true)
                     {
                         var success = _taskRepo.Add(task);
+                        _scheduleRepo.Add(schedule);
                         ShowMessage(success, Message.AddSuccess, Message.AddFailed);
                     }
                 }
@@ -329,6 +343,7 @@ namespace ThesisManagement.ViewModels
                     if (confirmUpdate == true)
                     {
                         var success = _taskRepo.Update(task);
+                        _scheduleRepo.Update(schedule);
                         ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
                     }
                 }

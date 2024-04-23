@@ -86,6 +86,7 @@
                              VerticalAlignment="Top"
                              Height="90"
                              Text="{Binding Description}" 
+                             IsReadOnly="{Binding IsProfessor}"
                              AcceptsReturn="True"
                              TextWrapping="Wrap"
                              VerticalScrollBarVisibility="Auto"/>
@@ -102,7 +103,7 @@
                         </Grid.ColumnDefinitions>
 
                         <ScrollViewer VerticalScrollBarVisibility="Auto">
-                            <ListBox ItemsSource="{Binding Attachments, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
+                            <ListBox ItemsSource="{Binding Attachments}"
                                      x:Name="AttachmentsListBox"
                                      Margin="0 0 10 0"
                                      SelectedItem="{Binding SelectedFile}"

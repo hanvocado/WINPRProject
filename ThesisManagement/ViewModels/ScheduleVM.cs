@@ -1,4 +1,5 @@
-﻿using ThesisManagement.Models;
+﻿using System.Drawing;
+using ThesisManagement.Models;
 using ThesisManagement.Repositories;
 
 namespace ThesisManagement.ViewModels
