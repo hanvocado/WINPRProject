@@ -40,18 +40,6 @@ namespace ThesisManagement.ViewModels
             set { studentId = value; }
         }
 
-
-        private string? studentName;
-        public string? StudentName
-        {
-            get { return studentName; }
-            set
-            {
-                studentName = value;
-                OnPropertyChanged(nameof(StudentName));
-            }
-        }
-
         private int id;
         public int Id
         {
@@ -233,17 +221,17 @@ namespace ThesisManagement.ViewModels
 
         private void UpdateProgress()
         {
-            var success = _taskProgressRepo.Update(id, response);
+            var success = _taskProgressRepo.Update(id, response, progress);
             if (success)
             {
                 UpdateAttachments(id);
-                var acceptedTask = _taskRepo.GetTask(taskId);
-                var studentWorkTime = acceptedTask.WorkingTime * ((progress - acceptedTask.Progress) / 100);
+                var task = _taskRepo.GetTask(taskId);
+                float studentWorkTime = task.WorkingTime * ((float)(progress - task.Progress) / 100);
                 _studentRepo.UpdateWorkTime(studentId, studentWorkTime);
-                acceptedTask.Progress = progress;
-                acceptedTask.HasNewUpdate = false;
-                _taskRepo.Update(acceptedTask);
-                _thesisRepo.UpdateWaitingForResponse(acceptedTask.ThesisId, -1);
+                task.Progress = progress;
+                task.HasNewUpdate = false;
+                _taskRepo.Update(task);
+                _thesisRepo.UpdateWaitingForResponse(task.ThesisId, -1);
                 Window profWindow = Application.Current.MainWindow;
                 profWindow.DataContext = new ProfessorMainVM { CurrentChildView = new ThesesVM() };
             }

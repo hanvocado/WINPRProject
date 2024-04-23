@@ -125,7 +125,7 @@ namespace ThesisManagement.ViewModels
                 UpdateAt = lastestProgress?.UpdateAt,
                 Description = lastestProgress.Description,
                 Response = lastestProgress.Response,
-                StudentName = lastestProgress.Student?.Name,
+                StudentId = lastestProgress.StudentId,
                 Progress = lastestProgress.Progress,
             };
             var view = new UpdateTaskProgressView { DataContext = vm };
@@ -138,8 +138,8 @@ namespace ThesisManagement.ViewModels
             {
                 ParentVM = this,
                 TaskId = taskId,
+                Progress = lastestProgress?.Progress ?? 0,
                 StudentId = SessionInfo.UserId,
-                StudentName = SessionInfo.Name
             };
 
             var view = new UpdateTaskProgressView { DataContext = vm };
