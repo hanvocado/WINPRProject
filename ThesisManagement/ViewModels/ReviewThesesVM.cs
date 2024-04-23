@@ -46,7 +46,7 @@ namespace ThesisManagement.ViewModels
         public string MessageTimeRemain { get => messageTimeRemain; set { messageTimeRemain = value; OnPropertyChanged(); } }
 
         public ICommand ApproveCommand { get; set; }
-        public ICommand UndoApproveCommand { get; set; }
+        public ICommand UndoCommand { get; set; }
         public ICommand RejectCommand { get; set; }
         public ICommand ShowThesisCommand { get; set; }
 
@@ -58,7 +58,7 @@ namespace ThesisManagement.ViewModels
             selectedThesis = new Thesis();
             WaitingTheses = _thesisRepo.Get(currentUserId, Variable.StatusTopic.Waiting);
             ApproveCommand = new ViewModelCommand(ExecuteApproveCommand);
-            UndoApproveCommand = new ViewModelCommand(ExecuteUndoApproveCommand);
+            UndoCommand = new ViewModelCommand(ExecuteUndoCommand);
             RejectCommand = new ViewModelCommand(ExecuteRejectCommand);
         }
 
@@ -86,7 +86,7 @@ namespace ThesisManagement.ViewModels
             }
         }
 
-        private void ExecuteUndoApproveCommand(object obj)
+        private void ExecuteUndoCommand(object obj)
         {
             bool? confirmUndo = _dialogService.ShowDialog(Message.Notification, Message.UndoApproveNotification);
             if (confirmUndo == true)
@@ -98,17 +98,10 @@ namespace ThesisManagement.ViewModels
             }
             else
             {
-                LoadUndoButton();
+                WaitingTheses = _thesisRepo.Get(currentUserId, Variable.StatusTopic.Waiting);
+                Window profWindow = Application.Current.MainWindow;
+                profWindow.DataContext = new ProfessorMainVM { CurrentChildView = new ThesesVM() };
             }
-
-            LoadWaitingTheses();
-        }
-
-        private void LoadWaitingTheses()
-        {
-            WaitingTheses = _thesisRepo.Get(currentUserId, Variable.StatusTopic.Waiting);
-            Window profWindow = Application.Current.MainWindow;
-            profWindow.DataContext = new ProfessorMainVM { CurrentChildView = new ThesesVM() };
         }
 
         private void LoadUndoButton()
@@ -121,7 +114,6 @@ namespace ThesisManagement.ViewModels
         {
             VisibleUndoButton = Visibility.Hidden;
             Timer = 0;
-            LoadWaitingTheses();
         }
 
         private void ShowUndoButton()

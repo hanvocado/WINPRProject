@@ -26,7 +26,7 @@ namespace ThesisManagement.Models
 
         public ICollection<TaskProgress>? TaskProgresses { get; set; }
 
-        public int WaitingForResponse { get; set; }
+        public bool HasNewUpdate { get; set; } = false;
     }
 
     public class TasksPie

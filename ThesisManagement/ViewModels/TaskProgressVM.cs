@@ -41,18 +41,6 @@ namespace ThesisManagement.ViewModels
             set { studentId = value; }
         }
 
-
-        private string? studentName;
-        public string? StudentName
-        {
-            get { return studentName; }
-            set
-            {
-                studentName = value;
-                OnPropertyChanged(nameof(StudentName));
-            }
-        }
-
         private int id;
         public int Id
         {
@@ -189,7 +177,7 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteUpdateTaskProgressCommand(object obj)
         {
-            bool? confirmUpdateProgress = _dialogService.ShowDialog(Message.Notification, Message.UpdateTaskProgressNotification);
+            bool? confirmUpdateProgress = _dialogService.ShowDialog(Message.Notification, Message.ContinueNotification);
             if (confirmUpdateProgress == true)
             {
                 UpdateTaskProgressView? taskProgressView = obj as UpdateTaskProgressView;
@@ -225,22 +213,26 @@ namespace ThesisManagement.ViewModels
             {
                 addSuccess = UpdateAttachments(newProgress.Id);
                 var task = _taskRepo.GetTask(taskId);
-                task.WaitingForResponse += 1;
+                task.HasNewUpdate = true;
                 _taskRepo.Update(task);
+                _thesisRepo.UpdateWaitingForResponse(task.ThesisId, 1);
             }
             ShowMessage(addSuccess, Message.AddSuccess, Message.AddFailed);
         }
 
         private void UpdateProgress()
         {
-            var success = _taskProgressRepo.Update(id, response);
+            var success = _taskProgressRepo.Update(id, response, progress);
             if (success)
             {
                 UpdateAttachments(id);
-                var acceptedTask = _taskRepo.GetTask(taskId);
-                acceptedTask.Progress = progress;
-                acceptedTask.WaitingForResponse -= 1;
-                _taskRepo.Update(acceptedTask);
+                var task = _taskRepo.GetTask(taskId);
+                float studentWorkTime = task.WorkingTime * ((float)(progress - task.Progress) / 100);
+                _studentRepo.UpdateWorkTime(studentId, studentWorkTime);
+                task.Progress = progress;
+                task.HasNewUpdate = false;
+                _taskRepo.Update(task);
+                _thesisRepo.UpdateWaitingForResponse(task.ThesisId, -1);
                 Window profWindow = Application.Current.MainWindow;
                 profWindow.DataContext = new ProfessorMainVM { CurrentChildView = new ThesesVM() };
             }

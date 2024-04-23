@@ -54,6 +54,10 @@
                                                     Binding="{Binding Name}" 
                                                     IsReadOnly="True"
                                                     Width="5*"/>
+                                <DataGridTextColumn Header="Đóng góp (h)" 
+                                                    Binding="{Binding WorkingTime}" 
+                                                    IsReadOnly="True"
+                                                    Width="2*"/>
                                 <DataGridTextColumn Header="Điểm" 
                                                     Binding="{Binding Score}" 
                                                     IsReadOnly="False"

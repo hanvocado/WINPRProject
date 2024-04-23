@@ -9,7 +9,7 @@
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
         xmlns:hc="https://handyorg.github.io/handycontrol"
-         Title="TopicView" Height="640" Width="600"
+         Title="TopicView" Height="570" Width="600"
          WindowStartupLocation="CenterScreen"
          Style="{StaticResource formStyle}">
     <Window.DataContext>
@@ -21,7 +21,6 @@
                 <RowDefinition Height="25" />
                 <RowDefinition Height="35" />
                 <RowDefinition Height="70" />
-                <RowDefinition Height="70" />
                 <RowDefinition Height="130" />
                 <RowDefinition Height="120" />
                 <RowDefinition Height="130" />
@@ -29,7 +28,7 @@
             </Grid.RowDefinitions>
 
             <customControls:PopupControlBar />
-            
+
             <TextBlock Margin="0 0 0 10"
                         Grid.Row="1"
                         Text="Cập nhật tiến độ" 
@@ -37,33 +36,6 @@
                         HorizontalAlignment="Center" />
 
             <Border Grid.Row="2" Padding="30 0">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*" />
-                        <ColumnDefinition Width="2*" />
-                    </Grid.ColumnDefinitions>
-                    
-                    <StackPanel Grid.Column="0" Margin="0 0 10 0">
-                        <TextBlock Text="Sinh viên" Style="{StaticResource label}" />
-                        <TextBox Grid.Row="2"
-                                 IsReadOnly="True"
-                                 Height="35"
-                                 VerticalAlignment="Top"
-                                 Text="{Binding StudentName, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    </StackPanel>
-
-                    <StackPanel Grid.Column="1" Margin="10 0 0 0">
-                        <TextBlock Text="Thời gian" Style="{StaticResource label}" />
-                        <TextBox Grid.Row="2"
-                                 IsReadOnly="True"
-                                 Height="35"
-                                 VerticalAlignment="Top"
-                                 Text="{Binding UpdateAt, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat='HH:mm dd-MM-yyyy'}" />
-                    </StackPanel>                    
-                </Grid>
-            </Border>
-
-            <Border Grid.Row="3" Padding="30 0">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Tiến độ"
                                Style="{StaticResource label}"/>
@@ -79,7 +51,7 @@
                 </StackPanel>
             </Border>
             
-            <Border Grid.Row="4" Padding="30 0">
+            <Border Grid.Row="3" Padding="30 0">
                 <StackPanel>
                     <TextBlock Text="Chú thích" Style="{StaticResource label}" />
                     <TextBox Grid.Row="3"
@@ -93,7 +65,7 @@
                 </StackPanel>
             </Border>
 
-            <Border Grid.Row="5" Padding="30 0">
+            <Border Grid.Row="4" Padding="30 0">
                 <StackPanel>
                     <TextBlock Text="Đính kèm" Style="{StaticResource label}" />
                     <Grid>
@@ -126,7 +98,7 @@
                 </StackPanel>
             </Border>
 
-            <Border Grid.Row="6" Padding="30 0">
+            <Border Grid.Row="5" Padding="30 0">
                 <StackPanel>
                     <TextBlock Text="Phản hồi" Style="{StaticResource label}" />
                     <TextBox Height="90"
@@ -139,7 +111,7 @@
             </Border>
             
             <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
-                                          Grid.Row="7"
+                                          Grid.Row="6"
                                             HoverColor="{StaticResource secondaryBrush}"
                                             Content="OK"
                                             Width="200"

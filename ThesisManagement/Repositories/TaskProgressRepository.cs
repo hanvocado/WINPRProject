@@ -8,7 +8,7 @@ namespace ThesisManagement.Repositories
     {
         bool Add(TaskProgress taskProgress);
         bool Update(TaskProgress taskProgress);
-        bool Update(int progressId, string response);
+        bool Update(int progressId, string response, int progress);
         bool Delete(int id);
         ObservableCollection<TaskProgress> GetAll();
         TaskProgress GetLastestTaskProgress(int taskId);
@@ -55,13 +55,14 @@ namespace ThesisManagement.Repositories
             return lastestTaskProgress;
         }
 
-        public bool Update(int progressId, string response)
+        public bool Update(int progressId, string response, int progress)
         {
-            var progress = _context.TaskProgresses.FirstOrDefault(t => t.Id == progressId);
-            if (progress != null)
+            var taskProgress = _context.TaskProgresses.FirstOrDefault(t => t.Id == progressId);
+            if (taskProgress != null)
             {
-                progress.Response = response;
-                _context.Update(progress);
+                taskProgress.Progress = progress;
+                taskProgress.Response = response;
+                _context.Update(taskProgress);
                 return DbSave();
             }
             return false;

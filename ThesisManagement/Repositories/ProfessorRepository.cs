@@ -40,7 +40,7 @@ namespace ThesisManagement.Repositories
                     {
                         foreach (Thesis thesis in topic.Theses)
                         {
-                            if (thesis.HasNewUpdate)
+                            if (thesis.WaitingForResponse > 0)
                                 return true;
                         }
                     }

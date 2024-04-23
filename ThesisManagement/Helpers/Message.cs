@@ -49,6 +49,7 @@
         public static string EvaluateNotification = "Bạn có chắc chắn muốn cập nhật đánh giá?";
         public static string UpdateTaskProgressNotification = "Bạn có chắc chắn muốn cập nhật phản hồi?";
 
-
+        public static string ContinueNotification = "Bạn có chắc chắn thực hiện hành động này?";
+        public static string StudentCant = "Sinh viên không thể thực hiện hành động này!";
     }
 }

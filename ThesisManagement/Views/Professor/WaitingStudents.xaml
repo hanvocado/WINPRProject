@@ -28,6 +28,17 @@
                            VerticalAlignment="Center"
                         Text="SINH VIÊN CHỜ DUYỆT ĐỀ TÀI"
                         HorizontalAlignment="Left" />
+                <Button Visibility="{Binding DataContext.VisibleUndoButton, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                        Content="Hoàn Tác"
+                        Height="30" Width="100"
+                        Foreground="White"
+                        Margin="20 0 0 0"
+                        Background="{StaticResource primaryBrush}"
+                        Command="{Binding DataContext.UndoCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                <TextBlock Text="{Binding  DataContext.MessageTimeRemain,RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                           Foreground="Red" 
+                           Width="auto" 
+                           VerticalAlignment="Center"/>
             </StackPanel>
         </Border>
 
@@ -90,20 +101,8 @@
                                                     <customControls:ControlButton.Content>
                                                         <fa:IconImage Icon="X" Style="{StaticResource btnIcon}" />
                                                     </customControls:ControlButton.Content>
-                                                </customControls:ControlButton>
-                                                
-                                                <Button Visibility="{Binding DataContext.VisibleUndoButton, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                    Content="Hoàn Tác"
-                                                    Height="30" Width="100"
-                                                    Foreground="White"
-                                                    Background="{StaticResource primaryBrush}"
-                                                    Command="{Binding DataContext.UndoApproveCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                                                </customControls:ControlButton>                                                
                                             </StackPanel>
-
-                                            <TextBlock Text="{Binding  DataContext.MessageTimeRemain,RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                                                       Foreground="Red" 
-                                                       Width="auto" 
-                                                       VerticalAlignment="Center"/>
                                         </StackPanel>
                                     </Grid>
                                 </Border>

@@ -64,7 +64,7 @@
                             </TabItem>
 
                             <TabItem Header="Nhiệm vụ">
-                                <shared:TasksView x:Name="tasksView" />
+                                <shared:TasksView x:Name="tasksView"  />
                             </TabItem>
 
                             <TabItem x:Name="scheduleView">
@@ -80,7 +80,7 @@
                             </TabItem>
 
                             <TabItem Header="Thống kê">
-                                <local:ChartView x:Name="chartView" DataContext="{Binding ElementName=tasksView, Path=DataContext}" />
+                                <local:ChartView x:Name="chartView"/>
                             </TabItem>
 
                             <TabItem x:Name="evaluationView">

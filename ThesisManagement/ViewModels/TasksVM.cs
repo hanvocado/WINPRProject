@@ -95,7 +95,7 @@ namespace ThesisManagement.ViewModels
                 OnPropertyChanged(nameof(End));
             }
         }
-        
+
         private float workingTime;
         public float WorkingTime
         {
@@ -211,17 +211,6 @@ namespace ThesisManagement.ViewModels
             }
         }
 
-        private IEnumerable<Task> undoneTasks;
-        public IEnumerable<Task> UndoneTasks
-        {
-            get { return undoneTasks; }
-            set
-            {
-                undoneTasks = value;
-                OnPropertyChanged(nameof(UndoneTasks));
-            }
-        }
-
         private IEnumerable<TasksPie> tasksPieData;
         public IEnumerable<TasksPie> TasksPieData
         {
@@ -229,16 +218,15 @@ namespace ThesisManagement.ViewModels
             set { tasksPieData = value; OnPropertyChanged(nameof(TasksPieData)); }
         }
 
-        public bool IsStudent
+        private int totalTasks;
+
+        public int TotalTasks
         {
-            get
-            {
-                if (SessionInfo.Role == Role.Student)
-                    return true;
-                else
-                    return false;
-            }
+            get { return totalTasks; }
+            set { totalTasks = value; OnPropertyChanged(nameof(TotalTasks)); }
         }
+
+        public ChartVM? ChartViewModel;
 
         public ViewModelCommand CreateTaskCommand { get; set; }
         public ViewModelCommand UpdateTaskCommand { get; set; }
@@ -306,18 +294,21 @@ namespace ThesisManagement.ViewModels
             ValidateInput();
             if (!existError)
             {
-                TaskView taskView = obj as TaskView;
-                Task task = new Task
+                var confirmed = _dialogService.ShowDialog(Message.Notification, Message.ContinueNotification);
+                if (confirmed == true)
                 {
-                    Id = id,
-                    ThesisId = thesisId,
-                    Name = name,
-                    Description = description,
-                    Start = start,
-                    End = end,
-                    WorkingTime = workingTime,
-                    Progress = progress
-                };
+                    TaskView taskView = obj as TaskView;
+                    Task task = new Task
+                    {
+                        Id = id,
+                        ThesisId = thesisId,
+                        Name = name,
+                        Description = description,
+                        Start = start,
+                        End = end,
+                        WorkingTime = workingTime,
+                        Progress = progress
+                    };
 
                 ScheduleInfo schedule = new ScheduleInfo
                 {
@@ -336,20 +327,20 @@ namespace ThesisManagement.ViewModels
                         _scheduleRepo.Add(schedule);
                         ShowMessage(success, Message.AddSuccess, Message.AddFailed);
                     }
-                }
-                else
-                {
-                    bool? confirmUpdate = _dialogService.ShowDialog(Message.Notification, Message.UpdateTaskNotification);
-                    if (confirmUpdate == true)
+                    else
                     {
+                        if (SessionInfo.Role == Role.Student)
+                        {
+                            ShowMessage(false, null, Message.StudentCant);
+                            return;
+                        }
                         var success = _taskRepo.Update(task);
                         _scheduleRepo.Update(schedule);
                         ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
                     }
+                    Reload();
+                    taskView?.Close();
                 }
-
-                Reload();
-                taskView?.Close();
             }
         }
 
@@ -374,7 +365,7 @@ namespace ThesisManagement.ViewModels
             var workingTime = selectedTask.WorkingTime;
             Day = (int)(workingTime / 24);
             Hour = (int)(workingTime % 24);
-            Minute = (int)((workingTime - (int)workingTime) * 60 + 0.5f); 
+            Minute = (int)((workingTime - (int)workingTime) * 60 + 0.5f);
 
             taskView.DataContext = this;
             taskView.Show();
@@ -383,11 +374,12 @@ namespace ThesisManagement.ViewModels
 
         public void Reload()
         {
+            ChartViewModel?.Reload();
             PendingTasks = _taskRepo.GetPendingTasks(thesis.Id);
             DoneTasks = _taskRepo.GetDoneTasks(thesis.Id);
             OverdueTasks = _taskRepo.GetOverdueTasks(thesis.Id);
             TasksPieData = _taskRepo.GetTasksPieData(thesis.Id);
-            UndoneTasks = _taskRepo.GetUndoneTasks(thesis.Id);
+            TotalTasks = PendingTasks.Count() + DoneTasks.Count() + OverdueTasks.Count();
         }
 
         private void ResetTaskProperties()
