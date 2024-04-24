@@ -32,6 +32,7 @@
 
         //Notificaion title
         public static string Notification = "Xác nhận";
+        public static string ErrorNotification = "Thông báo";
 
         //Notification message for Professor
         public static string AddTopicNotification = "Bạn có chắc chắn muốn thêm đề tài?";
@@ -51,5 +52,7 @@
 
         public static string ContinueNotification = "Bạn có chắc chắn thực hiện hành động này?";
         public static string StudentCant = "Sinh viên không thể thực hiện hành động này!";
+
+        public static string UploadFileFailed = "Không thể mở tệp đã chọn. Vui lòng chọn tệp PDF!";
     }
 }

@@ -2,6 +2,7 @@
 using Syncfusion.Pdf;
 using Syncfusion.Pdf.Parsing;
 using System.IO;
+using System.Windows;
 using System.Windows.Input;
 using ThesisManagement.CustomControls;
 using ThesisManagement.Helpers;
@@ -135,21 +136,30 @@ namespace ThesisManagement.ViewModels
         private void ExecuteUploadFileCommand(object obj)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "PDF Files (*.pdf)|*.pdf|All Files (*.*)|*.*";
             if (openFileDialog.ShowDialog() == true)
             {
                 //Uploaded file name
                 string fileName = openFileDialog.FileName;
-                string userFileName = SessionInfo.UserId + Path.GetFileName(fileName);
+                if (Path.GetExtension(fileName).Equals(".pdf", StringComparison.OrdinalIgnoreCase))
+                {
+                    string userFileName = SessionInfo.UserId + Path.GetFileName(fileName);
 
-                //Storage file name
-                destinationPath = Path.Combine(appDirectory, userFileName);
-                File.Copy(fileName, destinationPath, true);
-                DocumentStream = new FileStream(destinationPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
+                    //Storage file name
+                    destinationPath = Path.Combine(appDirectory, userFileName);
+                    File.Copy(fileName, destinationPath, true);
+                    DocumentStream = new FileStream(destinationPath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
 
-                //Update database
-                thesis.File = userFileName;
-                var success = _thesisRepo.Update(thesis);
-                ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
+                    //Update database
+                    thesis.File = userFileName;
+                    var success = _thesisRepo.Update(thesis);
+                    ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
+                }
+                else
+                {
+                    _dialogService.ShowDialog(Message.ErrorNotification, Message.UploadFileFailed);
+                } 
+                    
             }
         }
     }
