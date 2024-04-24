@@ -1,4 +1,10 @@
-﻿using System.Windows.Controls;
+﻿using Syncfusion.Windows.PdfViewer;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using ThesisManagement.CustomControls;
+using ThesisManagement.Helpers;
+using ThesisManagement.Models;
 using ThesisManagement.ViewModels;
 using ThesisManagement.Views.Shared;
 

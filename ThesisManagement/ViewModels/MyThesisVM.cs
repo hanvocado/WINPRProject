@@ -1,4 +1,6 @@
 ﻿using Microsoft.Win32;
+using Syncfusion.Pdf;
+using Syncfusion.Pdf.Parsing;
 using System.IO;
 using System.Windows.Input;
 using ThesisManagement.CustomControls;
