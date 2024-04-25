@@ -29,10 +29,7 @@ namespace ThesisManagement.ViewModels
             set
             {
                 taskId = value;
-                if (taskId > 0)
-                {
-                    Reload();
-                }
+                Reload();
             }
         }
 
@@ -106,13 +103,16 @@ namespace ThesisManagement.ViewModels
 
         public void Reload()
         {
-            this.Task = _taskRepo.GetTask(taskId);
-            this.lastestProgress = _progressRepo.GetLastestTaskProgress(taskId);
-            this.Progresses = task?.TaskProgresses?.OrderBy(tp => tp.Id).ToList() ?? new List<TaskProgress>();
-            if (SessionInfo.Role == Role.Student && lastestProgress != null && lastestProgress.Response == null)
-                UpdateBtnVisibility = Visibility.Collapsed;
-            else if (SessionInfo.Role == Role.Professor && lastestProgress?.Response != null)
-                UpdateBtnVisibility = Visibility.Collapsed;
+            if (taskId > 0) 
+            {
+                this.Task = _taskRepo.GetTask(taskId);
+                this.lastestProgress = _progressRepo.GetLastestTaskProgress(taskId);
+                this.Progresses = task?.TaskProgresses?.OrderBy(tp => tp.Id).ToList() ?? new List<TaskProgress>();
+                if (SessionInfo.Role == Role.Student && lastestProgress != null && lastestProgress.Response == null)
+                    UpdateBtnVisibility = Visibility.Collapsed;
+                else if (SessionInfo.Role == Role.Professor && lastestProgress?.Response != null)
+                    UpdateBtnVisibility = Visibility.Collapsed;
+            }
         }
 
         private void ShowLastestProgress()
