@@ -28,12 +28,6 @@ namespace ThesisManagement.Repositories
                 return LoginUser(Role.Professor, pw);
             }
 
-            user = _context.Admins.FirstOrDefault(p => p.Email.ToLower() == email && p.Password == pw);
-            if (user != null)
-            {
-                return LoginUser(Role.Admin, pw);
-            }
-
             return false;
         }
 

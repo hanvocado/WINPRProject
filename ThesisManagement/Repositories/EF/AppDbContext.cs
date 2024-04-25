@@ -8,7 +8,6 @@ namespace ThesisManagement.Repositories.EF
     {
         public AppDbContext(DbContextOptions<AppDbContext> opts) : base(opts) { }
         public DbSet<Topic> Topics { get; set; }
-        public DbSet<Professor> Admins { get; set; }
         public DbSet<Professor> Professors { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Thesis> Theses { get; set; }
@@ -21,16 +20,6 @@ namespace ThesisManagement.Repositories.EF
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<Admin>().HasData(
-                new Professor
-                {
-                    Id = "A1",
-                    Name = "Nguyen A",
-                    Email = "ad1@gmail.com",
-                    Password = "12345"
-                }
-            );
 
             modelBuilder.Entity<Professor>().HasData(
                 new Professor

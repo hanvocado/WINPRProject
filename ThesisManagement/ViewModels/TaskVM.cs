@@ -209,7 +209,7 @@ namespace ThesisManagement.ViewModels
 
         private void ValidateInput()
         {
-            ExistError = String.IsNullOrEmpty(name) || String.IsNullOrEmpty(description);
+            ExistError = String.IsNullOrEmpty(name) || String.IsNullOrEmpty(description) || WorkingTime <= 0;
             if (existError)
                 ShowMessage(false, null, Message.RequiredError);
         }

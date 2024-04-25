@@ -100,7 +100,7 @@ namespace ThesisManagement.ViewModels
                 var isUserValid = _userRepo.Authenticate(new NetworkCredential(email, password));
                 if (isUserValid)
                 {
-                    var logicView = Application.Current.MainWindow as LoginView;
+                    var loginView = Application.Current.MainWindow as LoginView;
 
                     if (SessionInfo.Role == Role.Student)
                     {
@@ -110,11 +110,8 @@ namespace ThesisManagement.ViewModels
                     {
                         ShowProfessorWindow();
                     }
-                    else if (SessionInfo.Role == Role.Admin)
-                    {
-                        Console.WriteLine();
-                    }
-                    logicView.Close();
+
+                    loginView?.Close();
                 }
             }
             ErrorMessage = Message.LoginFailed;
