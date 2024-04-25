@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Windows.Media;
 
 namespace ThesisManagement.Models
 {
@@ -23,25 +22,6 @@ namespace ThesisManagement.Models
         [ForeignKey(nameof(ThesisId))]
         public Thesis? Thesis { get; set; }
 
-        [NotMapped]
-        public Brush? Background { get; set; }
-
-        [NotMapped]
-        public string DisplayFrom
-        {
-            get
-            {
-                return From.ToString("HH:mm dd-MM-yyyy");
-            }
-        }
-
-        [NotMapped]
-        public string DisplayTo
-        {
-            get
-            {
-                return To.ToString("HH:mm dd-MM-yyyy");
-            }
-        }
+        public Task? Task { get; set; }
     }
 }

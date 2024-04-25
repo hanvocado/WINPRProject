@@ -94,7 +94,7 @@
                         </Border>
                         <StackPanel Grid.Column="1" Margin="0 0 10 0">
                             <TextBlock Text="Chờ phản hồi" />
-                            <TextBlock Text="{Binding Thesis.WaitingForResponse, UpdateSourceTrigger=PropertyChanged}" FontSize="20" FontWeight="Medium" />
+                            <TextBlock Text="{Binding WaitingForResponse, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontSize="20" FontWeight="Medium" />
                         </StackPanel>
                     </Grid>
                 </Border>

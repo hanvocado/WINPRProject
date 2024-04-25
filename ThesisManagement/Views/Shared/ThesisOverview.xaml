@@ -13,7 +13,7 @@
         <viewModels:MyThesisVM/>
     </UserControl.DataContext>
 
-    <Grid>
+    <Grid Margin="10 15 10 0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="280"/>
             <ColumnDefinition/>
@@ -31,56 +31,52 @@
                     Grid.Row="0">
                 <TextBlock Text="Giảng viên: "
                         Style="{StaticResource label}"
-                        Margin="10,5"
                         FontWeight="Medium"/>
-                <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,0,0">
+                <Border Style="{StaticResource borderCardStyle}" Background="White">
                     <TextBlock Text="{Binding Topic.Professor.Name, UpdateSourceTrigger=PropertyChanged}"
                                 Height="30"
                                 Padding="15 6"/>
-                </md:ColorZone>
+                </Border>
             </StackPanel>
 
             <StackPanel Orientation="Vertical"
                     Grid.Row="1">
                 <TextBlock Text="Thể loại: "
                         Style="{StaticResource label}"
-                        Margin="10,5"
                         FontWeight="Medium"/>
-                <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,0,0">
+                <Border Style="{StaticResource borderCardStyle}" Background="White">
                     <TextBlock Text="{Binding Topic.Category, UpdateSourceTrigger=PropertyChanged}"
                             Height="30"
                             Padding="15 6" />
-                </md:ColorZone>
+                </Border>
             </StackPanel>
 
             <StackPanel Orientation="Vertical"
                     Grid.Row="2">
                 <TextBlock Text="Công nghệ: "
                         Style="{StaticResource label}"
-                        Margin="10,5"
                         FontWeight="Medium"/>
-                <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,0,0">
+                <Border Style="{StaticResource borderCardStyle}" Background="White">
                     <TextBlock Text="{Binding Topic.Technology, UpdateSourceTrigger=PropertyChanged}"
                             Height="80"
                             Margin="15 6 15 9"/>
-                </md:ColorZone>
+                </Border>
             </StackPanel>
 
             <StackPanel Orientation="Vertical"
                     Grid.Row="3">
                 <TextBlock Text="Thành viên: "
                         Style="{StaticResource label}"
-                        Margin="10,5"
                         FontWeight="Medium"/>
-                <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,0,20">
+                <Border Style="{StaticResource borderCardStyle}" Background="White">
                     <TextBlock Text="{Binding Thesis.Students, Converter={StaticResource CollectionToStringConverter}}"
                             Height="80"
                             Margin="15 6 15 9"/>
-                </md:ColorZone>
+                </Border>
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" Margin="20 0 0 0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -91,32 +87,30 @@
                     Grid.Row="0">
                 <TextBlock Style="{StaticResource label}"
                         Text="Mô tả: "
-                        Margin="10,5"
                         FontWeight="Medium"/>
-                <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,10,10">
+                <Border Background="White" Style="{StaticResource borderCardStyle}">
                     <ScrollViewer>
                         <TextBlock Text="{Binding Topic.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Height="80"
                                 Margin="15 6 15 9"
                                 TextWrapping="Wrap"/>
                     </ScrollViewer>
-                </md:ColorZone>
+                </Border>
             </StackPanel>
 
             <StackPanel Orientation="Vertical"
                     Grid.Row="1">
                 <TextBlock Style="{StaticResource label}"
                         Text="Chức năng:: "
-                        Margin="10,5"
                         FontWeight="Medium"/>
-                <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,10,10">
+                <Border Background="White" Style="{StaticResource borderCardStyle}">
                     <ScrollViewer>
                         <TextBlock Text="{Binding Topic.Function, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     Height="80"
                                     Margin="15 6 15 9"
                                 TextWrapping="Wrap"/>
                     </ScrollViewer>
-                </md:ColorZone>
+                </Border>
             </StackPanel>
 
             <StackPanel Orientation="Vertical"
@@ -124,16 +118,15 @@
                 <TextBlock Style="{StaticResource label}"
                         Grid.Column="3"
                         Text="Yêu cầu: "
-                        Margin="10,5"
                         FontWeight="Medium"/>
-                <md:ColorZone Mode="Custom" Background="White" Foreground="Black" CornerRadius="15" Margin="10,0,10,10">
+                <Border Background="White" Style="{StaticResource borderCardStyle}">
                     <ScrollViewer>
                         <TextBlock Text="{Binding Topic.Requirement, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     Margin="15 6 15 9"
                                    Height="80"
                                 TextWrapping="Wrap"/>
                     </ScrollViewer>
-                </md:ColorZone>
+                </Border>
             </StackPanel>
         </Grid>
     </Grid>

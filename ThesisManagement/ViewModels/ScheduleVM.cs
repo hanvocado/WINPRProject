@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using ThesisManagement.Models;
+﻿using ThesisManagement.Models;
 using ThesisManagement.Repositories;
 
 namespace ThesisManagement.ViewModels
@@ -22,9 +21,7 @@ namespace ThesisManagement.ViewModels
             set
             {
                 thesisId = value;
-                ScheduleInfos = _scheduleRepo.GetScheduleInfos(thesisId);
-                CountUpcomingSchedules = _scheduleRepo.CountUpcomingSchedules(thesisId);
-                OnPropertyChanged(nameof(ThesisId));
+                Load();
             }
         }
 
@@ -108,6 +105,12 @@ namespace ThesisManagement.ViewModels
         public ScheduleVM()
         {
             _scheduleRepo = new ScheduleRepository();
+        }
+
+        public void Load()
+        {
+            ScheduleInfos = _scheduleRepo.Get(thesisId);
+            CountUpcomingSchedules = scheduleInfos.Where(sch => sch.To > DateTime.Now).Count();
         }
     }
 }

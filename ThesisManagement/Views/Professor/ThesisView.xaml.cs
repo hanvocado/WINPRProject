@@ -16,20 +16,21 @@ namespace ThesisManagement.Views.Professor
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var thesisVM = this.DataContext as MyThesisVM;
-            var chartVM = new ChartVM { ThesisId = thesisVM.Thesis.Id };
-            mainContainer.DataContext = thesisVM;
-            tasksView.DataContext = new TasksVM
+            if (thesisVM != null)
             {
-                ThesisId = thesisVM.Thesis.Id,
-                Thesis = thesisVM.Thesis,
-                ChartViewModel = chartVM
-            };
-            scheduleView.DataContext = new ScheduleVM
-            {
-                ThesisId = thesisVM.Thesis.Id
-            };
-            chartView.DataContext = chartVM;
-            evaluationView.DataContext = thesisVM;
+                var chartVM = new ChartVM { ThesisId = thesisVM.Thesis.Id };
+                var scheduleVM = new ScheduleVM { ThesisId = thesisVM.Thesis.Id };
+                mainContainer.DataContext = thesisVM;
+                tasksView.DataContext = new TasksVM
+                {
+                    Thesis = thesisVM.Thesis,
+                    ChartViewModel = chartVM,
+                    ScheduleViewModel = scheduleVM
+                };
+                scheduleView.DataContext = scheduleVM;
+                chartView.DataContext = chartVM;
+                evaluationView.DataContext = thesisVM;
+            }
         }
     }
 }

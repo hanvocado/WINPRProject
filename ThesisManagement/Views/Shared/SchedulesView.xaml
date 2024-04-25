@@ -15,7 +15,7 @@
 
     <Grid>
         <syncfusion:SfScheduler x:Name="Schedule"
-                            ItemsSource="{Binding ScheduleInfos}"
+                            ItemsSource="{Binding ScheduleInfos, UpdateSourceTrigger=PropertyChanged}"
                             ViewType="Week">
             <syncfusion:SfScheduler.DaysViewSettings>
                 <syncfusion:DaysViewSettings StartHour="6"

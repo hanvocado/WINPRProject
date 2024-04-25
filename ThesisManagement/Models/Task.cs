@@ -27,6 +27,9 @@ namespace ThesisManagement.Models
         public ICollection<TaskProgress>? TaskProgresses { get; set; }
 
         public bool HasNewUpdate { get; set; } = false;
+        public int ScheduleId { get; set; }
+        [ForeignKey(nameof(ScheduleId))]
+        public ScheduleInfo Schedule { get; set; }
     }
 
     public class TasksPie

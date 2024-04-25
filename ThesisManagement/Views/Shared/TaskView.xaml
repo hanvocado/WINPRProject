@@ -13,7 +13,7 @@
          WindowStartupLocation="CenterScreen"
          Style="{StaticResource formStyle}">
     <Window.DataContext>
-        <viewModels:TasksVM />
+        <viewModels:TaskVM />
     </Window.DataContext>
     <Border>
         <Grid >
@@ -37,7 +37,6 @@
                 <StackPanel>
                     <TextBlock Text="Tiêu đề" Style="{StaticResource label}" />
                     <TextBox Grid.Row="2"
-                             IsReadOnly="{Binding IsStudent}"
                              Height="35"
                              VerticalAlignment="Top"
                              Style="{StaticResource TextBoxExtend}" 
@@ -50,7 +49,6 @@
                     <TextBlock Text="Mô tả" Style="{StaticResource label}" />
                     <TextBox Grid.Row="3"
                              VerticalAlignment="Top"
-                             IsReadOnly="{Binding IsStudent}"
                              Height="90"
                              Text="{Binding Description}" 
                              AcceptsReturn="True"
@@ -66,19 +64,16 @@
                                 FlowDirection="LeftToRight" 
                                 Height="35">
                         <TextBox Text="{Binding Day}" 
-                                 IsReadOnly="{Binding IsStudent}" 
                                  Width="50" 
                                  Margin="0 0 5 0"/>
                         <TextBlock Text="Ngày" 
                                    HorizontalAlignment="Center" 
                                    VerticalAlignment="Center"/>
                         <TextBox Text="{Binding Hour}" 
-                                 IsReadOnly="{Binding IsStudent}" 
                                  Width="50" Margin="10 0 5 0"/>
                         <TextBlock Text="Giờ" HorizontalAlignment="Center" 
                                    VerticalAlignment="Center"/>
                         <TextBox Text="{Binding Minute}" 
-                                 IsReadOnly="{Binding IsStudent}" 
                                  Width="50" 
                                  Margin="10 0 5 0"/>
                         <TextBlock Text="Phút" 
@@ -103,7 +98,6 @@
                                              BorderThickness="0"
                                              Padding="5"
                                              DropDownView="Combined"
-                                             IsReadOnly="{Binding IsStudent}"
                                              CanEdit="True"
                                              CustomPattern="HH:mm dd-MM-yyyy"
                                              Pattern="CustomPattern" />
@@ -121,7 +115,6 @@
                                              BorderThickness="0"
                                              Padding="5"
                                              DropDownView="Combined"
-                                             IsReadOnly="{Binding IsStudent}"
                                              CanEdit="True"
                                              CustomPattern="HH:mm dd-MM-yyyy"
                                              Pattern="CustomPattern" >

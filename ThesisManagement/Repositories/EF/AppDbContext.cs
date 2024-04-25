@@ -190,7 +190,8 @@ namespace ThesisManagement.Repositories.EF
             {
                 entity.HasOne(tp => tp.Topic)
                         .WithMany(th => th.Theses)
-                        .HasForeignKey(th => th.TopicId);
+                        .HasForeignKey(th => th.TopicId)
+                        .OnDelete(DeleteBehavior.NoAction);
 
             });
 
@@ -198,83 +199,48 @@ namespace ThesisManagement.Repositories.EF
             {
                 entity.HasOne(th => th.Thesis)
                         .WithMany(sch => sch.ScheduleInfos)
-                        .HasForeignKey(m => m.ThesisId);
-
+                        .HasForeignKey(m => m.ThesisId)
+                        .OnDelete(DeleteBehavior.Cascade);
+                entity.HasOne(th => th.Task)
+                        .WithOne(t => t.Schedule)
+                        .OnDelete(DeleteBehavior.Cascade);
             });
-
-            //modelBuilder.Entity<Thesis>().HasData(
-            //    new Thesis
-            //    {
-            //        Id = 1,
-            //        TopicId = 2,
-            //        TopicStatus = "Approved",
-            //        File = null,
-            //        Score = 8
-            //    },
-            //    new Thesis
-            //    {
-            //        Id = 2,
-            //        TopicId = 1,
-            //        TopicStatus = "Waiting",
-            //        File = null,
-            //        Score = 9
-            //    },
-            //    new Thesis
-            //    {
-            //        Id = 3,
-            //        TopicId = 3,
-            //        TopicStatus = "Rejected",
-            //        File = null,
-            //        Score = 10
-            //    },
-            //    new Thesis
-            //    {
-            //        Id = 4,
-            //        TopicId = 2,
-            //        TopicStatus = "Waiting",
-            //        File = null,
-            //        Score = 10
-            //    },
-            //    new Thesis
-            //    {
-            //        Id = 5,
-            //        TopicId = 2,
-            //        TopicStatus = "Waiting",
-            //        File = null,
-            //        Score = 10
-            //    }
-            //);
 
             modelBuilder.Entity<Task>(entity =>
             {
                 entity.HasOne(tp => tp.Thesis)
                       .WithMany(t => t.Tasks)
-                      .HasForeignKey(t => t.ThesisId);
+                      .HasForeignKey(t => t.ThesisId)
+                      .OnDelete(DeleteBehavior.NoAction);
             });
 
             modelBuilder.Entity<Feedback>(entity =>
             {
                 entity.HasOne(fb => fb.Thesis)
                       .WithMany(ts => ts.Feedbacks)
-                      .HasForeignKey(fb => fb.ThesisId);
+                      .HasForeignKey(fb => fb.ThesisId)
+                      .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<TaskProgress>(entity =>
             {
                 entity.HasOne(t => t.Task)
                       .WithMany(tp => tp.TaskProgresses)
-                      .HasForeignKey(tp => tp.TaskId);
+                      .HasForeignKey(tp => tp.TaskId)
+                      .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasOne(st => st.Student)
                       .WithMany(tp => tp.TaskProgresses)
-                      .HasForeignKey(tp => tp.StudentId);
+                      .HasForeignKey(tp => tp.StudentId)
+                      .OnDelete(DeleteBehavior.NoAction);
             });
 
             modelBuilder.Entity<Attachment>(entity =>
             {
                 entity.HasOne(tp => tp.TaskProgress)
                       .WithMany(at => at.Attachments)
-                      .HasForeignKey(at => at.TaskProgressId);
+                      .HasForeignKey(at => at.TaskProgressId)
+                      .OnDelete(DeleteBehavior.Cascade);
             });
 
 

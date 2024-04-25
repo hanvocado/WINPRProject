@@ -8,8 +8,7 @@ namespace ThesisManagement.Repositories
         bool Add(ScheduleInfo scheduleInfo);
         bool Update(ScheduleInfo scheduleInfo);
         bool Delete(int id);
-        IEnumerable<ScheduleInfo> GetScheduleInfos(int thesisId);
-        int CountUpcomingSchedules(int thesisId);
+        IEnumerable<ScheduleInfo> Get(int thesisId);
     }
 
     public class ScheduleRepository : BaseRepository, IScheduleRepository
@@ -37,22 +36,11 @@ namespace ThesisManagement.Repositories
             return DbSave();
         }
 
-        public IEnumerable<ScheduleInfo> GetScheduleInfos(int thesisId)
+        public IEnumerable<ScheduleInfo> Get(int thesisId)
         {
-            var meetings = _context.ScheduleInfos.Include(th => th.Thesis)
-                                                  .Where(sch => sch.ThesisId == thesisId)
-                                                  .AsNoTracking()
-                                                  .ToList();
+            var meetings = _context.ScheduleInfos.Where(sch => sch.ThesisId == thesisId)
+                                                  .AsNoTracking().ToList();
             return meetings;
-        }
-
-        public int CountUpcomingSchedules(int thesisId)
-        {
-            var count = _context.ScheduleInfos.Include(th => th.Thesis)
-                                                  .Where(sch => sch.ThesisId == thesisId && sch.From > DateTime.Now)
-                                                  .AsNoTracking()
-                                                  .Count();
-            return count;
         }
     }
 }

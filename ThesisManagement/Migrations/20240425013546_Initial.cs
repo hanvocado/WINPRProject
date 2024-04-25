@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ThesisManagement.Migrations
 {
-    public partial class Inital : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -89,8 +89,7 @@ namespace ThesisManagement.Migrations
                         name: "FK_Theses_Topics_TopicId",
                         column: x => x.TopicId,
                         principalTable: "Topics",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -175,17 +174,23 @@ namespace ThesisManagement.Migrations
                     Start = table.Column<DateTime>(type: "datetime2", nullable: false),
                     End = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Progress = table.Column<int>(type: "int", nullable: false),
-                    HasNewUpdate = table.Column<bool>(type: "bit", nullable: false)
+                    HasNewUpdate = table.Column<bool>(type: "bit", nullable: false),
+                    ScheduleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tasks", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Tasks_ScheduleInfos_ScheduleId",
+                        column: x => x.ScheduleId,
+                        principalTable: "ScheduleInfos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_Tasks_Theses_ThesisId",
                         column: x => x.ThesisId,
                         principalTable: "Theses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -326,6 +331,12 @@ namespace ThesisManagement.Migrations
                 column: "TaskId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Tasks_ScheduleId",
+                table: "Tasks",
+                column: "ScheduleId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Tasks_ThesisId",
                 table: "Tasks",
                 column: "ThesisId");
@@ -353,9 +364,6 @@ namespace ThesisManagement.Migrations
                 name: "Feedbacks");
 
             migrationBuilder.DropTable(
-                name: "ScheduleInfos");
-
-            migrationBuilder.DropTable(
                 name: "TaskProgresses");
 
             migrationBuilder.DropTable(
@@ -363,6 +371,9 @@ namespace ThesisManagement.Migrations
 
             migrationBuilder.DropTable(
                 name: "Tasks");
+
+            migrationBuilder.DropTable(
+                name: "ScheduleInfos");
 
             migrationBuilder.DropTable(
                 name: "Theses");

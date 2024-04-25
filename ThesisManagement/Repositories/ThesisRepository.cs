@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.ObjectModel;
 using ThesisManagement.Models;
 using ThesisManagement.ViewModels;
 
@@ -11,9 +10,7 @@ namespace ThesisManagement.Repositories
         bool Add(Thesis thesis, IEnumerable<Student> students);
         bool Update(Thesis thesis);
         bool UpdateWaitingForResponse(int thesisId, int numberToAdd);
-        IEnumerable<Thesis> GetAll();
         IEnumerable<Thesis> Get(string userId, string topicStatus);
-        IEnumerable<Thesis> Get(int topicId, string topicStatus);
         IEnumerable<Student> GetMembers(int thesisId);
         Thesis? GetThesis(int taskId);
         Thesis? Get(int thesisId);
@@ -55,25 +52,11 @@ namespace ThesisManagement.Repositories
             return DbSave();
         }
 
-        public IEnumerable<Thesis> GetAll()
-        {
-            var theses = _context.Theses.Include(tp => tp.Topic).AsNoTracking().ToList();
-            return new ObservableCollection<Thesis>(theses);
-        }
-
         public IEnumerable<Thesis> Get(string userId, string topicStatus)
         {
             var list = _context.Theses.Include(th => th.Students).Include(th => th.Tasks).Include(th => th.Topic)
                                                 .ThenInclude(pr => pr.Professor)
                                                 .Where(th => th.Topic.ProfessorId == userId && th.TopicStatus == topicStatus).AsNoTracking().ToList();
-            return list;
-        }
-
-        public IEnumerable<Thesis> Get(int topicId, string topicStatus)
-        {
-            var list = _context.Theses.Include(st => st.Students).Include(tp => tp.Topic)
-                                    .ThenInclude(pr => pr.Professor)
-                                    .Where(th => th.TopicId == topicId && th.TopicStatus == topicStatus).AsNoTracking().ToList();
             return list;
         }
 

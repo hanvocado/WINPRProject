@@ -72,7 +72,7 @@
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Lịch" Margin="0 0 0 0" VerticalAlignment="Center" />
                                         <Border CornerRadius="20" Background="red" Margin="-1 -8 1 8" Width="13" Height="13">
-                                            <TextBlock Foreground="white" Text="{Binding CountUpcomingSchedules}" TextAlignment="Center" FontWeight="Bold" FontSize="10" />
+                                            <TextBlock Foreground="white" Text="{Binding CountUpcomingSchedules, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" FontWeight="Bold" FontSize="10" />
                                         </Border>
                                     </StackPanel>
                                 </TabItem.Header>

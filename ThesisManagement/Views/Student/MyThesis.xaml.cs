@@ -1,6 +1,5 @@
 ﻿using System.Windows.Controls;
 using ThesisManagement.ViewModels;
-using ThesisManagement.Views.Professor;
 
 namespace ThesisManagement.Views.Student
 {
@@ -16,15 +15,13 @@ namespace ThesisManagement.Views.Student
             var thesisVM = this.DataContext as MyThesisVM;
             if (thesisVM != null)
             {
+                var scheduleVM = new ScheduleVM { ThesisId = thesisVM.Thesis.Id };
                 tasksView.DataContext = new TasksVM
                 {
-                    ThesisId = thesisVM.Thesis.Id,
                     Thesis = thesisVM.Thesis,
+                    ScheduleViewModel = scheduleVM
                 };
-                notificationView.DataContext = new ScheduleVM
-                {
-                    ThesisId = thesisVM.Thesis.Id
-                };
+                notificationView.DataContext = scheduleVM;
                 professorEvaluationView.DataContext = thesisVM;
             }
 

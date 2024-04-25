@@ -351,6 +351,9 @@ namespace ThesisManagement.Migrations
                     b.Property<int>("Progress")
                         .HasColumnType("int");
 
+                    b.Property<int>("ScheduleId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Start")
                         .HasColumnType("datetime2");
 
@@ -361,6 +364,9 @@ namespace ThesisManagement.Migrations
                         .HasColumnType("real");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ScheduleId")
+                        .IsUnique();
 
                     b.HasIndex("ThesisId");
 
@@ -582,11 +588,19 @@ namespace ThesisManagement.Migrations
 
             modelBuilder.Entity("ThesisManagement.Models.Task", b =>
                 {
+                    b.HasOne("ThesisManagement.Models.ScheduleInfo", "Schedule")
+                        .WithOne("Task")
+                        .HasForeignKey("ThesisManagement.Models.Task", "ScheduleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ThesisManagement.Models.Thesis", "Thesis")
                         .WithMany("Tasks")
                         .HasForeignKey("ThesisId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("Schedule");
 
                     b.Navigation("Thesis");
                 });
@@ -595,7 +609,8 @@ namespace ThesisManagement.Migrations
                 {
                     b.HasOne("ThesisManagement.Models.Student", "Student")
                         .WithMany("TaskProgresses")
-                        .HasForeignKey("StudentId");
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("ThesisManagement.Models.Task", "Task")
                         .WithMany("TaskProgresses")
@@ -613,7 +628,7 @@ namespace ThesisManagement.Migrations
                     b.HasOne("ThesisManagement.Models.Topic", "Topic")
                         .WithMany("Theses")
                         .HasForeignKey("TopicId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Topic");
@@ -633,6 +648,11 @@ namespace ThesisManagement.Migrations
             modelBuilder.Entity("ThesisManagement.Models.Professor", b =>
                 {
                     b.Navigation("Topics");
+                });
+
+            modelBuilder.Entity("ThesisManagement.Models.ScheduleInfo", b =>
+                {
+                    b.Navigation("Task");
                 });
 
             modelBuilder.Entity("ThesisManagement.Models.Student", b =>

@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.ObjectModel;
 using ThesisManagement.Models;
 using Task = ThesisManagement.Models.Task;
 
@@ -10,12 +9,8 @@ namespace ThesisManagement.Repositories
         bool Add(Task task);
         bool Update(Task task);
         bool Delete(int id);
-        ObservableCollection<Task> GetAll();
+        IEnumerable<Task> GetAll(int thesisId);
         Task GetTask(int id);
-        IEnumerable<Task> Get(int thesisId);
-        IEnumerable<Task> GetPendingTasks(int thesisId);
-        IEnumerable<Task> GetDoneTasks(int thesisId);
-        IEnumerable<Task> GetOverdueTasks(int thesisId);
         IEnumerable<TasksPie> GetTasksPieData(int thesisId);
     }
 
@@ -43,53 +38,16 @@ namespace ThesisManagement.Repositories
             return DbSave();
         }
 
-        public ObservableCollection<Task> GetAll()
+        public IEnumerable<Task> GetAll(int thesisId)
         {
-            var tasks = _context.Tasks.Include(th => th.Thesis).AsNoTracking().ToList();
-            return new ObservableCollection<Task>(tasks);
-        }
-
-        public IEnumerable<Task> Get(int thesisId)
-        {
-            var tasks = _context.Tasks.Include(th => th.Thesis)
-                                      .Where(t => t.ThesisId == thesisId)
-                                      .AsNoTracking()
-                                      .ToList();
-            return tasks;
-        }
-
-        public IEnumerable<Task> GetPendingTasks(int thesisId)
-        {
-            var tasks = _context.Tasks.Include(th => th.Thesis)
-                                      .Where(t => t.ThesisId == thesisId && t.Progress < 100 && t.End >= DateTime.Now)
-                                      .AsNoTracking()
-                                      .ToList();
-            return tasks;
-        }
-
-        public IEnumerable<Task> GetDoneTasks(int thesisId)
-        {
-            var tasks = _context.Tasks.Include(th => th.Thesis)
-                                      .Where(t => t.ThesisId == thesisId && t.Progress == 100)
-                                      .AsNoTracking()
-                                      .ToList();
-            return tasks;
-        }
-
-        public IEnumerable<Task> GetOverdueTasks(int thesisId)
-        {
-            var tasks = _context.Tasks.Include(th => th.Thesis)
-                                      .Where(t => t.ThesisId == thesisId && t.Progress < 100 && t.End < DateTime.Now)
-                                      .AsNoTracking()
-                                      .ToList();
+            var tasks = _context.Tasks.Where(t => t.ThesisId == thesisId).AsNoTracking().ToList();
             return tasks;
         }
 
         public IEnumerable<TasksPie> GetTasksPieData(int thesisId)
         {
             var data = new List<TasksPie>();
-            var tasks = _context.Tasks.Include(th => th.Thesis)
-                                      .Where(t => t.ThesisId == thesisId)
+            var tasks = _context.Tasks.Where(t => t.ThesisId == thesisId)
                                       .AsNoTracking();
             int totalTasks = tasks.Count();
 
@@ -100,9 +58,9 @@ namespace ThesisManagement.Repositories
                 int countOverdue = tasks.Where(t => t.Progress < 100 && t.End < DateTime.Now).Count();
                 data = new List<TasksPie>
                 {
-                    new TasksPie { TaskStatus = "Đã hoàn thành", Count = countDone, Percentage = (countDone/totalTasks)*100 },
-                    new TasksPie { TaskStatus = "Đang thực hiện", Count = countPending, Percentage = (countPending/totalTasks)*100 },
-                    new TasksPie { TaskStatus = "Đã quá hạn", Count = countOverdue, Percentage = (countOverdue/totalTasks)*100 }
+                    new TasksPie { TaskStatus = "Đã hoàn thành", Count = countDone },
+                    new TasksPie { TaskStatus = "Đang thực hiện", Count = countPending },
+                    new TasksPie { TaskStatus = "Đã quá hạn", Count = countOverdue }
                 };
             }
             return data;
