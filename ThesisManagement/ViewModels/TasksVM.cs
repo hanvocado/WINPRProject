@@ -165,15 +165,18 @@ namespace ThesisManagement.ViewModels
 
         public void Reload()
         {
-            tasks = _taskRepo.GetAll(thesis.Id);
-            PendingTasks = tasks.Where(t => t.Progress < 100 && t.End >= DateTime.Now);
-            DoneTasks = tasks.Where(t => t.Progress == 100);
-            OverdueTasks = tasks.Where(t => t.Progress < 100 && t.End < DateTime.Now);
-            TotalTasks = tasks.Count();
-            thesis = _thesisRepo.Get(thesis.Id);
-            WaitingForResponse = thesis.WaitingForResponse;
-            ChartViewModel?.Reload();
-            ScheduleViewModel?.Load();
+            if (thesis != null)
+            {
+                tasks = _taskRepo.GetAll(thesis.Id);
+                PendingTasks = tasks.Where(t => t.Progress < 100 && t.End >= DateTime.Now);
+                DoneTasks = tasks.Where(t => t.Progress == 100);
+                OverdueTasks = tasks.Where(t => t.Progress < 100 && t.End < DateTime.Now);
+                TotalTasks = tasks.Count();
+                thesis = _thesisRepo.Get(thesis.Id);
+                WaitingForResponse = thesis?.WaitingForResponse ?? 0;
+                ChartViewModel?.Reload();
+                ScheduleViewModel?.Load();
+            }
         }
     }
 }

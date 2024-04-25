@@ -53,6 +53,6 @@
         public static string ContinueNotification = "Bạn có chắc chắn thực hiện hành động này?";
         public static string StudentCant = "Sinh viên không thể thực hiện hành động này!";
 
-        public static string UploadFileFailed = "Không thể mở tệp đã chọn. Vui lòng chọn tệp PDF!";
+        public static string PdfOnly = "Vui lòng upload file PDF!";
     }
 }

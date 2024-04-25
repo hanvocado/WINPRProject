@@ -53,7 +53,7 @@
                 </Border>
                 <Border Grid.Row="2" Padding="10 0"  CornerRadius="1" Background="White" Margin="-2 -8 2 8" >
                     <StackPanel>
-                        <TextBlock Text="Điểm số:" Style="{StaticResource label}" />
+                        <TextBlock Text="Điểm của bạn:" Style="{StaticResource label}" />
                         <TextBox Grid.Row="3"
                                  Height="40"
                                  IsReadOnly="True"

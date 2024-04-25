@@ -23,20 +23,12 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="2" >
-            <Grid >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="150"/>
-                    <RowDefinition Height="50"/>
-                </Grid.RowDefinitions>
-
-                <Border Grid.Row="1" Padding="10 0"  CornerRadius="1" Background="White" Margin="-2 -8 2 8" >
+            <StackPanel>
+                <Border Padding="10"  CornerRadius="1" Background="White" Margin="0 15 0 10" >
                     <StackPanel>
                         <TextBlock Text="Đánh giá" Style="{StaticResource label}" />
                         <TextBox Grid.Row="2"
                                  Height="140"
-                                 VerticalAlignment="Top"
                                  Style="{StaticResource TextBoxExtend}" 
                                  Text="{Binding Evaluation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                  AcceptsReturn="True"
@@ -44,7 +36,7 @@
                                  VerticalScrollBarVisibility="Auto"/>
                     </StackPanel>
                 </Border>
-                <Border Grid.Row="2" Padding="10 0"  CornerRadius="1" Background="White" Margin="-2 -8 2 8" >
+                <Border Padding="10 0"  CornerRadius="1" Background="White" Margin="-2 -8 2 8" >
                     <StackPanel>
                         <TextBlock Text="Điểm số:" Style="{StaticResource label}" />
                         <DataGrid AutoGenerateColumns="False" 
@@ -64,26 +56,24 @@
                         </DataGrid>
                     </StackPanel>
                 </Border>
-                <Grid Grid.Row="6" >
-                    <StackPanel Orientation="Horizontal"
-                                HorizontalAlignment="Center">
-                        <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
-                                                      HoverColor="{StaticResource secondaryBrush}"
-                                                      Content="Tải lên"
-                                                      Width="100"
-                                                      FontSize="14"
-                                                      Margin="5"
-                                                      Command="{Binding UploadFileCommand}"/>
-                        <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
-                                      HoverColor="{StaticResource secondaryBrush}"
-                                      Content="Lưu"
-                                      Width="100"
-                                      FontSize="14"
-                                      Margin="5"
-                                      Command="{Binding MakeEvaluationCommand}"/>
-                    </StackPanel>
-                </Grid>
-            </Grid>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                    <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
+                                                    HoverColor="{StaticResource secondaryBrush}"
+                                                    Content="Tải lên"
+                                                    Width="100"
+                                                    FontSize="14"
+                                                    Margin="5"
+                                                    Command="{Binding UploadFileCommand}"/>
+                    <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
+                                    HoverColor="{StaticResource secondaryBrush}"
+                                    Content="Lưu"
+                                    Width="100"
+                                    FontSize="14"
+                                    Margin="5"
+                                    Command="{Binding MakeEvaluationCommand}"/>
+                </StackPanel>
+            </StackPanel>
         </Grid>
 
         <Border Grid.Column="1" Background="#2755c0" Width="2" VerticalAlignment="Stretch"/>
