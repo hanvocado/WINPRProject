@@ -10,7 +10,9 @@
 
   <ItemGroup>
     <None Remove="Resources\Images\app-background.png" />
+    <None Remove="Resources\Images\default_avatar.jpg" />
     <None Remove="Resources\Images\UTE.png" />
+    <None Remove="Resources\Images\UTE_Background.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,7 +42,13 @@
 
   <ItemGroup>
     <Resource Include="Resources\Images\app-background.png" />
+    <Resource Include="Resources\Images\default_avatar.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\UTE.png" />
+    <Resource Include="Resources\Images\UTE_Background.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
