@@ -19,9 +19,12 @@ namespace ThesisManagement.ViewModels
             get { return thesis; }
             set
             {
-                thesis = value;
-                Reload();
-                OnPropertyChanged(nameof(Thesis));
+                if (value != null)
+                {
+                    thesis = value;
+                    OnPropertyChanged(nameof(Thesis));
+                    Reload();
+                }
             }
         }
 
