@@ -1,8 +1,5 @@
 ﻿using Microsoft.Win32;
-using Syncfusion.Pdf;
-using Syncfusion.Pdf.Parsing;
 using System.IO;
-using System.Windows;
 using System.Windows.Input;
 using ThesisManagement.CustomControls;
 using ThesisManagement.Helpers;
@@ -121,15 +118,14 @@ namespace ThesisManagement.ViewModels
             if (confirmEvaluate == true)
             {
                 thesis.Evaluation = evaluation;
-                bool successAddScore = true;
+                bool success = _thesisRepo.Update(thesis);
                 foreach (var student in Thesis.Students)
                 {
-                    successAddScore = _studentRepo.Update(student);
-                    if (!successAddScore)
+                    success = _studentRepo.Update(student);
+                    if (!success)
                         break;
                 }
-                var successUpdateThesis = _thesisRepo.Update(thesis);
-                ShowMessage(successAddScore && successUpdateThesis, Message.UpdateSuccess, Message.UpdateFailed);
+                ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
             }
         }
 
@@ -157,9 +153,8 @@ namespace ThesisManagement.ViewModels
                 }
                 else
                 {
-                    _dialogService.ShowDialog(Message.ErrorNotification, Message.UploadFileFailed);
-                } 
-                    
+                    _dialogService.ShowDialog(Message.ErrorNotification, Message.PdfOnly);
+                }
             }
         }
     }
