@@ -32,7 +32,7 @@
 
                 <customControls:ControlButton DefaultColor="{StaticResource primaryBrush}"
                                               HoverColor="{StaticResource secondaryBrush}"
-                                              Content="Upload"
+                                              Content="Tải lên"
                                               Width="150"
                                               FontSize="14"
                                               Command="{Binding UploadFileCommand}"/>
