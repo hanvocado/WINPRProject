@@ -46,7 +46,6 @@ namespace ThesisManagement.Repositories
     {
         None,
         Professor,
-        Student,
-        Admin
+        Student
     }
 }
