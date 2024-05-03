@@ -46,6 +46,7 @@
                 Padding="5" Margin="0 10 0 5"
                 Visibility="{Binding WaitingTheses.Count, Converter={StaticResource VisibilityConverter}}" >
             <ListBox ItemsSource="{Binding WaitingTheses}" 
+                     MouseLeftButtonUp="ListBoxItem_Click"
                      SelectedItem="{Binding SelectedThesis, Mode=OneWayToSource}"
                      x:Name="ThesisListView"
                      Background="{Binding RelativeSource={RelativeSource AncestorType=Border}, Path=Background}"

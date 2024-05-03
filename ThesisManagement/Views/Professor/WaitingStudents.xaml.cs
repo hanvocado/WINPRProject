@@ -4,18 +4,48 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using ThesisManagement.Models;
 using ThesisManagement.ViewModels;
+using ThesisManagement.Views.Shared;
 
 namespace ThesisManagement.Views.Professor
 {
-    /// <summary>
-    /// Interaction logic for WaitingStudents.xaml
-    /// </summary>
     public partial class WaitingStudents : UserControl
     {
         public WaitingStudents()
         {
             InitializeComponent();
             ThesisListView.ItemContainerGenerator.StatusChanged += OnListViewItemStatusChanged;
+        }
+
+        private void ListBoxItem_Click(object sender, RoutedEventArgs e)
+        {
+            var listBox = sender as ListBox;
+            var selectedItem = listBox?.SelectedItem;
+
+            if (selectedItem != null)
+            {
+                Thesis? thesis = selectedItem as Thesis;
+                if (thesis == null) return;
+
+                ProfilesView profilesView = new ProfilesView();
+                ReviewThesesVM dataContext = this.DataContext as ReviewThesesVM ?? new ReviewThesesVM();
+                if (thesis != null)
+                {
+                    dataContext.SelectedThesis = new Thesis
+                    {
+                        Id = thesis.Id,
+                        TopicId = thesis.TopicId,
+                        Students = thesis.Students,
+                        TopicStatus = thesis.TopicStatus,
+                        File = thesis.File,
+                        Score = thesis.Score
+                    };
+                }
+
+                profilesView.DataContext = this.DataContext;
+                profilesView.Owner = Application.Current.MainWindow;
+                profilesView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                profilesView.Show();
+            }
         }
 
         private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)

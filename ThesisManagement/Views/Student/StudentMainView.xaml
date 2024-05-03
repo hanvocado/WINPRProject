@@ -25,7 +25,7 @@
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type viewModel:ProfileVM}">
-            <shared:ProfilesView />
+            <shared:ProfileView />
         </DataTemplate>
     </Window.Resources>
     <Border CornerRadius="0">
