@@ -6,6 +6,7 @@ namespace ThesisManagement.Repositories
 {
     public interface IProfessorRepository
     {
+        bool Update(Professor professor);
         ObservableCollection<Professor> GetAll();
         Professor? Get(string id);
         bool HasNewUpdate(string professorId);
@@ -47,6 +48,12 @@ namespace ThesisManagement.Repositories
                 }
 
             return false;
+        }
+
+        public bool Update(Professor professor)
+        {
+            _context.Update(professor);
+            return DbSave();
         }
     }
 }
