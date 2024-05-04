@@ -31,7 +31,7 @@
                             CornerRadius="100" DockPanel.Dock="Bottom" HorizontalAlignment="Left">
                             <Ellipse>
                                 <Ellipse.Fill>
-                                    <ImageBrush ImageSource="\Resources\Images\default_avatar.jpg"/>
+                                    <ImageBrush ImageSource="{Binding User.Avatar}"/>
                                 </Ellipse.Fill>
                                 <Ellipse.InputBindings>
                                     <MouseBinding MouseAction="LeftClick" Command="{Binding UpdateAvatarCommand}" />

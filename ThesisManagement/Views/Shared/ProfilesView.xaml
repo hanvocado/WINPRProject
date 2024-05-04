@@ -8,7 +8,7 @@
         xmlns:hc="https://handyorg.github.io/handycontrol"
         mc:Ignorable="d"
         xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
-        Title="ProfilesView" Height="500" Width="700"
+        Title="ProfilesView" Height="400" Width="500"
         Style="{StaticResource formStyle}">
     
     <Window.DataContext>
@@ -26,7 +26,66 @@
                  Grid.Row="1">
             <hc:Carousel.ItemTemplate>
                 <DataTemplate>
-                    <local:ProfileView DataContext ="{Binding}"/>
+                    <Border CornerRadius="5" Margin="10" Height="Auto" BorderThickness="2" Background="#FFF7F7F7" BorderBrush="{StaticResource primaryBrush}" Width="350">
+                        <Grid >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="120"/>
+                                <RowDefinition Height="100"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Image Source="/Resources/Images/UTE_background.jpg" Stretch="UniformToFill" />
+
+                            <Border>
+                                <DockPanel>
+                                    <Border Width="80" Height="80" Padding="3" Background="White" Margin="30 0 20 -40"
+                                            CornerRadius="100" DockPanel.Dock="Bottom" HorizontalAlignment="Center">
+                                        <Ellipse>
+                                            <Ellipse.Resources>
+                                                <BitmapImage x:Key="DefaultAvatar" UriSource="/Resources/Images/default_avatar.jpg" />
+                                            </Ellipse.Resources>
+                                            <Ellipse.Fill>
+                                                <ImageBrush ImageSource="{Binding Avatar, TargetNullValue={StaticResource DefaultAvatar}}" />
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                    </Border>
+                                    <TextBlock/>
+                                </DockPanel>
+                            </Border>
+
+                            <TextBlock Text="{Binding Name}" 
+                                       Grid.Row="1"
+                                       FontSize="18" 
+                                       FontWeight="Bold" 
+                                       HorizontalAlignment="Center" 
+                                       VerticalAlignment="Bottom"
+                                       Margin="10"/>
+
+                            <TextBlock Text="{Binding Email}"
+                                       Grid.Row="2"
+                                       TextWrapping="Wrap" 
+                                       FontSize="14"
+                                       HorizontalAlignment="Center"
+                                       Margin="10"/>
+                            
+                            <TextBlock Text="{Binding Phone}"
+                                       Grid.Row="3"
+                                       TextWrapping="Wrap" 
+                                       FontSize="14"
+                                       HorizontalAlignment="Center"
+                                       Margin="10"/>
+
+                            <TextBlock Text="{Binding Birthday, StringFormat=dd/MM/yyyy}"
+                                       Grid.Row="4"
+                                       TextWrapping="Wrap" 
+                                       FontSize="14"
+                                       HorizontalAlignment="Center"
+                                       Margin="10"/>
+
+                        </Grid>
+                    </Border>
                 </DataTemplate>
             </hc:Carousel.ItemTemplate>
         </hc:Carousel>

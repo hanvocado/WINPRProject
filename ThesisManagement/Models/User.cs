@@ -27,6 +27,8 @@ namespace ThesisManagement.Models
 
         public DateTime? Birthday { get; set; }
 
+        public string? Avatar { get; set; }
+         
         [NotMapped]
         public string DisplayName
         {

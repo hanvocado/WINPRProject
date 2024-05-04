@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Win32;
+using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using ThesisManagement.CustomControls;
@@ -19,6 +15,8 @@ namespace ThesisManagement.ViewModels
         private readonly IProfessorRepository _professorRepo;
         private readonly IStudentRepository _studentRepo;
         private readonly DialogService _dialogService;
+        private string appDirectory;
+        private string defaultAvatar = "\\Resources\\Images\\default_avatar.jpg";
 
         private User user;
         public User User
@@ -40,7 +38,9 @@ namespace ThesisManagement.ViewModels
             _professorRepo = new ProfessorRepository();
             _studentRepo = new StudentRepository();
             _dialogService = new DialogService();
+            appDirectory = SessionInfo.BinDirectory;
             Load();
+
             ShowUpdateProfileCommand = new ViewModelCommand(ExecuteShowUpdateProfileCommand);
             UpdateProfileCommand = new ViewModelCommand(ExecuteUpdateProfileCommand);
             UpdateAvatarCommand = new ViewModelCommand(ExecuteUpdateAvatarCommand);
@@ -48,7 +48,37 @@ namespace ThesisManagement.ViewModels
 
         private void ExecuteUpdateAvatarCommand(object obj)
         {
-            throw new NotImplementedException();
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files (*.jpg;*.jpeg;*.png;*.gif;*.bmp)|*.jpg;*.jpeg;*.png;*.gif;*.bmp|All Files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string fileName = openFileDialog.FileName;
+                string[] imageExtensions = { ".jpg", ".jpeg", ".png", ".gif", ".bmp" };
+                string extension = Path.GetExtension(fileName);
+                if (imageExtensions.Contains(extension, StringComparer.OrdinalIgnoreCase))
+                {
+                    string userFileName = SessionInfo.UserId + Path.GetFileName(fileName);
+                    var destinationPath = Path.Combine(appDirectory, userFileName);
+                    File.Copy(fileName, destinationPath, true);
+
+                    User.Avatar = destinationPath;
+                    if (SessionInfo.Role == Role.Professor)
+                    {
+                        var success = _professorRepo.Update((Professor)user);
+                        ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
+                    }
+                    else
+                    {
+                        var success = _studentRepo.Update((Student)user);
+                        ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);
+                    }
+                }
+                else
+                {
+                    _dialogService.ShowDialog(Message.ErrorNotification, Message.ImageOnly);
+                }
+            }
+            Load();
         }
 
         private void ExecuteShowUpdateProfileCommand(object obj)
@@ -83,9 +113,11 @@ namespace ThesisManagement.ViewModels
         private void Load()
         {
             if (SessionInfo.Role == Role.Professor)
-                user = _professorRepo.Get(SessionInfo.UserId);
+                User = _professorRepo.Get(SessionInfo.UserId);
             else
-                user = _studentRepo.GetStudent(SessionInfo.UserId);
+                User = _studentRepo.GetStudent(SessionInfo.UserId);
+            if (string.IsNullOrEmpty(user.Avatar))
+                User.Avatar = defaultAvatar;
         }
     }
 }
