@@ -15,8 +15,8 @@
         <viewModels:TopicsVM/>
     </UserControl.DataContext>
 
-    <Border Style="{StaticResource borderCardStyle}" Background="{DynamicResource MaterialDesignPaper}" Margin="0 0 0 10">
-        <Grid Background="{DynamicResource MaterialDesignPaper}">
+    <Border Style="{StaticResource borderCardStyle}" Background="{StaticResource nearWhite}" Margin="0 0 0 10">
+        <Grid Background="{StaticResource nearWhite}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="62"/>
                 <RowDefinition/>
@@ -44,6 +44,18 @@
 
                         <ComboBox VerticalAlignment="Center"
                                   Padding="10 6"
+                                  Width="200"
+                                  ItemsSource="{Binding Professors}"
+                                  SelectedValuePath="Name"
+                                  DisplayMemberPath="Name"
+                                  SelectedValue="{Binding FilterProfessorName}"
+                                  md:HintAssist.Hint="Giảng viên"
+                                  md:TextFieldAssist.HasClearButton="True"
+                                  Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                        </ComboBox>
+
+                        <ComboBox VerticalAlignment="Center"
+                                  Padding="10 6"
                                   Margin="0,0,20,0"
                                   Width="180"
                                   ItemsSource="{Binding Technologies}"
@@ -51,18 +63,6 @@
                                   SelectedValuePath="Name"
                                   SelectedValue="{Binding FilterTechnology}"
                                   md:HintAssist.Hint="Công nghệ"
-                                  md:TextFieldAssist.HasClearButton="True"
-                                  Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                        </ComboBox>
-
-                        <ComboBox VerticalAlignment="Center"
-                                  Padding="10 6"
-                                  Width="200"
-                                  ItemsSource="{Binding Professors}"
-                                  SelectedValuePath="Name"
-                                  DisplayMemberPath="Name"
-                                  SelectedValue="{Binding FilterProfessorName}"
-                                  md:HintAssist.Hint="Giảng viên"
                                   md:TextFieldAssist.HasClearButton="True"
                                   Style="{StaticResource MaterialDesignOutlinedComboBox}">
                         </ComboBox>
