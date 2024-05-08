@@ -1,10 +1,10 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using ThesisManagement.CustomControls;
 using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.Repositories;
+using ThesisManagement.Views.Professor;
 
 namespace ThesisManagement.ViewModels
 {
@@ -15,13 +15,13 @@ namespace ThesisManagement.ViewModels
         private readonly DialogService _dialogService;
 
         private Thesis selectedThesis;
-        public Thesis SelectedThesis 
-        { 
-            get => selectedThesis; 
-            set 
-            { 
-                selectedThesis = value; 
-                OnPropertyChanged(nameof(SelectedThesis)); 
+        public Thesis SelectedThesis
+        {
+            get => selectedThesis;
+            set
+            {
+                selectedThesis = value;
+                OnPropertyChanged(nameof(SelectedThesis));
             }
         }
 
@@ -57,7 +57,7 @@ namespace ThesisManagement.ViewModels
         public ICommand ApproveCommand { get; set; }
         public ICommand UndoCommand { get; set; }
         public ICommand RejectCommand { get; set; }
-        public ICommand ShowThesisCommand { get; set; }
+        public ICommand ShowTopicCommand { get; set; }
 
         public ReviewThesesVM()
         {
@@ -70,6 +70,41 @@ namespace ThesisManagement.ViewModels
             ApproveCommand = new ViewModelCommand(ExecuteApproveCommand);
             UndoCommand = new ViewModelCommand(ExecuteUndoCommand);
             RejectCommand = new ViewModelCommand(ExecuteRejectCommand);
+            ShowTopicCommand = new ViewModelCommand(ExecuteShowTopicCommand);
+        }
+
+        private void ExecuteShowTopicCommand(object obj)
+        {
+            int thesisId = (int)obj;
+            Topic? topic = selectedThesis?.Topic ?? _thesisRepo.GetTopic(thesisId);
+            if (topic != null)
+            {
+                TopicView topicView = new();
+                var topicTech = new List<Technology>();
+                foreach (var str in topic.Technology!.Split("-"))
+                {
+                    topicTech.Add(new Technology(str, true));
+                }
+
+                topicView.DataContext = new TopicsVM
+                {
+                    Id = topic.Id,
+                    Name = topic.Name,
+                    ProfessorId = topic.ProfessorId,
+                    StudentId = topic.StudentId,
+                    Category = topic.Category,
+                    Technology = topic.Technology,
+                    Description = topic.Description,
+                    Requirement = topic.Requirement,
+                    StudentQuantity = topic.StudentQuantity,
+                    Function = topic.Function,
+                    SelectedTechnologies = topicTech
+                };
+
+                topicView.Owner = Application.Current.MainWindow;
+                topicView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                topicView.Show();
+            }
         }
 
         private void ExecuteApproveCommand(object obj)

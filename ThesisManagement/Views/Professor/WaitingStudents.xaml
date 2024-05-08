@@ -86,9 +86,10 @@
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                                 <customControls:ControlButton DefaultColor="{StaticResource success}"
                                                                           Margin="0 10 0 0"
-                                                           HoverColor="{StaticResource successHover}"
-                                                           Style="{StaticResource lvBtn}"
-                                                           Command="{Binding DataContext.ApproveCommand, RelativeSource={RelativeSource AncestorType=ListBox}}">
+                                                                           HoverColor="{StaticResource successHover}"
+                                                                           Style="{StaticResource lvBtn}"
+                                                                              CommandParameter="{Binding Id}"
+                                                                           Command="{Binding DataContext.ApproveCommand, RelativeSource={RelativeSource AncestorType=ListBox}}">
                                                     <customControls:ControlButton.Content>
                                                         <fa:IconImage Icon="Check" Style="{StaticResource btnIcon}" />
                                                     </customControls:ControlButton.Content>
@@ -98,9 +99,21 @@
                                                                           Margin="10 10 0 0"
                                                            HoverColor="{StaticResource dangerHover}"
                                                            Style="{StaticResource lvBtn}"
+                                                                              CommandParameter="{Binding Id}"
                                                            Command="{Binding DataContext.RejectCommand, RelativeSource={RelativeSource AncestorType=ListBox}}">
                                                     <customControls:ControlButton.Content>
                                                         <fa:IconImage Icon="X" Style="{StaticResource btnIcon}" />
+                                                    </customControls:ControlButton.Content>
+                                                </customControls:ControlButton>    
+                                                
+                                                <customControls:ControlButton DefaultColor="Gray"
+                                                                              Margin="10 10 0 0"
+                                                                              HoverColor="DarkGray"
+                                                                              Style="{StaticResource lvBtn}"
+                                                                              CommandParameter="{Binding Id}"
+                                                                              Command="{Binding DataContext.ShowTopicCommand, RelativeSource={RelativeSource AncestorType=ListBox}}">
+                                                    <customControls:ControlButton.Content>
+                                                        <fa:IconImage Icon="Info" Style="{StaticResource btnIcon}" />
                                                     </customControls:ControlButton.Content>
                                                 </customControls:ControlButton>                                                
                                             </StackPanel>

@@ -14,6 +14,7 @@ namespace ThesisManagement.Repositories
         IEnumerable<Student> GetMembers(int thesisId);
         Thesis? GetThesis(int taskId);
         Thesis? Get(int thesisId);
+        Topic? GetTopic(int thesisId);
         IEnumerable<ThesesChartData> CompareThesesData(string professorId);
     }
 
@@ -106,6 +107,12 @@ namespace ThesisManagement.Repositories
                 data.Add(new ThesesChartData(members, totalTaskTime, workedTime));
             }
             return data;
+        }
+
+        public Topic? GetTopic(int thesisId)
+        {
+            var thesis = _context.Theses.Include(t => t.Topic).FirstOrDefault(t => t.Id == thesisId);
+            return thesis?.Topic;
         }
     }
 }

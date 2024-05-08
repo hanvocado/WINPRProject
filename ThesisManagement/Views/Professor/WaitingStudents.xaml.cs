@@ -24,27 +24,29 @@ namespace ThesisManagement.Views.Professor
             if (selectedItem != null)
             {
                 Thesis? thesis = selectedItem as Thesis;
-                if (thesis == null) return;
-
-                ProfilesView profilesView = new ProfilesView();
-                ReviewThesesVM dataContext = this.DataContext as ReviewThesesVM ?? new ReviewThesesVM();
                 if (thesis != null)
                 {
-                    dataContext.SelectedThesis = new Thesis
+                    ProfilesView profilesView = new ProfilesView();
+                    ReviewThesesVM dataContext = this.DataContext as ReviewThesesVM ?? new ReviewThesesVM();
+                    if (thesis != null)
                     {
-                        Id = thesis.Id,
-                        TopicId = thesis.TopicId,
-                        Students = thesis.Students,
-                        TopicStatus = thesis.TopicStatus,
-                        File = thesis.File,
-                        Score = thesis.Score
-                    };
+                        dataContext.SelectedThesis = new Thesis
+                        {
+                            Id = thesis.Id,
+                            TopicId = thesis.TopicId,
+                            Students = thesis.Students,
+                            TopicStatus = thesis.TopicStatus,
+                            File = thesis.File,
+                            Score = thesis.Score
+                        };
+                    }
+
+                    profilesView.DataContext = this.DataContext;
+                    profilesView.Owner = Application.Current.MainWindow;
+                    profilesView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                    profilesView.Show();
                 }
 
-                profilesView.DataContext = this.DataContext;
-                profilesView.Owner = Application.Current.MainWindow;
-                profilesView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-                profilesView.Show();
             }
         }
 
