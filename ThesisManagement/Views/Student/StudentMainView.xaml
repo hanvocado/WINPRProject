@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:ThesisManagement.Views.Student"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:viewModel="clr-namespace:ThesisManagement.ViewModels"
+        xmlns:shared="clr-namespace:ThesisManagement.Views.Shared"
         xmlns:customControl="clr-namespace:ThesisManagement.CustomControls"
         mc:Ignorable="d"
         Title="StudentMainView" Height="550" Width="900"
@@ -21,6 +22,10 @@
 
         <DataTemplate DataType="{x:Type viewModel:MyThesisVM}">
             <local:MyThesis/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:ProfileVM}">
+            <shared:ProfileView />
         </DataTemplate>
     </Window.Resources>
     <Border CornerRadius="0">

@@ -7,6 +7,7 @@
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:viewModel="clr-namespace:ThesisManagement.ViewModels"
         xmlns:customControl="clr-namespace:ThesisManagement.CustomControls"
+        xmlns:shared="clr-namespace:ThesisManagement.Views.Shared"
         xmlns:sf="http://schemas.syncfusion.com/wpf"
         mc:Ignorable="d"
         Title="ProfessorMainView" Height="550" Width="900"
@@ -30,8 +31,8 @@
             <local:ThesesView />
         </DataTemplate>
 
-        <DataTemplate DataType="{x:Type viewModel:ProfessorProfileVM}">
-            <local:ProfilesView />
+        <DataTemplate DataType="{x:Type viewModel:ProfileVM}">
+            <shared:ProfileView />
         </DataTemplate>
     </Window.Resources>
 

@@ -36,12 +36,13 @@
                             <sf:ChartLegend />
                         </sf:SfChart.Legend>
                         <sf:DoughnutSeries XBindingPath="TaskStatus"
-                                            DoughnutCoefficient="0.85"
-                                            Label="TaskStatus"
-                                            ItemsSource="{Binding TasksPieData, UpdateSourceTrigger=PropertyChanged}"
-                                            YBindingPath="Count">
+                                           DoughnutCoefficient="0.85"
+                                           Label="TaskStatus"
+                                           ShowTooltip="False"
+                                           ItemsSource="{Binding TasksPieData, UpdateSourceTrigger=PropertyChanged}"
+                                           YBindingPath="Count">
                             <sf:DoughnutSeries.AdornmentsInfo>
-                                <sf:ChartAdornmentInfo ShowLabel="True" SegmentLabelContent="Percentage" LabelPosition="Inner"  />
+                                <sf:ChartAdornmentInfo ShowLabel="True" SegmentLabelContent="Percentage" LabelPosition="Default"  />
                             </sf:DoughnutSeries.AdornmentsInfo>
                         </sf:DoughnutSeries>
                     </sf:SfChart>

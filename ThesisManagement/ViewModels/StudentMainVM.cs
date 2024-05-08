@@ -44,7 +44,7 @@ namespace ThesisManagement.ViewModels
 
         private void ExcututeShowStudentProfileView(object obj)
         {
-            CurrentChildView = new ProfessorProfileVM();
+            CurrentChildView = new ProfileVM();
         }
 
         private void ExecuteShowThesisView(object? obj)

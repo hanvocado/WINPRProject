@@ -10,15 +10,14 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ThesisManagement.Views.Professor
+namespace ThesisManagement.Views.Shared
 {
     /// <summary>
-    /// Interaction logic for Profile.xaml
+    /// Interaction logic for ProfilesView.xaml
     /// </summary>
-    public partial class ProfilesView : UserControl
+    public partial class ProfilesView : Window
     {
         public ProfilesView()
         {

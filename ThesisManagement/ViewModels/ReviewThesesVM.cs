@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 using ThesisManagement.CustomControls;
 using ThesisManagement.Helpers;
@@ -14,7 +15,15 @@ namespace ThesisManagement.ViewModels
         private readonly DialogService _dialogService;
 
         private Thesis selectedThesis;
-        public Thesis SelectedThesis { get => selectedThesis; set { selectedThesis = value; OnPropertyChanged(nameof(SelectedThesis)); } }
+        public Thesis SelectedThesis 
+        { 
+            get => selectedThesis; 
+            set 
+            { 
+                selectedThesis = value; 
+                OnPropertyChanged(nameof(SelectedThesis)); 
+            }
+        }
 
         private IEnumerable<Thesis> waitingTheses;
         public IEnumerable<Thesis> WaitingTheses { get => waitingTheses; set { waitingTheses = value; OnPropertyChanged(nameof(WaitingTheses)); } }
@@ -56,6 +65,7 @@ namespace ThesisManagement.ViewModels
             _dialogService = new DialogService();
             currentUserId = SessionInfo.UserId;
             selectedThesis = new Thesis();
+
             WaitingTheses = _thesisRepo.Get(currentUserId, Variable.StatusTopic.Waiting);
             ApproveCommand = new ViewModelCommand(ExecuteApproveCommand);
             UndoCommand = new ViewModelCommand(ExecuteUndoCommand);
