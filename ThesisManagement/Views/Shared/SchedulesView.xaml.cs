@@ -66,15 +66,16 @@ namespace ThesisManagement.Views.Shared
                 var appointment = e.Appointment as ScheduleAppointment;
                 if (appointment != null)
                 {
-                    ScheduleInfo schedule = new ScheduleInfo
+                    var scheduleVM = new ScheduleVM
                     {
+                        Id = (int)appointment.Id,
                         From = appointment.StartTime,
                         To = appointment.EndTime,
                         EventName = appointment.Subject,
                         Location = appointment.Location,
                         Note = appointment.Notes
                     };
-                    var scheduleView = new ScheduleDetailsView { DataContext = schedule };
+                    var scheduleView = new ScheduleDetailsView { DataContext = scheduleVM };
                     scheduleView.Owner = Window.GetWindow(this);
                     scheduleView.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                     scheduleView.Show();

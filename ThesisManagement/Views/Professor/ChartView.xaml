@@ -41,7 +41,7 @@
                                             ItemsSource="{Binding TasksPieData, UpdateSourceTrigger=PropertyChanged}"
                                             YBindingPath="Count">
                             <sf:DoughnutSeries.AdornmentsInfo>
-                                <sf:ChartAdornmentInfo ShowLabel="True" SegmentLabelContent="Percentage" />
+                                <sf:ChartAdornmentInfo ShowLabel="True" SegmentLabelContent="Percentage" LabelPosition="Inner"  />
                             </sf:DoughnutSeries.AdornmentsInfo>
                         </sf:DoughnutSeries>
                     </sf:SfChart>

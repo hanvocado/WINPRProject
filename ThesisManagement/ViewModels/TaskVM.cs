@@ -175,7 +175,9 @@ namespace ThesisManagement.ViewModels
                         From = end.Date < start ? start : end.Date,
                         To = end,
                         EventName = name,
+                        Note = selectedTask?.Description ?? null,
                         ThesisId = thesisId,
+                        Location = "Trang nhiệm vụ",
                         Thesis = null
                     };
 
@@ -184,7 +186,7 @@ namespace ThesisManagement.ViewModels
                         var success = _scheduleRepo.Add(schedule);
                         if (success)
                         {
-                            selectedTask.ScheduleId = schedule.Id;
+                            selectedTask!.ScheduleId = schedule.Id;
                             success = _taskRepo.Add(selectedTask);
                         }
                         ShowMessage(success, Message.AddSuccess, Message.AddFailed);
@@ -196,7 +198,7 @@ namespace ThesisManagement.ViewModels
                             ShowMessage(false, null, Message.StudentCant);
                             return;
                         }
-                        var success = _taskRepo.Update(selectedTask);
+                        var success = _taskRepo.Update(selectedTask!);
                         if (success)
                             success = _scheduleRepo.Update(schedule);
                         ShowMessage(success, Message.UpdateSuccess, Message.UpdateFailed);

@@ -5,7 +5,6 @@ namespace ThesisManagement.ViewModels
 {
     public class ChartVM : ViewModelBase
     {
-        private readonly IStudentRepository _studentRepo;
         private readonly IThesisRepository _thesisRepo;
         private readonly ITaskRepository _taskRepo;
 

@@ -168,7 +168,7 @@ namespace ThesisManagement.ViewModels
             if (thesis != null)
             {
                 tasks = _taskRepo.GetAll(thesis.Id);
-                PendingTasks = tasks.Where(t => t.Progress < 100 && t.End >= DateTime.Now);
+                PendingTasks = tasks.Where(t => t.Progress < 100 && t.End >= DateTime.Now).OrderByDescending(t => t.HasNewUpdate);
                 DoneTasks = tasks.Where(t => t.Progress == 100);
                 OverdueTasks = tasks.Where(t => t.Progress < 100 && t.End < DateTime.Now);
                 TotalTasks = tasks.Count();

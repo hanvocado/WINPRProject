@@ -102,7 +102,7 @@ namespace ThesisManagement.Repositories
             {
                 totalTaskTime = thesis.Tasks?.Sum(t => t.WorkingTime) ?? 0;
                 members = String.Join('\n', thesis.Students!.Select(s => s.Name));
-                workedTime = totalTaskTime == 0 ? 0 : thesis.Tasks?.Sum(t => (float)(t.Progress / 100) * t.WorkingTime) ?? 0;
+                workedTime = totalTaskTime == 0 ? 0 : thesis.Students!.Sum(st => st.WorkingTime);
                 data.Add(new ThesesChartData(members, totalTaskTime, workedTime));
             }
             return data;

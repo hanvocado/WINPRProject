@@ -17,7 +17,7 @@
         <viewModels:ConfirmationDialogVM/>
     </Window.DataContext>
 
-    <Border CornerRadius="5" Padding="0" Height="Auto" BorderThickness="2" Background="#FFF7F7F7" BorderBrush="{StaticResource primaryBrush}">
+    <Border CornerRadius="5" Padding="0" Height="Auto" BorderThickness="2" Background="#FFF7F7F7" BorderBrush="{StaticResource info}">
         <Grid >
             <Grid.RowDefinitions>
                 <RowDefinition Height="120"/>

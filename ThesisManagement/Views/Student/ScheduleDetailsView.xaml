@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ThesisManagement.Views.Student"
         xmlns:viewModels="clr-namespace:ThesisManagement.ViewModels"
-        xmlns:models="clr-namespace:ThesisManagement.Models"
         xmlns:sf="http://schemas.syncfusion.com/wpf"
         xmlns:customControls="clr-namespace:ThesisManagement.CustomControls"
         mc:Ignorable="d"
@@ -13,7 +12,7 @@
         Style="{StaticResource formStyle}"
         Title="Schedule" Height="420" Width="600">
     <Window.DataContext>
-        <models:ScheduleInfo />
+        <viewModels:ScheduleVM />
     </Window.DataContext>
     <Border>
         <Grid >
@@ -30,7 +29,7 @@
             <customControls:PopupControlBar />
             <Grid Grid.Row="1">
                 <TextBlock 
-                Text="Meeting" 
+                Text="Lịch" 
                 Style="{StaticResource title}" 
                 FontSize="20"
                 TextWrapping="Wrap"
@@ -44,7 +43,7 @@
                     <TextBox Grid.Row="2"
                          Height="35"
                          IsReadOnly="True"
-                         Text="{Binding EventName}"/>
+                         Text="{Binding EventName, Mode=OneWay}"/>
                 </StackPanel>
             </Border>
 
@@ -52,12 +51,12 @@
                 <StackPanel>
                     <TextBlock Text="Mô tả" Style="{StaticResource label}" />
                     <TextBox Grid.Row="3"
-                         IsReadOnly="True"
-                         Height="90"
-                         Text="{Binding Note}" 
-                         AcceptsReturn="True"
-                         TextWrapping="Wrap"
-                         VerticalScrollBarVisibility="Auto"/>
+                             IsReadOnly="True"
+                             Height="90"
+                             Text="{Binding Note, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                             AcceptsReturn="True"
+                             TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"/>
                 </StackPanel>
             </Border>
             <Grid Grid.Row="4">
@@ -71,7 +70,7 @@
                                 Style="{StaticResource label}" />
                         <TextBox Height="35"
                                  IsReadOnly="True"
-                                 Text="{Binding DisplayFrom, Mode=OneWay}"/>
+                                 Text="{Binding From, Mode=OneWay, StringFormat=hh:mm dd/MM/yyyy}"/>
 
                     </StackPanel>
                 </Border>
@@ -82,7 +81,7 @@
                                 Style="{StaticResource label}" />
                         <TextBox Height="35"
                                  IsReadOnly="True"
-                                 Text="{Binding DisplayTo, Mode=OneWay}"/>
+                                 Text="{Binding To, Mode=OneWay, StringFormat=hh:mm dd/MM/yyyy}"/>
                     </StackPanel>
                 </Border>
             </Grid>
@@ -93,7 +92,7 @@
                     <TextBox Grid.Row="2"
                              Height="35"
                              IsReadOnly="True"
-                             Text="{Binding Location, UpdateSourceTrigger=PropertyChanged}"/>
+                             Text="{Binding Location, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
             </Border>
         </Grid>

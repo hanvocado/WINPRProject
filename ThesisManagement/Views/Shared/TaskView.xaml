@@ -59,7 +59,7 @@
 
             <Border Grid.Row="4" Padding="30 0" >
                 <StackPanel FlowDirection="LeftToRight">
-                    <TextBlock Text="Thời gian cần thiết dự kiến" Style="{StaticResource label}" />
+                    <TextBlock Text="Thời gian cần thiết ước tính" Style="{StaticResource label}" />
                     <StackPanel Orientation="Horizontal" 
                                 FlowDirection="LeftToRight" 
                                 Height="35">
