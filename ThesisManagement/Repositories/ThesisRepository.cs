@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ThesisManagement.Helpers;
 using ThesisManagement.Models;
 using ThesisManagement.ViewModels;
 
@@ -96,7 +97,7 @@ namespace ThesisManagement.Repositories
         public IEnumerable<ThesesChartData> CompareThesesData(string professorId)
         {
             var data = new List<ThesesChartData>();
-            var theses = _context.Theses.Include(th => th.Tasks).Include(th => th.Students).Where(th => th.Topic.ProfessorId == professorId);
+            var theses = _context.Theses.Include(th => th.Tasks).Include(th => th.Students).Where(th => th.Topic.ProfessorId == professorId && th.TopicStatus == Variable.StatusTopic.Approved);
             float workedTime, totalTaskTime;
             string members;
             foreach (var thesis in theses)

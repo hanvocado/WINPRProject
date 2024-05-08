@@ -104,7 +104,7 @@
                                      XBindingPath="Students" 
                                      YBindingPath="WorkedTime">
                         <sf:ColumnSeries.AdornmentsInfo>
-                            <sf:ChartAdornmentInfo LabelPosition="Inner"
+                            <sf:ChartAdornmentInfo LabelPosition="Outer"
                                                    ShowLabel="True" />
                         </sf:ColumnSeries.AdornmentsInfo>
                     </sf:ColumnSeries>
