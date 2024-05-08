@@ -32,18 +32,18 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="60" />
-                        <RowDefinition Height="70" />
-                        <RowDefinition Height="70"/>
-                        <RowDefinition Height="70"/>
-                        <RowDefinition Height="125"/>
-                        <RowDefinition Height="125"/>
-                        <RowDefinition Height="125"/>
-                        <RowDefinition Height="75"/>
-                        <RowDefinition Height="50" />
+                        <RowDefinition Height="65" />
+                        <RowDefinition Height="65"/>
+                        <RowDefinition Height="65"/>
+                        <RowDefinition Height="115"/>
+                        <RowDefinition Height="115"/>
+                        <RowDefinition Height="115"/>
+                        <RowDefinition Height="65"/>
+                        <RowDefinition />
                     </Grid.RowDefinitions>
                     
                     <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Top">
-                        <Image Source="/Resources/Images/UTE.png" Height="50" Width="50" Margin="20 0 20 0" />
+                        <Image Source="/Resources/Images/UTE.png" Height="50" Width="50" Margin="30 0 20 0" />
                         <TextBlock Style="{StaticResource title}" Width="500" >
                         <Run Text="Đề tài: "/>
                         <Run Text="{Binding SelectedTopic.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -53,11 +53,12 @@
                     <Border Grid.Row="1" Padding="30 0">
                         <StackPanel>
                             <TextBlock Text="Giảng viên" Style="{StaticResource label}" />
-                            <TextBox Grid.Row="0"
-                                Height="35"
-                                    IsReadOnly="True"
-                                VerticalAlignment="Top"
-                                Text="{Binding SelectedTopic.Professor.Name}" />
+                            <Border Background="White" Style="{StaticResource borderCardStyle}">
+                                <TextBlock Text="{Binding SelectedTopic.Professor.Name}"
+                                           Height="35"
+                                           Padding="5 10"
+                                           TextWrapping="Wrap"/>
+                            </Border>
                         </StackPanel>
                     </Border>
 
@@ -70,27 +71,26 @@
                         <Border Grid.Column="0" Padding="30 0 10 0">
                             <StackPanel>
                                 <TextBlock Text="Thể loại"
-                                Style="{StaticResource label}" />
-                                <ComboBox Grid.Row="1"
-                                        IsHitTestVisible="False"
-                                    IsEditable="True"
-                                    IsReadOnly="True"
-                                    VerticalAlignment="Top"
-                                    Height="35"
-                                    ItemsSource="{Binding Categories}"
-                                    SelectedValue="{Binding SelectedTopic.Category}" 
-                                    Style="{StaticResource ComboBoxExtend}"/>
+                                           Style="{StaticResource label}" />
+                                <Border Background="White" Style="{StaticResource borderCardStyle}">
+                                    <TextBlock Text="{Binding SelectedTopic.Category, UpdateSourceTrigger=PropertyChanged}"
+                                               Padding="5 10"
+                                               Height="35"
+                                               TextWrapping="Wrap"/>
+                                </Border>
                             </StackPanel>
                         </Border>
 
                         <Border Grid.Column="1" Padding="10 0 30 0">
                             <StackPanel>
                                 <TextBlock Text="Số sinh viên tối đa" Style="{StaticResource label}" />
-                                <TextBox IsReadOnly="True"
-                                    Height="35"
-                                    Text="{Binding SelectedTopic.StudentQuantity}"
-                                    VerticalAlignment="Top"
-                                    Style="{StaticResource TextBoxExtend}" />
+
+                                <Border Background="White" Style="{StaticResource borderCardStyle}">
+                                    <TextBlock Text="{Binding SelectedTopic.StudentQuantity, UpdateSourceTrigger=PropertyChanged}"
+                                               Height="35"
+                                               Padding="5 10"
+                                               TextWrapping="Wrap"/>
+                                </Border>
                             </StackPanel>
                         </Border>
                     </Grid>
@@ -98,48 +98,54 @@
                     <Border Grid.Row = "3" Padding="30 0">
                         <StackPanel>
                             <TextBlock Text="Công nghệ" Style="{StaticResource label}" />
-                            <TextBox Text="{Binding SelectedTopic.Technology}"
-                                     IsReadOnly="True"
-                                     Height="35" />
+                            <Border Background="White" Style="{StaticResource borderCardStyle}">
+                                <TextBlock Text="{Binding SelectedTopic.Technology, UpdateSourceTrigger=PropertyChanged}"
+                                           Height="35"
+                                           Padding="5 10"
+                                           TextWrapping="Wrap"/>
+                            </Border>
                         </StackPanel>
                     </Border>
 
                     <Border Grid.Row="4" Padding="30 0">
                         <StackPanel>
                             <TextBlock Text="Mô tả" Style="{StaticResource label}" />
-                            <TextBox  VerticalAlignment="Top"
-                                    IsReadOnly="True"
-                                    Text="{Binding SelectedTopic.Description,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                    Height="85"
-                                    AcceptsReturn="True"
-                                    TextWrapping="Wrap"
-                                    VerticalScrollBarVisibility="Auto" />
+                            <Border Background="White" Style="{StaticResource borderCardStyle}">
+                                <ScrollViewer>
+                                    <TextBlock Text="{Binding SelectedTopic.Description, UpdateSourceTrigger=PropertyChanged}"
+                                               Height="85"
+                                               Padding="5 10"
+                                               TextWrapping="Wrap"/>
+                                </ScrollViewer>
+                            </Border>
                         </StackPanel>
                     </Border>
 
                     <Border Grid.Row="5" Padding="30 0">
                         <StackPanel>
                             <TextBlock Text="Yêu cầu" Style="{StaticResource label}" />
-                            <TextBox  IsReadOnly="True"
-                                    VerticalAlignment="Top"
-                                    Text="{Binding SelectedTopic.Requirement,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                    Height="85"
-                                    AcceptsReturn="True"
-                                    TextWrapping="Wrap"
-                                    VerticalScrollBarVisibility="Auto" />
+                            <Border Background="White" Style="{StaticResource borderCardStyle}">
+                                <ScrollViewer>
+                                    <TextBlock Text="{Binding SelectedTopic.Requirement, UpdateSourceTrigger=PropertyChanged}"
+                                               Height="85"
+                                               Padding="5 10"
+                                               TextWrapping="Wrap"/>
+                                </ScrollViewer>
+                            </Border>
                         </StackPanel>
                     </Border>
 
                     <Border Grid.Row="6" Padding="30 0">
                         <StackPanel>
                             <TextBlock Text="Chức năng" Style="{StaticResource label}" />
-                            <TextBox  IsReadOnly="True"
-                                    VerticalAlignment="Top"
-                                    Text="{Binding SelectedTopic.Function,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                    Height="85"
-                                    AcceptsReturn="True"
-                                    TextWrapping="Wrap"
-                                    VerticalScrollBarVisibility="Auto" />
+                            <Border Background="White" Style="{StaticResource borderCardStyle}">
+                                <ScrollViewer>
+                                    <TextBlock Text="{Binding SelectedTopic.Function, UpdateSourceTrigger=PropertyChanged}"
+                                               Height="85"
+                                               Padding="5 10"
+                                               TextWrapping="Wrap"/>
+                                </ScrollViewer>
+                            </Border>
                         </StackPanel>
                     </Border>
 
@@ -147,13 +153,17 @@
                         <StackPanel>
                             <TextBlock Text="Thành viên" Style="{StaticResource label}" />
                             <StackPanel Orientation="Horizontal">
-                                <TextBox Width="480" Margin="0 0 10 0" 
-                                        IsReadOnly="True"
-                                        Text="{Binding SelectedStudentNames, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <Border Background="White"  Margin="0 0 10 0"
+                                        Style="{StaticResource borderCardStyle}">
+                                    <TextBlock Width="480"
+                                               Height="35"
+                                               Padding="5 10"
+                                               Text="{Binding SelectedStudentNames, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Border>
                                 <customControls:ControlButton DefaultColor="{StaticResource success}"
-                                    HoverColor="{StaticResource successHover}"
-                                    Command="{Binding ChooseMembersCommand}"
-                                    Width="40">
+                                                                HoverColor="{StaticResource successHover}"
+                                                                Command="{Binding ChooseMembersCommand}"
+                                                                Width="40">
                                     <customControls:ControlButton.Content>
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="+ " />
