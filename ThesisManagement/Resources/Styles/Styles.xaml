@@ -12,7 +12,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Window" >
-                    <Border x:Name="border" Background="White" BorderThickness="0">
+                    <Border x:Name="border" Background="White" BorderBrush="{StaticResource primaryBrush}" 
+                            BorderThickness="2">
                         <ContentPresenter />
                     </Border>
                     <ControlTemplate.Triggers>
