@@ -12,7 +12,7 @@ using ThesisManagement.Repositories.EF;
 namespace ThesisManagement.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240510012713_UpdateCategory")]
+    [Migration("20240510014838_UpdateCategory")]
     partial class UpdateCategory
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -272,7 +272,7 @@ namespace ThesisManagement.Migrations
                             Birthday = new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "f@student.com",
                             Name = "Trần Văn Nam",
-                            Password = "f12346",
+                            Password = "f12345",
                             Phone = "987-654-3215",
                             WorkingTime = 0f
                         },
@@ -282,7 +282,17 @@ namespace ThesisManagement.Migrations
                             Birthday = new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "g@student.com",
                             Name = "Nguyễn Ngọc Nữ",
-                            Password = "g12346",
+                            Password = "g12345",
+                            Phone = "987-654-3220",
+                            WorkingTime = 0f
+                        },
+                        new
+                        {
+                            Id = "22133020",
+                            Birthday = new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "h@student.com",
+                            Name = "Nguyễn Văn Hoàng",
+                            Password = "h12345",
                             Phone = "987-654-3220",
                             WorkingTime = 0f
                         });
@@ -459,7 +469,7 @@ namespace ThesisManagement.Migrations
                         new
                         {
                             Id = 1,
-                            Category = "Computer Science",
+                            Category = "Desktop App",
                             Description = "Introductory course on database design",
                             Function = "Access and query data",
                             Name = "Quản lý ngân hàng",
@@ -471,7 +481,7 @@ namespace ThesisManagement.Migrations
                         new
                         {
                             Id = 2,
-                            Category = "Web Development",
+                            Category = "Web App",
                             Description = "Xây dựng website Quản lý công ty quy mô vừa và nhỏ",
                             Function = "Trả lương nhân viên. Giao Tasks theo các cấp.",
                             Name = "Quản lý công ty",

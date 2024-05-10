@@ -102,7 +102,7 @@ namespace ThesisManagement.Repositories.EF
                     Id = "22133016",
                     Name = "Trần Văn Nam",
                     Email = "f@student.com",
-                    Password = "f12346",
+                    Password = "f12345",
                     Phone = "987-654-3215",
                     Birthday = new DateTime(2001, 5, 22)
                 },
@@ -111,7 +111,16 @@ namespace ThesisManagement.Repositories.EF
                     Id = "22133017",
                     Name = "Nguyễn Ngọc Nữ",
                     Email = "g@student.com",
-                    Password = "g12346",
+                    Password = "g12345",
+                    Phone = "987-654-3220",
+                    Birthday = new DateTime(2001, 5, 22)
+                },
+                new Student
+                {
+                    Id = "22133020",
+                    Name = "Nguyễn Văn Hoàng",
+                    Email = "h@student.com",
+                    Password = "h12345",
                     Phone = "987-654-3220",
                     Birthday = new DateTime(2001, 5, 22)
                 }

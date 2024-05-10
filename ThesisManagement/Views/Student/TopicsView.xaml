@@ -31,16 +31,6 @@
                                   Margin="0 4 5 0"
                                   Height="17" 
                                   Width="20"/>
-                        <ComboBox VerticalAlignment="Center"
-                              Padding="10 6"
-                              Margin="0,0,20,0"
-                              Width="180"
-                              ItemsSource="{Binding Categories}"
-                              SelectedValue="{Binding FilterCategory}"
-                              md:HintAssist.Hint="Thể loại"
-                              md:TextFieldAssist.HasClearButton="True"
-                              Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                        </ComboBox>
 
                         <ComboBox VerticalAlignment="Center"
                                   Padding="10 6"
@@ -50,6 +40,17 @@
                                   DisplayMemberPath="Name"
                                   SelectedValue="{Binding FilterProfessorName}"
                                   md:HintAssist.Hint="Giảng viên"
+                                  md:TextFieldAssist.HasClearButton="True"
+                                  Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                        </ComboBox>
+
+                        <ComboBox VerticalAlignment="Center"
+                                  Padding="10 6"
+                                  Margin="10,0,10,0"
+                                  Width="180"
+                                  ItemsSource="{Binding Categories}"
+                                  SelectedValue="{Binding FilterCategory}"
+                                  md:HintAssist.Hint="Thể loại"
                                   md:TextFieldAssist.HasClearButton="True"
                                   Style="{StaticResource MaterialDesignOutlinedComboBox}">
                         </ComboBox>

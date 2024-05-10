@@ -44,7 +44,7 @@
                             HorizontalAlignment="Left"
                             VerticalAlignment="Bottom"
                             Margin="5">
-                    <TextBlock Text="{Binding User.Name}" 
+                    <TextBlock Text="{Binding User.Name, Mode=OneWay}" 
                            Style="{StaticResource title}" 
                            FontSize="20"
                            TextWrapping="Wrap"
