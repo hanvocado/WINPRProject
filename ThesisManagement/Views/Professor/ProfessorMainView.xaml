@@ -8,7 +8,6 @@
         xmlns:viewModel="clr-namespace:ThesisManagement.ViewModels"
         xmlns:customControl="clr-namespace:ThesisManagement.CustomControls"
         xmlns:shared="clr-namespace:ThesisManagement.Views.Shared"
-        xmlns:sf="http://schemas.syncfusion.com/wpf"
         mc:Ignorable="d"
         Title="ProfessorMainView" Height="550" Width="900"
         WindowStartupLocation="CenterScreen"
@@ -77,14 +76,11 @@
                             </RadioButton.ToolTip>
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="UserGroup" Style="{StaticResource navIcon}" />
-                                <sf:SfBadge Content="{Binding RegisterCount}"
-                                            FontSize="9"
-                                            Padding="0"
-                                            Shape="Ellipse"
-                                            Width="11"
-                                            Background="{StaticResource accent}"
-                                            Margin="-5 -5 0 0"
-                                            Height="11"/>
+                                <Border Background="{StaticResource accent}" CornerRadius="10" Height="8" Width="8"
+                                        ToolTip="Có sinh viên đăng ký"
+                                        Margin="-7 -13 0 0"
+                                        Visibility="{Binding RegisterCount, Converter={StaticResource VisibilityConverter}}">
+                                </Border>
                             </StackPanel>
                         </RadioButton>
 
@@ -96,15 +92,11 @@
                             </RadioButton.ToolTip>
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="AddressBook" Style="{StaticResource navIcon}" />
-                                <sf:SfBadge Content="+"
-                                            FontSize="9"
-                                            Padding="0"
-                                            Visibility="{Binding HasNewUpdate, Converter={StaticResource VisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
-                                            Shape="Ellipse"
-                                            Width="11"
-                                            Background="{StaticResource accent}"
-                                            Margin="-5 -5 0 0"
-                                            Height="11"/>
+                                <Border Background="{StaticResource accent}" CornerRadius="10" Height="8" Width="8"
+                                        ToolTip="Có cập nhật mới"
+                                        Margin="-7 -13 0 0"
+                                        Visibility="{Binding HasNewUpdate, Converter={StaticResource VisibilityConverter}}">
+                                </Border>
                             </StackPanel>
                         </RadioButton>
 
