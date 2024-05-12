@@ -10,7 +10,7 @@ namespace ThesisManagement.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Admin",
+                name: "Professors",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
@@ -18,27 +18,12 @@ namespace ThesisManagement.Migrations
                     Email = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: true),
-                    Birthday = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Birthday = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Avatar = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Admin", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Professor",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: true),
-                    Birthday = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Professor", x => x.Id);
+                    table.PrimaryKey("PK_Professors", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -61,9 +46,9 @@ namespace ThesisManagement.Migrations
                 {
                     table.PrimaryKey("PK_Topics", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Topics_Professor_ProfessorId",
+                        name: "FK_Topics_Professors_ProfessorId",
                         column: x => x.ProfessorId,
-                        principalTable: "Professor",
+                        principalTable: "Professors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -123,8 +108,7 @@ namespace ThesisManagement.Migrations
                     To = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EventName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Color = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -149,7 +133,8 @@ namespace ThesisManagement.Migrations
                     Email = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: true),
-                    Birthday = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Birthday = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Avatar = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -243,32 +228,28 @@ namespace ThesisManagement.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Admin",
-                columns: new[] { "Id", "Birthday", "Email", "Name", "Password", "Phone" },
-                values: new object[] { "A1", null, "ad1@gmail.com", "Nguyen A", "12345", null });
-
-            migrationBuilder.InsertData(
-                table: "Professor",
-                columns: new[] { "Id", "Birthday", "Email", "Name", "Password", "Phone" },
+                table: "Professors",
+                columns: new[] { "Id", "Avatar", "Birthday", "Email", "Name", "Password", "Phone" },
                 values: new object[,]
                 {
-                    { "P1", new DateTime(1980, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "anh@hcmute.edu.vn", "Trần Văn Anh", "anh12345", "123-456-7890" },
-                    { "P2", new DateTime(1975, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "lenguyen@gmail.com", "Lê Nguyên", "nguyen12345", "987-654-3210" },
-                    { "P3", new DateTime(1975, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "lam@hcmute.edu.vn", "Đặng Lâm", "lam12345", "987-654-3210" }
+                    { "P1", null, new DateTime(1980, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "anh@hcmute.edu.vn", "Trần Văn Anh", "anh12345", "123-456-7890" },
+                    { "P2", null, new DateTime(1975, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "lenguyen@gmail.com", "Lê Nguyên", "nguyen12345", "987-654-3210" },
+                    { "P3", null, new DateTime(1975, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "lam@hcmute.edu.vn", "Đặng Lâm", "lam12345", "987-654-3210" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Students",
-                columns: new[] { "Id", "Birthday", "Email", "Name", "Password", "Phone", "Score", "ThesisId", "WorkingTime" },
+                columns: new[] { "Id", "Avatar", "Birthday", "Email", "Name", "Password", "Phone", "Score", "ThesisId", "WorkingTime" },
                 values: new object[,]
                 {
-                    { "22110001", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "c@student.com", "Võ Thị Thu Huyền", "c12345", "987-654-3910", null, null, 0f },
-                    { "22110010", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "d@student.com", "Nguyễn Bình Minh", "d12345", "987-654-3410", null, null, 0f },
-                    { "22133010", new DateTime(2000, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "a@student.com", "Nguyễn Văn Yên", "a12345", "931-456-7890", null, null, 0f },
-                    { "22133011", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "b@student.com", "Lâm Khang", "b12345", "977-654-3210", null, null, 0f },
-                    { "22133015", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "e@student.com", "Trần Quốc Khánh", "e12345", "987-655-3210", null, null, 0f },
-                    { "22133016", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "f@student.com", "Trần Văn Nam", "f12346", "987-654-3215", null, null, 0f },
-                    { "22133017", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "g@student.com", "Nguyễn Ngọc Nữ", "g12346", "987-654-3220", null, null, 0f }
+                    { "22110001", null, new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "c@student.com", "Võ Thị Thu Huyền", "c12345", "987-654-3910", null, null, 0f },
+                    { "22110010", null, new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "d@student.com", "Nguyễn Bình Minh", "d12345", "987-654-3410", null, null, 0f },
+                    { "22133010", null, new DateTime(2000, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "a@student.com", "Nguyễn Văn Yên", "a12345", "931-456-7890", null, null, 0f },
+                    { "22133011", null, new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "b@student.com", "Lâm Khang", "b12345", "977-654-3210", null, null, 0f },
+                    { "22133015", null, new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "e@student.com", "Trần Quốc Khánh", "e12345", "987-655-3210", null, null, 0f },
+                    { "22133016", null, new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "f@student.com", "Trần Văn Nam", "f12345", "987-654-3215", null, null, 0f },
+                    { "22133017", null, new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "g@student.com", "Nguyễn Ngọc Nữ", "g12345", "987-654-3220", null, null, 0f },
+                    { "22133020", null, new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "h@student.com", "Nguyễn Văn Hoàng", "h12345", "987-654-3220", null, null, 0f }
                 });
 
             migrationBuilder.InsertData(
@@ -276,17 +257,11 @@ namespace ThesisManagement.Migrations
                 columns: new[] { "Id", "Category", "Description", "Function", "Name", "ProfessorId", "Requirement", "StudentId", "StudentQuantity", "Technology" },
                 values: new object[,]
                 {
-                    { 1, "Computer Science", "Introductory course on database design", "Access and query data", "Quản lý ngân hàng", "P1", "Đúng deadline", null, 2, "SQL" },
-                    { 2, "Web Development", "Xây dựng website Quản lý công ty quy mô vừa và nhỏ", "Trả lương nhân viên. Giao Tasks theo các cấp.", "Quản lý công ty", "P1", "Đúng deadline, teamwork", null, 3, "ASP.NET Core" },
+                    { 1, "Desktop App", "Introductory course on database design", "Access and query data", "Quản lý ngân hàng", "P1", "Đúng deadline", null, 2, "SQL" },
+                    { 2, "Web App", "Xây dựng website Quản lý công ty quy mô vừa và nhỏ", "Trả lương nhân viên. Giao Tasks theo các cấp.", "Quản lý công ty", "P1", "Đúng deadline, teamwork", null, 3, "ASP.NET Core" },
                     { 3, "Data Science", "Exploring algorithms for predictive modeling", "Train model for project", "Machine Learning", "P2", "Đúng tiến độ", null, 3, "Python" },
                     { 4, "Data Science", "Description xyz", "", "Khảo sát và phân tích chất lượng thư viện trường HCMUTE", "P2", "Requirement something here", null, 2, "Python" }
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Admin_Email",
-                table: "Admin",
-                column: "Email",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Attachments_TaskProgressId",
@@ -299,8 +274,8 @@ namespace ThesisManagement.Migrations
                 column: "ThesisId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Professor_Email",
-                table: "Professor",
+                name: "IX_Professors_Email",
+                table: "Professors",
                 column: "Email",
                 unique: true);
 
@@ -355,9 +330,6 @@ namespace ThesisManagement.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Admin");
-
-            migrationBuilder.DropTable(
                 name: "Attachments");
 
             migrationBuilder.DropTable(
@@ -382,7 +354,7 @@ namespace ThesisManagement.Migrations
                 name: "Topics");
 
             migrationBuilder.DropTable(
-                name: "Professor");
+                name: "Professors");
         }
     }
 }
