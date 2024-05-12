@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.ObjectModel;
-using Attachment = ThesisManagement.Models.Attachment;
+﻿using Attachment = ThesisManagement.Models.Attachment;
 
 namespace ThesisManagement.Repositories
 {

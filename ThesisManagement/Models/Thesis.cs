@@ -29,7 +29,9 @@ namespace ThesisManagement.Models
         public ICollection<Feedback>? Feedbacks { get; set; }
 
         public ICollection<Student>? Students { get; set; }
+
         public ICollection<Task>? Tasks { get; set; }
+        
         public ICollection<ScheduleInfo>? ScheduleInfos { get; set; }
 
         public int WaitingForResponse { get; set; }

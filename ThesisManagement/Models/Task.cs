@@ -10,13 +10,16 @@ namespace ThesisManagement.Models
 
         [Required]
         public int ThesisId { get; set; }
+
         [Required]
         public string Name { get; set; }
 
         public string Description { get; set; }
+
         public float WorkingTime { get; set; }
 
         public DateTime Start { get; set; }
+
         public DateTime End { get; set; }
 
         public int Progress { get; set; }
@@ -27,7 +30,9 @@ namespace ThesisManagement.Models
         public ICollection<TaskProgress>? TaskProgresses { get; set; }
 
         public bool HasNewUpdate { get; set; } = false;
+
         public int ScheduleId { get; set; }
+
         [ForeignKey(nameof(ScheduleId))]
         public ScheduleInfo Schedule { get; set; }
     }
@@ -37,6 +42,5 @@ namespace ThesisManagement.Models
         public string TaskStatus { get; set; }
         public int Count { get; set; }
         public int Percentage { get; set; }
-
     }
 }

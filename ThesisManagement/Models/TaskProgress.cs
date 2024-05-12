@@ -28,6 +28,5 @@ namespace ThesisManagement.Models
         public Student? Student { get; set; }
 
         public ICollection<Attachment>? Attachments { get; set; }
-
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.ObjectModel;
 using ThesisManagement.Models;
 
 namespace ThesisManagement.Repositories
