@@ -8,13 +8,11 @@ namespace ThesisManagement.Repositories
     {
         bool Update(Student student);
         List<Student> GetAll();
-        List<Student> Get(string? filter);
-        Student GetStudent(string id);
+        Student? GetStudent(string id);
         IEnumerable<Student> GetStudent(int thesisId);
         List<Student> GetUnRegisteredStudents();
         Thesis? GetThesis(string studentId);
         bool CanRegisterTopic(string studentId);
-
         float UpdateWorkTime(string studentId, float timeToAdd);
     }
     public class StudentRepository : BaseRepository, IStudentRepository
@@ -33,16 +31,7 @@ namespace ThesisManagement.Repositories
             return students;
         }
 
-        public List<Student> Get(string? filter)
-        {
-            if (String.IsNullOrEmpty(filter))
-                return GetAll();
-
-            var students = _context.Students.Where(s => s.Name.ToLower().Contains(filter.ToLower()) || s.Id.ToLower().Contains(filter.ToLower())).AsNoTracking().ToList();
-            return students;
-        }
-
-        public Student GetStudent(string id)
+        public Student? GetStudent(string id)
         {
             var student = _context.Students.Where(st => st.Id == id).FirstOrDefault();
             return student;

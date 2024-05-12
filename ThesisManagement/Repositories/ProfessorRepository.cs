@@ -30,10 +30,10 @@ namespace ThesisManagement.Repositories
 
         public bool HasNewUpdate(string professorId)
         {
-            var topics = _context.Professors.Include(p => p.Topics)
-                                            .ThenInclude(t => t.Theses)
+            var topics = _context.Professors.Include(p => p.Topics)!
+                                            .ThenInclude(t => t.Theses)!
                                             .ThenInclude(th => th.Tasks)
-                                            .FirstOrDefault(p => p.Id == professorId).Topics;
+                                            .FirstOrDefault(p => p.Id == professorId)!.Topics;
             if (topics != null)
                 foreach (Topic topic in topics)
                 {

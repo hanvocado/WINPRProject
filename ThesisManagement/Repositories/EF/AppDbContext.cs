@@ -240,8 +240,6 @@ namespace ThesisManagement.Repositories.EF
                       .HasForeignKey(at => at.TaskProgressId)
                       .OnDelete(DeleteBehavior.Cascade);
             });
-
-
         }
     }
 }

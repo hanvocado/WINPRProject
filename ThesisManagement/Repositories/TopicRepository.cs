@@ -8,13 +8,10 @@ namespace ThesisManagement.Repositories
         bool Add(Topic topic);
         bool Update(Topic topic);
         bool Delete(int id);
-        Topic? Get(int id);
-        List<Topic> GetAll();
         List<Topic> GetMyTopicAndProfessorTopics(string studentId);
         List<Topic> GetAll(string professorId);
         List<Topic> Get(string topicName, string professorId);
         List<Topic> Get(string category, string technology, string professorname);
-
         bool CanBeDeleted(int topicId);
     }
 
@@ -40,12 +37,6 @@ namespace ThesisManagement.Repositories
             _context.ChangeTracker.Clear();
             _context.Update(topic);
             return DbSave();
-        }
-
-        public Topic? Get(int id)
-        {
-            var topic = _context.Topics.Include(topic => topic.Professor).FirstOrDefault(topic => topic.Id == id);
-            return topic;
         }
 
         public List<Topic> Get(string category, string technology, string professorname)
@@ -82,14 +73,6 @@ namespace ThesisManagement.Repositories
             var topics = _context.Topics.Include(t => t.Professor)
                                         .Where(t => t.ProfessorId == professorId && t.Name.ToLower().Contains(name.ToLower()))
                                         .AsNoTracking().ToList();
-            return topics;
-        }
-
-        public List<Topic> GetAll()
-        {
-            var topics = _context.Topics.Include(t => t.Professor)
-                                       .Include(t => t.Theses)
-                                       .AsNoTracking().ToList();
             return topics;
         }
 

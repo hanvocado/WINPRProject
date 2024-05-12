@@ -10,7 +10,7 @@ namespace ThesisManagement.Repositories
         bool Update(Task task);
         bool Delete(int id);
         IEnumerable<Task> GetAll(int thesisId);
-        Task GetTask(int id);
+        Task? GetTask(int id);
         IEnumerable<TasksPie> GetTasksPieData(int thesisId);
     }
 
@@ -31,6 +31,7 @@ namespace ThesisManagement.Repositories
             _context.Remove(task);
             return DbSave();
         }
+
         public bool Update(Task task)
         {
             _context.ChangeTracker.Clear();
@@ -66,11 +67,11 @@ namespace ThesisManagement.Repositories
             return data;
         }
 
-        public Task GetTask(int id)
+        public Task? GetTask(int id)
         {
-            var task = _context.Tasks.Include(t => t.TaskProgresses)
+            var task = _context.Tasks.Include(t => t.TaskProgresses)!
                                     .ThenInclude(p => p.Student)
-                                    .Include(t => t.TaskProgresses)
+                                    .Include(t => t.TaskProgresses)!
                                     .ThenInclude(p => p.Attachments)
                                     .FirstOrDefault(t => t.Id == id);
             return task;
